@@ -1,0 +1,49 @@
+{
+    "name": "talos",
+    "version": "0.0.1",
+    "resources": {
+        "talos:index:Random": {
+            "properties": {
+                "length": {
+                    "type": "integer"
+                },
+                "result": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "length",
+                "result"
+            ],
+            "inputProperties": {
+                "length": {
+                    "type": "integer"
+                }
+            },
+            "requiredInputs": [
+                "length"
+            ]
+        }
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            }
+        },
+        "go": {
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/go/talos"
+        },
+        "nodejs": {
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            }
+        },
+        "python": {
+            "requires": {
+                "pulumi": ">=3.0.0,<4.0.0"
+            }
+        }
+    }
+}
