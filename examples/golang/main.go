@@ -7,15 +7,18 @@ import (
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		// create a simple two node kind cluster
-		// with one control-plane and one worer node
-		bundle, err := bundle.NewSecretsBundle(ctx, "secret", &bundle.SecretsBundleArgs{
-			ConfigVersion: bundle.TalosMachineConfigVersionV1alpha1,
-		})
+		b, err := bundle.NewSecretsBundle(ctx, "secret", &bundle.SecretsBundleArgs{
+			// ConfigVersion: bundle.TalosMachineConfigVersionV1alpha1,
+		}, []pulumi.ResourceOption{
+			pulumi.AdditionalSecretOutputs([]string{
+				"secretsBundle",
+			}),
+		}...)
 		if err != nil {
 			return err
 		}
-		ctx.Export("bundle", bundle.SecretsBundle.Cluster().ID())
+		ctx.Export("bundle", b.SecretsBundle.Cluster().Id())
+
 		return nil
 	})
 }

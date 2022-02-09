@@ -38,7 +38,7 @@
         "talos:bundle:Cluster": {
             "description": "Talos Cluster type",
             "properties": {
-                "ID": {
+                "Id": {
                     "type": "string"
                 },
                 "Secret": {
@@ -51,10 +51,10 @@
             "description": "Talos PEMEncodedCertificateAndKey type",
             "properties": {
                 "Crt": {
-                    "type": "string"
+                    "$ref": "pulumi.json#/Any"
                 },
                 "Key": {
-                    "type": "string"
+                    "$ref": "pulumi.json#/Any"
                 }
             },
             "type": "object"
@@ -63,7 +63,7 @@
             "description": "Talos PEMEncodedKey type",
             "properties": {
                 "Key": {
-                    "type": "string"
+                    "$ref": "pulumi.json#/Any"
                 }
             },
             "type": "object"
@@ -126,11 +126,11 @@
             "description": "Talos secretsBundle resource",
             "properties": {
                 "secretsBundle": {
-                    "type": "string",
+                    "type": "object",
                     "$ref": "#types/talos:bundle:SecretsBundle"
                 }
             },
-            "type": "string",
+            "type": "object",
             "required": [
                 "secretsBundle"
             ],

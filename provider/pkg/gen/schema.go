@@ -23,36 +23,13 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 		Homepage:    "https://talos.dev",
 		Repository:  "https://github.com/frezbo/pulumi-provider-talos",
 
-		Config: schema.ConfigSpec{
-			// Variables: map[string]schema.PropertySpec{
-			// 	"talosVersion": {
-			// 		TypeSpec:    schema.TypeSpec{Type: "string"},
-			// 		Description: " the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)",
-			// 	},
-			// 	"configVersion": {
-			// 		TypeSpec:    schema.TypeSpec{Type: "string"},
-			// 		Description: "the desired machine config version to generate (default \"v1alpha1\")",
-			// 		Default:     "v1alpha1",
-			// 	},
-			// },
-		},
+		Config: schema.ConfigSpec{},
 
 		Provider: schema.ResourceSpec{
 			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Description: "The provider type for the Talos package",
 				Type:        "object",
 			},
-			// InputProperties: map[string]schema.PropertySpec{
-			// 	"talosVersion": {
-			// 		TypeSpec:    schema.TypeSpec{Type: "string"},
-			// 		Description: " the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)",
-			// 	},
-			// 	"configVersion": {
-			// 		TypeSpec:    schema.TypeSpec{Type: "string"},
-			// 		Description: "the desired machine config version to generate (default \"v1alpha1\")",
-			// 		Default:     "v1alpha1",
-			// 	},
-			// },
 		},
 
 		Types:     map[string]schema.ComplexTypeSpec{},
@@ -86,14 +63,6 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 			RequiredInputs:  definitionProperties.Required,
 		}
 
-		// add the Clock field
-		// if defintion == "SecretsBundle" {
-		// 	definitionProperties.Properties.Set("Clock", &jsonschema.Type{
-		// 		Type: "object",
-		// 	})
-		// 	definitionProperties.Required = append(definitionProperties.Required, "Clock")
-		// }
-
 		// pkgImportAliases[fmt.Sprintf("%s/%s", goImportPath, defintionSmallCased)] = defintionSmallCased
 
 		for _, definitionPropertyKey := range definitionProperties.Properties.Keys() {
@@ -115,6 +84,13 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 					}
 				}
 
+				// talos defines the type as `[]byte` for `PEMEncodedCertificateAndKey` and `PEMEncodedKey`,
+				// since Pulumi schema doesn't have a type for it, we'll use the anytype instead
+				if defintion == "PEMEncodedCertificateAndKey" || defintion == "PEMEncodedKey" {
+					resourceOutputProperty.Type = ""
+					resourceOutputProperty.Ref = "pulumi.json#/Any"
+				}
+
 				resourceSpec.Properties[definitionPropertyKey] = resourceOutputProperty
 
 				typeSpec := schema.ComplexTypeSpec{
@@ -134,13 +110,14 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 		pkg.Resources["talos:bundle:secretsBundle"] = schema.ResourceSpec{
 			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Description: "Talos secretsBundle resource",
-				Type:        "string",
+				Type:        "object",
 				Properties: map[string]schema.PropertySpec{
 					"secretsBundle": {
 						TypeSpec: schema.TypeSpec{
-							Type: "string",
+							Type: "object",
 							Ref:  "#types/talos:bundle:SecretsBundle",
 						},
+						// Secret: true,
 					},
 				},
 				Required: []string{"secretsBundle"},

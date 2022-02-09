@@ -20,80 +20,6 @@ type Certs struct {
 	OS                *PEMEncodedCertificateAndKey `pulumi:"OS"`
 }
 
-// CertsInput is an input type that accepts CertsArgs and CertsOutput values.
-// You can construct a concrete instance of `CertsInput` via:
-//
-//          CertsArgs{...}
-type CertsInput interface {
-	pulumi.Input
-
-	ToCertsOutput() CertsOutput
-	ToCertsOutputWithContext(context.Context) CertsOutput
-}
-
-// Talos Certs type
-type CertsArgs struct {
-	Admin             PEMEncodedCertificateAndKeyPtrInput `pulumi:"Admin"`
-	Etcd              PEMEncodedCertificateAndKeyPtrInput `pulumi:"Etcd"`
-	K8s               PEMEncodedCertificateAndKeyPtrInput `pulumi:"K8s"`
-	K8sAggregator     PEMEncodedCertificateAndKeyPtrInput `pulumi:"K8sAggregator"`
-	K8sServiceAccount PEMEncodedKeyPtrInput               `pulumi:"K8sServiceAccount"`
-	OS                PEMEncodedCertificateAndKeyPtrInput `pulumi:"OS"`
-}
-
-func (CertsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Certs)(nil)).Elem()
-}
-
-func (i CertsArgs) ToCertsOutput() CertsOutput {
-	return i.ToCertsOutputWithContext(context.Background())
-}
-
-func (i CertsArgs) ToCertsOutputWithContext(ctx context.Context) CertsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertsOutput)
-}
-
-func (i CertsArgs) ToCertsPtrOutput() CertsPtrOutput {
-	return i.ToCertsPtrOutputWithContext(context.Background())
-}
-
-func (i CertsArgs) ToCertsPtrOutputWithContext(ctx context.Context) CertsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertsOutput).ToCertsPtrOutputWithContext(ctx)
-}
-
-// CertsPtrInput is an input type that accepts CertsArgs, CertsPtr and CertsPtrOutput values.
-// You can construct a concrete instance of `CertsPtrInput` via:
-//
-//          CertsArgs{...}
-//
-//  or:
-//
-//          nil
-type CertsPtrInput interface {
-	pulumi.Input
-
-	ToCertsPtrOutput() CertsPtrOutput
-	ToCertsPtrOutputWithContext(context.Context) CertsPtrOutput
-}
-
-type certsPtrType CertsArgs
-
-func CertsPtr(v *CertsArgs) CertsPtrInput {
-	return (*certsPtrType)(v)
-}
-
-func (*certsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Certs)(nil)).Elem()
-}
-
-func (i *certsPtrType) ToCertsPtrOutput() CertsPtrOutput {
-	return i.ToCertsPtrOutputWithContext(context.Background())
-}
-
-func (i *certsPtrType) ToCertsPtrOutputWithContext(ctx context.Context) CertsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertsPtrOutput)
-}
-
 // Talos Certs type
 type CertsOutput struct{ *pulumi.OutputState }
 
@@ -109,15 +35,6 @@ func (o CertsOutput) ToCertsOutputWithContext(ctx context.Context) CertsOutput {
 	return o
 }
 
-func (o CertsOutput) ToCertsPtrOutput() CertsPtrOutput {
-	return o.ToCertsPtrOutputWithContext(context.Background())
-}
-
-func (o CertsOutput) ToCertsPtrOutputWithContext(ctx context.Context) CertsPtrOutput {
-	return o.ApplyT(func(v Certs) *Certs {
-		return &v
-	}).(CertsPtrOutput)
-}
 func (o CertsOutput) Admin() PEMEncodedCertificateAndKeyPtrOutput {
 	return o.ApplyT(func(v Certs) *PEMEncodedCertificateAndKey { return v.Admin }).(PEMEncodedCertificateAndKeyPtrOutput)
 }
@@ -157,7 +74,13 @@ func (o CertsPtrOutput) ToCertsPtrOutputWithContext(ctx context.Context) CertsPt
 }
 
 func (o CertsPtrOutput) Elem() CertsOutput {
-	return o.ApplyT(func(v *Certs) Certs { return *v }).(CertsOutput)
+	return o.ApplyT(func(v *Certs) Certs {
+		if v != nil {
+			return *v
+		}
+		var ret Certs
+		return ret
+	}).(CertsOutput)
 }
 
 func (o CertsPtrOutput) Admin() PEMEncodedCertificateAndKeyPtrOutput {
@@ -216,78 +139,8 @@ func (o CertsPtrOutput) OS() PEMEncodedCertificateAndKeyPtrOutput {
 
 // Talos Cluster type
 type Cluster struct {
-	ID     *string `pulumi:"ID"`
+	Id     *string `pulumi:"Id"`
 	Secret *string `pulumi:"Secret"`
-}
-
-// ClusterInput is an input type that accepts ClusterArgs and ClusterOutput values.
-// You can construct a concrete instance of `ClusterInput` via:
-//
-//          ClusterArgs{...}
-type ClusterInput interface {
-	pulumi.Input
-
-	ToClusterOutput() ClusterOutput
-	ToClusterOutputWithContext(context.Context) ClusterOutput
-}
-
-// Talos Cluster type
-type ClusterArgs struct {
-	ID     pulumi.StringPtrInput `pulumi:"ID"`
-	Secret pulumi.StringPtrInput `pulumi:"Secret"`
-}
-
-func (ClusterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Cluster)(nil)).Elem()
-}
-
-func (i ClusterArgs) ToClusterOutput() ClusterOutput {
-	return i.ToClusterOutputWithContext(context.Background())
-}
-
-func (i ClusterArgs) ToClusterOutputWithContext(ctx context.Context) ClusterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterOutput)
-}
-
-func (i ClusterArgs) ToClusterPtrOutput() ClusterPtrOutput {
-	return i.ToClusterPtrOutputWithContext(context.Background())
-}
-
-func (i ClusterArgs) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterOutput).ToClusterPtrOutputWithContext(ctx)
-}
-
-// ClusterPtrInput is an input type that accepts ClusterArgs, ClusterPtr and ClusterPtrOutput values.
-// You can construct a concrete instance of `ClusterPtrInput` via:
-//
-//          ClusterArgs{...}
-//
-//  or:
-//
-//          nil
-type ClusterPtrInput interface {
-	pulumi.Input
-
-	ToClusterPtrOutput() ClusterPtrOutput
-	ToClusterPtrOutputWithContext(context.Context) ClusterPtrOutput
-}
-
-type clusterPtrType ClusterArgs
-
-func ClusterPtr(v *ClusterArgs) ClusterPtrInput {
-	return (*clusterPtrType)(v)
-}
-
-func (*clusterPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Cluster)(nil)).Elem()
-}
-
-func (i *clusterPtrType) ToClusterPtrOutput() ClusterPtrOutput {
-	return i.ToClusterPtrOutputWithContext(context.Background())
-}
-
-func (i *clusterPtrType) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterPtrOutput)
 }
 
 // Talos Cluster type
@@ -305,17 +158,8 @@ func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOu
 	return o
 }
 
-func (o ClusterOutput) ToClusterPtrOutput() ClusterPtrOutput {
-	return o.ToClusterPtrOutputWithContext(context.Background())
-}
-
-func (o ClusterOutput) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
-	return o.ApplyT(func(v Cluster) *Cluster {
-		return &v
-	}).(ClusterPtrOutput)
-}
-func (o ClusterOutput) ID() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v Cluster) *string { return v.ID }).(pulumi.StringPtrOutput)
+func (o ClusterOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v Cluster) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o ClusterOutput) Secret() pulumi.StringPtrOutput {
@@ -337,15 +181,21 @@ func (o ClusterPtrOutput) ToClusterPtrOutputWithContext(ctx context.Context) Clu
 }
 
 func (o ClusterPtrOutput) Elem() ClusterOutput {
-	return o.ApplyT(func(v *Cluster) Cluster { return *v }).(ClusterOutput)
+	return o.ApplyT(func(v *Cluster) Cluster {
+		if v != nil {
+			return *v
+		}
+		var ret Cluster
+		return ret
+	}).(ClusterOutput)
 }
 
-func (o ClusterPtrOutput) ID() pulumi.StringPtrOutput {
+func (o ClusterPtrOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Cluster) *string {
 		if v == nil {
 			return nil
 		}
-		return v.ID
+		return v.Id
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -360,78 +210,8 @@ func (o ClusterPtrOutput) Secret() pulumi.StringPtrOutput {
 
 // Talos PEMEncodedCertificateAndKey type
 type PEMEncodedCertificateAndKey struct {
-	Crt *string `pulumi:"Crt"`
-	Key *string `pulumi:"Key"`
-}
-
-// PEMEncodedCertificateAndKeyInput is an input type that accepts PEMEncodedCertificateAndKeyArgs and PEMEncodedCertificateAndKeyOutput values.
-// You can construct a concrete instance of `PEMEncodedCertificateAndKeyInput` via:
-//
-//          PEMEncodedCertificateAndKeyArgs{...}
-type PEMEncodedCertificateAndKeyInput interface {
-	pulumi.Input
-
-	ToPEMEncodedCertificateAndKeyOutput() PEMEncodedCertificateAndKeyOutput
-	ToPEMEncodedCertificateAndKeyOutputWithContext(context.Context) PEMEncodedCertificateAndKeyOutput
-}
-
-// Talos PEMEncodedCertificateAndKey type
-type PEMEncodedCertificateAndKeyArgs struct {
-	Crt pulumi.StringPtrInput `pulumi:"Crt"`
-	Key pulumi.StringPtrInput `pulumi:"Key"`
-}
-
-func (PEMEncodedCertificateAndKeyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PEMEncodedCertificateAndKey)(nil)).Elem()
-}
-
-func (i PEMEncodedCertificateAndKeyArgs) ToPEMEncodedCertificateAndKeyOutput() PEMEncodedCertificateAndKeyOutput {
-	return i.ToPEMEncodedCertificateAndKeyOutputWithContext(context.Background())
-}
-
-func (i PEMEncodedCertificateAndKeyArgs) ToPEMEncodedCertificateAndKeyOutputWithContext(ctx context.Context) PEMEncodedCertificateAndKeyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PEMEncodedCertificateAndKeyOutput)
-}
-
-func (i PEMEncodedCertificateAndKeyArgs) ToPEMEncodedCertificateAndKeyPtrOutput() PEMEncodedCertificateAndKeyPtrOutput {
-	return i.ToPEMEncodedCertificateAndKeyPtrOutputWithContext(context.Background())
-}
-
-func (i PEMEncodedCertificateAndKeyArgs) ToPEMEncodedCertificateAndKeyPtrOutputWithContext(ctx context.Context) PEMEncodedCertificateAndKeyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PEMEncodedCertificateAndKeyOutput).ToPEMEncodedCertificateAndKeyPtrOutputWithContext(ctx)
-}
-
-// PEMEncodedCertificateAndKeyPtrInput is an input type that accepts PEMEncodedCertificateAndKeyArgs, PEMEncodedCertificateAndKeyPtr and PEMEncodedCertificateAndKeyPtrOutput values.
-// You can construct a concrete instance of `PEMEncodedCertificateAndKeyPtrInput` via:
-//
-//          PEMEncodedCertificateAndKeyArgs{...}
-//
-//  or:
-//
-//          nil
-type PEMEncodedCertificateAndKeyPtrInput interface {
-	pulumi.Input
-
-	ToPEMEncodedCertificateAndKeyPtrOutput() PEMEncodedCertificateAndKeyPtrOutput
-	ToPEMEncodedCertificateAndKeyPtrOutputWithContext(context.Context) PEMEncodedCertificateAndKeyPtrOutput
-}
-
-type pemencodedCertificateAndKeyPtrType PEMEncodedCertificateAndKeyArgs
-
-func PEMEncodedCertificateAndKeyPtr(v *PEMEncodedCertificateAndKeyArgs) PEMEncodedCertificateAndKeyPtrInput {
-	return (*pemencodedCertificateAndKeyPtrType)(v)
-}
-
-func (*pemencodedCertificateAndKeyPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**PEMEncodedCertificateAndKey)(nil)).Elem()
-}
-
-func (i *pemencodedCertificateAndKeyPtrType) ToPEMEncodedCertificateAndKeyPtrOutput() PEMEncodedCertificateAndKeyPtrOutput {
-	return i.ToPEMEncodedCertificateAndKeyPtrOutputWithContext(context.Background())
-}
-
-func (i *pemencodedCertificateAndKeyPtrType) ToPEMEncodedCertificateAndKeyPtrOutputWithContext(ctx context.Context) PEMEncodedCertificateAndKeyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PEMEncodedCertificateAndKeyPtrOutput)
+	Crt interface{} `pulumi:"Crt"`
+	Key interface{} `pulumi:"Key"`
 }
 
 // Talos PEMEncodedCertificateAndKey type
@@ -449,21 +229,12 @@ func (o PEMEncodedCertificateAndKeyOutput) ToPEMEncodedCertificateAndKeyOutputWi
 	return o
 }
 
-func (o PEMEncodedCertificateAndKeyOutput) ToPEMEncodedCertificateAndKeyPtrOutput() PEMEncodedCertificateAndKeyPtrOutput {
-	return o.ToPEMEncodedCertificateAndKeyPtrOutputWithContext(context.Background())
+func (o PEMEncodedCertificateAndKeyOutput) Crt() pulumi.AnyOutput {
+	return o.ApplyT(func(v PEMEncodedCertificateAndKey) interface{} { return v.Crt }).(pulumi.AnyOutput)
 }
 
-func (o PEMEncodedCertificateAndKeyOutput) ToPEMEncodedCertificateAndKeyPtrOutputWithContext(ctx context.Context) PEMEncodedCertificateAndKeyPtrOutput {
-	return o.ApplyT(func(v PEMEncodedCertificateAndKey) *PEMEncodedCertificateAndKey {
-		return &v
-	}).(PEMEncodedCertificateAndKeyPtrOutput)
-}
-func (o PEMEncodedCertificateAndKeyOutput) Crt() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PEMEncodedCertificateAndKey) *string { return v.Crt }).(pulumi.StringPtrOutput)
-}
-
-func (o PEMEncodedCertificateAndKeyOutput) Key() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PEMEncodedCertificateAndKey) *string { return v.Key }).(pulumi.StringPtrOutput)
+func (o PEMEncodedCertificateAndKeyOutput) Key() pulumi.AnyOutput {
+	return o.ApplyT(func(v PEMEncodedCertificateAndKey) interface{} { return v.Key }).(pulumi.AnyOutput)
 }
 
 type PEMEncodedCertificateAndKeyPtrOutput struct{ *pulumi.OutputState }
@@ -481,99 +252,36 @@ func (o PEMEncodedCertificateAndKeyPtrOutput) ToPEMEncodedCertificateAndKeyPtrOu
 }
 
 func (o PEMEncodedCertificateAndKeyPtrOutput) Elem() PEMEncodedCertificateAndKeyOutput {
-	return o.ApplyT(func(v *PEMEncodedCertificateAndKey) PEMEncodedCertificateAndKey { return *v }).(PEMEncodedCertificateAndKeyOutput)
+	return o.ApplyT(func(v *PEMEncodedCertificateAndKey) PEMEncodedCertificateAndKey {
+		if v != nil {
+			return *v
+		}
+		var ret PEMEncodedCertificateAndKey
+		return ret
+	}).(PEMEncodedCertificateAndKeyOutput)
 }
 
-func (o PEMEncodedCertificateAndKeyPtrOutput) Crt() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *PEMEncodedCertificateAndKey) *string {
+func (o PEMEncodedCertificateAndKeyPtrOutput) Crt() pulumi.AnyOutput {
+	return o.ApplyT(func(v *PEMEncodedCertificateAndKey) interface{} {
 		if v == nil {
 			return nil
 		}
 		return v.Crt
-	}).(pulumi.StringPtrOutput)
+	}).(pulumi.AnyOutput)
 }
 
-func (o PEMEncodedCertificateAndKeyPtrOutput) Key() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *PEMEncodedCertificateAndKey) *string {
+func (o PEMEncodedCertificateAndKeyPtrOutput) Key() pulumi.AnyOutput {
+	return o.ApplyT(func(v *PEMEncodedCertificateAndKey) interface{} {
 		if v == nil {
 			return nil
 		}
 		return v.Key
-	}).(pulumi.StringPtrOutput)
+	}).(pulumi.AnyOutput)
 }
 
 // Talos PEMEncodedKey type
 type PEMEncodedKey struct {
-	Key *string `pulumi:"Key"`
-}
-
-// PEMEncodedKeyInput is an input type that accepts PEMEncodedKeyArgs and PEMEncodedKeyOutput values.
-// You can construct a concrete instance of `PEMEncodedKeyInput` via:
-//
-//          PEMEncodedKeyArgs{...}
-type PEMEncodedKeyInput interface {
-	pulumi.Input
-
-	ToPEMEncodedKeyOutput() PEMEncodedKeyOutput
-	ToPEMEncodedKeyOutputWithContext(context.Context) PEMEncodedKeyOutput
-}
-
-// Talos PEMEncodedKey type
-type PEMEncodedKeyArgs struct {
-	Key pulumi.StringPtrInput `pulumi:"Key"`
-}
-
-func (PEMEncodedKeyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PEMEncodedKey)(nil)).Elem()
-}
-
-func (i PEMEncodedKeyArgs) ToPEMEncodedKeyOutput() PEMEncodedKeyOutput {
-	return i.ToPEMEncodedKeyOutputWithContext(context.Background())
-}
-
-func (i PEMEncodedKeyArgs) ToPEMEncodedKeyOutputWithContext(ctx context.Context) PEMEncodedKeyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PEMEncodedKeyOutput)
-}
-
-func (i PEMEncodedKeyArgs) ToPEMEncodedKeyPtrOutput() PEMEncodedKeyPtrOutput {
-	return i.ToPEMEncodedKeyPtrOutputWithContext(context.Background())
-}
-
-func (i PEMEncodedKeyArgs) ToPEMEncodedKeyPtrOutputWithContext(ctx context.Context) PEMEncodedKeyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PEMEncodedKeyOutput).ToPEMEncodedKeyPtrOutputWithContext(ctx)
-}
-
-// PEMEncodedKeyPtrInput is an input type that accepts PEMEncodedKeyArgs, PEMEncodedKeyPtr and PEMEncodedKeyPtrOutput values.
-// You can construct a concrete instance of `PEMEncodedKeyPtrInput` via:
-//
-//          PEMEncodedKeyArgs{...}
-//
-//  or:
-//
-//          nil
-type PEMEncodedKeyPtrInput interface {
-	pulumi.Input
-
-	ToPEMEncodedKeyPtrOutput() PEMEncodedKeyPtrOutput
-	ToPEMEncodedKeyPtrOutputWithContext(context.Context) PEMEncodedKeyPtrOutput
-}
-
-type pemencodedKeyPtrType PEMEncodedKeyArgs
-
-func PEMEncodedKeyPtr(v *PEMEncodedKeyArgs) PEMEncodedKeyPtrInput {
-	return (*pemencodedKeyPtrType)(v)
-}
-
-func (*pemencodedKeyPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**PEMEncodedKey)(nil)).Elem()
-}
-
-func (i *pemencodedKeyPtrType) ToPEMEncodedKeyPtrOutput() PEMEncodedKeyPtrOutput {
-	return i.ToPEMEncodedKeyPtrOutputWithContext(context.Background())
-}
-
-func (i *pemencodedKeyPtrType) ToPEMEncodedKeyPtrOutputWithContext(ctx context.Context) PEMEncodedKeyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PEMEncodedKeyPtrOutput)
+	Key interface{} `pulumi:"Key"`
 }
 
 // Talos PEMEncodedKey type
@@ -591,17 +299,8 @@ func (o PEMEncodedKeyOutput) ToPEMEncodedKeyOutputWithContext(ctx context.Contex
 	return o
 }
 
-func (o PEMEncodedKeyOutput) ToPEMEncodedKeyPtrOutput() PEMEncodedKeyPtrOutput {
-	return o.ToPEMEncodedKeyPtrOutputWithContext(context.Background())
-}
-
-func (o PEMEncodedKeyOutput) ToPEMEncodedKeyPtrOutputWithContext(ctx context.Context) PEMEncodedKeyPtrOutput {
-	return o.ApplyT(func(v PEMEncodedKey) *PEMEncodedKey {
-		return &v
-	}).(PEMEncodedKeyPtrOutput)
-}
-func (o PEMEncodedKeyOutput) Key() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PEMEncodedKey) *string { return v.Key }).(pulumi.StringPtrOutput)
+func (o PEMEncodedKeyOutput) Key() pulumi.AnyOutput {
+	return o.ApplyT(func(v PEMEncodedKey) interface{} { return v.Key }).(pulumi.AnyOutput)
 }
 
 type PEMEncodedKeyPtrOutput struct{ *pulumi.OutputState }
@@ -619,92 +318,28 @@ func (o PEMEncodedKeyPtrOutput) ToPEMEncodedKeyPtrOutputWithContext(ctx context.
 }
 
 func (o PEMEncodedKeyPtrOutput) Elem() PEMEncodedKeyOutput {
-	return o.ApplyT(func(v *PEMEncodedKey) PEMEncodedKey { return *v }).(PEMEncodedKeyOutput)
+	return o.ApplyT(func(v *PEMEncodedKey) PEMEncodedKey {
+		if v != nil {
+			return *v
+		}
+		var ret PEMEncodedKey
+		return ret
+	}).(PEMEncodedKeyOutput)
 }
 
-func (o PEMEncodedKeyPtrOutput) Key() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *PEMEncodedKey) *string {
+func (o PEMEncodedKeyPtrOutput) Key() pulumi.AnyOutput {
+	return o.ApplyT(func(v *PEMEncodedKey) interface{} {
 		if v == nil {
 			return nil
 		}
 		return v.Key
-	}).(pulumi.StringPtrOutput)
+	}).(pulumi.AnyOutput)
 }
 
 // Talos Secrets type
 type Secrets struct {
 	AESCBCEncryptionSecret *string `pulumi:"AESCBCEncryptionSecret"`
 	BootstrapToken         *string `pulumi:"BootstrapToken"`
-}
-
-// SecretsInput is an input type that accepts SecretsArgs and SecretsOutput values.
-// You can construct a concrete instance of `SecretsInput` via:
-//
-//          SecretsArgs{...}
-type SecretsInput interface {
-	pulumi.Input
-
-	ToSecretsOutput() SecretsOutput
-	ToSecretsOutputWithContext(context.Context) SecretsOutput
-}
-
-// Talos Secrets type
-type SecretsArgs struct {
-	AESCBCEncryptionSecret pulumi.StringPtrInput `pulumi:"AESCBCEncryptionSecret"`
-	BootstrapToken         pulumi.StringPtrInput `pulumi:"BootstrapToken"`
-}
-
-func (SecretsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Secrets)(nil)).Elem()
-}
-
-func (i SecretsArgs) ToSecretsOutput() SecretsOutput {
-	return i.ToSecretsOutputWithContext(context.Background())
-}
-
-func (i SecretsArgs) ToSecretsOutputWithContext(ctx context.Context) SecretsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsOutput)
-}
-
-func (i SecretsArgs) ToSecretsPtrOutput() SecretsPtrOutput {
-	return i.ToSecretsPtrOutputWithContext(context.Background())
-}
-
-func (i SecretsArgs) ToSecretsPtrOutputWithContext(ctx context.Context) SecretsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsOutput).ToSecretsPtrOutputWithContext(ctx)
-}
-
-// SecretsPtrInput is an input type that accepts SecretsArgs, SecretsPtr and SecretsPtrOutput values.
-// You can construct a concrete instance of `SecretsPtrInput` via:
-//
-//          SecretsArgs{...}
-//
-//  or:
-//
-//          nil
-type SecretsPtrInput interface {
-	pulumi.Input
-
-	ToSecretsPtrOutput() SecretsPtrOutput
-	ToSecretsPtrOutputWithContext(context.Context) SecretsPtrOutput
-}
-
-type secretsPtrType SecretsArgs
-
-func SecretsPtr(v *SecretsArgs) SecretsPtrInput {
-	return (*secretsPtrType)(v)
-}
-
-func (*secretsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Secrets)(nil)).Elem()
-}
-
-func (i *secretsPtrType) ToSecretsPtrOutput() SecretsPtrOutput {
-	return i.ToSecretsPtrOutputWithContext(context.Background())
-}
-
-func (i *secretsPtrType) ToSecretsPtrOutputWithContext(ctx context.Context) SecretsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsPtrOutput)
 }
 
 // Talos Secrets type
@@ -722,15 +357,6 @@ func (o SecretsOutput) ToSecretsOutputWithContext(ctx context.Context) SecretsOu
 	return o
 }
 
-func (o SecretsOutput) ToSecretsPtrOutput() SecretsPtrOutput {
-	return o.ToSecretsPtrOutputWithContext(context.Background())
-}
-
-func (o SecretsOutput) ToSecretsPtrOutputWithContext(ctx context.Context) SecretsPtrOutput {
-	return o.ApplyT(func(v Secrets) *Secrets {
-		return &v
-	}).(SecretsPtrOutput)
-}
 func (o SecretsOutput) AESCBCEncryptionSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v Secrets) *string { return v.AESCBCEncryptionSecret }).(pulumi.StringPtrOutput)
 }
@@ -754,7 +380,13 @@ func (o SecretsPtrOutput) ToSecretsPtrOutputWithContext(ctx context.Context) Sec
 }
 
 func (o SecretsPtrOutput) Elem() SecretsOutput {
-	return o.ApplyT(func(v *Secrets) Secrets { return *v }).(SecretsOutput)
+	return o.ApplyT(func(v *Secrets) Secrets {
+		if v != nil {
+			return *v
+		}
+		var ret Secrets
+		return ret
+	}).(SecretsOutput)
 }
 
 func (o SecretsPtrOutput) AESCBCEncryptionSecret() pulumi.StringPtrOutput {
@@ -783,78 +415,6 @@ type SecretsBundleType struct {
 	TrustdInfo *TrustdInfo `pulumi:"TrustdInfo"`
 }
 
-// SecretsBundleTypeInput is an input type that accepts SecretsBundleTypeArgs and SecretsBundleTypeOutput values.
-// You can construct a concrete instance of `SecretsBundleTypeInput` via:
-//
-//          SecretsBundleTypeArgs{...}
-type SecretsBundleTypeInput interface {
-	pulumi.Input
-
-	ToSecretsBundleTypeOutput() SecretsBundleTypeOutput
-	ToSecretsBundleTypeOutputWithContext(context.Context) SecretsBundleTypeOutput
-}
-
-// Talos SecretsBundle type
-type SecretsBundleTypeArgs struct {
-	Certs      CertsPtrInput      `pulumi:"Certs"`
-	Cluster    ClusterPtrInput    `pulumi:"Cluster"`
-	Secrets    SecretsPtrInput    `pulumi:"Secrets"`
-	TrustdInfo TrustdInfoPtrInput `pulumi:"TrustdInfo"`
-}
-
-func (SecretsBundleTypeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecretsBundleType)(nil)).Elem()
-}
-
-func (i SecretsBundleTypeArgs) ToSecretsBundleTypeOutput() SecretsBundleTypeOutput {
-	return i.ToSecretsBundleTypeOutputWithContext(context.Background())
-}
-
-func (i SecretsBundleTypeArgs) ToSecretsBundleTypeOutputWithContext(ctx context.Context) SecretsBundleTypeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsBundleTypeOutput)
-}
-
-func (i SecretsBundleTypeArgs) ToSecretsBundleTypePtrOutput() SecretsBundleTypePtrOutput {
-	return i.ToSecretsBundleTypePtrOutputWithContext(context.Background())
-}
-
-func (i SecretsBundleTypeArgs) ToSecretsBundleTypePtrOutputWithContext(ctx context.Context) SecretsBundleTypePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsBundleTypeOutput).ToSecretsBundleTypePtrOutputWithContext(ctx)
-}
-
-// SecretsBundleTypePtrInput is an input type that accepts SecretsBundleTypeArgs, SecretsBundleTypePtr and SecretsBundleTypePtrOutput values.
-// You can construct a concrete instance of `SecretsBundleTypePtrInput` via:
-//
-//          SecretsBundleTypeArgs{...}
-//
-//  or:
-//
-//          nil
-type SecretsBundleTypePtrInput interface {
-	pulumi.Input
-
-	ToSecretsBundleTypePtrOutput() SecretsBundleTypePtrOutput
-	ToSecretsBundleTypePtrOutputWithContext(context.Context) SecretsBundleTypePtrOutput
-}
-
-type secretsBundleTypePtrType SecretsBundleTypeArgs
-
-func SecretsBundleTypePtr(v *SecretsBundleTypeArgs) SecretsBundleTypePtrInput {
-	return (*secretsBundleTypePtrType)(v)
-}
-
-func (*secretsBundleTypePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecretsBundleType)(nil)).Elem()
-}
-
-func (i *secretsBundleTypePtrType) ToSecretsBundleTypePtrOutput() SecretsBundleTypePtrOutput {
-	return i.ToSecretsBundleTypePtrOutputWithContext(context.Background())
-}
-
-func (i *secretsBundleTypePtrType) ToSecretsBundleTypePtrOutputWithContext(ctx context.Context) SecretsBundleTypePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsBundleTypePtrOutput)
-}
-
 // Talos SecretsBundle type
 type SecretsBundleTypeOutput struct{ *pulumi.OutputState }
 
@@ -870,15 +430,6 @@ func (o SecretsBundleTypeOutput) ToSecretsBundleTypeOutputWithContext(ctx contex
 	return o
 }
 
-func (o SecretsBundleTypeOutput) ToSecretsBundleTypePtrOutput() SecretsBundleTypePtrOutput {
-	return o.ToSecretsBundleTypePtrOutputWithContext(context.Background())
-}
-
-func (o SecretsBundleTypeOutput) ToSecretsBundleTypePtrOutputWithContext(ctx context.Context) SecretsBundleTypePtrOutput {
-	return o.ApplyT(func(v SecretsBundleType) *SecretsBundleType {
-		return &v
-	}).(SecretsBundleTypePtrOutput)
-}
 func (o SecretsBundleTypeOutput) Certs() CertsPtrOutput {
 	return o.ApplyT(func(v SecretsBundleType) *Certs { return v.Certs }).(CertsPtrOutput)
 }
@@ -895,132 +446,9 @@ func (o SecretsBundleTypeOutput) TrustdInfo() TrustdInfoPtrOutput {
 	return o.ApplyT(func(v SecretsBundleType) *TrustdInfo { return v.TrustdInfo }).(TrustdInfoPtrOutput)
 }
 
-type SecretsBundleTypePtrOutput struct{ *pulumi.OutputState }
-
-func (SecretsBundleTypePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecretsBundleType)(nil)).Elem()
-}
-
-func (o SecretsBundleTypePtrOutput) ToSecretsBundleTypePtrOutput() SecretsBundleTypePtrOutput {
-	return o
-}
-
-func (o SecretsBundleTypePtrOutput) ToSecretsBundleTypePtrOutputWithContext(ctx context.Context) SecretsBundleTypePtrOutput {
-	return o
-}
-
-func (o SecretsBundleTypePtrOutput) Elem() SecretsBundleTypeOutput {
-	return o.ApplyT(func(v *SecretsBundleType) SecretsBundleType { return *v }).(SecretsBundleTypeOutput)
-}
-
-func (o SecretsBundleTypePtrOutput) Certs() CertsPtrOutput {
-	return o.ApplyT(func(v *SecretsBundleType) *Certs {
-		if v == nil {
-			return nil
-		}
-		return v.Certs
-	}).(CertsPtrOutput)
-}
-
-func (o SecretsBundleTypePtrOutput) Cluster() ClusterPtrOutput {
-	return o.ApplyT(func(v *SecretsBundleType) *Cluster {
-		if v == nil {
-			return nil
-		}
-		return v.Cluster
-	}).(ClusterPtrOutput)
-}
-
-func (o SecretsBundleTypePtrOutput) Secrets() SecretsPtrOutput {
-	return o.ApplyT(func(v *SecretsBundleType) *Secrets {
-		if v == nil {
-			return nil
-		}
-		return v.Secrets
-	}).(SecretsPtrOutput)
-}
-
-func (o SecretsBundleTypePtrOutput) TrustdInfo() TrustdInfoPtrOutput {
-	return o.ApplyT(func(v *SecretsBundleType) *TrustdInfo {
-		if v == nil {
-			return nil
-		}
-		return v.TrustdInfo
-	}).(TrustdInfoPtrOutput)
-}
-
 // Talos TrustdInfo type
 type TrustdInfo struct {
 	Token *string `pulumi:"Token"`
-}
-
-// TrustdInfoInput is an input type that accepts TrustdInfoArgs and TrustdInfoOutput values.
-// You can construct a concrete instance of `TrustdInfoInput` via:
-//
-//          TrustdInfoArgs{...}
-type TrustdInfoInput interface {
-	pulumi.Input
-
-	ToTrustdInfoOutput() TrustdInfoOutput
-	ToTrustdInfoOutputWithContext(context.Context) TrustdInfoOutput
-}
-
-// Talos TrustdInfo type
-type TrustdInfoArgs struct {
-	Token pulumi.StringPtrInput `pulumi:"Token"`
-}
-
-func (TrustdInfoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*TrustdInfo)(nil)).Elem()
-}
-
-func (i TrustdInfoArgs) ToTrustdInfoOutput() TrustdInfoOutput {
-	return i.ToTrustdInfoOutputWithContext(context.Background())
-}
-
-func (i TrustdInfoArgs) ToTrustdInfoOutputWithContext(ctx context.Context) TrustdInfoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoOutput)
-}
-
-func (i TrustdInfoArgs) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
-	return i.ToTrustdInfoPtrOutputWithContext(context.Background())
-}
-
-func (i TrustdInfoArgs) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoOutput).ToTrustdInfoPtrOutputWithContext(ctx)
-}
-
-// TrustdInfoPtrInput is an input type that accepts TrustdInfoArgs, TrustdInfoPtr and TrustdInfoPtrOutput values.
-// You can construct a concrete instance of `TrustdInfoPtrInput` via:
-//
-//          TrustdInfoArgs{...}
-//
-//  or:
-//
-//          nil
-type TrustdInfoPtrInput interface {
-	pulumi.Input
-
-	ToTrustdInfoPtrOutput() TrustdInfoPtrOutput
-	ToTrustdInfoPtrOutputWithContext(context.Context) TrustdInfoPtrOutput
-}
-
-type trustdInfoPtrType TrustdInfoArgs
-
-func TrustdInfoPtr(v *TrustdInfoArgs) TrustdInfoPtrInput {
-	return (*trustdInfoPtrType)(v)
-}
-
-func (*trustdInfoPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**TrustdInfo)(nil)).Elem()
-}
-
-func (i *trustdInfoPtrType) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
-	return i.ToTrustdInfoPtrOutputWithContext(context.Background())
-}
-
-func (i *trustdInfoPtrType) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoPtrOutput)
 }
 
 // Talos TrustdInfo type
@@ -1038,15 +466,6 @@ func (o TrustdInfoOutput) ToTrustdInfoOutputWithContext(ctx context.Context) Tru
 	return o
 }
 
-func (o TrustdInfoOutput) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
-	return o.ToTrustdInfoPtrOutputWithContext(context.Background())
-}
-
-func (o TrustdInfoOutput) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
-	return o.ApplyT(func(v TrustdInfo) *TrustdInfo {
-		return &v
-	}).(TrustdInfoPtrOutput)
-}
 func (o TrustdInfoOutput) Token() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v TrustdInfo) *string { return v.Token }).(pulumi.StringPtrOutput)
 }
@@ -1066,7 +485,13 @@ func (o TrustdInfoPtrOutput) ToTrustdInfoPtrOutputWithContext(ctx context.Contex
 }
 
 func (o TrustdInfoPtrOutput) Elem() TrustdInfoOutput {
-	return o.ApplyT(func(v *TrustdInfo) TrustdInfo { return *v }).(TrustdInfoOutput)
+	return o.ApplyT(func(v *TrustdInfo) TrustdInfo {
+		if v != nil {
+			return *v
+		}
+		var ret TrustdInfo
+		return ret
+	}).(TrustdInfoOutput)
 }
 
 func (o TrustdInfoPtrOutput) Token() pulumi.StringPtrOutput {
@@ -1090,7 +515,6 @@ func init() {
 	pulumi.RegisterOutputType(SecretsOutput{})
 	pulumi.RegisterOutputType(SecretsPtrOutput{})
 	pulumi.RegisterOutputType(SecretsBundleTypeOutput{})
-	pulumi.RegisterOutputType(SecretsBundleTypePtrOutput{})
 	pulumi.RegisterOutputType(TrustdInfoOutput{})
 	pulumi.RegisterOutputType(TrustdInfoPtrOutput{})
 }

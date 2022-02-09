@@ -24,7 +24,7 @@ func NewSecretsBundle(ctx *pulumi.Context,
 		args = &SecretsBundleArgs{}
 	}
 
-	if args.ConfigVersion == nil {
+	if isZero(args.ConfigVersion) {
 		args.ConfigVersion = pulumi.StringPtr("v1alpha1")
 	}
 	var resource SecretsBundle
@@ -85,7 +85,7 @@ type SecretsBundleInput interface {
 }
 
 func (*SecretsBundle) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecretsBundle)(nil))
+	return reflect.TypeOf((**SecretsBundle)(nil)).Elem()
 }
 
 func (i *SecretsBundle) ToSecretsBundleOutput() SecretsBundleOutput {
@@ -94,35 +94,6 @@ func (i *SecretsBundle) ToSecretsBundleOutput() SecretsBundleOutput {
 
 func (i *SecretsBundle) ToSecretsBundleOutputWithContext(ctx context.Context) SecretsBundleOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsBundleOutput)
-}
-
-func (i *SecretsBundle) ToSecretsBundlePtrOutput() SecretsBundlePtrOutput {
-	return i.ToSecretsBundlePtrOutputWithContext(context.Background())
-}
-
-func (i *SecretsBundle) ToSecretsBundlePtrOutputWithContext(ctx context.Context) SecretsBundlePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsBundlePtrOutput)
-}
-
-type SecretsBundlePtrInput interface {
-	pulumi.Input
-
-	ToSecretsBundlePtrOutput() SecretsBundlePtrOutput
-	ToSecretsBundlePtrOutputWithContext(ctx context.Context) SecretsBundlePtrOutput
-}
-
-type secretsBundlePtrType SecretsBundleArgs
-
-func (*secretsBundlePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecretsBundle)(nil))
-}
-
-func (i *secretsBundlePtrType) ToSecretsBundlePtrOutput() SecretsBundlePtrOutput {
-	return i.ToSecretsBundlePtrOutputWithContext(context.Background())
-}
-
-func (i *secretsBundlePtrType) ToSecretsBundlePtrOutputWithContext(ctx context.Context) SecretsBundlePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsBundlePtrOutput)
 }
 
 // SecretsBundleArrayInput is an input type that accepts SecretsBundleArray and SecretsBundleArrayOutput values.
@@ -175,12 +146,10 @@ func (i SecretsBundleMap) ToSecretsBundleMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsBundleMapOutput)
 }
 
-type SecretsBundleOutput struct {
-	*pulumi.OutputState
-}
+type SecretsBundleOutput struct{ *pulumi.OutputState }
 
 func (SecretsBundleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecretsBundle)(nil))
+	return reflect.TypeOf((**SecretsBundle)(nil)).Elem()
 }
 
 func (o SecretsBundleOutput) ToSecretsBundleOutput() SecretsBundleOutput {
@@ -191,36 +160,10 @@ func (o SecretsBundleOutput) ToSecretsBundleOutputWithContext(ctx context.Contex
 	return o
 }
 
-func (o SecretsBundleOutput) ToSecretsBundlePtrOutput() SecretsBundlePtrOutput {
-	return o.ToSecretsBundlePtrOutputWithContext(context.Background())
-}
-
-func (o SecretsBundleOutput) ToSecretsBundlePtrOutputWithContext(ctx context.Context) SecretsBundlePtrOutput {
-	return o.ApplyT(func(v SecretsBundle) *SecretsBundle {
-		return &v
-	}).(SecretsBundlePtrOutput)
-}
-
-type SecretsBundlePtrOutput struct {
-	*pulumi.OutputState
-}
-
-func (SecretsBundlePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecretsBundle)(nil))
-}
-
-func (o SecretsBundlePtrOutput) ToSecretsBundlePtrOutput() SecretsBundlePtrOutput {
-	return o
-}
-
-func (o SecretsBundlePtrOutput) ToSecretsBundlePtrOutputWithContext(ctx context.Context) SecretsBundlePtrOutput {
-	return o
-}
-
 type SecretsBundleArrayOutput struct{ *pulumi.OutputState }
 
 func (SecretsBundleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecretsBundle)(nil))
+	return reflect.TypeOf((*[]*SecretsBundle)(nil)).Elem()
 }
 
 func (o SecretsBundleArrayOutput) ToSecretsBundleArrayOutput() SecretsBundleArrayOutput {
@@ -232,15 +175,15 @@ func (o SecretsBundleArrayOutput) ToSecretsBundleArrayOutputWithContext(ctx cont
 }
 
 func (o SecretsBundleArrayOutput) Index(i pulumi.IntInput) SecretsBundleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecretsBundle {
-		return vs[0].([]SecretsBundle)[vs[1].(int)]
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *SecretsBundle {
+		return vs[0].([]*SecretsBundle)[vs[1].(int)]
 	}).(SecretsBundleOutput)
 }
 
 type SecretsBundleMapOutput struct{ *pulumi.OutputState }
 
 func (SecretsBundleMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]SecretsBundle)(nil))
+	return reflect.TypeOf((*map[string]*SecretsBundle)(nil)).Elem()
 }
 
 func (o SecretsBundleMapOutput) ToSecretsBundleMapOutput() SecretsBundleMapOutput {
@@ -252,14 +195,16 @@ func (o SecretsBundleMapOutput) ToSecretsBundleMapOutputWithContext(ctx context.
 }
 
 func (o SecretsBundleMapOutput) MapIndex(k pulumi.StringInput) SecretsBundleOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) SecretsBundle {
-		return vs[0].(map[string]SecretsBundle)[vs[1].(string)]
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *SecretsBundle {
+		return vs[0].(map[string]*SecretsBundle)[vs[1].(string)]
 	}).(SecretsBundleOutput)
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsBundleInput)(nil)).Elem(), &SecretsBundle{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsBundleArrayInput)(nil)).Elem(), SecretsBundleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsBundleMapInput)(nil)).Elem(), SecretsBundleMap{})
 	pulumi.RegisterOutputType(SecretsBundleOutput{})
-	pulumi.RegisterOutputType(SecretsBundlePtrOutput{})
 	pulumi.RegisterOutputType(SecretsBundleArrayOutput{})
 	pulumi.RegisterOutputType(SecretsBundleMapOutput{})
 }

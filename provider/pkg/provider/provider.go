@@ -21,7 +21,6 @@ import (
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v3/resource/provider"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
 	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1/generate"
@@ -139,47 +138,14 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
 	}
 
-	// inputs, err := plugin.UnmarshalProperties(req.GetProperties(), plugin.MarshalOptions{KeepUnknowns: true, SkipNulls: true})
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// if !inputs["length"].IsNumber() {
-	// 	return nil, fmt.Errorf("Expected input property 'length' of type 'number' but got '%s", inputs["length"].TypeString())
-	// }
-
-	// n := int(inputs["length"].NumberValue())
-
-	// // Actually "create" the random number
-	// result := makeRandom(n)
-
-	// inputsMap := inputs.Mappable()
-
-	type SecretsBundle struct {
-		Cluster    *generate.Cluster
-		Secrets    *generate.Secrets
-		TrustdInfo *generate.TrustdInfo
-		Certs      *generate.Certs
-	}
-
 	secretsBundle, err := generate.NewSecretsBundle(generate.NewClock(), []generate.GenOption{}...)
 	if err != nil {
 		return nil, err
 	}
 
-	bundle := &SecretsBundle{
-		Cluster:    secretsBundle.Cluster,
-		Secrets:    secretsBundle.Secrets,
-		TrustdInfo: secretsBundle.TrustdInfo,
-		Certs:      secretsBundle.Certs,
-	}
-
 	outputs := map[string]interface{}{
-		"secretsBundle": bundle,
+		"secretsBundle": secretsBundle,
 	}
-	k.host.LogStatus(ctx, diag.Info, urn, "Creating secrets bundle")
-	k.host.Log(ctx, diag.Info, urn, secretsBundle.Cluster.ID)
-	// inputsMap["secretsBundle"] = secretsBundle
 
 	outputProperties, err := plugin.MarshalProperties(
 		resource.NewPropertyMapFromMap(outputs),
@@ -189,7 +155,7 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		return nil, err
 	}
 	return &pulumirpc.CreateResponse{
-		Id:         "name",
+		Id:         "secretsBundle",
 		Properties: outputProperties,
 	}, nil
 }
