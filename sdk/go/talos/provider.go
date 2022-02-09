@@ -10,6 +10,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The provider type for the Talos package
 type Provider struct {
 	pulumi.ProviderResourceState
 }

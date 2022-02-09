@@ -22,13 +22,17 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/alecthomas/jsonschema"
+	"github.com/frezbo/pulumi-provider-talos/provider/pkg/gen"
 	providerVersion "github.com/frezbo/pulumi-provider-talos/provider/pkg/version"
+	"github.com/pkg/errors"
 	dotnetgen "github.com/pulumi/pulumi/pkg/v3/codegen/dotnet"
 	gogen "github.com/pulumi/pulumi/pkg/v3/codegen/go"
 	nodejsgen "github.com/pulumi/pulumi/pkg/v3/codegen/nodejs"
 	pythongen "github.com/pulumi/pulumi/pkg/v3/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
+	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1/generate"
 )
 
 // TemplateDir is the path to the base directory for code generator templates.
@@ -45,6 +49,7 @@ const (
 	Go     Language = "go"
 	NodeJS Language = "nodejs"
 	Python Language = "python"
+	Schema Language = "schema"
 )
 
 func main() {
@@ -84,6 +89,9 @@ func main() {
 	case Go:
 		templateDir := filepath.Join(TemplateDir, "_go-templates")
 		writeGoClient(readSchema(inputFile, version), outdir, templateDir)
+	case Schema:
+		pkgSpec := generateSchema()
+		mustWritePulumiSchema(pkgSpec, version)
 	default:
 		panic(fmt.Sprintf("Unrecognized language '%s'", language))
 	}
@@ -107,6 +115,11 @@ func readSchema(schemaPath string, version string) *schema.Package {
 		panic(err)
 	}
 	return pkg
+}
+
+func generateSchema() schema.PackageSpec {
+	schema := jsonschema.Reflect(&generate.SecretsBundle{})
+	return gen.PulumiSchema(schema)
 }
 
 func writeNodeJSClient(pkg *schema.Package, outdir, templateDir string) {
@@ -191,4 +204,21 @@ func mustWriteFile(rootDir, filename string, contents []byte) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func mustWritePulumiSchema(pkgSpec schema.PackageSpec, version string) {
+	schemaJSON, err := json.MarshalIndent(pkgSpec, "", "    ")
+	if err != nil {
+		panic(errors.Wrap(err, "marshaling Pulumi schema"))
+	}
+
+	mustWriteFile(BaseDir, filepath.Join("provider", "cmd", "pulumi-resource-talos", "schema.json"), schemaJSON)
+
+	versionedPkgSpec := pkgSpec
+	versionedPkgSpec.Version = version
+	versionedSchemaJSON, err := json.MarshalIndent(versionedPkgSpec, "", "    ")
+	if err != nil {
+		panic(errors.Wrap(err, "marshaling Pulumi schema"))
+	}
+	mustWriteFile(BaseDir, filepath.Join("sdk", "schema", "schema.json"), versionedSchemaJSON)
 }

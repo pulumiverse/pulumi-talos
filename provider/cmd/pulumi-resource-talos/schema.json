@@ -1,48 +1,175 @@
 {
     "name": "talos",
-    "version": "0.0.1",
-    "resources": {
-        "talos:index:Random": {
+    "description": "A Pulumi package for creating and managing talos config",
+    "keywords": [
+        "talos",
+        "kubernetes",
+        "pulumi"
+    ],
+    "homepage": "https://talos.dev",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/frezbo/pulumi-provider-talos",
+    "config": {},
+    "types": {
+        "talos:bundle:Certs": {
+            "description": "Talos Certs type",
             "properties": {
-                "length": {
-                    "type": "integer"
+                "Admin": {
+                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
                 },
-                "result": {
+                "Etcd": {
+                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                },
+                "K8s": {
+                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                },
+                "K8sAggregator": {
+                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                },
+                "K8sServiceAccount": {
+                    "$ref": "#/types/talos:bundle:PEMEncodedKey"
+                },
+                "OS": {
+                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                }
+            },
+            "type": "object"
+        },
+        "talos:bundle:Cluster": {
+            "description": "Talos Cluster type",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "Secret": {
                     "type": "string"
                 }
             },
-            "required": [
-                "length",
-                "result"
-            ],
-            "inputProperties": {
-                "length": {
-                    "type": "integer"
+            "type": "object"
+        },
+        "talos:bundle:PEMEncodedCertificateAndKey": {
+            "description": "Talos PEMEncodedCertificateAndKey type",
+            "properties": {
+                "Crt": {
+                    "type": "string"
+                },
+                "Key": {
+                    "type": "string"
                 }
             },
-            "requiredInputs": [
-                "length"
+            "type": "object"
+        },
+        "talos:bundle:PEMEncodedKey": {
+            "description": "Talos PEMEncodedKey type",
+            "properties": {
+                "Key": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "talos:bundle:Secrets": {
+            "description": "Talos Secrets type",
+            "properties": {
+                "AESCBCEncryptionSecret": {
+                    "type": "string"
+                },
+                "BootstrapToken": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "talos:bundle:SecretsBundle": {
+            "description": "Talos SecretsBundle type",
+            "properties": {
+                "Certs": {
+                    "$ref": "#/types/talos:bundle:Certs"
+                },
+                "Cluster": {
+                    "$ref": "#/types/talos:bundle:Cluster"
+                },
+                "Secrets": {
+                    "$ref": "#/types/talos:bundle:Secrets"
+                },
+                "TrustdInfo": {
+                    "$ref": "#/types/talos:bundle:TrustdInfo"
+                }
+            },
+            "type": "object"
+        },
+        "talos:bundle:TalosMachineConfigVersion": {
+            "type": "string",
+            "enum": [
+                {
+                    "description": "Talos ",
+                    "value": "v1alpha1"
+                }
             ]
+        },
+        "talos:bundle:TrustdInfo": {
+            "description": "Talos TrustdInfo type",
+            "properties": {
+                "Token": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "provider": {
+        "description": "The provider type for the Talos package",
+        "type": "object"
+    },
+    "resources": {
+        "talos:bundle:secretsBundle": {
+            "description": "Talos secretsBundle resource",
+            "properties": {
+                "secretsBundle": {
+                    "type": "string",
+                    "$ref": "#types/talos:bundle:SecretsBundle"
+                }
+            },
+            "type": "string",
+            "required": [
+                "secretsBundle"
+            ],
+            "inputProperties": {
+                "configVersion": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string",
+                            "$ref": "#types/talos:bundle:TalosMachineConfigVersion"
+                        }
+                    ],
+                    "description": "the desired machine config version to generate (default \"v1alpha1\")",
+                    "default": "v1alpha1"
+                },
+                "talosVersion": {
+                    "type": "string",
+                    "description": "the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)"
+                }
+            }
         }
     },
     "language": {
-        "csharp": {
-            "packageReferences": {
-                "Pulumi": "3.*"
-            }
-        },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/go/talos"
+            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/v3/go/talos",
+            "packageImportAliases": {
+                "github.com/frezbo/pulumi-provider-talos/sdk/v3/go/talos/bundle": "bundle"
+            }
         },
         "nodejs": {
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
-            }
-        },
-        "python": {
-            "requires": {
-                "pulumi": ">=3.0.0,<4.0.0"
+            },
+            "devDependencies": {
+                "@types/node": "^17.0.0",
+                "typescript": "^3.7.0"
             }
         }
     }

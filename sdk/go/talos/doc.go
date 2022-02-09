@@ -1,3 +1,3 @@
-// Package talos exports types, functions, subpackages for provisioning talos resources.
+// A Pulumi package for creating and managing talos config
 //
 package talos

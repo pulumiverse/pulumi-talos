@@ -1,0 +1,3 @@
+name: kind-go-example
+runtime: go
+description: A simple KIND cluster example
