@@ -559,8 +559,7 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 			return nil, fmt.Errorf("failed to parse config file %q: %w", talosconfig, err)
 		}
 
-		ctx := context.TODO()
-		ctx = client.WithNodes(ctx, nodes...)
+		client.WithNodes(ctx, nodes...)
 		opts := []client.OptionFunc{
 			client.WithConfig(cfg),
 			client.WithEndpoints(endpoints...),

@@ -12,7 +12,7 @@ require (
 	google.golang.org/grpc v1.44.0
 )
 
-require github.com/cosi-project/runtime v0.0.0-20211216175730-264f8fcd1a4f // indirect
+replace github.com/talos-systems/talos/pkg/machinery => github.com/frezbo/talos/pkg/machinery v0.14.0-alpha.0.0.20220214162816-686650b31f2c
 
 require (
 	cloud.google.com/go/iam v0.1.1 // indirect
@@ -28,6 +28,7 @@ require (
 	github.com/cheggaaa/pb v1.0.29 // indirect
 	github.com/containerd/go-cni v1.1.1 // indirect
 	github.com/containernetworking/cni v1.0.1 // indirect
+	github.com/cosi-project/runtime v0.0.0-20211216175730-264f8fcd1a4f // indirect
 	github.com/djherbis/times v1.5.0 // indirect
 	github.com/docker/docker v20.10.12+incompatible // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect

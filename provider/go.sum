@@ -287,6 +287,8 @@ github.com/form3tech-oss/jwt-go v3.2.5+incompatible/go.mod h1:pbq4aXjuKjdthFRnoD
 github.com/fortytw2/leaktest v1.3.0/go.mod h1:jDsjWgpAGjm2CA7WthBh/CdZYEPF31XHquHwclZch5g=
 github.com/frankban/quicktest v1.10.0/go.mod h1:ui7WezCLWMWxVWr1GETZY3smRy0G4KWq9vcPtJmFl7Y=
 github.com/frankban/quicktest v1.14.0/go.mod h1:NeW+ay9A/U67EYXNFA1nPE8e/tnQv/09mUdL/ijj8og=
+github.com/frezbo/talos/pkg/machinery v0.14.0-alpha.0.0.20220214162816-686650b31f2c h1:gBB5QwsCUKTwHA7/SQB6124+rGRPQg96/TmW2Zv6IZc=
+github.com/frezbo/talos/pkg/machinery v0.14.0-alpha.0.0.20220214162816-686650b31f2c/go.mod h1:Xs2Bxs6W+p6l7E3vU4PVHFpYg2TsrZ0fbpLGoH7EQSY=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/fsnotify/fsnotify v1.5.1 h1:mZcQUHVQUQWoPXXtuf9yuEXKudkV2sx1E06UadKWpgI=
@@ -829,8 +831,6 @@ github.com/talos-systems/go-retry v0.1.1-0.20201113203059-8c63d290a688/go.mod h1
 github.com/talos-systems/go-retry v0.3.1/go.mod h1:HiXQqyVStZ35uSY/MTLWVvQVmC3lIW2MS5VdDaMtoKM=
 github.com/talos-systems/net v0.3.2-0.20220207192449-409926aec1c3 h1:VIh+SOGK9XjanOQoo9w/ZurHfI6hd7hkMXpySc7Mte4=
 github.com/talos-systems/net v0.3.2-0.20220207192449-409926aec1c3/go.mod h1:zhcGixNJz9dgwFiUwc7gkkAqdVqXagU1SNNoIVXYKGo=
-github.com/talos-systems/talos/pkg/machinery v0.15.0-alpha.2 h1:7HEnSAd5CQ4LfYBsdSSiT4nJNKj4gTkf6i10McVUZM4=
-github.com/talos-systems/talos/pkg/machinery v0.15.0-alpha.2/go.mod h1:Xs2Bxs6W+p6l7E3vU4PVHFpYg2TsrZ0fbpLGoH7EQSY=
 github.com/texttheater/golang-levenshtein v0.0.0-20191208221605-eb6844b05fc6/go.mod h1:XDKHRm5ThF8YJjx001LtgelzsoaEcvnA7lVWz9EeX3g=
 github.com/texttheater/golang-levenshtein v1.0.1 h1:+cRNoVrfiwufQPhoMzB6N0Yf/Mqajr6t1lOv8GyGE2U=
 github.com/texttheater/golang-levenshtein v1.0.1/go.mod h1:PYAKrbF5sAiq9wd+H82hs7gNaen0CplQ9uvm6+enD/8=
