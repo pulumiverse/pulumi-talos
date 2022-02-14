@@ -21,12 +21,17 @@ import (
 	"fmt"
 	"net/url"
 	"strings"
+	"time"
 
 	jsonpatch "github.com/evanphx/json-patch"
 	"github.com/frezbo/pulumi-provider-talos/provider/pkg/constants"
 	"github.com/pulumi/pulumi/pkg/v3/resource/provider"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/retry"
+	machineapi "github.com/talos-systems/talos/pkg/machinery/api/machine"
+	"github.com/talos-systems/talos/pkg/machinery/client"
+	clientconfig "github.com/talos-systems/talos/pkg/machinery/client/config"
 	"github.com/talos-systems/talos/pkg/machinery/config"
 	"github.com/talos-systems/talos/pkg/machinery/config/encoder"
 	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1"
@@ -235,6 +240,19 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 		if changed {
 			changes = pulumirpc.DiffResponse_DIFF_SOME
 		}
+	case "talos:index:nodeBootstrap":
+		changed := false
+
+		for _, k := range d.ChangedKeys() {
+			property := string(k)
+
+			changed = true
+			replaces = append(replaces, property)
+		}
+
+		if changed {
+			changes = pulumirpc.DiffResponse_DIFF_SOME
+		}
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
@@ -340,7 +358,7 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		if additionalSANsUnTyped, ok := inputsMap["additionalSans"]; ok {
 			additionalSANs := additionalSANsUnTyped.([]string)
 
-			generate.WithAdditionalSubjectAltNames(additionalSANs)
+			genOptions = append(genOptions, generate.WithAdditionalSubjectAltNames(additionalSANs))
 			outputs["additionalSans"] = additionalSANs
 		}
 
@@ -525,6 +543,45 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 			return nil, err
 		}
 		outputs["talosConfig"] = string(talosConfigYaml)
+	case "talos:index:nodeBootstrap":
+		talosconfig := inputsMap["talosConfig"].(string)
+		nodes := []string{inputsMap["nodes"].(string)}
+		endpoints := []string{inputsMap["endpoints"].(string)}
+
+		outputs = map[string]interface{}{
+			"talosConfig": talosconfig,
+			"nodes":       nodes,
+			"endpoints":   endpoints,
+		}
+
+		cfg, err := clientconfig.FromString(talosconfig)
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse config file %q: %w", talosconfig, err)
+		}
+
+		ctx := context.TODO()
+		ctx = client.WithNodes(ctx, nodes...)
+		opts := []client.OptionFunc{
+			client.WithConfig(cfg),
+			client.WithEndpoints(endpoints...),
+		}
+
+		c, err := client.New(ctx, opts...)
+		if err != nil {
+			return nil, fmt.Errorf("error constructing client: %w", err)
+		}
+		//nolint:errcheck
+		defer c.Close()
+		if _, _, err := retry.UntilTimeout(ctx, retry.Acceptor{
+			Accept: func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
+				if err := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); err != nil {
+					return false, nil, err
+				}
+				return true, nil, nil
+			},
+		}, time.Duration(300*time.Second)); err != nil {
+			return nil, fmt.Errorf("error bootstrapping nodes: %w", err)
+		}
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
@@ -550,6 +607,7 @@ func (k *talosProvider) Read(ctx context.Context, req *pulumirpc.ReadRequest) (*
 	switch ty {
 	case "talos:index:clusterSecrets":
 	case "talos:index:clusterConfig":
+	case "talos:index:nodeBootstrap":
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
@@ -564,6 +622,7 @@ func (k *talosProvider) Update(ctx context.Context, req *pulumirpc.UpdateRequest
 	switch ty {
 	case "talos:index:clusterSecrets":
 	case "talos:index:clusterConfig":
+	case "talos:index:nodeBootstrap":
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
@@ -581,6 +640,7 @@ func (k *talosProvider) Delete(ctx context.Context, req *pulumirpc.DeleteRequest
 	switch ty {
 	case "talos:index:clusterSecrets":
 	case "talos:index:clusterConfig":
+	case "talos:index:nodeBootstrap":
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}

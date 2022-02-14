@@ -420,6 +420,48 @@
                     "description": "the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)"
                 }
             }
+        },
+        "talos:index:nodeBootstrap": {
+            "description": "A node bootstrap resource",
+            "properties": {
+                "endpoint": {
+                    "type": "string",
+                    "description": "node endpoint address"
+                },
+                "node": {
+                    "type": "string",
+                    "description": "node address"
+                },
+                "talosconfig": {
+                    "type": "string",
+                    "description": "talosconfig"
+                }
+            },
+            "type": "object",
+            "required": [
+                "endpoint",
+                "node",
+                "talosconfig"
+            ],
+            "inputProperties": {
+                "endpoint": {
+                    "type": "string",
+                    "description": "node endpoint address"
+                },
+                "node": {
+                    "type": "string",
+                    "description": "node address"
+                },
+                "talosconfig": {
+                    "type": "string",
+                    "description": "talosconfig"
+                }
+            },
+            "requiredInputs": [
+                "endpoint",
+                "node",
+                "talosconfig"
+            ]
         }
     },
     "language": {

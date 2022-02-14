@@ -7,6 +7,7 @@ import * as utilities from "./utilities";
 // Export members:
 export * from "./clusterConfig";
 export * from "./clusterSecrets";
+export * from "./nodeBootstrap";
 export * from "./provider";
 
 // Export enums:
@@ -22,6 +23,7 @@ export {
 // Import resources to register:
 import { ClusterConfig } from "./clusterConfig";
 import { ClusterSecrets } from "./clusterSecrets";
+import { NodeBootstrap } from "./nodeBootstrap";
 
 const _module = {
     version: utilities.getVersion(),
@@ -31,6 +33,8 @@ const _module = {
                 return new ClusterConfig(name, <any>undefined, { urn })
             case "talos:index:clusterSecrets":
                 return new ClusterSecrets(name, <any>undefined, { urn })
+            case "talos:index:nodeBootstrap":
+                return new NodeBootstrap(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

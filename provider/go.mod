@@ -12,6 +12,8 @@ require (
 	google.golang.org/grpc v1.44.0
 )
 
+require github.com/cosi-project/runtime v0.0.0-20211216175730-264f8fcd1a4f // indirect
+
 require (
 	cloud.google.com/go/iam v0.1.1 // indirect
 	cloud.google.com/go/kms v1.2.0 // indirect

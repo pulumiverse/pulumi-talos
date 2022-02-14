@@ -8,6 +8,7 @@ import typing
 from ._enums import *
 from .cluster_config import *
 from .cluster_secrets import *
+from .node_bootstrap import *
 from .provider import *
 from ._inputs import *
 from . import outputs
@@ -20,7 +21,8 @@ _utilities.register(
   "fqn": "pulumi_talos",
   "classes": {
    "talos:index:clusterConfig": "ClusterConfig",
-   "talos:index:clusterSecrets": "ClusterSecrets"
+   "talos:index:clusterSecrets": "ClusterSecrets",
+   "talos:index:nodeBootstrap": "NodeBootstrap"
   }
  }
 ]

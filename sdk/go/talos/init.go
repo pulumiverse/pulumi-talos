@@ -24,6 +24,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ClusterConfig{}
 	case "talos:index:clusterSecrets":
 		r = &ClusterSecrets{}
+	case "talos:index:nodeBootstrap":
+		r = &NodeBootstrap{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}

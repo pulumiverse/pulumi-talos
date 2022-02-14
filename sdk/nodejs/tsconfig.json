@@ -16,6 +16,7 @@
         "clusterConfig.ts",
         "clusterSecrets.ts",
         "index.ts",
+        "nodeBootstrap.ts",
         "provider.ts",
         "types/enums/index.ts",
         "types/index.ts",

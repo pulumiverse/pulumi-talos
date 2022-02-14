@@ -1,9 +1,10 @@
-module github.com/frezbo/pulumi-provider-talos/sdk/v3
+module github.com/frezbo/pulumi-provider-talos/sdk
 
 go 1.17
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
+	github.com/pkg/errors v0.9.1
 	github.com/pulumi/pulumi/sdk/v3 v3.24.1
 )
 
@@ -29,7 +30,6 @@ require (
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/opentracing/basictracer-go v1.1.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06 // indirect

@@ -459,6 +459,51 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 		}
 	}
 
+	pkg.Resources["talos:index:nodeBootstrap"] = schema.ResourceSpec{
+		ObjectTypeSpec: schema.ObjectTypeSpec{
+			Description: "A node bootstrap resource",
+			Type:        "object",
+			Properties: map[string]schema.PropertySpec{
+				"endpoint": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "node endpoint address",
+				},
+				"node": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "node address",
+				},
+				"talosconfig": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "talosconfig",
+				},
+			},
+			Required: []string{
+				"endpoint",
+				"node",
+				"talosconfig",
+			},
+		},
+		InputProperties: map[string]schema.PropertySpec{
+			"endpoint": {
+				TypeSpec:    schema.TypeSpec{Type: "string"},
+				Description: "node endpoint address",
+			},
+			"node": {
+				TypeSpec:    schema.TypeSpec{Type: "string"},
+				Description: "node address",
+			},
+			"talosconfig": {
+				TypeSpec:    schema.TypeSpec{Type: "string"},
+				Description: "talosconfig",
+			},
+		},
+		RequiredInputs: []string{
+			"endpoint",
+			"node",
+			"talosconfig",
+		},
+	}
+
 	goImportPath := "github.com/frezbo/pulumi-provider-talos/sdk/go/talos"
 
 	pkg.Language["go"] = rawMessage(map[string]interface{}{
