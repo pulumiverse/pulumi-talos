@@ -5,18 +5,32 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export * from "./clusterConfig";
+export * from "./clusterSecrets";
 export * from "./provider";
-export * from "./random";
+
+// Export enums:
+export * from "./types/enums";
+
+// Export sub-modules:
+import * as types from "./types";
+
+export {
+    types,
+};
 
 // Import resources to register:
-import { Random } from "./random";
+import { ClusterConfig } from "./clusterConfig";
+import { ClusterSecrets } from "./clusterSecrets";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "talos:index:Random":
-                return new Random(name, <any>undefined, { urn })
+            case "talos:index:clusterConfig":
+                return new ClusterConfig(name, <any>undefined, { urn })
+            case "talos:index:clusterSecrets":
+                return new ClusterSecrets(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

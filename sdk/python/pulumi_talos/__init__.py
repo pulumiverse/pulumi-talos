@@ -5,8 +5,12 @@
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from ._enums import *
+from .cluster_config import *
+from .cluster_secrets import *
 from .provider import *
-from .random import *
+from ._inputs import *
+from . import outputs
 _utilities.register(
     resource_modules="""
 [
@@ -15,7 +19,8 @@ _utilities.register(
   "mod": "index",
   "fqn": "pulumi_talos",
   "classes": {
-   "talos:index:Random": "Random"
+   "talos:index:clusterConfig": "ClusterConfig",
+   "talos:index:clusterSecrets": "ClusterSecrets"
   }
  }
 ]

@@ -39,15 +39,23 @@ def readme():
 
 setup(name='pulumi_talos',
       version=VERSION,
+      description="A Pulumi package for creating and managing talos config",
       long_description=readme(),
       long_description_content_type='text/markdown',
       cmdclass={
           'install': InstallPluginCommand,
       },
+      keywords='talos kubernetes pulumi',
+      url='https://talos.dev',
+      project_urls={
+          'Repository': 'https://github.com/frezbo/pulumi-provider-talos'
+      },
+      license='Apache-2.0',
       packages=find_packages(),
       package_data={
           'pulumi_talos': [
               'py.typed',
+              'pulumi-plugin.json',
           ]
       },
       install_requires=[

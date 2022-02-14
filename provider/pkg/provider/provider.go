@@ -16,18 +16,31 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"fmt"
-	"math/rand"
-	"time"
+	"net/url"
+	"strings"
 
+	jsonpatch "github.com/evanphx/json-patch"
+	"github.com/frezbo/pulumi-provider-talos/provider/pkg/constants"
 	"github.com/pulumi/pulumi/pkg/v3/resource/provider"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
+	"github.com/talos-systems/talos/pkg/machinery/config"
+	"github.com/talos-systems/talos/pkg/machinery/config/encoder"
+	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1"
+	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1/bundle"
 	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1/generate"
+	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1/machine"
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"gopkg.in/yaml.v3"
 
 	pulumirpc "github.com/pulumi/pulumi/sdk/v3/proto/go"
+	talosnet "github.com/talos-systems/net"
+	talosconstants "github.com/talos-systems/talos/pkg/machinery/constants"
 
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 )
@@ -75,14 +88,14 @@ func (k *talosProvider) Configure(_ context.Context, req *pulumirpc.ConfigureReq
 // Invoke dynamically executes a built-in function in the provider.
 func (k *talosProvider) Invoke(_ context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error) {
 	tok := req.GetTok()
-	return nil, fmt.Errorf("Unknown Invoke token '%s'", tok)
+	return nil, fmt.Errorf("unknown Invoke token '%s'", tok)
 }
 
 // StreamInvoke dynamically executes a built-in function in the provider. The result is streamed
 // back as a series of messages.
 func (k *talosProvider) StreamInvoke(req *pulumirpc.InvokeRequest, server pulumirpc.ResourceProvider_StreamInvokeServer) error {
 	tok := req.GetTok()
-	return fmt.Errorf("Unknown StreamInvoke token '%s'", tok)
+	return fmt.Errorf("unknown StreamInvoke token '%s'", tok)
 }
 
 // Check validates that the given property bag is valid for a resource of the given type and returns
@@ -94,9 +107,77 @@ func (k *talosProvider) StreamInvoke(req *pulumirpc.InvokeRequest, server pulumi
 func (k *talosProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) (*pulumirpc.CheckResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "talos:bundle:secretsBundle" {
-		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
+
+	// Obtain new resource inputs. This is the new version of the resource(s) supplied by the user as
+	// an update.
+	newResInputs := req.GetNews()
+	news, err := plugin.UnmarshalProperties(newResInputs, plugin.MarshalOptions{
+		KeepUnknowns: true,
+		SkipNulls:    true,
+	})
+	if err != nil {
+		return nil, errors.Unwrap(fmt.Errorf("%w: %s", err, "check failed because malformed resource inputs"))
 	}
+
+	if err != nil {
+		return nil, errors.Unwrap(fmt.Errorf("%w: %s", err, "check failed because malformed resource inputs"))
+	}
+
+	newInputs := news.Mappable()
+
+	switch ty {
+	case "talos:index:clusterSecrets":
+		if configVersionUnTyped, ok := newInputs["configVersion"]; ok {
+			configVersion := configVersionUnTyped.(string)
+
+			if configVersion != constants.TalosMachineConfigVersion {
+				return nil, fmt.Errorf("configVersion must be %s", constants.TalosMachineConfigVersion)
+			}
+		}
+
+		if talosVersionUnTyped, ok := newInputs["talosVersion"]; ok {
+			talosVersion := talosVersionUnTyped.(string)
+
+			_, err = config.ParseContractFromVersion(talosVersion)
+			if err != nil {
+				return nil, fmt.Errorf("invalid talos-version: %w", err)
+			}
+		}
+	case "talos:index:clusterConfig":
+		if clusterEndpointUnTyped, ok := newInputs["clusterEndpoint"]; ok {
+			clusterEndpoint := clusterEndpointUnTyped.(string)
+
+			u, err := url.Parse(clusterEndpoint)
+			if err != nil {
+				if !strings.Contains(clusterEndpoint, "/") {
+					// not a URL, could be just host:port
+					u = &url.URL{
+						Host: clusterEndpoint,
+					}
+				} else {
+					return nil, fmt.Errorf("failed to parse the cluster endpoint URL: %w", err)
+				}
+			}
+			if u.Scheme == "" {
+				if u.Port() == "" {
+					return nil, fmt.Errorf("no scheme and port specified for the cluster endpoint URL\ntry: %q", fixControlPlaneEndpoint(u))
+				}
+
+				return nil, fmt.Errorf("no scheme specified for the cluster endpoint URL\ntry: %q", fixControlPlaneEndpoint(u))
+			}
+
+			if u.Scheme != "https" {
+				return nil, fmt.Errorf("the control plane endpoint URL should have scheme https://\ntry: %q", fixControlPlaneEndpoint(u))
+			}
+
+			if err = talosnet.ValidateEndpointURI(clusterEndpoint); err != nil {
+				return nil, fmt.Errorf("error validating the cluster endpoint URL: %w", err)
+			}
+		}
+	default:
+		return nil, fmt.Errorf("unknown resource type '%s'", ty)
+	}
+
 	return &pulumirpc.CheckResponse{Inputs: req.News, Failures: nil}, nil
 }
 
@@ -104,9 +185,6 @@ func (k *talosProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) 
 func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*pulumirpc.DiffResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "talos:bundle:secretsBundle" {
-		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
-	}
 
 	olds, err := plugin.UnmarshalProperties(req.GetOlds(), plugin.MarshalOptions{KeepUnknowns: true, SkipNulls: true})
 	if err != nil {
@@ -119,14 +197,51 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 	}
 
 	d := olds.Diff(news)
+
+	replaces := make([]string, 0)
 	changes := pulumirpc.DiffResponse_DIFF_NONE
-	if d.Changed("talosVersion") {
-		changes = pulumirpc.DiffResponse_DIFF_SOME
+
+	switch ty {
+	case "talos:index:clusterSecrets":
+		changed := false
+		if d.Changed("talosVersion") {
+			changed = true
+			replaces = append(replaces, "talosVersion")
+		}
+
+		if d.Changed("configVersion") {
+			changed = true
+			replaces = append(replaces, "configVersion")
+		}
+
+		if changed {
+			changes = pulumirpc.DiffResponse_DIFF_SOME
+		}
+	case "talos:index:clusterConfig":
+		changed := false
+
+		for _, k := range d.ChangedKeys() {
+			property := string(k)
+
+			switch property {
+			case "controlplaneConfig", "workerConfig", "talosConfig":
+				continue
+			default:
+				changed = true
+				replaces = append(replaces, property)
+			}
+		}
+
+		if changed {
+			changes = pulumirpc.DiffResponse_DIFF_SOME
+		}
+	default:
+		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
 
 	return &pulumirpc.DiffResponse{
 		Changes:  changes,
-		Replaces: []string{"talosVersion"},
+		Replaces: replaces,
 	}, nil
 }
 
@@ -134,17 +249,284 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest) (*pulumirpc.CreateResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "talos:bundle:secretsBundle" {
-		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
-	}
 
-	secretsBundle, err := generate.NewSecretsBundle(generate.NewClock(), []generate.GenOption{}...)
+	inputs, err := plugin.UnmarshalProperties(req.GetProperties(), plugin.MarshalOptions{
+		KeepUnknowns: true,
+		SkipNulls:    true,
+	})
 	if err != nil {
 		return nil, err
 	}
 
-	outputs := map[string]interface{}{
-		"secretsBundle": secretsBundle,
+	inputsMap := inputs.Mappable()
+
+	genOptions := make([]generate.GenOption, 0)
+	outputs := make(map[string]interface{})
+	var id string
+
+	switch ty {
+	case "talos:index:clusterSecrets":
+		id = "secrets"
+
+		if talosVersionUnTyped, ok := inputsMap["talosVersion"]; ok {
+			talosVersion := talosVersionUnTyped.(string)
+			var versionContract *config.VersionContract
+
+			versionContract, err = config.ParseContractFromVersion(talosVersion)
+			if err != nil {
+				return nil, fmt.Errorf("invalid talos-version: %w", err)
+			}
+			genOptions = append(genOptions, generate.WithVersionContract(versionContract))
+			outputs["talosVersion"] = talosVersion
+		}
+
+		if configVersionUnTyped, ok := inputsMap["configVersion"]; ok {
+			configVersion := configVersionUnTyped.(string)
+
+			outputs["configVersion"] = configVersion
+		}
+
+		secretsBundle, err := generate.NewSecretsBundle(generate.NewClock(), genOptions...)
+		if err != nil {
+			return nil, err
+		}
+
+		outputs["secrets"] = secretsBundle
+
+	case "talos:index:clusterConfig":
+		id = "config"
+
+		outputs = map[string]interface{}{
+			"clusterName":       inputsMap["clusterName"].(string),
+			"clusterEndpoint":   inputsMap["clusterEndpoint"].(string),
+			"dnsDomain":         inputsMap["dnsDomain"].(string),
+			"installDisk":       inputsMap["installDisk"].(string),
+			"installImage":      inputsMap["installImage"].(string),
+			"kubernetesVersion": inputsMap["kubernetesVersion"].(string),
+			"persist":           inputsMap["persist"].(bool),
+			"clusterDiscovery":  inputsMap["clusterDiscovery"].(bool),
+			"docs":              inputsMap["docs"].(bool),
+			"examples":          inputsMap["examples"].(bool),
+		}
+		if registryMirrorsArrayUnTyped, ok := inputsMap["registryMirrors"]; ok {
+			registryMirrorsUnTyped := registryMirrorsArrayUnTyped.([]interface{})
+
+			outputs["registryMirrors"] = make([]string, len(registryMirrorsUnTyped))
+
+			for i, registryMirrorUnTyped := range registryMirrorsUnTyped {
+				registryMirror := registryMirrorUnTyped.(string)
+
+				outputs["registryMirrors"].([]string)[i] = registryMirror
+				components := strings.SplitN(registryMirror, "=", 2)
+				if len(components) != 2 {
+					return nil, fmt.Errorf("invalid registry mirror spec: %q", registryMirror)
+				}
+
+				genOptions = append(genOptions, generate.WithRegistryMirror(components[0], components[1]))
+			}
+		}
+
+		if kubespanUnTyped, ok := inputsMap["kubespan"]; ok {
+			kubespan := kubespanUnTyped.(bool)
+
+			if kubespan {
+				genOptions = append(genOptions, generate.WithNetworkOptions(
+					v1alpha1.WithKubeSpan(),
+				))
+			}
+			outputs["kubespan"] = kubespan
+		}
+
+		if additionalSANsUnTyped, ok := inputsMap["additionalSans"]; ok {
+			additionalSANs := additionalSANsUnTyped.([]string)
+
+			generate.WithAdditionalSubjectAltNames(additionalSANs)
+			outputs["additionalSans"] = additionalSANs
+		}
+
+		if talosVersionUnTyped, ok := inputsMap["talosVersion"]; ok {
+			talosVersion := talosVersionUnTyped.(string)
+			outputs["talosVersion"] = talosVersion
+		}
+
+		if configVersionUnTyped, ok := inputsMap["configVersion"]; ok {
+			configVersion := configVersionUnTyped.(string)
+			outputs["configVersion"] = configVersion
+		}
+
+		genOptions = append(genOptions,
+			generate.WithInstallDisk(inputsMap["installDisk"].(string)),
+			generate.WithInstallImage(inputsMap["installImage"].(string)),
+			generate.WithDNSDomain(inputsMap["dnsDomain"].(string)),
+			generate.WithPersist(inputsMap["persist"].(bool)),
+			generate.WithClusterDiscovery(inputsMap["clusterDiscovery"].(bool)),
+		)
+
+		commentsFlags := encoder.CommentsDisabled
+
+		if inputsMap["docs"].(bool) {
+			commentsFlags |= encoder.CommentsDocs
+		}
+
+		if inputsMap["examples"].(bool) {
+			commentsFlags |= encoder.CommentsExamples
+		}
+
+		configBundleOpts := []bundle.Option{
+			bundle.WithInputOptions(
+				&bundle.InputOptions{
+					ClusterName: inputsMap["clusterName"].(string),
+					Endpoint:    inputsMap["clusterEndpoint"].(string),
+					KubeVersion: strings.TrimPrefix(inputsMap["kubernetesVersion"].(string), "v"),
+					GenOptions:  genOptions,
+				},
+			),
+		}
+
+		addConfigPatch := func(patchesUnTyped []interface{}, configOpt func(jsonpatch.Patch) bundle.Option) error {
+			patches := make([]map[string]interface{}, len(patchesUnTyped))
+
+			for i, patchUntyped := range patchesUnTyped {
+				patches[i] = patchUntyped.(map[string]interface{})
+			}
+
+			patch, err := json.Marshal(patches)
+			if err != nil {
+				return fmt.Errorf("error marshalling config patches: %w", err)
+			}
+
+			jsonPatch, err := jsonpatch.DecodePatch(patch)
+			if err != nil {
+				return fmt.Errorf("error decoding config JSON patch: %w", err)
+			}
+			configBundleOpts = append(configBundleOpts, configOpt(jsonPatch))
+			return nil
+		}
+
+		if configPatchesArrayUnTyped, ok := inputsMap["configPatches"]; ok {
+			configPatchesUnTyped := configPatchesArrayUnTyped.([]interface{})
+
+			if err := addConfigPatch(configPatchesUnTyped, bundle.WithJSONPatch); err != nil {
+				return nil, err
+			}
+			outputs["configPatches"] = configPatchesUnTyped
+		}
+
+		if configPatchesControlPlaneArrayUnTyped, ok := inputsMap["configPatchesControlPlane"]; ok {
+			configPatchesControlPlaneUnTyped := configPatchesControlPlaneArrayUnTyped.([]interface{})
+
+			if err := addConfigPatch(configPatchesControlPlaneUnTyped, bundle.WithJSONPatchControlPlane); err != nil {
+				return nil, err
+			}
+			outputs["configPatchesControlPlane"] = configPatchesControlPlaneUnTyped
+		}
+
+		if configPatchesWorkerArrayUnTyped, ok := inputsMap["configPatchesWorker"]; ok {
+			configPatchesWorkerUnTyped := configPatchesWorkerArrayUnTyped.([]interface{})
+
+			if err := addConfigPatch(configPatchesWorkerUnTyped, bundle.WithJSONPatchWorker); err != nil {
+				return nil, err
+			}
+			outputs["configPatchesWorker"] = configPatchesWorkerUnTyped
+		}
+
+		options := bundle.Options{}
+
+		for _, opt := range configBundleOpts {
+			if err := opt(&options); err != nil {
+				return nil, err
+			}
+		}
+
+		if options.InputOptions == nil {
+			return nil, fmt.Errorf("no WithInputOptions is defined")
+		}
+
+		var secretsBundle *generate.SecretsBundle
+
+		bytes, err := json.Marshal(inputsMap["secrets"])
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling secrets: %w", err)
+		}
+
+		if err := json.Unmarshal(bytes, &secretsBundle); err != nil {
+			return nil, fmt.Errorf("error unmarshaling secrets: %w", err)
+		}
+
+		secretsBundle.Clock = generate.NewClock()
+
+		input, err := generate.NewInput(
+			options.InputOptions.ClusterName,
+			options.InputOptions.Endpoint,
+			options.InputOptions.KubeVersion,
+			secretsBundle,
+			options.InputOptions.GenOptions...,
+		)
+		if err != nil {
+			return nil, err
+		}
+		outputs["secrets"] = inputsMap["secrets"]
+
+		bundle := &v1alpha1.ConfigBundle{}
+
+		for _, configType := range []machine.Type{machine.TypeInit, machine.TypeControlPlane, machine.TypeWorker} {
+			var generatedConfig *v1alpha1.Config
+
+			generatedConfig, err = generate.Config(configType, input)
+			if err != nil {
+				return nil, err
+			}
+
+			switch configType {
+			case machine.TypeInit:
+				bundle.InitCfg = generatedConfig
+			case machine.TypeControlPlane:
+				bundle.ControlPlaneCfg = generatedConfig
+			case machine.TypeWorker:
+				bundle.WorkerCfg = generatedConfig
+			case machine.TypeUnknown:
+				fallthrough
+			default:
+				return nil, fmt.Errorf("unreachable code")
+			}
+		}
+
+		if err := bundle.ApplyJSONPatch(options.JSONPatch, true, true); err != nil {
+			return nil, fmt.Errorf("error patching configs: %w", err)
+		}
+
+		if err := bundle.ApplyJSONPatch(options.JSONPatchControlPlane, true, false); err != nil {
+			return nil, fmt.Errorf("error patching control plane configs: %w", err)
+		}
+
+		if err := bundle.ApplyJSONPatch(options.JSONPatchWorker, false, true); err != nil {
+			return nil, fmt.Errorf("error patching worker config: %w", err)
+		}
+
+		controlPlaneConfig, err := bundle.ControlPlaneCfg.EncodeString(encoder.WithComments(commentsFlags))
+		if err != nil {
+			return nil, err
+		}
+		outputs["controlplaneConfig"] = controlPlaneConfig
+
+		workerConfig, err := bundle.WorkerCfg.EncodeString(encoder.WithComments(commentsFlags))
+		if err != nil {
+			return nil, err
+		}
+		outputs["workerConfig"] = workerConfig
+
+		talosConfig, err := generate.Talosconfig(input, options.InputOptions.GenOptions...)
+		if err != nil {
+			return nil, err
+		}
+
+		talosConfigYaml, err := yaml.Marshal(talosConfig)
+		if err != nil {
+			return nil, err
+		}
+		outputs["talosConfig"] = string(talosConfigYaml)
+	default:
+		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
 
 	outputProperties, err := plugin.MarshalProperties(
@@ -155,7 +537,7 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		return nil, err
 	}
 	return &pulumirpc.CreateResponse{
-		Id:         "secretsBundle",
+		Id:         id,
 		Properties: outputProperties,
 	}, nil
 }
@@ -164,22 +546,30 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 func (k *talosProvider) Read(ctx context.Context, req *pulumirpc.ReadRequest) (*pulumirpc.ReadResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "talos:bundle:secretsBundle" {
-		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
+
+	switch ty {
+	case "talos:index:clusterSecrets":
+	case "talos:index:clusterConfig":
+	default:
+		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
-	return nil, status.Error(codes.Unimplemented, "Read is not yet implemented for 'talos:bundle:secretsBundle'")
+	return nil, status.Error(codes.Unimplemented, "Read is not yet implemented for talos resources")
 }
 
 // Update updates an existing resource with new values.
 func (k *talosProvider) Update(ctx context.Context, req *pulumirpc.UpdateRequest) (*pulumirpc.UpdateResponse, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "talos:bundle:secretsBundle" {
-		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
+
+	switch ty {
+	case "talos:index:clusterSecrets":
+	case "talos:index:clusterConfig":
+	default:
+		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
 
 	// Our Random resource will never be updated - if there is a diff, it will be a replacement.
-	return nil, status.Error(codes.Unimplemented, "Update is not yet implemented for 'talos:bundle:secretsBundle'")
+	return nil, status.Error(codes.Unimplemented, "Update is not yet implemented for talos resources")
 }
 
 // Delete tears down an existing resource with the given ID.  If it fails, the resource is assumed
@@ -187,11 +577,15 @@ func (k *talosProvider) Update(ctx context.Context, req *pulumirpc.UpdateRequest
 func (k *talosProvider) Delete(ctx context.Context, req *pulumirpc.DeleteRequest) (*pbempty.Empty, error) {
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
-	if ty != "talos:bundle:secretsBundle" {
-		return nil, fmt.Errorf("Unknown resource type '%s'", ty)
+
+	switch ty {
+	case "talos:index:clusterSecrets":
+	case "talos:index:clusterConfig":
+	default:
+		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
 
-	// Note that for our Random resource, we don't have to do anything on Delete.
+	// Note that for Talos resources, we don't have to do anything on Delete.
 	return &pbempty.Empty{}, nil
 }
 
@@ -217,13 +611,18 @@ func (k *talosProvider) Cancel(context.Context, *pbempty.Empty) (*pbempty.Empty,
 	return &pbempty.Empty{}, nil
 }
 
-func makeRandom(length int) string {
-	seededRand := rand.New(rand.NewSource(time.Now().UnixNano()))
-	charset := []rune("abcdefghijklmnopqrstuvwtalosABCDEFGHIJKLMNOPQRSTUVWtalos0123456789")
-
-	result := make([]rune, length)
-	for i := range result {
-		result[i] = charset[seededRand.Intn(len(charset))]
+func fixControlPlaneEndpoint(u *url.URL) *url.URL {
+	// handle the case when the hostname/IP is given without the port, it parses as URL Path
+	if u.Scheme == "" && u.Host == "" && u.Path != "" {
+		u.Host = u.Path
+		u.Path = ""
 	}
-	return string(result)
+
+	u.Scheme = "https"
+
+	if u.Port() == "" {
+		u.Host = fmt.Sprintf("%s:%d", u.Host, talosconstants.DefaultControlPlanePort)
+	}
+
+	return u
 }

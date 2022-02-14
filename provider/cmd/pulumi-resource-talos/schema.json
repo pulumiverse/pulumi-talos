@@ -11,31 +11,31 @@
     "repository": "https://github.com/frezbo/pulumi-provider-talos",
     "config": {},
     "types": {
-        "talos:bundle:Certs": {
+        "talos:index:Certs": {
             "description": "Talos Certs type",
             "properties": {
                 "Admin": {
-                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
                 },
                 "Etcd": {
-                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
                 },
                 "K8s": {
-                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
                 },
                 "K8sAggregator": {
-                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
                 },
                 "K8sServiceAccount": {
-                    "$ref": "#/types/talos:bundle:PEMEncodedKey"
+                    "$ref": "#/types/talos:index:PEMEncodedKey"
                 },
                 "OS": {
-                    "$ref": "#/types/talos:bundle:PEMEncodedCertificateAndKey"
+                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
                 }
             },
             "type": "object"
         },
-        "talos:bundle:Cluster": {
+        "talos:index:Cluster": {
             "description": "Talos Cluster type",
             "properties": {
                 "Id": {
@@ -47,7 +47,7 @@
             },
             "type": "object"
         },
-        "talos:bundle:PEMEncodedCertificateAndKey": {
+        "talos:index:PEMEncodedCertificateAndKey": {
             "description": "Talos PEMEncodedCertificateAndKey type",
             "properties": {
                 "Crt": {
@@ -59,7 +59,7 @@
             },
             "type": "object"
         },
-        "talos:bundle:PEMEncodedKey": {
+        "talos:index:PEMEncodedKey": {
             "description": "Talos PEMEncodedKey type",
             "properties": {
                 "Key": {
@@ -68,7 +68,7 @@
             },
             "type": "object"
         },
-        "talos:bundle:Secrets": {
+        "talos:index:Secrets": {
             "description": "Talos Secrets type",
             "properties": {
                 "AESCBCEncryptionSecret": {
@@ -80,34 +80,42 @@
             },
             "type": "object"
         },
-        "talos:bundle:SecretsBundle": {
+        "talos:index:SecretsBundle": {
             "description": "Talos SecretsBundle type",
             "properties": {
                 "Certs": {
-                    "$ref": "#/types/talos:bundle:Certs"
+                    "$ref": "#/types/talos:index:Certs"
                 },
                 "Cluster": {
-                    "$ref": "#/types/talos:bundle:Cluster"
+                    "$ref": "#/types/talos:index:Cluster"
                 },
                 "Secrets": {
-                    "$ref": "#/types/talos:bundle:Secrets"
+                    "$ref": "#/types/talos:index:Secrets"
                 },
                 "TrustdInfo": {
-                    "$ref": "#/types/talos:bundle:TrustdInfo"
+                    "$ref": "#/types/talos:index:TrustdInfo"
                 }
             },
             "type": "object"
         },
-        "talos:bundle:TalosMachineConfigVersion": {
+        "talos:index:TalosMachineConfigVersion": {
             "type": "string",
             "enum": [
                 {
-                    "description": "Talos ",
+                    "description": "Talos Machine Configuration Version",
                     "value": "v1alpha1"
                 }
             ]
         },
-        "talos:bundle:TrustdInfo": {
+        "talos:index:TalosMachineConfigVersionOutput": {
+            "description": "Talos Machine Configuration Version Output",
+            "type": "object"
+        },
+        "talos:index:TalosVersionOutput": {
+            "description": "Talos Version Output",
+            "type": "object"
+        },
+        "talos:index:TrustdInfo": {
             "description": "Talos TrustdInfo type",
             "properties": {
                 "Token": {
@@ -122,17 +130,276 @@
         "type": "object"
     },
     "resources": {
-        "talos:bundle:secretsBundle": {
-            "description": "Talos secretsBundle resource",
+        "talos:index:clusterConfig": {
+            "description": "Talos cluster config resource",
             "properties": {
-                "secretsBundle": {
+                "additionalSans": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "additional Subject-Alt-Names for the APIServer certificate"
+                },
+                "clusterDiscovery": {
+                    "type": "boolean",
+                    "description": "cluster discovery feature"
+                },
+                "clusterEndpoint": {
+                    "type": "string",
+                    "description": "The cluster endpoint"
+                },
+                "clusterName": {
+                    "type": "string",
+                    "description": "cluster name"
+                },
+                "configPatches": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "generated machineconfigs (applied to all node types)"
+                },
+                "configPatchesControlPlane": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "generated machineconfigs (applied to 'controlplane' types)"
+                },
+                "configPatchesWorker": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "generated machineconfigs (applied to 'worker' type)"
+                },
+                "configVersion": {
+                    "type": "string",
+                    "description": "the desired machine config version to refer to"
+                },
+                "controlplaneConfig": {
+                    "type": "string",
+                    "description": "Talos Controlplane Config"
+                },
+                "dnsDomain": {
+                    "type": "string",
+                    "description": "the dns domain to use for cluster"
+                },
+                "docs": {
+                    "type": "boolean",
+                    "description": "machine config documentation enabled"
+                },
+                "examples": {
+                    "type": "boolean",
+                    "description": "machine config examples enabled"
+                },
+                "installDisk": {
+                    "type": "string",
+                    "description": "the disk to install to "
+                },
+                "installImage": {
+                    "type": "string",
+                    "description": "the image used to perform an installation"
+                },
+                "kubernetesVersion": {
+                    "type": "string",
+                    "description": "desired kubernetes version to run"
+                },
+                "kubespan": {
+                    "type": "boolean",
+                    "description": "kubespan enabled"
+                },
+                "persist": {
+                    "type": "boolean",
+                    "description": "persist value for configs"
+                },
+                "registryMirrors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "list of registry mirrors"
+                },
+                "secrets": {
                     "type": "object",
-                    "$ref": "#types/talos:bundle:SecretsBundle"
+                    "$ref": "#/types/talos:index:SecretsBundle",
+                    "description": "Talos Secrets Bundle"
+                },
+                "talosConfig": {
+                    "type": "string",
+                    "description": "Talos Config"
+                },
+                "talosVersion": {
+                    "type": "string",
+                    "description": "the desired Talos version"
+                },
+                "workerConfig": {
+                    "type": "string",
+                    "description": "Talos Worker Config"
                 }
             },
             "type": "object",
             "required": [
-                "secretsBundle"
+                "clusterName",
+                "clusterEndpoint",
+                "additionalSans",
+                "configPatches",
+                "configPatchesControlPlane",
+                "configPatchesWorker",
+                "dnsDomain",
+                "installDisk",
+                "installImage",
+                "kubernetesVersion",
+                "persist",
+                "registryMirrors",
+                "talosVersion",
+                "configVersion",
+                "clusterDiscovery",
+                "docs",
+                "examples",
+                "kubespan",
+                "controlplaneConfig",
+                "workerConfig",
+                "talosConfig",
+                "secrets"
+            ],
+            "inputProperties": {
+                "additionalSans": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "additional Subject-Alt-Names for the APIServer certificate"
+                },
+                "clusterDiscovery": {
+                    "type": "boolean",
+                    "description": "enable cluster discovery feature (default true)",
+                    "default": true
+                },
+                "clusterEndpoint": {
+                    "type": "string",
+                    "description": "The cluster endpoint is the URL for the Kubernetes API. If you decide to use\na control plane node, common in a single node control plane setup, use port 6443 as\nthis is the port that the API server binds to on every control plane node. For an HA\nsetup, usually involving a load balancer, use the IP and port of the load balancer."
+                },
+                "clusterName": {
+                    "type": "string",
+                    "description": "cluster name"
+                },
+                "configPatches": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "patch generated machineconfigs (applied to all node types)"
+                },
+                "configPatchesControlPlane": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "patch generated machineconfigs (applied to 'controlplane' types)"
+                },
+                "configPatchesWorker": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "patch generated machineconfigs (applied to 'worker' type)"
+                },
+                "configVersion": {
+                    "$ref": "#/types/talos:index:TalosMachineConfigVersionOutput",
+                    "description": "the desired machine config version to refer to"
+                },
+                "dnsDomain": {
+                    "type": "string",
+                    "description": "the dns domain to use for cluster (default \"cluster.local\")",
+                    "default": "cluster.local"
+                },
+                "docs": {
+                    "type": "boolean",
+                    "description": "renders all machine configs adding the documentation for each field (default true)",
+                    "default": true
+                },
+                "examples": {
+                    "type": "boolean",
+                    "description": "renders all machine configs with the commented examples (default true)",
+                    "default": true
+                },
+                "installDisk": {
+                    "type": "string",
+                    "description": "the disk to install to (default \"/dev/sda\")",
+                    "default": "/dev/sda"
+                },
+                "installImage": {
+                    "type": "string",
+                    "description": "the image used to perform an installation (default \"ghcr.io/talos-systems/installer:v0.14.2\")",
+                    "default": "ghcr.io/talos-systems/installer:v0.14.2"
+                },
+                "kubernetesVersion": {
+                    "type": "string",
+                    "description": "desired kubernetes version to run (default \"1.23.3\")",
+                    "default": "1.23.3"
+                },
+                "kubespan": {
+                    "type": "boolean",
+                    "description": "enable kubespan feature"
+                },
+                "persist": {
+                    "type": "boolean",
+                    "description": "the desired persist value for configs (default true)",
+                    "default": true
+                },
+                "registryMirrors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "list of registry mirrors to use in format: \u003cregistry host\u003e=\u003cmirror URL\u003e"
+                },
+                "secrets": {
+                    "type": "object",
+                    "$ref": "#/types/talos:index:SecretsBundle",
+                    "description": "Talos Secrets Bundle"
+                },
+                "talosVersion": {
+                    "$ref": "#/types/talos:index:TalosVersionOutput",
+                    "description": "the desired Talos version to refer to"
+                }
+            },
+            "requiredInputs": [
+                "clusterName",
+                "clusterEndpoint",
+                "secrets"
+            ]
+        },
+        "talos:index:clusterSecrets": {
+            "description": "Talos secrets resource",
+            "properties": {
+                "configVersion": {
+                    "type": "string",
+                    "$ref": "#/types/talos:index:TalosMachineConfigVersionOutput"
+                },
+                "secrets": {
+                    "type": "object",
+                    "$ref": "#/types/talos:index:SecretsBundle",
+                    "description": "Talos Secrets Bundle"
+                },
+                "talosVersion": {
+                    "type": "string",
+                    "$ref": "#/types/talos:index:TalosVersionOutput",
+                    "description": "Talos version the config generated for"
+                }
+            },
+            "type": "object",
+            "required": [
+                "secrets",
+                "talosVersion",
+                "configVersion"
             ],
             "inputProperties": {
                 "configVersion": {
@@ -142,7 +409,7 @@
                         },
                         {
                             "type": "string",
-                            "$ref": "#types/talos:bundle:TalosMachineConfigVersion"
+                            "$ref": "#/types/talos:index:TalosMachineConfigVersion"
                         }
                     ],
                     "description": "the desired machine config version to generate (default \"v1alpha1\")",
@@ -156,12 +423,17 @@
         }
     },
     "language": {
+        "csharp": {
+            "namespaces": {
+                "bundle": "bundle"
+            },
+            "packageReferences": {
+                "Pulumi": "3.*"
+            }
+        },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/v3/go/talos",
-            "packageImportAliases": {
-                "github.com/frezbo/pulumi-provider-talos/sdk/v3/go/talos/bundle": "bundle"
-            }
+            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/go/talos"
         },
         "nodejs": {
             "dependencies": {
@@ -170,6 +442,11 @@
             "devDependencies": {
                 "@types/node": "^17.0.0",
                 "typescript": "^3.7.0"
+            }
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             }
         }
     }

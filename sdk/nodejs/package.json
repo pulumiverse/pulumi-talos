@@ -1,14 +1,24 @@
 {
     "name": "@pulumi/talos",
     "version": "${VERSION}",
+    "keywords": [
+        "talos",
+        "kubernetes",
+        "pulumi"
+    ],
+    "homepage": "https://talos.dev",
+    "repository": "https://github.com/frezbo/pulumi-provider-talos",
+    "license": "Apache-2.0",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "install": "node scripts/install-pulumi-plugin.js resource talos ${VERSION}"
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0"
     },
     "devDependencies": {
-        "typescript": "^4.3.5"
+        "@types/node": "^17.0.0",
+        "typescript": "^3.7.0"
     },
     "pulumi": {
         "resource": true

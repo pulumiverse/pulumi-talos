@@ -16,6 +16,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -25,7 +26,7 @@ import (
 	"github.com/alecthomas/jsonschema"
 	"github.com/frezbo/pulumi-provider-talos/provider/pkg/gen"
 	providerVersion "github.com/frezbo/pulumi-provider-talos/provider/pkg/version"
-	"github.com/pkg/errors"
+
 	dotnetgen "github.com/pulumi/pulumi/pkg/v3/codegen/dotnet"
 	gogen "github.com/pulumi/pulumi/pkg/v3/codegen/go"
 	nodejsgen "github.com/pulumi/pulumi/pkg/v3/codegen/nodejs"
@@ -209,7 +210,7 @@ func mustWriteFile(rootDir, filename string, contents []byte) {
 func mustWritePulumiSchema(pkgSpec schema.PackageSpec, version string) {
 	schemaJSON, err := json.MarshalIndent(pkgSpec, "", "    ")
 	if err != nil {
-		panic(errors.Wrap(err, "marshaling Pulumi schema"))
+		panic(errors.Unwrap(fmt.Errorf("%s: %w", "marshaling Pulumi schema", err)))
 	}
 
 	mustWriteFile(BaseDir, filepath.Join("provider", "cmd", "pulumi-resource-talos", "schema.json"), schemaJSON)
@@ -218,7 +219,7 @@ func mustWritePulumiSchema(pkgSpec schema.PackageSpec, version string) {
 	versionedPkgSpec.Version = version
 	versionedSchemaJSON, err := json.MarshalIndent(versionedPkgSpec, "", "    ")
 	if err != nil {
-		panic(errors.Wrap(err, "marshaling Pulumi schema"))
+		panic(errors.Unwrap(fmt.Errorf("%s: %w", "marshaling Pulumi schema", err)))
 	}
 	mustWriteFile(BaseDir, filepath.Join("sdk", "schema", "schema.json"), versionedSchemaJSON)
 }

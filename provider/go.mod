@@ -5,11 +5,10 @@ go 1.17
 require (
 	github.com/alecthomas/jsonschema v0.0.0-20220203024042-cc89723c9db0
 	github.com/golang/protobuf v1.5.2
-	github.com/pkg/errors v0.9.1
 	github.com/pulumi/pulumi/pkg/v3 v3.24.1
 	github.com/pulumi/pulumi/sdk v1.14.1
 	github.com/pulumi/pulumi/sdk/v3 v3.24.1
-	github.com/talos-systems/talos/pkg/machinery v0.15.0-alpha.1.0.20220209184436-8899dd349451
+	github.com/talos-systems/talos/pkg/machinery v0.15.0-alpha.2
 	google.golang.org/grpc v1.44.0
 )
 
@@ -31,7 +30,7 @@ require (
 	github.com/docker/docker v20.10.12+incompatible // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/emirpasic/gods v1.12.0 // indirect
-	github.com/evanphx/json-patch v5.6.0+incompatible // indirect
+	github.com/evanphx/json-patch v5.6.0+incompatible
 	github.com/form3tech-oss/jwt-go v3.2.5+incompatible // indirect
 	github.com/gedex/inflector v0.0.0-20170307190818-16278e9db813 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
@@ -70,6 +69,7 @@ require (
 	github.com/opentracing/basictracer-go v1.1.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pgavlin/goldmark v1.1.33-0.20200616210433-b5eb04559386 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
@@ -82,7 +82,7 @@ require (
 	github.com/talos-systems/crypto v0.3.5-0.20220209123851-510b0d2753a8 // indirect
 	github.com/talos-systems/go-blockdevice v0.2.6-0.20220125134504-7b9de26bc6bc // indirect
 	github.com/talos-systems/go-debug v0.2.1 // indirect
-	github.com/talos-systems/net v0.3.2-0.20220207192449-409926aec1c3 // indirect
+	github.com/talos-systems/net v0.3.2-0.20220207192449-409926aec1c3
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
 	github.com/tweekmonster/luser v0.0.0-20161003172636-3fa38070dbd7 // indirect
 	github.com/uber/jaeger-client-go v2.30.0+incompatible // indirect
@@ -105,6 +105,6 @@ require (
 	gopkg.in/src-d/go-git.v4 v4.13.1 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20211028080628-e2786a622600 // indirect
 )

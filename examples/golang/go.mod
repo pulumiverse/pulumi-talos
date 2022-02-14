@@ -3,7 +3,7 @@ module talos-go-example
 go 1.17
 
 require (
-	github.com/frezbo/pulumi-provider-talos/sdk/v3 v3.0.0-20220209044619-67b66fec94a9
+	github.com/frezbo/pulumi-provider-talos/sdk v0.0.0-00010101000000-000000000000
 	github.com/pulumi/pulumi/sdk/v3 v3.24.1
 )
 
@@ -57,4 +57,4 @@ require (
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20211028080628-e2786a622600 // indirect
 )
 
-replace github.com/frezbo/pulumi-provider-talos/sdk/v3 => ../../sdk
+replace github.com/frezbo/pulumi-provider-talos/sdk => ../../sdk

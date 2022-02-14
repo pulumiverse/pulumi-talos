@@ -7,9 +7,12 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.talos
+namespace Pulumi.Talos
 {
-    [talosResourceType("pulumi:providers:talos")]
+    /// <summary>
+    /// The provider type for the Talos package
+    /// </summary>
+    [TalosResourceType("pulumi:providers:talos")]
     public partial class Provider : Pulumi.ProviderResource
     {
         /// <summary>
