@@ -554,7 +554,7 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		talosconfig := inputsMap["talosConfig"].(string)
 		nodes := []string{inputsMap["node"].(string)}
 		endpoints := []string{inputsMap["endpoint"].(string)}
-		timeout := inputsMap["timeout"].(int)
+		timeout := int(inputsMap["timeout"].(float64))
 
 		outputs = map[string]interface{}{
 			"talosConfig": talosconfig,
