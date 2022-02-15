@@ -15,16 +15,22 @@ class NodeBootstrapArgs:
     def __init__(__self__, *,
                  endpoint: pulumi.Input[str],
                  node: pulumi.Input[str],
-                 talosconfig: pulumi.Input[str]):
+                 talos_config: pulumi.Input[str],
+                 timeout: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a NodeBootstrap resource.
         :param pulumi.Input[str] endpoint: node endpoint address
         :param pulumi.Input[str] node: node address
-        :param pulumi.Input[str] talosconfig: talosconfig
+        :param pulumi.Input[str] talos_config: talosconfig
+        :param pulumi.Input[int] timeout: timeout in seconds (default 600)
         """
         pulumi.set(__self__, "endpoint", endpoint)
         pulumi.set(__self__, "node", node)
-        pulumi.set(__self__, "talosconfig", talosconfig)
+        pulumi.set(__self__, "talos_config", talos_config)
+        if timeout is None:
+            timeout = 600
+        if timeout is not None:
+            pulumi.set(__self__, "timeout", timeout)
 
     @property
     @pulumi.getter
@@ -51,16 +57,28 @@ class NodeBootstrapArgs:
         pulumi.set(self, "node", value)
 
     @property
-    @pulumi.getter
-    def talosconfig(self) -> pulumi.Input[str]:
+    @pulumi.getter(name="talosConfig")
+    def talos_config(self) -> pulumi.Input[str]:
         """
         talosconfig
         """
-        return pulumi.get(self, "talosconfig")
+        return pulumi.get(self, "talos_config")
 
-    @talosconfig.setter
-    def talosconfig(self, value: pulumi.Input[str]):
-        pulumi.set(self, "talosconfig", value)
+    @talos_config.setter
+    def talos_config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "talos_config", value)
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        timeout in seconds (default 600)
+        """
+        return pulumi.get(self, "timeout")
+
+    @timeout.setter
+    def timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "timeout", value)
 
 
 class NodeBootstrap(pulumi.CustomResource):
@@ -70,7 +88,8 @@ class NodeBootstrap(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 talosconfig: Optional[pulumi.Input[str]] = None,
+                 talos_config: Optional[pulumi.Input[str]] = None,
+                 timeout: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
         A node bootstrap resource
@@ -79,7 +98,8 @@ class NodeBootstrap(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] endpoint: node endpoint address
         :param pulumi.Input[str] node: node address
-        :param pulumi.Input[str] talosconfig: talosconfig
+        :param pulumi.Input[str] talos_config: talosconfig
+        :param pulumi.Input[int] timeout: timeout in seconds (default 600)
         """
         ...
     @overload
@@ -107,7 +127,8 @@ class NodeBootstrap(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 talosconfig: Optional[pulumi.Input[str]] = None,
+                 talos_config: Optional[pulumi.Input[str]] = None,
+                 timeout: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -126,9 +147,12 @@ class NodeBootstrap(pulumi.CustomResource):
             if node is None and not opts.urn:
                 raise TypeError("Missing required property 'node'")
             __props__.__dict__["node"] = node
-            if talosconfig is None and not opts.urn:
-                raise TypeError("Missing required property 'talosconfig'")
-            __props__.__dict__["talosconfig"] = talosconfig
+            if talos_config is None and not opts.urn:
+                raise TypeError("Missing required property 'talos_config'")
+            __props__.__dict__["talos_config"] = talos_config
+            if timeout is None:
+                timeout = 600
+            __props__.__dict__["timeout"] = timeout
         super(NodeBootstrap, __self__).__init__(
             'talos:index:nodeBootstrap',
             resource_name,
@@ -153,7 +177,8 @@ class NodeBootstrap(pulumi.CustomResource):
 
         __props__.__dict__["endpoint"] = None
         __props__.__dict__["node"] = None
-        __props__.__dict__["talosconfig"] = None
+        __props__.__dict__["talos_config"] = None
+        __props__.__dict__["timeout"] = None
         return NodeBootstrap(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -173,10 +198,18 @@ class NodeBootstrap(pulumi.CustomResource):
         return pulumi.get(self, "node")
 
     @property
-    @pulumi.getter
-    def talosconfig(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="talosConfig")
+    def talos_config(self) -> pulumi.Output[str]:
         """
         talosconfig
         """
-        return pulumi.get(self, "talosconfig")
+        return pulumi.get(self, "talos_config")
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> pulumi.Output[int]:
+        """
+        wait timeout in seconds
+        """
+        return pulumi.get(self, "timeout")
 

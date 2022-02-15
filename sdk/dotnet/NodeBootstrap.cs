@@ -30,8 +30,14 @@ namespace Pulumi.Talos
         /// <summary>
         /// talosconfig
         /// </summary>
-        [Output("talosconfig")]
-        public Output<string> Talosconfig { get; private set; } = null!;
+        [Output("talosConfig")]
+        public Output<string> TalosConfig { get; private set; } = null!;
+
+        /// <summary>
+        /// wait timeout in seconds
+        /// </summary>
+        [Output("timeout")]
+        public Output<int> Timeout { get; private set; } = null!;
 
 
         /// <summary>
@@ -93,11 +99,18 @@ namespace Pulumi.Talos
         /// <summary>
         /// talosconfig
         /// </summary>
-        [Input("talosconfig", required: true)]
-        public Input<string> Talosconfig { get; set; } = null!;
+        [Input("talosConfig", required: true)]
+        public Input<string> TalosConfig { get; set; } = null!;
+
+        /// <summary>
+        /// timeout in seconds (default 600)
+        /// </summary>
+        [Input("timeout")]
+        public Input<int>? Timeout { get; set; }
 
         public NodeBootstrapArgs()
         {
+            Timeout = 600;
         }
     }
 }

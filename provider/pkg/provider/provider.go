@@ -132,7 +132,7 @@ func (k *talosProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) 
 
 	switch ty {
 	case "talos:index:clusterSecrets":
-		if configVersionUnTyped, ok := newInputs["configVersion"]; ok {
+		if configVersionUnTyped, ok := newInputs["configVersion"]; ok && !news["configVersion"].IsComputed() {
 			configVersion := configVersionUnTyped.(string)
 
 			if configVersion != constants.TalosMachineConfigVersion {
@@ -140,7 +140,7 @@ func (k *talosProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) 
 			}
 		}
 
-		if talosVersionUnTyped, ok := newInputs["talosVersion"]; ok {
+		if talosVersionUnTyped, ok := newInputs["talosVersion"]; ok && !news["talosVersion"].IsComputed() {
 			talosVersion := talosVersionUnTyped.(string)
 
 			_, err = config.ParseContractFromVersion(talosVersion)
@@ -149,7 +149,7 @@ func (k *talosProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) 
 			}
 		}
 	case "talos:index:clusterConfig":
-		if clusterEndpointUnTyped, ok := newInputs["clusterEndpoint"]; ok {
+		if clusterEndpointUnTyped, ok := newInputs["clusterEndpoint"]; ok && !news["clusterEndpoint"].IsComputed() {
 			clusterEndpoint := clusterEndpointUnTyped.(string)
 
 			u, err := url.Parse(clusterEndpoint)
@@ -179,6 +179,7 @@ func (k *talosProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) 
 				return nil, fmt.Errorf("error validating the cluster endpoint URL: %w", err)
 			}
 		}
+	case "talos:index:nodeBootstrap":
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
@@ -245,6 +246,10 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 
 		for _, k := range d.ChangedKeys() {
 			property := string(k)
+
+			if property == "timeout" {
+				continue
+			}
 
 			changed = true
 			replaces = append(replaces, property)
@@ -544,14 +549,18 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		}
 		outputs["talosConfig"] = string(talosConfigYaml)
 	case "talos:index:nodeBootstrap":
+		id = "nodeBootstrap"
+
 		talosconfig := inputsMap["talosConfig"].(string)
-		nodes := []string{inputsMap["nodes"].(string)}
-		endpoints := []string{inputsMap["endpoints"].(string)}
+		nodes := []string{inputsMap["node"].(string)}
+		endpoints := []string{inputsMap["endpoint"].(string)}
+		timeout := inputsMap["timeout"].(int)
 
 		outputs = map[string]interface{}{
 			"talosConfig": talosconfig,
 			"nodes":       nodes,
 			"endpoints":   endpoints,
+			"timeout":     timeout,
 		}
 
 		cfg, err := clientconfig.FromString(talosconfig)
@@ -571,14 +580,23 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		}
 		//nolint:errcheck
 		defer c.Close()
-		if _, _, err := retry.UntilTimeout(ctx, retry.Acceptor{
+
+		delay := constants.TalosBootstrapResourceDelayBetweenRetries
+		maxDelay := constants.TalosBootstrapResourceMaxDelayBetweenRetries
+
+		if _, finalErr, err := retry.UntilTimeout(ctx, retry.Acceptor{
 			Accept: func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
 				if err := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); err != nil {
-					return false, nil, err
+					return false, err, nil
 				}
 				return true, nil, nil
 			},
-		}, time.Duration(300*time.Second)); err != nil {
+			Delay:    &delay,
+			MaxDelay: &maxDelay,
+		}, time.Duration(timeout)*time.Second); err != nil {
+			if finalErr != nil {
+				return nil, fmt.Errorf("error bootstrapping nodes: %w", finalErr.(error))
+			}
 			return nil, fmt.Errorf("error bootstrapping nodes: %w", err)
 		}
 	default:

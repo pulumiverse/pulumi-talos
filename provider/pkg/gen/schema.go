@@ -472,15 +472,20 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 					TypeSpec:    schema.TypeSpec{Type: "string"},
 					Description: "node address",
 				},
-				"talosconfig": {
+				"talosConfig": {
 					TypeSpec:    schema.TypeSpec{Type: "string"},
 					Description: "talosconfig",
+				},
+				"timeout": {
+					TypeSpec:    schema.TypeSpec{Type: "integer"},
+					Description: "wait timeout in seconds",
 				},
 			},
 			Required: []string{
 				"endpoint",
 				"node",
-				"talosconfig",
+				"talosConfig",
+				"timeout",
 			},
 		},
 		InputProperties: map[string]schema.PropertySpec{
@@ -492,15 +497,20 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 				TypeSpec:    schema.TypeSpec{Type: "string"},
 				Description: "node address",
 			},
-			"talosconfig": {
+			"talosConfig": {
 				TypeSpec:    schema.TypeSpec{Type: "string"},
 				Description: "talosconfig",
+			},
+			"timeout": {
+				TypeSpec:    schema.TypeSpec{Type: "integer"},
+				Description: fmt.Sprintf("timeout in seconds (default %d)", constants.TalosBootstrapResourceTimeout),
+				Default:     constants.TalosBootstrapResourceTimeout,
 			},
 		},
 		RequiredInputs: []string{
 			"endpoint",
 			"node",
-			"talosconfig",
+			"talosConfig",
 		},
 	}
 

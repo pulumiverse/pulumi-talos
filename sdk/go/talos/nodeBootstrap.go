@@ -20,7 +20,9 @@ type NodeBootstrap struct {
 	// node address
 	Node pulumi.StringOutput `pulumi:"node"`
 	// talosconfig
-	Talosconfig pulumi.StringOutput `pulumi:"talosconfig"`
+	TalosConfig pulumi.StringOutput `pulumi:"talosConfig"`
+	// wait timeout in seconds
+	Timeout pulumi.IntOutput `pulumi:"timeout"`
 }
 
 // NewNodeBootstrap registers a new resource with the given unique name, arguments, and options.
@@ -36,8 +38,11 @@ func NewNodeBootstrap(ctx *pulumi.Context,
 	if args.Node == nil {
 		return nil, errors.New("invalid value for required argument 'Node'")
 	}
-	if args.Talosconfig == nil {
-		return nil, errors.New("invalid value for required argument 'Talosconfig'")
+	if args.TalosConfig == nil {
+		return nil, errors.New("invalid value for required argument 'TalosConfig'")
+	}
+	if isZero(args.Timeout) {
+		args.Timeout = pulumi.IntPtr(600)
 	}
 	var resource NodeBootstrap
 	err := ctx.RegisterResource("talos:index:nodeBootstrap", name, args, &resource, opts...)
@@ -76,7 +81,9 @@ type nodeBootstrapArgs struct {
 	// node address
 	Node string `pulumi:"node"`
 	// talosconfig
-	Talosconfig string `pulumi:"talosconfig"`
+	TalosConfig string `pulumi:"talosConfig"`
+	// timeout in seconds (default 600)
+	Timeout *int `pulumi:"timeout"`
 }
 
 // The set of arguments for constructing a NodeBootstrap resource.
@@ -86,7 +93,9 @@ type NodeBootstrapArgs struct {
 	// node address
 	Node pulumi.StringInput
 	// talosconfig
-	Talosconfig pulumi.StringInput
+	TalosConfig pulumi.StringInput
+	// timeout in seconds (default 600)
+	Timeout pulumi.IntPtrInput
 }
 
 func (NodeBootstrapArgs) ElementType() reflect.Type {

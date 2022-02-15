@@ -432,16 +432,21 @@
                     "type": "string",
                     "description": "node address"
                 },
-                "talosconfig": {
+                "talosConfig": {
                     "type": "string",
                     "description": "talosconfig"
+                },
+                "timeout": {
+                    "type": "integer",
+                    "description": "wait timeout in seconds"
                 }
             },
             "type": "object",
             "required": [
                 "endpoint",
                 "node",
-                "talosconfig"
+                "talosConfig",
+                "timeout"
             ],
             "inputProperties": {
                 "endpoint": {
@@ -452,15 +457,20 @@
                     "type": "string",
                     "description": "node address"
                 },
-                "talosconfig": {
+                "talosConfig": {
                     "type": "string",
                     "description": "talosconfig"
+                },
+                "timeout": {
+                    "type": "integer",
+                    "description": "timeout in seconds (default 600)",
+                    "default": 600
                 }
             },
             "requiredInputs": [
                 "endpoint",
                 "node",
-                "talosconfig"
+                "talosConfig"
             ]
         }
     },

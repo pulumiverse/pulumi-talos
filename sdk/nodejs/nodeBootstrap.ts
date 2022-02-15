@@ -45,7 +45,11 @@ export class NodeBootstrap extends pulumi.CustomResource {
     /**
      * talosconfig
      */
-    public readonly talosconfig!: pulumi.Output<string>;
+    public readonly talosConfig!: pulumi.Output<string>;
+    /**
+     * wait timeout in seconds
+     */
+    public readonly timeout!: pulumi.Output<number>;
 
     /**
      * Create a NodeBootstrap resource with the given unique name, arguments, and options.
@@ -64,16 +68,18 @@ export class NodeBootstrap extends pulumi.CustomResource {
             if ((!args || args.node === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'node'");
             }
-            if ((!args || args.talosconfig === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'talosconfig'");
+            if ((!args || args.talosConfig === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'talosConfig'");
             }
             resourceInputs["endpoint"] = args ? args.endpoint : undefined;
             resourceInputs["node"] = args ? args.node : undefined;
-            resourceInputs["talosconfig"] = args ? args.talosconfig : undefined;
+            resourceInputs["talosConfig"] = args ? args.talosConfig : undefined;
+            resourceInputs["timeout"] = (args ? args.timeout : undefined) ?? 600;
         } else {
             resourceInputs["endpoint"] = undefined /*out*/;
             resourceInputs["node"] = undefined /*out*/;
-            resourceInputs["talosconfig"] = undefined /*out*/;
+            resourceInputs["talosConfig"] = undefined /*out*/;
+            resourceInputs["timeout"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(NodeBootstrap.__pulumiType, name, resourceInputs, opts);
@@ -95,5 +101,9 @@ export interface NodeBootstrapArgs {
     /**
      * talosconfig
      */
-    talosconfig: pulumi.Input<string>;
+    talosConfig: pulumi.Input<string>;
+    /**
+     * timeout in seconds (default 600)
+     */
+    timeout?: pulumi.Input<number>;
 }
