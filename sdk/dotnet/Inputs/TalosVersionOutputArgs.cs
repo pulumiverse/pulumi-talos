@@ -11,7 +11,7 @@ namespace Pulumi.Talos.Inputs
 {
 
     /// <summary>
-    /// Talos Version Output
+    /// Talos Version
     /// </summary>
     public sealed class TalosVersionOutputArgs : Pulumi.ResourceArgs
     {

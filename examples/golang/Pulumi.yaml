@@ -1,3 +1,3 @@
-name: kind-go-example
+name: talos-go-example
 runtime: go
-description: A simple KIND cluster example
+description: A simple talos config example

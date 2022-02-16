@@ -15,18 +15,18 @@ require (
 replace github.com/talos-systems/talos/pkg/machinery => github.com/frezbo/talos/pkg/machinery v0.14.0-alpha.0.0.20220214162816-686650b31f2c
 
 require (
-	cloud.google.com/go/iam v0.1.1 // indirect
-	cloud.google.com/go/kms v1.2.0 // indirect
+	cloud.google.com/go/iam v0.2.0 // indirect
+	cloud.google.com/go/kms v1.3.0 // indirect
 	github.com/AlekSi/pointer v1.2.0 // indirect
 	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
-	github.com/Microsoft/go-winio v0.5.0 // indirect
+	github.com/Microsoft/go-winio v0.5.1 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
-	github.com/aws/aws-sdk-go v1.42.50 // indirect
+	github.com/aws/aws-sdk-go v1.42.53 // indirect
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/cheggaaa/pb v1.0.29 // indirect
-	github.com/containerd/go-cni v1.1.1 // indirect
+	github.com/containerd/go-cni v1.1.3 // indirect
 	github.com/containernetworking/cni v1.0.1 // indirect
 	github.com/cosi-project/runtime v0.0.0-20211216175730-264f8fcd1a4f // indirect
 	github.com/djherbis/times v1.5.0 // indirect
@@ -56,10 +56,10 @@ require (
 	github.com/kevinburke/ssh_config v1.1.0 // indirect
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/mattn/go-runewidth v0.0.13 // indirect
-	github.com/mdlayher/ethtool v0.0.0-20220131212354-81c2608dd90e // indirect
+	github.com/mdlayher/ethtool v0.0.0-20220213132912-856bd6cb8a38 // indirect
 	github.com/mdlayher/genetlink v1.2.0 // indirect
 	github.com/mdlayher/netlink v1.6.0 // indirect
-	github.com/mdlayher/socket v0.1.1 // indirect
+	github.com/mdlayher/socket v0.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/go-ps v1.0.0 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
@@ -93,15 +93,15 @@ require (
 	github.com/xanzy/ssh-agent v0.3.1 // indirect
 	github.com/zclconf/go-cty v1.10.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	golang.org/x/crypto v0.0.0-20220209195652-db638375bc3a // indirect
+	golang.org/x/crypto v0.0.0-20220214200702-86341886e292 // indirect
 	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
-	golang.org/x/sys v0.0.0-20220207234003-57398862261d // indirect
+	golang.org/x/sys v0.0.0-20220209214540-3681064d5158 // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	golang.org/x/time v0.0.0-20211116232009-f0f3c7e86c11 // indirect
-	google.golang.org/api v0.68.0 // indirect
-	google.golang.org/genproto v0.0.0-20220208230804-65c12eb4c068 // indirect
+	golang.org/x/time v0.0.0-20220210224613-90d013bbcef8 // indirect
+	google.golang.org/api v0.69.0 // indirect
+	google.golang.org/genproto v0.0.0-20220215190005-e57b466719ef // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/src-d/go-billy.v4 v4.3.2 // indirect

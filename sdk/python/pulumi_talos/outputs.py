@@ -13,6 +13,7 @@ from ._enums import *
 __all__ = [
     'Certs',
     'Cluster',
+    'ConfigPatches',
     'PEMEncodedCertificateAndKey',
     'PEMEncodedKey',
     'Secrets',
@@ -152,6 +153,58 @@ class Cluster(dict):
     @pulumi.getter(name="Secret")
     def secret(self) -> Optional[str]:
         return pulumi.get(self, "secret")
+
+
+@pulumi.output_type
+class ConfigPatches(dict):
+    """
+    patches applied to the config
+    """
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "patchFiles":
+            suggest = "patch_files"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConfigPatches. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConfigPatches.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConfigPatches.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 patch_files: Optional[Sequence[Union[pulumi.Asset, pulumi.Archive]]] = None,
+                 patches: Optional[Sequence[Any]] = None):
+        """
+        patches applied to the config
+        :param Sequence[Union[pulumi.Asset, pulumi.Archive]] patch_files: patches specified as pulumi file assets
+        :param Sequence[Any] patches: patches specified as a pulumi map
+        """
+        if patch_files is not None:
+            pulumi.set(__self__, "patch_files", patch_files)
+        if patches is not None:
+            pulumi.set(__self__, "patches", patches)
+
+    @property
+    @pulumi.getter(name="patchFiles")
+    def patch_files(self) -> Optional[Sequence[Union[pulumi.Asset, pulumi.Archive]]]:
+        """
+        patches specified as pulumi file assets
+        """
+        return pulumi.get(self, "patch_files")
+
+    @property
+    @pulumi.getter
+    def patches(self) -> Optional[Sequence[Any]]:
+        """
+        patches specified as a pulumi map
+        """
+        return pulumi.get(self, "patches")
 
 
 @pulumi.output_type
@@ -351,11 +404,11 @@ class SecretsBundle(dict):
 @pulumi.output_type
 class TalosMachineConfigVersionOutput(dict):
     """
-    Talos Machine Configuration Version Output
+    Talos Machine Configuration Version
     """
     def __init__(__self__):
         """
-        Talos Machine Configuration Version Output
+        Talos Machine Configuration Version
         """
         pass
 
@@ -363,11 +416,11 @@ class TalosMachineConfigVersionOutput(dict):
 @pulumi.output_type
 class TalosVersionOutput(dict):
     """
-    Talos Version Output
+    Talos Version
     """
     def __init__(__self__):
         """
-        Talos Version Output
+        Talos Version
         """
         pass
 

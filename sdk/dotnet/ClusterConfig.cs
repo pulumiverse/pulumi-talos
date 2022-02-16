@@ -43,19 +43,19 @@ namespace Pulumi.Talos
         /// generated machineconfigs (applied to all node types)
         /// </summary>
         [Output("configPatches")]
-        public Output<ImmutableArray<object>> ConfigPatches { get; private set; } = null!;
+        public Output<Outputs.ConfigPatches> ConfigPatches { get; private set; } = null!;
 
         /// <summary>
         /// generated machineconfigs (applied to 'controlplane' types)
         /// </summary>
         [Output("configPatchesControlPlane")]
-        public Output<ImmutableArray<object>> ConfigPatchesControlPlane { get; private set; } = null!;
+        public Output<Outputs.ConfigPatches> ConfigPatchesControlPlane { get; private set; } = null!;
 
         /// <summary>
         /// generated machineconfigs (applied to 'worker' type)
         /// </summary>
         [Output("configPatchesWorker")]
-        public Output<ImmutableArray<object>> ConfigPatchesWorker { get; private set; } = null!;
+        public Output<Outputs.ConfigPatches> ConfigPatchesWorker { get; private set; } = null!;
 
         /// <summary>
         /// the desired machine config version to refer to
@@ -225,41 +225,23 @@ namespace Pulumi.Talos
         [Input("clusterName", required: true)]
         public Input<string> ClusterName { get; set; } = null!;
 
-        [Input("configPatches")]
-        private InputList<object>? _configPatches;
-
         /// <summary>
         /// patch generated machineconfigs (applied to all node types)
         /// </summary>
-        public InputList<object> ConfigPatches
-        {
-            get => _configPatches ?? (_configPatches = new InputList<object>());
-            set => _configPatches = value;
-        }
-
-        [Input("configPatchesControlPlane")]
-        private InputList<object>? _configPatchesControlPlane;
+        [Input("configPatches")]
+        public Input<Inputs.ConfigPatchesArgs>? ConfigPatches { get; set; }
 
         /// <summary>
         /// patch generated machineconfigs (applied to 'controlplane' types)
         /// </summary>
-        public InputList<object> ConfigPatchesControlPlane
-        {
-            get => _configPatchesControlPlane ?? (_configPatchesControlPlane = new InputList<object>());
-            set => _configPatchesControlPlane = value;
-        }
-
-        [Input("configPatchesWorker")]
-        private InputList<object>? _configPatchesWorker;
+        [Input("configPatchesControlPlane")]
+        public Input<Inputs.ConfigPatchesArgs>? ConfigPatchesControlPlane { get; set; }
 
         /// <summary>
         /// patch generated machineconfigs (applied to 'worker' type)
         /// </summary>
-        public InputList<object> ConfigPatchesWorker
-        {
-            get => _configPatchesWorker ?? (_configPatchesWorker = new InputList<object>());
-            set => _configPatchesWorker = value;
-        }
+        [Input("configPatchesWorker")]
+        public Input<Inputs.ConfigPatchesArgs>? ConfigPatchesWorker { get; set; }
 
         /// <summary>
         /// the desired machine config version to refer to

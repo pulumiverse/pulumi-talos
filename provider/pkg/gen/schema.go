@@ -166,14 +166,43 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 		pkg.Types["talos:index:TalosMachineConfigVersionOutput"] = schema.ComplexTypeSpec{
 			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Type:        "object",
-				Description: "Talos Machine Configuration Version Output",
+				Description: "Talos Machine Configuration Version",
 			},
 		}
 
 		pkg.Types["talos:index:TalosVersionOutput"] = schema.ComplexTypeSpec{
 			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Type:        "object",
-				Description: "Talos Version Output",
+				Description: "Talos Version",
+			},
+		}
+
+		pkg.Types["talos:index:ConfigPatches"] = schema.ComplexTypeSpec{
+			ObjectTypeSpec: schema.ObjectTypeSpec{
+				Type:        "object",
+				Description: "patches applied to the config",
+				Properties: map[string]schema.PropertySpec{
+					"patchFiles": {
+						Description: "patches specified as pulumi file assets",
+						TypeSpec: schema.TypeSpec{
+							Type: "array",
+							Items: &schema.TypeSpec{
+								Type: "object",
+								Ref:  "pulumi.json#/Asset",
+							},
+						},
+					},
+					"patches": {
+						Description: "patches specified as a pulumi map",
+						TypeSpec: schema.TypeSpec{
+							Type: "array",
+							Items: &schema.TypeSpec{
+								Type: "object",
+								Ref:  "pulumi.json#/Any",
+							},
+						},
+					},
+				},
 			},
 		}
 
@@ -199,31 +228,22 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 					},
 					"configPatches": {
 						TypeSpec: schema.TypeSpec{
-							Type: "array",
-							Items: &schema.TypeSpec{
-								Type: "object",
-								Ref:  "pulumi.json#/Any",
-							},
+							Type: "object",
+							Ref:  "#/types/talos:index:ConfigPatches",
 						},
 						Description: "generated machineconfigs (applied to all node types)",
 					},
 					"configPatchesControlPlane": {
 						TypeSpec: schema.TypeSpec{
-							Type: "array",
-							Items: &schema.TypeSpec{
-								Type: "object",
-								Ref:  "pulumi.json#/Any",
-							},
+							Type: "object",
+							Ref:  "#/types/talos:index:ConfigPatches",
 						},
 						Description: "generated machineconfigs (applied to 'controlplane' types)",
 					},
 					"configPatchesWorker": {
 						TypeSpec: schema.TypeSpec{
-							Type: "array",
-							Items: &schema.TypeSpec{
-								Type: "object",
-								Ref:  "pulumi.json#/Any",
-							},
+							Type: "object",
+							Ref:  "#/types/talos:index:ConfigPatches",
 						},
 						Description: "generated machineconfigs (applied to 'worker' type)",
 					},
@@ -359,31 +379,22 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 				},
 				"configPatches": {
 					TypeSpec: schema.TypeSpec{
-						Type: "array",
-						Items: &schema.TypeSpec{
-							Type: "object",
-							Ref:  "pulumi.json#/Any",
-						},
+						Type: "object",
+						Ref:  "#/types/talos:index:ConfigPatches",
 					},
 					Description: "patch generated machineconfigs (applied to all node types)",
 				},
 				"configPatchesControlPlane": {
 					TypeSpec: schema.TypeSpec{
-						Type: "array",
-						Items: &schema.TypeSpec{
-							Type: "object",
-							Ref:  "pulumi.json#/Any",
-						},
+						Type: "object",
+						Ref:  "#/types/talos:index:ConfigPatches",
 					},
 					Description: "patch generated machineconfigs (applied to 'controlplane' types)",
 				},
 				"configPatchesWorker": {
 					TypeSpec: schema.TypeSpec{
-						Type: "array",
-						Items: &schema.TypeSpec{
-							Type: "object",
-							Ref:  "pulumi.json#/Any",
-						},
+						Type: "object",
+						Ref:  "#/types/talos:index:ConfigPatches",
 					},
 					Description: "patch generated machineconfigs (applied to 'worker' type)",
 				},

@@ -24,11 +24,11 @@ type ClusterConfig struct {
 	// cluster name
 	ClusterName pulumi.StringOutput `pulumi:"clusterName"`
 	// generated machineconfigs (applied to all node types)
-	ConfigPatches pulumi.ArrayOutput `pulumi:"configPatches"`
+	ConfigPatches ConfigPatchesOutput `pulumi:"configPatches"`
 	// generated machineconfigs (applied to 'controlplane' types)
-	ConfigPatchesControlPlane pulumi.ArrayOutput `pulumi:"configPatchesControlPlane"`
+	ConfigPatchesControlPlane ConfigPatchesOutput `pulumi:"configPatchesControlPlane"`
 	// generated machineconfigs (applied to 'worker' type)
-	ConfigPatchesWorker pulumi.ArrayOutput `pulumi:"configPatchesWorker"`
+	ConfigPatchesWorker ConfigPatchesOutput `pulumi:"configPatchesWorker"`
 	// the desired machine config version to refer to
 	ConfigVersion pulumi.StringOutput `pulumi:"configVersion"`
 	// Talos Controlplane Config
@@ -145,11 +145,11 @@ type clusterConfigArgs struct {
 	// cluster name
 	ClusterName string `pulumi:"clusterName"`
 	// patch generated machineconfigs (applied to all node types)
-	ConfigPatches []interface{} `pulumi:"configPatches"`
+	ConfigPatches *ConfigPatches `pulumi:"configPatches"`
 	// patch generated machineconfigs (applied to 'controlplane' types)
-	ConfigPatchesControlPlane []interface{} `pulumi:"configPatchesControlPlane"`
+	ConfigPatchesControlPlane *ConfigPatches `pulumi:"configPatchesControlPlane"`
 	// patch generated machineconfigs (applied to 'worker' type)
-	ConfigPatchesWorker []interface{} `pulumi:"configPatchesWorker"`
+	ConfigPatchesWorker *ConfigPatches `pulumi:"configPatchesWorker"`
 	// the desired machine config version to refer to
 	ConfigVersion *TalosMachineConfigVersionOutputType `pulumi:"configVersion"`
 	// the dns domain to use for cluster (default "cluster.local")
@@ -190,11 +190,11 @@ type ClusterConfigArgs struct {
 	// cluster name
 	ClusterName pulumi.StringInput
 	// patch generated machineconfigs (applied to all node types)
-	ConfigPatches pulumi.ArrayInput
+	ConfigPatches ConfigPatchesPtrInput
 	// patch generated machineconfigs (applied to 'controlplane' types)
-	ConfigPatchesControlPlane pulumi.ArrayInput
+	ConfigPatchesControlPlane ConfigPatchesPtrInput
 	// patch generated machineconfigs (applied to 'worker' type)
-	ConfigPatchesWorker pulumi.ArrayInput
+	ConfigPatchesWorker ConfigPatchesPtrInput
 	// the desired machine config version to refer to
 	ConfigVersion TalosMachineConfigVersionOutputTypePtrInput
 	// the dns domain to use for cluster (default "cluster.local")

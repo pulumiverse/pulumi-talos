@@ -12,6 +12,7 @@ from ._enums import *
 __all__ = [
     'CertsArgs',
     'ClusterArgs',
+    'ConfigPatchesArgs',
     'PEMEncodedCertificateAndKeyArgs',
     'PEMEncodedKeyArgs',
     'SecretsBundleArgs',
@@ -131,6 +132,46 @@ class ClusterArgs:
     @secret.setter
     def secret(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "secret", value)
+
+
+@pulumi.input_type
+class ConfigPatchesArgs:
+    def __init__(__self__, *,
+                 patch_files: Optional[pulumi.Input[Sequence[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]]]] = None,
+                 patches: Optional[pulumi.Input[Sequence[Any]]] = None):
+        """
+        patches applied to the config
+        :param pulumi.Input[Sequence[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]]] patch_files: patches specified as pulumi file assets
+        :param pulumi.Input[Sequence[Any]] patches: patches specified as a pulumi map
+        """
+        if patch_files is not None:
+            pulumi.set(__self__, "patch_files", patch_files)
+        if patches is not None:
+            pulumi.set(__self__, "patches", patches)
+
+    @property
+    @pulumi.getter(name="patchFiles")
+    def patch_files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]]]]:
+        """
+        patches specified as pulumi file assets
+        """
+        return pulumi.get(self, "patch_files")
+
+    @patch_files.setter
+    def patch_files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]]]]):
+        pulumi.set(self, "patch_files", value)
+
+    @property
+    @pulumi.getter
+    def patches(self) -> Optional[pulumi.Input[Sequence[Any]]]:
+        """
+        patches specified as a pulumi map
+        """
+        return pulumi.get(self, "patches")
+
+    @patches.setter
+    def patches(self, value: Optional[pulumi.Input[Sequence[Any]]]):
+        pulumi.set(self, "patches", value)
 
 
 @pulumi.input_type
@@ -277,7 +318,7 @@ class SecretsArgs:
 class TalosMachineConfigVersionOutputArgs:
     def __init__(__self__):
         """
-        Talos Machine Configuration Version Output
+        Talos Machine Configuration Version
         """
         pass
 
@@ -286,7 +327,7 @@ class TalosMachineConfigVersionOutputArgs:
 class TalosVersionOutputArgs:
     def __init__(__self__):
         """
-        Talos Version Output
+        Talos Version
         """
         pass
 

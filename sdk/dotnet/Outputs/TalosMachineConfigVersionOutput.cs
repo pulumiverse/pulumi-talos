@@ -11,7 +11,7 @@ namespace Pulumi.Talos.Outputs
 {
 
     /// <summary>
-    /// Talos Machine Configuration Version Output
+    /// Talos Machine Configuration Version
     /// </summary>
     [OutputType]
     public sealed class TalosMachineConfigVersionOutput

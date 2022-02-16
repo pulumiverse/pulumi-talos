@@ -1,0 +1,5 @@
+- op: add
+  path: /machine/network/interfaces
+  value:
+    - interface: eth0
+      

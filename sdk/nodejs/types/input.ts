@@ -25,6 +25,20 @@ export interface ClusterArgs {
 }
 
 /**
+ * patches applied to the config
+ */
+export interface ConfigPatchesArgs {
+    /**
+     * patches specified as pulumi file assets
+     */
+    patchFiles?: pulumi.Input<pulumi.Input<pulumi.asset.Asset | pulumi.asset.Archive>[]>;
+    /**
+     * patches specified as a pulumi map
+     */
+    patches?: pulumi.Input<any[]>;
+}
+
+/**
  * Talos PEMEncodedCertificateAndKey type
  */
 export interface PEMEncodedCertificateAndKeyArgs {
@@ -58,13 +72,13 @@ export interface SecretsBundleArgs {
 }
 
 /**
- * Talos Machine Configuration Version Output
+ * Talos Machine Configuration Version
  */
 export interface TalosMachineConfigVersionOutputArgs {
 }
 
 /**
- * Talos Version Output
+ * Talos Version
  */
 export interface TalosVersionOutputArgs {
 }

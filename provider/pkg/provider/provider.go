@@ -33,6 +33,7 @@ import (
 	"github.com/talos-systems/talos/pkg/machinery/client"
 	clientconfig "github.com/talos-systems/talos/pkg/machinery/client/config"
 	"github.com/talos-systems/talos/pkg/machinery/config"
+	"github.com/talos-systems/talos/pkg/machinery/config/configpatcher"
 	"github.com/talos-systems/talos/pkg/machinery/config/encoder"
 	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1"
 	"github.com/talos-systems/talos/pkg/machinery/config/types/v1alpha1/bundle"
@@ -406,28 +407,52 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 			),
 		}
 
-		addConfigPatch := func(patchesUnTyped []interface{}, configOpt func(jsonpatch.Patch) bundle.Option) error {
-			patches := make([]map[string]interface{}, len(patchesUnTyped))
+		addConfigPatch := func(configPatchesUnTyped map[string]interface{}, configOpt func(jsonpatch.Patch) bundle.Option) error {
+			var result jsonpatch.Patch
 
-			for i, patchUntyped := range patchesUnTyped {
-				patches[i] = patchUntyped.(map[string]interface{})
+			if patchesUntyped, ok := configPatchesUnTyped["patches"]; ok {
+				patchesUntyped := patchesUntyped.([]interface{})
+				patches := make([]map[string]interface{}, len(patchesUntyped))
+
+				for i, patchAsMapUntyped := range patchesUntyped {
+					patches[i] = patchAsMapUntyped.(map[string]interface{})
+				}
+
+				patchBytes, err := json.Marshal(patches)
+				if err != nil {
+					return fmt.Errorf("error marshalling patch: %w", err)
+				}
+				p, err := jsonpatch.DecodePatch(patchBytes)
+				if err != nil {
+					return fmt.Errorf("error parsing patch: %w", err)
+				}
+				result = append(result, p...)
 			}
 
-			patch, err := json.Marshal(patches)
-			if err != nil {
-				return fmt.Errorf("error marshalling config patches: %w", err)
+			if filePatchesUnTyped, ok := configPatchesUnTyped["patchFiles"]; ok {
+				patchesUnTyped := filePatchesUnTyped.([]interface{})
+
+				for _, patchUntyped := range patchesUnTyped {
+					asset := patchUntyped.(*resource.Asset)
+
+					patchBytes, err := asset.Bytes()
+					if err != nil {
+						return fmt.Errorf("error reading patch file: %w", err)
+					}
+					p, err := configpatcher.LoadPatch(patchBytes)
+					if err != nil {
+						return fmt.Errorf("error parsing patch file: %w", err)
+					}
+					result = append(result, p...)
+				}
 			}
 
-			jsonPatch, err := jsonpatch.DecodePatch(patch)
-			if err != nil {
-				return fmt.Errorf("error decoding config JSON patch: %w", err)
-			}
-			configBundleOpts = append(configBundleOpts, configOpt(jsonPatch))
+			configBundleOpts = append(configBundleOpts, configOpt(result))
 			return nil
 		}
 
-		if configPatchesArrayUnTyped, ok := inputsMap["configPatches"]; ok {
-			configPatchesUnTyped := configPatchesArrayUnTyped.([]interface{})
+		if patchesUnTyped, ok := inputsMap["configPatches"]; ok {
+			configPatchesUnTyped := patchesUnTyped.(map[string]interface{})
 
 			if err := addConfigPatch(configPatchesUnTyped, bundle.WithJSONPatch); err != nil {
 				return nil, err
@@ -435,8 +460,8 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 			outputs["configPatches"] = configPatchesUnTyped
 		}
 
-		if configPatchesControlPlaneArrayUnTyped, ok := inputsMap["configPatchesControlPlane"]; ok {
-			configPatchesControlPlaneUnTyped := configPatchesControlPlaneArrayUnTyped.([]interface{})
+		if patchesControlPlaneUnTyped, ok := inputsMap["configPatchesControlPlane"]; ok {
+			configPatchesControlPlaneUnTyped := patchesControlPlaneUnTyped.(map[string]interface{})
 
 			if err := addConfigPatch(configPatchesControlPlaneUnTyped, bundle.WithJSONPatchControlPlane); err != nil {
 				return nil, err
@@ -444,8 +469,8 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 			outputs["configPatchesControlPlane"] = configPatchesControlPlaneUnTyped
 		}
 
-		if configPatchesWorkerArrayUnTyped, ok := inputsMap["configPatchesWorker"]; ok {
-			configPatchesWorkerUnTyped := configPatchesWorkerArrayUnTyped.([]interface{})
+		if patchesWorkerUnTyped, ok := inputsMap["configPatchesWorker"]; ok {
+			configPatchesWorkerUnTyped := patchesWorkerUnTyped.(map[string]interface{})
 
 			if err := addConfigPatch(configPatchesWorkerUnTyped, bundle.WithJSONPatchWorker); err != nil {
 				return nil, err
@@ -558,8 +583,8 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 
 		outputs = map[string]interface{}{
 			"talosConfig": talosconfig,
-			"nodes":       nodes,
-			"endpoints":   endpoints,
+			"node":        inputsMap["node"].(string),
+			"endpoint":    inputsMap["endpoint"].(string),
 			"timeout":     timeout,
 		}
 

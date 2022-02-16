@@ -20,9 +20,9 @@ class ClusterConfigArgs:
                  secrets: pulumi.Input['SecretsBundleArgs'],
                  additional_sans: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  cluster_discovery: Optional[pulumi.Input[bool]] = None,
-                 config_patches: Optional[pulumi.Input[Sequence[Any]]] = None,
-                 config_patches_control_plane: Optional[pulumi.Input[Sequence[Any]]] = None,
-                 config_patches_worker: Optional[pulumi.Input[Sequence[Any]]] = None,
+                 config_patches: Optional[pulumi.Input['ConfigPatchesArgs']] = None,
+                 config_patches_control_plane: Optional[pulumi.Input['ConfigPatchesArgs']] = None,
+                 config_patches_worker: Optional[pulumi.Input['ConfigPatchesArgs']] = None,
                  config_version: Optional[pulumi.Input['TalosMachineConfigVersionOutputArgs']] = None,
                  dns_domain: Optional[pulumi.Input[str]] = None,
                  docs: Optional[pulumi.Input[bool]] = None,
@@ -44,9 +44,9 @@ class ClusterConfigArgs:
         :param pulumi.Input['SecretsBundleArgs'] secrets: Talos Secrets Bundle
         :param pulumi.Input[Sequence[pulumi.Input[str]]] additional_sans: additional Subject-Alt-Names for the APIServer certificate
         :param pulumi.Input[bool] cluster_discovery: enable cluster discovery feature (default true)
-        :param pulumi.Input[Sequence[Any]] config_patches: patch generated machineconfigs (applied to all node types)
-        :param pulumi.Input[Sequence[Any]] config_patches_control_plane: patch generated machineconfigs (applied to 'controlplane' types)
-        :param pulumi.Input[Sequence[Any]] config_patches_worker: patch generated machineconfigs (applied to 'worker' type)
+        :param pulumi.Input['ConfigPatchesArgs'] config_patches: patch generated machineconfigs (applied to all node types)
+        :param pulumi.Input['ConfigPatchesArgs'] config_patches_control_plane: patch generated machineconfigs (applied to 'controlplane' types)
+        :param pulumi.Input['ConfigPatchesArgs'] config_patches_worker: patch generated machineconfigs (applied to 'worker' type)
         :param pulumi.Input['TalosMachineConfigVersionOutputArgs'] config_version: the desired machine config version to refer to
         :param pulumi.Input[str] dns_domain: the dns domain to use for cluster (default "cluster.local")
         :param pulumi.Input[bool] docs: renders all machine configs adding the documentation for each field (default true)
@@ -176,38 +176,38 @@ class ClusterConfigArgs:
 
     @property
     @pulumi.getter(name="configPatches")
-    def config_patches(self) -> Optional[pulumi.Input[Sequence[Any]]]:
+    def config_patches(self) -> Optional[pulumi.Input['ConfigPatchesArgs']]:
         """
         patch generated machineconfigs (applied to all node types)
         """
         return pulumi.get(self, "config_patches")
 
     @config_patches.setter
-    def config_patches(self, value: Optional[pulumi.Input[Sequence[Any]]]):
+    def config_patches(self, value: Optional[pulumi.Input['ConfigPatchesArgs']]):
         pulumi.set(self, "config_patches", value)
 
     @property
     @pulumi.getter(name="configPatchesControlPlane")
-    def config_patches_control_plane(self) -> Optional[pulumi.Input[Sequence[Any]]]:
+    def config_patches_control_plane(self) -> Optional[pulumi.Input['ConfigPatchesArgs']]:
         """
         patch generated machineconfigs (applied to 'controlplane' types)
         """
         return pulumi.get(self, "config_patches_control_plane")
 
     @config_patches_control_plane.setter
-    def config_patches_control_plane(self, value: Optional[pulumi.Input[Sequence[Any]]]):
+    def config_patches_control_plane(self, value: Optional[pulumi.Input['ConfigPatchesArgs']]):
         pulumi.set(self, "config_patches_control_plane", value)
 
     @property
     @pulumi.getter(name="configPatchesWorker")
-    def config_patches_worker(self) -> Optional[pulumi.Input[Sequence[Any]]]:
+    def config_patches_worker(self) -> Optional[pulumi.Input['ConfigPatchesArgs']]:
         """
         patch generated machineconfigs (applied to 'worker' type)
         """
         return pulumi.get(self, "config_patches_worker")
 
     @config_patches_worker.setter
-    def config_patches_worker(self, value: Optional[pulumi.Input[Sequence[Any]]]):
+    def config_patches_worker(self, value: Optional[pulumi.Input['ConfigPatchesArgs']]):
         pulumi.set(self, "config_patches_worker", value)
 
     @property
@@ -352,9 +352,9 @@ class ClusterConfig(pulumi.CustomResource):
                  cluster_discovery: Optional[pulumi.Input[bool]] = None,
                  cluster_endpoint: Optional[pulumi.Input[str]] = None,
                  cluster_name: Optional[pulumi.Input[str]] = None,
-                 config_patches: Optional[pulumi.Input[Sequence[Any]]] = None,
-                 config_patches_control_plane: Optional[pulumi.Input[Sequence[Any]]] = None,
-                 config_patches_worker: Optional[pulumi.Input[Sequence[Any]]] = None,
+                 config_patches: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
+                 config_patches_control_plane: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
+                 config_patches_worker: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
                  config_version: Optional[pulumi.Input[pulumi.InputType['TalosMachineConfigVersionOutputArgs']]] = None,
                  dns_domain: Optional[pulumi.Input[str]] = None,
                  docs: Optional[pulumi.Input[bool]] = None,
@@ -380,9 +380,9 @@ class ClusterConfig(pulumi.CustomResource):
                this is the port that the API server binds to on every control plane node. For an HA
                setup, usually involving a load balancer, use the IP and port of the load balancer.
         :param pulumi.Input[str] cluster_name: cluster name
-        :param pulumi.Input[Sequence[Any]] config_patches: patch generated machineconfigs (applied to all node types)
-        :param pulumi.Input[Sequence[Any]] config_patches_control_plane: patch generated machineconfigs (applied to 'controlplane' types)
-        :param pulumi.Input[Sequence[Any]] config_patches_worker: patch generated machineconfigs (applied to 'worker' type)
+        :param pulumi.Input[pulumi.InputType['ConfigPatchesArgs']] config_patches: patch generated machineconfigs (applied to all node types)
+        :param pulumi.Input[pulumi.InputType['ConfigPatchesArgs']] config_patches_control_plane: patch generated machineconfigs (applied to 'controlplane' types)
+        :param pulumi.Input[pulumi.InputType['ConfigPatchesArgs']] config_patches_worker: patch generated machineconfigs (applied to 'worker' type)
         :param pulumi.Input[pulumi.InputType['TalosMachineConfigVersionOutputArgs']] config_version: the desired machine config version to refer to
         :param pulumi.Input[str] dns_domain: the dns domain to use for cluster (default "cluster.local")
         :param pulumi.Input[bool] docs: renders all machine configs adding the documentation for each field (default true)
@@ -424,9 +424,9 @@ class ClusterConfig(pulumi.CustomResource):
                  cluster_discovery: Optional[pulumi.Input[bool]] = None,
                  cluster_endpoint: Optional[pulumi.Input[str]] = None,
                  cluster_name: Optional[pulumi.Input[str]] = None,
-                 config_patches: Optional[pulumi.Input[Sequence[Any]]] = None,
-                 config_patches_control_plane: Optional[pulumi.Input[Sequence[Any]]] = None,
-                 config_patches_worker: Optional[pulumi.Input[Sequence[Any]]] = None,
+                 config_patches: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
+                 config_patches_control_plane: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
+                 config_patches_worker: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
                  config_version: Optional[pulumi.Input[pulumi.InputType['TalosMachineConfigVersionOutputArgs']]] = None,
                  dns_domain: Optional[pulumi.Input[str]] = None,
                  docs: Optional[pulumi.Input[bool]] = None,
@@ -575,7 +575,7 @@ class ClusterConfig(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="configPatches")
-    def config_patches(self) -> pulumi.Output[Sequence[Any]]:
+    def config_patches(self) -> pulumi.Output['outputs.ConfigPatches']:
         """
         generated machineconfigs (applied to all node types)
         """
@@ -583,7 +583,7 @@ class ClusterConfig(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="configPatchesControlPlane")
-    def config_patches_control_plane(self) -> pulumi.Output[Sequence[Any]]:
+    def config_patches_control_plane(self) -> pulumi.Output['outputs.ConfigPatches']:
         """
         generated machineconfigs (applied to 'controlplane' types)
         """
@@ -591,7 +591,7 @@ class ClusterConfig(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="configPatchesWorker")
-    def config_patches_worker(self) -> pulumi.Output[Sequence[Any]]:
+    def config_patches_worker(self) -> pulumi.Output['outputs.ConfigPatches']:
         """
         generated machineconfigs (applied to 'worker' type)
         """

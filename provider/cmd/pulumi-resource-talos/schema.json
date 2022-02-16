@@ -47,6 +47,28 @@
             },
             "type": "object"
         },
+        "talos:index:ConfigPatches": {
+            "description": "patches applied to the config",
+            "properties": {
+                "patchFiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "pulumi.json#/Asset"
+                    },
+                    "description": "patches specified as pulumi file assets"
+                },
+                "patches": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "patches specified as a pulumi map"
+                }
+            },
+            "type": "object"
+        },
         "talos:index:PEMEncodedCertificateAndKey": {
             "description": "Talos PEMEncodedCertificateAndKey type",
             "properties": {
@@ -108,11 +130,11 @@
             ]
         },
         "talos:index:TalosMachineConfigVersionOutput": {
-            "description": "Talos Machine Configuration Version Output",
+            "description": "Talos Machine Configuration Version",
             "type": "object"
         },
         "talos:index:TalosVersionOutput": {
-            "description": "Talos Version Output",
+            "description": "Talos Version",
             "type": "object"
         },
         "talos:index:TrustdInfo": {
@@ -153,27 +175,18 @@
                     "description": "cluster name"
                 },
                 "configPatches": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "$ref": "pulumi.json#/Any"
-                    },
+                    "type": "object",
+                    "$ref": "#/types/talos:index:ConfigPatches",
                     "description": "generated machineconfigs (applied to all node types)"
                 },
                 "configPatchesControlPlane": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "$ref": "pulumi.json#/Any"
-                    },
+                    "type": "object",
+                    "$ref": "#/types/talos:index:ConfigPatches",
                     "description": "generated machineconfigs (applied to 'controlplane' types)"
                 },
                 "configPatchesWorker": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "$ref": "pulumi.json#/Any"
-                    },
+                    "type": "object",
+                    "$ref": "#/types/talos:index:ConfigPatches",
                     "description": "generated machineconfigs (applied to 'worker' type)"
                 },
                 "configVersion": {
@@ -288,27 +301,18 @@
                     "description": "cluster name"
                 },
                 "configPatches": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "$ref": "pulumi.json#/Any"
-                    },
+                    "type": "object",
+                    "$ref": "#/types/talos:index:ConfigPatches",
                     "description": "patch generated machineconfigs (applied to all node types)"
                 },
                 "configPatchesControlPlane": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "$ref": "pulumi.json#/Any"
-                    },
+                    "type": "object",
+                    "$ref": "#/types/talos:index:ConfigPatches",
                     "description": "patch generated machineconfigs (applied to 'controlplane' types)"
                 },
                 "configPatchesWorker": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "$ref": "pulumi.json#/Any"
-                    },
+                    "type": "object",
+                    "$ref": "#/types/talos:index:ConfigPatches",
                     "description": "patch generated machineconfigs (applied to 'worker' type)"
                 },
                 "configVersion": {

@@ -372,6 +372,165 @@ func (o ClusterPtrOutput) Secret() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// patches applied to the config
+type ConfigPatches struct {
+	// patches specified as pulumi file assets
+	PatchFiles []pulumi.AssetOrArchive `pulumi:"patchFiles"`
+	// patches specified as a pulumi map
+	Patches []interface{} `pulumi:"patches"`
+}
+
+// ConfigPatchesInput is an input type that accepts ConfigPatchesArgs and ConfigPatchesOutput values.
+// You can construct a concrete instance of `ConfigPatchesInput` via:
+//
+//          ConfigPatchesArgs{...}
+type ConfigPatchesInput interface {
+	pulumi.Input
+
+	ToConfigPatchesOutput() ConfigPatchesOutput
+	ToConfigPatchesOutputWithContext(context.Context) ConfigPatchesOutput
+}
+
+// patches applied to the config
+type ConfigPatchesArgs struct {
+	// patches specified as pulumi file assets
+	PatchFiles pulumi.AssetOrArchiveArrayInput `pulumi:"patchFiles"`
+	// patches specified as a pulumi map
+	Patches pulumi.ArrayInput `pulumi:"patches"`
+}
+
+func (ConfigPatchesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigPatches)(nil)).Elem()
+}
+
+func (i ConfigPatchesArgs) ToConfigPatchesOutput() ConfigPatchesOutput {
+	return i.ToConfigPatchesOutputWithContext(context.Background())
+}
+
+func (i ConfigPatchesArgs) ToConfigPatchesOutputWithContext(ctx context.Context) ConfigPatchesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigPatchesOutput)
+}
+
+func (i ConfigPatchesArgs) ToConfigPatchesPtrOutput() ConfigPatchesPtrOutput {
+	return i.ToConfigPatchesPtrOutputWithContext(context.Background())
+}
+
+func (i ConfigPatchesArgs) ToConfigPatchesPtrOutputWithContext(ctx context.Context) ConfigPatchesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigPatchesOutput).ToConfigPatchesPtrOutputWithContext(ctx)
+}
+
+// ConfigPatchesPtrInput is an input type that accepts ConfigPatchesArgs, ConfigPatchesPtr and ConfigPatchesPtrOutput values.
+// You can construct a concrete instance of `ConfigPatchesPtrInput` via:
+//
+//          ConfigPatchesArgs{...}
+//
+//  or:
+//
+//          nil
+type ConfigPatchesPtrInput interface {
+	pulumi.Input
+
+	ToConfigPatchesPtrOutput() ConfigPatchesPtrOutput
+	ToConfigPatchesPtrOutputWithContext(context.Context) ConfigPatchesPtrOutput
+}
+
+type configPatchesPtrType ConfigPatchesArgs
+
+func ConfigPatchesPtr(v *ConfigPatchesArgs) ConfigPatchesPtrInput {
+	return (*configPatchesPtrType)(v)
+}
+
+func (*configPatchesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigPatches)(nil)).Elem()
+}
+
+func (i *configPatchesPtrType) ToConfigPatchesPtrOutput() ConfigPatchesPtrOutput {
+	return i.ToConfigPatchesPtrOutputWithContext(context.Background())
+}
+
+func (i *configPatchesPtrType) ToConfigPatchesPtrOutputWithContext(ctx context.Context) ConfigPatchesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigPatchesPtrOutput)
+}
+
+// patches applied to the config
+type ConfigPatchesOutput struct{ *pulumi.OutputState }
+
+func (ConfigPatchesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigPatches)(nil)).Elem()
+}
+
+func (o ConfigPatchesOutput) ToConfigPatchesOutput() ConfigPatchesOutput {
+	return o
+}
+
+func (o ConfigPatchesOutput) ToConfigPatchesOutputWithContext(ctx context.Context) ConfigPatchesOutput {
+	return o
+}
+
+func (o ConfigPatchesOutput) ToConfigPatchesPtrOutput() ConfigPatchesPtrOutput {
+	return o.ToConfigPatchesPtrOutputWithContext(context.Background())
+}
+
+func (o ConfigPatchesOutput) ToConfigPatchesPtrOutputWithContext(ctx context.Context) ConfigPatchesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConfigPatches) *ConfigPatches {
+		return &v
+	}).(ConfigPatchesPtrOutput)
+}
+
+// patches specified as pulumi file assets
+func (o ConfigPatchesOutput) PatchFiles() pulumi.AssetOrArchiveArrayOutput {
+	return o.ApplyT(func(v ConfigPatches) []pulumi.AssetOrArchive { return v.PatchFiles }).(pulumi.AssetOrArchiveArrayOutput)
+}
+
+// patches specified as a pulumi map
+func (o ConfigPatchesOutput) Patches() pulumi.ArrayOutput {
+	return o.ApplyT(func(v ConfigPatches) []interface{} { return v.Patches }).(pulumi.ArrayOutput)
+}
+
+type ConfigPatchesPtrOutput struct{ *pulumi.OutputState }
+
+func (ConfigPatchesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigPatches)(nil)).Elem()
+}
+
+func (o ConfigPatchesPtrOutput) ToConfigPatchesPtrOutput() ConfigPatchesPtrOutput {
+	return o
+}
+
+func (o ConfigPatchesPtrOutput) ToConfigPatchesPtrOutputWithContext(ctx context.Context) ConfigPatchesPtrOutput {
+	return o
+}
+
+func (o ConfigPatchesPtrOutput) Elem() ConfigPatchesOutput {
+	return o.ApplyT(func(v *ConfigPatches) ConfigPatches {
+		if v != nil {
+			return *v
+		}
+		var ret ConfigPatches
+		return ret
+	}).(ConfigPatchesOutput)
+}
+
+// patches specified as pulumi file assets
+func (o ConfigPatchesPtrOutput) PatchFiles() pulumi.AssetOrArchiveArrayOutput {
+	return o.ApplyT(func(v *ConfigPatches) []pulumi.AssetOrArchive {
+		if v == nil {
+			return nil
+		}
+		return v.PatchFiles
+	}).(pulumi.AssetOrArchiveArrayOutput)
+}
+
+// patches specified as a pulumi map
+func (o ConfigPatchesPtrOutput) Patches() pulumi.ArrayOutput {
+	return o.ApplyT(func(v *ConfigPatches) []interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Patches
+	}).(pulumi.ArrayOutput)
+}
+
 // Talos PEMEncodedCertificateAndKey type
 type PEMEncodedCertificateAndKey struct {
 	Crt interface{} `pulumi:"Crt"`
@@ -880,7 +1039,7 @@ func (o SecretsBundleOutput) TrustdInfo() TrustdInfoPtrOutput {
 	return o.ApplyT(func(v SecretsBundle) *TrustdInfo { return v.TrustdInfo }).(TrustdInfoPtrOutput)
 }
 
-// Talos Machine Configuration Version Output
+// Talos Machine Configuration Version
 type TalosMachineConfigVersionOutputType struct {
 }
 
@@ -895,7 +1054,7 @@ type TalosMachineConfigVersionOutputTypeInput interface {
 	ToTalosMachineConfigVersionOutputTypeOutputWithContext(context.Context) TalosMachineConfigVersionOutputTypeOutput
 }
 
-// Talos Machine Configuration Version Output
+// Talos Machine Configuration Version
 type TalosMachineConfigVersionOutputTypeArgs struct {
 }
 
@@ -952,7 +1111,7 @@ func (i *talosMachineConfigVersionOutputTypePtrType) ToTalosMachineConfigVersion
 	return pulumi.ToOutputWithContext(ctx, i).(TalosMachineConfigVersionOutputTypePtrOutput)
 }
 
-// Talos Machine Configuration Version Output
+// Talos Machine Configuration Version
 type TalosMachineConfigVersionOutputTypeOutput struct{ *pulumi.OutputState }
 
 func (TalosMachineConfigVersionOutputTypeOutput) ElementType() reflect.Type {
@@ -1001,7 +1160,7 @@ func (o TalosMachineConfigVersionOutputTypePtrOutput) Elem() TalosMachineConfigV
 	}).(TalosMachineConfigVersionOutputTypeOutput)
 }
 
-// Talos Version Output
+// Talos Version
 type TalosVersionOutput struct {
 }
 
@@ -1016,7 +1175,7 @@ type TalosVersionOutputInput interface {
 	ToTalosVersionOutputOutputWithContext(context.Context) TalosVersionOutputOutput
 }
 
-// Talos Version Output
+// Talos Version
 type TalosVersionOutputArgs struct {
 }
 
@@ -1073,7 +1232,7 @@ func (i *talosVersionOutputPtrType) ToTalosVersionOutputPtrOutputWithContext(ctx
 	return pulumi.ToOutputWithContext(ctx, i).(TalosVersionOutputPtrOutput)
 }
 
-// Talos Version Output
+// Talos Version
 type TalosVersionOutputOutput struct{ *pulumi.OutputState }
 
 func (TalosVersionOutputOutput) ElementType() reflect.Type {
@@ -1263,6 +1422,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CertsPtrInput)(nil)).Elem(), CertsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterInput)(nil)).Elem(), ClusterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPtrInput)(nil)).Elem(), ClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigPatchesInput)(nil)).Elem(), ConfigPatchesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigPatchesPtrInput)(nil)).Elem(), ConfigPatchesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PEMEncodedCertificateAndKeyInput)(nil)).Elem(), PEMEncodedCertificateAndKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PEMEncodedCertificateAndKeyPtrInput)(nil)).Elem(), PEMEncodedCertificateAndKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PEMEncodedKeyInput)(nil)).Elem(), PEMEncodedKeyArgs{})
@@ -1280,6 +1441,8 @@ func init() {
 	pulumi.RegisterOutputType(CertsPtrOutput{})
 	pulumi.RegisterOutputType(ClusterOutput{})
 	pulumi.RegisterOutputType(ClusterPtrOutput{})
+	pulumi.RegisterOutputType(ConfigPatchesOutput{})
+	pulumi.RegisterOutputType(ConfigPatchesPtrOutput{})
 	pulumi.RegisterOutputType(PEMEncodedCertificateAndKeyOutput{})
 	pulumi.RegisterOutputType(PEMEncodedCertificateAndKeyPtrOutput{})
 	pulumi.RegisterOutputType(PEMEncodedKeyOutput{})

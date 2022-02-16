@@ -54,15 +54,15 @@ export class ClusterConfig extends pulumi.CustomResource {
     /**
      * generated machineconfigs (applied to all node types)
      */
-    public readonly configPatches!: pulumi.Output<any[]>;
+    public readonly configPatches!: pulumi.Output<outputs.ConfigPatches>;
     /**
      * generated machineconfigs (applied to 'controlplane' types)
      */
-    public readonly configPatchesControlPlane!: pulumi.Output<any[]>;
+    public readonly configPatchesControlPlane!: pulumi.Output<outputs.ConfigPatches>;
     /**
      * generated machineconfigs (applied to 'worker' type)
      */
-    public readonly configPatchesWorker!: pulumi.Output<any[]>;
+    public readonly configPatchesWorker!: pulumi.Output<outputs.ConfigPatches>;
     /**
      * the desired machine config version to refer to
      */
@@ -221,15 +221,15 @@ export interface ClusterConfigArgs {
     /**
      * patch generated machineconfigs (applied to all node types)
      */
-    configPatches?: pulumi.Input<any[]>;
+    configPatches?: pulumi.Input<inputs.ConfigPatchesArgs>;
     /**
      * patch generated machineconfigs (applied to 'controlplane' types)
      */
-    configPatchesControlPlane?: pulumi.Input<any[]>;
+    configPatchesControlPlane?: pulumi.Input<inputs.ConfigPatchesArgs>;
     /**
      * patch generated machineconfigs (applied to 'worker' type)
      */
-    configPatchesWorker?: pulumi.Input<any[]>;
+    configPatchesWorker?: pulumi.Input<inputs.ConfigPatchesArgs>;
     /**
      * the desired machine config version to refer to
      */
