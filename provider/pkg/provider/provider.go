@@ -248,12 +248,13 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 		for _, k := range d.ChangedKeys() {
 			property := string(k)
 
-			if property == "timeout" {
+			switch property {
+			case "timeout":
 				continue
+			default:
+				changed = true
+				replaces = append(replaces, property)
 			}
-
-			changed = true
-			replaces = append(replaces, property)
 		}
 
 		if changed {
@@ -609,16 +610,19 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		delay := constants.TalosBootstrapResourceDelayBetweenRetries
 		maxDelay := constants.TalosBootstrapResourceMaxDelayBetweenRetries
 
-		_, finalErr, err := retry.UntilTimeout(ctx, retry.Acceptor{
+		status, finalErr, err := retry.UntilTimeout(ctx, retry.Acceptor{
 			Accept: func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
-				if err := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); err == nil {
-					return true, nil, nil
+				if bootstrapError := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); bootstrapError != nil {
+					return false, bootstrapError, nil
 				}
-				return false, err, nil
+				return true, nil, nil
 			},
 			Delay:    &delay,
 			MaxDelay: &maxDelay,
 		}, time.Duration(timeout)*time.Second)
+		if !status {
+			return nil, errors.New("failed to bootstrap node: timeout waiting for bootstrap")
+		}
 		if finalErr != nil {
 			return nil, fmt.Errorf("error bootstrapping nodes: %w", finalErr.(error))
 		}
