@@ -609,19 +609,20 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		delay := constants.TalosBootstrapResourceDelayBetweenRetries
 		maxDelay := constants.TalosBootstrapResourceMaxDelayBetweenRetries
 
-		if _, finalErr, err := retry.UntilTimeout(ctx, retry.Acceptor{
+		_, finalErr, err := retry.UntilTimeout(ctx, retry.Acceptor{
 			Accept: func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
-				if err := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); err != nil {
-					return false, err, nil
+				if err := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); err == nil {
+					return true, nil, nil
 				}
-				return true, nil, nil
+				return false, err, nil
 			},
 			Delay:    &delay,
 			MaxDelay: &maxDelay,
-		}, time.Duration(timeout)*time.Second); err != nil {
-			if finalErr != nil {
-				return nil, fmt.Errorf("error bootstrapping nodes: %w", finalErr.(error))
-			}
+		}, time.Duration(timeout)*time.Second)
+		if finalErr != nil {
+			return nil, fmt.Errorf("error bootstrapping nodes: %w", finalErr.(error))
+		}
+		if err != nil {
 			return nil, fmt.Errorf("error bootstrapping nodes: %w", err)
 		}
 	default:
