@@ -8,6 +8,7 @@ import typing
 from ._enums import *
 from .cluster_config import *
 from .cluster_secrets import *
+from .get_kube_config import *
 from .node_bootstrap import *
 from .provider import *
 from ._inputs import *

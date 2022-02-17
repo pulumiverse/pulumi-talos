@@ -92,8 +92,41 @@ func (k *talosProvider) Configure(_ context.Context, req *pulumirpc.ConfigureReq
 }
 
 // Invoke dynamically executes a built-in function in the provider.
-func (k *talosProvider) Invoke(_ context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error) {
+func (k *talosProvider) Invoke(ctx context.Context, req *pulumirpc.InvokeRequest) (*pulumirpc.InvokeResponse, error) {
 	tok := req.GetTok()
+	if tok == "talos:index:getKubeConfig" {
+		inputs := req.Args.AsMap()
+
+		endpoints := []string{inputs["endpoint"].(string)}
+		nodes := []string{inputs["node"].(string)}
+		talosconfig := inputs["talosConfig"].(string)
+		timeout := int(inputs["timeout"].(float64))
+
+		delay := constants.TalosGetKubeConfigResourceDelayBetweenRetries
+		maxDelay := constants.TalosGetKubeConfigResourceMaxDelayBetweenRetries
+
+		kubeconfigUnTyped, err := talosClusterOperation(ctx, nodes, endpoints, talosconfig, delay, maxDelay, timeout, "kubeconfig")
+		if err != nil {
+			return nil, err
+		}
+		kubeconfig := kubeconfigUnTyped.(string)
+
+		outputs := map[string]interface{}{
+			"kubeconfig": kubeconfig,
+		}
+
+		outputProperties, err := plugin.MarshalProperties(
+			resource.NewPropertyMapFromMap(outputs),
+			plugin.MarshalOptions{},
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		return &pulumirpc.InvokeResponse{
+			Return: outputProperties,
+		}, nil
+	}
 	return nil, fmt.Errorf("unknown Invoke token '%s'", tok)
 }
 
@@ -589,45 +622,11 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 			"timeout":     timeout,
 		}
 
-		cfg, err := clientconfig.FromString(talosconfig)
-		if err != nil {
-			return nil, fmt.Errorf("failed to parse config file %q: %w", talosconfig, err)
-		}
-
-		client.WithNodes(ctx, nodes...)
-		opts := []client.OptionFunc{
-			client.WithConfig(cfg),
-			client.WithEndpoints(endpoints...),
-		}
-
-		c, err := client.New(ctx, opts...)
-		if err != nil {
-			return nil, fmt.Errorf("error constructing client: %w", err)
-		}
-		//nolint:errcheck
-		defer c.Close()
-
 		delay := constants.TalosBootstrapResourceDelayBetweenRetries
 		maxDelay := constants.TalosBootstrapResourceMaxDelayBetweenRetries
 
-		status, finalErr, err := retry.UntilTimeout(ctx, retry.Acceptor{
-			Accept: func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
-				if bootstrapError := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); bootstrapError != nil {
-					return false, bootstrapError, nil
-				}
-				return true, nil, nil
-			},
-			Delay:    &delay,
-			MaxDelay: &maxDelay,
-		}, time.Duration(timeout)*time.Second)
-		if !status {
-			return nil, errors.New("failed to bootstrap node: timeout waiting for bootstrap")
-		}
-		if finalErr != nil {
-			return nil, fmt.Errorf("error bootstrapping nodes: %w", finalErr.(error))
-		}
-		if err != nil {
-			return nil, fmt.Errorf("error bootstrapping nodes: %w", err)
+		if _, err := talosClusterOperation(ctx, nodes, endpoints, talosconfig, delay, maxDelay, timeout, "bootstrap"); err != nil {
+			return nil, err
 		}
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
@@ -732,4 +731,66 @@ func fixControlPlaneEndpoint(u *url.URL) *url.URL {
 	}
 
 	return u
+}
+
+func talosClusterOperation(ctx context.Context,
+	nodes, endpoints []string,
+	talosconfig string,
+	delay, maxDelay time.Duration,
+	timeout int,
+	operation string,
+) (interface{}, error) {
+	cfg, err := clientconfig.FromString(talosconfig)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse talosconfig %w", err)
+	}
+
+	client.WithNodes(ctx, nodes...)
+	opts := []client.OptionFunc{
+		client.WithConfig(cfg),
+		client.WithEndpoints(endpoints...),
+	}
+
+	c, err := client.New(ctx, opts...)
+	if err != nil {
+		return nil, fmt.Errorf("error constructing client: %w", err)
+	}
+
+	//nolint:errcheck
+	defer c.Close()
+
+	var acceptanceFunc retry.Acceptance
+
+	switch operation {
+	case "bootstrap":
+		acceptanceFunc = func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
+			if bootstrapError := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); bootstrapError != nil {
+				return false, nil, nil
+			}
+			return true, nil, nil
+		}
+	case "kubeconfig":
+		acceptanceFunc = func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
+			k, getKubeconfigErr := c.Kubeconfig(ctx)
+			if getKubeconfigErr != nil {
+				return false, getKubeconfigErr, nil
+			}
+			return true, string(k), nil
+		}
+	default:
+		return nil, fmt.Errorf("unknown operation '%s'", operation)
+	}
+
+	status, value, err := retry.UntilTimeout(ctx, retry.Acceptor{
+		Accept:   acceptanceFunc,
+		Delay:    &delay,
+		MaxDelay: &maxDelay,
+	}, time.Duration(timeout)*time.Second)
+	if !status {
+		return nil, fmt.Errorf("timeout waiting for %s", operation)
+	}
+	if err != nil {
+		return nil, err
+	}
+	return value, nil
 }

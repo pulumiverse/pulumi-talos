@@ -478,8 +478,52 @@
             ]
         }
     },
+    "functions": {
+        "talos:index:getKubeConfig": {
+            "description": "retrieve kubeconfig from a talos cluster",
+            "inputs": {
+                "properties": {
+                    "endpoint": {
+                        "type": "string",
+                        "description": "node endpoint address"
+                    },
+                    "node": {
+                        "type": "string",
+                        "description": "node address"
+                    },
+                    "talosConfig": {
+                        "type": "string",
+                        "description": "talosconfig"
+                    },
+                    "timeout": {
+                        "type": "integer",
+                        "description": "timeout in seconds (default 600)",
+                        "default": 600
+                    }
+                },
+                "required": [
+                    "endpoint",
+                    "node",
+                    "talosConfig"
+                ]
+            },
+            "outputs": {
+                "properties": {
+                    "kubeconfig": {
+                        "type": "string",
+                        "description": "kubeconfig retrieved from the talos cluster",
+                        "secret": true
+                    }
+                },
+                "required": [
+                    "kubeconfig"
+                ]
+            }
+        }
+    },
     "language": {
         "csharp": {
+            "liftSingleValueMethodReturns": true,
             "namespaces": {
                 "bundle": "bundle"
             },
@@ -489,7 +533,8 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/go/talos"
+            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/go/talos",
+            "liftSingleValueMethodReturns": true
         },
         "nodejs": {
             "dependencies": {
@@ -498,9 +543,11 @@
             "devDependencies": {
                 "@types/node": "^17.0.0",
                 "typescript": "^3.7.0"
-            }
+            },
+            "liftSingleValueMethodReturns": true
         },
         "python": {
+            "liftSingleValueMethodReturns": true,
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             }

@@ -525,11 +525,54 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 		},
 	}
 
+	pkg.Functions["talos:index:getKubeConfig"] = schema.FunctionSpec{
+		Description: "retrieve kubeconfig from a talos cluster",
+		Inputs: &schema.ObjectTypeSpec{
+			Properties: map[string]schema.PropertySpec{
+				"endpoint": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "node endpoint address",
+				},
+				"node": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "node address",
+				},
+				"talosConfig": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "talosconfig",
+				},
+				"timeout": {
+					TypeSpec:    schema.TypeSpec{Type: "integer"},
+					Description: fmt.Sprintf("timeout in seconds (default %d)", constants.TalosGetKubeConfigResourceTimeout),
+					Default:     constants.TalosGetKubeConfigResourceTimeout,
+				},
+			},
+			Required: []string{
+				"endpoint",
+				"node",
+				"talosConfig",
+			},
+		},
+		Outputs: &schema.ObjectTypeSpec{
+			Properties: map[string]schema.PropertySpec{
+				"kubeconfig": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "kubeconfig retrieved from the talos cluster",
+					Secret:      true,
+				},
+			},
+			Required: []string{
+				"kubeconfig",
+			},
+		},
+	}
+
 	goImportPath := "github.com/frezbo/pulumi-provider-talos/sdk/go/talos"
 
 	pkg.Language["go"] = rawMessage(map[string]interface{}{
 		"importBasePath":                 goImportPath,
 		"generateResourceContainerTypes": true,
+		"liftSingleValueMethodReturns":   true,
 	})
 
 	pkg.Language["csharp"] = rawMessage(map[string]interface{}{
@@ -539,12 +582,14 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 		"namespaces": map[string]string{
 			"bundle": "bundle",
 		},
+		"liftSingleValueMethodReturns": true,
 	})
 
 	pkg.Language["python"] = rawMessage(map[string]interface{}{
 		"requires": map[string]string{
 			"pulumi": ">=3.0.0,<4.0.0",
 		},
+		"liftSingleValueMethodReturns": true,
 	})
 
 	pkg.Language["nodejs"] = rawMessage(map[string]interface{}{
@@ -555,6 +600,7 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 			"typescript":  "^3.7.0",
 			"@types/node": "^17.0.0",
 		},
+		"liftSingleValueMethodReturns": true,
 	})
 
 	return pkg

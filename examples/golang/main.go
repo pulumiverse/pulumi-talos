@@ -45,14 +45,16 @@ func main() {
 					pulumi.NewFileAsset("patches/network.yaml"),
 				},
 			},
-		})
+		}, pulumi.AdditionalSecretOutputs(
+			[]string{
+				"controlplaneConfig",
+				"workerConfig",
+				"talosConfig",
+			},
+		))
 		if err != nil {
 			return err
 		}
-
-		ctx.Export("controlPlaneConfig", tc.ControlplaneConfig)
-		ctx.Export("workerConfig", tc.WorkerConfig)
-		ctx.Export("talosConfig", tc.TalosConfig)
 
 		_, err = talos.NewNodeBootstrap(ctx, "bootstrap", &talos.NodeBootstrapArgs{
 			Endpoint:    pulumi.String("192.168.15.40"),
@@ -62,6 +64,24 @@ func main() {
 		if err != nil {
 			return err
 		}
+
+		kubeconfig := tc.TalosConfig.ApplyT(func(tc string) (string, error) {
+
+			k, err := talos.GetKubeConfig(ctx, &talos.GetKubeConfigArgs{
+				Endpoint:    "192.168.15.40",
+				Node:        "192.168.15.40",
+				TalosConfig: tc,
+			})
+			if err != nil {
+				return "", err
+			}
+			return k.Kubeconfig, nil
+		}).(pulumi.StringOutput)
+
+		ctx.Export("controlPlaneConfig", tc.ControlplaneConfig)
+		ctx.Export("workerConfig", tc.WorkerConfig)
+		ctx.Export("talosConfig", tc.TalosConfig)
+		ctx.Export("kubeconfig", kubeconfig)
 		return nil
 	})
 }

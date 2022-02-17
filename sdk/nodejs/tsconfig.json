@@ -15,6 +15,7 @@
     "files": [
         "clusterConfig.ts",
         "clusterSecrets.ts",
+        "getKubeConfig.ts",
         "index.ts",
         "nodeBootstrap.ts",
         "provider.ts",

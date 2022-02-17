@@ -35,8 +35,31 @@ const tc = new talos.ClusterConfig("config", {
             "patches/network.yaml",
         ],
     },
+}, {
+    additionalSecretOutputs: [
+				"controlplaneConfig",
+				"workerConfig",
+				"talosConfig",
+    ]
 });
+
+new talos.NodeBootstrap("bootstrap", {
+    endpoint: "192.168.1.50",
+    node: "192.168.1.50",
+    talosConfig: tc.talosConfig,
+});
+
+const kubeconfig = tc.talosConfig.apply(talosconfig => {
+    talos.getKubeConfig({
+        endpoint: "192.168.1.50",
+        node: "192.168.1.50",
+        talosConfig: talosconfig,
+    })
+}
+);
+
 
 export const talosconfig = tc.talosConfig;
 export const talosControlPlaneConfig = tc.controlplaneConfig;
 export const talosWorkerConfig = tc.workerConfig;
+export const kubeConfig = kubeconfig;

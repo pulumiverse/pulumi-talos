@@ -7,6 +7,7 @@ import * as utilities from "./utilities";
 // Export members:
 export * from "./clusterConfig";
 export * from "./clusterSecrets";
+export * from "./getKubeConfig";
 export * from "./nodeBootstrap";
 export * from "./provider";
 
