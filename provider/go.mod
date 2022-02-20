@@ -8,11 +8,9 @@ require (
 	github.com/pulumi/pulumi/pkg/v3 v3.24.1
 	github.com/pulumi/pulumi/sdk v1.14.1
 	github.com/pulumi/pulumi/sdk/v3 v3.24.1
-	github.com/talos-systems/talos/pkg/machinery v0.15.0-alpha.2
+	github.com/talos-systems/talos/pkg/machinery v0.15.0-alpha.2.0.20220219050436-f40b480bddcf
 	google.golang.org/grpc v1.44.0
 )
-
-replace github.com/talos-systems/talos/pkg/machinery => github.com/frezbo/talos/pkg/machinery v0.14.0-alpha.0.0.20220214162816-686650b31f2c
 
 require (
 	cloud.google.com/go/iam v0.2.0 // indirect
