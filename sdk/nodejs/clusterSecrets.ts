@@ -65,6 +65,8 @@ export class ClusterSecrets extends pulumi.CustomResource {
             resourceInputs["talosVersion"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["secrets"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ClusterSecrets.__pulumiType, name, resourceInputs, opts);
     }
 }

@@ -53,7 +53,7 @@ class ClusterConfigArgs:
         :param pulumi.Input[bool] examples: renders all machine configs with the commented examples (default true)
         :param pulumi.Input[str] install_disk: the disk to install to (default "/dev/sda")
         :param pulumi.Input[str] install_image: the image used to perform an installation (default "ghcr.io/talos-systems/installer:v0.14.2")
-        :param pulumi.Input[str] kubernetes_version: desired kubernetes version to run (default "1.23.3")
+        :param pulumi.Input[str] kubernetes_version: desired kubernetes version to run (default "1.23.4")
         :param pulumi.Input[bool] kubespan: enable kubespan feature
         :param pulumi.Input[bool] persist: the desired persist value for configs (default true)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] registry_mirrors: list of registry mirrors to use in format: <registry host>=<mirror URL>
@@ -97,7 +97,7 @@ class ClusterConfigArgs:
         if install_image is not None:
             pulumi.set(__self__, "install_image", install_image)
         if kubernetes_version is None:
-            kubernetes_version = '1.23.3'
+            kubernetes_version = '1.23.4'
         if kubernetes_version is not None:
             pulumi.set(__self__, "kubernetes_version", kubernetes_version)
         if kubespan is not None:
@@ -286,7 +286,7 @@ class ClusterConfigArgs:
     @pulumi.getter(name="kubernetesVersion")
     def kubernetes_version(self) -> Optional[pulumi.Input[str]]:
         """
-        desired kubernetes version to run (default "1.23.3")
+        desired kubernetes version to run (default "1.23.4")
         """
         return pulumi.get(self, "kubernetes_version")
 
@@ -389,7 +389,7 @@ class ClusterConfig(pulumi.CustomResource):
         :param pulumi.Input[bool] examples: renders all machine configs with the commented examples (default true)
         :param pulumi.Input[str] install_disk: the disk to install to (default "/dev/sda")
         :param pulumi.Input[str] install_image: the image used to perform an installation (default "ghcr.io/talos-systems/installer:v0.14.2")
-        :param pulumi.Input[str] kubernetes_version: desired kubernetes version to run (default "1.23.3")
+        :param pulumi.Input[str] kubernetes_version: desired kubernetes version to run (default "1.23.4")
         :param pulumi.Input[bool] kubespan: enable kubespan feature
         :param pulumi.Input[bool] persist: the desired persist value for configs (default true)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] registry_mirrors: list of registry mirrors to use in format: <registry host>=<mirror URL>
@@ -481,7 +481,7 @@ class ClusterConfig(pulumi.CustomResource):
                 install_image = 'ghcr.io/talos-systems/installer:v0.14.2'
             __props__.__dict__["install_image"] = install_image
             if kubernetes_version is None:
-                kubernetes_version = '1.23.3'
+                kubernetes_version = '1.23.4'
             __props__.__dict__["kubernetes_version"] = kubernetes_version
             __props__.__dict__["kubespan"] = kubespan
             if persist is None:
@@ -490,11 +490,13 @@ class ClusterConfig(pulumi.CustomResource):
             __props__.__dict__["registry_mirrors"] = registry_mirrors
             if secrets is None and not opts.urn:
                 raise TypeError("Missing required property 'secrets'")
-            __props__.__dict__["secrets"] = secrets
+            __props__.__dict__["secrets"] = None if secrets is None else pulumi.Output.secret(secrets)
             __props__.__dict__["talos_version"] = talos_version
             __props__.__dict__["controlplane_config"] = None
             __props__.__dict__["talos_config"] = None
             __props__.__dict__["worker_config"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["secrets"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ClusterConfig, __self__).__init__(
             'talos:index:clusterConfig',
             resource_name,

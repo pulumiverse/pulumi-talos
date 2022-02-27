@@ -113,6 +113,8 @@ class ClusterSecrets(pulumi.CustomResource):
             __props__.__dict__["config_version"] = config_version
             __props__.__dict__["talos_version"] = talos_version
             __props__.__dict__["secrets"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["secrets"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ClusterSecrets, __self__).__init__(
             'talos:index:clusterSecrets',
             resource_name,

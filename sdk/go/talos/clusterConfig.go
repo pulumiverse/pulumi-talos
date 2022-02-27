@@ -96,11 +96,18 @@ func NewClusterConfig(ctx *pulumi.Context,
 		args.InstallImage = pulumi.StringPtr("ghcr.io/talos-systems/installer:v0.14.2")
 	}
 	if isZero(args.KubernetesVersion) {
-		args.KubernetesVersion = pulumi.StringPtr("1.23.3")
+		args.KubernetesVersion = pulumi.StringPtr("1.23.4")
 	}
 	if isZero(args.Persist) {
 		args.Persist = pulumi.BoolPtr(true)
 	}
+	if args.Secrets != nil {
+		args.Secrets = pulumi.ToSecret(args.Secrets).(SecretsBundleOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"secrets",
+	})
+	opts = append(opts, secrets)
 	var resource ClusterConfig
 	err := ctx.RegisterResource("talos:index:clusterConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -162,7 +169,7 @@ type clusterConfigArgs struct {
 	InstallDisk *string `pulumi:"installDisk"`
 	// the image used to perform an installation (default "ghcr.io/talos-systems/installer:v0.14.2")
 	InstallImage *string `pulumi:"installImage"`
-	// desired kubernetes version to run (default "1.23.3")
+	// desired kubernetes version to run (default "1.23.4")
 	KubernetesVersion *string `pulumi:"kubernetesVersion"`
 	// enable kubespan feature
 	Kubespan *bool `pulumi:"kubespan"`
@@ -207,7 +214,7 @@ type ClusterConfigArgs struct {
 	InstallDisk pulumi.StringPtrInput
 	// the image used to perform an installation (default "ghcr.io/talos-systems/installer:v0.14.2")
 	InstallImage pulumi.StringPtrInput
-	// desired kubernetes version to run (default "1.23.3")
+	// desired kubernetes version to run (default "1.23.4")
 	KubernetesVersion pulumi.StringPtrInput
 	// enable kubespan feature
 	Kubespan pulumi.BoolPtrInput

@@ -170,6 +170,10 @@ namespace Pulumi.Talos
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "secrets",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -280,7 +284,7 @@ namespace Pulumi.Talos
         public Input<string>? InstallImage { get; set; }
 
         /// <summary>
-        /// desired kubernetes version to run (default "1.23.3")
+        /// desired kubernetes version to run (default "1.23.4")
         /// </summary>
         [Input("kubernetesVersion")]
         public Input<string>? KubernetesVersion { get; set; }
@@ -309,11 +313,21 @@ namespace Pulumi.Talos
             set => _registryMirrors = value;
         }
 
+        [Input("secrets", required: true)]
+        private Input<Inputs.SecretsBundleArgs>? _secrets;
+
         /// <summary>
         /// Talos Secrets Bundle
         /// </summary>
-        [Input("secrets", required: true)]
-        public Input<Inputs.SecretsBundleArgs> Secrets { get; set; } = null!;
+        public Input<Inputs.SecretsBundleArgs>? Secrets
+        {
+            get => _secrets;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secrets = Output.Tuple<Input<Inputs.SecretsBundleArgs>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// the desired Talos version to refer to
@@ -329,7 +343,7 @@ namespace Pulumi.Talos
             Examples = true;
             InstallDisk = "/dev/sda";
             InstallImage = "ghcr.io/talos-systems/installer:v0.14.2";
-            KubernetesVersion = "1.23.3";
+            KubernetesVersion = "1.23.4";
             Persist = true;
         }
     }

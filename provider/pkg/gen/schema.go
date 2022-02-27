@@ -106,7 +106,7 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 							Type: "object",
 							Ref:  "#/types/talos:index:SecretsBundle",
 						},
-						// Secret: true,
+						Secret: true,
 					},
 					"talosVersion": {
 						Description: "Talos version the config generated for",
@@ -322,7 +322,7 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 							Type: "object",
 							Ref:  "#/types/talos:index:SecretsBundle",
 						},
-						// Secret: true,
+						Secret: true,
 					},
 				},
 				Required: []string{
@@ -368,7 +368,7 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 						Type: "object",
 						Ref:  "#/types/talos:index:SecretsBundle",
 					},
-					// Secret: true,
+					Secret: true,
 				},
 				"additionalSans": {
 					TypeSpec: schema.TypeSpec{

@@ -157,11 +157,11 @@ export class ClusterConfig extends pulumi.CustomResource {
             resourceInputs["examples"] = (args ? args.examples : undefined) ?? true;
             resourceInputs["installDisk"] = (args ? args.installDisk : undefined) ?? "/dev/sda";
             resourceInputs["installImage"] = (args ? args.installImage : undefined) ?? "ghcr.io/talos-systems/installer:v0.14.2";
-            resourceInputs["kubernetesVersion"] = (args ? args.kubernetesVersion : undefined) ?? "1.23.3";
+            resourceInputs["kubernetesVersion"] = (args ? args.kubernetesVersion : undefined) ?? "1.23.4";
             resourceInputs["kubespan"] = args ? args.kubespan : undefined;
             resourceInputs["persist"] = (args ? args.persist : undefined) ?? true;
             resourceInputs["registryMirrors"] = args ? args.registryMirrors : undefined;
-            resourceInputs["secrets"] = args ? args.secrets : undefined;
+            resourceInputs["secrets"] = args?.secrets ? pulumi.secret(args.secrets) : undefined;
             resourceInputs["talosVersion"] = args ? args.talosVersion : undefined;
             resourceInputs["controlplaneConfig"] = undefined /*out*/;
             resourceInputs["talosConfig"] = undefined /*out*/;
@@ -191,6 +191,8 @@ export class ClusterConfig extends pulumi.CustomResource {
             resourceInputs["workerConfig"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["secrets"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ClusterConfig.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -255,7 +257,7 @@ export interface ClusterConfigArgs {
      */
     installImage?: pulumi.Input<string>;
     /**
-     * desired kubernetes version to run (default "1.23.3")
+     * desired kubernetes version to run (default "1.23.4")
      */
     kubernetesVersion?: pulumi.Input<string>;
     /**

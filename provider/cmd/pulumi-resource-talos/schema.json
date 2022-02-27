@@ -239,7 +239,8 @@
                 "secrets": {
                     "type": "object",
                     "$ref": "#/types/talos:index:SecretsBundle",
-                    "description": "Talos Secrets Bundle"
+                    "description": "Talos Secrets Bundle",
+                    "secret": true
                 },
                 "talosConfig": {
                     "type": "string",
@@ -346,8 +347,8 @@
                 },
                 "kubernetesVersion": {
                     "type": "string",
-                    "description": "desired kubernetes version to run (default \"1.23.3\")",
-                    "default": "1.23.3"
+                    "description": "desired kubernetes version to run (default \"1.23.4\")",
+                    "default": "1.23.4"
                 },
                 "kubespan": {
                     "type": "boolean",
@@ -368,7 +369,8 @@
                 "secrets": {
                     "type": "object",
                     "$ref": "#/types/talos:index:SecretsBundle",
-                    "description": "Talos Secrets Bundle"
+                    "description": "Talos Secrets Bundle",
+                    "secret": true
                 },
                 "talosVersion": {
                     "$ref": "#/types/talos:index:TalosVersionOutput",
@@ -391,7 +393,8 @@
                 "secrets": {
                     "type": "object",
                     "$ref": "#/types/talos:index:SecretsBundle",
-                    "description": "Talos Secrets Bundle"
+                    "description": "Talos Secrets Bundle",
+                    "secret": true
                 },
                 "talosVersion": {
                     "type": "string",
