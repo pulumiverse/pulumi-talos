@@ -8,7 +8,7 @@ import (
 	"github.com/alecthomas/jsonschema"
 	"github.com/frezbo/pulumi-provider-talos/provider/pkg/constants"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 	talosconstants "github.com/talos-systems/talos/pkg/machinery/constants"
 )
 

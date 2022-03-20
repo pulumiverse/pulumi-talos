@@ -31,9 +31,6 @@ func NewClusterSecrets(ctx *pulumi.Context,
 	if isZero(args.ConfigVersion) {
 		args.ConfigVersion = pulumi.StringPtr("v1alpha1")
 	}
-	if args.Secrets != nil {
-		args.Secrets = pulumi.ToSecret(args.Secrets).(SecretsBundleOutput)
-	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"secrets",
 	})

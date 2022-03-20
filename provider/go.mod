@@ -1,34 +1,33 @@
 module github.com/frezbo/pulumi-provider-talos/provider
 
-go 1.17
+go 1.18
 
 require (
 	github.com/alecthomas/jsonschema v0.0.0-20220216202328-9eeeec9d044b
 	github.com/golang/protobuf v1.5.2
-	github.com/pulumi/pulumi/pkg/v3 v3.25.0
-	github.com/pulumi/pulumi/sdk v1.14.1
-	github.com/pulumi/pulumi/sdk/v3 v3.25.0
-	github.com/talos-systems/talos/pkg/machinery v0.15.0-alpha.2.0.20220219050436-f40b480bddcf
-	google.golang.org/grpc v1.44.0
+	github.com/pulumi/pulumi/pkg/v3 v3.26.1
+	github.com/pulumi/pulumi/sdk/v3 v3.26.1
+	github.com/talos-systems/talos/pkg/machinery v1.0.0-beta.1
+	google.golang.org/grpc v1.45.0
 )
 
 require (
-	cloud.google.com/go/iam v0.2.0 // indirect
-	cloud.google.com/go/kms v1.3.0 // indirect
+	cloud.google.com/go/iam v0.3.0 // indirect
+	cloud.google.com/go/kms v1.4.0 // indirect
 	github.com/AlekSi/pointer v1.2.0 // indirect
 	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
 	github.com/Microsoft/go-winio v0.5.2 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
-	github.com/aws/aws-sdk-go v1.43.7 // indirect
+	github.com/aws/aws-sdk-go v1.43.21 // indirect
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/cheggaaa/pb v1.0.29 // indirect
 	github.com/containerd/go-cni v1.1.3 // indirect
 	github.com/containernetworking/cni v1.0.1 // indirect
 	github.com/cosi-project/runtime v0.0.0-20211216175730-264f8fcd1a4f // indirect
 	github.com/djherbis/times v1.5.0 // indirect
-	github.com/docker/docker v20.10.12+incompatible // indirect
+	github.com/docker/docker v20.10.13+incompatible // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/emirpasic/gods v1.12.0 // indirect
 	github.com/evanphx/json-patch v5.6.0+incompatible
@@ -50,7 +49,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/josharian/native v1.0.0 // indirect
-	github.com/jsimonetti/rtnetlink v1.1.0 // indirect
+	github.com/jsimonetti/rtnetlink v1.1.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kevinburke/ssh_config v1.1.0 // indirect
 	github.com/kylelemons/godebug v1.1.0 // indirect
@@ -58,7 +57,7 @@ require (
 	github.com/mdlayher/ethtool v0.0.0-20220213132912-856bd6cb8a38 // indirect
 	github.com/mdlayher/genetlink v1.2.0 // indirect
 	github.com/mdlayher/netlink v1.6.0 // indirect
-	github.com/mdlayher/socket v0.2.2 // indirect
+	github.com/mdlayher/socket v0.2.3 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/go-ps v1.0.0 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
@@ -78,13 +77,13 @@ require (
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06 // indirect
 	github.com/santhosh-tekuri/jsonschema/v5 v5.0.0 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
-	github.com/spf13/cobra v1.3.0 // indirect
+	github.com/spf13/cobra v1.4.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/src-d/gcfg v1.4.0 // indirect
-	github.com/talos-systems/crypto v0.3.5-0.20220209123851-510b0d2753a8 // indirect
-	github.com/talos-systems/go-blockdevice v0.2.6-0.20220125134504-7b9de26bc6bc // indirect
+	github.com/talos-systems/crypto v0.3.5 // indirect
+	github.com/talos-systems/go-blockdevice v0.3.0 // indirect
 	github.com/talos-systems/go-debug v0.2.1 // indirect
-	github.com/talos-systems/net v0.3.2-0.20220207192449-409926aec1c3
+	github.com/talos-systems/net v0.3.2
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
 	github.com/tweekmonster/luser v0.0.0-20161003172636-3fa38070dbd7 // indirect
 	github.com/uber/jaeger-client-go v2.30.0+incompatible // indirect
@@ -92,15 +91,16 @@ require (
 	github.com/xanzy/ssh-agent v0.3.1 // indirect
 	github.com/zclconf/go-cty v1.10.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	golang.org/x/crypto v0.0.0-20220214200702-86341886e292 // indirect
+	golang.org/x/crypto v0.0.0-20220315160706-3147a52a75dd // indirect
 	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
+	golang.org/x/oauth2 v0.0.0-20220309155454-6242fa91716a // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
-	golang.org/x/sys v0.0.0-20220224120231-95c6836cb0e7 // indirect
+	golang.org/x/sys v0.0.0-20220319134239-a9b59b0215f8 // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20220224211638-0e9765cccd65 // indirect
-	google.golang.org/api v0.70.0 // indirect
-	google.golang.org/genproto v0.0.0-20220222213610-43724f9ea8cf // indirect
+	google.golang.org/api v0.73.0 // indirect
+	google.golang.org/genproto v0.0.0-20220317150908-0efb43f6373e // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/src-d/go-billy.v4 v4.3.2 // indirect
