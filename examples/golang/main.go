@@ -45,13 +45,7 @@ func main() {
 					pulumi.NewFileAsset("patches/network.yaml"),
 				},
 			},
-		}, pulumi.AdditionalSecretOutputs(
-			[]string{
-				"controlplaneConfig",
-				"workerConfig",
-				"talosConfig",
-			},
-		))
+		})
 		if err != nil {
 			return err
 		}
