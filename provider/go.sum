@@ -469,8 +469,8 @@ github.com/talos-systems/go-retry v0.1.1-0.20201113203059-8c63d290a688/go.mod h1
 github.com/talos-systems/go-retry v0.3.1/go.mod h1:HiXQqyVStZ35uSY/MTLWVvQVmC3lIW2MS5VdDaMtoKM=
 github.com/talos-systems/net v0.3.2 h1:IMseRyuha8fNsv/3FbQPRE9hLVRBEFR+9sxcoETQ5vI=
 github.com/talos-systems/net v0.3.2/go.mod h1:zhcGixNJz9dgwFiUwc7gkkAqdVqXagU1SNNoIVXYKGo=
-github.com/talos-systems/talos/pkg/machinery v1.0.0-beta.1 h1:AlZQbAsdmbHfGnK6Mlfv81c836a1y5oV1+xuniu9M2Q=
-github.com/talos-systems/talos/pkg/machinery v1.0.0-beta.1/go.mod h1:nIZsF2R14luOK5Tm/LN9AcvWrC3uw3Vwkz+n04evqCE=
+github.com/talos-systems/talos/pkg/machinery v1.0.0-beta.2 h1:1BtrM0gXno1nlfZlu+ppprHS3F9C4g953+1v/rZ7Sxw=
+github.com/talos-systems/talos/pkg/machinery v1.0.0-beta.2/go.mod h1:nIZsF2R14luOK5Tm/LN9AcvWrC3uw3Vwkz+n04evqCE=
 github.com/texttheater/golang-levenshtein v1.0.1 h1:+cRNoVrfiwufQPhoMzB6N0Yf/Mqajr6t1lOv8GyGE2U=
 github.com/texttheater/golang-levenshtein v1.0.1/go.mod h1:PYAKrbF5sAiq9wd+H82hs7gNaen0CplQ9uvm6+enD/8=
 github.com/tweekmonster/luser v0.0.0-20161003172636-3fa38070dbd7 h1:X9dsIWPuuEJlPX//UmRKophhOKCGXc46RVIGuttks68=

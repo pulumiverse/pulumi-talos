@@ -7,7 +7,7 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/pulumi/pulumi/pkg/v3 v3.26.1
 	github.com/pulumi/pulumi/sdk/v3 v3.26.1
-	github.com/talos-systems/talos/pkg/machinery v1.0.0-beta.1
+	github.com/talos-systems/talos/pkg/machinery v1.0.0-beta.2
 	google.golang.org/grpc v1.45.0
 )
 
