@@ -396,7 +396,11 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 		}
 
 		if additionalSANsUnTyped, ok := inputsMap["additionalSans"]; ok {
-			additionalSANs := additionalSANsUnTyped.([]string)
+			additionalSANs := []string{}
+
+			for _, additionalSANsItemUnTyped := range additionalSANsUnTyped.([]interface{}) {
+				additionalSANs = append(additionalSANs, additionalSANsItemUnTyped.(string))
+			}
 
 			genOptions = append(genOptions, generate.WithAdditionalSubjectAltNames(additionalSANs))
 			outputs["additionalSans"] = additionalSANs
