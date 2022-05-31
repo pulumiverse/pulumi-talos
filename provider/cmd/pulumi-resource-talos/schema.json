@@ -9,6 +9,38 @@
     "homepage": "https://talos.dev",
     "license": "Apache-2.0",
     "repository": "https://github.com/frezbo/pulumi-provider-talos",
+    "language": {
+        "csharp": {
+            "liftSingleValueMethodReturns": true,
+            "namespaces": {
+                "bundle": "bundle"
+            },
+            "packageReferences": {
+                "Pulumi": "3.*"
+            }
+        },
+        "go": {
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/go/talos",
+            "liftSingleValueMethodReturns": true
+        },
+        "nodejs": {
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/node": "^17.0.0",
+                "typescript": "^3.7.0"
+            },
+            "liftSingleValueMethodReturns": true
+        },
+        "python": {
+            "liftSingleValueMethodReturns": true,
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
     "config": {},
     "types": {
         "talos:index:Certs": {
@@ -120,6 +152,27 @@
             },
             "type": "object"
         },
+        "talos:index:TalosMachineConfigApplyMode": {
+            "type": "string",
+            "enum": [
+                {
+                    "description": "apply config with a reboot",
+                    "value": "REBOOT"
+                },
+                {
+                    "description": "automatically try to apply and reboot if only required",
+                    "value": "AUTO"
+                },
+                {
+                    "description": "apply config without a reboot",
+                    "value": "NO_REBOOT"
+                },
+                {
+                    "description": "apply config as staged",
+                    "value": "STAGED"
+                }
+            ]
+        },
         "talos:index:TalosMachineConfigVersion": {
             "type": "string",
             "enum": [
@@ -128,14 +181,6 @@
                     "value": "v1alpha1"
                 }
             ]
-        },
-        "talos:index:TalosMachineConfigVersionOutput": {
-            "description": "Talos Machine Configuration Version",
-            "type": "object"
-        },
-        "talos:index:TalosVersionOutput": {
-            "description": "Talos Version",
-            "type": "object"
         },
         "talos:index:TrustdInfo": {
             "description": "Talos TrustdInfo type",
@@ -195,7 +240,8 @@
                 },
                 "controlplaneConfig": {
                     "type": "string",
-                    "description": "Talos Controlplane Config"
+                    "description": "Talos Controlplane Config",
+                    "secret": true
                 },
                 "dnsDomain": {
                     "type": "string",
@@ -244,7 +290,8 @@
                 },
                 "talosConfig": {
                     "type": "string",
-                    "description": "Talos Config"
+                    "description": "Talos Config",
+                    "secret": true
                 },
                 "talosVersion": {
                     "type": "string",
@@ -252,7 +299,8 @@
                 },
                 "workerConfig": {
                     "type": "string",
-                    "description": "Talos Worker Config"
+                    "description": "Talos Worker Config",
+                    "secret": true
                 }
             },
             "type": "object",
@@ -317,7 +365,7 @@
                     "description": "patch generated machineconfigs (applied to 'worker' type)"
                 },
                 "configVersion": {
-                    "$ref": "#/types/talos:index:TalosMachineConfigVersionOutput",
+                    "type": "string",
                     "description": "the desired machine config version to refer to"
                 },
                 "dnsDomain": {
@@ -347,8 +395,8 @@
                 },
                 "kubernetesVersion": {
                     "type": "string",
-                    "description": "desired kubernetes version to run (default \"1.23.4\")",
-                    "default": "1.23.4"
+                    "description": "desired kubernetes version to run (default \"1.23.6\")",
+                    "default": "1.23.6"
                 },
                 "kubespan": {
                     "type": "boolean",
@@ -369,11 +417,10 @@
                 "secrets": {
                     "type": "object",
                     "$ref": "#/types/talos:index:SecretsBundle",
-                    "description": "Talos Secrets Bundle",
-                    "secret": true
+                    "description": "Talos Secrets Bundle"
                 },
                 "talosVersion": {
-                    "$ref": "#/types/talos:index:TalosVersionOutput",
+                    "type": "string",
                     "description": "the desired Talos version to refer to"
                 }
             },
@@ -387,8 +434,7 @@
             "description": "Talos secrets resource",
             "properties": {
                 "configVersion": {
-                    "type": "string",
-                    "$ref": "#/types/talos:index:TalosMachineConfigVersionOutput"
+                    "type": "string"
                 },
                 "secrets": {
                     "type": "object",
@@ -398,8 +444,7 @@
                 },
                 "talosVersion": {
                     "type": "string",
-                    "$ref": "#/types/talos:index:TalosVersionOutput",
-                    "description": "Talos version the config generated for"
+                    "description": "Talos version the config is generated for"
                 }
             },
             "type": "object",
@@ -428,6 +473,95 @@
                 }
             }
         },
+        "talos:index:nodeApplyConfig": {
+            "description": "A node apply config resource",
+            "properties": {
+                "endpoint": {
+                    "type": "string",
+                    "description": "node endpoint address"
+                },
+                "insecure": {
+                    "type": "boolean",
+                    "description": "allow insecure connections"
+                },
+                "machineConfig": {
+                    "type": "object",
+                    "$ref": "pulumi.json#/Asset",
+                    "description": "machineconfig",
+                    "secret": true
+                },
+                "mode": {
+                    "type": "string",
+                    "description": "machine config apply mode"
+                },
+                "node": {
+                    "type": "string",
+                    "description": "node address"
+                },
+                "talosConfig": {
+                    "type": "object",
+                    "$ref": "pulumi.json#/Asset",
+                    "description": "talosconfig",
+                    "secret": true
+                },
+                "timeout": {
+                    "type": "integer",
+                    "description": "wait timeout in seconds"
+                }
+            },
+            "type": "object",
+            "required": [
+                "endpoint",
+                "node",
+                "talosConfig",
+                "machineConfig",
+                "mode",
+                "insecure",
+                "timeout"
+            ],
+            "inputProperties": {
+                "endpoint": {
+                    "type": "string",
+                    "description": "node endpoint address"
+                },
+                "insecure": {
+                    "type": "boolean",
+                    "description": "whether to use insecure connection",
+                    "default": false
+                },
+                "machineConfig": {
+                    "type": "object",
+                    "$ref": "pulumi.json#/Asset",
+                    "description": "machineconfig"
+                },
+                "mode": {
+                    "type": "string",
+                    "$ref": "#/types/talos:index:TalosMachineConfigApplyMode",
+                    "description": "machine config apply mode (default auto)",
+                    "default": "AUTO"
+                },
+                "node": {
+                    "type": "string",
+                    "description": "node address"
+                },
+                "talosConfig": {
+                    "type": "object",
+                    "$ref": "pulumi.json#/Asset",
+                    "description": "talosconfig"
+                },
+                "timeout": {
+                    "type": "integer",
+                    "description": "timeout in seconds (default 600)",
+                    "default": 600
+                }
+            },
+            "requiredInputs": [
+                "endpoint",
+                "node",
+                "talosConfig",
+                "machineConfig"
+            ]
+        },
         "talos:index:nodeBootstrap": {
             "description": "A node bootstrap resource",
             "properties": {
@@ -441,7 +575,8 @@
                 },
                 "talosConfig": {
                     "type": "string",
-                    "description": "talosconfig"
+                    "description": "talosconfig",
+                    "secret": true
                 },
                 "timeout": {
                     "type": "integer",
@@ -521,38 +656,6 @@
                 "required": [
                     "kubeconfig"
                 ]
-            }
-        }
-    },
-    "language": {
-        "csharp": {
-            "liftSingleValueMethodReturns": true,
-            "namespaces": {
-                "bundle": "bundle"
-            },
-            "packageReferences": {
-                "Pulumi": "3.*"
-            }
-        },
-        "go": {
-            "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/go/talos",
-            "liftSingleValueMethodReturns": true
-        },
-        "nodejs": {
-            "dependencies": {
-                "@pulumi/pulumi": "^3.0.0"
-            },
-            "devDependencies": {
-                "@types/node": "^17.0.0",
-                "typescript": "^3.7.0"
-            },
-            "liftSingleValueMethodReturns": true
-        },
-        "python": {
-            "liftSingleValueMethodReturns": true,
-            "requires": {
-                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             }
         }
     }

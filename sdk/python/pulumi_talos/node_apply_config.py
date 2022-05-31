@@ -7,26 +7,42 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
+from ._enums import *
 
-__all__ = ['NodeBootstrapArgs', 'NodeBootstrap']
+__all__ = ['NodeApplyConfigArgs', 'NodeApplyConfig']
 
 @pulumi.input_type
-class NodeBootstrapArgs:
+class NodeApplyConfigArgs:
     def __init__(__self__, *,
                  endpoint: pulumi.Input[str],
+                 machine_config: pulumi.Input[Union[pulumi.Asset, pulumi.Archive]],
                  node: pulumi.Input[str],
-                 talos_config: pulumi.Input[str],
+                 talos_config: pulumi.Input[Union[pulumi.Asset, pulumi.Archive]],
+                 insecure: Optional[pulumi.Input[bool]] = None,
+                 mode: Optional[pulumi.Input['TalosMachineConfigApplyMode']] = None,
                  timeout: Optional[pulumi.Input[int]] = None):
         """
-        The set of arguments for constructing a NodeBootstrap resource.
+        The set of arguments for constructing a NodeApplyConfig resource.
         :param pulumi.Input[str] endpoint: node endpoint address
+        :param pulumi.Input[Union[pulumi.Asset, pulumi.Archive]] machine_config: machineconfig
         :param pulumi.Input[str] node: node address
-        :param pulumi.Input[str] talos_config: talosconfig
+        :param pulumi.Input[Union[pulumi.Asset, pulumi.Archive]] talos_config: talosconfig
+        :param pulumi.Input[bool] insecure: whether to use insecure connection
+        :param pulumi.Input['TalosMachineConfigApplyMode'] mode: machine config apply mode (default auto)
         :param pulumi.Input[int] timeout: timeout in seconds (default 600)
         """
         pulumi.set(__self__, "endpoint", endpoint)
+        pulumi.set(__self__, "machine_config", machine_config)
         pulumi.set(__self__, "node", node)
         pulumi.set(__self__, "talos_config", talos_config)
+        if insecure is None:
+            insecure = False
+        if insecure is not None:
+            pulumi.set(__self__, "insecure", insecure)
+        if mode is None:
+            mode = 'AUTO'
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
         if timeout is None:
             timeout = 600
         if timeout is not None:
@@ -45,6 +61,18 @@ class NodeBootstrapArgs:
         pulumi.set(self, "endpoint", value)
 
     @property
+    @pulumi.getter(name="machineConfig")
+    def machine_config(self) -> pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]:
+        """
+        machineconfig
+        """
+        return pulumi.get(self, "machine_config")
+
+    @machine_config.setter
+    def machine_config(self, value: pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]):
+        pulumi.set(self, "machine_config", value)
+
+    @property
     @pulumi.getter
     def node(self) -> pulumi.Input[str]:
         """
@@ -58,15 +86,39 @@ class NodeBootstrapArgs:
 
     @property
     @pulumi.getter(name="talosConfig")
-    def talos_config(self) -> pulumi.Input[str]:
+    def talos_config(self) -> pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]:
         """
         talosconfig
         """
         return pulumi.get(self, "talos_config")
 
     @talos_config.setter
-    def talos_config(self, value: pulumi.Input[str]):
+    def talos_config(self, value: pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]):
         pulumi.set(self, "talos_config", value)
+
+    @property
+    @pulumi.getter
+    def insecure(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether to use insecure connection
+        """
+        return pulumi.get(self, "insecure")
+
+    @insecure.setter
+    def insecure(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "insecure", value)
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[pulumi.Input['TalosMachineConfigApplyMode']]:
+        """
+        machine config apply mode (default auto)
+        """
+        return pulumi.get(self, "mode")
+
+    @mode.setter
+    def mode(self, value: Optional[pulumi.Input['TalosMachineConfigApplyMode']]):
+        pulumi.set(self, "mode", value)
 
     @property
     @pulumi.getter
@@ -81,42 +133,48 @@ class NodeBootstrapArgs:
         pulumi.set(self, "timeout", value)
 
 
-class NodeBootstrap(pulumi.CustomResource):
+class NodeApplyConfig(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
+                 insecure: Optional[pulumi.Input[bool]] = None,
+                 machine_config: Optional[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]] = None,
+                 mode: Optional[pulumi.Input['TalosMachineConfigApplyMode']] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 talos_config: Optional[pulumi.Input[str]] = None,
+                 talos_config: Optional[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]] = None,
                  timeout: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        A node bootstrap resource
+        A node apply config resource
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] endpoint: node endpoint address
+        :param pulumi.Input[bool] insecure: whether to use insecure connection
+        :param pulumi.Input[Union[pulumi.Asset, pulumi.Archive]] machine_config: machineconfig
+        :param pulumi.Input['TalosMachineConfigApplyMode'] mode: machine config apply mode (default auto)
         :param pulumi.Input[str] node: node address
-        :param pulumi.Input[str] talos_config: talosconfig
+        :param pulumi.Input[Union[pulumi.Asset, pulumi.Archive]] talos_config: talosconfig
         :param pulumi.Input[int] timeout: timeout in seconds (default 600)
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: NodeBootstrapArgs,
+                 args: NodeApplyConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        A node bootstrap resource
+        A node apply config resource
 
         :param str resource_name: The name of the resource.
-        :param NodeBootstrapArgs args: The arguments to use to populate this resource's properties.
+        :param NodeApplyConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(NodeBootstrapArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(NodeApplyConfigArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -126,8 +184,11 @@ class NodeBootstrap(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
+                 insecure: Optional[pulumi.Input[bool]] = None,
+                 machine_config: Optional[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]] = None,
+                 mode: Optional[pulumi.Input['TalosMachineConfigApplyMode']] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 talos_config: Optional[pulumi.Input[str]] = None,
+                 talos_config: Optional[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]] = None,
                  timeout: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         if opts is None:
@@ -139,11 +200,20 @@ class NodeBootstrap(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = NodeBootstrapArgs.__new__(NodeBootstrapArgs)
+            __props__ = NodeApplyConfigArgs.__new__(NodeApplyConfigArgs)
 
             if endpoint is None and not opts.urn:
                 raise TypeError("Missing required property 'endpoint'")
             __props__.__dict__["endpoint"] = endpoint
+            if insecure is None:
+                insecure = False
+            __props__.__dict__["insecure"] = insecure
+            if machine_config is None and not opts.urn:
+                raise TypeError("Missing required property 'machine_config'")
+            __props__.__dict__["machine_config"] = machine_config
+            if mode is None:
+                mode = 'AUTO'
+            __props__.__dict__["mode"] = mode
             if node is None and not opts.urn:
                 raise TypeError("Missing required property 'node'")
             __props__.__dict__["node"] = node
@@ -153,10 +223,10 @@ class NodeBootstrap(pulumi.CustomResource):
             if timeout is None:
                 timeout = 600
             __props__.__dict__["timeout"] = timeout
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["talosConfig"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["machineConfig", "talosConfig"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
-        super(NodeBootstrap, __self__).__init__(
-            'talos:index:nodeBootstrap',
+        super(NodeApplyConfig, __self__).__init__(
+            'talos:index:nodeApplyConfig',
             resource_name,
             __props__,
             opts)
@@ -164,9 +234,9 @@ class NodeBootstrap(pulumi.CustomResource):
     @staticmethod
     def get(resource_name: str,
             id: pulumi.Input[str],
-            opts: Optional[pulumi.ResourceOptions] = None) -> 'NodeBootstrap':
+            opts: Optional[pulumi.ResourceOptions] = None) -> 'NodeApplyConfig':
         """
-        Get an existing NodeBootstrap resource's state with the given name, id, and optional extra
+        Get an existing NodeApplyConfig resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -175,13 +245,16 @@ class NodeBootstrap(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = NodeBootstrapArgs.__new__(NodeBootstrapArgs)
+        __props__ = NodeApplyConfigArgs.__new__(NodeApplyConfigArgs)
 
         __props__.__dict__["endpoint"] = None
+        __props__.__dict__["insecure"] = None
+        __props__.__dict__["machine_config"] = None
+        __props__.__dict__["mode"] = None
         __props__.__dict__["node"] = None
         __props__.__dict__["talos_config"] = None
         __props__.__dict__["timeout"] = None
-        return NodeBootstrap(resource_name, opts=opts, __props__=__props__)
+        return NodeApplyConfig(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
@@ -193,6 +266,30 @@ class NodeBootstrap(pulumi.CustomResource):
 
     @property
     @pulumi.getter
+    def insecure(self) -> pulumi.Output[bool]:
+        """
+        allow insecure connections
+        """
+        return pulumi.get(self, "insecure")
+
+    @property
+    @pulumi.getter(name="machineConfig")
+    def machine_config(self) -> pulumi.Output[Union[pulumi.Asset, pulumi.Archive]]:
+        """
+        machineconfig
+        """
+        return pulumi.get(self, "machine_config")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> pulumi.Output[str]:
+        """
+        machine config apply mode
+        """
+        return pulumi.get(self, "mode")
+
+    @property
+    @pulumi.getter
     def node(self) -> pulumi.Output[str]:
         """
         node address
@@ -201,7 +298,7 @@ class NodeBootstrap(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="talosConfig")
-    def talos_config(self) -> pulumi.Output[str]:
+    def talos_config(self) -> pulumi.Output[Union[pulumi.Asset, pulumi.Archive]]:
         """
         talosconfig
         """

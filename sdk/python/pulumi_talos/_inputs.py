@@ -17,8 +17,6 @@ __all__ = [
     'PEMEncodedKeyArgs',
     'SecretsBundleArgs',
     'SecretsArgs',
-    'TalosMachineConfigVersionOutputArgs',
-    'TalosVersionOutputArgs',
     'TrustdInfoArgs',
 ]
 
@@ -312,24 +310,6 @@ class SecretsArgs:
     @bootstrap_token.setter
     def bootstrap_token(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "bootstrap_token", value)
-
-
-@pulumi.input_type
-class TalosMachineConfigVersionOutputArgs:
-    def __init__(__self__):
-        """
-        Talos Machine Configuration Version
-        """
-        pass
-
-
-@pulumi.input_type
-class TalosVersionOutputArgs:
-    def __init__(__self__):
-        """
-        Talos Version
-        """
-        pass
 
 
 @pulumi.input_type

@@ -17,6 +17,7 @@
         "clusterSecrets.ts",
         "getKubeConfig.ts",
         "index.ts",
+        "nodeApplyConfig.ts",
         "nodeBootstrap.ts",
         "provider.ts",
         "types/enums/index.ts",

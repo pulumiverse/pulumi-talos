@@ -144,7 +144,7 @@ class ClusterSecrets(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="configVersion")
-    def config_version(self) -> pulumi.Output['outputs.TalosMachineConfigVersionOutput']:
+    def config_version(self) -> pulumi.Output[str]:
         return pulumi.get(self, "config_version")
 
     @property
@@ -157,9 +157,9 @@ class ClusterSecrets(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="talosVersion")
-    def talos_version(self) -> pulumi.Output['outputs.TalosVersionOutput']:
+    def talos_version(self) -> pulumi.Output[str]:
         """
-        Talos version the config generated for
+        Talos version the config is generated for
         """
         return pulumi.get(self, "talos_version")
 

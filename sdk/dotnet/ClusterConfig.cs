@@ -172,7 +172,10 @@ namespace Pulumi.Talos
                 Version = Utilities.Version,
                 AdditionalSecretOutputs =
                 {
+                    "controlplaneConfig",
                     "secrets",
+                    "talosConfig",
+                    "workerConfig",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -251,7 +254,7 @@ namespace Pulumi.Talos
         /// the desired machine config version to refer to
         /// </summary>
         [Input("configVersion")]
-        public Input<Inputs.TalosMachineConfigVersionOutputArgs>? ConfigVersion { get; set; }
+        public Input<string>? ConfigVersion { get; set; }
 
         /// <summary>
         /// the dns domain to use for cluster (default "cluster.local")
@@ -284,7 +287,7 @@ namespace Pulumi.Talos
         public Input<string>? InstallImage { get; set; }
 
         /// <summary>
-        /// desired kubernetes version to run (default "1.23.4")
+        /// desired kubernetes version to run (default "1.23.6")
         /// </summary>
         [Input("kubernetesVersion")]
         public Input<string>? KubernetesVersion { get; set; }
@@ -313,27 +316,17 @@ namespace Pulumi.Talos
             set => _registryMirrors = value;
         }
 
-        [Input("secrets", required: true)]
-        private Input<Inputs.SecretsBundleArgs>? _secrets;
-
         /// <summary>
         /// Talos Secrets Bundle
         /// </summary>
-        public Input<Inputs.SecretsBundleArgs>? Secrets
-        {
-            get => _secrets;
-            set
-            {
-                var emptySecret = Output.CreateSecret(0);
-                _secrets = Output.Tuple<Input<Inputs.SecretsBundleArgs>?, int>(value, emptySecret).Apply(t => t.Item1);
-            }
-        }
+        [Input("secrets", required: true)]
+        public Input<Inputs.SecretsBundleArgs> Secrets { get; set; } = null!;
 
         /// <summary>
         /// the desired Talos version to refer to
         /// </summary>
         [Input("talosVersion")]
-        public Input<Inputs.TalosVersionOutputArgs>? TalosVersion { get; set; }
+        public Input<string>? TalosVersion { get; set; }
 
         public ClusterConfigArgs()
         {
@@ -343,7 +336,7 @@ namespace Pulumi.Talos
             Examples = true;
             InstallDisk = "/dev/sda";
             InstallImage = "ghcr.io/talos-systems/installer:v0.14.2";
-            KubernetesVersion = "1.23.4";
+            KubernetesVersion = "1.23.6";
             Persist = true;
         }
     }

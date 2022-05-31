@@ -16,6 +16,7 @@ package provider
 
 import (
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -99,16 +100,31 @@ func (k *talosProvider) Invoke(ctx context.Context, req *pulumirpc.InvokeRequest
 
 		endpoints := []string{inputs["endpoint"].(string)}
 		nodes := []string{inputs["node"].(string)}
-		talosconfig := inputs["talosConfig"].(string)
+		talosConfig := inputs["talosConfig"].(string)
 		timeout := int(inputs["timeout"].(float64))
 
-		delay := constants.TalosGetKubeConfigResourceDelayBetweenRetries
+		retryDelay := constants.TalosGetKubeConfigResourceDelayBetweenRetries
 		maxDelay := constants.TalosGetKubeConfigResourceMaxDelayBetweenRetries
 
-		kubeconfigUnTyped, err := talosClusterOperation(ctx, nodes, endpoints, talosconfig, delay, maxDelay, timeout, "kubeconfig")
+		kubeconfigUnTyped, err := clusterOp(ctx, clusterOpOpts{
+			endpoints:   endpoints,
+			nodes:       nodes,
+			talosConfig: talosConfig,
+			timeout:     time.Duration(timeout),
+			retryDelay:  retryDelay,
+			maxDelay:    maxDelay,
+		}, func(c *client.Client) (bool, interface{}, error) {
+			k, getKubeconfigErr := c.Kubeconfig(ctx)
+			if getKubeconfigErr != nil {
+				return false, getKubeconfigErr, nil
+			}
+
+			return true, string(k), nil
+		})
 		if err != nil {
 			return nil, err
 		}
+
 		kubeconfig := kubeconfigUnTyped.(string)
 
 		outputs := map[string]interface{}{
@@ -127,6 +143,7 @@ func (k *talosProvider) Invoke(ctx context.Context, req *pulumirpc.InvokeRequest
 			Return: outputProperties,
 		}, nil
 	}
+
 	return nil, fmt.Errorf("unknown Invoke token '%s'", tok)
 }
 
@@ -134,7 +151,19 @@ func (k *talosProvider) Invoke(ctx context.Context, req *pulumirpc.InvokeRequest
 // back as a series of messages.
 func (k *talosProvider) StreamInvoke(req *pulumirpc.InvokeRequest, server pulumirpc.ResourceProvider_StreamInvokeServer) error {
 	tok := req.GetTok()
+
 	return fmt.Errorf("unknown StreamInvoke token '%s'", tok)
+}
+
+// Attach sends the engine address to an already running plugin.
+func (k *talosProvider) Attach(_ context.Context, req *pulumirpc.PluginAttach) (*pbempty.Empty, error) {
+	host, err := provider.NewHostClient(req.GetAddress())
+	if err != nil {
+		return nil, err
+	}
+	k.host = host
+
+	return &pbempty.Empty{}, nil
 }
 
 // Check validates that the given property bag is valid for a resource of the given type and returns
@@ -214,6 +243,7 @@ func (k *talosProvider) Check(ctx context.Context, req *pulumirpc.CheckRequest) 
 			}
 		}
 	case "talos:index:nodeBootstrap":
+	case "talos:index:nodeApplyConfig":
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
@@ -275,7 +305,7 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 		if changed {
 			changes = pulumirpc.DiffResponse_DIFF_SOME
 		}
-	case "talos:index:nodeBootstrap":
+	case "talos:index:nodeBootstrap", "talos:index:nodeApplyConfig":
 		changed := false
 
 		for _, k := range d.ChangedKeys() {
@@ -614,22 +644,87 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 	case "talos:index:nodeBootstrap":
 		id = "nodeBootstrap"
 
-		talosconfig := inputsMap["talosConfig"].(string)
+		talosConfig := inputsMap["talosConfig"].(string)
 		nodes := []string{inputsMap["node"].(string)}
 		endpoints := []string{inputsMap["endpoint"].(string)}
 		timeout := int(inputsMap["timeout"].(float64))
 
 		outputs = map[string]interface{}{
-			"talosConfig": talosconfig,
+			"talosConfig": talosConfig,
 			"node":        inputsMap["node"].(string),
 			"endpoint":    inputsMap["endpoint"].(string),
 			"timeout":     timeout,
 		}
 
-		delay := constants.TalosBootstrapResourceDelayBetweenRetries
-		maxDelay := constants.TalosBootstrapResourceMaxDelayBetweenRetries
+		if _, err := clusterOp(ctx, clusterOpOpts{
+			endpoints:   endpoints,
+			nodes:       nodes,
+			talosConfig: talosConfig,
+			timeout:     time.Duration(timeout),
+			retryDelay:  constants.TalosBootstrapResourceDelayBetweenRetries,
+			maxDelay:    constants.TalosBootstrapResourceMaxDelayBetweenRetries,
+		}, func(c *client.Client) (bool, interface{}, error) {
+			bootstrapError := c.Bootstrap(ctx, &machineapi.BootstrapRequest{})
+			if bootstrapError != nil {
+				return false, bootstrapError, nil
+			}
 
-		if _, err := talosClusterOperation(ctx, nodes, endpoints, talosconfig, delay, maxDelay, timeout, "bootstrap"); err != nil {
+			return true, nil, nil
+		}); err != nil {
+			return nil, err
+		}
+	case "talos:index:nodeApplyConfig":
+		id = "nodeApplyConfig"
+
+		nodes := []string{inputsMap["node"].(string)}
+		endpoints := []string{inputsMap["endpoint"].(string)}
+		mode := inputsMap["mode"].(string)
+		insecure := inputsMap["insecure"].(bool)
+		timeout := int(inputsMap["timeout"].(float64))
+
+		talosConfigAsset := inputsMap["talosConfig"].(*resource.Asset)
+		talosConfigBytes, err := talosConfigAsset.Bytes()
+		if err != nil {
+			return nil, fmt.Errorf("error reading talosConfig file: %w", err)
+		}
+		talosConfig := string(talosConfigBytes)
+
+		machineConfigAsset := inputsMap["machineConfig"].(*resource.Asset)
+		machineConfigBytes, err := machineConfigAsset.Bytes()
+		if err != nil {
+			return nil, fmt.Errorf("error reading machineConfig file: %w", err)
+		}
+		machineConfig := string(machineConfigBytes)
+
+		outputs = map[string]interface{}{
+			"talosConfig":   talosConfigAsset,
+			"machineConfig": machineConfigAsset,
+			"node":          inputsMap["node"].(string),
+			"endpoint":      inputsMap["endpoint"].(string),
+			"mode":          mode,
+			"insecure":      insecure,
+			"timeout":       timeout,
+		}
+
+		if _, err := clusterOp(ctx, clusterOpOpts{
+			endpoints:   endpoints,
+			nodes:       nodes,
+			talosConfig: talosConfig,
+			timeout:     time.Duration(timeout),
+			insecure:    insecure,
+			retryDelay:  constants.TalosApplyConfigResourceDelayBetweenRetries,
+			maxDelay:    constants.TalosApplyConfigResourceMaxDelayBetweenRetries,
+		}, func(c *client.Client) (bool, interface{}, error) {
+			resp, applyConfigErr := c.ApplyConfiguration(ctx, &machineapi.ApplyConfigurationRequest{
+				Mode: machineapi.ApplyConfigurationRequest_Mode(machineapi.ApplyConfigurationRequest_Mode_value[mode]),
+				Data: []byte(machineConfig),
+			})
+			if applyConfigErr != nil {
+				return false, applyConfigErr, nil
+			}
+
+			return true, resp, nil
+		}); err != nil {
 			return nil, err
 		}
 	default:
@@ -658,9 +753,11 @@ func (k *talosProvider) Read(ctx context.Context, req *pulumirpc.ReadRequest) (*
 	case "talos:index:clusterSecrets":
 	case "talos:index:clusterConfig":
 	case "talos:index:nodeBootstrap":
+	case "talos:index:nodeApplyConfig":
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
+
 	return nil, status.Error(codes.Unimplemented, "Read is not yet implemented for talos resources")
 }
 
@@ -673,12 +770,12 @@ func (k *talosProvider) Update(ctx context.Context, req *pulumirpc.UpdateRequest
 	case "talos:index:clusterSecrets":
 	case "talos:index:clusterConfig":
 	case "talos:index:nodeBootstrap":
+	case "talos:index:nodeApplyConfig":
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
 
-	// Our Random resource will never be updated - if there is a diff, it will be a replacement.
-	return nil, status.Error(codes.Unimplemented, "Update is not yet implemented for talos resources")
+	return nil, status.Errorf(codes.Unimplemented, "Update is not yet implemented for %s resource", ty)
 }
 
 // Delete tears down an existing resource with the given ID.  If it fails, the resource is assumed
@@ -691,6 +788,7 @@ func (k *talosProvider) Delete(ctx context.Context, req *pulumirpc.DeleteRequest
 	case "talos:index:clusterSecrets":
 	case "talos:index:clusterConfig":
 	case "talos:index:nodeBootstrap":
+	case "talos:index:nodeApplyConfig":
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
@@ -737,22 +835,32 @@ func fixControlPlaneEndpoint(u *url.URL) *url.URL {
 	return u
 }
 
-func talosClusterOperation(ctx context.Context,
-	nodes, endpoints []string,
-	talosconfig string,
-	delay, maxDelay time.Duration,
-	timeout int,
-	operation string,
-) (interface{}, error) {
-	cfg, err := clientconfig.FromString(talosconfig)
+type clusterOpOpts struct {
+	endpoints   []string
+	nodes       []string
+	insecure    bool
+	talosConfig string
+	retryDelay  time.Duration
+	maxDelay    time.Duration
+	timeout     time.Duration
+}
+
+func clusterOp(ctx context.Context, clusterOpts clusterOpOpts, opFunc func(c *client.Client) (bool, interface{}, error)) (interface{}, error) {
+	cfg, err := clientconfig.FromString(clusterOpts.talosConfig)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse talosconfig %w", err)
 	}
 
-	client.WithNodes(ctx, nodes...)
+	client.WithNodes(ctx, clusterOpts.nodes...)
 	opts := []client.OptionFunc{
 		client.WithConfig(cfg),
-		client.WithEndpoints(endpoints...),
+		client.WithEndpoints(clusterOpts.endpoints...),
+	}
+
+	if clusterOpts.insecure {
+		opts = append(opts, client.WithTLSConfig(&tls.Config{
+			InsecureSkipVerify: true,
+		}))
 	}
 
 	c, err := client.New(ctx, opts...)
@@ -763,38 +871,27 @@ func talosClusterOperation(ctx context.Context,
 	//nolint:errcheck
 	defer c.Close()
 
-	var acceptanceFunc retry.Acceptance
-
-	switch operation {
-	case "bootstrap":
-		acceptanceFunc = func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
-			if bootstrapError := c.Bootstrap(ctx, &machineapi.BootstrapRequest{}); bootstrapError != nil {
-				return false, nil, nil
-			}
-			return true, nil, nil
-		}
-	case "kubeconfig":
-		acceptanceFunc = func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
-			k, getKubeconfigErr := c.Kubeconfig(ctx)
-			if getKubeconfigErr != nil {
-				return false, getKubeconfigErr, nil
-			}
-			return true, string(k), nil
-		}
-	default:
-		return nil, fmt.Errorf("unknown operation '%s'", operation)
+	acceptanceFunc := func(try int, nextRetryTime time.Duration) (bool, interface{}, error) {
+		return opFunc(c)
 	}
 
 	status, value, err := retry.UntilTimeout(ctx, retry.Acceptor{
 		Accept:   acceptanceFunc,
-		Delay:    &delay,
-		MaxDelay: &maxDelay,
-	}, time.Duration(timeout)*time.Second)
+		Delay:    &clusterOpts.retryDelay,
+		MaxDelay: &clusterOpts.maxDelay,
+	}, time.Duration(clusterOpts.timeout)*time.Second)
+
 	if !status {
-		return nil, fmt.Errorf("timeout waiting for %s", operation)
+		// this means the operation timed out, call the function again to get the error
+		// the returned error is interface{} in the function signature, so we need to cast it to error
+		_, val, _ := opFunc(c)
+		err := val.(error)
+
+		return nil, fmt.Errorf("timeout waiting for client operation: %v", err)
 	}
 	if err != nil {
 		return nil, err
 	}
+
 	return value, nil
 }

@@ -157,11 +157,11 @@ export class ClusterConfig extends pulumi.CustomResource {
             resourceInputs["examples"] = (args ? args.examples : undefined) ?? true;
             resourceInputs["installDisk"] = (args ? args.installDisk : undefined) ?? "/dev/sda";
             resourceInputs["installImage"] = (args ? args.installImage : undefined) ?? "ghcr.io/talos-systems/installer:v0.14.2";
-            resourceInputs["kubernetesVersion"] = (args ? args.kubernetesVersion : undefined) ?? "1.23.4";
+            resourceInputs["kubernetesVersion"] = (args ? args.kubernetesVersion : undefined) ?? "1.23.6";
             resourceInputs["kubespan"] = args ? args.kubespan : undefined;
             resourceInputs["persist"] = (args ? args.persist : undefined) ?? true;
             resourceInputs["registryMirrors"] = args ? args.registryMirrors : undefined;
-            resourceInputs["secrets"] = args?.secrets ? pulumi.secret(args.secrets) : undefined;
+            resourceInputs["secrets"] = args ? args.secrets : undefined;
             resourceInputs["talosVersion"] = args ? args.talosVersion : undefined;
             resourceInputs["controlplaneConfig"] = undefined /*out*/;
             resourceInputs["talosConfig"] = undefined /*out*/;
@@ -191,7 +191,7 @@ export class ClusterConfig extends pulumi.CustomResource {
             resourceInputs["workerConfig"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["secrets"] };
+        const secretOpts = { additionalSecretOutputs: ["controlplaneConfig", "secrets", "talosConfig", "workerConfig"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(ClusterConfig.__pulumiType, name, resourceInputs, opts);
     }
@@ -235,7 +235,7 @@ export interface ClusterConfigArgs {
     /**
      * the desired machine config version to refer to
      */
-    configVersion?: pulumi.Input<inputs.TalosMachineConfigVersionOutputArgs>;
+    configVersion?: pulumi.Input<string>;
     /**
      * the dns domain to use for cluster (default "cluster.local")
      */
@@ -257,7 +257,7 @@ export interface ClusterConfigArgs {
      */
     installImage?: pulumi.Input<string>;
     /**
-     * desired kubernetes version to run (default "1.23.4")
+     * desired kubernetes version to run (default "1.23.6")
      */
     kubernetesVersion?: pulumi.Input<string>;
     /**
@@ -279,5 +279,5 @@ export interface ClusterConfigArgs {
     /**
      * the desired Talos version to refer to
      */
-    talosVersion?: pulumi.Input<inputs.TalosVersionOutputArgs>;
+    talosVersion?: pulumi.Input<string>;
 }

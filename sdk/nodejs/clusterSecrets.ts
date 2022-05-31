@@ -35,15 +35,15 @@ export class ClusterSecrets extends pulumi.CustomResource {
         return obj['__pulumiType'] === ClusterSecrets.__pulumiType;
     }
 
-    public readonly configVersion!: pulumi.Output<outputs.TalosMachineConfigVersionOutput>;
+    public readonly configVersion!: pulumi.Output<string>;
     /**
      * Talos Secrets Bundle
      */
     public /*out*/ readonly secrets!: pulumi.Output<outputs.SecretsBundle>;
     /**
-     * Talos version the config generated for
+     * Talos version the config is generated for
      */
-    public readonly talosVersion!: pulumi.Output<outputs.TalosVersionOutput>;
+    public readonly talosVersion!: pulumi.Output<string>;
 
     /**
      * Create a ClusterSecrets resource with the given unique name, arguments, and options.

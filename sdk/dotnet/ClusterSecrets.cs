@@ -16,7 +16,7 @@ namespace Pulumi.Talos
     public partial class ClusterSecrets : Pulumi.CustomResource
     {
         [Output("configVersion")]
-        public Output<Outputs.TalosMachineConfigVersionOutput> ConfigVersion { get; private set; } = null!;
+        public Output<string> ConfigVersion { get; private set; } = null!;
 
         /// <summary>
         /// Talos Secrets Bundle
@@ -25,10 +25,10 @@ namespace Pulumi.Talos
         public Output<Outputs.SecretsBundle> Secrets { get; private set; } = null!;
 
         /// <summary>
-        /// Talos version the config generated for
+        /// Talos version the config is generated for
         /// </summary>
         [Output("talosVersion")]
-        public Output<Outputs.TalosVersionOutput> TalosVersion { get; private set; } = null!;
+        public Output<string> TalosVersion { get; private set; } = null!;
 
 
         /// <summary>

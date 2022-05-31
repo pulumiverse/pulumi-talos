@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/alecthomas/jsonschema"
 	"github.com/frezbo/pulumi-provider-talos/provider/pkg/constants"
+	"github.com/invopop/jsonschema"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
+
+	machineapi "github.com/talos-systems/talos/pkg/machinery/api/machine"
 	talosconstants "github.com/talos-systems/talos/pkg/machinery/constants"
 )
 
@@ -57,18 +59,18 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 			if val, ok := definitionProperties.Properties.Get(definitionPropertyKey); ok {
 				// the returned value is an interface
 				// we need to cast it to jsonSchema.Type to access the fields
-				definitionPropertyValue := val.(*jsonschema.Type)
+				definitionPropertySchema := val.(*jsonschema.Schema)
 
 				resourceOutputProperty := schema.PropertySpec{
 					TypeSpec: schema.TypeSpec{
-						Type: definitionPropertyValue.Type,
-						Ref:  openAPISpecRefToPulumiRef(definitionPropertyValue.Ref),
+						Type: definitionPropertySchema.Type,
+						Ref:  openAPISpecRefToPulumiRef(definitionPropertySchema.Ref),
 					},
 				}
-				if definitionPropertyValue.Items != nil {
+				if definitionPropertySchema.Items != nil {
 					resourceOutputProperty.TypeSpec.Items = &schema.TypeSpec{
-						Type: definitionPropertyValue.Items.Type,
-						Ref:  openAPISpecRefToPulumiRef(definitionPropertyValue.Items.Ref),
+						Type: definitionPropertySchema.Items.Type,
+						Ref:  openAPISpecRefToPulumiRef(definitionPropertySchema.Items.Ref),
 					}
 				}
 
@@ -109,17 +111,11 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 						Secret: true,
 					},
 					"talosVersion": {
-						Description: "Talos version the config generated for",
-						TypeSpec: schema.TypeSpec{
-							Type: "string",
-							Ref:  "#/types/talos:index:TalosVersionOutput",
-						},
+						Description: "Talos version the config is generated for",
+						TypeSpec:    schema.TypeSpec{Type: "string"},
 					},
 					"configVersion": {
-						TypeSpec: schema.TypeSpec{
-							Type: "string",
-							Ref:  "#/types/talos:index:TalosMachineConfigVersionOutput",
-						},
+						TypeSpec: schema.TypeSpec{Type: "string"},
 					},
 				},
 				Required: []string{
@@ -160,20 +156,6 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 					Value:       constants.TalosMachineConfigVersion,
 					Description: "Talos Machine Configuration Version",
 				},
-			},
-		}
-
-		pkg.Types["talos:index:TalosMachineConfigVersionOutput"] = schema.ComplexTypeSpec{
-			ObjectTypeSpec: schema.ObjectTypeSpec{
-				Type:        "object",
-				Description: "Talos Machine Configuration Version",
-			},
-		}
-
-		pkg.Types["talos:index:TalosVersionOutput"] = schema.ComplexTypeSpec{
-			ObjectTypeSpec: schema.ObjectTypeSpec{
-				Type:        "object",
-				Description: "Talos Version",
 			},
 		}
 
@@ -300,21 +282,20 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 					},
 					"controlplaneConfig": {
 						Description: "Talos Controlplane Config",
-						TypeSpec: schema.TypeSpec{
-							Type: "string",
-						},
+						TypeSpec:    schema.TypeSpec{Type: "string"},
+						Secret:      true,
 					},
 					"workerConfig": {
 						Description: "Talos Worker Config",
-						TypeSpec: schema.TypeSpec{
-							Type: "string",
-						},
+						TypeSpec:    schema.TypeSpec{Type: "string"},
+						Secret:      true,
 					},
 					"talosConfig": {
 						Description: "Talos Config",
 						TypeSpec: schema.TypeSpec{
 							Type: "string",
 						},
+						Secret: true,
 					},
 					"secrets": {
 						Description: "Talos Secrets Bundle",
@@ -368,7 +349,6 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 						Type: "object",
 						Ref:  "#/types/talos:index:SecretsBundle",
 					},
-					Secret: true,
 				},
 				"additionalSans": {
 					TypeSpec: schema.TypeSpec{
@@ -431,15 +411,11 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 					Description: "list of registry mirrors to use in format: <registry host>=<mirror URL>",
 				},
 				"talosVersion": {
-					TypeSpec: schema.TypeSpec{
-						Ref: "#/types/talos:index:TalosVersionOutput",
-					},
+					TypeSpec:    schema.TypeSpec{Type: "string"},
 					Description: "the desired Talos version to refer to",
 				},
 				"configVersion": {
-					TypeSpec: schema.TypeSpec{
-						Ref: "#/types/talos:index:TalosMachineConfigVersionOutput",
-					},
+					TypeSpec:    schema.TypeSpec{Type: "string"},
 					Description: "the desired machine config version to refer to",
 				},
 				"clusterDiscovery": {
@@ -486,6 +462,7 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 				"talosConfig": {
 					TypeSpec:    schema.TypeSpec{Type: "string"},
 					Description: "talosconfig",
+					Secret:      true,
 				},
 				"timeout": {
 					TypeSpec:    schema.TypeSpec{Type: "integer"},
@@ -522,6 +499,132 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 			"endpoint",
 			"node",
 			"talosConfig",
+		},
+	}
+
+	pkg.Resources["talos:index:nodeApplyConfig"] = schema.ResourceSpec{
+		ObjectTypeSpec: schema.ObjectTypeSpec{
+			Description: "A node apply config resource",
+			Type:        "object",
+			Properties: map[string]schema.PropertySpec{
+				"endpoint": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "node endpoint address",
+				},
+				"node": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "node address",
+				},
+				"talosConfig": {
+					TypeSpec: schema.TypeSpec{
+						Type: "object",
+						Ref:  "pulumi.json#/Asset",
+					},
+					Description: "talosconfig",
+					Secret:      true,
+				},
+				"machineConfig": {
+					TypeSpec: schema.TypeSpec{
+						Type: "object",
+						Ref:  "pulumi.json#/Asset",
+					},
+					Description: "machineconfig",
+					Secret:      true,
+				},
+				"mode": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "machine config apply mode",
+				},
+				"insecure": {
+					TypeSpec:    schema.TypeSpec{Type: "boolean"},
+					Description: "allow insecure connections",
+				},
+				"timeout": {
+					TypeSpec:    schema.TypeSpec{Type: "integer"},
+					Description: "wait timeout in seconds",
+				},
+			},
+			Required: []string{
+				"endpoint",
+				"node",
+				"talosConfig",
+				"machineConfig",
+				"mode",
+				"insecure",
+				"timeout",
+			},
+		},
+		InputProperties: map[string]schema.PropertySpec{
+			"endpoint": {
+				TypeSpec:    schema.TypeSpec{Type: "string"},
+				Description: "node endpoint address",
+			},
+			"node": {
+				TypeSpec:    schema.TypeSpec{Type: "string"},
+				Description: "node address",
+			},
+			"talosConfig": {
+				TypeSpec: schema.TypeSpec{
+					Type: "object",
+					Ref:  "pulumi.json#/Asset",
+				},
+				Description: "talosconfig",
+			},
+			"machineConfig": {
+				TypeSpec: schema.TypeSpec{
+					Type: "object",
+					Ref:  "pulumi.json#/Asset",
+				},
+				Description: "machineconfig",
+			},
+			"mode": {
+				TypeSpec: schema.TypeSpec{
+					Type: "string",
+					Ref:  "#/types/talos:index:TalosMachineConfigApplyMode",
+				},
+				Default:     machineapi.ApplyConfigurationRequest_Mode_name[1],
+				Description: fmt.Sprintf("machine config apply mode (default %s)", strings.ToLower(machineapi.ApplyConfigurationRequest_Mode_name[1])),
+			},
+			"insecure": {
+				TypeSpec:    schema.TypeSpec{Type: "boolean"},
+				Description: "whether to use insecure connection",
+				Default:     false,
+			},
+			"timeout": {
+				TypeSpec:    schema.TypeSpec{Type: "integer"},
+				Description: fmt.Sprintf("timeout in seconds (default %d)", constants.TalosBootstrapResourceTimeout),
+				Default:     constants.TalosApplyConfigResourceTimeout,
+			},
+		},
+		RequiredInputs: []string{
+			"endpoint",
+			"node",
+			"talosConfig",
+			"machineConfig",
+		},
+	}
+
+	pkg.Types["talos:index:TalosMachineConfigApplyMode"] = schema.ComplexTypeSpec{
+		ObjectTypeSpec: schema.ObjectTypeSpec{
+			Type: "string",
+		},
+		Enum: []schema.EnumValueSpec{
+			{
+				Value:       machineapi.ApplyConfigurationRequest_Mode_name[0],
+				Description: "apply config with a reboot",
+			},
+			{
+				Value:       machineapi.ApplyConfigurationRequest_Mode_name[1],
+				Description: "automatically try to apply and reboot if only required",
+			},
+			{
+				Value:       machineapi.ApplyConfigurationRequest_Mode_name[2],
+				Description: "apply config without a reboot",
+			},
+			{
+				Value:       machineapi.ApplyConfigurationRequest_Mode_name[3],
+				Description: "apply config as staged",
+			},
 		},
 	}
 
@@ -615,9 +718,9 @@ func rawMessage(v interface{}) schema.RawMessage {
 func openAPISpecRefToPulumiRef(ref string) string {
 	if ref != "" {
 		// convert openAPI schema references to Pulumi schema reference
-		// remove `definitions` and replace by `types`
+		// remove `$defs` and replace by `types`
 		// ref: https://www.pulumi.com/docs/guides/pulumi-packages/schema/#
-		ref = strings.ReplaceAll(ref, "#/definitions/", "")
+		ref = strings.ReplaceAll(ref, "#/$defs/", "")
 		ref = fmt.Sprintf("%s/talos:%s:%s", "#/types", "index", ref)
 		return ref
 	}

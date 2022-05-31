@@ -72,18 +72,6 @@ export interface SecretsBundleArgs {
 }
 
 /**
- * Talos Machine Configuration Version
- */
-export interface TalosMachineConfigVersionOutputArgs {
-}
-
-/**
- * Talos Version
- */
-export interface TalosVersionOutputArgs {
-}
-
-/**
  * Talos TrustdInfo type
  */
 export interface TrustdInfoArgs {

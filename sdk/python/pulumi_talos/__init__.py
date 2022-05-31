@@ -9,6 +9,7 @@ from ._enums import *
 from .cluster_config import *
 from .cluster_secrets import *
 from .get_kube_config import *
+from .node_apply_config import *
 from .node_bootstrap import *
 from .provider import *
 from ._inputs import *
@@ -23,6 +24,7 @@ _utilities.register(
   "classes": {
    "talos:index:clusterConfig": "ClusterConfig",
    "talos:index:clusterSecrets": "ClusterSecrets",
+   "talos:index:nodeApplyConfig": "NodeApplyConfig",
    "talos:index:nodeBootstrap": "NodeBootstrap"
   }
  }

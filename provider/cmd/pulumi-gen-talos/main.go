@@ -23,9 +23,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/alecthomas/jsonschema"
 	"github.com/frezbo/pulumi-provider-talos/provider/pkg/gen"
 	providerVersion "github.com/frezbo/pulumi-provider-talos/provider/pkg/version"
+	"github.com/invopop/jsonschema"
 
 	dotnetgen "github.com/pulumi/pulumi/pkg/v3/codegen/dotnet"
 	gogen "github.com/pulumi/pulumi/pkg/v3/codegen/go"

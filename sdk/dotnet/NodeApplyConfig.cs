@@ -10,16 +10,34 @@ using Pulumi.Serialization;
 namespace Pulumi.Talos
 {
     /// <summary>
-    /// A node bootstrap resource
+    /// A node apply config resource
     /// </summary>
-    [TalosResourceType("talos:index:nodeBootstrap")]
-    public partial class NodeBootstrap : Pulumi.CustomResource
+    [TalosResourceType("talos:index:nodeApplyConfig")]
+    public partial class NodeApplyConfig : Pulumi.CustomResource
     {
         /// <summary>
         /// node endpoint address
         /// </summary>
         [Output("endpoint")]
         public Output<string> Endpoint { get; private set; } = null!;
+
+        /// <summary>
+        /// allow insecure connections
+        /// </summary>
+        [Output("insecure")]
+        public Output<bool> Insecure { get; private set; } = null!;
+
+        /// <summary>
+        /// machineconfig
+        /// </summary>
+        [Output("machineConfig")]
+        public Output<AssetOrArchive> MachineConfig { get; private set; } = null!;
+
+        /// <summary>
+        /// machine config apply mode
+        /// </summary>
+        [Output("mode")]
+        public Output<string> Mode { get; private set; } = null!;
 
         /// <summary>
         /// node address
@@ -31,7 +49,7 @@ namespace Pulumi.Talos
         /// talosconfig
         /// </summary>
         [Output("talosConfig")]
-        public Output<string> TalosConfig { get; private set; } = null!;
+        public Output<AssetOrArchive> TalosConfig { get; private set; } = null!;
 
         /// <summary>
         /// wait timeout in seconds
@@ -41,19 +59,19 @@ namespace Pulumi.Talos
 
 
         /// <summary>
-        /// Create a NodeBootstrap resource with the given unique name, arguments, and options.
+        /// Create a NodeApplyConfig resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public NodeBootstrap(string name, NodeBootstrapArgs args, CustomResourceOptions? options = null)
-            : base("talos:index:nodeBootstrap", name, args ?? new NodeBootstrapArgs(), MakeResourceOptions(options, ""))
+        public NodeApplyConfig(string name, NodeApplyConfigArgs args, CustomResourceOptions? options = null)
+            : base("talos:index:nodeApplyConfig", name, args ?? new NodeApplyConfigArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private NodeBootstrap(string name, Input<string> id, CustomResourceOptions? options = null)
-            : base("talos:index:nodeBootstrap", name, null, MakeResourceOptions(options, id))
+        private NodeApplyConfig(string name, Input<string> id, CustomResourceOptions? options = null)
+            : base("talos:index:nodeApplyConfig", name, null, MakeResourceOptions(options, id))
         {
         }
 
@@ -64,6 +82,7 @@ namespace Pulumi.Talos
                 Version = Utilities.Version,
                 AdditionalSecretOutputs =
                 {
+                    "machineConfig",
                     "talosConfig",
                 },
             };
@@ -73,26 +92,44 @@ namespace Pulumi.Talos
             return merged;
         }
         /// <summary>
-        /// Get an existing NodeBootstrap resource's state with the given name, ID, and optional extra
+        /// Get an existing NodeApplyConfig resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static NodeBootstrap Get(string name, Input<string> id, CustomResourceOptions? options = null)
+        public static NodeApplyConfig Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
-            return new NodeBootstrap(name, id, options);
+            return new NodeApplyConfig(name, id, options);
         }
     }
 
-    public sealed class NodeBootstrapArgs : Pulumi.ResourceArgs
+    public sealed class NodeApplyConfigArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// node endpoint address
         /// </summary>
         [Input("endpoint", required: true)]
         public Input<string> Endpoint { get; set; } = null!;
+
+        /// <summary>
+        /// whether to use insecure connection
+        /// </summary>
+        [Input("insecure")]
+        public Input<bool>? Insecure { get; set; }
+
+        /// <summary>
+        /// machineconfig
+        /// </summary>
+        [Input("machineConfig", required: true)]
+        public Input<AssetOrArchive> MachineConfig { get; set; } = null!;
+
+        /// <summary>
+        /// machine config apply mode (default auto)
+        /// </summary>
+        [Input("mode")]
+        public Input<Pulumi.Talos.TalosMachineConfigApplyMode>? Mode { get; set; }
 
         /// <summary>
         /// node address
@@ -104,7 +141,7 @@ namespace Pulumi.Talos
         /// talosconfig
         /// </summary>
         [Input("talosConfig", required: true)]
-        public Input<string> TalosConfig { get; set; } = null!;
+        public Input<AssetOrArchive> TalosConfig { get; set; } = null!;
 
         /// <summary>
         /// timeout in seconds (default 600)
@@ -112,8 +149,10 @@ namespace Pulumi.Talos
         [Input("timeout")]
         public Input<int>? Timeout { get; set; }
 
-        public NodeBootstrapArgs()
+        public NodeApplyConfigArgs()
         {
+            Insecure = false;
+            Mode = Pulumi.Talos.TalosMachineConfigApplyMode.AUTO;
             Timeout = 600;
         }
     }

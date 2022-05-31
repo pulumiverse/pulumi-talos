@@ -23,7 +23,7 @@ class ClusterConfigArgs:
                  config_patches: Optional[pulumi.Input['ConfigPatchesArgs']] = None,
                  config_patches_control_plane: Optional[pulumi.Input['ConfigPatchesArgs']] = None,
                  config_patches_worker: Optional[pulumi.Input['ConfigPatchesArgs']] = None,
-                 config_version: Optional[pulumi.Input['TalosMachineConfigVersionOutputArgs']] = None,
+                 config_version: Optional[pulumi.Input[str]] = None,
                  dns_domain: Optional[pulumi.Input[str]] = None,
                  docs: Optional[pulumi.Input[bool]] = None,
                  examples: Optional[pulumi.Input[bool]] = None,
@@ -33,7 +33,7 @@ class ClusterConfigArgs:
                  kubespan: Optional[pulumi.Input[bool]] = None,
                  persist: Optional[pulumi.Input[bool]] = None,
                  registry_mirrors: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 talos_version: Optional[pulumi.Input['TalosVersionOutputArgs']] = None):
+                 talos_version: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ClusterConfig resource.
         :param pulumi.Input[str] cluster_endpoint: The cluster endpoint is the URL for the Kubernetes API. If you decide to use
@@ -47,17 +47,17 @@ class ClusterConfigArgs:
         :param pulumi.Input['ConfigPatchesArgs'] config_patches: patch generated machineconfigs (applied to all node types)
         :param pulumi.Input['ConfigPatchesArgs'] config_patches_control_plane: patch generated machineconfigs (applied to 'controlplane' types)
         :param pulumi.Input['ConfigPatchesArgs'] config_patches_worker: patch generated machineconfigs (applied to 'worker' type)
-        :param pulumi.Input['TalosMachineConfigVersionOutputArgs'] config_version: the desired machine config version to refer to
+        :param pulumi.Input[str] config_version: the desired machine config version to refer to
         :param pulumi.Input[str] dns_domain: the dns domain to use for cluster (default "cluster.local")
         :param pulumi.Input[bool] docs: renders all machine configs adding the documentation for each field (default true)
         :param pulumi.Input[bool] examples: renders all machine configs with the commented examples (default true)
         :param pulumi.Input[str] install_disk: the disk to install to (default "/dev/sda")
         :param pulumi.Input[str] install_image: the image used to perform an installation (default "ghcr.io/talos-systems/installer:v0.14.2")
-        :param pulumi.Input[str] kubernetes_version: desired kubernetes version to run (default "1.23.4")
+        :param pulumi.Input[str] kubernetes_version: desired kubernetes version to run (default "1.23.6")
         :param pulumi.Input[bool] kubespan: enable kubespan feature
         :param pulumi.Input[bool] persist: the desired persist value for configs (default true)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] registry_mirrors: list of registry mirrors to use in format: <registry host>=<mirror URL>
-        :param pulumi.Input['TalosVersionOutputArgs'] talos_version: the desired Talos version to refer to
+        :param pulumi.Input[str] talos_version: the desired Talos version to refer to
         """
         pulumi.set(__self__, "cluster_endpoint", cluster_endpoint)
         pulumi.set(__self__, "cluster_name", cluster_name)
@@ -97,7 +97,7 @@ class ClusterConfigArgs:
         if install_image is not None:
             pulumi.set(__self__, "install_image", install_image)
         if kubernetes_version is None:
-            kubernetes_version = '1.23.4'
+            kubernetes_version = '1.23.6'
         if kubernetes_version is not None:
             pulumi.set(__self__, "kubernetes_version", kubernetes_version)
         if kubespan is not None:
@@ -212,14 +212,14 @@ class ClusterConfigArgs:
 
     @property
     @pulumi.getter(name="configVersion")
-    def config_version(self) -> Optional[pulumi.Input['TalosMachineConfigVersionOutputArgs']]:
+    def config_version(self) -> Optional[pulumi.Input[str]]:
         """
         the desired machine config version to refer to
         """
         return pulumi.get(self, "config_version")
 
     @config_version.setter
-    def config_version(self, value: Optional[pulumi.Input['TalosMachineConfigVersionOutputArgs']]):
+    def config_version(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "config_version", value)
 
     @property
@@ -286,7 +286,7 @@ class ClusterConfigArgs:
     @pulumi.getter(name="kubernetesVersion")
     def kubernetes_version(self) -> Optional[pulumi.Input[str]]:
         """
-        desired kubernetes version to run (default "1.23.4")
+        desired kubernetes version to run (default "1.23.6")
         """
         return pulumi.get(self, "kubernetes_version")
 
@@ -332,14 +332,14 @@ class ClusterConfigArgs:
 
     @property
     @pulumi.getter(name="talosVersion")
-    def talos_version(self) -> Optional[pulumi.Input['TalosVersionOutputArgs']]:
+    def talos_version(self) -> Optional[pulumi.Input[str]]:
         """
         the desired Talos version to refer to
         """
         return pulumi.get(self, "talos_version")
 
     @talos_version.setter
-    def talos_version(self, value: Optional[pulumi.Input['TalosVersionOutputArgs']]):
+    def talos_version(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "talos_version", value)
 
 
@@ -355,7 +355,7 @@ class ClusterConfig(pulumi.CustomResource):
                  config_patches: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
                  config_patches_control_plane: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
                  config_patches_worker: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
-                 config_version: Optional[pulumi.Input[pulumi.InputType['TalosMachineConfigVersionOutputArgs']]] = None,
+                 config_version: Optional[pulumi.Input[str]] = None,
                  dns_domain: Optional[pulumi.Input[str]] = None,
                  docs: Optional[pulumi.Input[bool]] = None,
                  examples: Optional[pulumi.Input[bool]] = None,
@@ -366,7 +366,7 @@ class ClusterConfig(pulumi.CustomResource):
                  persist: Optional[pulumi.Input[bool]] = None,
                  registry_mirrors: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  secrets: Optional[pulumi.Input[pulumi.InputType['SecretsBundleArgs']]] = None,
-                 talos_version: Optional[pulumi.Input[pulumi.InputType['TalosVersionOutputArgs']]] = None,
+                 talos_version: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Talos cluster config resource
@@ -383,18 +383,18 @@ class ClusterConfig(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['ConfigPatchesArgs']] config_patches: patch generated machineconfigs (applied to all node types)
         :param pulumi.Input[pulumi.InputType['ConfigPatchesArgs']] config_patches_control_plane: patch generated machineconfigs (applied to 'controlplane' types)
         :param pulumi.Input[pulumi.InputType['ConfigPatchesArgs']] config_patches_worker: patch generated machineconfigs (applied to 'worker' type)
-        :param pulumi.Input[pulumi.InputType['TalosMachineConfigVersionOutputArgs']] config_version: the desired machine config version to refer to
+        :param pulumi.Input[str] config_version: the desired machine config version to refer to
         :param pulumi.Input[str] dns_domain: the dns domain to use for cluster (default "cluster.local")
         :param pulumi.Input[bool] docs: renders all machine configs adding the documentation for each field (default true)
         :param pulumi.Input[bool] examples: renders all machine configs with the commented examples (default true)
         :param pulumi.Input[str] install_disk: the disk to install to (default "/dev/sda")
         :param pulumi.Input[str] install_image: the image used to perform an installation (default "ghcr.io/talos-systems/installer:v0.14.2")
-        :param pulumi.Input[str] kubernetes_version: desired kubernetes version to run (default "1.23.4")
+        :param pulumi.Input[str] kubernetes_version: desired kubernetes version to run (default "1.23.6")
         :param pulumi.Input[bool] kubespan: enable kubespan feature
         :param pulumi.Input[bool] persist: the desired persist value for configs (default true)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] registry_mirrors: list of registry mirrors to use in format: <registry host>=<mirror URL>
         :param pulumi.Input[pulumi.InputType['SecretsBundleArgs']] secrets: Talos Secrets Bundle
-        :param pulumi.Input[pulumi.InputType['TalosVersionOutputArgs']] talos_version: the desired Talos version to refer to
+        :param pulumi.Input[str] talos_version: the desired Talos version to refer to
         """
         ...
     @overload
@@ -427,7 +427,7 @@ class ClusterConfig(pulumi.CustomResource):
                  config_patches: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
                  config_patches_control_plane: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
                  config_patches_worker: Optional[pulumi.Input[pulumi.InputType['ConfigPatchesArgs']]] = None,
-                 config_version: Optional[pulumi.Input[pulumi.InputType['TalosMachineConfigVersionOutputArgs']]] = None,
+                 config_version: Optional[pulumi.Input[str]] = None,
                  dns_domain: Optional[pulumi.Input[str]] = None,
                  docs: Optional[pulumi.Input[bool]] = None,
                  examples: Optional[pulumi.Input[bool]] = None,
@@ -438,7 +438,7 @@ class ClusterConfig(pulumi.CustomResource):
                  persist: Optional[pulumi.Input[bool]] = None,
                  registry_mirrors: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  secrets: Optional[pulumi.Input[pulumi.InputType['SecretsBundleArgs']]] = None,
-                 talos_version: Optional[pulumi.Input[pulumi.InputType['TalosVersionOutputArgs']]] = None,
+                 talos_version: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -481,7 +481,7 @@ class ClusterConfig(pulumi.CustomResource):
                 install_image = 'ghcr.io/talos-systems/installer:v0.14.2'
             __props__.__dict__["install_image"] = install_image
             if kubernetes_version is None:
-                kubernetes_version = '1.23.4'
+                kubernetes_version = '1.23.6'
             __props__.__dict__["kubernetes_version"] = kubernetes_version
             __props__.__dict__["kubespan"] = kubespan
             if persist is None:
@@ -490,12 +490,12 @@ class ClusterConfig(pulumi.CustomResource):
             __props__.__dict__["registry_mirrors"] = registry_mirrors
             if secrets is None and not opts.urn:
                 raise TypeError("Missing required property 'secrets'")
-            __props__.__dict__["secrets"] = None if secrets is None else pulumi.Output.secret(secrets)
+            __props__.__dict__["secrets"] = secrets
             __props__.__dict__["talos_version"] = talos_version
             __props__.__dict__["controlplane_config"] = None
             __props__.__dict__["talos_config"] = None
             __props__.__dict__["worker_config"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["secrets"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["controlplaneConfig", "secrets", "talosConfig", "workerConfig"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ClusterConfig, __self__).__init__(
             'talos:index:clusterConfig',

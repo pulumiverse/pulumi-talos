@@ -19,6 +19,13 @@ const (
 	TalosBootstrapResourceTimeout                = 600
 )
 
+// Talos apply config resource constants
+const (
+	TalosApplyConfigResourceDelayBetweenRetries    = 10 * time.Second
+	TalosApplyConfigResourceMaxDelayBetweenRetries = 60 * time.Second
+	TalosApplyConfigResourceTimeout                = 600
+)
+
 // Talos GetKubeConfig resource constants
 const (
 	TalosGetKubeConfigResourceDelayBetweenRetries    = 10 * time.Second

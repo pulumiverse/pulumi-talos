@@ -8,6 +8,7 @@ import * as utilities from "./utilities";
 export * from "./clusterConfig";
 export * from "./clusterSecrets";
 export * from "./getKubeConfig";
+export * from "./nodeApplyConfig";
 export * from "./nodeBootstrap";
 export * from "./provider";
 
@@ -24,6 +25,7 @@ export {
 // Import resources to register:
 import { ClusterConfig } from "./clusterConfig";
 import { ClusterSecrets } from "./clusterSecrets";
+import { NodeApplyConfig } from "./nodeApplyConfig";
 import { NodeBootstrap } from "./nodeBootstrap";
 
 const _module = {
@@ -34,6 +36,8 @@ const _module = {
                 return new ClusterConfig(name, <any>undefined, { urn })
             case "talos:index:clusterSecrets":
                 return new ClusterSecrets(name, <any>undefined, { urn })
+            case "talos:index:nodeApplyConfig":
+                return new NodeApplyConfig(name, <any>undefined, { urn })
             case "talos:index:nodeBootstrap":
                 return new NodeBootstrap(name, <any>undefined, { urn })
             default:

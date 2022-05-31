@@ -18,8 +18,6 @@ __all__ = [
     'PEMEncodedKey',
     'Secrets',
     'SecretsBundle',
-    'TalosMachineConfigVersionOutput',
-    'TalosVersionOutput',
     'TrustdInfo',
 ]
 
@@ -399,30 +397,6 @@ class SecretsBundle(dict):
     @pulumi.getter(name="TrustdInfo")
     def trustd_info(self) -> Optional['outputs.TrustdInfo']:
         return pulumi.get(self, "trustd_info")
-
-
-@pulumi.output_type
-class TalosMachineConfigVersionOutput(dict):
-    """
-    Talos Machine Configuration Version
-    """
-    def __init__(__self__):
-        """
-        Talos Machine Configuration Version
-        """
-        pass
-
-
-@pulumi.output_type
-class TalosVersionOutput(dict):
-    """
-    Talos Version
-    """
-    def __init__(__self__):
-        """
-        Talos Version
-        """
-        pass
 
 
 @pulumi.output_type

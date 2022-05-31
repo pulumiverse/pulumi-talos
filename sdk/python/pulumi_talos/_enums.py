@@ -5,8 +5,28 @@
 from enum import Enum
 
 __all__ = [
+    'TalosMachineConfigApplyMode',
     'TalosMachineConfigVersion',
 ]
+
+
+class TalosMachineConfigApplyMode(str, Enum):
+    REBOOT = "REBOOT"
+    """
+    apply config with a reboot
+    """
+    AUTO = "AUTO"
+    """
+    automatically try to apply and reboot if only required
+    """
+    N_O_REBOOT = "NO_REBOOT"
+    """
+    apply config without a reboot
+    """
+    STAGED = "STAGED"
+    """
+    apply config as staged
+    """
 
 
 class TalosMachineConfigVersion(str, Enum):
