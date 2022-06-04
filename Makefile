@@ -2,8 +2,8 @@ PROJECT_NAME := Pulumi Talos Resource Provider
 
 PACK             := talos
 PACKDIR          := sdk
-PROJECT          := github.com/frezbo/pulumi-provider-talos
-NODE_MODULE_NAME := @frezbo/talos
+PROJECT          := github.com/siderolabs/pulumi-provider-talos
+NODE_MODULE_NAME := @siderolabs/talos
 NUGET_PKG_NAME   := Pulumi.Talos
 
 PROVIDER        := pulumi-resource-${PACK}

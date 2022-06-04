@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/frezbo/pulumi-provider-talos/provider/pkg/constants"
 	"github.com/invopop/jsonschema"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
+	"github.com/siderolabs/pulumi-provider-talos/provider/pkg/constants"
 
 	machineapi "github.com/talos-systems/talos/pkg/machinery/api/machine"
 	talosconstants "github.com/talos-systems/talos/pkg/machinery/constants"
@@ -21,7 +21,7 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 		License:     "Apache-2.0",
 		Keywords:    []string{"talos", "kubernetes", "pulumi"},
 		Homepage:    "https://talos.dev",
-		Repository:  "https://github.com/frezbo/pulumi-provider-talos",
+		Repository:  "https://github.com/siderolabs/pulumi-provider-talos",
 
 		Config: schema.ConfigSpec{},
 
@@ -670,7 +670,7 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 		},
 	}
 
-	goImportPath := "github.com/frezbo/pulumi-provider-talos/sdk/go/talos"
+	goImportPath := "github.com/siderolabs/pulumi-provider-talos/sdk/go/talos"
 
 	pkg.Language["go"] = rawMessage(map[string]interface{}{
 		"importBasePath":                 goImportPath,

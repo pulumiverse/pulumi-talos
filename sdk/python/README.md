@@ -24,7 +24,7 @@ $ make build install
 
 # test
 $ cd examples/simple
-$ yarn link @frezbo/talos
+$ yarn link @siderolabs/talos
 $ yarn install
 $ pulumi stack init test
 $ pulumi up
