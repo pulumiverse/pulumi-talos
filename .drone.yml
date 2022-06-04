@@ -8,6 +8,28 @@ platform:
   arch: amd64
 
 steps:
+- name: setup-ci
+  pull: always
+  image: autonomy/build-container:latest
+  commands:
+  - sleep 5
+  - git fetch --tags
+  - install-ci-key
+  - docker buildx create --driver docker-container --platform linux/amd64 --name local --use unix:///var/outer-run/docker.sock
+  - docker buildx inspect --bootstrap
+  environment:
+    SSH_KEY:
+      from_secret: ssh_key
+  volumes:
+  - name: outer-docker-socket
+    path: /var/outer-run
+  - name: docker-socket
+    path: /var/run
+  - name: buildx
+    path: /root/.docker/buildx
+  - name: ssh
+    path: /root/.ssh
+
 - name: build
   pull: always
   image: golang:1.18
@@ -20,6 +42,15 @@ steps:
   image: autonomy/build-container:latest
   commands:
   - make release-notes
+  volumes:
+  - name: outer-docker-socket
+    path: /var/outer-run
+  - name: docker-socket
+    path: /var/run
+  - name: buildx
+    path: /root/.docker/buildx
+  - name: ssh
+    path: /root/.ssh
   when:
     event:
     - tag
@@ -44,6 +75,41 @@ steps:
     - tag
   depends_on:
   - release-notes
+
+services:
+- name: docker
+  image: docker:20.10-dind
+  entrypoint:
+  - dockerd
+  commands:
+  - --dns=8.8.8.8
+  - --dns=8.8.4.4
+  - --mtu=1500
+  - --log-level=error
+  privileged: true
+  volumes:
+  - name: outer-docker-socket
+    path: /var/outer-run
+  - name: docker-socket
+    path: /var/run
+  - name: buildx
+    path: /root/.docker/buildx
+  - name: ssh
+    path: /root/.ssh
+
+volumes:
+- name: outer-docker-socket
+  host:
+    path: /var/ci-docker
+- name: docker-socket
+  temp:
+    medium: memory
+- name: buildx
+  temp:
+    medium: memory
+- name: ssh
+  temp:
+    medium: memory
 
 ---
 kind: pipeline

@@ -1,5 +1,3 @@
-SHELL := /bin/bash
-
 PROJECT_NAME := Pulumi Talos Resource Provider
 
 PACK             := talos
@@ -13,12 +11,12 @@ PROVIDER_PATH   := provider
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 
 SCHEMA_FILE     := provider/cmd/${PROVIDER}/schema.json
-GOPATH			:= $(shell go env GOPATH)
 
 WORKING_DIR     := $(shell pwd)
 TESTPARALLELISM := 4
 
 ARTIFACTS := _out
+TAG := $(shell git describe --tag --always --dirty)
 
 ensure::
 	cd provider && go mod tidy
@@ -61,18 +59,14 @@ install-prereqs::
 	tar -xvf pulumictl-v0.0.31-linux-amd64.tar.gz
 	mv pulumictl /usr/local/bin
 
-install::
-	cp $(WORKING_DIR)/${ARTIFACTS}/${PROVIDER} ${GOPATH}/bin
-
+.PHONY: release-notes
+release-notes::
+	mkdir -p $(ARTIFACTS)
+	@ARTIFACTS=$(ARTIFACTS) ./hack/release.sh $@ $(ARTIFACTS)/RELEASE_NOTES.md $(TAG)
 
 GO_TEST 	 := go test -v -count=1 -cover -timeout 2h -parallel ${TESTPARALLELISM}
 
 test_all::
 	cd provider/pkg && $(GO_TEST) ./...
 	cd tests/sdk/go && $(GO_TEST) ./...
-
-.PHONY: release-notes
-release-notes:
-	mkdir -p $(ARTIFACTS)
-	@ARTIFACTS=$(ARTIFACTS) ./hack/release.sh $@ $(ARTIFACTS)/RELEASE_NOTES.md $(TAG)
 
