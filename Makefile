@@ -31,13 +31,23 @@ schema:: gen
 	$(WORKING_DIR)/${ARTIFACTS}/${CODEGEN} schema "" $(CURDIR)
 	@echo "Finished generating schema."
 
-provider::
+gen_provider::
 	(cd provider && VERSION=${VERSION} go generate cmd/${PROVIDER}/main.go)
-	(cd provider && go build -o $(WORKING_DIR)/${ARTIFACTS}/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" $(PROJECT)/${PROVIDER_PATH}/cmd/$(PROVIDER))
 
-provider_debug::
-	(cd provider && go build -o $(WORKING_DIR)/${ARTIFACTS}/${PROVIDER} -gcflags="all=-N -l" -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" $(PROJECT)/${PROVIDER_PATH}/cmd/$(PROVIDER))
+provider_darwin_amd64::
+	(cd provider && GOOS=darwin GOARCH=amd64 go build -o $(WORKING_DIR)/${ARTIFACTS}/${PROVIDER}-darwin-amd64 -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" $(PROJECT)/${PROVIDER_PATH}/cmd/$(PROVIDER))
 
+provider_darwin_arm64::
+	(cd provider && GOOS=darwin GOARCH=arm64 go build -o $(WORKING_DIR)/${ARTIFACTS}/${PROVIDER}-darwin-arm64 -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" $(PROJECT)/${PROVIDER_PATH}/cmd/$(PROVIDER))
+
+provider_linux_amd64::
+	(cd provider && GOOS=linux GOARCH=amd64 go build -o $(WORKING_DIR)/${ARTIFACTS}/${PROVIDER}-linux-amd64 -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" $(PROJECT)/${PROVIDER_PATH}/cmd/$(PROVIDER))
+
+provider_linux_arm64::
+	(cd provider && GOOS=linux GOARCH=arm64 go build -o $(WORKING_DIR)/${ARTIFACTS}/${PROVIDER}-linux-arm64 -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" $(PROJECT)/${PROVIDER_PATH}/cmd/$(PROVIDER))
+
+provider:: gen_provider provider_darwin_amd64 provider_darwin_arm64 provider_linux_amd64 provider_linux_arm64
+	
 test_provider::
 	cd provider/pkg && go test -short -v -count=1 -cover -timeout 2h -parallel ${TESTPARALLELISM} ./...
 
@@ -55,9 +65,9 @@ lint::
   ## TODO: re-add this
 
 install-prereqs::
-	wget https://github.com/pulumi/pulumictl/releases/download/v0.0.31/pulumictl-v0.0.31-linux-amd64.tar.gz
-	tar -xvf pulumictl-v0.0.31-linux-amd64.tar.gz
-	mv pulumictl /usr/local/bin
+	wget -P /tmp https://github.com/pulumi/pulumictl/releases/download/v0.0.31/pulumictl-v0.0.31-linux-amd64.tar.gz
+	tar -xvf /tmp/pulumictl-v0.0.31-linux-amd64.tar.gz -C /tmp 
+	mv /tmp/pulumictl /usr/local/bin
 
 .PHONY: release-notes
 release-notes::

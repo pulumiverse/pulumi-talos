@@ -68,7 +68,7 @@ steps:
     - sha512
     draft: true
     files:
-    - "_out/pulumi-resource-talos"
+    - "_out/pulumi-resource-talos-*"
     note: _out/RELEASE_NOTES.md
   when:
     event:
