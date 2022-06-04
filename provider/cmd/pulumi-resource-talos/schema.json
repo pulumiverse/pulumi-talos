@@ -8,7 +8,7 @@
     ],
     "homepage": "https://talos.dev",
     "license": "Apache-2.0",
-    "repository": "https://github.com/frezbo/pulumi-provider-talos",
+    "repository": "https://github.com/siderolabs/pulumi-provider-talos",
     "language": {
         "csharp": {
             "liftSingleValueMethodReturns": true,
@@ -21,7 +21,7 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/frezbo/pulumi-provider-talos/sdk/go/talos",
+            "importBasePath": "github.com/siderolabs/pulumi-provider-talos/sdk/go/talos",
             "liftSingleValueMethodReturns": true
         },
         "nodejs": {

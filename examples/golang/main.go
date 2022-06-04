@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/frezbo/pulumi-provider-talos/sdk/go/talos"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/siderolabs/pulumi-provider-talos/sdk/go/talos"
 )
 
 func main() {

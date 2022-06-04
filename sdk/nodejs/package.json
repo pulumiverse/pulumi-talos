@@ -7,7 +7,7 @@
         "pulumi"
     ],
     "homepage": "https://talos.dev",
-    "repository": "https://github.com/frezbo/pulumi-provider-talos",
+    "repository": "https://github.com/siderolabs/pulumi-provider-talos",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc",

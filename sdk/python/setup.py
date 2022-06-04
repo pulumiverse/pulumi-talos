@@ -48,7 +48,7 @@ setup(name='pulumi_talos',
       keywords='talos kubernetes pulumi',
       url='https://talos.dev',
       project_urls={
-          'Repository': 'https://github.com/frezbo/pulumi-provider-talos'
+          'Repository': 'https://github.com/siderolabs/pulumi-provider-talos'
       },
       license='Apache-2.0',
       packages=find_packages(),

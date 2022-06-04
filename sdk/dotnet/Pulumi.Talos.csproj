@@ -7,7 +7,7 @@
     <Description>A Pulumi package for creating and managing talos config</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://talos.dev</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/frezbo/pulumi-provider-talos</RepositoryUrl>
+    <RepositoryUrl>https://github.com/siderolabs/pulumi-provider-talos</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
 
     <TargetFramework>netcoreapp3.1</TargetFramework>

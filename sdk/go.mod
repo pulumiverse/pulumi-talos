@@ -1,4 +1,4 @@
-module github.com/frezbo/pulumi-provider-talos/sdk
+module github.com/siderolabs/pulumi-provider-talos/sdk
 
 go 1.18
 

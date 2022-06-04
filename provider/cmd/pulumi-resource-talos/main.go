@@ -15,8 +15,8 @@
 package main
 
 import (
-	"github.com/frezbo/pulumi-provider-talos/provider/pkg/provider"
-	"github.com/frezbo/pulumi-provider-talos/provider/pkg/version"
+	"github.com/siderolabs/pulumi-provider-talos/provider/pkg/provider"
+	"github.com/siderolabs/pulumi-provider-talos/provider/pkg/version"
 )
 
 var providerName = "talos"
