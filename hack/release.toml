@@ -1,0 +1,12 @@
+
+# commit to be tagged for the new release
+commit = "HEAD"
+
+project_name = "pulumi-provider-talos"
+github_repo = "siderolabs/pulumi-provider-talos"
+match_deps = "^github.com/(siderolabs/[a-zA-Z0-9-]+)$"
+
+# previous = -
+# pre_release = true
+
+# [notes]
