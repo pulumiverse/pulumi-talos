@@ -35,11 +35,19 @@ export class ClusterSecrets extends pulumi.CustomResource {
         return obj['__pulumiType'] === ClusterSecrets.__pulumiType;
     }
 
+    /**
+     * cluster name
+     */
+    public readonly clusterName!: pulumi.Output<string>;
     public readonly configVersion!: pulumi.Output<string>;
     /**
      * Talos Secrets Bundle
      */
     public /*out*/ readonly secrets!: pulumi.Output<outputs.SecretsBundle>;
+    /**
+     * Talos config
+     */
+    public /*out*/ readonly talosConfig!: pulumi.Output<string>;
     /**
      * Talos version the config is generated for
      */
@@ -52,20 +60,27 @@ export class ClusterSecrets extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args?: ClusterSecretsArgs, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: ClusterSecretsArgs, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
+            if ((!args || args.clusterName === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterName'");
+            }
+            resourceInputs["clusterName"] = args ? args.clusterName : undefined;
             resourceInputs["configVersion"] = (args ? args.configVersion : undefined) ?? "v1alpha1";
             resourceInputs["talosVersion"] = args ? args.talosVersion : undefined;
             resourceInputs["secrets"] = undefined /*out*/;
+            resourceInputs["talosConfig"] = undefined /*out*/;
         } else {
+            resourceInputs["clusterName"] = undefined /*out*/;
             resourceInputs["configVersion"] = undefined /*out*/;
             resourceInputs["secrets"] = undefined /*out*/;
+            resourceInputs["talosConfig"] = undefined /*out*/;
             resourceInputs["talosVersion"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["secrets"] };
+        const secretOpts = { additionalSecretOutputs: ["secrets", "talosConfig"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(ClusterSecrets.__pulumiType, name, resourceInputs, opts);
     }
@@ -75,6 +90,10 @@ export class ClusterSecrets extends pulumi.CustomResource {
  * The set of arguments for constructing a ClusterSecrets resource.
  */
 export interface ClusterSecretsArgs {
+    /**
+     * cluster name
+     */
+    clusterName: pulumi.Input<string>;
     /**
      * the desired machine config version to generate (default "v1alpha1")
      */

@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -14,9 +15,13 @@ import (
 type ClusterSecrets struct {
 	pulumi.CustomResourceState
 
+	// cluster name
+	ClusterName   pulumi.StringOutput `pulumi:"clusterName"`
 	ConfigVersion pulumi.StringOutput `pulumi:"configVersion"`
 	// Talos Secrets Bundle
 	Secrets SecretsBundleOutput `pulumi:"secrets"`
+	// Talos config
+	TalosConfig pulumi.StringOutput `pulumi:"talosConfig"`
 	// Talos version the config is generated for
 	TalosVersion pulumi.StringOutput `pulumi:"talosVersion"`
 }
@@ -25,14 +30,18 @@ type ClusterSecrets struct {
 func NewClusterSecrets(ctx *pulumi.Context,
 	name string, args *ClusterSecretsArgs, opts ...pulumi.ResourceOption) (*ClusterSecrets, error) {
 	if args == nil {
-		args = &ClusterSecretsArgs{}
+		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.ClusterName == nil {
+		return nil, errors.New("invalid value for required argument 'ClusterName'")
+	}
 	if isZero(args.ConfigVersion) {
 		args.ConfigVersion = pulumi.StringPtr("v1alpha1")
 	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"secrets",
+		"talosConfig",
 	})
 	opts = append(opts, secrets)
 	var resource ClusterSecrets
@@ -67,6 +76,8 @@ func (ClusterSecretsState) ElementType() reflect.Type {
 }
 
 type clusterSecretsArgs struct {
+	// cluster name
+	ClusterName string `pulumi:"clusterName"`
 	// the desired machine config version to generate (default "v1alpha1")
 	ConfigVersion *string `pulumi:"configVersion"`
 	// the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)
@@ -75,6 +86,8 @@ type clusterSecretsArgs struct {
 
 // The set of arguments for constructing a ClusterSecrets resource.
 type ClusterSecretsArgs struct {
+	// cluster name
+	ClusterName pulumi.StringInput
 	// the desired machine config version to generate (default "v1alpha1")
 	ConfigVersion pulumi.StringPtrInput
 	// the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)
@@ -168,6 +181,11 @@ func (o ClusterSecretsOutput) ToClusterSecretsOutputWithContext(ctx context.Cont
 	return o
 }
 
+// cluster name
+func (o ClusterSecretsOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v *ClusterSecrets) pulumi.StringOutput { return v.ClusterName }).(pulumi.StringOutput)
+}
+
 func (o ClusterSecretsOutput) ConfigVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *ClusterSecrets) pulumi.StringOutput { return v.ConfigVersion }).(pulumi.StringOutput)
 }
@@ -175,6 +193,11 @@ func (o ClusterSecretsOutput) ConfigVersion() pulumi.StringOutput {
 // Talos Secrets Bundle
 func (o ClusterSecretsOutput) Secrets() SecretsBundleOutput {
 	return o.ApplyT(func(v *ClusterSecrets) SecretsBundleOutput { return v.Secrets }).(SecretsBundleOutput)
+}
+
+// Talos config
+func (o ClusterSecretsOutput) TalosConfig() pulumi.StringOutput {
+	return o.ApplyT(func(v *ClusterSecrets) pulumi.StringOutput { return v.TalosConfig }).(pulumi.StringOutput)
 }
 
 // Talos version the config is generated for

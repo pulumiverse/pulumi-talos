@@ -493,9 +493,8 @@ class ClusterConfig(pulumi.CustomResource):
             __props__.__dict__["secrets"] = secrets
             __props__.__dict__["talos_version"] = talos_version
             __props__.__dict__["controlplane_config"] = None
-            __props__.__dict__["talos_config"] = None
             __props__.__dict__["worker_config"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["controlplaneConfig", "secrets", "talosConfig", "workerConfig"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["controlplaneConfig", "secrets", "workerConfig"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ClusterConfig, __self__).__init__(
             'talos:index:clusterConfig',
@@ -538,7 +537,6 @@ class ClusterConfig(pulumi.CustomResource):
         __props__.__dict__["persist"] = None
         __props__.__dict__["registry_mirrors"] = None
         __props__.__dict__["secrets"] = None
-        __props__.__dict__["talos_config"] = None
         __props__.__dict__["talos_version"] = None
         __props__.__dict__["worker_config"] = None
         return ClusterConfig(resource_name, opts=opts, __props__=__props__)
@@ -694,14 +692,6 @@ class ClusterConfig(pulumi.CustomResource):
         Talos Secrets Bundle
         """
         return pulumi.get(self, "secrets")
-
-    @property
-    @pulumi.getter(name="talosConfig")
-    def talos_config(self) -> pulumi.Output[str]:
-        """
-        Talos Config
-        """
-        return pulumi.get(self, "talos_config")
 
     @property
     @pulumi.getter(name="talosVersion")

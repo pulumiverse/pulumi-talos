@@ -288,11 +288,6 @@
                     "description": "Talos Secrets Bundle",
                     "secret": true
                 },
-                "talosConfig": {
-                    "type": "string",
-                    "description": "Talos Config",
-                    "secret": true
-                },
                 "talosVersion": {
                     "type": "string",
                     "description": "the desired Talos version"
@@ -325,7 +320,6 @@
                 "kubespan",
                 "controlplaneConfig",
                 "workerConfig",
-                "talosConfig",
                 "secrets"
             ],
             "inputProperties": {
@@ -433,6 +427,10 @@
         "talos:index:clusterSecrets": {
             "description": "Talos secrets resource",
             "properties": {
+                "clusterName": {
+                    "type": "string",
+                    "description": "cluster name"
+                },
                 "configVersion": {
                     "type": "string"
                 },
@@ -440,6 +438,11 @@
                     "type": "object",
                     "$ref": "#/types/talos:index:SecretsBundle",
                     "description": "Talos Secrets Bundle",
+                    "secret": true
+                },
+                "talosConfig": {
+                    "type": "string",
+                    "description": "Talos config",
                     "secret": true
                 },
                 "talosVersion": {
@@ -451,9 +454,15 @@
             "required": [
                 "secrets",
                 "talosVersion",
-                "configVersion"
+                "configVersion",
+                "talosConfig",
+                "clusterName"
             ],
             "inputProperties": {
+                "clusterName": {
+                    "type": "string",
+                    "description": "cluster name"
+                },
                 "configVersion": {
                     "oneOf": [
                         {
@@ -471,7 +480,10 @@
                     "type": "string",
                     "description": "the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)"
                 }
-            }
+            },
+            "requiredInputs": [
+                "clusterName"
+            ]
         },
         "talos:index:nodeApplyConfig": {
             "description": "A node apply config resource",

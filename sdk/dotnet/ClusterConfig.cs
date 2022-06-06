@@ -130,12 +130,6 @@ namespace Pulumi.Talos
         public Output<Outputs.SecretsBundle> Secrets { get; private set; } = null!;
 
         /// <summary>
-        /// Talos Config
-        /// </summary>
-        [Output("talosConfig")]
-        public Output<string> TalosConfig { get; private set; } = null!;
-
-        /// <summary>
         /// the desired Talos version
         /// </summary>
         [Output("talosVersion")]
@@ -174,7 +168,6 @@ namespace Pulumi.Talos
                 {
                     "controlplaneConfig",
                     "secrets",
-                    "talosConfig",
                     "workerConfig",
                 },
             };

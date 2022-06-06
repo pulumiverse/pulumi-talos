@@ -53,8 +53,6 @@ type ClusterConfig struct {
 	RegistryMirrors pulumi.StringArrayOutput `pulumi:"registryMirrors"`
 	// Talos Secrets Bundle
 	Secrets SecretsBundleOutput `pulumi:"secrets"`
-	// Talos Config
-	TalosConfig pulumi.StringOutput `pulumi:"talosConfig"`
 	// the desired Talos version
 	TalosVersion pulumi.StringOutput `pulumi:"talosVersion"`
 	// Talos Worker Config
@@ -104,7 +102,6 @@ func NewClusterConfig(ctx *pulumi.Context,
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"controlplaneConfig",
 		"secrets",
-		"talosConfig",
 		"workerConfig",
 	})
 	opts = append(opts, secrets)
@@ -408,11 +405,6 @@ func (o ClusterConfigOutput) RegistryMirrors() pulumi.StringArrayOutput {
 // Talos Secrets Bundle
 func (o ClusterConfigOutput) Secrets() SecretsBundleOutput {
 	return o.ApplyT(func(v *ClusterConfig) SecretsBundleOutput { return v.Secrets }).(SecretsBundleOutput)
-}
-
-// Talos Config
-func (o ClusterConfigOutput) TalosConfig() pulumi.StringOutput {
-	return o.ApplyT(func(v *ClusterConfig) pulumi.StringOutput { return v.TalosConfig }).(pulumi.StringOutput)
 }
 
 // the desired Talos version

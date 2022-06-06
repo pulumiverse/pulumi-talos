@@ -117,11 +117,22 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 					"configVersion": {
 						TypeSpec: schema.TypeSpec{Type: "string"},
 					},
+					"talosConfig": {
+						Description: "Talos config",
+						TypeSpec:    schema.TypeSpec{Type: "string"},
+						Secret:      true,
+					},
+					"clusterName": {
+						TypeSpec:    schema.TypeSpec{Type: "string"},
+						Description: "cluster name",
+					},
 				},
 				Required: []string{
 					"secrets",
 					"talosVersion",
 					"configVersion",
+					"talosConfig",
+					"clusterName",
 				},
 			},
 			InputProperties: map[string]schema.PropertySpec{
@@ -144,6 +155,13 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 					Description: fmt.Sprintf("the desired machine config version to generate (default \"%s\")", constants.TalosMachineConfigVersion),
 					Default:     constants.TalosMachineConfigVersion,
 				},
+				"clusterName": {
+					TypeSpec:    schema.TypeSpec{Type: "string"},
+					Description: "cluster name",
+				},
+			},
+			RequiredInputs: []string{
+				"clusterName",
 			},
 		}
 
@@ -290,13 +308,6 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 						TypeSpec:    schema.TypeSpec{Type: "string"},
 						Secret:      true,
 					},
-					"talosConfig": {
-						Description: "Talos Config",
-						TypeSpec: schema.TypeSpec{
-							Type: "string",
-						},
-						Secret: true,
-					},
 					"secrets": {
 						Description: "Talos Secrets Bundle",
 						TypeSpec: schema.TypeSpec{
@@ -327,7 +338,6 @@ func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
 					"kubespan",
 					"controlplaneConfig",
 					"workerConfig",
-					"talosConfig",
 					"secrets",
 				},
 			},

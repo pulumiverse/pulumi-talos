@@ -112,10 +112,6 @@ export class ClusterConfig extends pulumi.CustomResource {
      */
     public readonly secrets!: pulumi.Output<outputs.SecretsBundle>;
     /**
-     * Talos Config
-     */
-    public /*out*/ readonly talosConfig!: pulumi.Output<string>;
-    /**
      * the desired Talos version
      */
     public readonly talosVersion!: pulumi.Output<string>;
@@ -164,7 +160,6 @@ export class ClusterConfig extends pulumi.CustomResource {
             resourceInputs["secrets"] = args ? args.secrets : undefined;
             resourceInputs["talosVersion"] = args ? args.talosVersion : undefined;
             resourceInputs["controlplaneConfig"] = undefined /*out*/;
-            resourceInputs["talosConfig"] = undefined /*out*/;
             resourceInputs["workerConfig"] = undefined /*out*/;
         } else {
             resourceInputs["additionalSans"] = undefined /*out*/;
@@ -186,12 +181,11 @@ export class ClusterConfig extends pulumi.CustomResource {
             resourceInputs["persist"] = undefined /*out*/;
             resourceInputs["registryMirrors"] = undefined /*out*/;
             resourceInputs["secrets"] = undefined /*out*/;
-            resourceInputs["talosConfig"] = undefined /*out*/;
             resourceInputs["talosVersion"] = undefined /*out*/;
             resourceInputs["workerConfig"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["controlplaneConfig", "secrets", "talosConfig", "workerConfig"] };
+        const secretOpts = { additionalSecretOutputs: ["controlplaneConfig", "secrets", "workerConfig"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(ClusterConfig.__pulumiType, name, resourceInputs, opts);
     }

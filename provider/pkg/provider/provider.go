@@ -270,6 +270,7 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 
 	replaces := make([]string, 0)
 	changes := pulumirpc.DiffResponse_DIFF_NONE
+	var diffs []string
 
 	switch ty {
 	case "talos:index:clusterSecrets":
@@ -305,7 +306,7 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 		if changed {
 			changes = pulumirpc.DiffResponse_DIFF_SOME
 		}
-	case "talos:index:nodeBootstrap", "talos:index:nodeApplyConfig":
+	case "talos:index:nodeBootstrap":
 		changed := false
 
 		for _, k := range d.ChangedKeys() {
@@ -323,6 +324,27 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 		if changed {
 			changes = pulumirpc.DiffResponse_DIFF_SOME
 		}
+	case "talos:index:nodeApplyConfig":
+		changed := false
+
+		for _, k := range d.ChangedKeys() {
+			property := string(k)
+
+			switch property {
+			case "timeout":
+				continue
+			case "machineConfig", "mode", "insecure":
+				changed = true
+				diffs = append(diffs, property)
+			default:
+				changed = true
+				replaces = append(replaces, property)
+			}
+		}
+
+		if changed {
+			changes = pulumirpc.DiffResponse_DIFF_SOME
+		}
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
@@ -330,6 +352,7 @@ func (k *talosProvider) Diff(ctx context.Context, req *pulumirpc.DiffRequest) (*
 	return &pulumirpc.DiffResponse{
 		Changes:  changes,
 		Replaces: replaces,
+		Diffs:    diffs,
 	}, nil
 }
 
@@ -374,13 +397,36 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 			outputs["configVersion"] = configVersion
 		}
 
+		clusterName := inputsMap["clusterName"].(string)
+
 		secretsBundle, err := generate.NewSecretsBundle(generate.NewClock(), genOptions...)
 		if err != nil {
 			return nil, err
 		}
 
-		outputs["secrets"] = secretsBundle
+		input, err := generate.NewInput(
+			clusterName,
+			"",
+			"",
+			secretsBundle,
+		)
+		if err != nil {
+			return nil, err
+		}
 
+		talosConfig, err := generate.Talosconfig(input)
+		if err != nil {
+			return nil, err
+		}
+
+		talosConfigYaml, err := yaml.Marshal(talosConfig)
+		if err != nil {
+			return nil, err
+		}
+
+		outputs["secrets"] = secretsBundle
+		outputs["clusterName"] = clusterName
+		outputs["talosConfig"] = string(talosConfigYaml)
 	case "talos:index:clusterConfig":
 		id = "config"
 
@@ -630,17 +676,6 @@ func (k *talosProvider) Create(ctx context.Context, req *pulumirpc.CreateRequest
 			return nil, err
 		}
 		outputs["workerConfig"] = workerConfig
-
-		talosConfig, err := generate.Talosconfig(input, options.InputOptions.GenOptions...)
-		if err != nil {
-			return nil, err
-		}
-
-		talosConfigYaml, err := yaml.Marshal(talosConfig)
-		if err != nil {
-			return nil, err
-		}
-		outputs["talosConfig"] = string(talosConfigYaml)
 	case "talos:index:nodeBootstrap":
 		id = "nodeBootstrap"
 
@@ -766,16 +801,73 @@ func (k *talosProvider) Update(ctx context.Context, req *pulumirpc.UpdateRequest
 	urn := resource.URN(req.GetUrn())
 	ty := urn.Type()
 
+	inputsMap := req.News.AsMap()
+	outputs := make(map[string]interface{})
+
 	switch ty {
 	case "talos:index:clusterSecrets":
 	case "talos:index:clusterConfig":
 	case "talos:index:nodeBootstrap":
 	case "talos:index:nodeApplyConfig":
+		nodes := []string{inputsMap["node"].(string)}
+		endpoints := []string{inputsMap["endpoint"].(string)}
+		mode := inputsMap["mode"].(string)
+		insecure := inputsMap["insecure"].(bool)
+		timeout := int(inputsMap["timeout"].(float64))
+
+		// update gets the pulumi asset as a map[string]interface{}
+		talosConfigAsset := inputsMap["talosConfig"].(map[string]interface{})
+		talosConfig := talosConfigAsset["text"].(string)
+
+		machineConfigAsset := inputsMap["machineConfig"].(map[string]interface{})
+		machineConfig := machineConfigAsset["text"].(string)
+
+		outputs = map[string]interface{}{
+			"talosConfig":   talosConfigAsset,
+			"machineConfig": machineConfigAsset,
+			"node":          inputsMap["node"].(string),
+			"endpoint":      inputsMap["endpoint"].(string),
+			"mode":          mode,
+			"insecure":      insecure,
+			"timeout":       timeout,
+		}
+
+		if _, err := clusterOp(ctx, clusterOpOpts{
+			endpoints:   endpoints,
+			nodes:       nodes,
+			talosConfig: talosConfig,
+			timeout:     time.Duration(timeout),
+			insecure:    insecure,
+			retryDelay:  constants.TalosApplyConfigResourceDelayBetweenRetries,
+			maxDelay:    constants.TalosApplyConfigResourceMaxDelayBetweenRetries,
+		}, func(c *client.Client) (bool, interface{}, error) {
+			resp, applyConfigErr := c.ApplyConfiguration(ctx, &machineapi.ApplyConfigurationRequest{
+				Mode: machineapi.ApplyConfigurationRequest_Mode(machineapi.ApplyConfigurationRequest_Mode_value[mode]),
+				Data: []byte(machineConfig),
+			})
+			if applyConfigErr != nil {
+				return false, applyConfigErr, nil
+			}
+
+			return true, resp, nil
+		}); err != nil {
+			return nil, err
+		}
 	default:
 		return nil, fmt.Errorf("unknown resource type '%s'", ty)
 	}
 
-	return nil, status.Errorf(codes.Unimplemented, "Update is not yet implemented for %s resource", ty)
+	outputProperties, err := plugin.MarshalProperties(
+		resource.NewPropertyMapFromMap(outputs),
+		plugin.MarshalOptions{KeepUnknowns: true, SkipNulls: true},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pulumirpc.UpdateResponse{
+		Properties: outputProperties,
+	}, nil
 }
 
 // Delete tears down an existing resource with the given ID.  If it fails, the resource is assumed

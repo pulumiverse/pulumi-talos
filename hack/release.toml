@@ -7,6 +7,13 @@ github_repo = "siderolabs/pulumi-provider-talos"
 match_deps = "^github.com/(siderolabs/[a-zA-Z0-9-]+)$"
 
 # previous = -
-# pre_release = true
+pre_release = true
 
-# [notes]
+[notes]
+
+    [notes.resource]
+        title = "Secrets and GenConfig resource changes"
+        description = """\
+The talosconfig output has now been moved to the Secrets Resource and there is no talosconfig output for the GenConfig resource
+"""
+

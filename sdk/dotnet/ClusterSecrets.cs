@@ -15,6 +15,12 @@ namespace Pulumi.Talos
     [TalosResourceType("talos:index:clusterSecrets")]
     public partial class ClusterSecrets : Pulumi.CustomResource
     {
+        /// <summary>
+        /// cluster name
+        /// </summary>
+        [Output("clusterName")]
+        public Output<string> ClusterName { get; private set; } = null!;
+
         [Output("configVersion")]
         public Output<string> ConfigVersion { get; private set; } = null!;
 
@@ -23,6 +29,12 @@ namespace Pulumi.Talos
         /// </summary>
         [Output("secrets")]
         public Output<Outputs.SecretsBundle> Secrets { get; private set; } = null!;
+
+        /// <summary>
+        /// Talos config
+        /// </summary>
+        [Output("talosConfig")]
+        public Output<string> TalosConfig { get; private set; } = null!;
 
         /// <summary>
         /// Talos version the config is generated for
@@ -38,7 +50,7 @@ namespace Pulumi.Talos
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public ClusterSecrets(string name, ClusterSecretsArgs? args = null, CustomResourceOptions? options = null)
+        public ClusterSecrets(string name, ClusterSecretsArgs args, CustomResourceOptions? options = null)
             : base("talos:index:clusterSecrets", name, args ?? new ClusterSecretsArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -56,6 +68,7 @@ namespace Pulumi.Talos
                 AdditionalSecretOutputs =
                 {
                     "secrets",
+                    "talosConfig",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -79,6 +92,12 @@ namespace Pulumi.Talos
 
     public sealed class ClusterSecretsArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// cluster name
+        /// </summary>
+        [Input("clusterName", required: true)]
+        public Input<string> ClusterName { get; set; } = null!;
+
         /// <summary>
         /// the desired machine config version to generate (default "v1alpha1")
         /// </summary>

@@ -15,19 +15,34 @@ __all__ = ['ClusterSecretsArgs', 'ClusterSecrets']
 @pulumi.input_type
 class ClusterSecretsArgs:
     def __init__(__self__, *,
+                 cluster_name: pulumi.Input[str],
                  config_version: Optional[pulumi.Input[Union[str, 'TalosMachineConfigVersion']]] = None,
                  talos_version: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ClusterSecrets resource.
+        :param pulumi.Input[str] cluster_name: cluster name
         :param pulumi.Input[Union[str, 'TalosMachineConfigVersion']] config_version: the desired machine config version to generate (default "v1alpha1")
         :param pulumi.Input[str] talos_version: the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)
         """
+        pulumi.set(__self__, "cluster_name", cluster_name)
         if config_version is None:
             config_version = 'v1alpha1'
         if config_version is not None:
             pulumi.set(__self__, "config_version", config_version)
         if talos_version is not None:
             pulumi.set(__self__, "talos_version", talos_version)
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> pulumi.Input[str]:
+        """
+        cluster name
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @cluster_name.setter
+    def cluster_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_name", value)
 
     @property
     @pulumi.getter(name="configVersion")
@@ -59,6 +74,7 @@ class ClusterSecrets(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_name: Optional[pulumi.Input[str]] = None,
                  config_version: Optional[pulumi.Input[Union[str, 'TalosMachineConfigVersion']]] = None,
                  talos_version: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -67,6 +83,7 @@ class ClusterSecrets(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_name: cluster name
         :param pulumi.Input[Union[str, 'TalosMachineConfigVersion']] config_version: the desired machine config version to generate (default "v1alpha1")
         :param pulumi.Input[str] talos_version: the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)
         """
@@ -74,7 +91,7 @@ class ClusterSecrets(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: Optional[ClusterSecretsArgs] = None,
+                 args: ClusterSecretsArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Talos secrets resource
@@ -94,6 +111,7 @@ class ClusterSecrets(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_name: Optional[pulumi.Input[str]] = None,
                  config_version: Optional[pulumi.Input[Union[str, 'TalosMachineConfigVersion']]] = None,
                  talos_version: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -108,12 +126,16 @@ class ClusterSecrets(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ClusterSecretsArgs.__new__(ClusterSecretsArgs)
 
+            if cluster_name is None and not opts.urn:
+                raise TypeError("Missing required property 'cluster_name'")
+            __props__.__dict__["cluster_name"] = cluster_name
             if config_version is None:
                 config_version = 'v1alpha1'
             __props__.__dict__["config_version"] = config_version
             __props__.__dict__["talos_version"] = talos_version
             __props__.__dict__["secrets"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["secrets"])
+            __props__.__dict__["talos_config"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["secrets", "talosConfig"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ClusterSecrets, __self__).__init__(
             'talos:index:clusterSecrets',
@@ -137,10 +159,20 @@ class ClusterSecrets(pulumi.CustomResource):
 
         __props__ = ClusterSecretsArgs.__new__(ClusterSecretsArgs)
 
+        __props__.__dict__["cluster_name"] = None
         __props__.__dict__["config_version"] = None
         __props__.__dict__["secrets"] = None
+        __props__.__dict__["talos_config"] = None
         __props__.__dict__["talos_version"] = None
         return ClusterSecrets(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> pulumi.Output[str]:
+        """
+        cluster name
+        """
+        return pulumi.get(self, "cluster_name")
 
     @property
     @pulumi.getter(name="configVersion")
@@ -154,6 +186,14 @@ class ClusterSecrets(pulumi.CustomResource):
         Talos Secrets Bundle
         """
         return pulumi.get(self, "secrets")
+
+    @property
+    @pulumi.getter(name="talosConfig")
+    def talos_config(self) -> pulumi.Output[str]:
+        """
+        Talos config
+        """
+        return pulumi.get(self, "talos_config")
 
     @property
     @pulumi.getter(name="talosVersion")
