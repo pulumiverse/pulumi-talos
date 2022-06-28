@@ -7,7 +7,7 @@ require (
 	github.com/invopop/jsonschema v0.4.0
 	github.com/pulumi/pulumi/pkg/v3 v3.33.2
 	github.com/pulumi/pulumi/sdk/v3 v3.33.2
-	github.com/talos-systems/talos/pkg/machinery v1.0.5
+	github.com/talos-systems/talos/pkg/machinery v1.1.0
 	google.golang.org/grpc v1.46.2
 )
 
@@ -114,7 +114,6 @@ require (
 require (
 	cloud.google.com/go/iam v0.3.0 // indirect
 	cloud.google.com/go/kms v1.4.0 // indirect
-	github.com/AlekSi/pointer v1.2.0 // indirect
 	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
 	github.com/Microsoft/go-winio v0.5.2 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
@@ -194,7 +193,7 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
 	google.golang.org/api v0.81.0 // indirect
-	google.golang.org/genproto v0.0.0-20220527130721-00d5c0f3be58 // indirect
+	google.golang.org/genproto v0.0.0-20220531134929-86cf59382f1b // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/src-d/go-billy.v4 v4.3.2 // indirect
 	gopkg.in/src-d/go-git.v4 v4.13.1 // indirect
