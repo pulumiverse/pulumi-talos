@@ -91,7 +91,7 @@ func NewClusterConfig(ctx *pulumi.Context,
 		args.InstallDisk = pulumi.StringPtr("/dev/sda")
 	}
 	if isZero(args.InstallImage) {
-		args.InstallImage = pulumi.StringPtr("ghcr.io/talos-systems/installer:v0.14.2")
+		args.InstallImage = pulumi.StringPtr("ghcr.io/siderolabs/installer:v1.1.0")
 	}
 	if isZero(args.KubernetesVersion) {
 		args.KubernetesVersion = pulumi.StringPtr("1.24.2")
@@ -164,7 +164,7 @@ type clusterConfigArgs struct {
 	Examples *bool `pulumi:"examples"`
 	// the disk to install to (default "/dev/sda")
 	InstallDisk *string `pulumi:"installDisk"`
-	// the image used to perform an installation (default "ghcr.io/talos-systems/installer:v0.14.2")
+	// the image used to perform an installation (default "ghcr.io/siderolabs/installer:v1.1.0")
 	InstallImage *string `pulumi:"installImage"`
 	// desired kubernetes version to run (default "1.24.2")
 	KubernetesVersion *string `pulumi:"kubernetesVersion"`
@@ -209,7 +209,7 @@ type ClusterConfigArgs struct {
 	Examples pulumi.BoolPtrInput
 	// the disk to install to (default "/dev/sda")
 	InstallDisk pulumi.StringPtrInput
-	// the image used to perform an installation (default "ghcr.io/talos-systems/installer:v0.14.2")
+	// the image used to perform an installation (default "ghcr.io/siderolabs/installer:v1.1.0")
 	InstallImage pulumi.StringPtrInput
 	// desired kubernetes version to run (default "1.24.2")
 	KubernetesVersion pulumi.StringPtrInput

@@ -12,6 +12,7 @@ import (
 
 	machineapi "github.com/talos-systems/talos/pkg/machinery/api/machine"
 	talosconstants "github.com/talos-systems/talos/pkg/machinery/constants"
+	"github.com/talos-systems/talos/pkg/machinery/gendata"
 )
 
 func PulumiSchema(swagger *jsonschema.Schema) schema.PackageSpec {
@@ -400,8 +401,8 @@ setup, usually involving a load balancer, use the IP and port of the load balanc
 				},
 				"installImage": {
 					TypeSpec:    schema.TypeSpec{Type: "string"},
-					Description: fmt.Sprintf("the image used to perform an installation (default \"ghcr.io/talos-systems/installer:%s\")", constants.TalosInstallImageVersion),
-					Default:     fmt.Sprintf("ghcr.io/talos-systems/installer:%s", constants.TalosInstallImageVersion),
+					Description: fmt.Sprintf("the image used to perform an installation (default \"%s/%s/installer:%s\")", gendata.ImagesRegistry, gendata.ImagesUsername, gendata.VersionTag),
+					Default:     fmt.Sprintf("%s/%s/installer:%s", gendata.ImagesRegistry, gendata.ImagesUsername, gendata.VersionTag),
 				},
 				"kubernetesVersion": {
 					TypeSpec:    schema.TypeSpec{Type: "string"},

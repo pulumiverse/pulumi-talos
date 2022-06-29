@@ -384,8 +384,8 @@
                 },
                 "installImage": {
                     "type": "string",
-                    "description": "the image used to perform an installation (default \"ghcr.io/talos-systems/installer:v0.14.2\")",
-                    "default": "ghcr.io/talos-systems/installer:v0.14.2"
+                    "description": "the image used to perform an installation (default \"ghcr.io/siderolabs/installer:v1.1.0\")",
+                    "default": "ghcr.io/siderolabs/installer:v1.1.0"
                 },
                 "kubernetesVersion": {
                     "type": "string",
