@@ -1,0 +1,21 @@
+name: ci
+on:
+  pull_request:
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: 'provider/go.mod'
+          cache: true
+      - name: dirty-check
+        run: |
+          make check-dirty
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          working-directory: provider

@@ -1,673 +1,725 @@
 {
     "name": "talos",
-    "description": "A Pulumi package for creating and managing talos config",
+    "description": "A Pulumi package for creating and managing talos resources.",
     "keywords": [
+        "pulumi",
         "talos",
-        "kubernetes",
-        "pulumi"
+        "category/os"
     ],
     "homepage": "https://talos.dev",
-    "license": "Apache-2.0",
+    "license": "MPL-2.0 license ",
+    "attribution": "This Pulumi package is based on the [`talos` Terraform Provider](https://github.com/siderolabs/terraform-provider-talos).",
     "repository": "https://github.com/siderolabs/pulumi-provider-talos",
+    "logoUrl": "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.svg",
+    "pluginDownloadURL": "https://github.com/siderolabs/pulumi-provider-talos/releases/",
+    "publisher": "Siderolabs",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
     "language": {
         "csharp": {
-            "liftSingleValueMethodReturns": true,
-            "namespaces": {
-                "bundle": "bundle"
-            },
+            "compatibility": "tfbridge20",
+            "namespaces": null,
             "packageReferences": {
                 "Pulumi": "3.*"
             }
         },
         "go": {
+            "generateExtraInputTypes": true,
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/siderolabs/pulumi-provider-talos/sdk/go/talos",
-            "liftSingleValueMethodReturns": true
+            "importBasePath": "github.com/pulumi/pulumi-talos/sdk/go/talos"
         },
         "nodejs": {
+            "compatibility": "tfbridge20",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
             },
             "devDependencies": {
-                "@types/node": "^17.0.0",
-                "typescript": "^3.7.0"
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
             },
-            "liftSingleValueMethodReturns": true
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing talos resources.",
+            "packageName": "",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/siderolabs/terraform-provider-talos)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-talos` repo](https://github.com/siderolabs/pulumi-provider-talos/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-talos` repo](https://github.com/siderolabs/terraform-provider-talos/issues).",
+            "typescriptVersion": ""
         },
         "python": {
-            "liftSingleValueMethodReturns": true,
+            "compatibility": "tfbridge20",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/siderolabs/terraform-provider-talos)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-talos` repo](https://github.com/siderolabs/pulumi-provider-talos/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-talos` repo](https://github.com/siderolabs/terraform-provider-talos/issues).",
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             }
         }
     },
     "config": {},
-    "types": {
-        "talos:index:Certs": {
-            "description": "Talos Certs type",
-            "properties": {
-                "Admin": {
-                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
-                },
-                "Etcd": {
-                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
-                },
-                "K8s": {
-                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
-                },
-                "K8sAggregator": {
-                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
-                },
-                "K8sServiceAccount": {
-                    "$ref": "#/types/talos:index:PEMEncodedKey"
-                },
-                "OS": {
-                    "$ref": "#/types/talos:index:PEMEncodedCertificateAndKey"
-                }
-            },
-            "type": "object"
-        },
-        "talos:index:Cluster": {
-            "description": "Talos Cluster type",
-            "properties": {
-                "Id": {
-                    "type": "string"
-                },
-                "Secret": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "talos:index:ConfigPatches": {
-            "description": "patches applied to the config",
-            "properties": {
-                "patchFiles": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "$ref": "pulumi.json#/Asset"
-                    },
-                    "description": "patches specified as pulumi file assets"
-                },
-                "patches": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "$ref": "pulumi.json#/Any"
-                    },
-                    "description": "patches specified as a pulumi map"
-                }
-            },
-            "type": "object"
-        },
-        "talos:index:PEMEncodedCertificateAndKey": {
-            "description": "Talos PEMEncodedCertificateAndKey type",
-            "properties": {
-                "Crt": {
-                    "$ref": "pulumi.json#/Any"
-                },
-                "Key": {
-                    "$ref": "pulumi.json#/Any"
-                }
-            },
-            "type": "object"
-        },
-        "talos:index:PEMEncodedKey": {
-            "description": "Talos PEMEncodedKey type",
-            "properties": {
-                "Key": {
-                    "$ref": "pulumi.json#/Any"
-                }
-            },
-            "type": "object"
-        },
-        "talos:index:Secrets": {
-            "description": "Talos Secrets type",
-            "properties": {
-                "AESCBCEncryptionSecret": {
-                    "type": "string"
-                },
-                "BootstrapToken": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "talos:index:SecretsBundle": {
-            "description": "Talos SecretsBundle type",
-            "properties": {
-                "Certs": {
-                    "$ref": "#/types/talos:index:Certs"
-                },
-                "Cluster": {
-                    "$ref": "#/types/talos:index:Cluster"
-                },
-                "Secrets": {
-                    "$ref": "#/types/talos:index:Secrets"
-                },
-                "TrustdInfo": {
-                    "$ref": "#/types/talos:index:TrustdInfo"
-                }
-            },
-            "type": "object"
-        },
-        "talos:index:TalosMachineConfigApplyMode": {
-            "type": "string",
-            "enum": [
-                {
-                    "description": "apply config with a reboot",
-                    "value": "REBOOT"
-                },
-                {
-                    "description": "automatically try to apply and reboot if only required",
-                    "value": "AUTO"
-                },
-                {
-                    "description": "apply config without a reboot",
-                    "value": "NO_REBOOT"
-                },
-                {
-                    "description": "apply config as staged",
-                    "value": "STAGED"
-                }
-            ]
-        },
-        "talos:index:TalosMachineConfigVersion": {
-            "type": "string",
-            "enum": [
-                {
-                    "description": "Talos Machine Configuration Version",
-                    "value": "v1alpha1"
-                }
-            ]
-        },
-        "talos:index:TrustdInfo": {
-            "description": "Talos TrustdInfo type",
-            "properties": {
-                "Token": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        }
-    },
     "provider": {
-        "description": "The provider type for the Talos package",
-        "type": "object"
+        "description": "The provider type for the talos package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
     },
     "resources": {
-        "talos:index:clusterConfig": {
-            "description": "Talos cluster config resource",
+        "talos:index/talosClientConfiguration:TalosClientConfiguration": {
+            "description": "Generate client configuration for a Talos cluster\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst machineSecrets = new talos.TalosMachineSecrets(\"machineSecrets\", {});\nconst talosconfig = new talos.TalosClientConfiguration(\"talosconfig\", {\n    clusterName: \"example-cluster\",\n    machineSecrets: machineSecrets.machineSecrets,\n    endpoints: [\"10.5.0.2\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nmachine_secrets = talos.TalosMachineSecrets(\"machineSecrets\")\ntalosconfig = talos.TalosClientConfiguration(\"talosconfig\",\n    cluster_name=\"example-cluster\",\n    machine_secrets=machine_secrets.machine_secrets,\n    endpoints=[\"10.5.0.2\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.TalosMachineSecrets(\"machineSecrets\");\n\n    var talosconfig = new Talos.TalosClientConfiguration(\"talosconfig\", new()\n    {\n        ClusterName = \"example-cluster\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n        Endpoints = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-talos/sdk/go/talos\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmachineSecrets, err := talos.NewTalosMachineSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = talos.NewTalosClientConfiguration(ctx, \"talosconfig\", \u0026talos.TalosClientConfigurationArgs{\n\t\t\tClusterName:    pulumi.String(\"example-cluster\"),\n\t\t\tMachineSecrets: machineSecrets.MachineSecrets,\n\t\t\tEndpoints: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport com.pulumi.talos.TalosClientConfiguration;\nimport com.pulumi.talos.TalosClientConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new TalosMachineSecrets(\"machineSecrets\");\n\n        var talosconfig = new TalosClientConfiguration(\"talosconfig\", TalosClientConfigurationArgs.builder()        \n            .clusterName(\"example-cluster\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .endpoints(\"10.5.0.2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:TalosMachineSecrets\n  talosconfig:\n    type: talos:TalosClientConfiguration\n    properties:\n      clusterName: example-cluster\n      machineSecrets: ${machineSecrets.machineSecrets}\n      endpoints:\n        - 10.5.0.2\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
-                "additionalSans": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "additional Subject-Alt-Names for the APIServer certificate"
-                },
-                "clusterDiscovery": {
-                    "type": "boolean",
-                    "description": "cluster discovery feature"
-                },
-                "clusterEndpoint": {
-                    "type": "string",
-                    "description": "The cluster endpoint"
-                },
                 "clusterName": {
                     "type": "string",
-                    "description": "cluster name"
+                    "description": "The name of the cluster in the generated config\n"
                 },
-                "configPatches": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:ConfigPatches",
-                    "description": "generated machineconfigs (applied to all node types)"
-                },
-                "configPatchesControlPlane": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:ConfigPatches",
-                    "description": "generated machineconfigs (applied to 'controlplane' types)"
-                },
-                "configPatchesWorker": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:ConfigPatches",
-                    "description": "generated machineconfigs (applied to 'worker' type)"
-                },
-                "configVersion": {
-                    "type": "string",
-                    "description": "the desired machine config version to refer to"
-                },
-                "controlplaneConfig": {
-                    "type": "string",
-                    "description": "Talos Controlplane Config",
-                    "secret": true
-                },
-                "dnsDomain": {
-                    "type": "string",
-                    "description": "the dns domain to use for cluster"
-                },
-                "docs": {
-                    "type": "boolean",
-                    "description": "machine config documentation enabled"
-                },
-                "examples": {
-                    "type": "boolean",
-                    "description": "machine config examples enabled"
-                },
-                "installDisk": {
-                    "type": "string",
-                    "description": "the disk to install to "
-                },
-                "installImage": {
-                    "type": "string",
-                    "description": "the image used to perform an installation"
-                },
-                "kubernetesVersion": {
-                    "type": "string",
-                    "description": "desired kubernetes version to run"
-                },
-                "kubespan": {
-                    "type": "boolean",
-                    "description": "kubespan enabled"
-                },
-                "persist": {
-                    "type": "boolean",
-                    "description": "persist value for configs"
-                },
-                "registryMirrors": {
+                "endpoints": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "list of registry mirrors"
+                    "description": "endpoints to set in the generated config\n"
                 },
-                "secrets": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:SecretsBundle",
-                    "description": "Talos Secrets Bundle",
-                    "secret": true
-                },
-                "talosVersion": {
+                "machineSecrets": {
                     "type": "string",
-                    "description": "the desired Talos version"
+                    "description": "The machine secrets for the cluster\n"
                 },
-                "workerConfig": {
+                "nodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "nodes to set in the generated config\n"
+                },
+                "talosConfig": {
                     "type": "string",
-                    "description": "Talos Worker Config",
-                    "secret": true
+                    "description": "The generated talos config\n"
                 }
             },
-            "type": "object",
             "required": [
                 "clusterName",
-                "clusterEndpoint",
-                "additionalSans",
-                "configPatches",
-                "configPatchesControlPlane",
-                "configPatchesWorker",
-                "dnsDomain",
-                "installDisk",
-                "installImage",
-                "kubernetesVersion",
-                "persist",
-                "registryMirrors",
-                "talosVersion",
-                "configVersion",
-                "clusterDiscovery",
-                "docs",
-                "examples",
-                "kubespan",
-                "controlplaneConfig",
-                "workerConfig",
-                "secrets"
+                "machineSecrets",
+                "talosConfig"
             ],
             "inputProperties": {
-                "additionalSans": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "additional Subject-Alt-Names for the APIServer certificate"
-                },
-                "clusterDiscovery": {
-                    "type": "boolean",
-                    "description": "enable cluster discovery feature (default true)",
-                    "default": true
-                },
-                "clusterEndpoint": {
-                    "type": "string",
-                    "description": "The cluster endpoint is the URL for the Kubernetes API. If you decide to use\na control plane node, common in a single node control plane setup, use port 6443 as\nthis is the port that the API server binds to on every control plane node. For an HA\nsetup, usually involving a load balancer, use the IP and port of the load balancer."
-                },
                 "clusterName": {
                     "type": "string",
-                    "description": "cluster name"
+                    "description": "The name of the cluster in the generated config\n"
                 },
-                "configPatches": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:ConfigPatches",
-                    "description": "patch generated machineconfigs (applied to all node types)"
-                },
-                "configPatchesControlPlane": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:ConfigPatches",
-                    "description": "patch generated machineconfigs (applied to 'controlplane' types)"
-                },
-                "configPatchesWorker": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:ConfigPatches",
-                    "description": "patch generated machineconfigs (applied to 'worker' type)"
-                },
-                "configVersion": {
-                    "type": "string",
-                    "description": "the desired machine config version to refer to"
-                },
-                "dnsDomain": {
-                    "type": "string",
-                    "description": "the dns domain to use for cluster (default \"cluster.local\")",
-                    "default": "cluster.local"
-                },
-                "docs": {
-                    "type": "boolean",
-                    "description": "renders all machine configs adding the documentation for each field (default true)",
-                    "default": true
-                },
-                "examples": {
-                    "type": "boolean",
-                    "description": "renders all machine configs with the commented examples (default true)",
-                    "default": true
-                },
-                "installDisk": {
-                    "type": "string",
-                    "description": "the disk to install to (default \"/dev/sda\")",
-                    "default": "/dev/sda"
-                },
-                "installImage": {
-                    "type": "string",
-                    "description": "the image used to perform an installation (default \"ghcr.io/siderolabs/installer:v1.1.0\")",
-                    "default": "ghcr.io/siderolabs/installer:v1.1.0"
-                },
-                "kubernetesVersion": {
-                    "type": "string",
-                    "description": "desired kubernetes version to run (default \"1.24.2\")",
-                    "default": "1.24.2"
-                },
-                "kubespan": {
-                    "type": "boolean",
-                    "description": "enable kubespan feature"
-                },
-                "persist": {
-                    "type": "boolean",
-                    "description": "the desired persist value for configs (default true)",
-                    "default": true
-                },
-                "registryMirrors": {
+                "endpoints": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "list of registry mirrors to use in format: \u003cregistry host\u003e=\u003cmirror URL\u003e"
+                    "description": "endpoints to set in the generated config\n"
                 },
-                "secrets": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:SecretsBundle",
-                    "description": "Talos Secrets Bundle"
-                },
-                "talosVersion": {
+                "machineSecrets": {
                     "type": "string",
-                    "description": "the desired Talos version to refer to"
+                    "description": "The machine secrets for the cluster\n"
+                },
+                "nodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "nodes to set in the generated config\n"
                 }
             },
             "requiredInputs": [
                 "clusterName",
-                "clusterEndpoint",
-                "secrets"
-            ]
-        },
-        "talos:index:clusterSecrets": {
-            "description": "Talos secrets resource",
-            "properties": {
-                "clusterName": {
-                    "type": "string",
-                    "description": "cluster name"
-                },
-                "configVersion": {
-                    "type": "string"
-                },
-                "secrets": {
-                    "type": "object",
-                    "$ref": "#/types/talos:index:SecretsBundle",
-                    "description": "Talos Secrets Bundle",
-                    "secret": true
-                },
-                "talosConfig": {
-                    "type": "string",
-                    "description": "Talos config",
-                    "secret": true
-                },
-                "talosVersion": {
-                    "type": "string",
-                    "description": "Talos version the config is generated for"
-                }
-            },
-            "type": "object",
-            "required": [
-                "secrets",
-                "talosVersion",
-                "configVersion",
-                "talosConfig",
-                "clusterName"
+                "machineSecrets"
             ],
-            "inputProperties": {
-                "clusterName": {
-                    "type": "string",
-                    "description": "cluster name"
-                },
-                "configVersion": {
-                    "oneOf": [
-                        {
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TalosClientConfiguration resources.\n",
+                "properties": {
+                    "clusterName": {
+                        "type": "string",
+                        "description": "The name of the cluster in the generated config\n"
+                    },
+                    "endpoints": {
+                        "type": "array",
+                        "items": {
                             "type": "string"
                         },
-                        {
-                            "type": "string",
-                            "$ref": "#/types/talos:index:TalosMachineConfigVersion"
-                        }
-                    ],
-                    "description": "the desired machine config version to generate (default \"v1alpha1\")",
-                    "default": "v1alpha1"
+                        "description": "endpoints to set in the generated config\n"
+                    },
+                    "machineSecrets": {
+                        "type": "string",
+                        "description": "The machine secrets for the cluster\n"
+                    },
+                    "nodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "nodes to set in the generated config\n"
+                    },
+                    "talosConfig": {
+                        "type": "string",
+                        "description": "The generated talos config\n"
+                    }
                 },
-                "talosVersion": {
-                    "type": "string",
-                    "description": "the desired Talos version to generate config for (backwards compatibility, e.g. v0.8)"
-                }
-            },
-            "requiredInputs": [
-                "clusterName"
-            ]
+                "type": "object"
+            }
         },
-        "talos:index:nodeApplyConfig": {
-            "description": "A node apply config resource",
+        "talos:index/talosClusterKubeconfig:TalosClusterKubeconfig": {
+            "description": "Retrieve Kubeconfig for a Talos cluster\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst machineSecrets = new talos.TalosMachineSecrets(\"machineSecrets\", {});\nconst talosconfig = new talos.TalosClientConfiguration(\"talosconfig\", {\n    clusterName: \"example-cluster\",\n    machineSecrets: machineSecrets.machineSecrets,\n    endpoints: [\"10.5.0.2\"],\n});\nconst kubeconfig = new talos.TalosClusterKubeconfig(\"kubeconfig\", {\n    talosConfig: talosconfig.talosConfig,\n    endpoint: \"10.5.0.2\",\n    node: \"10.5.0.2\",\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nmachine_secrets = talos.TalosMachineSecrets(\"machineSecrets\")\ntalosconfig = talos.TalosClientConfiguration(\"talosconfig\",\n    cluster_name=\"example-cluster\",\n    machine_secrets=machine_secrets.machine_secrets,\n    endpoints=[\"10.5.0.2\"])\nkubeconfig = talos.TalosClusterKubeconfig(\"kubeconfig\",\n    talos_config=talosconfig.talos_config,\n    endpoint=\"10.5.0.2\",\n    node=\"10.5.0.2\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.TalosMachineSecrets(\"machineSecrets\");\n\n    var talosconfig = new Talos.TalosClientConfiguration(\"talosconfig\", new()\n    {\n        ClusterName = \"example-cluster\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n        Endpoints = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n    var kubeconfig = new Talos.TalosClusterKubeconfig(\"kubeconfig\", new()\n    {\n        TalosConfig = talosconfig.TalosConfig,\n        Endpoint = \"10.5.0.2\",\n        Node = \"10.5.0.2\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-talos/sdk/go/talos\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmachineSecrets, err := talos.NewTalosMachineSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\ttalosconfig, err := talos.NewTalosClientConfiguration(ctx, \"talosconfig\", \u0026talos.TalosClientConfigurationArgs{\n\t\t\tClusterName:    pulumi.String(\"example-cluster\"),\n\t\t\tMachineSecrets: machineSecrets.MachineSecrets,\n\t\t\tEndpoints: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = talos.NewTalosClusterKubeconfig(ctx, \"kubeconfig\", \u0026talos.TalosClusterKubeconfigArgs{\n\t\t\tTalosConfig: talosconfig.TalosConfig,\n\t\t\tEndpoint:    pulumi.String(\"10.5.0.2\"),\n\t\t\tNode:        pulumi.String(\"10.5.0.2\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport com.pulumi.talos.TalosClientConfiguration;\nimport com.pulumi.talos.TalosClientConfigurationArgs;\nimport com.pulumi.talos.TalosClusterKubeconfig;\nimport com.pulumi.talos.TalosClusterKubeconfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new TalosMachineSecrets(\"machineSecrets\");\n\n        var talosconfig = new TalosClientConfiguration(\"talosconfig\", TalosClientConfigurationArgs.builder()        \n            .clusterName(\"example-cluster\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .endpoints(\"10.5.0.2\")\n            .build());\n\n        var kubeconfig = new TalosClusterKubeconfig(\"kubeconfig\", TalosClusterKubeconfigArgs.builder()        \n            .talosConfig(talosconfig.talosConfig())\n            .endpoint(\"10.5.0.2\")\n            .node(\"10.5.0.2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:TalosMachineSecrets\n  talosconfig:\n    type: talos:TalosClientConfiguration\n    properties:\n      clusterName: example-cluster\n      machineSecrets: ${machineSecrets.machineSecrets}\n      endpoints:\n        - 10.5.0.2\n  kubeconfig:\n    type: talos:TalosClusterKubeconfig\n    properties:\n      talosConfig: ${talosconfig.talosConfig}\n      endpoint: 10.5.0.2\n      node: 10.5.0.2\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "endpoint": {
                     "type": "string",
-                    "description": "node endpoint address"
+                    "description": "machine endpoint\n"
                 },
-                "insecure": {
-                    "type": "boolean",
-                    "description": "allow insecure connections"
-                },
-                "machineConfig": {
-                    "type": "object",
-                    "$ref": "pulumi.json#/Asset",
-                    "description": "machineconfig",
-                    "secret": true
-                },
-                "mode": {
+                "kubeConfig": {
                     "type": "string",
-                    "description": "machine config apply mode"
+                    "description": "The retrieved Kubeconfig\n"
                 },
                 "node": {
                     "type": "string",
-                    "description": "node address"
+                    "description": "node to use\n"
                 },
                 "talosConfig": {
-                    "type": "object",
-                    "$ref": "pulumi.json#/Asset",
-                    "description": "talosconfig",
-                    "secret": true
-                },
-                "timeout": {
-                    "type": "integer",
-                    "description": "wait timeout in seconds"
+                    "type": "string",
+                    "description": "talos client configuration for authentication\n"
                 }
             },
-            "type": "object",
             "required": [
                 "endpoint",
+                "kubeConfig",
                 "node",
-                "talosConfig",
-                "machineConfig",
-                "mode",
-                "insecure",
-                "timeout"
+                "talosConfig"
             ],
             "inputProperties": {
                 "endpoint": {
                     "type": "string",
-                    "description": "node endpoint address"
-                },
-                "insecure": {
-                    "type": "boolean",
-                    "description": "whether to use insecure connection",
-                    "default": false
-                },
-                "machineConfig": {
-                    "type": "object",
-                    "$ref": "pulumi.json#/Asset",
-                    "description": "machineconfig"
-                },
-                "mode": {
-                    "type": "string",
-                    "$ref": "#/types/talos:index:TalosMachineConfigApplyMode",
-                    "description": "machine config apply mode (default auto)",
-                    "default": "AUTO"
+                    "description": "machine endpoint\n"
                 },
                 "node": {
                     "type": "string",
-                    "description": "node address"
-                },
-                "talosConfig": {
-                    "type": "object",
-                    "$ref": "pulumi.json#/Asset",
-                    "description": "talosconfig"
-                },
-                "timeout": {
-                    "type": "integer",
-                    "description": "timeout in seconds (default 600)",
-                    "default": 600
-                }
-            },
-            "requiredInputs": [
-                "endpoint",
-                "node",
-                "talosConfig",
-                "machineConfig"
-            ]
-        },
-        "talos:index:nodeBootstrap": {
-            "description": "A node bootstrap resource",
-            "properties": {
-                "endpoint": {
-                    "type": "string",
-                    "description": "node endpoint address"
-                },
-                "node": {
-                    "type": "string",
-                    "description": "node address"
+                    "description": "node to use\n"
                 },
                 "talosConfig": {
                     "type": "string",
-                    "description": "talosconfig",
-                    "secret": true
-                },
-                "timeout": {
-                    "type": "integer",
-                    "description": "wait timeout in seconds"
-                }
-            },
-            "type": "object",
-            "required": [
-                "endpoint",
-                "node",
-                "talosConfig",
-                "timeout"
-            ],
-            "inputProperties": {
-                "endpoint": {
-                    "type": "string",
-                    "description": "node endpoint address"
-                },
-                "node": {
-                    "type": "string",
-                    "description": "node address"
-                },
-                "talosConfig": {
-                    "type": "string",
-                    "description": "talosconfig"
-                },
-                "timeout": {
-                    "type": "integer",
-                    "description": "timeout in seconds (default 600)",
-                    "default": 600
+                    "description": "talos client configuration for authentication\n"
                 }
             },
             "requiredInputs": [
                 "endpoint",
                 "node",
                 "talosConfig"
-            ]
-        }
-    },
-    "functions": {
-        "talos:index:getKubeConfig": {
-            "description": "retrieve kubeconfig from a talos cluster",
-            "inputs": {
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TalosClusterKubeconfig resources.\n",
                 "properties": {
                     "endpoint": {
                         "type": "string",
-                        "description": "node endpoint address"
+                        "description": "machine endpoint\n"
+                    },
+                    "kubeConfig": {
+                        "type": "string",
+                        "description": "The retrieved Kubeconfig\n"
                     },
                     "node": {
                         "type": "string",
-                        "description": "node address"
+                        "description": "node to use\n"
                     },
                     "talosConfig": {
                         "type": "string",
-                        "description": "talosconfig"
-                    },
-                    "timeout": {
-                        "type": "integer",
-                        "description": "timeout in seconds (default 600)",
-                        "default": 600
+                        "description": "talos client configuration for authentication\n"
                     }
                 },
-                "required": [
-                    "endpoint",
-                    "node",
-                    "talosConfig"
-                ]
+                "type": "object"
+            }
+        },
+        "talos:index/talosMachineBootstrap:TalosMachineBootstrap": {
+            "description": "Applies machine configuration to a Talos node.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst machineSecrets = new talos.TalosMachineSecrets(\"machineSecrets\", {});\nconst talosconfig = new talos.TalosClientConfiguration(\"talosconfig\", {\n    clusterName: \"example-cluster\",\n    machineSecrets: machineSecrets.machineSecrets,\n    endpoints: [\"10.5.0.2\"],\n});\nconst bootstrap = new talos.TalosMachineBootstrap(\"bootstrap\", {\n    talosConfig: talosconfig.talosConfig,\n    endpoint: \"10.5.0.2\",\n    node: \"10.5.0.2\",\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nmachine_secrets = talos.TalosMachineSecrets(\"machineSecrets\")\ntalosconfig = talos.TalosClientConfiguration(\"talosconfig\",\n    cluster_name=\"example-cluster\",\n    machine_secrets=machine_secrets.machine_secrets,\n    endpoints=[\"10.5.0.2\"])\nbootstrap = talos.TalosMachineBootstrap(\"bootstrap\",\n    talos_config=talosconfig.talos_config,\n    endpoint=\"10.5.0.2\",\n    node=\"10.5.0.2\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.TalosMachineSecrets(\"machineSecrets\");\n\n    var talosconfig = new Talos.TalosClientConfiguration(\"talosconfig\", new()\n    {\n        ClusterName = \"example-cluster\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n        Endpoints = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n    var bootstrap = new Talos.TalosMachineBootstrap(\"bootstrap\", new()\n    {\n        TalosConfig = talosconfig.TalosConfig,\n        Endpoint = \"10.5.0.2\",\n        Node = \"10.5.0.2\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-talos/sdk/go/talos\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmachineSecrets, err := talos.NewTalosMachineSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\ttalosconfig, err := talos.NewTalosClientConfiguration(ctx, \"talosconfig\", \u0026talos.TalosClientConfigurationArgs{\n\t\t\tClusterName:    pulumi.String(\"example-cluster\"),\n\t\t\tMachineSecrets: machineSecrets.MachineSecrets,\n\t\t\tEndpoints: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = talos.NewTalosMachineBootstrap(ctx, \"bootstrap\", \u0026talos.TalosMachineBootstrapArgs{\n\t\t\tTalosConfig: talosconfig.TalosConfig,\n\t\t\tEndpoint:    pulumi.String(\"10.5.0.2\"),\n\t\t\tNode:        pulumi.String(\"10.5.0.2\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport com.pulumi.talos.TalosClientConfiguration;\nimport com.pulumi.talos.TalosClientConfigurationArgs;\nimport com.pulumi.talos.TalosMachineBootstrap;\nimport com.pulumi.talos.TalosMachineBootstrapArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new TalosMachineSecrets(\"machineSecrets\");\n\n        var talosconfig = new TalosClientConfiguration(\"talosconfig\", TalosClientConfigurationArgs.builder()        \n            .clusterName(\"example-cluster\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .endpoints(\"10.5.0.2\")\n            .build());\n\n        var bootstrap = new TalosMachineBootstrap(\"bootstrap\", TalosMachineBootstrapArgs.builder()        \n            .talosConfig(talosconfig.talosConfig())\n            .endpoint(\"10.5.0.2\")\n            .node(\"10.5.0.2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:TalosMachineSecrets\n  talosconfig:\n    type: talos:TalosClientConfiguration\n    properties:\n      clusterName: example-cluster\n      machineSecrets: ${machineSecrets.machineSecrets}\n      endpoints:\n        - 10.5.0.2\n  bootstrap:\n    type: talos:TalosMachineBootstrap\n    properties:\n      talosConfig: ${talosconfig.talosConfig}\n      endpoint: 10.5.0.2\n      node: 10.5.0.2\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "endpoint": {
+                    "type": "string",
+                    "description": "machine endpoint\n"
+                },
+                "node": {
+                    "type": "string",
+                    "description": "node to bootstrap\n"
+                },
+                "talosConfig": {
+                    "type": "string",
+                    "description": "talos client configuration for authentication\n"
+                }
             },
-            "outputs": {
+            "required": [
+                "endpoint",
+                "node",
+                "talosConfig"
+            ],
+            "inputProperties": {
+                "endpoint": {
+                    "type": "string",
+                    "description": "machine endpoint\n"
+                },
+                "node": {
+                    "type": "string",
+                    "description": "node to bootstrap\n"
+                },
+                "talosConfig": {
+                    "type": "string",
+                    "description": "talos client configuration for authentication\n"
+                }
+            },
+            "requiredInputs": [
+                "endpoint",
+                "node",
+                "talosConfig"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TalosMachineBootstrap resources.\n",
                 "properties": {
-                    "kubeconfig": {
+                    "endpoint": {
                         "type": "string",
-                        "description": "kubeconfig retrieved from the talos cluster",
-                        "secret": true
+                        "description": "machine endpoint\n"
+                    },
+                    "node": {
+                        "type": "string",
+                        "description": "node to bootstrap\n"
+                    },
+                    "talosConfig": {
+                        "type": "string",
+                        "description": "talos client configuration for authentication\n"
                     }
                 },
-                "required": [
-                    "kubeconfig"
-                ]
+                "type": "object"
+            }
+        },
+        "talos:index/talosMachineConfigurationApply:TalosMachineConfigurationApply": {
+            "description": "Applies machine configuration to a Talos node.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as fs from \"fs\";\nimport * as talos from \"@pulumi/talos\";\n\nconst machineSecrets = new talos.TalosMachineSecrets(\"machineSecrets\", {});\nconst talosconfig = new talos.TalosClientConfiguration(\"talosconfig\", {\n    clusterName: \"example-cluster\",\n    machineSecrets: machineSecrets.machineSecrets,\n    endpoints: [\"10.5.0.2\"],\n});\nconst machineconfigCp = new talos.TalosMachineConfigurationControlplane(\"machineconfigCp\", {\n    clusterName: talosconfig.clusterName,\n    clusterEndpoint: \"https://cluster.local:6443\",\n    machineSecrets: machineSecrets.machineSecrets,\n});\nconst configApply = new talos.TalosMachineConfigurationApply(\"configApply\", {\n    talosConfig: talosconfig.talosConfig,\n    machineConfiguration: machineconfigCp.machineConfig,\n    configPatches: [fs.readFileSync(`${path.module}/files/worker.yaml`)],\n    endpoint: \"10.5.0.2\",\n    node: \"10.5.0.2\",\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nmachine_secrets = talos.TalosMachineSecrets(\"machineSecrets\")\ntalosconfig = talos.TalosClientConfiguration(\"talosconfig\",\n    cluster_name=\"example-cluster\",\n    machine_secrets=machine_secrets.machine_secrets,\n    endpoints=[\"10.5.0.2\"])\nmachineconfig_cp = talos.TalosMachineConfigurationControlplane(\"machineconfigCp\",\n    cluster_name=talosconfig.cluster_name,\n    cluster_endpoint=\"https://cluster.local:6443\",\n    machine_secrets=machine_secrets.machine_secrets)\nconfig_apply = talos.TalosMachineConfigurationApply(\"configApply\",\n    talos_config=talosconfig.talos_config,\n    machine_configuration=machineconfig_cp.machine_config,\n    config_patches=[(lambda path: open(path).read())(f\"{path['module']}/files/worker.yaml\")],\n    endpoint=\"10.5.0.2\",\n    node=\"10.5.0.2\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.IO;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.TalosMachineSecrets(\"machineSecrets\");\n\n    var talosconfig = new Talos.TalosClientConfiguration(\"talosconfig\", new()\n    {\n        ClusterName = \"example-cluster\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n        Endpoints = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n    var machineconfigCp = new Talos.TalosMachineConfigurationControlplane(\"machineconfigCp\", new()\n    {\n        ClusterName = talosconfig.ClusterName,\n        ClusterEndpoint = \"https://cluster.local:6443\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n    });\n\n    var configApply = new Talos.TalosMachineConfigurationApply(\"configApply\", new()\n    {\n        TalosConfig = talosconfig.TalosConfig,\n        MachineConfiguration = machineconfigCp.MachineConfig,\n        ConfigPatches = new[]\n        {\n            File.ReadAllText($\"{path.Module}/files/worker.yaml\"),\n        },\n        Endpoint = \"10.5.0.2\",\n        Node = \"10.5.0.2\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\t\"io/ioutil\"\n\n\t\"github.com/pulumi/pulumi-talos/sdk/go/talos\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc readFileOrPanic(path string) pulumi.StringPtrInput {\n\tdata, err := ioutil.ReadFile(path)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\treturn pulumi.String(string(data))\n}\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmachineSecrets, err := talos.NewTalosMachineSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\ttalosconfig, err := talos.NewTalosClientConfiguration(ctx, \"talosconfig\", \u0026talos.TalosClientConfigurationArgs{\n\t\t\tClusterName:    pulumi.String(\"example-cluster\"),\n\t\t\tMachineSecrets: machineSecrets.MachineSecrets,\n\t\t\tEndpoints: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmachineconfigCp, err := talos.NewTalosMachineConfigurationControlplane(ctx, \"machineconfigCp\", \u0026talos.TalosMachineConfigurationControlplaneArgs{\n\t\t\tClusterName:     talosconfig.ClusterName,\n\t\t\tClusterEndpoint: pulumi.String(\"https://cluster.local:6443\"),\n\t\t\tMachineSecrets:  machineSecrets.MachineSecrets,\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = talos.NewTalosMachineConfigurationApply(ctx, \"configApply\", \u0026talos.TalosMachineConfigurationApplyArgs{\n\t\t\tTalosConfig:          talosconfig.TalosConfig,\n\t\t\tMachineConfiguration: machineconfigCp.MachineConfig,\n\t\t\tConfigPatches: pulumi.StringArray{\n\t\t\t\treadFileOrPanic(fmt.Sprintf(\"%v/files/worker.yaml\", path.Module)),\n\t\t\t},\n\t\t\tEndpoint: pulumi.String(\"10.5.0.2\"),\n\t\t\tNode:     pulumi.String(\"10.5.0.2\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport com.pulumi.talos.TalosClientConfiguration;\nimport com.pulumi.talos.TalosClientConfigurationArgs;\nimport com.pulumi.talos.TalosMachineConfigurationControlplane;\nimport com.pulumi.talos.TalosMachineConfigurationControlplaneArgs;\nimport com.pulumi.talos.TalosMachineConfigurationApply;\nimport com.pulumi.talos.TalosMachineConfigurationApplyArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new TalosMachineSecrets(\"machineSecrets\");\n\n        var talosconfig = new TalosClientConfiguration(\"talosconfig\", TalosClientConfigurationArgs.builder()        \n            .clusterName(\"example-cluster\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .endpoints(\"10.5.0.2\")\n            .build());\n\n        var machineconfigCp = new TalosMachineConfigurationControlplane(\"machineconfigCp\", TalosMachineConfigurationControlplaneArgs.builder()        \n            .clusterName(talosconfig.clusterName())\n            .clusterEndpoint(\"https://cluster.local:6443\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .build());\n\n        var configApply = new TalosMachineConfigurationApply(\"configApply\", TalosMachineConfigurationApplyArgs.builder()        \n            .talosConfig(talosconfig.talosConfig())\n            .machineConfiguration(machineconfigCp.machineConfig())\n            .configPatches(Files.readString(Paths.get(String.format(\"%s/files/worker.yaml\", path.module()))))\n            .endpoint(\"10.5.0.2\")\n            .node(\"10.5.0.2\")\n            .build());\n\n    }\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "configPatches": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "config patches to apply to the generated config\n"
+                },
+                "endpoint": {
+                    "type": "string",
+                    "description": "machine endpoint\n"
+                },
+                "machineConfiguration": {
+                    "type": "string",
+                    "description": "machine configuration\n"
+                },
+                "mode": {
+                    "type": "string",
+                    "description": "The mode to apply the configuration in.\n"
+                },
+                "node": {
+                    "type": "string",
+                    "description": "node to apply the config against\n"
+                },
+                "talosConfig": {
+                    "type": "string",
+                    "description": "talos client configuration for authentication\n"
+                }
+            },
+            "required": [
+                "endpoint",
+                "machineConfiguration",
+                "node",
+                "talosConfig"
+            ],
+            "inputProperties": {
+                "configPatches": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "config patches to apply to the generated config\n"
+                },
+                "endpoint": {
+                    "type": "string",
+                    "description": "machine endpoint\n"
+                },
+                "machineConfiguration": {
+                    "type": "string",
+                    "description": "machine configuration\n"
+                },
+                "mode": {
+                    "type": "string",
+                    "description": "The mode to apply the configuration in.\n"
+                },
+                "node": {
+                    "type": "string",
+                    "description": "node to apply the config against\n"
+                },
+                "talosConfig": {
+                    "type": "string",
+                    "description": "talos client configuration for authentication\n"
+                }
+            },
+            "requiredInputs": [
+                "endpoint",
+                "machineConfiguration",
+                "node",
+                "talosConfig"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TalosMachineConfigurationApply resources.\n",
+                "properties": {
+                    "configPatches": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "config patches to apply to the generated config\n"
+                    },
+                    "endpoint": {
+                        "type": "string",
+                        "description": "machine endpoint\n"
+                    },
+                    "machineConfiguration": {
+                        "type": "string",
+                        "description": "machine configuration\n"
+                    },
+                    "mode": {
+                        "type": "string",
+                        "description": "The mode to apply the configuration in.\n"
+                    },
+                    "node": {
+                        "type": "string",
+                        "description": "node to apply the config against\n"
+                    },
+                    "talosConfig": {
+                        "type": "string",
+                        "description": "talos client configuration for authentication\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "talos:index/talosMachineConfigurationControlplane:TalosMachineConfigurationControlplane": {
+            "description": "Generate machine configuration for a Talos control plane node.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst machineSecrets = new talos.TalosMachineSecrets(\"machineSecrets\", {});\nconst talosconfig = new talos.TalosClientConfiguration(\"talosconfig\", {\n    clusterName: \"example-cluster\",\n    machineSecrets: machineSecrets.machineSecrets,\n    endpoints: [\"10.5.0.2\"],\n});\nconst machineconfigCp = new talos.TalosMachineConfigurationControlplane(\"machineconfigCp\", {\n    clusterName: talosconfig.clusterName,\n    clusterEndpoint: \"https://cluster.local:6443\",\n    machineSecrets: machineSecrets.machineSecrets,\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nmachine_secrets = talos.TalosMachineSecrets(\"machineSecrets\")\ntalosconfig = talos.TalosClientConfiguration(\"talosconfig\",\n    cluster_name=\"example-cluster\",\n    machine_secrets=machine_secrets.machine_secrets,\n    endpoints=[\"10.5.0.2\"])\nmachineconfig_cp = talos.TalosMachineConfigurationControlplane(\"machineconfigCp\",\n    cluster_name=talosconfig.cluster_name,\n    cluster_endpoint=\"https://cluster.local:6443\",\n    machine_secrets=machine_secrets.machine_secrets)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.TalosMachineSecrets(\"machineSecrets\");\n\n    var talosconfig = new Talos.TalosClientConfiguration(\"talosconfig\", new()\n    {\n        ClusterName = \"example-cluster\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n        Endpoints = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n    var machineconfigCp = new Talos.TalosMachineConfigurationControlplane(\"machineconfigCp\", new()\n    {\n        ClusterName = talosconfig.ClusterName,\n        ClusterEndpoint = \"https://cluster.local:6443\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-talos/sdk/go/talos\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmachineSecrets, err := talos.NewTalosMachineSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\ttalosconfig, err := talos.NewTalosClientConfiguration(ctx, \"talosconfig\", \u0026talos.TalosClientConfigurationArgs{\n\t\t\tClusterName:    pulumi.String(\"example-cluster\"),\n\t\t\tMachineSecrets: machineSecrets.MachineSecrets,\n\t\t\tEndpoints: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = talos.NewTalosMachineConfigurationControlplane(ctx, \"machineconfigCp\", \u0026talos.TalosMachineConfigurationControlplaneArgs{\n\t\t\tClusterName:     talosconfig.ClusterName,\n\t\t\tClusterEndpoint: pulumi.String(\"https://cluster.local:6443\"),\n\t\t\tMachineSecrets:  machineSecrets.MachineSecrets,\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport com.pulumi.talos.TalosClientConfiguration;\nimport com.pulumi.talos.TalosClientConfigurationArgs;\nimport com.pulumi.talos.TalosMachineConfigurationControlplane;\nimport com.pulumi.talos.TalosMachineConfigurationControlplaneArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new TalosMachineSecrets(\"machineSecrets\");\n\n        var talosconfig = new TalosClientConfiguration(\"talosconfig\", TalosClientConfigurationArgs.builder()        \n            .clusterName(\"example-cluster\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .endpoints(\"10.5.0.2\")\n            .build());\n\n        var machineconfigCp = new TalosMachineConfigurationControlplane(\"machineconfigCp\", TalosMachineConfigurationControlplaneArgs.builder()        \n            .clusterName(talosconfig.clusterName())\n            .clusterEndpoint(\"https://cluster.local:6443\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:TalosMachineSecrets\n  talosconfig:\n    type: talos:TalosClientConfiguration\n    properties:\n      clusterName: example-cluster\n      machineSecrets: ${machineSecrets.machineSecrets}\n      endpoints:\n        - 10.5.0.2\n  machineconfigCp:\n    type: talos:TalosMachineConfigurationControlplane\n    properties:\n      clusterName: ${talosconfig.clusterName}\n      clusterEndpoint: https://cluster.local:6443\n      machineSecrets: ${machineSecrets.machineSecrets}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "clusterEndpoint": {
+                    "type": "string",
+                    "description": "The endpoint of the Talos cluster\n"
+                },
+                "clusterName": {
+                    "type": "string",
+                    "description": "The name of the cluster in the generated config\n"
+                },
+                "configPatches": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "config patches to apply to the generated config\n"
+                },
+                "configVersion": {
+                    "type": "string",
+                    "description": "the desired machine config version to generate\n"
+                },
+                "docsEnabled": {
+                    "type": "boolean",
+                    "description": "whether to render all machine configs adding the documentation for each field\n"
+                },
+                "examplesEnabled": {
+                    "type": "boolean",
+                    "description": "whether to render all machine configs with the commented examples\n"
+                },
+                "kubernetesVersion": {
+                    "type": "string",
+                    "description": "desired kubernetes version to run\n"
+                },
+                "machineConfig": {
+                    "type": "string",
+                    "description": "the generated control plane config\n"
+                },
+                "machineSecrets": {
+                    "type": "string",
+                    "description": "The machine secrets for the cluster\n"
+                },
+                "talosVersion": {
+                    "type": "string",
+                    "description": "The version of Talos for which to generate configs\n"
+                }
+            },
+            "required": [
+                "clusterEndpoint",
+                "clusterName",
+                "machineConfig",
+                "machineSecrets"
+            ],
+            "inputProperties": {
+                "clusterEndpoint": {
+                    "type": "string",
+                    "description": "The endpoint of the Talos cluster\n"
+                },
+                "clusterName": {
+                    "type": "string",
+                    "description": "The name of the cluster in the generated config\n"
+                },
+                "configPatches": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "config patches to apply to the generated config\n"
+                },
+                "configVersion": {
+                    "type": "string",
+                    "description": "the desired machine config version to generate\n"
+                },
+                "docsEnabled": {
+                    "type": "boolean",
+                    "description": "whether to render all machine configs adding the documentation for each field\n"
+                },
+                "examplesEnabled": {
+                    "type": "boolean",
+                    "description": "whether to render all machine configs with the commented examples\n"
+                },
+                "kubernetesVersion": {
+                    "type": "string",
+                    "description": "desired kubernetes version to run\n"
+                },
+                "machineSecrets": {
+                    "type": "string",
+                    "description": "The machine secrets for the cluster\n"
+                },
+                "talosVersion": {
+                    "type": "string",
+                    "description": "The version of Talos for which to generate configs\n"
+                }
+            },
+            "requiredInputs": [
+                "clusterEndpoint",
+                "clusterName",
+                "machineSecrets"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TalosMachineConfigurationControlplane resources.\n",
+                "properties": {
+                    "clusterEndpoint": {
+                        "type": "string",
+                        "description": "The endpoint of the Talos cluster\n"
+                    },
+                    "clusterName": {
+                        "type": "string",
+                        "description": "The name of the cluster in the generated config\n"
+                    },
+                    "configPatches": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "config patches to apply to the generated config\n"
+                    },
+                    "configVersion": {
+                        "type": "string",
+                        "description": "the desired machine config version to generate\n"
+                    },
+                    "docsEnabled": {
+                        "type": "boolean",
+                        "description": "whether to render all machine configs adding the documentation for each field\n"
+                    },
+                    "examplesEnabled": {
+                        "type": "boolean",
+                        "description": "whether to render all machine configs with the commented examples\n"
+                    },
+                    "kubernetesVersion": {
+                        "type": "string",
+                        "description": "desired kubernetes version to run\n"
+                    },
+                    "machineConfig": {
+                        "type": "string",
+                        "description": "the generated control plane config\n"
+                    },
+                    "machineSecrets": {
+                        "type": "string",
+                        "description": "The machine secrets for the cluster\n"
+                    },
+                    "talosVersion": {
+                        "type": "string",
+                        "description": "The version of Talos for which to generate configs\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "talos:index/talosMachineConfigurationWorker:TalosMachineConfigurationWorker": {
+            "description": "Generate machine configuration for a Talos worker node.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst machineSecrets = new talos.TalosMachineSecrets(\"machineSecrets\", {});\nconst talosconfig = new talos.TalosClientConfiguration(\"talosconfig\", {\n    clusterName: \"example-cluster\",\n    machineSecrets: machineSecrets.machineSecrets,\n    endpoints: [\"10.5.0.2\"],\n});\nconst machineconfigWorker = new talos.TalosMachineConfigurationWorker(\"machineconfigWorker\", {\n    clusterName: talosconfig.clusterName,\n    clusterEndpoint: \"https://cluster.local:6443\",\n    machineSecrets: machineSecrets.machineSecrets,\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nmachine_secrets = talos.TalosMachineSecrets(\"machineSecrets\")\ntalosconfig = talos.TalosClientConfiguration(\"talosconfig\",\n    cluster_name=\"example-cluster\",\n    machine_secrets=machine_secrets.machine_secrets,\n    endpoints=[\"10.5.0.2\"])\nmachineconfig_worker = talos.TalosMachineConfigurationWorker(\"machineconfigWorker\",\n    cluster_name=talosconfig.cluster_name,\n    cluster_endpoint=\"https://cluster.local:6443\",\n    machine_secrets=machine_secrets.machine_secrets)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.TalosMachineSecrets(\"machineSecrets\");\n\n    var talosconfig = new Talos.TalosClientConfiguration(\"talosconfig\", new()\n    {\n        ClusterName = \"example-cluster\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n        Endpoints = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n    var machineconfigWorker = new Talos.TalosMachineConfigurationWorker(\"machineconfigWorker\", new()\n    {\n        ClusterName = talosconfig.ClusterName,\n        ClusterEndpoint = \"https://cluster.local:6443\",\n        MachineSecrets = machineSecrets.MachineSecrets,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-talos/sdk/go/talos\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmachineSecrets, err := talos.NewTalosMachineSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\ttalosconfig, err := talos.NewTalosClientConfiguration(ctx, \"talosconfig\", \u0026talos.TalosClientConfigurationArgs{\n\t\t\tClusterName:    pulumi.String(\"example-cluster\"),\n\t\t\tMachineSecrets: machineSecrets.MachineSecrets,\n\t\t\tEndpoints: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = talos.NewTalosMachineConfigurationWorker(ctx, \"machineconfigWorker\", \u0026talos.TalosMachineConfigurationWorkerArgs{\n\t\t\tClusterName:     talosconfig.ClusterName,\n\t\t\tClusterEndpoint: pulumi.String(\"https://cluster.local:6443\"),\n\t\t\tMachineSecrets:  machineSecrets.MachineSecrets,\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport com.pulumi.talos.TalosClientConfiguration;\nimport com.pulumi.talos.TalosClientConfigurationArgs;\nimport com.pulumi.talos.TalosMachineConfigurationWorker;\nimport com.pulumi.talos.TalosMachineConfigurationWorkerArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new TalosMachineSecrets(\"machineSecrets\");\n\n        var talosconfig = new TalosClientConfiguration(\"talosconfig\", TalosClientConfigurationArgs.builder()        \n            .clusterName(\"example-cluster\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .endpoints(\"10.5.0.2\")\n            .build());\n\n        var machineconfigWorker = new TalosMachineConfigurationWorker(\"machineconfigWorker\", TalosMachineConfigurationWorkerArgs.builder()        \n            .clusterName(talosconfig.clusterName())\n            .clusterEndpoint(\"https://cluster.local:6443\")\n            .machineSecrets(machineSecrets.machineSecrets())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:TalosMachineSecrets\n  talosconfig:\n    type: talos:TalosClientConfiguration\n    properties:\n      clusterName: example-cluster\n      machineSecrets: ${machineSecrets.machineSecrets}\n      endpoints:\n        - 10.5.0.2\n  machineconfigWorker:\n    type: talos:TalosMachineConfigurationWorker\n    properties:\n      clusterName: ${talosconfig.clusterName}\n      clusterEndpoint: https://cluster.local:6443\n      machineSecrets: ${machineSecrets.machineSecrets}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "clusterEndpoint": {
+                    "type": "string",
+                    "description": "The endpoint of the Talos cluster\n"
+                },
+                "clusterName": {
+                    "type": "string",
+                    "description": "The name of the cluster in the generated config\n"
+                },
+                "configPatches": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "config patches to apply to the generated config\n"
+                },
+                "configVersion": {
+                    "type": "string",
+                    "description": "the desired machine config version to generate\n"
+                },
+                "docsEnabled": {
+                    "type": "boolean",
+                    "description": "whether to render all machine configs adding the documentation for each field\n"
+                },
+                "examplesEnabled": {
+                    "type": "boolean",
+                    "description": "whether to render all machine configs with the commented examples\n"
+                },
+                "kubernetesVersion": {
+                    "type": "string",
+                    "description": "desired kubernetes version to run\n"
+                },
+                "machineConfig": {
+                    "type": "string",
+                    "description": "the generated worker config\n"
+                },
+                "machineSecrets": {
+                    "type": "string",
+                    "description": "The machine secrets for the cluster\n"
+                },
+                "talosVersion": {
+                    "type": "string",
+                    "description": "The version of Talos for which to generate configs\n"
+                }
+            },
+            "required": [
+                "clusterEndpoint",
+                "clusterName",
+                "machineConfig",
+                "machineSecrets"
+            ],
+            "inputProperties": {
+                "clusterEndpoint": {
+                    "type": "string",
+                    "description": "The endpoint of the Talos cluster\n"
+                },
+                "clusterName": {
+                    "type": "string",
+                    "description": "The name of the cluster in the generated config\n"
+                },
+                "configPatches": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "config patches to apply to the generated config\n"
+                },
+                "configVersion": {
+                    "type": "string",
+                    "description": "the desired machine config version to generate\n"
+                },
+                "docsEnabled": {
+                    "type": "boolean",
+                    "description": "whether to render all machine configs adding the documentation for each field\n"
+                },
+                "examplesEnabled": {
+                    "type": "boolean",
+                    "description": "whether to render all machine configs with the commented examples\n"
+                },
+                "kubernetesVersion": {
+                    "type": "string",
+                    "description": "desired kubernetes version to run\n"
+                },
+                "machineSecrets": {
+                    "type": "string",
+                    "description": "The machine secrets for the cluster\n"
+                },
+                "talosVersion": {
+                    "type": "string",
+                    "description": "The version of Talos for which to generate configs\n"
+                }
+            },
+            "requiredInputs": [
+                "clusterEndpoint",
+                "clusterName",
+                "machineSecrets"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TalosMachineConfigurationWorker resources.\n",
+                "properties": {
+                    "clusterEndpoint": {
+                        "type": "string",
+                        "description": "The endpoint of the Talos cluster\n"
+                    },
+                    "clusterName": {
+                        "type": "string",
+                        "description": "The name of the cluster in the generated config\n"
+                    },
+                    "configPatches": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "config patches to apply to the generated config\n"
+                    },
+                    "configVersion": {
+                        "type": "string",
+                        "description": "the desired machine config version to generate\n"
+                    },
+                    "docsEnabled": {
+                        "type": "boolean",
+                        "description": "whether to render all machine configs adding the documentation for each field\n"
+                    },
+                    "examplesEnabled": {
+                        "type": "boolean",
+                        "description": "whether to render all machine configs with the commented examples\n"
+                    },
+                    "kubernetesVersion": {
+                        "type": "string",
+                        "description": "desired kubernetes version to run\n"
+                    },
+                    "machineConfig": {
+                        "type": "string",
+                        "description": "the generated worker config\n"
+                    },
+                    "machineSecrets": {
+                        "type": "string",
+                        "description": "The machine secrets for the cluster\n"
+                    },
+                    "talosVersion": {
+                        "type": "string",
+                        "description": "The version of Talos for which to generate configs\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "talos:index/talosMachineSecrets:TalosMachineSecrets": {
+            "description": "Generate machine secrets for a Talos cluster\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst machineSecrets = new talos.TalosMachineSecrets(\"machine_secrets\", {});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nmachine_secrets = talos.TalosMachineSecrets(\"machineSecrets\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.TalosMachineSecrets(\"machineSecrets\");\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-talos/sdk/go/talos\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := talos.NewTalosMachineSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new TalosMachineSecrets(\"machineSecrets\");\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:TalosMachineSecrets\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "machineSecrets": {
+                    "type": "string",
+                    "description": "The generated talos cluster secrets\n"
+                },
+                "talosVersion": {
+                    "type": "string",
+                    "description": "The version of Talos for which to generate secrets\n"
+                }
+            },
+            "required": [
+                "machineSecrets"
+            ],
+            "inputProperties": {
+                "talosVersion": {
+                    "type": "string",
+                    "description": "The version of Talos for which to generate secrets\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TalosMachineSecrets resources.\n",
+                "properties": {
+                    "machineSecrets": {
+                        "type": "string",
+                        "description": "The generated talos cluster secrets\n"
+                    },
+                    "talosVersion": {
+                        "type": "string",
+                        "description": "The version of Talos for which to generate secrets\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
             }
         }
     }

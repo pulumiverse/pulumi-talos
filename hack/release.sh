@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
+#
+# Generated on 2022-09-08T16:40:48Z by kres 871f67c-dirty.
+
 set -e
 
 RELEASE_TOOL_IMAGE="ghcr.io/siderolabs/release-tool:latest"
