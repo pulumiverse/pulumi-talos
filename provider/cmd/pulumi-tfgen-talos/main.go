@@ -12,7 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package version
+package main
 
-// Version is initialized by the Go linker to contain the semver of this build.
-var Version string
+import (
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+	talos "github.com/siderolabs/pulumi-provider-talos/provider"
+	"github.com/siderolabs/pulumi-provider-talos/provider/pkg/version"
+)
+
+func main() {
+	// Modify the path to point to the new provider
+	tfgen.Main("talos", version.Version, talos.Provider())
+}

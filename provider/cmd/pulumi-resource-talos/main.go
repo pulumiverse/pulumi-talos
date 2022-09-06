@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,15 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:generate go run ./generate.go
+
 package main
 
 import (
-	"github.com/siderolabs/pulumi-provider-talos/provider/pkg/provider"
+	_ "embed"
+
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	talos "github.com/siderolabs/pulumi-provider-talos/provider"
 	"github.com/siderolabs/pulumi-provider-talos/provider/pkg/version"
 )
 
-var providerName = "talos"
+//go:embed schema-embed.json
+var pulumiSchema []byte
 
 func main() {
-	provider.Serve(providerName, version.Version)
+	// Modify the path to point to the new provider
+	tfbridge.Main("talos", version.Version, talos.Provider(), pulumiSchema)
 }
