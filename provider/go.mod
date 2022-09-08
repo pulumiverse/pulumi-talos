@@ -6,8 +6,8 @@ replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraf
 
 require (
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.30.0
-	github.com/pulumi/pulumi/sdk/v3 v3.39.2
-	github.com/siderolabs/terraform-provider-talos v0.1.0-alpha.2.0.20220905051814-4ecfd4f52353
+	github.com/pulumi/pulumi/sdk/v3 v3.40.0
+	github.com/siderolabs/terraform-provider-talos v0.1.0-alpha.6
 )
 
 require (
@@ -189,11 +189,11 @@ require (
 	github.com/spf13/cobra v1.4.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.8.0 // indirect
-	github.com/talos-systems/crypto v0.3.6 // indirect
+	github.com/talos-systems/crypto v0.3.7 // indirect
 	github.com/talos-systems/go-blockdevice v0.3.4 // indirect
 	github.com/talos-systems/go-debug v0.2.1 // indirect
 	github.com/talos-systems/net v0.3.2 // indirect
-	github.com/talos-systems/talos/pkg/machinery v1.2.0 // indirect
+	github.com/talos-systems/talos/pkg/machinery v1.2.2 // indirect
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
 	github.com/tweekmonster/luser v0.0.0-20161003172636-3fa38070dbd7 // indirect
 	github.com/uber/jaeger-client-go v2.30.0+incompatible // indirect

@@ -11,6 +11,30 @@ import (
 )
 
 // Generate machine secrets for a Talos cluster
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-talos/sdk/go/talos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := talos.NewTalosMachineSecrets(ctx, "machineSecrets", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type TalosMachineSecrets struct {
 	pulumi.CustomResourceState
 

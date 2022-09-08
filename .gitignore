@@ -15,9 +15,11 @@ Pulumi.*.yaml
 
 yarn.lock
 **/pulumiManifest.go
+go.work.sum
 
 ci-scripts
 provider/**/schema-embed.json
 **/version.txt
 **/nuget
 **/dist
+_out

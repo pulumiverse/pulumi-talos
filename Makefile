@@ -20,6 +20,9 @@ WORKING_DIR     := $(shell pwd)
 OS := $(shell uname)
 EMPTY_TO_AVOID_SED := ""
 
+TAG ?= $(shell git describe --tag --always --dirty)
+ARTIFACTS ?= _out
+
 .PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup
 
 development:: install_plugins provider lint_provider build_sdks install_sdks cleanup # Build the provider & SDKs for a development environment
@@ -87,8 +90,6 @@ clean::
 	rm -rf sdk/{dotnet,nodejs,go,python}
 
 install_plugins::
-	# [ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
-	# pulumi plugin install resource random 4.3.1
 
 install_dotnet_sdk::
 	mkdir -p $(WORKING_DIR)/nuget
@@ -105,3 +106,11 @@ install_sdks:: install_dotnet_sdk install_python_sdk install_nodejs_sdk
 
 test::
 	cd examples && go test -v -tags=all -parallel ${TESTPARALLELISM} -timeout 2h
+
+.PHONY: check-dirty
+check-dirty: tfgen build_sdks ## Verifies that source tree is not dirty
+	@if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; exit 1 ; fi
+
+release-notes:
+	mkdir -p $(ARTIFACTS)
+	@ARTIFACTS=$(ARTIFACTS) ./hack/release.sh $@ $(ARTIFACTS)/RELEASE_NOTES.md $(TAG)

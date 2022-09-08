@@ -12,12 +12,54 @@ import (
 )
 
 // Applies machine configuration to a Talos node.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-talos/sdk/go/talos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			machineSecrets, err := talos.NewTalosMachineSecrets(ctx, "machineSecrets", nil)
+//			if err != nil {
+//				return err
+//			}
+//			talosconfig, err := talos.NewTalosClientConfiguration(ctx, "talosconfig", &talos.TalosClientConfigurationArgs{
+//				ClusterName:    pulumi.String("example-cluster"),
+//				MachineSecrets: machineSecrets.MachineSecrets,
+//				Endpoints: pulumi.StringArray{
+//					pulumi.String("10.5.0.2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = talos.NewTalosMachineBootstrap(ctx, "bootstrap", &talos.TalosMachineBootstrapArgs{
+//				TalosConfig: talosconfig.TalosConfig,
+//				Endpoint:    pulumi.String("10.5.0.2"),
+//				Node:        pulumi.String("10.5.0.2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type TalosMachineBootstrap struct {
 	pulumi.CustomResourceState
 
 	// machine endpoint
-	Endpoints pulumi.StringArrayOutput `pulumi:"endpoints"`
-	// nodes to bootstrap
+	Endpoint pulumi.StringOutput `pulumi:"endpoint"`
+	// node to bootstrap
 	Node pulumi.StringOutput `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringOutput `pulumi:"talosConfig"`
@@ -30,6 +72,9 @@ func NewTalosMachineBootstrap(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.Endpoint == nil {
+		return nil, errors.New("invalid value for required argument 'Endpoint'")
+	}
 	if args.Node == nil {
 		return nil, errors.New("invalid value for required argument 'Node'")
 	}
@@ -60,8 +105,8 @@ func GetTalosMachineBootstrap(ctx *pulumi.Context,
 // Input properties used for looking up and filtering TalosMachineBootstrap resources.
 type talosMachineBootstrapState struct {
 	// machine endpoint
-	Endpoints []string `pulumi:"endpoints"`
-	// nodes to bootstrap
+	Endpoint *string `pulumi:"endpoint"`
+	// node to bootstrap
 	Node *string `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig *string `pulumi:"talosConfig"`
@@ -69,8 +114,8 @@ type talosMachineBootstrapState struct {
 
 type TalosMachineBootstrapState struct {
 	// machine endpoint
-	Endpoints pulumi.StringArrayInput
-	// nodes to bootstrap
+	Endpoint pulumi.StringPtrInput
+	// node to bootstrap
 	Node pulumi.StringPtrInput
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringPtrInput
@@ -82,8 +127,8 @@ func (TalosMachineBootstrapState) ElementType() reflect.Type {
 
 type talosMachineBootstrapArgs struct {
 	// machine endpoint
-	Endpoints []string `pulumi:"endpoints"`
-	// nodes to bootstrap
+	Endpoint string `pulumi:"endpoint"`
+	// node to bootstrap
 	Node string `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig string `pulumi:"talosConfig"`
@@ -92,8 +137,8 @@ type talosMachineBootstrapArgs struct {
 // The set of arguments for constructing a TalosMachineBootstrap resource.
 type TalosMachineBootstrapArgs struct {
 	// machine endpoint
-	Endpoints pulumi.StringArrayInput
-	// nodes to bootstrap
+	Endpoint pulumi.StringInput
+	// node to bootstrap
 	Node pulumi.StringInput
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringInput
@@ -187,11 +232,11 @@ func (o TalosMachineBootstrapOutput) ToTalosMachineBootstrapOutputWithContext(ct
 }
 
 // machine endpoint
-func (o TalosMachineBootstrapOutput) Endpoints() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *TalosMachineBootstrap) pulumi.StringArrayOutput { return v.Endpoints }).(pulumi.StringArrayOutput)
+func (o TalosMachineBootstrapOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v *TalosMachineBootstrap) pulumi.StringOutput { return v.Endpoint }).(pulumi.StringOutput)
 }
 
-// nodes to bootstrap
+// node to bootstrap
 func (o TalosMachineBootstrapOutput) Node() pulumi.StringOutput {
 	return o.ApplyT(func(v *TalosMachineBootstrap) pulumi.StringOutput { return v.Node }).(pulumi.StringOutput)
 }

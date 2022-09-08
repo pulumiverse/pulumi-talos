@@ -12,15 +12,57 @@ import (
 )
 
 // Retrieve Kubeconfig for a Talos cluster
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-talos/sdk/go/talos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			machineSecrets, err := talos.NewTalosMachineSecrets(ctx, "machineSecrets", nil)
+//			if err != nil {
+//				return err
+//			}
+//			talosconfig, err := talos.NewTalosClientConfiguration(ctx, "talosconfig", &talos.TalosClientConfigurationArgs{
+//				ClusterName:    pulumi.String("example-cluster"),
+//				MachineSecrets: machineSecrets.MachineSecrets,
+//				Endpoints: pulumi.StringArray{
+//					pulumi.String("10.5.0.2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = talos.NewTalosClusterKubeconfig(ctx, "kubeconfig", &talos.TalosClusterKubeconfigArgs{
+//				TalosConfig: talosconfig.TalosConfig,
+//				Endpoint:    pulumi.String("10.5.0.2"),
+//				Node:        pulumi.String("10.5.0.2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type TalosClusterKubeconfig struct {
 	pulumi.CustomResourceState
 
-	// endpoints to use
-	Endpoints pulumi.StringArrayOutput `pulumi:"endpoints"`
+	// machine endpoint
+	Endpoint pulumi.StringOutput `pulumi:"endpoint"`
 	// The retrieved Kubeconfig
 	KubeConfig pulumi.StringOutput `pulumi:"kubeConfig"`
-	// nodes to use
-	Nodes pulumi.StringArrayOutput `pulumi:"nodes"`
+	// node to use
+	Node pulumi.StringOutput `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringOutput `pulumi:"talosConfig"`
 }
@@ -32,6 +74,12 @@ func NewTalosClusterKubeconfig(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.Endpoint == nil {
+		return nil, errors.New("invalid value for required argument 'Endpoint'")
+	}
+	if args.Node == nil {
+		return nil, errors.New("invalid value for required argument 'Node'")
+	}
 	if args.TalosConfig == nil {
 		return nil, errors.New("invalid value for required argument 'TalosConfig'")
 	}
@@ -58,23 +106,23 @@ func GetTalosClusterKubeconfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering TalosClusterKubeconfig resources.
 type talosClusterKubeconfigState struct {
-	// endpoints to use
-	Endpoints []string `pulumi:"endpoints"`
+	// machine endpoint
+	Endpoint *string `pulumi:"endpoint"`
 	// The retrieved Kubeconfig
 	KubeConfig *string `pulumi:"kubeConfig"`
-	// nodes to use
-	Nodes []string `pulumi:"nodes"`
+	// node to use
+	Node *string `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig *string `pulumi:"talosConfig"`
 }
 
 type TalosClusterKubeconfigState struct {
-	// endpoints to use
-	Endpoints pulumi.StringArrayInput
+	// machine endpoint
+	Endpoint pulumi.StringPtrInput
 	// The retrieved Kubeconfig
 	KubeConfig pulumi.StringPtrInput
-	// nodes to use
-	Nodes pulumi.StringArrayInput
+	// node to use
+	Node pulumi.StringPtrInput
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringPtrInput
 }
@@ -84,20 +132,20 @@ func (TalosClusterKubeconfigState) ElementType() reflect.Type {
 }
 
 type talosClusterKubeconfigArgs struct {
-	// endpoints to use
-	Endpoints []string `pulumi:"endpoints"`
-	// nodes to use
-	Nodes []string `pulumi:"nodes"`
+	// machine endpoint
+	Endpoint string `pulumi:"endpoint"`
+	// node to use
+	Node string `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig string `pulumi:"talosConfig"`
 }
 
 // The set of arguments for constructing a TalosClusterKubeconfig resource.
 type TalosClusterKubeconfigArgs struct {
-	// endpoints to use
-	Endpoints pulumi.StringArrayInput
-	// nodes to use
-	Nodes pulumi.StringArrayInput
+	// machine endpoint
+	Endpoint pulumi.StringInput
+	// node to use
+	Node pulumi.StringInput
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringInput
 }
@@ -189,9 +237,9 @@ func (o TalosClusterKubeconfigOutput) ToTalosClusterKubeconfigOutputWithContext(
 	return o
 }
 
-// endpoints to use
-func (o TalosClusterKubeconfigOutput) Endpoints() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringArrayOutput { return v.Endpoints }).(pulumi.StringArrayOutput)
+// machine endpoint
+func (o TalosClusterKubeconfigOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringOutput { return v.Endpoint }).(pulumi.StringOutput)
 }
 
 // The retrieved Kubeconfig
@@ -199,9 +247,9 @@ func (o TalosClusterKubeconfigOutput) KubeConfig() pulumi.StringOutput {
 	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringOutput { return v.KubeConfig }).(pulumi.StringOutput)
 }
 
-// nodes to use
-func (o TalosClusterKubeconfigOutput) Nodes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringArrayOutput { return v.Nodes }).(pulumi.StringArrayOutput)
+// node to use
+func (o TalosClusterKubeconfigOutput) Node() pulumi.StringOutput {
+	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringOutput { return v.Node }).(pulumi.StringOutput)
 }
 
 // talos client configuration for authentication

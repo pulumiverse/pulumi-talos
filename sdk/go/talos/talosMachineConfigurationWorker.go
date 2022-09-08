@@ -12,6 +12,48 @@ import (
 )
 
 // Generate machine configuration for a Talos worker node.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-talos/sdk/go/talos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			machineSecrets, err := talos.NewTalosMachineSecrets(ctx, "machineSecrets", nil)
+//			if err != nil {
+//				return err
+//			}
+//			talosconfig, err := talos.NewTalosClientConfiguration(ctx, "talosconfig", &talos.TalosClientConfigurationArgs{
+//				ClusterName:    pulumi.String("example-cluster"),
+//				MachineSecrets: machineSecrets.MachineSecrets,
+//				Endpoints: pulumi.StringArray{
+//					pulumi.String("10.5.0.2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = talos.NewTalosMachineConfigurationWorker(ctx, "machineconfigWorker", &talos.TalosMachineConfigurationWorkerArgs{
+//				ClusterName:     talosconfig.ClusterName,
+//				ClusterEndpoint: pulumi.String("https://cluster.local:6443"),
+//				MachineSecrets:  machineSecrets.MachineSecrets,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type TalosMachineConfigurationWorker struct {
 	pulumi.CustomResourceState
 

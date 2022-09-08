@@ -12,19 +12,84 @@ import (
 )
 
 // Applies machine configuration to a Talos node.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"fmt"
+//	"io/ioutil"
+//
+//	"github.com/pulumi/pulumi-talos/sdk/go/talos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := ioutil.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			machineSecrets, err := talos.NewTalosMachineSecrets(ctx, "machineSecrets", nil)
+//			if err != nil {
+//				return err
+//			}
+//			talosconfig, err := talos.NewTalosClientConfiguration(ctx, "talosconfig", &talos.TalosClientConfigurationArgs{
+//				ClusterName:    pulumi.String("example-cluster"),
+//				MachineSecrets: machineSecrets.MachineSecrets,
+//				Endpoints: pulumi.StringArray{
+//					pulumi.String("10.5.0.2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			machineconfigCp, err := talos.NewTalosMachineConfigurationControlplane(ctx, "machineconfigCp", &talos.TalosMachineConfigurationControlplaneArgs{
+//				ClusterName:     talosconfig.ClusterName,
+//				ClusterEndpoint: pulumi.String("https://cluster.local:6443"),
+//				MachineSecrets:  machineSecrets.MachineSecrets,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = talos.NewTalosMachineConfigurationApply(ctx, "configApply", &talos.TalosMachineConfigurationApplyArgs{
+//				TalosConfig:          talosconfig.TalosConfig,
+//				MachineConfiguration: machineconfigCp.MachineConfig,
+//				ConfigPatches: pulumi.StringArray{
+//					readFileOrPanic(fmt.Sprintf("%v/files/worker.yaml", path.Module)),
+//				},
+//				Endpoint: pulumi.String("10.5.0.2"),
+//				Node:     pulumi.String("10.5.0.2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type TalosMachineConfigurationApply struct {
 	pulumi.CustomResourceState
 
 	// config patches to apply to the generated config
 	ConfigPatches pulumi.StringArrayOutput `pulumi:"configPatches"`
 	// machine endpoint
-	Endpoints pulumi.StringArrayOutput `pulumi:"endpoints"`
+	Endpoint pulumi.StringOutput `pulumi:"endpoint"`
 	// machine configuration
 	MachineConfiguration pulumi.StringOutput `pulumi:"machineConfiguration"`
 	// The mode to apply the configuration in.
 	Mode pulumi.StringPtrOutput `pulumi:"mode"`
-	// nodes to apply the config
-	Nodes pulumi.StringArrayOutput `pulumi:"nodes"`
+	// node to apply the config against
+	Node pulumi.StringOutput `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringOutput `pulumi:"talosConfig"`
 }
@@ -36,8 +101,14 @@ func NewTalosMachineConfigurationApply(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.Endpoint == nil {
+		return nil, errors.New("invalid value for required argument 'Endpoint'")
+	}
 	if args.MachineConfiguration == nil {
 		return nil, errors.New("invalid value for required argument 'MachineConfiguration'")
+	}
+	if args.Node == nil {
+		return nil, errors.New("invalid value for required argument 'Node'")
 	}
 	if args.TalosConfig == nil {
 		return nil, errors.New("invalid value for required argument 'TalosConfig'")
@@ -68,13 +139,13 @@ type talosMachineConfigurationApplyState struct {
 	// config patches to apply to the generated config
 	ConfigPatches []string `pulumi:"configPatches"`
 	// machine endpoint
-	Endpoints []string `pulumi:"endpoints"`
+	Endpoint *string `pulumi:"endpoint"`
 	// machine configuration
 	MachineConfiguration *string `pulumi:"machineConfiguration"`
 	// The mode to apply the configuration in.
 	Mode *string `pulumi:"mode"`
-	// nodes to apply the config
-	Nodes []string `pulumi:"nodes"`
+	// node to apply the config against
+	Node *string `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig *string `pulumi:"talosConfig"`
 }
@@ -83,13 +154,13 @@ type TalosMachineConfigurationApplyState struct {
 	// config patches to apply to the generated config
 	ConfigPatches pulumi.StringArrayInput
 	// machine endpoint
-	Endpoints pulumi.StringArrayInput
+	Endpoint pulumi.StringPtrInput
 	// machine configuration
 	MachineConfiguration pulumi.StringPtrInput
 	// The mode to apply the configuration in.
 	Mode pulumi.StringPtrInput
-	// nodes to apply the config
-	Nodes pulumi.StringArrayInput
+	// node to apply the config against
+	Node pulumi.StringPtrInput
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringPtrInput
 }
@@ -102,13 +173,13 @@ type talosMachineConfigurationApplyArgs struct {
 	// config patches to apply to the generated config
 	ConfigPatches []string `pulumi:"configPatches"`
 	// machine endpoint
-	Endpoints []string `pulumi:"endpoints"`
+	Endpoint string `pulumi:"endpoint"`
 	// machine configuration
 	MachineConfiguration string `pulumi:"machineConfiguration"`
 	// The mode to apply the configuration in.
 	Mode *string `pulumi:"mode"`
-	// nodes to apply the config
-	Nodes []string `pulumi:"nodes"`
+	// node to apply the config against
+	Node string `pulumi:"node"`
 	// talos client configuration for authentication
 	TalosConfig string `pulumi:"talosConfig"`
 }
@@ -118,13 +189,13 @@ type TalosMachineConfigurationApplyArgs struct {
 	// config patches to apply to the generated config
 	ConfigPatches pulumi.StringArrayInput
 	// machine endpoint
-	Endpoints pulumi.StringArrayInput
+	Endpoint pulumi.StringInput
 	// machine configuration
 	MachineConfiguration pulumi.StringInput
 	// The mode to apply the configuration in.
 	Mode pulumi.StringPtrInput
-	// nodes to apply the config
-	Nodes pulumi.StringArrayInput
+	// node to apply the config against
+	Node pulumi.StringInput
 	// talos client configuration for authentication
 	TalosConfig pulumi.StringInput
 }
@@ -222,8 +293,8 @@ func (o TalosMachineConfigurationApplyOutput) ConfigPatches() pulumi.StringArray
 }
 
 // machine endpoint
-func (o TalosMachineConfigurationApplyOutput) Endpoints() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *TalosMachineConfigurationApply) pulumi.StringArrayOutput { return v.Endpoints }).(pulumi.StringArrayOutput)
+func (o TalosMachineConfigurationApplyOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v *TalosMachineConfigurationApply) pulumi.StringOutput { return v.Endpoint }).(pulumi.StringOutput)
 }
 
 // machine configuration
@@ -236,9 +307,9 @@ func (o TalosMachineConfigurationApplyOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *TalosMachineConfigurationApply) pulumi.StringPtrOutput { return v.Mode }).(pulumi.StringPtrOutput)
 }
 
-// nodes to apply the config
-func (o TalosMachineConfigurationApplyOutput) Nodes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *TalosMachineConfigurationApply) pulumi.StringArrayOutput { return v.Nodes }).(pulumi.StringArrayOutput)
+// node to apply the config against
+func (o TalosMachineConfigurationApplyOutput) Node() pulumi.StringOutput {
+	return o.ApplyT(func(v *TalosMachineConfigurationApply) pulumi.StringOutput { return v.Node }).(pulumi.StringOutput)
 }
 
 // talos client configuration for authentication
