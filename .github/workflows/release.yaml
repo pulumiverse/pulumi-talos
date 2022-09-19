@@ -16,6 +16,7 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version-file: 'provider/go.mod'
+        cache-dependency-path: 'provider/go.sum'
         cache: true
     - name: Install pulumictl
       uses: jaxxstorm/action-install-gh-release@v1.7.1
@@ -23,8 +24,6 @@ jobs:
         repo: pulumi/pulumictl
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Set PreRelease Version
-      run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
     - name: release-notes
       run: make release-notes
     - name: Run GoReleaser
