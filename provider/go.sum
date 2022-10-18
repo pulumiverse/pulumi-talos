@@ -890,8 +890,8 @@ github.com/siderolabs/go-pointer v1.0.0 h1:6TshPKep2doDQJAAtHUuHWXbca8ZfyRySjSBT
 github.com/siderolabs/go-pointer v1.0.0/go.mod h1:HTRFUNYa3R+k0FFKNv11zgkaCLzEkWVzoYZ433P3kHc=
 github.com/siderolabs/protoenc v0.1.4-0.20220912144557-28f42ee12889 h1:RVK6GOTtUtwaPHLG9FXoPwv2rKfrqy4rEw/ZnNEpCWM=
 github.com/siderolabs/protoenc v0.1.4-0.20220912144557-28f42ee12889/go.mod h1:mu4gc6pJxhdJYpuloacKE4jsJojj87qDXwn8LUvs2bY=
-github.com/siderolabs/terraform-provider-talos v0.1.0-alpha.8 h1:22iEbcW6AzbbGJUUhlTj9juvaTy1XAiZdckgHNimlJg=
-github.com/siderolabs/terraform-provider-talos v0.1.0-alpha.8/go.mod h1:JhayAUqEaUPyFsiNnPtrRaXeiNunHVycRoWd5DPx5vg=
+github.com/siderolabs/terraform-provider-talos v0.1.0-alpha.9 h1:xyc64gIqTq4+OxGuIP504SOk1lMu70om6yqyJ2qVL1I=
+github.com/siderolabs/terraform-provider-talos v0.1.0-alpha.9/go.mod h1:RLhxAoycExnAABHY3wR6mhTjbz34m6K51HyLECXwCYo=
 github.com/sirupsen/logrus v1.0.4-0.20170822132746-89742aefa4b2/go.mod h1:pMByvHTf9Beacp5x1UXfOR9xyW/9antXMhjMPG0dEzc=
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/sirupsen/logrus v1.4.1/go.mod h1:ni0Sbl8bgC9z8RoU9G6nDWqqs/fq4eDPysMBDgk/93Q=
@@ -939,8 +939,8 @@ github.com/talos-systems/go-retry v0.1.1-0.20201113203059-8c63d290a688/go.mod h1
 github.com/talos-systems/go-retry v0.3.1 h1:GjjyHB8i1CJpb1O5qYPMljq74cRQ5uiDoyMaWddA5FA=
 github.com/talos-systems/net v0.3.2 h1:IMseRyuha8fNsv/3FbQPRE9hLVRBEFR+9sxcoETQ5vI=
 github.com/talos-systems/net v0.3.2/go.mod h1:zhcGixNJz9dgwFiUwc7gkkAqdVqXagU1SNNoIVXYKGo=
-github.com/talos-systems/talos/pkg/machinery v1.2.4 h1:xktg8Q74dJSWN5HVwwh+u9IKfoMZ2T1HpPJSBcDoQx4=
-github.com/talos-systems/talos/pkg/machinery v1.2.4/go.mod h1:bMaqe3cZ95419vkUt+zQQXXvgVcW7saTi80RsWyIC2M=
+github.com/talos-systems/talos/pkg/machinery v1.2.5 h1:cccQLWqb7kKp2UNDEwHGlJ6OkCBRq04/pj20HsQOxAU=
+github.com/talos-systems/talos/pkg/machinery v1.2.5/go.mod h1:bMaqe3cZ95419vkUt+zQQXXvgVcW7saTi80RsWyIC2M=
 github.com/texttheater/golang-levenshtein v1.0.1 h1:+cRNoVrfiwufQPhoMzB6N0Yf/Mqajr6t1lOv8GyGE2U=
 github.com/texttheater/golang-levenshtein v1.0.1/go.mod h1:PYAKrbF5sAiq9wd+H82hs7gNaen0CplQ9uvm6+enD/8=
 github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqriFuLhtthL60Sar/7RFoluCcXsuvEwTV5KM=

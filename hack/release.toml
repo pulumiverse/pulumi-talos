@@ -5,7 +5,7 @@ project_name = "pulumi-provider-talos"
 github_repo = "siderolabs/pulumi-provider-talos"
 match_deps = "^github.com/(siderolabs/[a-zA-Z0-9-]+)$"
 
-previous = "v0.1.0-alpha.8"
+previous = "v0.1.0-alpha.9"
 pre_release = true
 
 [notes]
@@ -13,5 +13,5 @@ pre_release = true
     [notes.updates]
         title = "Component Updates"
         description = """\
-Talos TF provider: v0.1.0-alpha.8
+Talos TF provider: v0.1.0-alpha.9
 """

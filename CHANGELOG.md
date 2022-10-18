@@ -1,3 +1,34 @@
+## [pulumi-provider-talos 0.1.0-alpha.10](https://github.com/siderolabs/pulumi-provider-talos/releases/tag/v0.1.0-alpha.10) (2022-10-18)
+
+Welcome to the v0.1.0-alpha.10 release of pulumi-provider-talos!  
+*This is a pre-release of pulumi-provider-talos*
+
+
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/pulumi-provider-talos/issues.
+
+### Component Updates
+
+Talos TF provider: v0.1.0-alpha.9
+
+
+### Contributors
+
+
+### Changes
+<details><summary>0 commit</summary>
+<p>
+
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v0.1.0-alpha.9](https://github.com/siderolabs/pulumi-provider-talos/releases/tag/v0.1.0-alpha.9)
+
 ## [pulumi-provider-talos 0.1.0-alpha.9](https://github.com/siderolabs/pulumi-provider-talos/releases/tag/v0.1.0-alpha.9) (2022-10-18)
 
 Welcome to the v0.1.0-alpha.9 release of pulumi-provider-talos!  
