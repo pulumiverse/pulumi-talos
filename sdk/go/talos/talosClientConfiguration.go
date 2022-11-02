@@ -74,6 +74,10 @@ func NewTalosClientConfiguration(ctx *pulumi.Context,
 	if args.MachineSecrets == nil {
 		return nil, errors.New("invalid value for required argument 'MachineSecrets'")
 	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"talosConfig",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource TalosClientConfiguration
 	err := ctx.RegisterResource("talos:index/talosClientConfiguration:TalosClientConfiguration", name, args, &resource, opts...)

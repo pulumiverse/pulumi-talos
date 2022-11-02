@@ -83,6 +83,10 @@ func NewTalosClusterKubeconfig(ctx *pulumi.Context,
 	if args.TalosConfig == nil {
 		return nil, errors.New("invalid value for required argument 'TalosConfig'")
 	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"kubeConfig",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource TalosClusterKubeconfig
 	err := ctx.RegisterResource("talos:index/talosClusterKubeconfig:TalosClusterKubeconfig", name, args, &resource, opts...)

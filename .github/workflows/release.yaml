@@ -27,7 +27,7 @@ jobs:
     - name: release-notes
       run: make release-notes
     - name: Run GoReleaser
-      uses: goreleaser/goreleaser-action@v3.1.0
+      uses: goreleaser/goreleaser-action@v3.2.0
       with:
         args: -p 3 release --rm-dist --release-notes=_out/RELEASE_NOTES.md
         version: latest

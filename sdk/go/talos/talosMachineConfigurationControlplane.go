@@ -95,6 +95,10 @@ func NewTalosMachineConfigurationControlplane(ctx *pulumi.Context,
 	if args.MachineSecrets == nil {
 		return nil, errors.New("invalid value for required argument 'MachineSecrets'")
 	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"machineConfig",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource TalosMachineConfigurationControlplane
 	err := ctx.RegisterResource("talos:index/talosMachineConfigurationControlplane:TalosMachineConfigurationControlplane", name, args, &resource, opts...)

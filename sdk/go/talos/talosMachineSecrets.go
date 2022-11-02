@@ -51,6 +51,10 @@ func NewTalosMachineSecrets(ctx *pulumi.Context,
 		args = &TalosMachineSecretsArgs{}
 	}
 
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"machineSecrets",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource TalosMachineSecrets
 	err := ctx.RegisterResource("talos:index/talosMachineSecrets:TalosMachineSecrets", name, args, &resource, opts...)
