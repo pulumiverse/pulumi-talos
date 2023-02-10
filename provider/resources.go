@@ -24,7 +24,10 @@ const (
 	// registries for nodejs and python.
 	mainPkg = "talos"
 	// modules:
-	mainMod = "index" // the talos module
+	mainMod    = "index"   // the talos module
+	clientMod  = "client"  // the client module
+	clusterMod = "cluster" // the talos module
+	machineMod = "machine" // the talos module
 )
 
 // preConfigureCallback is called before the providerConfigure function of the underlying provider.
@@ -44,29 +47,30 @@ func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:                    p,
 		Name:                 "talos",
-		DisplayName:          "",
+		DisplayName:          "Talos Linux",
 		Publisher:            "Siderolabs",
 		LogoURL:              "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.svg",
-		PluginDownloadURL:    "https://github.com/siderolabs/pulumi-provider-talos/releases/",
+		PluginDownloadURL:    "github://api.github.com/siderolabs/pulumi-provider-talos",
 		Description:          "A Pulumi package for creating and managing talos resources.",
 		Keywords:             []string{"pulumi", "talos", "category/os"},
-		License:              "MPL-2.0 license ",
+		License:              "MPL-2.0",
 		Homepage:             "https://talos.dev",
 		Repository:           "https://github.com/siderolabs/pulumi-provider-talos",
 		GitHubOrg:            "siderolabs",
 		Config:               map[string]*tfbridge.SchemaInfo{},
 		PreConfigureCallback: preConfigureCallback,
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"talos_client_configuration":               {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TalosClientConfiguration")},
-			"talos_cluster_kubeconfig":                 {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TalosClusterKubeconfig")},
-			"talos_machine_bootstrap":                  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TalosMachineBootstrap")},
-			"talos_machine_configuration_apply":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TalosMachineConfigurationApply")},
-			"talos_machine_configuration_controlplane": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TalosMachineConfigurationControlplane")},
-			"talos_machine_configuration_worker":       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TalosMachineConfigurationWorker")},
-			"talos_machine_secrets":                    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TalosMachineSecrets")},
+			"talos_client_configuration":               {Tok: tfbridge.MakeResource(mainPkg, clientMod, "Configuration")},
+			"talos_cluster_kubeconfig":                 {Tok: tfbridge.MakeResource(mainPkg, clusterMod, "Kubeconfig")},
+			"talos_machine_bootstrap":                  {Tok: tfbridge.MakeResource(mainPkg, machineMod, "Bootstrap")},
+			"talos_machine_configuration_apply":        {Tok: tfbridge.MakeResource(mainPkg, machineMod, "ConfigurationApply")},
+			"talos_machine_configuration_controlplane": {Tok: tfbridge.MakeResource(mainPkg, machineMod, "ConfigurationControlplane")},
+			"talos_machine_configuration_worker":       {Tok: tfbridge.MakeResource(mainPkg, machineMod, "ConfigurationWorker")},
+			"talos_machine_secrets":                    {Tok: tfbridge.MakeResource(mainPkg, machineMod, "Secrets")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{},
 		JavaScript: &tfbridge.JavaScriptInfo{
+			PackageName: "@siderolabs/pulumi-talos",
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -77,6 +81,7 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		Python: &tfbridge.PythonInfo{
+			PackageName: "siderolabs_pulumi_talos",
 			// List any Python dependencies and their version ranges
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
@@ -84,7 +89,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
+				fmt.Sprintf("github.com/siderolabs/pulumi-provider-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,
@@ -92,6 +97,7 @@ func Provider() tfbridge.ProviderInfo {
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
+			RootNamespace: "SideroLabs.Pulumi",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
