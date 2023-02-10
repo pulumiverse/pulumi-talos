@@ -47,7 +47,7 @@ func Provider() tfbridge.ProviderInfo {
 		DisplayName:          "",
 		Publisher:            "Siderolabs",
 		LogoURL:              "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.svg",
-		PluginDownloadURL:    "https://github.com/siderolabs/pulumi-provider-talos/releases/",
+		PluginDownloadURL:    "github://api.github.com/siderolabs/pulumi-provider-talos",
 		Description:          "A Pulumi package for creating and managing talos resources.",
 		Keywords:             []string{"pulumi", "talos", "category/os"},
 		License:              "MPL-2.0 license ",
