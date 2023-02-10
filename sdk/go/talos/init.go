@@ -10,38 +10,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type module struct {
-	version semver.Version
-}
-
-func (m *module) Version() semver.Version {
-	return m.version
-}
-
-func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
-	switch typ {
-	case "talos:index/talosClientConfiguration:TalosClientConfiguration":
-		r = &TalosClientConfiguration{}
-	case "talos:index/talosClusterKubeconfig:TalosClusterKubeconfig":
-		r = &TalosClusterKubeconfig{}
-	case "talos:index/talosMachineBootstrap:TalosMachineBootstrap":
-		r = &TalosMachineBootstrap{}
-	case "talos:index/talosMachineConfigurationApply:TalosMachineConfigurationApply":
-		r = &TalosMachineConfigurationApply{}
-	case "talos:index/talosMachineConfigurationControlplane:TalosMachineConfigurationControlplane":
-		r = &TalosMachineConfigurationControlplane{}
-	case "talos:index/talosMachineConfigurationWorker:TalosMachineConfigurationWorker":
-		r = &TalosMachineConfigurationWorker{}
-	case "talos:index/talosMachineSecrets:TalosMachineSecrets":
-		r = &TalosMachineSecrets{}
-	default:
-		return nil, fmt.Errorf("unknown resource type: %s", typ)
-	}
-
-	err = ctx.RegisterResource(typ, name, nil, r, pulumi.URN_(urn))
-	return
-}
-
 type pkg struct {
 	version semver.Version
 }
@@ -62,41 +30,6 @@ func (p *pkg) ConstructProvider(ctx *pulumi.Context, name, typ, urn string) (pul
 
 func init() {
 	version, _ := PkgVersion()
-	pulumi.RegisterResourceModule(
-		"talos",
-		"index/talosClientConfiguration",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"talos",
-		"index/talosClusterKubeconfig",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"talos",
-		"index/talosMachineBootstrap",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"talos",
-		"index/talosMachineConfigurationApply",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"talos",
-		"index/talosMachineConfigurationControlplane",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"talos",
-		"index/talosMachineConfigurationWorker",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"talos",
-		"index/talosMachineSecrets",
-		&module{version},
-	)
 	pulumi.RegisterResourcePackage(
 		"talos",
 		&pkg{version},
