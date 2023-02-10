@@ -53,7 +53,7 @@ func Provider() tfbridge.ProviderInfo {
 		PluginDownloadURL:    "github://api.github.com/siderolabs/pulumi-provider-talos",
 		Description:          "A Pulumi package for creating and managing talos resources.",
 		Keywords:             []string{"pulumi", "talos", "category/os"},
-		License:              "MPL-2.0 license ",
+		License:              "MPL-2.0",
 		Homepage:             "https://talos.dev",
 		Repository:           "https://github.com/siderolabs/pulumi-provider-talos",
 		GitHubOrg:            "siderolabs",
@@ -96,6 +96,7 @@ func Provider() tfbridge.ProviderInfo {
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
+			RootNamespace: "SideroLabs.Pulumi",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
