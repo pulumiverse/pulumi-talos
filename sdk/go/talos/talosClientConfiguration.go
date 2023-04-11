@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -20,296 +19,143 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-talos/sdk/go/talos"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/siderolabs/pulumi-provider-talos/sdk/go/talos"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			machineSecrets, err := talos.NewTalosMachineSecrets(ctx, "machineSecrets", nil)
+//			thisTalosMachineSecrets, err := talos.NewTalosMachineSecrets(ctx, "thisTalosMachineSecrets", nil)
 //			if err != nil {
 //				return err
 //			}
-//			_, err = talos.NewTalosClientConfiguration(ctx, "talosconfig", &talos.TalosClientConfigurationArgs{
-//				ClusterName:    pulumi.String("example-cluster"),
-//				MachineSecrets: machineSecrets.MachineSecrets,
-//				Endpoints: pulumi.StringArray{
+//			_ = talos.TalosClientConfigurationOutput(ctx, talos.TalosClientConfigurationOutputArgs{
+//				ClusterName:         pulumi.String("example-cluster"),
+//				ClientConfiguration: thisTalosMachineSecrets.ClientConfiguration,
+//				Nodes: pulumi.StringArray{
 //					pulumi.String("10.5.0.2"),
 //				},
-//			})
-//			if err != nil {
-//				return err
-//			}
+//			}, nil)
 //			return nil
 //		})
 //	}
 //
 // ```
-type TalosClientConfiguration struct {
-	pulumi.CustomResourceState
-
-	// The name of the cluster in the generated config
-	ClusterName pulumi.StringOutput `pulumi:"clusterName"`
-	// endpoints to set in the generated config
-	Endpoints pulumi.StringArrayOutput `pulumi:"endpoints"`
-	// The machine secrets for the cluster
-	MachineSecrets pulumi.StringOutput `pulumi:"machineSecrets"`
-	// nodes to set in the generated config
-	Nodes pulumi.StringArrayOutput `pulumi:"nodes"`
-	// The generated talos config
-	TalosConfig pulumi.StringOutput `pulumi:"talosConfig"`
-}
-
-// NewTalosClientConfiguration registers a new resource with the given unique name, arguments, and options.
-func NewTalosClientConfiguration(ctx *pulumi.Context,
-	name string, args *TalosClientConfigurationArgs, opts ...pulumi.ResourceOption) (*TalosClientConfiguration, error) {
-	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
-	}
-
-	if args.ClusterName == nil {
-		return nil, errors.New("invalid value for required argument 'ClusterName'")
-	}
-	if args.MachineSecrets == nil {
-		return nil, errors.New("invalid value for required argument 'MachineSecrets'")
-	}
-	secrets := pulumi.AdditionalSecretOutputs([]string{
-		"talosConfig",
-	})
-	opts = append(opts, secrets)
-	opts = pkgResourceDefaultOpts(opts)
-	var resource TalosClientConfiguration
-	err := ctx.RegisterResource("talos:index/talosClientConfiguration:TalosClientConfiguration", name, args, &resource, opts...)
+func TalosClientConfiguration(ctx *pulumi.Context, args *TalosClientConfigurationArgs, opts ...pulumi.InvokeOption) (*TalosClientConfigurationResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
+	var rv TalosClientConfigurationResult
+	err := ctx.Invoke("talos:index/talosClientConfiguration:TalosClientConfiguration", args, &rv, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &resource, nil
+	return &rv, nil
 }
 
-// GetTalosClientConfiguration gets an existing TalosClientConfiguration resource's state with the given name, ID, and optional
-// state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetTalosClientConfiguration(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *TalosClientConfigurationState, opts ...pulumi.ResourceOption) (*TalosClientConfiguration, error) {
-	var resource TalosClientConfiguration
-	err := ctx.ReadResource("talos:index/talosClientConfiguration:TalosClientConfiguration", name, id, state, &resource, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &resource, nil
-}
-
-// Input properties used for looking up and filtering TalosClientConfiguration resources.
-type talosClientConfigurationState struct {
-	// The name of the cluster in the generated config
-	ClusterName *string `pulumi:"clusterName"`
-	// endpoints to set in the generated config
-	Endpoints []string `pulumi:"endpoints"`
-	// The machine secrets for the cluster
-	MachineSecrets *string `pulumi:"machineSecrets"`
-	// nodes to set in the generated config
-	Nodes []string `pulumi:"nodes"`
-	// The generated talos config
-	TalosConfig *string `pulumi:"talosConfig"`
-}
-
-type TalosClientConfigurationState struct {
-	// The name of the cluster in the generated config
-	ClusterName pulumi.StringPtrInput
-	// endpoints to set in the generated config
-	Endpoints pulumi.StringArrayInput
-	// The machine secrets for the cluster
-	MachineSecrets pulumi.StringPtrInput
-	// nodes to set in the generated config
-	Nodes pulumi.StringArrayInput
-	// The generated talos config
-	TalosConfig pulumi.StringPtrInput
-}
-
-func (TalosClientConfigurationState) ElementType() reflect.Type {
-	return reflect.TypeOf((*talosClientConfigurationState)(nil)).Elem()
-}
-
-type talosClientConfigurationArgs struct {
+// A collection of arguments for invoking TalosClientConfiguration.
+type TalosClientConfigurationArgs struct {
+	// The client configuration data
+	ClientConfiguration TalosClientConfigurationClientConfiguration `pulumi:"clientConfiguration"`
 	// The name of the cluster in the generated config
 	ClusterName string `pulumi:"clusterName"`
 	// endpoints to set in the generated config
 	Endpoints []string `pulumi:"endpoints"`
-	// The machine secrets for the cluster
-	MachineSecrets string `pulumi:"machineSecrets"`
 	// nodes to set in the generated config
 	Nodes []string `pulumi:"nodes"`
 }
 
-// The set of arguments for constructing a TalosClientConfiguration resource.
-type TalosClientConfigurationArgs struct {
+// A collection of values returned by TalosClientConfiguration.
+type TalosClientConfigurationResult struct {
+	// The client configuration data
+	ClientConfiguration TalosClientConfigurationClientConfiguration `pulumi:"clientConfiguration"`
 	// The name of the cluster in the generated config
-	ClusterName pulumi.StringInput
+	ClusterName string `pulumi:"clusterName"`
 	// endpoints to set in the generated config
-	Endpoints pulumi.StringArrayInput
-	// The machine secrets for the cluster
-	MachineSecrets pulumi.StringInput
+	Endpoints []string `pulumi:"endpoints"`
+	// The ID of this resource
+	Id string `pulumi:"id"`
 	// nodes to set in the generated config
-	Nodes pulumi.StringArrayInput
+	Nodes []string `pulumi:"nodes"`
+	// The generated client configuration
+	TalosConfig string `pulumi:"talosConfig"`
 }
 
-func (TalosClientConfigurationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*talosClientConfigurationArgs)(nil)).Elem()
+func TalosClientConfigurationOutput(ctx *pulumi.Context, args TalosClientConfigurationOutputArgs, opts ...pulumi.InvokeOption) TalosClientConfigurationResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (TalosClientConfigurationResult, error) {
+			args := v.(TalosClientConfigurationArgs)
+			r, err := TalosClientConfiguration(ctx, &args, opts...)
+			var s TalosClientConfigurationResult
+			if r != nil {
+				s = *r
+			}
+			return s, err
+		}).(TalosClientConfigurationResultOutput)
 }
 
-type TalosClientConfigurationInput interface {
-	pulumi.Input
-
-	ToTalosClientConfigurationOutput() TalosClientConfigurationOutput
-	ToTalosClientConfigurationOutputWithContext(ctx context.Context) TalosClientConfigurationOutput
+// A collection of arguments for invoking TalosClientConfiguration.
+type TalosClientConfigurationOutputArgs struct {
+	// The client configuration data
+	ClientConfiguration TalosClientConfigurationClientConfigurationInput `pulumi:"clientConfiguration"`
+	// The name of the cluster in the generated config
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// endpoints to set in the generated config
+	Endpoints pulumi.StringArrayInput `pulumi:"endpoints"`
+	// nodes to set in the generated config
+	Nodes pulumi.StringArrayInput `pulumi:"nodes"`
 }
 
-func (*TalosClientConfiguration) ElementType() reflect.Type {
-	return reflect.TypeOf((**TalosClientConfiguration)(nil)).Elem()
+func (TalosClientConfigurationOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TalosClientConfigurationArgs)(nil)).Elem()
 }
 
-func (i *TalosClientConfiguration) ToTalosClientConfigurationOutput() TalosClientConfigurationOutput {
-	return i.ToTalosClientConfigurationOutputWithContext(context.Background())
+// A collection of values returned by TalosClientConfiguration.
+type TalosClientConfigurationResultOutput struct{ *pulumi.OutputState }
+
+func (TalosClientConfigurationResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TalosClientConfigurationResult)(nil)).Elem()
 }
 
-func (i *TalosClientConfiguration) ToTalosClientConfigurationOutputWithContext(ctx context.Context) TalosClientConfigurationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TalosClientConfigurationOutput)
-}
-
-// TalosClientConfigurationArrayInput is an input type that accepts TalosClientConfigurationArray and TalosClientConfigurationArrayOutput values.
-// You can construct a concrete instance of `TalosClientConfigurationArrayInput` via:
-//
-//	TalosClientConfigurationArray{ TalosClientConfigurationArgs{...} }
-type TalosClientConfigurationArrayInput interface {
-	pulumi.Input
-
-	ToTalosClientConfigurationArrayOutput() TalosClientConfigurationArrayOutput
-	ToTalosClientConfigurationArrayOutputWithContext(context.Context) TalosClientConfigurationArrayOutput
-}
-
-type TalosClientConfigurationArray []TalosClientConfigurationInput
-
-func (TalosClientConfigurationArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*TalosClientConfiguration)(nil)).Elem()
-}
-
-func (i TalosClientConfigurationArray) ToTalosClientConfigurationArrayOutput() TalosClientConfigurationArrayOutput {
-	return i.ToTalosClientConfigurationArrayOutputWithContext(context.Background())
-}
-
-func (i TalosClientConfigurationArray) ToTalosClientConfigurationArrayOutputWithContext(ctx context.Context) TalosClientConfigurationArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TalosClientConfigurationArrayOutput)
-}
-
-// TalosClientConfigurationMapInput is an input type that accepts TalosClientConfigurationMap and TalosClientConfigurationMapOutput values.
-// You can construct a concrete instance of `TalosClientConfigurationMapInput` via:
-//
-//	TalosClientConfigurationMap{ "key": TalosClientConfigurationArgs{...} }
-type TalosClientConfigurationMapInput interface {
-	pulumi.Input
-
-	ToTalosClientConfigurationMapOutput() TalosClientConfigurationMapOutput
-	ToTalosClientConfigurationMapOutputWithContext(context.Context) TalosClientConfigurationMapOutput
-}
-
-type TalosClientConfigurationMap map[string]TalosClientConfigurationInput
-
-func (TalosClientConfigurationMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*TalosClientConfiguration)(nil)).Elem()
-}
-
-func (i TalosClientConfigurationMap) ToTalosClientConfigurationMapOutput() TalosClientConfigurationMapOutput {
-	return i.ToTalosClientConfigurationMapOutputWithContext(context.Background())
-}
-
-func (i TalosClientConfigurationMap) ToTalosClientConfigurationMapOutputWithContext(ctx context.Context) TalosClientConfigurationMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TalosClientConfigurationMapOutput)
-}
-
-type TalosClientConfigurationOutput struct{ *pulumi.OutputState }
-
-func (TalosClientConfigurationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**TalosClientConfiguration)(nil)).Elem()
-}
-
-func (o TalosClientConfigurationOutput) ToTalosClientConfigurationOutput() TalosClientConfigurationOutput {
+func (o TalosClientConfigurationResultOutput) ToTalosClientConfigurationResultOutput() TalosClientConfigurationResultOutput {
 	return o
 }
 
-func (o TalosClientConfigurationOutput) ToTalosClientConfigurationOutputWithContext(ctx context.Context) TalosClientConfigurationOutput {
+func (o TalosClientConfigurationResultOutput) ToTalosClientConfigurationResultOutputWithContext(ctx context.Context) TalosClientConfigurationResultOutput {
 	return o
+}
+
+// The client configuration data
+func (o TalosClientConfigurationResultOutput) ClientConfiguration() TalosClientConfigurationClientConfigurationOutput {
+	return o.ApplyT(func(v TalosClientConfigurationResult) TalosClientConfigurationClientConfiguration {
+		return v.ClientConfiguration
+	}).(TalosClientConfigurationClientConfigurationOutput)
 }
 
 // The name of the cluster in the generated config
-func (o TalosClientConfigurationOutput) ClusterName() pulumi.StringOutput {
-	return o.ApplyT(func(v *TalosClientConfiguration) pulumi.StringOutput { return v.ClusterName }).(pulumi.StringOutput)
+func (o TalosClientConfigurationResultOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v TalosClientConfigurationResult) string { return v.ClusterName }).(pulumi.StringOutput)
 }
 
 // endpoints to set in the generated config
-func (o TalosClientConfigurationOutput) Endpoints() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *TalosClientConfiguration) pulumi.StringArrayOutput { return v.Endpoints }).(pulumi.StringArrayOutput)
+func (o TalosClientConfigurationResultOutput) Endpoints() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TalosClientConfigurationResult) []string { return v.Endpoints }).(pulumi.StringArrayOutput)
 }
 
-// The machine secrets for the cluster
-func (o TalosClientConfigurationOutput) MachineSecrets() pulumi.StringOutput {
-	return o.ApplyT(func(v *TalosClientConfiguration) pulumi.StringOutput { return v.MachineSecrets }).(pulumi.StringOutput)
+// The ID of this resource
+func (o TalosClientConfigurationResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v TalosClientConfigurationResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
 // nodes to set in the generated config
-func (o TalosClientConfigurationOutput) Nodes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *TalosClientConfiguration) pulumi.StringArrayOutput { return v.Nodes }).(pulumi.StringArrayOutput)
+func (o TalosClientConfigurationResultOutput) Nodes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TalosClientConfigurationResult) []string { return v.Nodes }).(pulumi.StringArrayOutput)
 }
 
-// The generated talos config
-func (o TalosClientConfigurationOutput) TalosConfig() pulumi.StringOutput {
-	return o.ApplyT(func(v *TalosClientConfiguration) pulumi.StringOutput { return v.TalosConfig }).(pulumi.StringOutput)
-}
-
-type TalosClientConfigurationArrayOutput struct{ *pulumi.OutputState }
-
-func (TalosClientConfigurationArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*TalosClientConfiguration)(nil)).Elem()
-}
-
-func (o TalosClientConfigurationArrayOutput) ToTalosClientConfigurationArrayOutput() TalosClientConfigurationArrayOutput {
-	return o
-}
-
-func (o TalosClientConfigurationArrayOutput) ToTalosClientConfigurationArrayOutputWithContext(ctx context.Context) TalosClientConfigurationArrayOutput {
-	return o
-}
-
-func (o TalosClientConfigurationArrayOutput) Index(i pulumi.IntInput) TalosClientConfigurationOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *TalosClientConfiguration {
-		return vs[0].([]*TalosClientConfiguration)[vs[1].(int)]
-	}).(TalosClientConfigurationOutput)
-}
-
-type TalosClientConfigurationMapOutput struct{ *pulumi.OutputState }
-
-func (TalosClientConfigurationMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*TalosClientConfiguration)(nil)).Elem()
-}
-
-func (o TalosClientConfigurationMapOutput) ToTalosClientConfigurationMapOutput() TalosClientConfigurationMapOutput {
-	return o
-}
-
-func (o TalosClientConfigurationMapOutput) ToTalosClientConfigurationMapOutputWithContext(ctx context.Context) TalosClientConfigurationMapOutput {
-	return o
-}
-
-func (o TalosClientConfigurationMapOutput) MapIndex(k pulumi.StringInput) TalosClientConfigurationOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *TalosClientConfiguration {
-		return vs[0].(map[string]*TalosClientConfiguration)[vs[1].(string)]
-	}).(TalosClientConfigurationOutput)
+// The generated client configuration
+func (o TalosClientConfigurationResultOutput) TalosConfig() pulumi.StringOutput {
+	return o.ApplyT(func(v TalosClientConfigurationResult) string { return v.TalosConfig }).(pulumi.StringOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*TalosClientConfigurationInput)(nil)).Elem(), &TalosClientConfiguration{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TalosClientConfigurationArrayInput)(nil)).Elem(), TalosClientConfigurationArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TalosClientConfigurationMapInput)(nil)).Elem(), TalosClientConfigurationMap{})
-	pulumi.RegisterOutputType(TalosClientConfigurationOutput{})
-	pulumi.RegisterOutputType(TalosClientConfigurationArrayOutput{})
-	pulumi.RegisterOutputType(TalosClientConfigurationMapOutput{})
+	pulumi.RegisterOutputType(TalosClientConfigurationResultOutput{})
 }

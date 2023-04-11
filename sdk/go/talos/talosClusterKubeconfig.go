@@ -7,305 +7,140 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Retrieve Kubeconfig for a Talos cluster
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-talos/sdk/go/talos"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			machineSecrets, err := talos.NewTalosMachineSecrets(ctx, "machineSecrets", nil)
-//			if err != nil {
-//				return err
-//			}
-//			talosconfig, err := talos.NewTalosClientConfiguration(ctx, "talosconfig", &talos.TalosClientConfigurationArgs{
-//				ClusterName:    pulumi.String("example-cluster"),
-//				MachineSecrets: machineSecrets.MachineSecrets,
-//				Endpoints: pulumi.StringArray{
-//					pulumi.String("10.5.0.2"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = talos.NewTalosClusterKubeconfig(ctx, "kubeconfig", &talos.TalosClusterKubeconfigArgs{
-//				TalosConfig: talosconfig.TalosConfig,
-//				Endpoint:    pulumi.String("10.5.0.2"),
-//				Node:        pulumi.String("10.5.0.2"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-type TalosClusterKubeconfig struct {
-	pulumi.CustomResourceState
-
-	// machine endpoint
-	Endpoint pulumi.StringOutput `pulumi:"endpoint"`
-	// The retrieved Kubeconfig
-	KubeConfig pulumi.StringOutput `pulumi:"kubeConfig"`
-	// node to use
-	Node pulumi.StringOutput `pulumi:"node"`
-	// talos client configuration for authentication
-	TalosConfig pulumi.StringOutput `pulumi:"talosConfig"`
-}
-
-// NewTalosClusterKubeconfig registers a new resource with the given unique name, arguments, and options.
-func NewTalosClusterKubeconfig(ctx *pulumi.Context,
-	name string, args *TalosClusterKubeconfigArgs, opts ...pulumi.ResourceOption) (*TalosClusterKubeconfig, error) {
-	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
-	}
-
-	if args.Endpoint == nil {
-		return nil, errors.New("invalid value for required argument 'Endpoint'")
-	}
-	if args.Node == nil {
-		return nil, errors.New("invalid value for required argument 'Node'")
-	}
-	if args.TalosConfig == nil {
-		return nil, errors.New("invalid value for required argument 'TalosConfig'")
-	}
-	secrets := pulumi.AdditionalSecretOutputs([]string{
-		"kubeConfig",
-	})
-	opts = append(opts, secrets)
-	opts = pkgResourceDefaultOpts(opts)
-	var resource TalosClusterKubeconfig
-	err := ctx.RegisterResource("talos:index/talosClusterKubeconfig:TalosClusterKubeconfig", name, args, &resource, opts...)
+// Retrieves the kubeconfig for a Talos cluster
+func TalosClusterKubeconfig(ctx *pulumi.Context, args *TalosClusterKubeconfigArgs, opts ...pulumi.InvokeOption) (*TalosClusterKubeconfigResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
+	var rv TalosClusterKubeconfigResult
+	err := ctx.Invoke("talos:index/talosClusterKubeconfig:TalosClusterKubeconfig", args, &rv, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &resource, nil
+	return &rv, nil
 }
 
-// GetTalosClusterKubeconfig gets an existing TalosClusterKubeconfig resource's state with the given name, ID, and optional
-// state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetTalosClusterKubeconfig(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *TalosClusterKubeconfigState, opts ...pulumi.ResourceOption) (*TalosClusterKubeconfig, error) {
-	var resource TalosClusterKubeconfig
-	err := ctx.ReadResource("talos:index/talosClusterKubeconfig:TalosClusterKubeconfig", name, id, state, &resource, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &resource, nil
-}
-
-// Input properties used for looking up and filtering TalosClusterKubeconfig resources.
-type talosClusterKubeconfigState struct {
-	// machine endpoint
-	Endpoint *string `pulumi:"endpoint"`
-	// The retrieved Kubeconfig
-	KubeConfig *string `pulumi:"kubeConfig"`
-	// node to use
-	Node *string `pulumi:"node"`
-	// talos client configuration for authentication
-	TalosConfig *string `pulumi:"talosConfig"`
-}
-
-type TalosClusterKubeconfigState struct {
-	// machine endpoint
-	Endpoint pulumi.StringPtrInput
-	// The retrieved Kubeconfig
-	KubeConfig pulumi.StringPtrInput
-	// node to use
-	Node pulumi.StringPtrInput
-	// talos client configuration for authentication
-	TalosConfig pulumi.StringPtrInput
-}
-
-func (TalosClusterKubeconfigState) ElementType() reflect.Type {
-	return reflect.TypeOf((*talosClusterKubeconfigState)(nil)).Elem()
-}
-
-type talosClusterKubeconfigArgs struct {
-	// machine endpoint
-	Endpoint string `pulumi:"endpoint"`
-	// node to use
-	Node string `pulumi:"node"`
-	// talos client configuration for authentication
-	TalosConfig string `pulumi:"talosConfig"`
-}
-
-// The set of arguments for constructing a TalosClusterKubeconfig resource.
+// A collection of arguments for invoking TalosClusterKubeconfig.
 type TalosClusterKubeconfigArgs struct {
-	// machine endpoint
-	Endpoint pulumi.StringInput
-	// node to use
-	Node pulumi.StringInput
-	// talos client configuration for authentication
-	TalosConfig pulumi.StringInput
+	// The client configuration data
+	ClientConfiguration TalosClusterKubeconfigClientConfiguration `pulumi:"clientConfiguration"`
+	// endpoint to use for the talosclient. if not set, the node value will be used
+	Endpoint *string `pulumi:"endpoint"`
+	// controlplane node to retrieve the kubeconfig from
+	Node     string                 `pulumi:"node"`
+	Timeouts map[string]interface{} `pulumi:"timeouts"`
+	// Wait for the kubernetes api to be available
+	Wait *bool `pulumi:"wait"`
 }
 
-func (TalosClusterKubeconfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*talosClusterKubeconfigArgs)(nil)).Elem()
+// A collection of values returned by TalosClusterKubeconfig.
+type TalosClusterKubeconfigResult struct {
+	// The client configuration data
+	ClientConfiguration TalosClusterKubeconfigClientConfiguration `pulumi:"clientConfiguration"`
+	// endpoint to use for the talosclient. if not set, the node value will be used
+	Endpoint string `pulumi:"endpoint"`
+	// The ID of this resource.
+	Id string `pulumi:"id"`
+	// The raw kubeconfig
+	KubeconfigRaw string `pulumi:"kubeconfigRaw"`
+	// The kubernetes client configuration
+	KubernetesClientConfiguration TalosClusterKubeconfigKubernetesClientConfiguration `pulumi:"kubernetesClientConfiguration"`
+	// controlplane node to retrieve the kubeconfig from
+	Node     string                 `pulumi:"node"`
+	Timeouts map[string]interface{} `pulumi:"timeouts"`
+	// Wait for the kubernetes api to be available
+	Wait *bool `pulumi:"wait"`
 }
 
-type TalosClusterKubeconfigInput interface {
-	pulumi.Input
-
-	ToTalosClusterKubeconfigOutput() TalosClusterKubeconfigOutput
-	ToTalosClusterKubeconfigOutputWithContext(ctx context.Context) TalosClusterKubeconfigOutput
+func TalosClusterKubeconfigOutput(ctx *pulumi.Context, args TalosClusterKubeconfigOutputArgs, opts ...pulumi.InvokeOption) TalosClusterKubeconfigResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (TalosClusterKubeconfigResult, error) {
+			args := v.(TalosClusterKubeconfigArgs)
+			r, err := TalosClusterKubeconfig(ctx, &args, opts...)
+			var s TalosClusterKubeconfigResult
+			if r != nil {
+				s = *r
+			}
+			return s, err
+		}).(TalosClusterKubeconfigResultOutput)
 }
 
-func (*TalosClusterKubeconfig) ElementType() reflect.Type {
-	return reflect.TypeOf((**TalosClusterKubeconfig)(nil)).Elem()
+// A collection of arguments for invoking TalosClusterKubeconfig.
+type TalosClusterKubeconfigOutputArgs struct {
+	// The client configuration data
+	ClientConfiguration TalosClusterKubeconfigClientConfigurationInput `pulumi:"clientConfiguration"`
+	// endpoint to use for the talosclient. if not set, the node value will be used
+	Endpoint pulumi.StringPtrInput `pulumi:"endpoint"`
+	// controlplane node to retrieve the kubeconfig from
+	Node     pulumi.StringInput `pulumi:"node"`
+	Timeouts pulumi.MapInput    `pulumi:"timeouts"`
+	// Wait for the kubernetes api to be available
+	Wait pulumi.BoolPtrInput `pulumi:"wait"`
 }
 
-func (i *TalosClusterKubeconfig) ToTalosClusterKubeconfigOutput() TalosClusterKubeconfigOutput {
-	return i.ToTalosClusterKubeconfigOutputWithContext(context.Background())
+func (TalosClusterKubeconfigOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TalosClusterKubeconfigArgs)(nil)).Elem()
 }
 
-func (i *TalosClusterKubeconfig) ToTalosClusterKubeconfigOutputWithContext(ctx context.Context) TalosClusterKubeconfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TalosClusterKubeconfigOutput)
+// A collection of values returned by TalosClusterKubeconfig.
+type TalosClusterKubeconfigResultOutput struct{ *pulumi.OutputState }
+
+func (TalosClusterKubeconfigResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TalosClusterKubeconfigResult)(nil)).Elem()
 }
 
-// TalosClusterKubeconfigArrayInput is an input type that accepts TalosClusterKubeconfigArray and TalosClusterKubeconfigArrayOutput values.
-// You can construct a concrete instance of `TalosClusterKubeconfigArrayInput` via:
-//
-//	TalosClusterKubeconfigArray{ TalosClusterKubeconfigArgs{...} }
-type TalosClusterKubeconfigArrayInput interface {
-	pulumi.Input
-
-	ToTalosClusterKubeconfigArrayOutput() TalosClusterKubeconfigArrayOutput
-	ToTalosClusterKubeconfigArrayOutputWithContext(context.Context) TalosClusterKubeconfigArrayOutput
-}
-
-type TalosClusterKubeconfigArray []TalosClusterKubeconfigInput
-
-func (TalosClusterKubeconfigArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*TalosClusterKubeconfig)(nil)).Elem()
-}
-
-func (i TalosClusterKubeconfigArray) ToTalosClusterKubeconfigArrayOutput() TalosClusterKubeconfigArrayOutput {
-	return i.ToTalosClusterKubeconfigArrayOutputWithContext(context.Background())
-}
-
-func (i TalosClusterKubeconfigArray) ToTalosClusterKubeconfigArrayOutputWithContext(ctx context.Context) TalosClusterKubeconfigArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TalosClusterKubeconfigArrayOutput)
-}
-
-// TalosClusterKubeconfigMapInput is an input type that accepts TalosClusterKubeconfigMap and TalosClusterKubeconfigMapOutput values.
-// You can construct a concrete instance of `TalosClusterKubeconfigMapInput` via:
-//
-//	TalosClusterKubeconfigMap{ "key": TalosClusterKubeconfigArgs{...} }
-type TalosClusterKubeconfigMapInput interface {
-	pulumi.Input
-
-	ToTalosClusterKubeconfigMapOutput() TalosClusterKubeconfigMapOutput
-	ToTalosClusterKubeconfigMapOutputWithContext(context.Context) TalosClusterKubeconfigMapOutput
-}
-
-type TalosClusterKubeconfigMap map[string]TalosClusterKubeconfigInput
-
-func (TalosClusterKubeconfigMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*TalosClusterKubeconfig)(nil)).Elem()
-}
-
-func (i TalosClusterKubeconfigMap) ToTalosClusterKubeconfigMapOutput() TalosClusterKubeconfigMapOutput {
-	return i.ToTalosClusterKubeconfigMapOutputWithContext(context.Background())
-}
-
-func (i TalosClusterKubeconfigMap) ToTalosClusterKubeconfigMapOutputWithContext(ctx context.Context) TalosClusterKubeconfigMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TalosClusterKubeconfigMapOutput)
-}
-
-type TalosClusterKubeconfigOutput struct{ *pulumi.OutputState }
-
-func (TalosClusterKubeconfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**TalosClusterKubeconfig)(nil)).Elem()
-}
-
-func (o TalosClusterKubeconfigOutput) ToTalosClusterKubeconfigOutput() TalosClusterKubeconfigOutput {
+func (o TalosClusterKubeconfigResultOutput) ToTalosClusterKubeconfigResultOutput() TalosClusterKubeconfigResultOutput {
 	return o
 }
 
-func (o TalosClusterKubeconfigOutput) ToTalosClusterKubeconfigOutputWithContext(ctx context.Context) TalosClusterKubeconfigOutput {
+func (o TalosClusterKubeconfigResultOutput) ToTalosClusterKubeconfigResultOutputWithContext(ctx context.Context) TalosClusterKubeconfigResultOutput {
 	return o
 }
 
-// machine endpoint
-func (o TalosClusterKubeconfigOutput) Endpoint() pulumi.StringOutput {
-	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringOutput { return v.Endpoint }).(pulumi.StringOutput)
+// The client configuration data
+func (o TalosClusterKubeconfigResultOutput) ClientConfiguration() TalosClusterKubeconfigClientConfigurationOutput {
+	return o.ApplyT(func(v TalosClusterKubeconfigResult) TalosClusterKubeconfigClientConfiguration {
+		return v.ClientConfiguration
+	}).(TalosClusterKubeconfigClientConfigurationOutput)
 }
 
-// The retrieved Kubeconfig
-func (o TalosClusterKubeconfigOutput) KubeConfig() pulumi.StringOutput {
-	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringOutput { return v.KubeConfig }).(pulumi.StringOutput)
+// endpoint to use for the talosclient. if not set, the node value will be used
+func (o TalosClusterKubeconfigResultOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v TalosClusterKubeconfigResult) string { return v.Endpoint }).(pulumi.StringOutput)
 }
 
-// node to use
-func (o TalosClusterKubeconfigOutput) Node() pulumi.StringOutput {
-	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringOutput { return v.Node }).(pulumi.StringOutput)
+// The ID of this resource.
+func (o TalosClusterKubeconfigResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v TalosClusterKubeconfigResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// talos client configuration for authentication
-func (o TalosClusterKubeconfigOutput) TalosConfig() pulumi.StringOutput {
-	return o.ApplyT(func(v *TalosClusterKubeconfig) pulumi.StringOutput { return v.TalosConfig }).(pulumi.StringOutput)
+// The raw kubeconfig
+func (o TalosClusterKubeconfigResultOutput) KubeconfigRaw() pulumi.StringOutput {
+	return o.ApplyT(func(v TalosClusterKubeconfigResult) string { return v.KubeconfigRaw }).(pulumi.StringOutput)
 }
 
-type TalosClusterKubeconfigArrayOutput struct{ *pulumi.OutputState }
-
-func (TalosClusterKubeconfigArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*TalosClusterKubeconfig)(nil)).Elem()
+// The kubernetes client configuration
+func (o TalosClusterKubeconfigResultOutput) KubernetesClientConfiguration() TalosClusterKubeconfigKubernetesClientConfigurationOutput {
+	return o.ApplyT(func(v TalosClusterKubeconfigResult) TalosClusterKubeconfigKubernetesClientConfiguration {
+		return v.KubernetesClientConfiguration
+	}).(TalosClusterKubeconfigKubernetesClientConfigurationOutput)
 }
 
-func (o TalosClusterKubeconfigArrayOutput) ToTalosClusterKubeconfigArrayOutput() TalosClusterKubeconfigArrayOutput {
-	return o
+// controlplane node to retrieve the kubeconfig from
+func (o TalosClusterKubeconfigResultOutput) Node() pulumi.StringOutput {
+	return o.ApplyT(func(v TalosClusterKubeconfigResult) string { return v.Node }).(pulumi.StringOutput)
 }
 
-func (o TalosClusterKubeconfigArrayOutput) ToTalosClusterKubeconfigArrayOutputWithContext(ctx context.Context) TalosClusterKubeconfigArrayOutput {
-	return o
+func (o TalosClusterKubeconfigResultOutput) Timeouts() pulumi.MapOutput {
+	return o.ApplyT(func(v TalosClusterKubeconfigResult) map[string]interface{} { return v.Timeouts }).(pulumi.MapOutput)
 }
 
-func (o TalosClusterKubeconfigArrayOutput) Index(i pulumi.IntInput) TalosClusterKubeconfigOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *TalosClusterKubeconfig {
-		return vs[0].([]*TalosClusterKubeconfig)[vs[1].(int)]
-	}).(TalosClusterKubeconfigOutput)
-}
-
-type TalosClusterKubeconfigMapOutput struct{ *pulumi.OutputState }
-
-func (TalosClusterKubeconfigMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*TalosClusterKubeconfig)(nil)).Elem()
-}
-
-func (o TalosClusterKubeconfigMapOutput) ToTalosClusterKubeconfigMapOutput() TalosClusterKubeconfigMapOutput {
-	return o
-}
-
-func (o TalosClusterKubeconfigMapOutput) ToTalosClusterKubeconfigMapOutputWithContext(ctx context.Context) TalosClusterKubeconfigMapOutput {
-	return o
-}
-
-func (o TalosClusterKubeconfigMapOutput) MapIndex(k pulumi.StringInput) TalosClusterKubeconfigOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *TalosClusterKubeconfig {
-		return vs[0].(map[string]*TalosClusterKubeconfig)[vs[1].(string)]
-	}).(TalosClusterKubeconfigOutput)
+// Wait for the kubernetes api to be available
+func (o TalosClusterKubeconfigResultOutput) Wait() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TalosClusterKubeconfigResult) *bool { return v.Wait }).(pulumi.BoolPtrOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*TalosClusterKubeconfigInput)(nil)).Elem(), &TalosClusterKubeconfig{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TalosClusterKubeconfigArrayInput)(nil)).Elem(), TalosClusterKubeconfigArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TalosClusterKubeconfigMapInput)(nil)).Elem(), TalosClusterKubeconfigMap{})
-	pulumi.RegisterOutputType(TalosClusterKubeconfigOutput{})
-	pulumi.RegisterOutputType(TalosClusterKubeconfigArrayOutput{})
-	pulumi.RegisterOutputType(TalosClusterKubeconfigMapOutput{})
+	pulumi.RegisterOutputType(TalosClusterKubeconfigResultOutput{})
 }

@@ -8,18 +8,24 @@
 package main
 
 import (
+	"context"
 	_ "embed"
 
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 
 	talos "github.com/siderolabs/pulumi-provider-talos/provider"
-	"github.com/siderolabs/pulumi-provider-talos/provider/pkg/version"
 )
 
 //go:embed schema-embed.json
 var pulumiSchema []byte
 
+//go:embed bridge-metadata.json
+var bridgeMetadata []byte
+
 func main() {
-	// Modify the path to point to the new provider
-	tfbridge.Main("talos", version.Version, talos.Provider(), pulumiSchema)
+	meta := tfbridge.ProviderMetadata{
+		PackageSchema:  pulumiSchema,
+		BridgeMetadata: bridgeMetadata,
+	}
+	tfbridge.Main(context.Background(), "random", talos.Provider(), meta)
 }

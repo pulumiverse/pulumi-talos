@@ -10,7 +10,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Generate machine secrets for a Talos cluster
+// Generate machine secrets for Talos cluster.
 //
 // ## Example Usage
 //
@@ -19,8 +19,8 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-talos/sdk/go/talos"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/siderolabs/pulumi-provider-talos/sdk/go/talos"
 //
 // )
 //
@@ -35,13 +35,25 @@ import (
 //	}
 //
 // ```
+//
+// ## Import
+//
+// terraform machine secrets can be imported from an existing secrets file
+//
+// ```sh
+//
+//	$ pulumi import talos:index/talosMachineSecrets:TalosMachineSecrets this <path-to-secrets.yaml>
+//
+// ```
 type TalosMachineSecrets struct {
 	pulumi.CustomResourceState
 
-	// The generated talos cluster secrets
-	MachineSecrets pulumi.StringOutput `pulumi:"machineSecrets"`
-	// The version of Talos for which to generate secrets
-	TalosVersion pulumi.StringPtrOutput `pulumi:"talosVersion"`
+	// The generated client configuration data
+	ClientConfiguration TalosMachineSecretsClientConfigurationOutput `pulumi:"clientConfiguration"`
+	// The secrets for the talos cluster
+	MachineSecrets TalosMachineSecretsMachineSecretsOutput `pulumi:"machineSecrets"`
+	// The version of talos features to use in generated machine configuration
+	TalosVersion pulumi.StringOutput `pulumi:"talosVersion"`
 }
 
 // NewTalosMachineSecrets registers a new resource with the given unique name, arguments, and options.
@@ -51,10 +63,6 @@ func NewTalosMachineSecrets(ctx *pulumi.Context,
 		args = &TalosMachineSecretsArgs{}
 	}
 
-	secrets := pulumi.AdditionalSecretOutputs([]string{
-		"machineSecrets",
-	})
-	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource TalosMachineSecrets
 	err := ctx.RegisterResource("talos:index/talosMachineSecrets:TalosMachineSecrets", name, args, &resource, opts...)
@@ -78,16 +86,20 @@ func GetTalosMachineSecrets(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering TalosMachineSecrets resources.
 type talosMachineSecretsState struct {
-	// The generated talos cluster secrets
-	MachineSecrets *string `pulumi:"machineSecrets"`
-	// The version of Talos for which to generate secrets
+	// The generated client configuration data
+	ClientConfiguration *TalosMachineSecretsClientConfiguration `pulumi:"clientConfiguration"`
+	// The secrets for the talos cluster
+	MachineSecrets *TalosMachineSecretsMachineSecrets `pulumi:"machineSecrets"`
+	// The version of talos features to use in generated machine configuration
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
 type TalosMachineSecretsState struct {
-	// The generated talos cluster secrets
-	MachineSecrets pulumi.StringPtrInput
-	// The version of Talos for which to generate secrets
+	// The generated client configuration data
+	ClientConfiguration TalosMachineSecretsClientConfigurationPtrInput
+	// The secrets for the talos cluster
+	MachineSecrets TalosMachineSecretsMachineSecretsPtrInput
+	// The version of talos features to use in generated machine configuration
 	TalosVersion pulumi.StringPtrInput
 }
 
@@ -96,13 +108,13 @@ func (TalosMachineSecretsState) ElementType() reflect.Type {
 }
 
 type talosMachineSecretsArgs struct {
-	// The version of Talos for which to generate secrets
+	// The version of talos features to use in generated machine configuration
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
 // The set of arguments for constructing a TalosMachineSecrets resource.
 type TalosMachineSecretsArgs struct {
-	// The version of Talos for which to generate secrets
+	// The version of talos features to use in generated machine configuration
 	TalosVersion pulumi.StringPtrInput
 }
 
@@ -193,14 +205,21 @@ func (o TalosMachineSecretsOutput) ToTalosMachineSecretsOutputWithContext(ctx co
 	return o
 }
 
-// The generated talos cluster secrets
-func (o TalosMachineSecretsOutput) MachineSecrets() pulumi.StringOutput {
-	return o.ApplyT(func(v *TalosMachineSecrets) pulumi.StringOutput { return v.MachineSecrets }).(pulumi.StringOutput)
+// The generated client configuration data
+func (o TalosMachineSecretsOutput) ClientConfiguration() TalosMachineSecretsClientConfigurationOutput {
+	return o.ApplyT(func(v *TalosMachineSecrets) TalosMachineSecretsClientConfigurationOutput {
+		return v.ClientConfiguration
+	}).(TalosMachineSecretsClientConfigurationOutput)
 }
 
-// The version of Talos for which to generate secrets
-func (o TalosMachineSecretsOutput) TalosVersion() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *TalosMachineSecrets) pulumi.StringPtrOutput { return v.TalosVersion }).(pulumi.StringPtrOutput)
+// The secrets for the talos cluster
+func (o TalosMachineSecretsOutput) MachineSecrets() TalosMachineSecretsMachineSecretsOutput {
+	return o.ApplyT(func(v *TalosMachineSecrets) TalosMachineSecretsMachineSecretsOutput { return v.MachineSecrets }).(TalosMachineSecretsMachineSecretsOutput)
+}
+
+// The version of talos features to use in generated machine configuration
+func (o TalosMachineSecretsOutput) TalosVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v *TalosMachineSecrets) pulumi.StringOutput { return v.TalosVersion }).(pulumi.StringOutput)
 }
 
 type TalosMachineSecretsArrayOutput struct{ *pulumi.OutputState }

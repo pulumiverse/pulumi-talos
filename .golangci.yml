@@ -60,7 +60,7 @@ linters-settings:
   gofmt:
     simplify: true
   goimports:
-    local-prefixes: github.com/siderolabs/pulumi-talos
+    local-prefixes: github.com/siderolabs/pulumi-provider-talos
   golint:
     min-confidence: 0.8
   gomnd:
@@ -145,6 +145,12 @@ linters:
     - maligned
     - golint
     - scopelint
+    - varcheck
+    - deadcode
+    - structcheck
+    - ifshort
+    # disabled as it seems to be broken - goes into imported libraries and reports issues there
+    - musttag
 
 issues:
   exclude: []

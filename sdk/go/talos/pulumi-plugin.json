@@ -1,5 +1,5 @@
 {
   "resource": true,
   "name": "talos",
-  "server": "https://github.com/siderolabs/pulumi-provider-talos/releases/"
+  "server": "https://github.com/siderolabs/pulumi-provider-talos/releases"
 }

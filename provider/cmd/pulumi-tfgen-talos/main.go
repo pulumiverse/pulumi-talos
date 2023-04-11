@@ -6,13 +6,12 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
 
 	talos "github.com/siderolabs/pulumi-provider-talos/provider"
-	"github.com/siderolabs/pulumi-provider-talos/provider/pkg/version"
 )
 
 func main() {
 	// Modify the path to point to the new provider
-	tfgen.Main("talos", version.Version, talos.Provider())
+	tfgen.Main("talos", talos.Provider())
 }
