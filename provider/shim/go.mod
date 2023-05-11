@@ -12,7 +12,7 @@ require (
 	github.com/ProtonMail/go-mime v0.0.0-20221031134845-8fd9bc37cf08 // indirect
 	github.com/ProtonMail/gopenpgp/v2 v2.5.2 // indirect
 	github.com/adrg/xdg v0.4.0 // indirect
-	github.com/cloudflare/circl v1.1.0 // indirect
+	github.com/cloudflare/circl v1.3.3 // indirect
 	github.com/containerd/go-cni v1.1.9 // indirect
 	github.com/containernetworking/cni v1.1.2 // indirect
 	github.com/cosi-project/runtime v0.3.0 // indirect
