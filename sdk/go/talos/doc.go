@@ -1,2 +1,2 @@
-// A Pulumi package for creating and managing talos resources.
+// A Pulumi package for creating and managing Talos Linux machines and clusters.
 package talos

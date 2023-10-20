@@ -1,39 +1,62 @@
 {
     "name": "talos",
-    "description": "A Pulumi package for creating and managing talos resources.",
+    "description": "A Pulumi package for creating and managing Talos Linux machines and clusters.",
     "keywords": [
         "pulumi",
-        "talos"
+        "talos",
+        "category/infrastructure"
     ],
     "homepage": "https://talos.dev",
     "license": "MPL-2.0",
     "attribution": "This Pulumi package is based on the [`talos` Terraform Provider](https://github.com/siderolabs/terraform-provider-talos).",
-    "repository": "https://github.com/siderolabs/pulumi-provider-talos",
+    "repository": "https://github.com/pulumiverse/pulumi-talos",
     "logoUrl": "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.svg",
-    "pluginDownloadURL": "https://github.com/siderolabs/pulumi-provider-talos/releases",
-    "publisher": "Sidero Labs",
+    "pluginDownloadURL": "https://github.com/pulumiverse/pulumi-talos/releases",
+    "publisher": "Pulumiverse",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
     "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "rootNamespace": "Pulumiverse"
+        },
         "go": {
             "generateExtraInputTypes": true,
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/siderolabs/pulumi-provider-talos/sdk/go/talos"
+            "importBasePath": "github.com/pulumiverse/pulumi-talos/sdk/go/talos"
         },
         "nodejs": {
             "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
             "disableUnionOutputTypes": true,
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/siderolabs/terraform-provider-talos)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-talos` repo](https://github.com/siderolabs/pulumi-provider-talos/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-talos` repo](https://github.com/siderolabs/terraform-provider-talos/issues)."
+            "packageDescription": "A Pulumi package for creating and managing Talos Linux machines and clusters.",
+            "packageName": "@pulumiverse/talos",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/siderolabs/terraform-provider-talos)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-talos` repo](https://github.com/pulumiverse/pulumi-talos/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-talos` repo](https://github.com/siderolabs/terraform-provider-talos/issues).",
+            "typescriptVersion": ""
         },
         "python": {
             "compatibility": "tfbridge20",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/siderolabs/terraform-provider-talos)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-talos` repo](https://github.com/siderolabs/pulumi-provider-talos/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-talos` repo](https://github.com/siderolabs/terraform-provider-talos/issues)."
+            "packageName": "pulumiverse_talos",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/siderolabs/terraform-provider-talos)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-talos` repo](https://github.com/pulumiverse/pulumi-talos/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-talos` repo](https://github.com/siderolabs/terraform-provider-talos/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
         }
     },
     "config": {},
     "types": {
-        "talos:index/TalosClientConfigurationClientConfiguration:TalosClientConfigurationClientConfiguration": {
+        "talos:client/ConfigurationClientConfiguration:ConfigurationClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -56,7 +79,7 @@
                 "clientKey"
             ]
         },
-        "talos:index/TalosClusterKubeconfigClientConfiguration:TalosClusterKubeconfigClientConfiguration": {
+        "talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -79,7 +102,7 @@
                 "clientKey"
             ]
         },
-        "talos:index/TalosClusterKubeconfigKubernetesClientConfiguration:TalosClusterKubeconfigKubernetesClientConfiguration": {
+        "talos:cluster/KubeconfigKubernetesClientConfiguration:KubeconfigKubernetesClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -112,7 +135,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineBootstrapClientConfiguration:TalosMachineBootstrapClientConfiguration": {
+        "talos:machine/BootstrapClientConfiguration:BootstrapClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -135,7 +158,7 @@
                 "clientKey"
             ]
         },
-        "talos:index/TalosMachineConfigurationApplyClientConfiguration:TalosMachineConfigurationApplyClientConfiguration": {
+        "talos:machine/ConfigurationApplyClientConfiguration:ConfigurationApplyClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -158,22 +181,22 @@
                 "clientKey"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecrets:TalosMachineConfigurationMachineSecrets": {
+        "talos:machine/ConfigurationMachineSecrets:ConfigurationMachineSecrets": {
             "properties": {
                 "certs": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsCerts:TalosMachineConfigurationMachineSecretsCerts",
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsCerts:ConfigurationMachineSecretsCerts",
                     "description": "The certs for the talos kubernetes cluster\n"
                 },
                 "cluster": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsCluster:TalosMachineConfigurationMachineSecretsCluster",
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsCluster:ConfigurationMachineSecretsCluster",
                     "description": "The cluster secrets\n"
                 },
                 "secrets": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsSecrets:TalosMachineConfigurationMachineSecretsSecrets",
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsSecrets:ConfigurationMachineSecretsSecrets",
                     "description": "The secrets for the talos kubernetes cluster\n"
                 },
                 "trustdinfo": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsTrustdinfo:TalosMachineConfigurationMachineSecretsTrustdinfo",
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsTrustdinfo:ConfigurationMachineSecretsTrustdinfo",
                     "description": "The trustd info for the talos kubernetes cluster\n"
                 }
             },
@@ -185,22 +208,22 @@
                 "trustdinfo"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsCerts:TalosMachineConfigurationMachineSecretsCerts": {
+        "talos:machine/ConfigurationMachineSecretsCerts:ConfigurationMachineSecretsCerts": {
             "properties": {
                 "etcd": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsCertsEtcd:TalosMachineConfigurationMachineSecretsCertsEtcd"
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsCertsEtcd:ConfigurationMachineSecretsCertsEtcd"
                 },
                 "k8s": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsCertsK8s:TalosMachineConfigurationMachineSecretsCertsK8s"
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsCertsK8s:ConfigurationMachineSecretsCertsK8s"
                 },
                 "k8sAggregator": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsCertsK8sAggregator:TalosMachineConfigurationMachineSecretsCertsK8sAggregator"
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsCertsK8sAggregator:ConfigurationMachineSecretsCertsK8sAggregator"
                 },
                 "k8sServiceaccount": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsCertsK8sServiceaccount:TalosMachineConfigurationMachineSecretsCertsK8sServiceaccount"
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsCertsK8sServiceaccount:ConfigurationMachineSecretsCertsK8sServiceaccount"
                 },
                 "os": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecretsCertsOs:TalosMachineConfigurationMachineSecretsCertsOs"
+                    "$ref": "#/types/talos:machine/ConfigurationMachineSecretsCertsOs:ConfigurationMachineSecretsCertsOs"
                 }
             },
             "type": "object",
@@ -212,7 +235,7 @@
                 "os"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsCertsEtcd:TalosMachineConfigurationMachineSecretsCertsEtcd": {
+        "talos:machine/ConfigurationMachineSecretsCertsEtcd:ConfigurationMachineSecretsCertsEtcd": {
             "properties": {
                 "cert": {
                     "type": "string"
@@ -228,7 +251,7 @@
                 "key"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsCertsK8s:TalosMachineConfigurationMachineSecretsCertsK8s": {
+        "talos:machine/ConfigurationMachineSecretsCertsK8s:ConfigurationMachineSecretsCertsK8s": {
             "properties": {
                 "cert": {
                     "type": "string"
@@ -244,7 +267,7 @@
                 "key"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsCertsK8sAggregator:TalosMachineConfigurationMachineSecretsCertsK8sAggregator": {
+        "talos:machine/ConfigurationMachineSecretsCertsK8sAggregator:ConfigurationMachineSecretsCertsK8sAggregator": {
             "properties": {
                 "cert": {
                     "type": "string"
@@ -260,7 +283,7 @@
                 "key"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsCertsK8sServiceaccount:TalosMachineConfigurationMachineSecretsCertsK8sServiceaccount": {
+        "talos:machine/ConfigurationMachineSecretsCertsK8sServiceaccount:ConfigurationMachineSecretsCertsK8sServiceaccount": {
             "properties": {
                 "key": {
                     "type": "string",
@@ -272,7 +295,7 @@
                 "key"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsCertsOs:TalosMachineConfigurationMachineSecretsCertsOs": {
+        "talos:machine/ConfigurationMachineSecretsCertsOs:ConfigurationMachineSecretsCertsOs": {
             "properties": {
                 "cert": {
                     "type": "string"
@@ -288,7 +311,7 @@
                 "key"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsCluster:TalosMachineConfigurationMachineSecretsCluster": {
+        "talos:machine/ConfigurationMachineSecretsCluster:ConfigurationMachineSecretsCluster": {
             "properties": {
                 "id": {
                     "type": "string",
@@ -305,7 +328,7 @@
                 "secret"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsSecrets:TalosMachineConfigurationMachineSecretsSecrets": {
+        "talos:machine/ConfigurationMachineSecretsSecrets:ConfigurationMachineSecretsSecrets": {
             "properties": {
                 "aescbcEncryptionSecret": {
                     "type": "string",
@@ -326,7 +349,7 @@
                 "secretboxEncryptionSecret"
             ]
         },
-        "talos:index/TalosMachineConfigurationMachineSecretsTrustdinfo:TalosMachineConfigurationMachineSecretsTrustdinfo": {
+        "talos:machine/ConfigurationMachineSecretsTrustdinfo:ConfigurationMachineSecretsTrustdinfo": {
             "properties": {
                 "token": {
                     "type": "string",
@@ -338,7 +361,7 @@
                 "token"
             ]
         },
-        "talos:index/TalosMachineSecretsClientConfiguration:TalosMachineSecretsClientConfiguration": {
+        "talos:machine/SecretsClientConfiguration:SecretsClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -365,21 +388,21 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecrets:TalosMachineSecretsMachineSecrets": {
+        "talos:machine/SecretsMachineSecrets:SecretsMachineSecrets": {
             "properties": {
                 "certs": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsCerts:TalosMachineSecretsMachineSecretsCerts"
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsCerts:SecretsMachineSecretsCerts"
                 },
                 "cluster": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsCluster:TalosMachineSecretsMachineSecretsCluster",
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsCluster:SecretsMachineSecretsCluster",
                     "description": "The cluster secrets\n"
                 },
                 "secrets": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsSecrets:TalosMachineSecretsMachineSecretsSecrets",
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsSecrets:SecretsMachineSecretsSecrets",
                     "description": "kubernetes cluster secrets\n"
                 },
                 "trustdinfo": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsTrustdinfo:TalosMachineSecretsMachineSecretsTrustdinfo",
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsTrustdinfo:SecretsMachineSecretsTrustdinfo",
                     "description": "trustd secrets\n"
                 }
             },
@@ -395,22 +418,22 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsCerts:TalosMachineSecretsMachineSecretsCerts": {
+        "talos:machine/SecretsMachineSecretsCerts:SecretsMachineSecretsCerts": {
             "properties": {
                 "etcd": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsCertsEtcd:TalosMachineSecretsMachineSecretsCertsEtcd"
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsCertsEtcd:SecretsMachineSecretsCertsEtcd"
                 },
                 "k8s": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsCertsK8s:TalosMachineSecretsMachineSecretsCertsK8s"
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsCertsK8s:SecretsMachineSecretsCertsK8s"
                 },
                 "k8sAggregator": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsCertsK8sAggregator:TalosMachineSecretsMachineSecretsCertsK8sAggregator"
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsCertsK8sAggregator:SecretsMachineSecretsCertsK8sAggregator"
                 },
                 "k8sServiceaccount": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsCertsK8sServiceaccount:TalosMachineSecretsMachineSecretsCertsK8sServiceaccount"
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsCertsK8sServiceaccount:SecretsMachineSecretsCertsK8sServiceaccount"
                 },
                 "os": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecretsCertsOs:TalosMachineSecretsMachineSecretsCertsOs"
+                    "$ref": "#/types/talos:machine/SecretsMachineSecretsCertsOs:SecretsMachineSecretsCertsOs"
                 }
             },
             "type": "object",
@@ -426,7 +449,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsCertsEtcd:TalosMachineSecretsMachineSecretsCertsEtcd": {
+        "talos:machine/SecretsMachineSecretsCertsEtcd:SecretsMachineSecretsCertsEtcd": {
             "properties": {
                 "cert": {
                     "type": "string"
@@ -446,7 +469,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsCertsK8s:TalosMachineSecretsMachineSecretsCertsK8s": {
+        "talos:machine/SecretsMachineSecretsCertsK8s:SecretsMachineSecretsCertsK8s": {
             "properties": {
                 "cert": {
                     "type": "string"
@@ -466,7 +489,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsCertsK8sAggregator:TalosMachineSecretsMachineSecretsCertsK8sAggregator": {
+        "talos:machine/SecretsMachineSecretsCertsK8sAggregator:SecretsMachineSecretsCertsK8sAggregator": {
             "properties": {
                 "cert": {
                     "type": "string"
@@ -486,7 +509,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsCertsK8sServiceaccount:TalosMachineSecretsMachineSecretsCertsK8sServiceaccount": {
+        "talos:machine/SecretsMachineSecretsCertsK8sServiceaccount:SecretsMachineSecretsCertsK8sServiceaccount": {
             "properties": {
                 "key": {
                     "type": "string",
@@ -502,7 +525,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsCertsOs:TalosMachineSecretsMachineSecretsCertsOs": {
+        "talos:machine/SecretsMachineSecretsCertsOs:SecretsMachineSecretsCertsOs": {
             "properties": {
                 "cert": {
                     "type": "string"
@@ -522,7 +545,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsCluster:TalosMachineSecretsMachineSecretsCluster": {
+        "talos:machine/SecretsMachineSecretsCluster:SecretsMachineSecretsCluster": {
             "properties": {
                 "id": {
                     "type": "string",
@@ -543,7 +566,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsSecrets:TalosMachineSecretsMachineSecretsSecrets": {
+        "talos:machine/SecretsMachineSecretsSecrets:SecretsMachineSecretsSecrets": {
             "properties": {
                 "aescbcEncryptionSecret": {
                     "type": "string",
@@ -569,7 +592,7 @@
                 }
             }
         },
-        "talos:index/TalosMachineSecretsMachineSecretsTrustdinfo:TalosMachineSecretsMachineSecretsTrustdinfo": {
+        "talos:machine/SecretsMachineSecretsTrustdinfo:SecretsMachineSecretsTrustdinfo": {
             "properties": {
                 "token": {
                     "type": "string",
@@ -590,11 +613,11 @@
         "description": "The provider type for the talos package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
     },
     "resources": {
-        "talos:index/talosMachineBootstrap:TalosMachineBootstrap": {
-            "description": "The machine bootstrap resource allows you to bootstrap a Talos node.\n\n\n## Import\n\nterraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped\n\n```sh\n $ pulumi import talos:index/talosMachineBootstrap:TalosMachineBootstrap this \u003cany id\u003e\n```\n\n ",
+        "talos:machine/bootstrap:Bootstrap": {
+            "description": "The machine bootstrap resource allows you to bootstrap a Talos node.\n\n\n## Import\n\nterraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped\n\n```sh\n $ pulumi import talos:machine/bootstrap:Bootstrap this \u003cany id\u003e\n```\n\n ",
             "properties": {
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:index/TalosMachineBootstrapClientConfiguration:TalosMachineBootstrapClientConfiguration",
+                    "$ref": "#/types/talos:machine/BootstrapClientConfiguration:BootstrapClientConfiguration",
                     "description": "The client configuration data\n"
                 },
                 "endpoint": {
@@ -619,7 +642,7 @@
             ],
             "inputProperties": {
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:index/TalosMachineBootstrapClientConfiguration:TalosMachineBootstrapClientConfiguration",
+                    "$ref": "#/types/talos:machine/BootstrapClientConfiguration:BootstrapClientConfiguration",
                     "description": "The client configuration data\n"
                 },
                 "endpoint": {
@@ -642,10 +665,10 @@
                 "node"
             ],
             "stateInputs": {
-                "description": "Input properties used for looking up and filtering TalosMachineBootstrap resources.\n",
+                "description": "Input properties used for looking up and filtering Bootstrap resources.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:index/TalosMachineBootstrapClientConfiguration:TalosMachineBootstrapClientConfiguration",
+                        "$ref": "#/types/talos:machine/BootstrapClientConfiguration:BootstrapClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "endpoint": {
@@ -666,7 +689,7 @@
                 "type": "object"
             }
         },
-        "talos:index/talosMachineConfigurationApply:TalosMachineConfigurationApply": {
+        "talos:machine/configurationApply:ConfigurationApply": {
             "description": "The machine bootstrap resource allows you to bootstrap a Talos node.\n",
             "properties": {
                 "applyMode": {
@@ -674,7 +697,7 @@
                     "description": "The mode of the apply operation\n"
                 },
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationApplyClientConfiguration:TalosMachineConfigurationApplyClientConfiguration",
+                    "$ref": "#/types/talos:machine/ConfigurationApplyClientConfiguration:ConfigurationApplyClientConfiguration",
                     "description": "The client configuration data\n"
                 },
                 "configPatches": {
@@ -723,7 +746,7 @@
                     "description": "The mode of the apply operation\n"
                 },
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:index/TalosMachineConfigurationApplyClientConfiguration:TalosMachineConfigurationApplyClientConfiguration",
+                    "$ref": "#/types/talos:machine/ConfigurationApplyClientConfiguration:ConfigurationApplyClientConfiguration",
                     "description": "The client configuration data\n"
                 },
                 "configPatches": {
@@ -759,14 +782,14 @@
                 "node"
             ],
             "stateInputs": {
-                "description": "Input properties used for looking up and filtering TalosMachineConfigurationApply resources.\n",
+                "description": "Input properties used for looking up and filtering ConfigurationApply resources.\n",
                 "properties": {
                     "applyMode": {
                         "type": "string",
                         "description": "The mode of the apply operation\n"
                     },
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:index/TalosMachineConfigurationApplyClientConfiguration:TalosMachineConfigurationApplyClientConfiguration",
+                        "$ref": "#/types/talos:machine/ConfigurationApplyClientConfiguration:ConfigurationApplyClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "configPatches": {
@@ -804,15 +827,15 @@
                 "type": "object"
             }
         },
-        "talos:index/talosMachineSecrets:TalosMachineSecrets": {
-            "description": "Generate machine secrets for Talos cluster.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst machineSecrets = new talos.TalosMachineSecrets(\"machineSecrets\", {});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nmachine_secrets = talos.TalosMachineSecrets(\"machineSecrets\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.TalosMachineSecrets(\"machineSecrets\");\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/siderolabs/pulumi-provider-talos/sdk/go/talos\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := talos.NewTalosMachineSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new TalosMachineSecrets(\"machineSecrets\");\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:TalosMachineSecrets\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform machine secrets can be imported from an existing secrets file\n\n```sh\n $ pulumi import talos:index/talosMachineSecrets:TalosMachineSecrets this \u003cpath-to-secrets.yaml\u003e\n```\n\n ",
+        "talos:machine/secrets:Secrets": {
+            "description": "Generate machine secrets for Talos cluster.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst machineSecrets = new talos.machine.Secrets(\"machineSecrets\", {});\n```\n```python\nimport pulumi\nimport pulumiverse_talos as talos\n\nmachine_secrets = talos.machine.Secrets(\"machineSecrets\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.Machine.Secrets(\"machineSecrets\");\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := machine.NewSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new Secrets(\"machineSecrets\");\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:machine:Secrets\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform machine secrets can be imported from an existing secrets file\n\n```sh\n $ pulumi import talos:machine/secrets:Secrets this \u003cpath-to-secrets.yaml\u003e\n```\n\n ",
             "properties": {
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsClientConfiguration:TalosMachineSecretsClientConfiguration",
+                    "$ref": "#/types/talos:machine/SecretsClientConfiguration:SecretsClientConfiguration",
                     "description": "The generated client configuration data\n"
                 },
                 "machineSecrets": {
-                    "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecrets:TalosMachineSecretsMachineSecrets",
+                    "$ref": "#/types/talos:machine/SecretsMachineSecrets:SecretsMachineSecrets",
                     "description": "The secrets for the talos cluster\n"
                 },
                 "talosVersion": {
@@ -832,14 +855,14 @@
                 }
             },
             "stateInputs": {
-                "description": "Input properties used for looking up and filtering TalosMachineSecrets resources.\n",
+                "description": "Input properties used for looking up and filtering Secrets resources.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:index/TalosMachineSecretsClientConfiguration:TalosMachineSecretsClientConfiguration",
+                        "$ref": "#/types/talos:machine/SecretsClientConfiguration:SecretsClientConfiguration",
                         "description": "The generated client configuration data\n"
                     },
                     "machineSecrets": {
-                        "$ref": "#/types/talos:index/TalosMachineSecretsMachineSecrets:TalosMachineSecretsMachineSecrets",
+                        "$ref": "#/types/talos:machine/SecretsMachineSecrets:SecretsMachineSecrets",
                         "description": "The secrets for the talos cluster\n"
                     },
                     "talosVersion": {
@@ -852,13 +875,13 @@
         }
     },
     "functions": {
-        "talos:index/talosClientConfiguration:TalosClientConfiguration": {
-            "description": "Generate client configuration for a Talos cluster\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst thisTalosMachineSecrets = new talos.TalosMachineSecrets(\"thisTalosMachineSecrets\", {});\nconst thisTalosClientConfiguration = talos.TalosClientConfigurationOutput({\n    clusterName: \"example-cluster\",\n    clientConfiguration: thisTalosMachineSecrets.clientConfiguration,\n    nodes: [\"10.5.0.2\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nthis_talos_machine_secrets = talos.TalosMachineSecrets(\"thisTalosMachineSecrets\")\nthis_talos_client_configuration = talos.talos_client_configuration_output(cluster_name=\"example-cluster\",\n    client_configuration=this_talos_machine_secrets.client_configuration,\n    nodes=[\"10.5.0.2\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisTalosMachineSecrets = new Talos.TalosMachineSecrets(\"thisTalosMachineSecrets\");\n\n    var thisTalosClientConfiguration = Talos.TalosClientConfiguration.Invoke(new()\n    {\n        ClusterName = \"example-cluster\",\n        ClientConfiguration = thisTalosMachineSecrets.ClientConfiguration,\n        Nodes = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/siderolabs/pulumi-provider-talos/sdk/go/talos\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tthisTalosMachineSecrets, err := talos.NewTalosMachineSecrets(ctx, \"thisTalosMachineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_ = talos.TalosClientConfigurationOutput(ctx, talos.TalosClientConfigurationOutputArgs{\n\t\t\tClusterName:         pulumi.String(\"example-cluster\"),\n\t\t\tClientConfiguration: thisTalosMachineSecrets.ClientConfiguration,\n\t\t\tNodes: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t}, nil)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosMachineSecrets;\nimport com.pulumi.talos.TalosFunctions;\nimport com.pulumi.talos.inputs.TalosClientConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisTalosMachineSecrets = new TalosMachineSecrets(\"thisTalosMachineSecrets\");\n\n        final var thisTalosClientConfiguration = TalosFunctions.TalosClientConfiguration(TalosClientConfigurationArgs.builder()\n            .clusterName(\"example-cluster\")\n            .clientConfiguration(thisTalosMachineSecrets.clientConfiguration())\n            .nodes(\"10.5.0.2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  thisTalosMachineSecrets:\n    type: talos:TalosMachineSecrets\nvariables:\n  thisTalosClientConfiguration:\n    fn::invoke:\n      Function: talos:TalosClientConfiguration\n      Arguments:\n        clusterName: example-cluster\n        clientConfiguration: ${thisTalosMachineSecrets.clientConfiguration}\n        nodes:\n          - 10.5.0.2\n```\n{{% /example %}}\n{{% /examples %}}",
+        "talos:client/configuration:Configuration": {
+            "description": "Generate client configuration for a Talos cluster\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst thisSecrets = new talos.machine.Secrets(\"thisSecrets\", {});\nconst thisConfiguration = talos.client.ConfigurationOutput({\n    clusterName: \"example-cluster\",\n    clientConfiguration: thisSecrets.clientConfiguration,\n    nodes: [\"10.5.0.2\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\nimport pulumiverse_talos as talos\n\nthis_secrets = talos.machine.Secrets(\"thisSecrets\")\nthis_configuration = talos.client.configuration_output(cluster_name=\"example-cluster\",\n    client_configuration=this_secrets.client_configuration,\n    nodes=[\"10.5.0.2\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisSecrets = new Talos.Machine.Secrets(\"thisSecrets\");\n\n    var thisConfiguration = Talos.Client.Configuration.Invoke(new()\n    {\n        ClusterName = \"example-cluster\",\n        ClientConfiguration = thisSecrets.ClientConfiguration,\n        Nodes = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/client\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tthisSecrets, err := machine.NewSecrets(ctx, \"thisSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_ = client.ConfigurationOutput(ctx, client.ConfigurationOutputArgs{\n\t\t\tClusterName:         pulumi.String(\"example-cluster\"),\n\t\t\tClientConfiguration: thisSecrets.ClientConfiguration,\n\t\t\tNodes: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t}, nil)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport com.pulumi.talos.client.ClientFunctions;\nimport com.pulumi.talos.client.inputs.ConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisSecrets = new Secrets(\"thisSecrets\");\n\n        final var thisConfiguration = ClientFunctions.Configuration(ConfigurationArgs.builder()\n            .clusterName(\"example-cluster\")\n            .clientConfiguration(thisSecrets.clientConfiguration())\n            .nodes(\"10.5.0.2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  thisSecrets:\n    type: talos:machine:Secrets\nvariables:\n  thisConfiguration:\n    fn::invoke:\n      Function: talos:client:Configuration\n      Arguments:\n        clusterName: example-cluster\n        clientConfiguration: ${thisSecrets.clientConfiguration}\n        nodes:\n          - 10.5.0.2\n```\n{{% /example %}}\n{{% /examples %}}",
             "inputs": {
-                "description": "A collection of arguments for invoking TalosClientConfiguration.\n",
+                "description": "A collection of arguments for invoking Configuration.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:index/TalosClientConfigurationClientConfiguration:TalosClientConfigurationClientConfiguration",
+                        "$ref": "#/types/talos:client/ConfigurationClientConfiguration:ConfigurationClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "clusterName": {
@@ -887,10 +910,10 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by TalosClientConfiguration.\n",
+                "description": "A collection of values returned by Configuration.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:index/TalosClientConfigurationClientConfiguration:TalosClientConfigurationClientConfiguration",
+                        "$ref": "#/types/talos:client/ConfigurationClientConfiguration:ConfigurationClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "clusterName": {
@@ -930,13 +953,13 @@
                 ]
             }
         },
-        "talos:index/talosClusterKubeconfig:TalosClusterKubeconfig": {
+        "talos:cluster/kubeconfig:Kubeconfig": {
             "description": "Retrieves the kubeconfig for a Talos cluster\n",
             "inputs": {
-                "description": "A collection of arguments for invoking TalosClusterKubeconfig.\n",
+                "description": "A collection of arguments for invoking Kubeconfig.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:index/TalosClusterKubeconfigClientConfiguration:TalosClusterKubeconfigClientConfiguration",
+                        "$ref": "#/types/talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "endpoint": {
@@ -965,10 +988,10 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by TalosClusterKubeconfig.\n",
+                "description": "A collection of values returned by Kubeconfig.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:index/TalosClusterKubeconfigClientConfiguration:TalosClusterKubeconfigClientConfiguration",
+                        "$ref": "#/types/talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "endpoint": {
@@ -985,7 +1008,7 @@
                         "secret": true
                     },
                     "kubernetesClientConfiguration": {
-                        "$ref": "#/types/talos:index/TalosClusterKubeconfigKubernetesClientConfiguration:TalosClusterKubeconfigKubernetesClientConfiguration",
+                        "$ref": "#/types/talos:cluster/KubeconfigKubernetesClientConfiguration:KubeconfigKubernetesClientConfiguration",
                         "description": "The kubernetes client configuration\n"
                     },
                     "node": {
@@ -1014,10 +1037,10 @@
                 ]
             }
         },
-        "talos:index/talosMachineConfiguration:TalosMachineConfiguration": {
+        "talos:machine/configuration:Configuration": {
             "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** It is recommended to set the optional `talos_version` attribute.\n\u003e Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.\n\n{{% examples %}}\n## Example Usage\n\n{{tffile \"examples/data-sources/talos_machine_configuration/data-source.tf\"}}\n{{% /examples %}}",
             "inputs": {
-                "description": "A collection of arguments for invoking TalosMachineConfiguration.\n",
+                "description": "A collection of arguments for invoking Configuration.\n",
                 "properties": {
                     "clusterEndpoint": {
                         "type": "string",
@@ -1047,7 +1070,7 @@
                         "description": "The version of kubernetes to use\n"
                     },
                     "machineSecrets": {
-                        "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecrets:TalosMachineConfigurationMachineSecrets",
+                        "$ref": "#/types/talos:machine/ConfigurationMachineSecrets:ConfigurationMachineSecrets",
                         "description": "The secrets for the talos cluster\n"
                     },
                     "machineType": {
@@ -1068,7 +1091,7 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by TalosMachineConfiguration.\n",
+                "description": "A collection of values returned by Configuration.\n",
                 "properties": {
                     "clusterEndpoint": {
                         "type": "string",
@@ -1107,7 +1130,7 @@
                         "secret": true
                     },
                     "machineSecrets": {
-                        "$ref": "#/types/talos:index/TalosMachineConfigurationMachineSecrets:TalosMachineConfigurationMachineSecrets",
+                        "$ref": "#/types/talos:machine/ConfigurationMachineSecrets:ConfigurationMachineSecrets",
                         "description": "The secrets for the talos cluster\n"
                     },
                     "machineType": {

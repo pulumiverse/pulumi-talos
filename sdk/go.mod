@@ -1,4 +1,4 @@
-module github.com/siderolabs/pulumi-provider-talos/sdk/v2
+module github.com/pulumiverse/pulumi-talos/sdk
 
 go 1.20
 

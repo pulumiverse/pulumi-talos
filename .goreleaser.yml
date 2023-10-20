@@ -17,7 +17,7 @@ builds:
       - windows
       - linux
     ldflags:
-      - -X github.com/siderolabs/pulumi-provider-talos/provider/pkg/version.Version={{.Tag }}
+      - -X github.com/pulumiverse/pulumi-talos/provider/pkg/version.Version={{.Tag }}
     main: ./cmd/pulumi-resource-talos/
 changelog:
   skip: false

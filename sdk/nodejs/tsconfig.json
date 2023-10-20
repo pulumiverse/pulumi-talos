@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "outDir": "bin",
+        "target": "es2016",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "noFallthroughCasesInSwitch": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true
+    },
+    "files": [
+        "client/configuration.ts",
+        "client/index.ts",
+        "cluster/index.ts",
+        "cluster/kubeconfig.ts",
+        "index.ts",
+        "machine/bootstrap.ts",
+        "machine/configuration.ts",
+        "machine/configurationApply.ts",
+        "machine/index.ts",
+        "machine/secrets.ts",
+        "provider.ts",
+        "types/index.ts",
+        "types/input.ts",
+        "types/output.ts",
+        "utilities.ts"
+    ]
+}

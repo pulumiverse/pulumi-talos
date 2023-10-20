@@ -8,7 +8,7 @@ package main
 import (
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
 
-	talos "github.com/siderolabs/pulumi-provider-talos/provider"
+	talos "github.com/pulumiverse/pulumi-talos/provider"
 )
 
 func main() {
