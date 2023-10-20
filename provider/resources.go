@@ -60,6 +60,7 @@ func Provider() tfbridge.ProviderInfo {
 			"talos_client_configuration":  {Tok: tfbridge.MakeDataSource(talosPkg, clientMod, "Configuration")},
 			"talos_cluster_kubeconfig":    {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "Kubeconfig")},
 			"talos_machine_configuration": {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "Configuration")},
+			"talos_machine_disks":         {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "Disks")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/talos",
