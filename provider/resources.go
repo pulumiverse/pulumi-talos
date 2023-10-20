@@ -9,11 +9,9 @@ import (
 	"fmt"
 	"path/filepath"
 
-	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	"github.com/siderolabs/terraform-provider-talos/shim"
-
 	"github.com/pulumiverse/pulumi-talos/provider/pkg/version"
+	"github.com/siderolabs/terraform-provider-talos/shim"
 )
 
 // all of the talos token components used below.
@@ -26,8 +24,9 @@ const (
 )
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
-func Provider() pf.ProviderInfo {
+func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
+		P:                 shim.ShimmedProvider(),
 		Name:              talosPkg,
 		Description:       "A Pulumi package for creating and managing Talos Linux machines and clusters.",
 		Keywords:          []string{"pulumi", "talos", "category/infrastructure"},
@@ -40,9 +39,16 @@ func Provider() pf.ProviderInfo {
 		LogoURL:           "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.svg",
 		PluginDownloadURL: "https://github.com/pulumiverse/pulumi-talos/releases",
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"talos_machine_bootstrap":           {Tok: tfbridge.MakeResource(talosPkg, machineMod, "Bootstrap")},
-			"talos_machine_configuration_apply": {Tok: tfbridge.MakeResource(talosPkg, machineMod, "ConfigurationApply")},
-			"talos_machine_secrets":             {Tok: tfbridge.MakeResource(talosPkg, machineMod, "Secrets")},
+			"talos_machine_bootstrap": {Tok: tfbridge.MakeResource(talosPkg, machineMod, "Bootstrap")},
+			"talos_machine_configuration_apply": {
+				Tok: tfbridge.MakeResource(talosPkg, machineMod, "ConfigurationApply"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"timeouts": {Elem: &tfbridge.SchemaInfo{
+						NestedType: "Timeout",
+					}},
+				},
+			},
+			"talos_machine_secrets": {Tok: tfbridge.MakeResource(talosPkg, machineMod, "Secrets")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"talos_client_configuration":  {Tok: tfbridge.MakeDataSource(talosPkg, clientMod, "Configuration")},
@@ -84,8 +90,7 @@ func Provider() pf.ProviderInfo {
 		},
 	}
 
-	return pf.ProviderInfo{
-		ProviderInfo: info,
-		NewProvider:  shim.NewProvider,
-	}
+	info.SetAutonaming(255, "-")
+
+	return info
 }
