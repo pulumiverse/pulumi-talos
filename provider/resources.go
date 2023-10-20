@@ -6,6 +6,7 @@
 package talos
 
 import (
+	_ "embed"
 	"fmt"
 	"path/filepath"
 
@@ -24,6 +25,9 @@ const (
 	machineMod = "machine" // the talos module
 )
 
+//go:embed cmd/pulumi-resource-talos/bridge-metadata.json
+var metadata []byte
+
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
@@ -39,6 +43,7 @@ func Provider() tfbridge.ProviderInfo {
 		Publisher:         "Pulumiverse",
 		LogoURL:           "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.svg",
 		PluginDownloadURL: "https://github.com/pulumiverse/pulumi-talos/releases",
+		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"talos_machine_bootstrap": {Tok: tfbridge.MakeResource(talosPkg, machineMod, "Bootstrap")},
 			"talos_machine_configuration_apply": {
