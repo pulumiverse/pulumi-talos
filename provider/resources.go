@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"path/filepath"
 
+	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumiverse/pulumi-talos/provider/pkg/version"
 	"github.com/siderolabs/terraform-provider-talos/shim"
@@ -26,7 +27,7 @@ const (
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
-		P:                 shim.ShimmedProvider(),
+		P:                 pf.ShimProvider(shim.NewProvider()),
 		Name:              talosPkg,
 		Description:       "A Pulumi package for creating and managing Talos Linux machines and clusters.",
 		Keywords:          []string{"pulumi", "talos", "category/infrastructure"},

@@ -27,5 +27,5 @@ func main() {
 		PackageSchema:  pulumiSchema,
 		BridgeMetadata: bridgeMetadata,
 	}
-	tfbridge.Main(context.Background(), "random", talos.Provider(), meta)
+	tfbridge.Main(context.Background(), "talos", talos.Provider(), meta)
 }
