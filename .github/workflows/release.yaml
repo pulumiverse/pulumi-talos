@@ -1,8 +1,14 @@
 name: release
+
 on:
   push:
     tags:
       - v*.*.*
+
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   publish_binary:
     name: publish
