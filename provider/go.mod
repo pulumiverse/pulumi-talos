@@ -7,7 +7,6 @@ replace github.com/siderolabs/terraform-provider-talos/shim => ./shim
 require (
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.7.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.43.0
-	github.com/pulumi/pulumi/sdk/v3 v3.62.0
 	github.com/siderolabs/terraform-provider-talos/shim v0.0.0
 )
 
@@ -206,6 +205,7 @@ require (
 	github.com/pulumi/pulumi-java/pkg v0.9.0 // indirect
 	github.com/pulumi/pulumi-yaml v1.1.0 // indirect
 	github.com/pulumi/pulumi/pkg/v3 v3.62.0 // indirect
+	github.com/pulumi/pulumi/sdk/v3 v3.62.0 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rogpeppe/go-internal v1.10.0 // indirect
