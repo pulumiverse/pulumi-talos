@@ -30,12 +30,10 @@ jobs:
         repo: pulumi/pulumictl
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: release-notes
-      run: make release-notes
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v5.0.0
       with:
-        args: -p 3 release --rm-dist --release-notes=_out/RELEASE_NOTES.md
+        args: -p 3 release --rm-dist
         version: latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
