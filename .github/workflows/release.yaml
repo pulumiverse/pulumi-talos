@@ -25,7 +25,7 @@ jobs:
         cache-dependency-path: 'provider/go.sum'
         cache: true
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.9.0
+      uses: jaxxstorm/action-install-gh-release@v1.10.0
       with:
         repo: pulumi/pulumictl
       env:
