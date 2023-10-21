@@ -243,8 +243,8 @@ require (
 	github.com/siderolabs/go-pointer v1.0.0 // indirect
 	github.com/siderolabs/net v0.4.0 // indirect
 	github.com/siderolabs/protoenc v0.2.0 // indirect
-	github.com/siderolabs/talos/pkg/machinery v1.5.0 // indirect
-	github.com/siderolabs/terraform-provider-talos v0.3.0 // indirect
+	github.com/siderolabs/talos/pkg/machinery v1.5.2 // indirect
+	github.com/siderolabs/terraform-provider-talos v0.3.4 // indirect
 	github.com/skeema/knownhosts v1.2.0 // indirect
 	github.com/spf13/afero v1.9.5 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
