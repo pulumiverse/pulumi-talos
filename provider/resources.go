@@ -41,7 +41,7 @@ func Provider() tfbridge.ProviderInfo {
 		Repository:        "https://github.com/pulumiverse/pulumi-talos",
 		Version:           version.Version,
 		Publisher:         "Pulumiverse",
-		LogoURL:           "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.svg",
+		LogoURL:           "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.png",
 		PluginDownloadURL: "https://github.com/pulumiverse/pulumi-talos/releases",
 		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
 		Resources: map[string]*tfbridge.ResourceInfo{
