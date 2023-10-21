@@ -10,7 +10,7 @@ The Pulumiverse Talos Linux provider is available as a package in all Pulumi lan
 
 * JavaScript/TypeScript: [`@pulumiverse/talos`](https://www.npmjs.com/package/@pulumiverse/talos)
 * Python: [`pulumiverse_talos`](https://pypi.org/project/pulumiverse-talos/)
-* Go: [`github.com/pulumiverse/pulumi-talos/sdk/go/talos`](https://pkg.go.dev/github.com/pulumiverse/pulumi-talos/sdk)
+* Go: [`github.com/pulumiverse/pulumi-talos/sdk/go/talos`](https://pkg.go.dev/github.com/pulumiverse/pulumi-talos/sdk/talos)
 * .NET: [`Pulumiverse.Talos`](https://www.nuget.org/packages/Pulumiverse.Talos)
 
 ## Setup
