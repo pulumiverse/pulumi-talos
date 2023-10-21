@@ -14,6 +14,9 @@ namespace Pulumiverse.Talos.Machine.Outputs
     [OutputType]
     public sealed class ConfigurationMachineSecretsTrustdinfoResult
     {
+        /// <summary>
+        /// The trustd token for the talos kubernetes cluster
+        /// </summary>
         public readonly string Token;
 
         [OutputConstructor]

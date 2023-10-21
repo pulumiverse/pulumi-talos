@@ -14,6 +14,9 @@ namespace Pulumiverse.Talos.Machine.Outputs
     [OutputType]
     public sealed class SecretsMachineSecretsTrustdinfo
     {
+        /// <summary>
+        /// The trustd token
+        /// </summary>
         public readonly string? Token;
 
         [OutputConstructor]

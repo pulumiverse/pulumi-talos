@@ -15,9 +15,12 @@ namespace Pulumiverse.Talos.Machine.Outputs
     public sealed class SecretsMachineSecretsCluster
     {
         /// <summary>
-        /// The computed ID of the Talos cluster
+        /// The cluster ID
         /// </summary>
         public readonly string? Id;
+        /// <summary>
+        /// The cluster secret
+        /// </summary>
         public readonly string? Secret;
 
         [OutputConstructor]

@@ -14,10 +14,22 @@ namespace Pulumiverse.Talos.Machine.Outputs
     [OutputType]
     public sealed class ConfigurationMachineSecretsCertsResult
     {
+        /// <summary>
+        /// The certificate and key pair
+        /// </summary>
         public readonly Outputs.ConfigurationMachineSecretsCertsEtcdResult Etcd;
+        /// <summary>
+        /// The certificate and key pair
+        /// </summary>
         public readonly Outputs.ConfigurationMachineSecretsCertsK8sResult K8s;
+        /// <summary>
+        /// The certificate and key pair
+        /// </summary>
         public readonly Outputs.ConfigurationMachineSecretsCertsK8sAggregatorResult K8sAggregator;
         public readonly Outputs.ConfigurationMachineSecretsCertsK8sServiceaccountResult K8sServiceaccount;
+        /// <summary>
+        /// The certificate and key pair
+        /// </summary>
         public readonly Outputs.ConfigurationMachineSecretsCertsOsResult Os;
 
         [OutputConstructor]

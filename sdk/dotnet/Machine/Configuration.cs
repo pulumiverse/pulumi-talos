@@ -15,13 +15,34 @@ namespace Pulumiverse.Talos.Machine
         /// <summary>
         /// Generate a machine configuration for a node type
         /// 
-        /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute.
-        /// &gt; Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+        /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
         /// 
         /// {{% examples %}}
         /// ## Example Usage
+        /// {{% example %}}
         /// 
-        /// {{tffile "examples/data-sources/talos_machine_configuration/data-source.tf"}}
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// using Talos = Pulumiverse.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var thisSecrets = new Talos.Machine.Secrets("thisSecrets");
+        /// 
+        ///     var thisConfiguration = Talos.Machine.Configuration.Invoke(new()
+        ///     {
+        ///         ClusterName = "example-cluster",
+        ///         MachineType = "controlplane",
+        ///         ClusterEndpoint = "https://cluster.local:6443",
+        ///         MachineSecrets = thisSecrets.MachineSecrets,
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Task<ConfigurationResult> InvokeAsync(ConfigurationArgs args, InvokeOptions? options = null)
@@ -30,13 +51,34 @@ namespace Pulumiverse.Talos.Machine
         /// <summary>
         /// Generate a machine configuration for a node type
         /// 
-        /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute.
-        /// &gt; Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+        /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
         /// 
         /// {{% examples %}}
         /// ## Example Usage
+        /// {{% example %}}
         /// 
-        /// {{tffile "examples/data-sources/talos_machine_configuration/data-source.tf"}}
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// using Talos = Pulumiverse.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var thisSecrets = new Talos.Machine.Secrets("thisSecrets");
+        /// 
+        ///     var thisConfiguration = Talos.Machine.Configuration.Invoke(new()
+        ///     {
+        ///         ClusterName = "example-cluster",
+        ///         MachineType = "controlplane",
+        ///         ClusterEndpoint = "https://cluster.local:6443",
+        ///         MachineSecrets = thisSecrets.MachineSecrets,
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Output<ConfigurationResult> Invoke(ConfigurationInvokeArgs args, InvokeOptions? options = null)

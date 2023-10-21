@@ -8,18 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
 // Generate a machine configuration for a node type
 //
-// > **Note:** It is recommended to set the optional `talosVersion` attribute.
-// Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+// > **Note:** It is recommended to set the optional `talosVersion` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
 //
 // ## Example Usage
 //
-// {{tffile "examples/data-sources/talos_machine_configuration/data-source.tf"}}
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			thisSecrets, err := machine.NewSecrets(ctx, "thisSecrets", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_ = machine.ConfigurationOutput(ctx, machine.ConfigurationOutputArgs{
+//				ClusterName:     pulumi.String("example-cluster"),
+//				MachineType:     pulumi.String("controlplane"),
+//				ClusterEndpoint: pulumi.String("https://cluster.local:6443"),
+//				MachineSecrets:  thisSecrets.MachineSecrets,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
+// ```
 func Configuration(ctx *pulumi.Context, args *ConfigurationArgs, opts ...pulumi.InvokeOption) (*ConfigurationResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv ConfigurationResult
 	err := ctx.Invoke("talos:machine/configuration:Configuration", args, &rv, opts...)
 	if err != nil {
@@ -128,6 +155,12 @@ func (o ConfigurationResultOutput) ToConfigurationResultOutput() ConfigurationRe
 
 func (o ConfigurationResultOutput) ToConfigurationResultOutputWithContext(ctx context.Context) ConfigurationResultOutput {
 	return o
+}
+
+func (o ConfigurationResultOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationResult] {
+	return pulumix.Output[ConfigurationResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The endpoint of the talos kubernetes cluster

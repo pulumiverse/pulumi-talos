@@ -14,7 +14,13 @@ namespace Pulumiverse.Talos.Machine.Outputs
     [OutputType]
     public sealed class ConfigurationMachineSecretsCertsEtcdResult
     {
+        /// <summary>
+        /// certificate data
+        /// </summary>
         public readonly string Cert;
+        /// <summary>
+        /// key data
+        /// </summary>
         public readonly string Key;
 
         [OutputConstructor]

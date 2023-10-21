@@ -43,7 +43,7 @@ namespace Pulumiverse.Talos.Machine
         public Output<string> Node { get; private set; } = null!;
 
         [Output("timeouts")]
-        public Output<ImmutableDictionary<string, object>?> Timeouts { get; private set; } = null!;
+        public Output<Outputs.BootstrapTimeouts?> Timeouts { get; private set; } = null!;
 
 
         /// <summary>
@@ -111,12 +111,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<string> Node { get; set; } = null!;
 
         [Input("timeouts")]
-        private InputMap<object>? _timeouts;
-        public InputMap<object> Timeouts
-        {
-            get => _timeouts ?? (_timeouts = new InputMap<object>());
-            set => _timeouts = value;
-        }
+        public Input<Inputs.BootstrapTimeoutsArgs>? Timeouts { get; set; }
 
         public BootstrapArgs()
         {
@@ -145,12 +140,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<string>? Node { get; set; }
 
         [Input("timeouts")]
-        private InputMap<object>? _timeouts;
-        public InputMap<object> Timeouts
-        {
-            get => _timeouts ?? (_timeouts = new InputMap<object>());
-            set => _timeouts = value;
-        }
+        public Input<Inputs.BootstrapTimeoutsGetArgs>? Timeouts { get; set; }
 
         public BootstrapState()
         {

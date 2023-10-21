@@ -9,12 +9,23 @@ import * as utilities from "../utilities";
 /**
  * Generate a machine configuration for a node type
  *
- * > **Note:** It is recommended to set the optional `talosVersion` attribute.
- * Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+ * > **Note:** It is recommended to set the optional `talosVersion` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
  *
  * ## Example Usage
  *
- * {{tffile "examples/data-sources/talos_machine_configuration/data-source.tf"}}
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as talos from "@pulumi/talos";
+ * import * as talos from "@pulumiverse/talos";
+ *
+ * const thisSecrets = new talos.machine.Secrets("thisSecrets", {});
+ * const thisConfiguration = talos.machine.ConfigurationOutput({
+ *     clusterName: "example-cluster",
+ *     machineType: "controlplane",
+ *     clusterEndpoint: "https://cluster.local:6443",
+ *     machineSecrets: thisSecrets.machineSecrets,
+ * });
+ * ```
  */
 export function configuration(args: ConfigurationArgs, opts?: pulumi.InvokeOptions): Promise<ConfigurationResult> {
 
@@ -126,12 +137,23 @@ export interface ConfigurationResult {
 /**
  * Generate a machine configuration for a node type
  *
- * > **Note:** It is recommended to set the optional `talosVersion` attribute.
- * Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+ * > **Note:** It is recommended to set the optional `talosVersion` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
  *
  * ## Example Usage
  *
- * {{tffile "examples/data-sources/talos_machine_configuration/data-source.tf"}}
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as talos from "@pulumi/talos";
+ * import * as talos from "@pulumiverse/talos";
+ *
+ * const thisSecrets = new talos.machine.Secrets("thisSecrets", {});
+ * const thisConfiguration = talos.machine.ConfigurationOutput({
+ *     clusterName: "example-cluster",
+ *     machineType: "controlplane",
+ *     clusterEndpoint: "https://cluster.local:6443",
+ *     machineSecrets: thisSecrets.machineSecrets,
+ * });
+ * ```
  */
 export function configurationOutput(args: ConfigurationOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<ConfigurationResult> {
     return pulumi.output(args).apply((a: any) => configuration(a, opts))

@@ -57,7 +57,7 @@ export class Bootstrap extends pulumi.CustomResource {
      * The name of the node to bootstrap
      */
     public readonly node!: pulumi.Output<string>;
-    public readonly timeouts!: pulumi.Output<{[key: string]: any} | undefined>;
+    public readonly timeouts!: pulumi.Output<outputs.machine.BootstrapTimeouts | undefined>;
 
     /**
      * Create a Bootstrap resource with the given unique name, arguments, and options.
@@ -110,7 +110,7 @@ export interface BootstrapState {
      * The name of the node to bootstrap
      */
     node?: pulumi.Input<string>;
-    timeouts?: pulumi.Input<{[key: string]: any}>;
+    timeouts?: pulumi.Input<inputs.machine.BootstrapTimeouts>;
 }
 
 /**
@@ -129,5 +129,5 @@ export interface BootstrapArgs {
      * The name of the node to bootstrap
      */
     node: pulumi.Input<string>;
-    timeouts?: pulumi.Input<{[key: string]: any}>;
+    timeouts?: pulumi.Input<inputs.machine.BootstrapTimeouts>;
 }

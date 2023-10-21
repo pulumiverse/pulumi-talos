@@ -68,6 +68,19 @@ export namespace cluster {
         clientKey: pulumi.Input<string>;
     }
 
+    export interface KubeconfigTimeouts {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+         */
+        read?: string;
+    }
+
+    export interface KubeconfigTimeoutsArgs {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+         */
+        read?: pulumi.Input<string>;
+    }
 }
 
 export namespace machine {
@@ -84,6 +97,13 @@ export namespace machine {
          * The client key
          */
         clientKey: pulumi.Input<string>;
+    }
+
+    export interface BootstrapTimeouts {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+         */
+        create?: pulumi.Input<string>;
     }
 
     export interface ConfigurationApplyClientConfiguration {
@@ -140,103 +160,333 @@ export namespace machine {
     }
 
     export interface ConfigurationMachineSecretsCerts {
+        /**
+         * The certificate and key pair
+         */
         etcd: inputs.machine.ConfigurationMachineSecretsCertsEtcd;
+        /**
+         * The certificate and key pair
+         */
         k8s: inputs.machine.ConfigurationMachineSecretsCertsK8s;
+        /**
+         * The certificate and key pair
+         */
         k8sAggregator: inputs.machine.ConfigurationMachineSecretsCertsK8sAggregator;
         k8sServiceaccount: inputs.machine.ConfigurationMachineSecretsCertsK8sServiceaccount;
+        /**
+         * The certificate and key pair
+         */
         os: inputs.machine.ConfigurationMachineSecretsCertsOs;
     }
 
     export interface ConfigurationMachineSecretsCertsArgs {
+        /**
+         * The certificate and key pair
+         */
         etcd: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsEtcdArgs>;
+        /**
+         * The certificate and key pair
+         */
         k8s: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsK8sArgs>;
+        /**
+         * The certificate and key pair
+         */
         k8sAggregator: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsK8sAggregatorArgs>;
         k8sServiceaccount: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsK8sServiceaccountArgs>;
+        /**
+         * The certificate and key pair
+         */
         os: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsOsArgs>;
     }
 
     export interface ConfigurationMachineSecretsCertsEtcd {
+        /**
+         * certificate data
+         */
         cert: string;
+        /**
+         * key data
+         */
         key: string;
     }
 
     export interface ConfigurationMachineSecretsCertsEtcdArgs {
+        /**
+         * certificate data
+         */
         cert: pulumi.Input<string>;
+        /**
+         * key data
+         */
         key: pulumi.Input<string>;
     }
 
     export interface ConfigurationMachineSecretsCertsK8s {
+        /**
+         * certificate data
+         */
         cert: string;
+        /**
+         * key data
+         */
         key: string;
     }
 
     export interface ConfigurationMachineSecretsCertsK8sArgs {
+        /**
+         * certificate data
+         */
         cert: pulumi.Input<string>;
+        /**
+         * key data
+         */
         key: pulumi.Input<string>;
     }
 
     export interface ConfigurationMachineSecretsCertsK8sAggregator {
+        /**
+         * certificate data
+         */
         cert: string;
+        /**
+         * key data
+         */
         key: string;
     }
 
     export interface ConfigurationMachineSecretsCertsK8sAggregatorArgs {
+        /**
+         * certificate data
+         */
         cert: pulumi.Input<string>;
+        /**
+         * key data
+         */
         key: pulumi.Input<string>;
     }
 
     export interface ConfigurationMachineSecretsCertsK8sServiceaccount {
+        /**
+         * key data
+         */
         key: string;
     }
 
     export interface ConfigurationMachineSecretsCertsK8sServiceaccountArgs {
+        /**
+         * key data
+         */
         key: pulumi.Input<string>;
     }
 
     export interface ConfigurationMachineSecretsCertsOs {
+        /**
+         * certificate data
+         */
         cert: string;
+        /**
+         * key data
+         */
         key: string;
     }
 
     export interface ConfigurationMachineSecretsCertsOsArgs {
+        /**
+         * certificate data
+         */
         cert: pulumi.Input<string>;
+        /**
+         * key data
+         */
         key: pulumi.Input<string>;
     }
 
     export interface ConfigurationMachineSecretsCluster {
         /**
-         * The ID of this resource.
+         * The cluster id
          */
         id: string;
+        /**
+         * The cluster secret
+         */
         secret: string;
     }
 
     export interface ConfigurationMachineSecretsClusterArgs {
         /**
-         * The ID of this resource.
+         * The cluster id
          */
         id: pulumi.Input<string>;
+        /**
+         * The cluster secret
+         */
         secret: pulumi.Input<string>;
     }
 
     export interface ConfigurationMachineSecretsSecrets {
+        /**
+         * The aescbc encryption secret for the talos kubernetes cluster
+         */
         aescbcEncryptionSecret?: string;
+        /**
+         * The bootstrap token for the talos kubernetes cluster
+         */
         bootstrapToken: string;
+        /**
+         * The secretbox encryption secret for the talos kubernetes cluster
+         */
         secretboxEncryptionSecret: string;
     }
 
     export interface ConfigurationMachineSecretsSecretsArgs {
+        /**
+         * The aescbc encryption secret for the talos kubernetes cluster
+         */
         aescbcEncryptionSecret?: pulumi.Input<string>;
+        /**
+         * The bootstrap token for the talos kubernetes cluster
+         */
         bootstrapToken: pulumi.Input<string>;
+        /**
+         * The secretbox encryption secret for the talos kubernetes cluster
+         */
         secretboxEncryptionSecret: pulumi.Input<string>;
     }
 
     export interface ConfigurationMachineSecretsTrustdinfo {
+        /**
+         * The trustd token for the talos kubernetes cluster
+         */
         token: string;
     }
 
     export interface ConfigurationMachineSecretsTrustdinfoArgs {
+        /**
+         * The trustd token for the talos kubernetes cluster
+         */
         token: pulumi.Input<string>;
+    }
+
+    export interface DisksClientConfiguration {
+        /**
+         * The client CA certificate
+         */
+        caCertificate: string;
+        /**
+         * The client certificate
+         */
+        clientCertificate: string;
+        /**
+         * The client key
+         */
+        clientKey: string;
+    }
+
+    export interface DisksClientConfigurationArgs {
+        /**
+         * The client CA certificate
+         */
+        caCertificate: pulumi.Input<string>;
+        /**
+         * The client certificate
+         */
+        clientCertificate: pulumi.Input<string>;
+        /**
+         * The client key
+         */
+        clientKey: pulumi.Input<string>;
+    }
+
+    export interface DisksFilters {
+        /**
+         * Filter disks by bus path
+         */
+        busPath?: string;
+        /**
+         * Filter disks by modalias
+         */
+        modalias?: string;
+        /**
+         * Filter disks by model
+         */
+        model?: string;
+        /**
+         * Filter disks by name
+         */
+        name?: string;
+        /**
+         * Filter disks by serial number
+         */
+        serial?: string;
+        /**
+         * Filter disks by size
+         */
+        size?: string;
+        /**
+         * Filter disks by type
+         */
+        type?: string;
+        /**
+         * Filter disks by uuid
+         */
+        uuid?: string;
+        /**
+         * Filter disks by wwid
+         */
+        wwid?: string;
+    }
+
+    export interface DisksFiltersArgs {
+        /**
+         * Filter disks by bus path
+         */
+        busPath?: pulumi.Input<string>;
+        /**
+         * Filter disks by modalias
+         */
+        modalias?: pulumi.Input<string>;
+        /**
+         * Filter disks by model
+         */
+        model?: pulumi.Input<string>;
+        /**
+         * Filter disks by name
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Filter disks by serial number
+         */
+        serial?: pulumi.Input<string>;
+        /**
+         * Filter disks by size
+         */
+        size?: pulumi.Input<string>;
+        /**
+         * Filter disks by type
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * Filter disks by uuid
+         */
+        uuid?: pulumi.Input<string>;
+        /**
+         * Filter disks by wwid
+         */
+        wwid?: pulumi.Input<string>;
+    }
+
+    export interface DisksTimeouts {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+         */
+        read?: string;
+    }
+
+    export interface DisksTimeoutsArgs {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+         */
+        read?: pulumi.Input<string>;
     }
 
     export interface SecretsClientConfiguration {
@@ -271,52 +521,120 @@ export namespace machine {
     }
 
     export interface SecretsMachineSecretsCerts {
+        /**
+         * The certificate and key pair
+         */
         etcd?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsEtcd>;
+        /**
+         * The certificate and key pair
+         */
         k8s?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsK8s>;
+        /**
+         * The certificate and key pair
+         */
         k8sAggregator?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsK8sAggregator>;
+        /**
+         * The service account secrets
+         */
         k8sServiceaccount?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsK8sServiceaccount>;
+        /**
+         * The certificate and key pair
+         */
         os?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsOs>;
     }
 
     export interface SecretsMachineSecretsCertsEtcd {
+        /**
+         * certificate data
+         */
         cert?: pulumi.Input<string>;
+        /**
+         * key data
+         */
         key?: pulumi.Input<string>;
     }
 
     export interface SecretsMachineSecretsCertsK8s {
+        /**
+         * certificate data
+         */
         cert?: pulumi.Input<string>;
+        /**
+         * key data
+         */
         key?: pulumi.Input<string>;
     }
 
     export interface SecretsMachineSecretsCertsK8sAggregator {
+        /**
+         * certificate data
+         */
         cert?: pulumi.Input<string>;
+        /**
+         * key data
+         */
         key?: pulumi.Input<string>;
     }
 
     export interface SecretsMachineSecretsCertsK8sServiceaccount {
+        /**
+         * key data
+         */
         key?: pulumi.Input<string>;
     }
 
     export interface SecretsMachineSecretsCertsOs {
+        /**
+         * certificate data
+         */
         cert?: pulumi.Input<string>;
+        /**
+         * key data
+         */
         key?: pulumi.Input<string>;
     }
 
     export interface SecretsMachineSecretsCluster {
         /**
-         * The computed ID of the Talos cluster
+         * The cluster ID
          */
         id?: pulumi.Input<string>;
+        /**
+         * The cluster secret
+         */
         secret?: pulumi.Input<string>;
     }
 
     export interface SecretsMachineSecretsSecrets {
+        /**
+         * The AES-CBC encryption secret
+         */
         aescbcEncryptionSecret?: pulumi.Input<string>;
+        /**
+         * The bootstrap token
+         */
         bootstrapToken?: pulumi.Input<string>;
+        /**
+         * The secretbox encryption secret
+         */
         secretboxEncryptionSecret?: pulumi.Input<string>;
     }
 
     export interface SecretsMachineSecretsTrustdinfo {
+        /**
+         * The trustd token
+         */
         token?: pulumi.Input<string>;
+    }
+
+    export interface Timeout {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+         */
+        create?: pulumi.Input<string>;
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+         */
+        update?: pulumi.Input<string>;
     }
 }

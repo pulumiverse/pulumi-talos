@@ -47,12 +47,7 @@ namespace Pulumiverse.Talos.Cluster
         public string Node { get; set; } = null!;
 
         [Input("timeouts")]
-        private Dictionary<string, object>? _timeouts;
-        public Dictionary<string, object> Timeouts
-        {
-            get => _timeouts ?? (_timeouts = new Dictionary<string, object>());
-            set => _timeouts = value;
-        }
+        public Inputs.KubeconfigTimeoutsArgs? Timeouts { get; set; }
 
         /// <summary>
         /// Wait for the kubernetes api to be available
@@ -87,12 +82,7 @@ namespace Pulumiverse.Talos.Cluster
         public Input<string> Node { get; set; } = null!;
 
         [Input("timeouts")]
-        private InputMap<object>? _timeouts;
-        public InputMap<object> Timeouts
-        {
-            get => _timeouts ?? (_timeouts = new InputMap<object>());
-            set => _timeouts = value;
-        }
+        public Input<Inputs.KubeconfigTimeoutsInputArgs>? Timeouts { get; set; }
 
         /// <summary>
         /// Wait for the kubernetes api to be available
@@ -134,7 +124,7 @@ namespace Pulumiverse.Talos.Cluster
         /// controlplane node to retrieve the kubeconfig from
         /// </summary>
         public readonly string Node;
-        public readonly ImmutableDictionary<string, object>? Timeouts;
+        public readonly Outputs.KubeconfigTimeoutsResult? Timeouts;
         /// <summary>
         /// Wait for the kubernetes api to be available
         /// </summary>
@@ -154,7 +144,7 @@ namespace Pulumiverse.Talos.Cluster
 
             string node,
 
-            ImmutableDictionary<string, object>? timeouts,
+            Outputs.KubeconfigTimeoutsResult? timeouts,
 
             bool? wait)
         {

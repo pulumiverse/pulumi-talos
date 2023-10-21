@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -99,7 +99,7 @@ class KubeconfigResult:
 
     @property
     @pulumi.getter
-    def timeouts(self) -> Optional[Mapping[str, Any]]:
+    def timeouts(self) -> Optional['outputs.KubeconfigTimeoutsResult']:
         return pulumi.get(self, "timeouts")
 
     @property
@@ -130,7 +130,7 @@ class AwaitableKubeconfigResult(KubeconfigResult):
 def kubeconfig(client_configuration: Optional[pulumi.InputType['KubeconfigClientConfigurationArgs']] = None,
                endpoint: Optional[str] = None,
                node: Optional[str] = None,
-               timeouts: Optional[Mapping[str, Any]] = None,
+               timeouts: Optional[pulumi.InputType['KubeconfigTimeoutsArgs']] = None,
                wait: Optional[bool] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableKubeconfigResult:
     """
@@ -152,21 +152,21 @@ def kubeconfig(client_configuration: Optional[pulumi.InputType['KubeconfigClient
     __ret__ = pulumi.runtime.invoke('talos:cluster/kubeconfig:Kubeconfig', __args__, opts=opts, typ=KubeconfigResult).value
 
     return AwaitableKubeconfigResult(
-        client_configuration=__ret__.client_configuration,
-        endpoint=__ret__.endpoint,
-        id=__ret__.id,
-        kubeconfig_raw=__ret__.kubeconfig_raw,
-        kubernetes_client_configuration=__ret__.kubernetes_client_configuration,
-        node=__ret__.node,
-        timeouts=__ret__.timeouts,
-        wait=__ret__.wait)
+        client_configuration=pulumi.get(__ret__, 'client_configuration'),
+        endpoint=pulumi.get(__ret__, 'endpoint'),
+        id=pulumi.get(__ret__, 'id'),
+        kubeconfig_raw=pulumi.get(__ret__, 'kubeconfig_raw'),
+        kubernetes_client_configuration=pulumi.get(__ret__, 'kubernetes_client_configuration'),
+        node=pulumi.get(__ret__, 'node'),
+        timeouts=pulumi.get(__ret__, 'timeouts'),
+        wait=pulumi.get(__ret__, 'wait'))
 
 
 @_utilities.lift_output_func(kubeconfig)
 def kubeconfig_output(client_configuration: Optional[pulumi.Input[pulumi.InputType['KubeconfigClientConfigurationArgs']]] = None,
                       endpoint: Optional[pulumi.Input[Optional[str]]] = None,
                       node: Optional[pulumi.Input[str]] = None,
-                      timeouts: Optional[pulumi.Input[Optional[Mapping[str, Any]]]] = None,
+                      timeouts: Optional[pulumi.Input[Optional[pulumi.InputType['KubeconfigTimeoutsArgs']]]] = None,
                       wait: Optional[pulumi.Input[Optional[bool]]] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[KubeconfigResult]:
     """

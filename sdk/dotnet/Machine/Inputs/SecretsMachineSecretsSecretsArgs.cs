@@ -15,6 +15,10 @@ namespace Pulumiverse.Talos.Machine.Inputs
     {
         [Input("aescbcEncryptionSecret")]
         private Input<string>? _aescbcEncryptionSecret;
+
+        /// <summary>
+        /// The AES-CBC encryption secret
+        /// </summary>
         public Input<string>? AescbcEncryptionSecret
         {
             get => _aescbcEncryptionSecret;
@@ -27,6 +31,10 @@ namespace Pulumiverse.Talos.Machine.Inputs
 
         [Input("bootstrapToken")]
         private Input<string>? _bootstrapToken;
+
+        /// <summary>
+        /// The bootstrap token
+        /// </summary>
         public Input<string>? BootstrapToken
         {
             get => _bootstrapToken;
@@ -39,6 +47,10 @@ namespace Pulumiverse.Talos.Machine.Inputs
 
         [Input("secretboxEncryptionSecret")]
         private Input<string>? _secretboxEncryptionSecret;
+
+        /// <summary>
+        /// The secretbox encryption secret
+        /// </summary>
         public Input<string>? SecretboxEncryptionSecret
         {
             get => _secretboxEncryptionSecret;

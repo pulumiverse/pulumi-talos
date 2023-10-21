@@ -37,7 +37,7 @@ export interface KubeconfigArgs {
      * controlplane node to retrieve the kubeconfig from
      */
     node: string;
-    timeouts?: {[key: string]: any};
+    timeouts?: inputs.cluster.KubeconfigTimeouts;
     /**
      * Wait for the kubernetes api to be available
      */
@@ -72,7 +72,7 @@ export interface KubeconfigResult {
      * controlplane node to retrieve the kubeconfig from
      */
     readonly node: string;
-    readonly timeouts?: {[key: string]: any};
+    readonly timeouts?: outputs.cluster.KubeconfigTimeouts;
     /**
      * Wait for the kubernetes api to be available
      */
@@ -101,7 +101,7 @@ export interface KubeconfigOutputArgs {
      * controlplane node to retrieve the kubeconfig from
      */
     node: pulumi.Input<string>;
-    timeouts?: pulumi.Input<{[key: string]: any}>;
+    timeouts?: pulumi.Input<inputs.cluster.KubeconfigTimeoutsArgs>;
     /**
      * Wait for the kubernetes api to be available
      */

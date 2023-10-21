@@ -14,8 +14,17 @@ namespace Pulumiverse.Talos.Machine.Outputs
     [OutputType]
     public sealed class ConfigurationMachineSecretsSecretsResult
     {
+        /// <summary>
+        /// The aescbc encryption secret for the talos kubernetes cluster
+        /// </summary>
         public readonly string? AescbcEncryptionSecret;
+        /// <summary>
+        /// The bootstrap token for the talos kubernetes cluster
+        /// </summary>
         public readonly string BootstrapToken;
+        /// <summary>
+        /// The secretbox encryption secret for the talos kubernetes cluster
+        /// </summary>
         public readonly string SecretboxEncryptionSecret;
 
         [OutputConstructor]

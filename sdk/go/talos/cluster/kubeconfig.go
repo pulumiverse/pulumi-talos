@@ -8,11 +8,13 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
 // Retrieves the kubeconfig for a Talos cluster
 func Kubeconfig(ctx *pulumi.Context, args *KubeconfigArgs, opts ...pulumi.InvokeOption) (*KubeconfigResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv KubeconfigResult
 	err := ctx.Invoke("talos:cluster/kubeconfig:Kubeconfig", args, &rv, opts...)
 	if err != nil {
@@ -28,8 +30,8 @@ type KubeconfigArgs struct {
 	// endpoint to use for the talosclient. if not set, the node value will be used
 	Endpoint *string `pulumi:"endpoint"`
 	// controlplane node to retrieve the kubeconfig from
-	Node     string                 `pulumi:"node"`
-	Timeouts map[string]interface{} `pulumi:"timeouts"`
+	Node     string              `pulumi:"node"`
+	Timeouts *KubeconfigTimeouts `pulumi:"timeouts"`
 	// Wait for the kubernetes api to be available
 	Wait *bool `pulumi:"wait"`
 }
@@ -47,8 +49,8 @@ type KubeconfigResult struct {
 	// The kubernetes client configuration
 	KubernetesClientConfiguration KubeconfigKubernetesClientConfiguration `pulumi:"kubernetesClientConfiguration"`
 	// controlplane node to retrieve the kubeconfig from
-	Node     string                 `pulumi:"node"`
-	Timeouts map[string]interface{} `pulumi:"timeouts"`
+	Node     string              `pulumi:"node"`
+	Timeouts *KubeconfigTimeouts `pulumi:"timeouts"`
 	// Wait for the kubernetes api to be available
 	Wait *bool `pulumi:"wait"`
 }
@@ -73,8 +75,8 @@ type KubeconfigOutputArgs struct {
 	// endpoint to use for the talosclient. if not set, the node value will be used
 	Endpoint pulumi.StringPtrInput `pulumi:"endpoint"`
 	// controlplane node to retrieve the kubeconfig from
-	Node     pulumi.StringInput `pulumi:"node"`
-	Timeouts pulumi.MapInput    `pulumi:"timeouts"`
+	Node     pulumi.StringInput         `pulumi:"node"`
+	Timeouts KubeconfigTimeoutsPtrInput `pulumi:"timeouts"`
 	// Wait for the kubernetes api to be available
 	Wait pulumi.BoolPtrInput `pulumi:"wait"`
 }
@@ -96,6 +98,12 @@ func (o KubeconfigResultOutput) ToKubeconfigResultOutput() KubeconfigResultOutpu
 
 func (o KubeconfigResultOutput) ToKubeconfigResultOutputWithContext(ctx context.Context) KubeconfigResultOutput {
 	return o
+}
+
+func (o KubeconfigResultOutput) ToOutput(ctx context.Context) pulumix.Output[KubeconfigResult] {
+	return pulumix.Output[KubeconfigResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The client configuration data
@@ -130,8 +138,8 @@ func (o KubeconfigResultOutput) Node() pulumi.StringOutput {
 	return o.ApplyT(func(v KubeconfigResult) string { return v.Node }).(pulumi.StringOutput)
 }
 
-func (o KubeconfigResultOutput) Timeouts() pulumi.MapOutput {
-	return o.ApplyT(func(v KubeconfigResult) map[string]interface{} { return v.Timeouts }).(pulumi.MapOutput)
+func (o KubeconfigResultOutput) Timeouts() KubeconfigTimeoutsPtrOutput {
+	return o.ApplyT(func(v KubeconfigResult) *KubeconfigTimeouts { return v.Timeouts }).(KubeconfigTimeoutsPtrOutput)
 }
 
 // Wait for the kubernetes api to be available

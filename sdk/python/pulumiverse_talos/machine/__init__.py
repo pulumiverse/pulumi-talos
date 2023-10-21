@@ -8,6 +8,7 @@ import typing
 from .bootstrap import *
 from .configuration import *
 from .configuration_apply import *
+from .disks import *
 from .secrets import *
 from ._inputs import *
 from . import outputs

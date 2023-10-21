@@ -21,6 +21,7 @@
         "machine/bootstrap.ts",
         "machine/configuration.ts",
         "machine/configurationApply.ts",
+        "machine/disks.ts",
         "machine/index.ts",
         "machine/secrets.ts",
         "provider.ts",

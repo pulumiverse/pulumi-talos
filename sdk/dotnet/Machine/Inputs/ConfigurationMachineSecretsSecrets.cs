@@ -15,6 +15,10 @@ namespace Pulumiverse.Talos.Machine.Inputs
     {
         [Input("aescbcEncryptionSecret")]
         private string? _aescbcEncryptionSecret;
+
+        /// <summary>
+        /// The aescbc encryption secret for the talos kubernetes cluster
+        /// </summary>
         public string? AescbcEncryptionSecret
         {
             get => _aescbcEncryptionSecret;
@@ -23,6 +27,10 @@ namespace Pulumiverse.Talos.Machine.Inputs
 
         [Input("bootstrapToken", required: true)]
         private string? _bootstrapToken;
+
+        /// <summary>
+        /// The bootstrap token for the talos kubernetes cluster
+        /// </summary>
         public string? BootstrapToken
         {
             get => _bootstrapToken;
@@ -31,6 +39,10 @@ namespace Pulumiverse.Talos.Machine.Inputs
 
         [Input("secretboxEncryptionSecret", required: true)]
         private string? _secretboxEncryptionSecret;
+
+        /// <summary>
+        /// The secretbox encryption secret for the talos kubernetes cluster
+        /// </summary>
         public string? SecretboxEncryptionSecret
         {
             get => _secretboxEncryptionSecret;

@@ -8,7 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type KubeconfigClientConfiguration struct {
 	// The client CA certificate
@@ -51,6 +55,12 @@ func (i KubeconfigClientConfigurationArgs) ToKubeconfigClientConfigurationOutput
 	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigClientConfigurationOutput)
 }
 
+func (i KubeconfigClientConfigurationArgs) ToOutput(ctx context.Context) pulumix.Output[KubeconfigClientConfiguration] {
+	return pulumix.Output[KubeconfigClientConfiguration]{
+		OutputState: i.ToKubeconfigClientConfigurationOutputWithContext(ctx).OutputState,
+	}
+}
+
 type KubeconfigClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (KubeconfigClientConfigurationOutput) ElementType() reflect.Type {
@@ -63,6 +73,12 @@ func (o KubeconfigClientConfigurationOutput) ToKubeconfigClientConfigurationOutp
 
 func (o KubeconfigClientConfigurationOutput) ToKubeconfigClientConfigurationOutputWithContext(ctx context.Context) KubeconfigClientConfigurationOutput {
 	return o
+}
+
+func (o KubeconfigClientConfigurationOutput) ToOutput(ctx context.Context) pulumix.Output[KubeconfigClientConfiguration] {
+	return pulumix.Output[KubeconfigClientConfiguration]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The client CA certificate
@@ -125,6 +141,12 @@ func (i KubeconfigKubernetesClientConfigurationArgs) ToKubeconfigKubernetesClien
 	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigKubernetesClientConfigurationOutput)
 }
 
+func (i KubeconfigKubernetesClientConfigurationArgs) ToOutput(ctx context.Context) pulumix.Output[KubeconfigKubernetesClientConfiguration] {
+	return pulumix.Output[KubeconfigKubernetesClientConfiguration]{
+		OutputState: i.ToKubeconfigKubernetesClientConfigurationOutputWithContext(ctx).OutputState,
+	}
+}
+
 type KubeconfigKubernetesClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (KubeconfigKubernetesClientConfigurationOutput) ElementType() reflect.Type {
@@ -137,6 +159,12 @@ func (o KubeconfigKubernetesClientConfigurationOutput) ToKubeconfigKubernetesCli
 
 func (o KubeconfigKubernetesClientConfigurationOutput) ToKubeconfigKubernetesClientConfigurationOutputWithContext(ctx context.Context) KubeconfigKubernetesClientConfigurationOutput {
 	return o
+}
+
+func (o KubeconfigKubernetesClientConfigurationOutput) ToOutput(ctx context.Context) pulumix.Output[KubeconfigKubernetesClientConfiguration] {
+	return pulumix.Output[KubeconfigKubernetesClientConfiguration]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The kubernetes CA certificate
@@ -159,9 +187,174 @@ func (o KubeconfigKubernetesClientConfigurationOutput) Host() pulumi.StringOutpu
 	return o.ApplyT(func(v KubeconfigKubernetesClientConfiguration) string { return v.Host }).(pulumi.StringOutput)
 }
 
+type KubeconfigTimeouts struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `pulumi:"read"`
+}
+
+// KubeconfigTimeoutsInput is an input type that accepts KubeconfigTimeoutsArgs and KubeconfigTimeoutsOutput values.
+// You can construct a concrete instance of `KubeconfigTimeoutsInput` via:
+//
+//	KubeconfigTimeoutsArgs{...}
+type KubeconfigTimeoutsInput interface {
+	pulumi.Input
+
+	ToKubeconfigTimeoutsOutput() KubeconfigTimeoutsOutput
+	ToKubeconfigTimeoutsOutputWithContext(context.Context) KubeconfigTimeoutsOutput
+}
+
+type KubeconfigTimeoutsArgs struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read pulumi.StringPtrInput `pulumi:"read"`
+}
+
+func (KubeconfigTimeoutsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*KubeconfigTimeouts)(nil)).Elem()
+}
+
+func (i KubeconfigTimeoutsArgs) ToKubeconfigTimeoutsOutput() KubeconfigTimeoutsOutput {
+	return i.ToKubeconfigTimeoutsOutputWithContext(context.Background())
+}
+
+func (i KubeconfigTimeoutsArgs) ToKubeconfigTimeoutsOutputWithContext(ctx context.Context) KubeconfigTimeoutsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigTimeoutsOutput)
+}
+
+func (i KubeconfigTimeoutsArgs) ToOutput(ctx context.Context) pulumix.Output[KubeconfigTimeouts] {
+	return pulumix.Output[KubeconfigTimeouts]{
+		OutputState: i.ToKubeconfigTimeoutsOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i KubeconfigTimeoutsArgs) ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput {
+	return i.ToKubeconfigTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i KubeconfigTimeoutsArgs) ToKubeconfigTimeoutsPtrOutputWithContext(ctx context.Context) KubeconfigTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigTimeoutsOutput).ToKubeconfigTimeoutsPtrOutputWithContext(ctx)
+}
+
+// KubeconfigTimeoutsPtrInput is an input type that accepts KubeconfigTimeoutsArgs, KubeconfigTimeoutsPtr and KubeconfigTimeoutsPtrOutput values.
+// You can construct a concrete instance of `KubeconfigTimeoutsPtrInput` via:
+//
+//	        KubeconfigTimeoutsArgs{...}
+//
+//	or:
+//
+//	        nil
+type KubeconfigTimeoutsPtrInput interface {
+	pulumi.Input
+
+	ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput
+	ToKubeconfigTimeoutsPtrOutputWithContext(context.Context) KubeconfigTimeoutsPtrOutput
+}
+
+type kubeconfigTimeoutsPtrType KubeconfigTimeoutsArgs
+
+func KubeconfigTimeoutsPtr(v *KubeconfigTimeoutsArgs) KubeconfigTimeoutsPtrInput {
+	return (*kubeconfigTimeoutsPtrType)(v)
+}
+
+func (*kubeconfigTimeoutsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**KubeconfigTimeouts)(nil)).Elem()
+}
+
+func (i *kubeconfigTimeoutsPtrType) ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput {
+	return i.ToKubeconfigTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i *kubeconfigTimeoutsPtrType) ToKubeconfigTimeoutsPtrOutputWithContext(ctx context.Context) KubeconfigTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigTimeoutsPtrOutput)
+}
+
+func (i *kubeconfigTimeoutsPtrType) ToOutput(ctx context.Context) pulumix.Output[*KubeconfigTimeouts] {
+	return pulumix.Output[*KubeconfigTimeouts]{
+		OutputState: i.ToKubeconfigTimeoutsPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+type KubeconfigTimeoutsOutput struct{ *pulumi.OutputState }
+
+func (KubeconfigTimeoutsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*KubeconfigTimeouts)(nil)).Elem()
+}
+
+func (o KubeconfigTimeoutsOutput) ToKubeconfigTimeoutsOutput() KubeconfigTimeoutsOutput {
+	return o
+}
+
+func (o KubeconfigTimeoutsOutput) ToKubeconfigTimeoutsOutputWithContext(ctx context.Context) KubeconfigTimeoutsOutput {
+	return o
+}
+
+func (o KubeconfigTimeoutsOutput) ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput {
+	return o.ToKubeconfigTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (o KubeconfigTimeoutsOutput) ToKubeconfigTimeoutsPtrOutputWithContext(ctx context.Context) KubeconfigTimeoutsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v KubeconfigTimeouts) *KubeconfigTimeouts {
+		return &v
+	}).(KubeconfigTimeoutsPtrOutput)
+}
+
+func (o KubeconfigTimeoutsOutput) ToOutput(ctx context.Context) pulumix.Output[KubeconfigTimeouts] {
+	return pulumix.Output[KubeconfigTimeouts]{
+		OutputState: o.OutputState,
+	}
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+func (o KubeconfigTimeoutsOutput) Read() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubeconfigTimeouts) *string { return v.Read }).(pulumi.StringPtrOutput)
+}
+
+type KubeconfigTimeoutsPtrOutput struct{ *pulumi.OutputState }
+
+func (KubeconfigTimeoutsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**KubeconfigTimeouts)(nil)).Elem()
+}
+
+func (o KubeconfigTimeoutsPtrOutput) ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput {
+	return o
+}
+
+func (o KubeconfigTimeoutsPtrOutput) ToKubeconfigTimeoutsPtrOutputWithContext(ctx context.Context) KubeconfigTimeoutsPtrOutput {
+	return o
+}
+
+func (o KubeconfigTimeoutsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*KubeconfigTimeouts] {
+	return pulumix.Output[*KubeconfigTimeouts]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o KubeconfigTimeoutsPtrOutput) Elem() KubeconfigTimeoutsOutput {
+	return o.ApplyT(func(v *KubeconfigTimeouts) KubeconfigTimeouts {
+		if v != nil {
+			return *v
+		}
+		var ret KubeconfigTimeouts
+		return ret
+	}).(KubeconfigTimeoutsOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+func (o KubeconfigTimeoutsPtrOutput) Read() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigTimeouts) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Read
+	}).(pulumi.StringPtrOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigClientConfigurationInput)(nil)).Elem(), KubeconfigClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigKubernetesClientConfigurationInput)(nil)).Elem(), KubeconfigKubernetesClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigTimeoutsInput)(nil)).Elem(), KubeconfigTimeoutsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigTimeoutsPtrInput)(nil)).Elem(), KubeconfigTimeoutsArgs{})
 	pulumi.RegisterOutputType(KubeconfigClientConfigurationOutput{})
 	pulumi.RegisterOutputType(KubeconfigKubernetesClientConfigurationOutput{})
+	pulumi.RegisterOutputType(KubeconfigTimeoutsOutput{})
+	pulumi.RegisterOutputType(KubeconfigTimeoutsPtrOutput{})
 }

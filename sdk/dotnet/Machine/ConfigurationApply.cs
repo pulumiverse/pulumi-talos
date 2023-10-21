@@ -11,7 +11,7 @@ using Pulumi;
 namespace Pulumiverse.Talos.Machine
 {
     /// <summary>
-    /// The machine bootstrap resource allows you to bootstrap a Talos node.
+    /// The machine configuration apply resource allows to apply machine configuration to a node
     /// </summary>
     [TalosResourceType("talos:machine/configurationApply:ConfigurationApply")]
     public partial class ConfigurationApply : global::Pulumi.CustomResource
@@ -59,7 +59,7 @@ namespace Pulumiverse.Talos.Machine
         public Output<string> Node { get; private set; } = null!;
 
         [Output("timeouts")]
-        public Output<ImmutableDictionary<string, object>?> Timeouts { get; private set; } = null!;
+        public Output<Outputs.Timeout?> Timeouts { get; private set; } = null!;
 
 
         /// <summary>
@@ -166,12 +166,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<string> Node { get; set; } = null!;
 
         [Input("timeouts")]
-        private InputMap<object>? _timeouts;
-        public InputMap<object> Timeouts
-        {
-            get => _timeouts ?? (_timeouts = new InputMap<object>());
-            set => _timeouts = value;
-        }
+        public Input<Inputs.TimeoutArgs>? Timeouts { get; set; }
 
         public ConfigurationApplyArgs()
         {
@@ -250,12 +245,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<string>? Node { get; set; }
 
         [Input("timeouts")]
-        private InputMap<object>? _timeouts;
-        public InputMap<object> Timeouts
-        {
-            get => _timeouts ?? (_timeouts = new InputMap<object>());
-            set => _timeouts = value;
-        }
+        public Input<Inputs.TimeoutGetArgs>? Timeouts { get; set; }
 
         public ConfigurationApplyState()
         {

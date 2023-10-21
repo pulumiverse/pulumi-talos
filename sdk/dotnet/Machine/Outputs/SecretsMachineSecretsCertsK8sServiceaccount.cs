@@ -14,6 +14,9 @@ namespace Pulumiverse.Talos.Machine.Outputs
     [OutputType]
     public sealed class SecretsMachineSecretsCertsK8sServiceaccount
     {
+        /// <summary>
+        /// key data
+        /// </summary>
         public readonly string? Key;
 
         [OutputConstructor]

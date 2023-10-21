@@ -8,7 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type ConfigurationClientConfiguration struct {
 	// The client CA certificate
@@ -51,6 +55,12 @@ func (i ConfigurationClientConfigurationArgs) ToConfigurationClientConfiguration
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationClientConfigurationOutput)
 }
 
+func (i ConfigurationClientConfigurationArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationClientConfiguration] {
+	return pulumix.Output[ConfigurationClientConfiguration]{
+		OutputState: i.ToConfigurationClientConfigurationOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ConfigurationClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (ConfigurationClientConfigurationOutput) ElementType() reflect.Type {
@@ -63,6 +73,12 @@ func (o ConfigurationClientConfigurationOutput) ToConfigurationClientConfigurati
 
 func (o ConfigurationClientConfigurationOutput) ToConfigurationClientConfigurationOutputWithContext(ctx context.Context) ConfigurationClientConfigurationOutput {
 	return o
+}
+
+func (o ConfigurationClientConfigurationOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationClientConfiguration] {
+	return pulumix.Output[ConfigurationClientConfiguration]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The client CA certificate

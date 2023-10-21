@@ -15,6 +15,10 @@ namespace Pulumiverse.Talos.Machine.Inputs
     {
         [Input("token", required: true)]
         private Input<string>? _token;
+
+        /// <summary>
+        /// The trustd token for the talos kubernetes cluster
+        /// </summary>
         public Input<string>? Token
         {
             get => _token;

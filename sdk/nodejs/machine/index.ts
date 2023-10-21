@@ -20,6 +20,11 @@ export type ConfigurationApply = import("./configurationApply").ConfigurationApp
 export const ConfigurationApply: typeof import("./configurationApply").ConfigurationApply = null as any;
 utilities.lazyLoad(exports, ["ConfigurationApply"], () => require("./configurationApply"));
 
+export { DisksArgs, DisksResult, DisksOutputArgs } from "./disks";
+export const disks: typeof import("./disks").disks = null as any;
+export const disksOutput: typeof import("./disks").disksOutput = null as any;
+utilities.lazyLoad(exports, ["disks","disksOutput"], () => require("./disks"));
+
 export { SecretsArgs, SecretsState } from "./secrets";
 export type Secrets = import("./secrets").Secrets;
 export const Secrets: typeof import("./secrets").Secrets = null as any;

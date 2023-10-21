@@ -13,18 +13,33 @@ namespace Pulumiverse.Talos.Machine.Inputs
 
     public sealed class SecretsMachineSecretsCertsGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The certificate and key pair
+        /// </summary>
         [Input("etcd")]
         public Input<Inputs.SecretsMachineSecretsCertsEtcdGetArgs>? Etcd { get; set; }
 
+        /// <summary>
+        /// The certificate and key pair
+        /// </summary>
         [Input("k8s")]
         public Input<Inputs.SecretsMachineSecretsCertsK8sGetArgs>? K8s { get; set; }
 
+        /// <summary>
+        /// The certificate and key pair
+        /// </summary>
         [Input("k8sAggregator")]
         public Input<Inputs.SecretsMachineSecretsCertsK8sAggregatorGetArgs>? K8sAggregator { get; set; }
 
+        /// <summary>
+        /// The service account secrets
+        /// </summary>
         [Input("k8sServiceaccount")]
         public Input<Inputs.SecretsMachineSecretsCertsK8sServiceaccountGetArgs>? K8sServiceaccount { get; set; }
 
+        /// <summary>
+        /// The certificate and key pair
+        /// </summary>
         [Input("os")]
         public Input<Inputs.SecretsMachineSecretsCertsOsGetArgs>? Os { get; set; }
 

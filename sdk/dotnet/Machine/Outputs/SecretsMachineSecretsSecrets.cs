@@ -14,8 +14,17 @@ namespace Pulumiverse.Talos.Machine.Outputs
     [OutputType]
     public sealed class SecretsMachineSecretsSecrets
     {
+        /// <summary>
+        /// The AES-CBC encryption secret
+        /// </summary>
         public readonly string? AescbcEncryptionSecret;
+        /// <summary>
+        /// The bootstrap token
+        /// </summary>
         public readonly string? BootstrapToken;
+        /// <summary>
+        /// The secretbox encryption secret
+        /// </summary>
         public readonly string? SecretboxEncryptionSecret;
 
         [OutputConstructor]

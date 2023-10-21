@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
 // Generate client configuration for a Talos cluster
@@ -44,7 +46,7 @@ import (
 //
 // ```
 func Configuration(ctx *pulumi.Context, args *ConfigurationArgs, opts ...pulumi.InvokeOption) (*ConfigurationResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv ConfigurationResult
 	err := ctx.Invoke("talos:client/configuration:Configuration", args, &rv, opts...)
 	if err != nil {
@@ -123,6 +125,12 @@ func (o ConfigurationResultOutput) ToConfigurationResultOutput() ConfigurationRe
 
 func (o ConfigurationResultOutput) ToConfigurationResultOutputWithContext(ctx context.Context) ConfigurationResultOutput {
 	return o
+}
+
+func (o ConfigurationResultOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationResult] {
+	return pulumix.Output[ConfigurationResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The client configuration data

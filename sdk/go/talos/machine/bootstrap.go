@@ -9,6 +9,8 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
 // The machine bootstrap resource allows you to bootstrap a Talos node.
@@ -30,8 +32,8 @@ type Bootstrap struct {
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringOutput `pulumi:"endpoint"`
 	// The name of the node to bootstrap
-	Node     pulumi.StringOutput `pulumi:"node"`
-	Timeouts pulumi.MapOutput    `pulumi:"timeouts"`
+	Node     pulumi.StringOutput        `pulumi:"node"`
+	Timeouts BootstrapTimeoutsPtrOutput `pulumi:"timeouts"`
 }
 
 // NewBootstrap registers a new resource with the given unique name, arguments, and options.
@@ -47,7 +49,7 @@ func NewBootstrap(ctx *pulumi.Context,
 	if args.Node == nil {
 		return nil, errors.New("invalid value for required argument 'Node'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Bootstrap
 	err := ctx.RegisterResource("talos:machine/bootstrap:Bootstrap", name, args, &resource, opts...)
 	if err != nil {
@@ -75,8 +77,8 @@ type bootstrapState struct {
 	// The endpoint of the machine to bootstrap
 	Endpoint *string `pulumi:"endpoint"`
 	// The name of the node to bootstrap
-	Node     *string                `pulumi:"node"`
-	Timeouts map[string]interface{} `pulumi:"timeouts"`
+	Node     *string            `pulumi:"node"`
+	Timeouts *BootstrapTimeouts `pulumi:"timeouts"`
 }
 
 type BootstrapState struct {
@@ -86,7 +88,7 @@ type BootstrapState struct {
 	Endpoint pulumi.StringPtrInput
 	// The name of the node to bootstrap
 	Node     pulumi.StringPtrInput
-	Timeouts pulumi.MapInput
+	Timeouts BootstrapTimeoutsPtrInput
 }
 
 func (BootstrapState) ElementType() reflect.Type {
@@ -99,8 +101,8 @@ type bootstrapArgs struct {
 	// The endpoint of the machine to bootstrap
 	Endpoint *string `pulumi:"endpoint"`
 	// The name of the node to bootstrap
-	Node     string                 `pulumi:"node"`
-	Timeouts map[string]interface{} `pulumi:"timeouts"`
+	Node     string             `pulumi:"node"`
+	Timeouts *BootstrapTimeouts `pulumi:"timeouts"`
 }
 
 // The set of arguments for constructing a Bootstrap resource.
@@ -111,7 +113,7 @@ type BootstrapArgs struct {
 	Endpoint pulumi.StringPtrInput
 	// The name of the node to bootstrap
 	Node     pulumi.StringInput
-	Timeouts pulumi.MapInput
+	Timeouts BootstrapTimeoutsPtrInput
 }
 
 func (BootstrapArgs) ElementType() reflect.Type {
@@ -135,6 +137,12 @@ func (i *Bootstrap) ToBootstrapOutput() BootstrapOutput {
 
 func (i *Bootstrap) ToBootstrapOutputWithContext(ctx context.Context) BootstrapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapOutput)
+}
+
+func (i *Bootstrap) ToOutput(ctx context.Context) pulumix.Output[*Bootstrap] {
+	return pulumix.Output[*Bootstrap]{
+		OutputState: i.ToBootstrapOutputWithContext(ctx).OutputState,
+	}
 }
 
 // BootstrapArrayInput is an input type that accepts BootstrapArray and BootstrapArrayOutput values.
@@ -162,6 +170,12 @@ func (i BootstrapArray) ToBootstrapArrayOutputWithContext(ctx context.Context) B
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapArrayOutput)
 }
 
+func (i BootstrapArray) ToOutput(ctx context.Context) pulumix.Output[[]*Bootstrap] {
+	return pulumix.Output[[]*Bootstrap]{
+		OutputState: i.ToBootstrapArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // BootstrapMapInput is an input type that accepts BootstrapMap and BootstrapMapOutput values.
 // You can construct a concrete instance of `BootstrapMapInput` via:
 //
@@ -187,6 +201,12 @@ func (i BootstrapMap) ToBootstrapMapOutputWithContext(ctx context.Context) Boots
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapMapOutput)
 }
 
+func (i BootstrapMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Bootstrap] {
+	return pulumix.Output[map[string]*Bootstrap]{
+		OutputState: i.ToBootstrapMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type BootstrapOutput struct{ *pulumi.OutputState }
 
 func (BootstrapOutput) ElementType() reflect.Type {
@@ -199,6 +219,12 @@ func (o BootstrapOutput) ToBootstrapOutput() BootstrapOutput {
 
 func (o BootstrapOutput) ToBootstrapOutputWithContext(ctx context.Context) BootstrapOutput {
 	return o
+}
+
+func (o BootstrapOutput) ToOutput(ctx context.Context) pulumix.Output[*Bootstrap] {
+	return pulumix.Output[*Bootstrap]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The client configuration data
@@ -216,8 +242,8 @@ func (o BootstrapOutput) Node() pulumi.StringOutput {
 	return o.ApplyT(func(v *Bootstrap) pulumi.StringOutput { return v.Node }).(pulumi.StringOutput)
 }
 
-func (o BootstrapOutput) Timeouts() pulumi.MapOutput {
-	return o.ApplyT(func(v *Bootstrap) pulumi.MapOutput { return v.Timeouts }).(pulumi.MapOutput)
+func (o BootstrapOutput) Timeouts() BootstrapTimeoutsPtrOutput {
+	return o.ApplyT(func(v *Bootstrap) BootstrapTimeoutsPtrOutput { return v.Timeouts }).(BootstrapTimeoutsPtrOutput)
 }
 
 type BootstrapArrayOutput struct{ *pulumi.OutputState }
@@ -232,6 +258,12 @@ func (o BootstrapArrayOutput) ToBootstrapArrayOutput() BootstrapArrayOutput {
 
 func (o BootstrapArrayOutput) ToBootstrapArrayOutputWithContext(ctx context.Context) BootstrapArrayOutput {
 	return o
+}
+
+func (o BootstrapArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Bootstrap] {
+	return pulumix.Output[[]*Bootstrap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o BootstrapArrayOutput) Index(i pulumi.IntInput) BootstrapOutput {
@@ -252,6 +284,12 @@ func (o BootstrapMapOutput) ToBootstrapMapOutput() BootstrapMapOutput {
 
 func (o BootstrapMapOutput) ToBootstrapMapOutputWithContext(ctx context.Context) BootstrapMapOutput {
 	return o
+}
+
+func (o BootstrapMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Bootstrap] {
+	return pulumix.Output[map[string]*Bootstrap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o BootstrapMapOutput) MapIndex(k pulumi.StringInput) BootstrapOutput {

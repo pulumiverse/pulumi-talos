@@ -13,11 +13,18 @@ namespace Pulumiverse.Talos.Machine.Inputs
 
     public sealed class SecretsMachineSecretsCertsOsArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// certificate data
+        /// </summary>
         [Input("cert")]
         public Input<string>? Cert { get; set; }
 
         [Input("key")]
         private Input<string>? _key;
+
+        /// <summary>
+        /// key data
+        /// </summary>
         public Input<string>? Key
         {
             get => _key;

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -22,7 +22,7 @@ class ConfigurationApplyArgs:
                  apply_mode: Optional[pulumi.Input[str]] = None,
                  config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
-                 timeouts: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 timeouts: Optional[pulumi.Input['TimeoutArgs']] = None):
         """
         The set of arguments for constructing a ConfigurationApply resource.
         :param pulumi.Input['ConfigurationApplyClientConfigurationArgs'] client_configuration: The client configuration data
@@ -32,17 +32,38 @@ class ConfigurationApplyArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         """
-        pulumi.set(__self__, "client_configuration", client_configuration)
-        pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
-        pulumi.set(__self__, "node", node)
+        ConfigurationApplyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_configuration=client_configuration,
+            machine_configuration_input=machine_configuration_input,
+            node=node,
+            apply_mode=apply_mode,
+            config_patches=config_patches,
+            endpoint=endpoint,
+            timeouts=timeouts,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_configuration: pulumi.Input['ConfigurationApplyClientConfigurationArgs'],
+             machine_configuration_input: pulumi.Input[str],
+             node: pulumi.Input[str],
+             apply_mode: Optional[pulumi.Input[str]] = None,
+             config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             endpoint: Optional[pulumi.Input[str]] = None,
+             timeouts: Optional[pulumi.Input['TimeoutArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
+        _setter("client_configuration", client_configuration)
+        _setter("machine_configuration_input", machine_configuration_input)
+        _setter("node", node)
         if apply_mode is not None:
-            pulumi.set(__self__, "apply_mode", apply_mode)
+            _setter("apply_mode", apply_mode)
         if config_patches is not None:
-            pulumi.set(__self__, "config_patches", config_patches)
+            _setter("config_patches", config_patches)
         if endpoint is not None:
-            pulumi.set(__self__, "endpoint", endpoint)
+            _setter("endpoint", endpoint)
         if timeouts is not None:
-            pulumi.set(__self__, "timeouts", timeouts)
+            _setter("timeouts", timeouts)
 
     @property
     @pulumi.getter(name="clientConfiguration")
@@ -118,11 +139,11 @@ class ConfigurationApplyArgs:
 
     @property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+    def timeouts(self) -> Optional[pulumi.Input['TimeoutArgs']]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+    def timeouts(self, value: Optional[pulumi.Input['TimeoutArgs']]):
         pulumi.set(self, "timeouts", value)
 
 
@@ -136,7 +157,7 @@ class _ConfigurationApplyState:
                  machine_configuration: Optional[pulumi.Input[str]] = None,
                  machine_configuration_input: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 timeouts: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 timeouts: Optional[pulumi.Input['TimeoutArgs']] = None):
         """
         Input properties used for looking up and filtering ConfigurationApply resources.
         :param pulumi.Input[str] apply_mode: The mode of the apply operation
@@ -147,22 +168,45 @@ class _ConfigurationApplyState:
         :param pulumi.Input[str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[str] node: The name of the node to bootstrap
         """
+        _ConfigurationApplyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            apply_mode=apply_mode,
+            client_configuration=client_configuration,
+            config_patches=config_patches,
+            endpoint=endpoint,
+            machine_configuration=machine_configuration,
+            machine_configuration_input=machine_configuration_input,
+            node=node,
+            timeouts=timeouts,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             apply_mode: Optional[pulumi.Input[str]] = None,
+             client_configuration: Optional[pulumi.Input['ConfigurationApplyClientConfigurationArgs']] = None,
+             config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             endpoint: Optional[pulumi.Input[str]] = None,
+             machine_configuration: Optional[pulumi.Input[str]] = None,
+             machine_configuration_input: Optional[pulumi.Input[str]] = None,
+             node: Optional[pulumi.Input[str]] = None,
+             timeouts: Optional[pulumi.Input['TimeoutArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if apply_mode is not None:
-            pulumi.set(__self__, "apply_mode", apply_mode)
+            _setter("apply_mode", apply_mode)
         if client_configuration is not None:
-            pulumi.set(__self__, "client_configuration", client_configuration)
+            _setter("client_configuration", client_configuration)
         if config_patches is not None:
-            pulumi.set(__self__, "config_patches", config_patches)
+            _setter("config_patches", config_patches)
         if endpoint is not None:
-            pulumi.set(__self__, "endpoint", endpoint)
+            _setter("endpoint", endpoint)
         if machine_configuration is not None:
-            pulumi.set(__self__, "machine_configuration", machine_configuration)
+            _setter("machine_configuration", machine_configuration)
         if machine_configuration_input is not None:
-            pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
+            _setter("machine_configuration_input", machine_configuration_input)
         if node is not None:
-            pulumi.set(__self__, "node", node)
+            _setter("node", node)
         if timeouts is not None:
-            pulumi.set(__self__, "timeouts", timeouts)
+            _setter("timeouts", timeouts)
 
     @property
     @pulumi.getter(name="applyMode")
@@ -250,11 +294,11 @@ class _ConfigurationApplyState:
 
     @property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+    def timeouts(self) -> Optional[pulumi.Input['TimeoutArgs']]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+    def timeouts(self, value: Optional[pulumi.Input['TimeoutArgs']]):
         pulumi.set(self, "timeouts", value)
 
 
@@ -269,10 +313,10 @@ class ConfigurationApply(pulumi.CustomResource):
                  endpoint: Optional[pulumi.Input[str]] = None,
                  machine_configuration_input: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 timeouts: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 timeouts: Optional[pulumi.Input[pulumi.InputType['TimeoutArgs']]] = None,
                  __props__=None):
         """
-        The machine bootstrap resource allows you to bootstrap a Talos node.
+        The machine configuration apply resource allows to apply machine configuration to a node
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -290,7 +334,7 @@ class ConfigurationApply(pulumi.CustomResource):
                  args: ConfigurationApplyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        The machine bootstrap resource allows you to bootstrap a Talos node.
+        The machine configuration apply resource allows to apply machine configuration to a node
 
         :param str resource_name: The name of the resource.
         :param ConfigurationApplyArgs args: The arguments to use to populate this resource's properties.
@@ -302,6 +346,10 @@ class ConfigurationApply(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ConfigurationApplyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -313,7 +361,7 @@ class ConfigurationApply(pulumi.CustomResource):
                  endpoint: Optional[pulumi.Input[str]] = None,
                  machine_configuration_input: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 timeouts: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 timeouts: Optional[pulumi.Input[pulumi.InputType['TimeoutArgs']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -324,6 +372,11 @@ class ConfigurationApply(pulumi.CustomResource):
             __props__ = ConfigurationApplyArgs.__new__(ConfigurationApplyArgs)
 
             __props__.__dict__["apply_mode"] = apply_mode
+            if client_configuration is not None and not isinstance(client_configuration, ConfigurationApplyClientConfigurationArgs):
+                client_configuration = client_configuration or {}
+                def _setter(key, value):
+                    client_configuration[key] = value
+                ConfigurationApplyClientConfigurationArgs._configure(_setter, **client_configuration)
             if client_configuration is None and not opts.urn:
                 raise TypeError("Missing required property 'client_configuration'")
             __props__.__dict__["client_configuration"] = client_configuration
@@ -335,6 +388,11 @@ class ConfigurationApply(pulumi.CustomResource):
             if node is None and not opts.urn:
                 raise TypeError("Missing required property 'node'")
             __props__.__dict__["node"] = node
+            if timeouts is not None and not isinstance(timeouts, TimeoutArgs):
+                timeouts = timeouts or {}
+                def _setter(key, value):
+                    timeouts[key] = value
+                TimeoutArgs._configure(_setter, **timeouts)
             __props__.__dict__["timeouts"] = timeouts
             __props__.__dict__["machine_configuration"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["machineConfiguration", "machineConfigurationInput"])
@@ -356,7 +414,7 @@ class ConfigurationApply(pulumi.CustomResource):
             machine_configuration: Optional[pulumi.Input[str]] = None,
             machine_configuration_input: Optional[pulumi.Input[str]] = None,
             node: Optional[pulumi.Input[str]] = None,
-            timeouts: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'ConfigurationApply':
+            timeouts: Optional[pulumi.Input[pulumi.InputType['TimeoutArgs']]] = None) -> 'ConfigurationApply':
         """
         Get an existing ConfigurationApply resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -444,6 +502,6 @@ class ConfigurationApply(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def timeouts(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+    def timeouts(self) -> pulumi.Output[Optional['outputs.Timeout']]:
         return pulumi.get(self, "timeouts")
 

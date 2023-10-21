@@ -9,9 +9,11 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
-// The machine bootstrap resource allows you to bootstrap a Talos node.
+// The machine configuration apply resource allows to apply machine configuration to a node
 type ConfigurationApply struct {
 	pulumi.CustomResourceState
 
@@ -29,7 +31,7 @@ type ConfigurationApply struct {
 	MachineConfigurationInput pulumi.StringOutput `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
 	Node     pulumi.StringOutput `pulumi:"node"`
-	Timeouts pulumi.MapOutput    `pulumi:"timeouts"`
+	Timeouts TimeoutPtrOutput    `pulumi:"timeouts"`
 }
 
 // NewConfigurationApply registers a new resource with the given unique name, arguments, and options.
@@ -56,7 +58,7 @@ func NewConfigurationApply(ctx *pulumi.Context,
 		"machineConfigurationInput",
 	})
 	opts = append(opts, secrets)
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConfigurationApply
 	err := ctx.RegisterResource("talos:machine/configurationApply:ConfigurationApply", name, args, &resource, opts...)
 	if err != nil {
@@ -92,8 +94,8 @@ type configurationApplyState struct {
 	// The machine configuration to apply
 	MachineConfigurationInput *string `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
-	Node     *string                `pulumi:"node"`
-	Timeouts map[string]interface{} `pulumi:"timeouts"`
+	Node     *string  `pulumi:"node"`
+	Timeouts *Timeout `pulumi:"timeouts"`
 }
 
 type ConfigurationApplyState struct {
@@ -111,7 +113,7 @@ type ConfigurationApplyState struct {
 	MachineConfigurationInput pulumi.StringPtrInput
 	// The name of the node to bootstrap
 	Node     pulumi.StringPtrInput
-	Timeouts pulumi.MapInput
+	Timeouts TimeoutPtrInput
 }
 
 func (ConfigurationApplyState) ElementType() reflect.Type {
@@ -130,8 +132,8 @@ type configurationApplyArgs struct {
 	// The machine configuration to apply
 	MachineConfigurationInput string `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
-	Node     string                 `pulumi:"node"`
-	Timeouts map[string]interface{} `pulumi:"timeouts"`
+	Node     string   `pulumi:"node"`
+	Timeouts *Timeout `pulumi:"timeouts"`
 }
 
 // The set of arguments for constructing a ConfigurationApply resource.
@@ -148,7 +150,7 @@ type ConfigurationApplyArgs struct {
 	MachineConfigurationInput pulumi.StringInput
 	// The name of the node to bootstrap
 	Node     pulumi.StringInput
-	Timeouts pulumi.MapInput
+	Timeouts TimeoutPtrInput
 }
 
 func (ConfigurationApplyArgs) ElementType() reflect.Type {
@@ -172,6 +174,12 @@ func (i *ConfigurationApply) ToConfigurationApplyOutput() ConfigurationApplyOutp
 
 func (i *ConfigurationApply) ToConfigurationApplyOutputWithContext(ctx context.Context) ConfigurationApplyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyOutput)
+}
+
+func (i *ConfigurationApply) ToOutput(ctx context.Context) pulumix.Output[*ConfigurationApply] {
+	return pulumix.Output[*ConfigurationApply]{
+		OutputState: i.ToConfigurationApplyOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ConfigurationApplyArrayInput is an input type that accepts ConfigurationApplyArray and ConfigurationApplyArrayOutput values.
@@ -199,6 +207,12 @@ func (i ConfigurationApplyArray) ToConfigurationApplyArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyArrayOutput)
 }
 
+func (i ConfigurationApplyArray) ToOutput(ctx context.Context) pulumix.Output[[]*ConfigurationApply] {
+	return pulumix.Output[[]*ConfigurationApply]{
+		OutputState: i.ToConfigurationApplyArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ConfigurationApplyMapInput is an input type that accepts ConfigurationApplyMap and ConfigurationApplyMapOutput values.
 // You can construct a concrete instance of `ConfigurationApplyMapInput` via:
 //
@@ -224,6 +238,12 @@ func (i ConfigurationApplyMap) ToConfigurationApplyMapOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyMapOutput)
 }
 
+func (i ConfigurationApplyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConfigurationApply] {
+	return pulumix.Output[map[string]*ConfigurationApply]{
+		OutputState: i.ToConfigurationApplyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ConfigurationApplyOutput struct{ *pulumi.OutputState }
 
 func (ConfigurationApplyOutput) ElementType() reflect.Type {
@@ -236,6 +256,12 @@ func (o ConfigurationApplyOutput) ToConfigurationApplyOutput() ConfigurationAppl
 
 func (o ConfigurationApplyOutput) ToConfigurationApplyOutputWithContext(ctx context.Context) ConfigurationApplyOutput {
 	return o
+}
+
+func (o ConfigurationApplyOutput) ToOutput(ctx context.Context) pulumix.Output[*ConfigurationApply] {
+	return pulumix.Output[*ConfigurationApply]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The mode of the apply operation
@@ -273,8 +299,8 @@ func (o ConfigurationApplyOutput) Node() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.Node }).(pulumi.StringOutput)
 }
 
-func (o ConfigurationApplyOutput) Timeouts() pulumi.MapOutput {
-	return o.ApplyT(func(v *ConfigurationApply) pulumi.MapOutput { return v.Timeouts }).(pulumi.MapOutput)
+func (o ConfigurationApplyOutput) Timeouts() TimeoutPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApply) TimeoutPtrOutput { return v.Timeouts }).(TimeoutPtrOutput)
 }
 
 type ConfigurationApplyArrayOutput struct{ *pulumi.OutputState }
@@ -289,6 +315,12 @@ func (o ConfigurationApplyArrayOutput) ToConfigurationApplyArrayOutput() Configu
 
 func (o ConfigurationApplyArrayOutput) ToConfigurationApplyArrayOutputWithContext(ctx context.Context) ConfigurationApplyArrayOutput {
 	return o
+}
+
+func (o ConfigurationApplyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ConfigurationApply] {
+	return pulumix.Output[[]*ConfigurationApply]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConfigurationApplyArrayOutput) Index(i pulumi.IntInput) ConfigurationApplyOutput {
@@ -309,6 +341,12 @@ func (o ConfigurationApplyMapOutput) ToConfigurationApplyMapOutput() Configurati
 
 func (o ConfigurationApplyMapOutput) ToConfigurationApplyMapOutputWithContext(ctx context.Context) ConfigurationApplyMapOutput {
 	return o
+}
+
+func (o ConfigurationApplyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConfigurationApply] {
+	return pulumix.Output[map[string]*ConfigurationApply]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConfigurationApplyMapOutput) MapIndex(k pulumi.StringInput) ConfigurationApplyOutput {

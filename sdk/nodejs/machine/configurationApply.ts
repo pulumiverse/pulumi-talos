@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * The machine bootstrap resource allows you to bootstrap a Talos node.
+ * The machine configuration apply resource allows to apply machine configuration to a node
  */
 export class ConfigurationApply extends pulumi.CustomResource {
     /**
@@ -65,7 +65,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
      * The name of the node to bootstrap
      */
     public readonly node!: pulumi.Output<string>;
-    public readonly timeouts!: pulumi.Output<{[key: string]: any} | undefined>;
+    public readonly timeouts!: pulumi.Output<outputs.machine.Timeout | undefined>;
 
     /**
      * Create a ConfigurationApply resource with the given unique name, arguments, and options.
@@ -147,7 +147,7 @@ export interface ConfigurationApplyState {
      * The name of the node to bootstrap
      */
     node?: pulumi.Input<string>;
-    timeouts?: pulumi.Input<{[key: string]: any}>;
+    timeouts?: pulumi.Input<inputs.machine.Timeout>;
 }
 
 /**
@@ -178,5 +178,5 @@ export interface ConfigurationApplyArgs {
      * The name of the node to bootstrap
      */
     node: pulumi.Input<string>;
-    timeouts?: pulumi.Input<{[key: string]: any}>;
+    timeouts?: pulumi.Input<inputs.machine.Timeout>;
 }

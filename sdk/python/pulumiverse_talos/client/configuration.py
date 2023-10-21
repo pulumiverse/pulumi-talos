@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -142,12 +142,12 @@ def configuration(client_configuration: Optional[pulumi.InputType['Configuration
     __ret__ = pulumi.runtime.invoke('talos:client/configuration:Configuration', __args__, opts=opts, typ=ConfigurationResult).value
 
     return AwaitableConfigurationResult(
-        client_configuration=__ret__.client_configuration,
-        cluster_name=__ret__.cluster_name,
-        endpoints=__ret__.endpoints,
-        id=__ret__.id,
-        nodes=__ret__.nodes,
-        talos_config=__ret__.talos_config)
+        client_configuration=pulumi.get(__ret__, 'client_configuration'),
+        cluster_name=pulumi.get(__ret__, 'cluster_name'),
+        endpoints=pulumi.get(__ret__, 'endpoints'),
+        id=pulumi.get(__ret__, 'id'),
+        nodes=pulumi.get(__ret__, 'nodes'),
+        talos_config=pulumi.get(__ret__, 'talos_config'))
 
 
 @_utilities.lift_output_func(configuration)

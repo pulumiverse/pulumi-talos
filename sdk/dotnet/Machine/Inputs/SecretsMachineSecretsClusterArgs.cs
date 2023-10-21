@@ -14,13 +14,17 @@ namespace Pulumiverse.Talos.Machine.Inputs
     public sealed class SecretsMachineSecretsClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The computed ID of the Talos cluster
+        /// The cluster ID
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
         [Input("secret")]
         private Input<string>? _secret;
+
+        /// <summary>
+        /// The cluster secret
+        /// </summary>
         public Input<string>? Secret
         {
             get => _secret;

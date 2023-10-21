@@ -11,8 +11,7 @@
     "repository": "https://github.com/pulumiverse/pulumi-talos",
     "license": "MPL-2.0",
     "scripts": {
-        "build": "tsc",
-        "install": "node scripts/install-pulumi-plugin.js resource talos ${VERSION}"
+        "build": "tsc"
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0"

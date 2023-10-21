@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -179,12 +179,21 @@ def configuration(cluster_endpoint: Optional[str] = None,
     """
     Generate a machine configuration for a node type
 
-    > **Note:** It is recommended to set the optional `talos_version` attribute.
-    Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+    > **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
 
     ## Example Usage
 
-    {{tffile "examples/data-sources/talos_machine_configuration/data-source.tf"}}
+    ```python
+    import pulumi
+    import pulumi_talos as talos
+    import pulumiverse_talos as talos
+
+    this_secrets = talos.machine.Secrets("thisSecrets")
+    this_configuration = talos.machine.configuration_output(cluster_name="example-cluster",
+        machine_type="controlplane",
+        cluster_endpoint="https://cluster.local:6443",
+        machine_secrets=this_secrets.machine_secrets)
+    ```
 
 
     :param str cluster_endpoint: The endpoint of the talos kubernetes cluster
@@ -211,17 +220,17 @@ def configuration(cluster_endpoint: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('talos:machine/configuration:Configuration', __args__, opts=opts, typ=ConfigurationResult).value
 
     return AwaitableConfigurationResult(
-        cluster_endpoint=__ret__.cluster_endpoint,
-        cluster_name=__ret__.cluster_name,
-        config_patches=__ret__.config_patches,
-        docs=__ret__.docs,
-        examples=__ret__.examples,
-        id=__ret__.id,
-        kubernetes_version=__ret__.kubernetes_version,
-        machine_configuration=__ret__.machine_configuration,
-        machine_secrets=__ret__.machine_secrets,
-        machine_type=__ret__.machine_type,
-        talos_version=__ret__.talos_version)
+        cluster_endpoint=pulumi.get(__ret__, 'cluster_endpoint'),
+        cluster_name=pulumi.get(__ret__, 'cluster_name'),
+        config_patches=pulumi.get(__ret__, 'config_patches'),
+        docs=pulumi.get(__ret__, 'docs'),
+        examples=pulumi.get(__ret__, 'examples'),
+        id=pulumi.get(__ret__, 'id'),
+        kubernetes_version=pulumi.get(__ret__, 'kubernetes_version'),
+        machine_configuration=pulumi.get(__ret__, 'machine_configuration'),
+        machine_secrets=pulumi.get(__ret__, 'machine_secrets'),
+        machine_type=pulumi.get(__ret__, 'machine_type'),
+        talos_version=pulumi.get(__ret__, 'talos_version'))
 
 
 @_utilities.lift_output_func(configuration)
@@ -238,12 +247,21 @@ def configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = None,
     """
     Generate a machine configuration for a node type
 
-    > **Note:** It is recommended to set the optional `talos_version` attribute.
-    Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+    > **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
 
     ## Example Usage
 
-    {{tffile "examples/data-sources/talos_machine_configuration/data-source.tf"}}
+    ```python
+    import pulumi
+    import pulumi_talos as talos
+    import pulumiverse_talos as talos
+
+    this_secrets = talos.machine.Secrets("thisSecrets")
+    this_configuration = talos.machine.configuration_output(cluster_name="example-cluster",
+        machine_type="controlplane",
+        cluster_endpoint="https://cluster.local:6443",
+        machine_secrets=this_secrets.machine_secrets)
+    ```
 
 
     :param str cluster_endpoint: The endpoint of the talos kubernetes cluster

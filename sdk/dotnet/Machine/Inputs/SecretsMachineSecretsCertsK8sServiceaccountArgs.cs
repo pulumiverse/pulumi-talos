@@ -15,6 +15,10 @@ namespace Pulumiverse.Talos.Machine.Inputs
     {
         [Input("key")]
         private Input<string>? _key;
+
+        /// <summary>
+        /// key data
+        /// </summary>
         public Input<string>? Key
         {
             get => _key;
