@@ -1,0 +1,3 @@
+name: talos
+runtime: nodejs
+description: A minimal Talos program in Pulumi YAML

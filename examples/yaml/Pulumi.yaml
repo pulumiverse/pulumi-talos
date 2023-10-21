@@ -21,18 +21,18 @@ resources:
       clientConfiguration: ${secrets.clientConfiguration}
       machineConfigurationInput: ${configuration}
       node: "10.5.0.2"
-  #     configPatches:
-  #       - fn::toJSON:
-  #           machine:
-  #             install:
-  #               disk: "/dev/sdd"
-  # bootstrap:
-  #   type: talos:machine:Bootstrap
-  #   properties:
-  #     node: "10.5.0.2"
-  #     clientConfiguration: ${secrets.clientConfiguration}
-  #   options:
-  #     dependsOn:
-  #       - configurationApply
+      configPatches:
+        - fn::toJSON:
+            machine:
+              install:
+                disk: "/dev/sdd"
+  bootstrap:
+    type: talos:machine:Bootstrap
+    properties:
+      node: "10.5.0.2"
+      clientConfiguration: ${secrets.clientConfiguration}
+    options:
+      dependsOn:
+        - ${configurationApply}
 
 outputs: {}
