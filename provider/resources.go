@@ -6,9 +6,11 @@
 package talos
 
 import (
+	_ "embed"
 	"fmt"
 	"path/filepath"
 
+	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumiverse/pulumi-talos/provider/pkg/version"
 	"github.com/siderolabs/terraform-provider-talos/shim"
@@ -23,10 +25,13 @@ const (
 	machineMod = "machine" // the talos module
 )
 
+//go:embed cmd/pulumi-resource-talos/bridge-metadata.json
+var metadata []byte
+
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
-		P:                 shim.ShimmedProvider(),
+		P:                 pf.ShimProvider(shim.NewProvider()),
 		Name:              talosPkg,
 		Description:       "A Pulumi package for creating and managing Talos Linux machines and clusters.",
 		Keywords:          []string{"pulumi", "talos", "category/infrastructure"},
@@ -38,6 +43,7 @@ func Provider() tfbridge.ProviderInfo {
 		Publisher:         "Pulumiverse",
 		LogoURL:           "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.svg",
 		PluginDownloadURL: "https://github.com/pulumiverse/pulumi-talos/releases",
+		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"talos_machine_bootstrap": {Tok: tfbridge.MakeResource(talosPkg, machineMod, "Bootstrap")},
 			"talos_machine_configuration_apply": {
@@ -54,6 +60,7 @@ func Provider() tfbridge.ProviderInfo {
 			"talos_client_configuration":  {Tok: tfbridge.MakeDataSource(talosPkg, clientMod, "Configuration")},
 			"talos_cluster_kubeconfig":    {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "Kubeconfig")},
 			"talos_machine_configuration": {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "Configuration")},
+			"talos_machine_disks":         {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "Disks")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/talos",

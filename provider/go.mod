@@ -155,7 +155,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.18.0 // indirect
 	github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.3.4 // indirect
+	github.com/hashicorp/terraform-plugin-framework v1.4.1 // indirect
 	github.com/hashicorp/terraform-plugin-framework-timeouts v0.4.1 // indirect
 	github.com/hashicorp/terraform-plugin-framework-validators v0.11.0 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.19.0 // indirect
