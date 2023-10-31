@@ -1,7 +1,7 @@
 ---
 title: Talos Linux
 meta_desc: Provides an overview of the Talos Linux Provider for Pulumi.
-layout: overview
+layout: package
 ---
 
 The Talos Linux provider for Pulumi can be used to provision Talos Linux machines and activate Kubernetes clusters running on top of them.
