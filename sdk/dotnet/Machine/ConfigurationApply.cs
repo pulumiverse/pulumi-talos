@@ -84,7 +84,7 @@ namespace Pulumiverse.Talos.Machine
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/pulumiverse/pulumi-talos/releases",
+                PluginDownloadURL = "github://api.github.com/pulumiverse",
                 AdditionalSecretOutputs =
                 {
                     "machineConfiguration",

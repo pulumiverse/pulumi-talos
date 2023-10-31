@@ -1,5 +1,5 @@
 {
   "resource": true,
   "name": "talos",
-  "server": "https://github.com/pulumiverse/pulumi-talos/releases"
+  "server": "github://api.github.com/pulumiverse"
 }

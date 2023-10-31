@@ -42,7 +42,7 @@ func Provider() tfbridge.ProviderInfo {
 		Version:           version.Version,
 		Publisher:         "Pulumiverse",
 		LogoURL:           "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.png",
-		PluginDownloadURL: "https://github.com/pulumiverse/pulumi-talos/releases",
+		PluginDownloadURL: "github://api.github.com/pulumiverse",
 		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"talos_machine_bootstrap": {Tok: tfbridge.MakeResource(talosPkg, machineMod, "Bootstrap")},
