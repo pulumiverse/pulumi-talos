@@ -6,6 +6,6 @@
 	"dependencies": {
 		"typescript": "^4.0.0",
 		"@pulumi/pulumi": "^3.0.0",
-		"@pulumiverse/talos": "0.1.2"
+		"@pulumiverse/talos": "0.1.7"
 	}
 }
