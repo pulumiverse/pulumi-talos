@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
       - name: Install Go
@@ -74,7 +74,7 @@ jobs:
     needs: publish_binary
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
       - name: Install Go
