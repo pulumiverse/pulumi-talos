@@ -14,6 +14,10 @@
                 "golang-version"
             ],
             "groupName": "go packages"
+        },
+        {
+          "matchFileNames": ["sdk/**"],
+          "enabled": false
         }
     ],
     "dependencyDashboard": true
