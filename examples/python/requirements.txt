@@ -1,2 +1,2 @@
 pulumi>=3.0.0,<4.0.0
-pulumiverse_talos==0.1.1-alpha.1697871885+abfc3336.dirty
+pulumiverse_talos==0.1.7
