@@ -92,7 +92,7 @@ jobs:
         with:
           node-version: ${{ env.NODEVERSION }}
       - name: Setup DotNet
-        uses: actions/setup-dotnet@v2.1.0
+        uses: actions/setup-dotnet@v2.1.1
         with:
           dotnet-version: ${{ env.DOTNETVERSION }}
       - name: Setup Python
