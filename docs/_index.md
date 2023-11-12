@@ -17,12 +17,12 @@ import * as talos from "@pulumiverse/talos";
 
 const secrets = new talos.machine.Secrets("secrets", {});
 
-const configuration = talos.machine.ConfigurationOutput({
+const configuration = secrets.machineSecrets.apply(machineSecrets => talos.machine.getConfiguration({
     clusterName: "exampleCluster",
     machineType: "controlplane",
     clusterEndpoint: "https://cluster.local:6443",
-    machineSecrets: secrets.machineSecrets,
-});
+    machineSecrets: machineSecrets,
+}));
 
 const configurationApply = new talos.machine.ConfigurationApply("configurationApply", {
     clientConfiguration: secrets.clientConfiguration,
@@ -55,7 +55,7 @@ import pulumiverse_talos as talos
 
 secrets = talos.machine.Secrets("secrets")
 
-configuration = talos.machine.configuration_output(cluster_name="exampleCluster",
+configuration = talos.machine.get_configuration(cluster_name="exampleCluster",
     machine_type="controlplane",
     cluster_endpoint="https://cluster.local:6443",
     machine_secrets=secrets.machine_secrets)

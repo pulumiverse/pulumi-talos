@@ -6,9 +6,9 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .bootstrap import *
-from .configuration import *
 from .configuration_apply import *
 from .disks import *
+from .get_configuration import *
 from .secrets import *
 from ._inputs import *
 from . import outputs

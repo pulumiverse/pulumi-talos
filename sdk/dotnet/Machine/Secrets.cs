@@ -49,7 +49,7 @@ namespace Pulumiverse.Talos.Machine
         /// The secrets for the talos cluster
         /// </summary>
         [Output("machineSecrets")]
-        public Output<Outputs.SecretsMachineSecrets> MachineSecrets { get; private set; } = null!;
+        public Output<Outputs.MachineSecretsResult> MachineSecrets { get; private set; } = null!;
 
         /// <summary>
         /// The version of talos features to use in generated machine configuration
@@ -128,7 +128,7 @@ namespace Pulumiverse.Talos.Machine
         /// The secrets for the talos cluster
         /// </summary>
         [Input("machineSecrets")]
-        public Input<Inputs.SecretsMachineSecretsGetArgs>? MachineSecrets { get; set; }
+        public Input<Inputs.MachineSecretsGetArgs>? MachineSecrets { get; set; }
 
         /// <summary>
         /// The version of talos features to use in generated machine configuration
