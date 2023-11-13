@@ -8,7 +8,7 @@ return await Deployment.RunAsync(() =>
 {
     var secrets = new Talos.Machine.Secrets("secrets");
 
-    var configuration = Talos.Machine.Configuration.Invoke(new()
+    var configuration = Talos.Machine.GetConfiguration.Invoke(new()
     {
         ClusterName = "exampleCluster",
         MachineType = "controlplane",
@@ -19,7 +19,7 @@ return await Deployment.RunAsync(() =>
     var configurationApply = new Talos.Machine.ConfigurationApply("configurationApply", new()
     {
         ClientConfiguration = secrets.ClientConfiguration,
-        MachineConfigurationInput = configuration.MachineConfiguration,
+        MachineConfigurationInput = configuration,
         Node = "10.5.0.2",
         ConfigPatches = new[]
         {

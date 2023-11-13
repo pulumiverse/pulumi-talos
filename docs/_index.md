@@ -17,12 +17,12 @@ import * as talos from "@pulumiverse/talos";
 
 const secrets = new talos.machine.Secrets("secrets", {});
 
-const configuration = secrets.machineSecrets.apply(machineSecrets => talos.machine.getConfiguration({
+const configuration = talos.machine.getConfigurationOutput({
     clusterName: "exampleCluster",
     machineType: "controlplane",
     clusterEndpoint: "https://cluster.local:6443",
-    machineSecrets: machineSecrets,
-}));
+    machineSecrets: secrets.machineSecrets,
+});
 
 const configurationApply = new talos.machine.ConfigurationApply("configurationApply", {
     clientConfiguration: secrets.clientConfiguration,
@@ -55,7 +55,7 @@ import pulumiverse_talos as talos
 
 secrets = talos.machine.Secrets("secrets")
 
-configuration = talos.machine.get_configuration(cluster_name="exampleCluster",
+configuration = talos.machine.get_configuration_output(cluster_name="exampleCluster",
     machine_type="controlplane",
     cluster_endpoint="https://cluster.local:6443",
     machine_secrets=secrets.machine_secrets)
@@ -98,15 +98,14 @@ func main() {
 			return err
 		}
 
-		configuration := machine.ConfigurationOutput(ctx, machine.ConfigurationOutputArgs{
+		configuration := machine.GetConfigurationOutput(ctx, machine.GetConfigurationOutputArgs{
 			ClusterName:     pulumi.String("exampleCluster"),
 			MachineType:     pulumi.String("controlplane"),
 			ClusterEndpoint: pulumi.String("https://cluster.local:6443"),
 			MachineSecrets:  secrets.MachineSecrets,
-		}, nil).ApplyT(func(invoke machine.ConfigurationResult) (*string, error) {
-			return invoke.MachineConfiguration, nil
-		}).(pulumi.StringPtrOutput)
-		tmpJSON0, err := json.Marshal(map[string]interface{}{
+		}, nil)
+
+        tmpJSON0, err := json.Marshal(map[string]interface{}{
 			"machine": map[string]interface{}{
 				"install": map[string]interface{}{
 					"disk": "/dev/sdd",
@@ -159,7 +158,7 @@ return await Deployment.RunAsync(() =>
 {
     var secrets = new Talos.Machine.Secrets("secrets");
 
-    var configuration = Talos.Machine.Configuration.Invoke(new()
+    var configuration = Talos.Machine.GetConfiguration.Invoke(new()
     {
         ClusterName = "exampleCluster",
         MachineType = "controlplane",
@@ -213,7 +212,7 @@ description: A minimal Talos program in Pulumi YAML
 variables:
   configuration:
     fn::invoke:
-      function: talos:machine/configuration:Configuration
+      function: talos:machine/getConfiguration:getConfiguration
       arguments:
         clusterName: "exampleCluster"
         machineType: "controlplane"

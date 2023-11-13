@@ -4,7 +4,7 @@ description: A minimal Talos program in Pulumi YAML
 variables:
   configuration:
     fn::invoke:
-      function: talos:machine/configuration:Configuration
+      function: talos:machine/getConfiguration:getConfiguration
       arguments:
         clusterName: "exampleCluster"
         machineType: "controlplane"

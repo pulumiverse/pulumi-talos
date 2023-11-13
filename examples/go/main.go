@@ -14,14 +14,13 @@ func main() {
 			return err
 		}
 
-		configuration := machine.ConfigurationOutput(ctx, machine.ConfigurationOutputArgs{
+		configuration := machine.GetConfigurationOutput(ctx, machine.GetConfigurationOutputArgs{
 			ClusterName:     pulumi.String("exampleCluster"),
 			MachineType:     pulumi.String("controlplane"),
 			ClusterEndpoint: pulumi.String("https://cluster.local:6443"),
 			MachineSecrets:  secrets.MachineSecrets,
-		}, nil).ApplyT(func(invoke machine.ConfigurationResult) (*string, error) {
-			return invoke.MachineConfiguration, nil
-		}).(pulumi.StringPtrOutput)
+		}, nil)
+
 		tmpJSON0, err := json.Marshal(map[string]interface{}{
 			"machine": map[string]interface{}{
 				"install": map[string]interface{}{
@@ -32,9 +31,7 @@ func main() {
 		if err != nil {
 			return err
 		}
-
 		json0 := string(tmpJSON0)
-
 		configurationApply, err := machine.NewConfigurationApply(ctx, "configurationApply", &machine.ConfigurationApplyArgs{
 			ClientConfiguration:       secrets.ClientConfiguration,
 			MachineConfigurationInput: *pulumi.String(configuration),
@@ -46,7 +43,6 @@ func main() {
 		if err != nil {
 			return err
 		}
-
 		_, err = machine.NewBootstrap(ctx, "bootstrap", &machine.BootstrapArgs{
 			Node:                pulumi.String("10.5.0.2"),
 			ClientConfiguration: secrets.ClientConfiguration,
