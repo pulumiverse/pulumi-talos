@@ -4,14 +4,14 @@ import pulumiverse_talos as talos
 
 secrets = talos.machine.Secrets("secrets")
 
-configuration = talos.machine.configuration_output(cluster_name="exampleCluster",
+configuration = talos.machine.get_configuration_output(cluster_name="exampleCluster",
     machine_type="controlplane",
     cluster_endpoint="https://cluster.local:6443",
     machine_secrets=secrets.machine_secrets)
 
 configuration_apply = talos.machine.ConfigurationApply("configurationApply",
     client_configuration=secrets.client_configuration,
-    machine_configuration_input=configuration.machine_configuration,
+    machine_configuration_input=configuration.machine_secrets,
     node="10.5.0.2",
     config_patches=[json.dumps({
         "machine": {
@@ -20,7 +20,6 @@ configuration_apply = talos.machine.ConfigurationApply("configurationApply",
             },
         },
     })])
-
 bootstrap = talos.machine.Bootstrap("bootstrap",
     node="10.5.0.2",
     client_configuration=secrets.client_configuration,

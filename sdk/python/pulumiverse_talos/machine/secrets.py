@@ -11,17 +11,17 @@ from .. import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['SecretsArgs', 'Secrets']
+__all__ = ['SecretsInitArgs', 'Secrets']
 
 @pulumi.input_type
-class SecretsArgs:
+class SecretsInitArgs:
     def __init__(__self__, *,
                  talos_version: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Secrets resource.
         :param pulumi.Input[str] talos_version: The version of talos features to use in generated machine configuration
         """
-        SecretsArgs._configure(
+        SecretsInitArgs._configure(
             lambda key, value: pulumi.set(__self__, key, value),
             talos_version=talos_version,
         )
@@ -50,12 +50,12 @@ class SecretsArgs:
 class _SecretsState:
     def __init__(__self__, *,
                  client_configuration: Optional[pulumi.Input['SecretsClientConfigurationArgs']] = None,
-                 machine_secrets: Optional[pulumi.Input['SecretsMachineSecretsArgs']] = None,
+                 machine_secrets: Optional[pulumi.Input['MachineSecretsArgs']] = None,
                  talos_version: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Secrets resources.
         :param pulumi.Input['SecretsClientConfigurationArgs'] client_configuration: The generated client configuration data
-        :param pulumi.Input['SecretsMachineSecretsArgs'] machine_secrets: The secrets for the talos cluster
+        :param pulumi.Input['MachineSecretsArgs'] machine_secrets: The secrets for the talos cluster
         :param pulumi.Input[str] talos_version: The version of talos features to use in generated machine configuration
         """
         _SecretsState._configure(
@@ -68,7 +68,7 @@ class _SecretsState:
     def _configure(
              _setter: Callable[[Any, Any], None],
              client_configuration: Optional[pulumi.Input['SecretsClientConfigurationArgs']] = None,
-             machine_secrets: Optional[pulumi.Input['SecretsMachineSecretsArgs']] = None,
+             machine_secrets: Optional[pulumi.Input['MachineSecretsArgs']] = None,
              talos_version: Optional[pulumi.Input[str]] = None,
              opts: Optional[pulumi.ResourceOptions]=None):
         if client_configuration is not None:
@@ -92,14 +92,14 @@ class _SecretsState:
 
     @property
     @pulumi.getter(name="machineSecrets")
-    def machine_secrets(self) -> Optional[pulumi.Input['SecretsMachineSecretsArgs']]:
+    def machine_secrets(self) -> Optional[pulumi.Input['MachineSecretsArgs']]:
         """
         The secrets for the talos cluster
         """
         return pulumi.get(self, "machine_secrets")
 
     @machine_secrets.setter
-    def machine_secrets(self, value: Optional[pulumi.Input['SecretsMachineSecretsArgs']]):
+    def machine_secrets(self, value: Optional[pulumi.Input['MachineSecretsArgs']]):
         pulumi.set(self, "machine_secrets", value)
 
     @property
@@ -150,7 +150,7 @@ class Secrets(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: Optional[SecretsArgs] = None,
+                 args: Optional[SecretsInitArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Generate machine secrets for Talos cluster.
@@ -173,19 +173,19 @@ class Secrets(pulumi.CustomResource):
         ```
 
         :param str resource_name: The name of the resource.
-        :param SecretsArgs args: The arguments to use to populate this resource's properties.
+        :param SecretsInitArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(SecretsArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(SecretsInitArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
             kwargs = kwargs or {}
             def _setter(key, value):
                 kwargs[key] = value
-            SecretsArgs._configure(_setter, **kwargs)
+            SecretsInitArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -199,7 +199,7 @@ class Secrets(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = SecretsArgs.__new__(SecretsArgs)
+            __props__ = SecretsInitArgs.__new__(SecretsInitArgs)
 
             __props__.__dict__["talos_version"] = talos_version
             __props__.__dict__["client_configuration"] = None
@@ -215,7 +215,7 @@ class Secrets(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             client_configuration: Optional[pulumi.Input[pulumi.InputType['SecretsClientConfigurationArgs']]] = None,
-            machine_secrets: Optional[pulumi.Input[pulumi.InputType['SecretsMachineSecretsArgs']]] = None,
+            machine_secrets: Optional[pulumi.Input[pulumi.InputType['MachineSecretsArgs']]] = None,
             talos_version: Optional[pulumi.Input[str]] = None) -> 'Secrets':
         """
         Get an existing Secrets resource's state with the given name, id, and optional extra
@@ -225,7 +225,7 @@ class Secrets(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['SecretsClientConfigurationArgs']] client_configuration: The generated client configuration data
-        :param pulumi.Input[pulumi.InputType['SecretsMachineSecretsArgs']] machine_secrets: The secrets for the talos cluster
+        :param pulumi.Input[pulumi.InputType['MachineSecretsArgs']] machine_secrets: The secrets for the talos cluster
         :param pulumi.Input[str] talos_version: The version of talos features to use in generated machine configuration
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -247,7 +247,7 @@ class Secrets(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="machineSecrets")
-    def machine_secrets(self) -> pulumi.Output['outputs.SecretsMachineSecrets']:
+    def machine_secrets(self) -> pulumi.Output['outputs.MachineSecretsResult']:
         """
         The secrets for the talos cluster
         """

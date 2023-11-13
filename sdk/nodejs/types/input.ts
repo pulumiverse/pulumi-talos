@@ -106,6 +106,84 @@ export namespace machine {
         create?: pulumi.Input<string>;
     }
 
+    /**
+     * A Machine Secrets Certificate
+     */
+    export interface Certificate {
+        /**
+         * Certificate
+         */
+        cert: string;
+        /**
+         * Private Key
+         */
+        key: string;
+    }
+
+    /**
+     * A Machine Secrets Certificate
+     */
+    export interface CertificateArgs {
+        /**
+         * Certificate
+         */
+        cert: pulumi.Input<string>;
+        /**
+         * Private Key
+         */
+        key: pulumi.Input<string>;
+    }
+
+    /**
+     * A complete Machine Secrets Certificates configuration
+     */
+    export interface Certificates {
+        etcd: inputs.machine.Certificate;
+        k8s: inputs.machine.Certificate;
+        k8s_aggregator: inputs.machine.Certificate;
+        k8s_serviceaccount: inputs.machine.Key;
+        os: inputs.machine.Certificate;
+    }
+
+    /**
+     * A complete Machine Secrets Certificates configuration
+     */
+    export interface CertificatesArgs {
+        etcd: pulumi.Input<inputs.machine.CertificateArgs>;
+        k8s: pulumi.Input<inputs.machine.CertificateArgs>;
+        k8s_aggregator: pulumi.Input<inputs.machine.CertificateArgs>;
+        k8s_serviceaccount: pulumi.Input<inputs.machine.KeyArgs>;
+        os: pulumi.Input<inputs.machine.CertificateArgs>;
+    }
+
+    /**
+     * A Machine Secrets Cluster Info
+     */
+    export interface Cluster {
+        /**
+         * Certificate
+         */
+        id: string;
+        /**
+         * Private Key
+         */
+        secret: string;
+    }
+
+    /**
+     * A Machine Secrets Cluster Info
+     */
+    export interface ClusterArgs {
+        /**
+         * Certificate
+         */
+        id: pulumi.Input<string>;
+        /**
+         * Private Key
+         */
+        secret: pulumi.Input<string>;
+    }
+
     export interface ConfigurationApplyClientConfiguration {
         /**
          * The client CA certificate
@@ -119,252 +197,6 @@ export namespace machine {
          * The client key
          */
         clientKey: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationMachineSecrets {
-        /**
-         * The certs for the talos kubernetes cluster
-         */
-        certs: inputs.machine.ConfigurationMachineSecretsCerts;
-        /**
-         * The cluster secrets
-         */
-        cluster: inputs.machine.ConfigurationMachineSecretsCluster;
-        /**
-         * The secrets for the talos kubernetes cluster
-         */
-        secrets: inputs.machine.ConfigurationMachineSecretsSecrets;
-        /**
-         * The trustd info for the talos kubernetes cluster
-         */
-        trustdinfo: inputs.machine.ConfigurationMachineSecretsTrustdinfo;
-    }
-
-    export interface ConfigurationMachineSecretsArgs {
-        /**
-         * The certs for the talos kubernetes cluster
-         */
-        certs: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsArgs>;
-        /**
-         * The cluster secrets
-         */
-        cluster: pulumi.Input<inputs.machine.ConfigurationMachineSecretsClusterArgs>;
-        /**
-         * The secrets for the talos kubernetes cluster
-         */
-        secrets: pulumi.Input<inputs.machine.ConfigurationMachineSecretsSecretsArgs>;
-        /**
-         * The trustd info for the talos kubernetes cluster
-         */
-        trustdinfo: pulumi.Input<inputs.machine.ConfigurationMachineSecretsTrustdinfoArgs>;
-    }
-
-    export interface ConfigurationMachineSecretsCerts {
-        /**
-         * The certificate and key pair
-         */
-        etcd: inputs.machine.ConfigurationMachineSecretsCertsEtcd;
-        /**
-         * The certificate and key pair
-         */
-        k8s: inputs.machine.ConfigurationMachineSecretsCertsK8s;
-        /**
-         * The certificate and key pair
-         */
-        k8sAggregator: inputs.machine.ConfigurationMachineSecretsCertsK8sAggregator;
-        k8sServiceaccount: inputs.machine.ConfigurationMachineSecretsCertsK8sServiceaccount;
-        /**
-         * The certificate and key pair
-         */
-        os: inputs.machine.ConfigurationMachineSecretsCertsOs;
-    }
-
-    export interface ConfigurationMachineSecretsCertsArgs {
-        /**
-         * The certificate and key pair
-         */
-        etcd: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsEtcdArgs>;
-        /**
-         * The certificate and key pair
-         */
-        k8s: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsK8sArgs>;
-        /**
-         * The certificate and key pair
-         */
-        k8sAggregator: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsK8sAggregatorArgs>;
-        k8sServiceaccount: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsK8sServiceaccountArgs>;
-        /**
-         * The certificate and key pair
-         */
-        os: pulumi.Input<inputs.machine.ConfigurationMachineSecretsCertsOsArgs>;
-    }
-
-    export interface ConfigurationMachineSecretsCertsEtcd {
-        /**
-         * certificate data
-         */
-        cert: string;
-        /**
-         * key data
-         */
-        key: string;
-    }
-
-    export interface ConfigurationMachineSecretsCertsEtcdArgs {
-        /**
-         * certificate data
-         */
-        cert: pulumi.Input<string>;
-        /**
-         * key data
-         */
-        key: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationMachineSecretsCertsK8s {
-        /**
-         * certificate data
-         */
-        cert: string;
-        /**
-         * key data
-         */
-        key: string;
-    }
-
-    export interface ConfigurationMachineSecretsCertsK8sArgs {
-        /**
-         * certificate data
-         */
-        cert: pulumi.Input<string>;
-        /**
-         * key data
-         */
-        key: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationMachineSecretsCertsK8sAggregator {
-        /**
-         * certificate data
-         */
-        cert: string;
-        /**
-         * key data
-         */
-        key: string;
-    }
-
-    export interface ConfigurationMachineSecretsCertsK8sAggregatorArgs {
-        /**
-         * certificate data
-         */
-        cert: pulumi.Input<string>;
-        /**
-         * key data
-         */
-        key: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationMachineSecretsCertsK8sServiceaccount {
-        /**
-         * key data
-         */
-        key: string;
-    }
-
-    export interface ConfigurationMachineSecretsCertsK8sServiceaccountArgs {
-        /**
-         * key data
-         */
-        key: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationMachineSecretsCertsOs {
-        /**
-         * certificate data
-         */
-        cert: string;
-        /**
-         * key data
-         */
-        key: string;
-    }
-
-    export interface ConfigurationMachineSecretsCertsOsArgs {
-        /**
-         * certificate data
-         */
-        cert: pulumi.Input<string>;
-        /**
-         * key data
-         */
-        key: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationMachineSecretsCluster {
-        /**
-         * The cluster id
-         */
-        id: string;
-        /**
-         * The cluster secret
-         */
-        secret: string;
-    }
-
-    export interface ConfigurationMachineSecretsClusterArgs {
-        /**
-         * The cluster id
-         */
-        id: pulumi.Input<string>;
-        /**
-         * The cluster secret
-         */
-        secret: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationMachineSecretsSecrets {
-        /**
-         * The aescbc encryption secret for the talos kubernetes cluster
-         */
-        aescbcEncryptionSecret?: string;
-        /**
-         * The bootstrap token for the talos kubernetes cluster
-         */
-        bootstrapToken: string;
-        /**
-         * The secretbox encryption secret for the talos kubernetes cluster
-         */
-        secretboxEncryptionSecret: string;
-    }
-
-    export interface ConfigurationMachineSecretsSecretsArgs {
-        /**
-         * The aescbc encryption secret for the talos kubernetes cluster
-         */
-        aescbcEncryptionSecret?: pulumi.Input<string>;
-        /**
-         * The bootstrap token for the talos kubernetes cluster
-         */
-        bootstrapToken: pulumi.Input<string>;
-        /**
-         * The secretbox encryption secret for the talos kubernetes cluster
-         */
-        secretboxEncryptionSecret: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationMachineSecretsTrustdinfo {
-        /**
-         * The trustd token for the talos kubernetes cluster
-         */
-        token: string;
-    }
-
-    export interface ConfigurationMachineSecretsTrustdinfoArgs {
-        /**
-         * The trustd token for the talos kubernetes cluster
-         */
-        token: pulumi.Input<string>;
     }
 
     export interface DisksClientConfiguration {
@@ -489,6 +321,74 @@ export namespace machine {
         read?: pulumi.Input<string>;
     }
 
+    /**
+     * A Machine Secrets Private Key
+     */
+    export interface Key {
+        /**
+         * Private Key
+         */
+        key: string;
+    }
+
+    /**
+     * A Machine Secrets Private Key
+     */
+    export interface KeyArgs {
+        /**
+         * Private Key
+         */
+        key: pulumi.Input<string>;
+    }
+
+    /**
+     * A complete Machine Secrets configuration
+     */
+    export interface MachineSecrets {
+        certs: inputs.machine.Certificates;
+        cluster: inputs.machine.Cluster;
+        secrets: inputs.machine.Secrets;
+        trustdinfo: inputs.machine.TrustdInfo;
+    }
+
+    /**
+     * A complete Machine Secrets configuration
+     */
+    export interface MachineSecretsArgs {
+        certs: pulumi.Input<inputs.machine.CertificatesArgs>;
+        cluster: pulumi.Input<inputs.machine.ClusterArgs>;
+        secrets: pulumi.Input<inputs.machine.SecretsArgs>;
+        trustdinfo: pulumi.Input<inputs.machine.TrustdInfoArgs>;
+    }
+
+    /**
+     * A Machine Secrets Bootstrap data
+     */
+    export interface Secrets {
+        /**
+         * The bootstrap token for the talos kubernetes cluster
+         */
+        bootstrap_token: string;
+        /**
+         * The secretbox encryption secret for the talos kubernetes cluster
+         */
+        secretbox_encryption_secret: string;
+    }
+
+    /**
+     * A Machine Secrets Bootstrap data
+     */
+    export interface SecretsArgs {
+        /**
+         * The bootstrap token for the talos kubernetes cluster
+         */
+        bootstrap_token: pulumi.Input<string>;
+        /**
+         * The secretbox encryption secret for the talos kubernetes cluster
+         */
+        secretbox_encryption_secret: pulumi.Input<string>;
+    }
+
     export interface SecretsClientConfiguration {
         /**
          * The client CA certificate
@@ -504,129 +404,6 @@ export namespace machine {
         clientKey?: pulumi.Input<string>;
     }
 
-    export interface SecretsMachineSecrets {
-        certs?: pulumi.Input<inputs.machine.SecretsMachineSecretsCerts>;
-        /**
-         * The cluster secrets
-         */
-        cluster?: pulumi.Input<inputs.machine.SecretsMachineSecretsCluster>;
-        /**
-         * kubernetes cluster secrets
-         */
-        secrets?: pulumi.Input<inputs.machine.SecretsMachineSecretsSecrets>;
-        /**
-         * trustd secrets
-         */
-        trustdinfo?: pulumi.Input<inputs.machine.SecretsMachineSecretsTrustdinfo>;
-    }
-
-    export interface SecretsMachineSecretsCerts {
-        /**
-         * The certificate and key pair
-         */
-        etcd?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsEtcd>;
-        /**
-         * The certificate and key pair
-         */
-        k8s?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsK8s>;
-        /**
-         * The certificate and key pair
-         */
-        k8sAggregator?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsK8sAggregator>;
-        /**
-         * The service account secrets
-         */
-        k8sServiceaccount?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsK8sServiceaccount>;
-        /**
-         * The certificate and key pair
-         */
-        os?: pulumi.Input<inputs.machine.SecretsMachineSecretsCertsOs>;
-    }
-
-    export interface SecretsMachineSecretsCertsEtcd {
-        /**
-         * certificate data
-         */
-        cert?: pulumi.Input<string>;
-        /**
-         * key data
-         */
-        key?: pulumi.Input<string>;
-    }
-
-    export interface SecretsMachineSecretsCertsK8s {
-        /**
-         * certificate data
-         */
-        cert?: pulumi.Input<string>;
-        /**
-         * key data
-         */
-        key?: pulumi.Input<string>;
-    }
-
-    export interface SecretsMachineSecretsCertsK8sAggregator {
-        /**
-         * certificate data
-         */
-        cert?: pulumi.Input<string>;
-        /**
-         * key data
-         */
-        key?: pulumi.Input<string>;
-    }
-
-    export interface SecretsMachineSecretsCertsK8sServiceaccount {
-        /**
-         * key data
-         */
-        key?: pulumi.Input<string>;
-    }
-
-    export interface SecretsMachineSecretsCertsOs {
-        /**
-         * certificate data
-         */
-        cert?: pulumi.Input<string>;
-        /**
-         * key data
-         */
-        key?: pulumi.Input<string>;
-    }
-
-    export interface SecretsMachineSecretsCluster {
-        /**
-         * The cluster ID
-         */
-        id?: pulumi.Input<string>;
-        /**
-         * The cluster secret
-         */
-        secret?: pulumi.Input<string>;
-    }
-
-    export interface SecretsMachineSecretsSecrets {
-        /**
-         * The AES-CBC encryption secret
-         */
-        aescbcEncryptionSecret?: pulumi.Input<string>;
-        /**
-         * The bootstrap token
-         */
-        bootstrapToken?: pulumi.Input<string>;
-        /**
-         * The secretbox encryption secret
-         */
-        secretboxEncryptionSecret?: pulumi.Input<string>;
-    }
-
-    export interface SecretsMachineSecretsTrustdinfo {
-        /**
-         * The trustd token
-         */
-        token?: pulumi.Input<string>;
-    }
-
     export interface Timeout {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
@@ -636,5 +413,25 @@ export namespace machine {
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
         update?: pulumi.Input<string>;
+    }
+
+    /**
+     * A Machine Secrets Trust daemon info
+     */
+    export interface TrustdInfo {
+        /**
+         * The trustd token for the talos kubernetes cluster
+         */
+        token: string;
+    }
+
+    /**
+     * A Machine Secrets Trust daemon info
+     */
+    export interface TrustdInfoArgs {
+        /**
+         * The trustd token for the talos kubernetes cluster
+         */
+        token: pulumi.Input<string>;
     }
 }

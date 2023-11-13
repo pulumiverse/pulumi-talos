@@ -10,11 +10,6 @@ export type Bootstrap = import("./bootstrap").Bootstrap;
 export const Bootstrap: typeof import("./bootstrap").Bootstrap = null as any;
 utilities.lazyLoad(exports, ["Bootstrap"], () => require("./bootstrap"));
 
-export { ConfigurationArgs, ConfigurationResult, ConfigurationOutputArgs } from "./configuration";
-export const configuration: typeof import("./configuration").configuration = null as any;
-export const configurationOutput: typeof import("./configuration").configurationOutput = null as any;
-utilities.lazyLoad(exports, ["configuration","configurationOutput"], () => require("./configuration"));
-
 export { ConfigurationApplyArgs, ConfigurationApplyState } from "./configurationApply";
 export type ConfigurationApply = import("./configurationApply").ConfigurationApply;
 export const ConfigurationApply: typeof import("./configurationApply").ConfigurationApply = null as any;
@@ -24,6 +19,11 @@ export { DisksArgs, DisksResult, DisksOutputArgs } from "./disks";
 export const disks: typeof import("./disks").disks = null as any;
 export const disksOutput: typeof import("./disks").disksOutput = null as any;
 utilities.lazyLoad(exports, ["disks","disksOutput"], () => require("./disks"));
+
+export { GetConfigurationArgs, GetConfigurationResult, GetConfigurationOutputArgs } from "./getConfiguration";
+export const getConfiguration: typeof import("./getConfiguration").getConfiguration = null as any;
+export const getConfigurationOutput: typeof import("./getConfiguration").getConfigurationOutput = null as any;
+utilities.lazyLoad(exports, ["getConfiguration","getConfigurationOutput"], () => require("./getConfiguration"));
 
 export { SecretsArgs, SecretsState } from "./secrets";
 export type Secrets = import("./secrets").Secrets;

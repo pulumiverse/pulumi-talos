@@ -3,7 +3,7 @@ import * as talos from "@pulumiverse/talos";
 
 const secrets = new talos.machine.Secrets("secrets", {});
 
-const configuration = talos.machine.ConfigurationOutput({
+const configuration = talos.machine.getConfigurationOutput({
     clusterName: "exampleCluster",
     machineType: "controlplane",
     clusterEndpoint: "https://cluster.local:6443",
@@ -22,7 +22,6 @@ const configurationApply = new talos.machine.ConfigurationApply("configurationAp
         },
     })],
 });
-
 const bootstrap = new talos.machine.Bootstrap("bootstrap", {
     node: "10.5.0.2",
     clientConfiguration: secrets.clientConfiguration,

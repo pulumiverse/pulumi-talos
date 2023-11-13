@@ -1,2 +1,2 @@
 pulumi>=3.0.0,<4.0.0
-pulumiverse_talos==0.1.7
+pulumiverse_talos==0.1.8

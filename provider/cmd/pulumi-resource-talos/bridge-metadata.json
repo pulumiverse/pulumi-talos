@@ -98,8 +98,8 @@
         "functions": {
             "talos:client/configuration:Configuration": "talos_client_configuration",
             "talos:cluster/kubeconfig:Kubeconfig": "talos_cluster_kubeconfig",
-            "talos:machine/configuration:Configuration": "talos_machine_configuration",
-            "talos:machine/disks:Disks": "talos_machine_disks"
+            "talos:machine/disks:Disks": "talos_machine_disks",
+            "talos:machine/getConfiguration:getConfiguration": "talos_machine_configuration"
         },
         "renamedProperties": {
             "talos:client/ConfigurationClientConfiguration:ConfigurationClientConfiguration": {
@@ -137,15 +137,6 @@
                 "clientCertificate": "client_certificate",
                 "clientKey": "client_key"
             },
-            "talos:machine/ConfigurationMachineSecretsCerts:ConfigurationMachineSecretsCerts": {
-                "k8sAggregator": "k8s_aggregator",
-                "k8sServiceaccount": "k8s_serviceaccount"
-            },
-            "talos:machine/ConfigurationMachineSecretsSecrets:ConfigurationMachineSecretsSecrets": {
-                "aescbcEncryptionSecret": "aescbc_encryption_secret",
-                "bootstrapToken": "bootstrap_token",
-                "secretboxEncryptionSecret": "secretbox_encryption_secret"
-            },
             "talos:machine/DisksClientConfiguration:DisksClientConfiguration": {
                 "caCertificate": "ca_certificate",
                 "clientCertificate": "client_certificate",
@@ -174,16 +165,6 @@
             "talos:machine/bootstrap:Bootstrap": {
                 "clientConfiguration": "client_configuration"
             },
-            "talos:machine/configuration:Configuration": {
-                "clusterEndpoint": "cluster_endpoint",
-                "clusterName": "cluster_name",
-                "configPatches": "config_patches",
-                "kubernetesVersion": "kubernetes_version",
-                "machineConfiguration": "machine_configuration",
-                "machineSecrets": "machine_secrets",
-                "machineType": "machine_type",
-                "talosVersion": "talos_version"
-            },
             "talos:machine/configurationApply:ConfigurationApply": {
                 "applyMode": "apply_mode",
                 "clientConfiguration": "client_configuration",
@@ -193,6 +174,25 @@
             },
             "talos:machine/disks:Disks": {
                 "clientConfiguration": "client_configuration"
+            },
+            "talos:machine/getConfiguration:getConfiguration": {
+                "clusterEndpoint": "cluster_endpoint",
+                "clusterName": "cluster_name",
+                "configPatches": "config_patches",
+                "kubernetesVersion": "kubernetes_version",
+                "machineConfiguration": "machine_configuration",
+                "machineSecrets": "machine_secrets",
+                "machineType": "machine_type",
+                "talosVersion": "talos_version"
+            },
+            "talos:machine/getConfigurationMachineSecretsCerts:getConfigurationMachineSecretsCerts": {
+                "k8sAggregator": "k8s_aggregator",
+                "k8sServiceaccount": "k8s_serviceaccount"
+            },
+            "talos:machine/getConfigurationMachineSecretsSecrets:getConfigurationMachineSecretsSecrets": {
+                "aescbcEncryptionSecret": "aescbc_encryption_secret",
+                "bootstrapToken": "bootstrap_token",
+                "secretboxEncryptionSecret": "secretbox_encryption_secret"
             },
             "talos:machine/secrets:Secrets": {
                 "clientConfiguration": "client_configuration",

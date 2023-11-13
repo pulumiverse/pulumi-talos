@@ -573,773 +573,6 @@ func (o ConfigurationApplyClientConfigurationPtrOutput) ClientKey() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
-type ConfigurationMachineSecrets struct {
-	// The certs for the talos kubernetes cluster
-	Certs ConfigurationMachineSecretsCerts `pulumi:"certs"`
-	// The cluster secrets
-	Cluster ConfigurationMachineSecretsCluster `pulumi:"cluster"`
-	// The secrets for the talos kubernetes cluster
-	Secrets ConfigurationMachineSecretsSecrets `pulumi:"secrets"`
-	// The trustd info for the talos kubernetes cluster
-	Trustdinfo ConfigurationMachineSecretsTrustdinfo `pulumi:"trustdinfo"`
-}
-
-// ConfigurationMachineSecretsInput is an input type that accepts ConfigurationMachineSecretsArgs and ConfigurationMachineSecretsOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsInput` via:
-//
-//	ConfigurationMachineSecretsArgs{...}
-type ConfigurationMachineSecretsInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsOutput() ConfigurationMachineSecretsOutput
-	ToConfigurationMachineSecretsOutputWithContext(context.Context) ConfigurationMachineSecretsOutput
-}
-
-type ConfigurationMachineSecretsArgs struct {
-	// The certs for the talos kubernetes cluster
-	Certs ConfigurationMachineSecretsCertsInput `pulumi:"certs"`
-	// The cluster secrets
-	Cluster ConfigurationMachineSecretsClusterInput `pulumi:"cluster"`
-	// The secrets for the talos kubernetes cluster
-	Secrets ConfigurationMachineSecretsSecretsInput `pulumi:"secrets"`
-	// The trustd info for the talos kubernetes cluster
-	Trustdinfo ConfigurationMachineSecretsTrustdinfoInput `pulumi:"trustdinfo"`
-}
-
-func (ConfigurationMachineSecretsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecrets)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsArgs) ToConfigurationMachineSecretsOutput() ConfigurationMachineSecretsOutput {
-	return i.ToConfigurationMachineSecretsOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsArgs) ToConfigurationMachineSecretsOutputWithContext(ctx context.Context) ConfigurationMachineSecretsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsOutput)
-}
-
-func (i ConfigurationMachineSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecrets] {
-	return pulumix.Output[ConfigurationMachineSecrets]{
-		OutputState: i.ToConfigurationMachineSecretsOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecrets)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsOutput) ToConfigurationMachineSecretsOutput() ConfigurationMachineSecretsOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsOutput) ToConfigurationMachineSecretsOutputWithContext(ctx context.Context) ConfigurationMachineSecretsOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecrets] {
-	return pulumix.Output[ConfigurationMachineSecrets]{
-		OutputState: o.OutputState,
-	}
-}
-
-// The certs for the talos kubernetes cluster
-func (o ConfigurationMachineSecretsOutput) Certs() ConfigurationMachineSecretsCertsOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecrets) ConfigurationMachineSecretsCerts { return v.Certs }).(ConfigurationMachineSecretsCertsOutput)
-}
-
-// The cluster secrets
-func (o ConfigurationMachineSecretsOutput) Cluster() ConfigurationMachineSecretsClusterOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecrets) ConfigurationMachineSecretsCluster { return v.Cluster }).(ConfigurationMachineSecretsClusterOutput)
-}
-
-// The secrets for the talos kubernetes cluster
-func (o ConfigurationMachineSecretsOutput) Secrets() ConfigurationMachineSecretsSecretsOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecrets) ConfigurationMachineSecretsSecrets { return v.Secrets }).(ConfigurationMachineSecretsSecretsOutput)
-}
-
-// The trustd info for the talos kubernetes cluster
-func (o ConfigurationMachineSecretsOutput) Trustdinfo() ConfigurationMachineSecretsTrustdinfoOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecrets) ConfigurationMachineSecretsTrustdinfo { return v.Trustdinfo }).(ConfigurationMachineSecretsTrustdinfoOutput)
-}
-
-type ConfigurationMachineSecretsCerts struct {
-	// The certificate and key pair
-	Etcd ConfigurationMachineSecretsCertsEtcd `pulumi:"etcd"`
-	// The certificate and key pair
-	K8s ConfigurationMachineSecretsCertsK8s `pulumi:"k8s"`
-	// The certificate and key pair
-	K8sAggregator     ConfigurationMachineSecretsCertsK8sAggregator     `pulumi:"k8sAggregator"`
-	K8sServiceaccount ConfigurationMachineSecretsCertsK8sServiceaccount `pulumi:"k8sServiceaccount"`
-	// The certificate and key pair
-	Os ConfigurationMachineSecretsCertsOs `pulumi:"os"`
-}
-
-// ConfigurationMachineSecretsCertsInput is an input type that accepts ConfigurationMachineSecretsCertsArgs and ConfigurationMachineSecretsCertsOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsCertsInput` via:
-//
-//	ConfigurationMachineSecretsCertsArgs{...}
-type ConfigurationMachineSecretsCertsInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsCertsOutput() ConfigurationMachineSecretsCertsOutput
-	ToConfigurationMachineSecretsCertsOutputWithContext(context.Context) ConfigurationMachineSecretsCertsOutput
-}
-
-type ConfigurationMachineSecretsCertsArgs struct {
-	// The certificate and key pair
-	Etcd ConfigurationMachineSecretsCertsEtcdInput `pulumi:"etcd"`
-	// The certificate and key pair
-	K8s ConfigurationMachineSecretsCertsK8sInput `pulumi:"k8s"`
-	// The certificate and key pair
-	K8sAggregator     ConfigurationMachineSecretsCertsK8sAggregatorInput     `pulumi:"k8sAggregator"`
-	K8sServiceaccount ConfigurationMachineSecretsCertsK8sServiceaccountInput `pulumi:"k8sServiceaccount"`
-	// The certificate and key pair
-	Os ConfigurationMachineSecretsCertsOsInput `pulumi:"os"`
-}
-
-func (ConfigurationMachineSecretsCertsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCerts)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsCertsArgs) ToConfigurationMachineSecretsCertsOutput() ConfigurationMachineSecretsCertsOutput {
-	return i.ToConfigurationMachineSecretsCertsOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsCertsArgs) ToConfigurationMachineSecretsCertsOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsCertsOutput)
-}
-
-func (i ConfigurationMachineSecretsCertsArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCerts] {
-	return pulumix.Output[ConfigurationMachineSecretsCerts]{
-		OutputState: i.ToConfigurationMachineSecretsCertsOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsCertsOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsCertsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCerts)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsCertsOutput) ToConfigurationMachineSecretsCertsOutput() ConfigurationMachineSecretsCertsOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsOutput) ToConfigurationMachineSecretsCertsOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCerts] {
-	return pulumix.Output[ConfigurationMachineSecretsCerts]{
-		OutputState: o.OutputState,
-	}
-}
-
-// The certificate and key pair
-func (o ConfigurationMachineSecretsCertsOutput) Etcd() ConfigurationMachineSecretsCertsEtcdOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCerts) ConfigurationMachineSecretsCertsEtcd { return v.Etcd }).(ConfigurationMachineSecretsCertsEtcdOutput)
-}
-
-// The certificate and key pair
-func (o ConfigurationMachineSecretsCertsOutput) K8s() ConfigurationMachineSecretsCertsK8sOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCerts) ConfigurationMachineSecretsCertsK8s { return v.K8s }).(ConfigurationMachineSecretsCertsK8sOutput)
-}
-
-// The certificate and key pair
-func (o ConfigurationMachineSecretsCertsOutput) K8sAggregator() ConfigurationMachineSecretsCertsK8sAggregatorOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCerts) ConfigurationMachineSecretsCertsK8sAggregator {
-		return v.K8sAggregator
-	}).(ConfigurationMachineSecretsCertsK8sAggregatorOutput)
-}
-
-func (o ConfigurationMachineSecretsCertsOutput) K8sServiceaccount() ConfigurationMachineSecretsCertsK8sServiceaccountOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCerts) ConfigurationMachineSecretsCertsK8sServiceaccount {
-		return v.K8sServiceaccount
-	}).(ConfigurationMachineSecretsCertsK8sServiceaccountOutput)
-}
-
-// The certificate and key pair
-func (o ConfigurationMachineSecretsCertsOutput) Os() ConfigurationMachineSecretsCertsOsOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCerts) ConfigurationMachineSecretsCertsOs { return v.Os }).(ConfigurationMachineSecretsCertsOsOutput)
-}
-
-type ConfigurationMachineSecretsCertsEtcd struct {
-	// certificate data
-	Cert string `pulumi:"cert"`
-	// key data
-	Key string `pulumi:"key"`
-}
-
-// ConfigurationMachineSecretsCertsEtcdInput is an input type that accepts ConfigurationMachineSecretsCertsEtcdArgs and ConfigurationMachineSecretsCertsEtcdOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsCertsEtcdInput` via:
-//
-//	ConfigurationMachineSecretsCertsEtcdArgs{...}
-type ConfigurationMachineSecretsCertsEtcdInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsCertsEtcdOutput() ConfigurationMachineSecretsCertsEtcdOutput
-	ToConfigurationMachineSecretsCertsEtcdOutputWithContext(context.Context) ConfigurationMachineSecretsCertsEtcdOutput
-}
-
-type ConfigurationMachineSecretsCertsEtcdArgs struct {
-	// certificate data
-	Cert pulumi.StringInput `pulumi:"cert"`
-	// key data
-	Key pulumi.StringInput `pulumi:"key"`
-}
-
-func (ConfigurationMachineSecretsCertsEtcdArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsEtcd)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsCertsEtcdArgs) ToConfigurationMachineSecretsCertsEtcdOutput() ConfigurationMachineSecretsCertsEtcdOutput {
-	return i.ToConfigurationMachineSecretsCertsEtcdOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsCertsEtcdArgs) ToConfigurationMachineSecretsCertsEtcdOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsEtcdOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsCertsEtcdOutput)
-}
-
-func (i ConfigurationMachineSecretsCertsEtcdArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsEtcd] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsEtcd]{
-		OutputState: i.ToConfigurationMachineSecretsCertsEtcdOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsCertsEtcdOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsCertsEtcdOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsEtcd)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsCertsEtcdOutput) ToConfigurationMachineSecretsCertsEtcdOutput() ConfigurationMachineSecretsCertsEtcdOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsEtcdOutput) ToConfigurationMachineSecretsCertsEtcdOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsEtcdOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsEtcdOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsEtcd] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsEtcd]{
-		OutputState: o.OutputState,
-	}
-}
-
-// certificate data
-func (o ConfigurationMachineSecretsCertsEtcdOutput) Cert() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsEtcd) string { return v.Cert }).(pulumi.StringOutput)
-}
-
-// key data
-func (o ConfigurationMachineSecretsCertsEtcdOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsEtcd) string { return v.Key }).(pulumi.StringOutput)
-}
-
-type ConfigurationMachineSecretsCertsK8s struct {
-	// certificate data
-	Cert string `pulumi:"cert"`
-	// key data
-	Key string `pulumi:"key"`
-}
-
-// ConfigurationMachineSecretsCertsK8sInput is an input type that accepts ConfigurationMachineSecretsCertsK8sArgs and ConfigurationMachineSecretsCertsK8sOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsCertsK8sInput` via:
-//
-//	ConfigurationMachineSecretsCertsK8sArgs{...}
-type ConfigurationMachineSecretsCertsK8sInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsCertsK8sOutput() ConfigurationMachineSecretsCertsK8sOutput
-	ToConfigurationMachineSecretsCertsK8sOutputWithContext(context.Context) ConfigurationMachineSecretsCertsK8sOutput
-}
-
-type ConfigurationMachineSecretsCertsK8sArgs struct {
-	// certificate data
-	Cert pulumi.StringInput `pulumi:"cert"`
-	// key data
-	Key pulumi.StringInput `pulumi:"key"`
-}
-
-func (ConfigurationMachineSecretsCertsK8sArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsK8s)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsCertsK8sArgs) ToConfigurationMachineSecretsCertsK8sOutput() ConfigurationMachineSecretsCertsK8sOutput {
-	return i.ToConfigurationMachineSecretsCertsK8sOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsCertsK8sArgs) ToConfigurationMachineSecretsCertsK8sOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsK8sOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsCertsK8sOutput)
-}
-
-func (i ConfigurationMachineSecretsCertsK8sArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsK8s] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsK8s]{
-		OutputState: i.ToConfigurationMachineSecretsCertsK8sOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsCertsK8sOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsCertsK8sOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsK8s)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsCertsK8sOutput) ToConfigurationMachineSecretsCertsK8sOutput() ConfigurationMachineSecretsCertsK8sOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsK8sOutput) ToConfigurationMachineSecretsCertsK8sOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsK8sOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsK8sOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsK8s] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsK8s]{
-		OutputState: o.OutputState,
-	}
-}
-
-// certificate data
-func (o ConfigurationMachineSecretsCertsK8sOutput) Cert() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsK8s) string { return v.Cert }).(pulumi.StringOutput)
-}
-
-// key data
-func (o ConfigurationMachineSecretsCertsK8sOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsK8s) string { return v.Key }).(pulumi.StringOutput)
-}
-
-type ConfigurationMachineSecretsCertsK8sAggregator struct {
-	// certificate data
-	Cert string `pulumi:"cert"`
-	// key data
-	Key string `pulumi:"key"`
-}
-
-// ConfigurationMachineSecretsCertsK8sAggregatorInput is an input type that accepts ConfigurationMachineSecretsCertsK8sAggregatorArgs and ConfigurationMachineSecretsCertsK8sAggregatorOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsCertsK8sAggregatorInput` via:
-//
-//	ConfigurationMachineSecretsCertsK8sAggregatorArgs{...}
-type ConfigurationMachineSecretsCertsK8sAggregatorInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsCertsK8sAggregatorOutput() ConfigurationMachineSecretsCertsK8sAggregatorOutput
-	ToConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(context.Context) ConfigurationMachineSecretsCertsK8sAggregatorOutput
-}
-
-type ConfigurationMachineSecretsCertsK8sAggregatorArgs struct {
-	// certificate data
-	Cert pulumi.StringInput `pulumi:"cert"`
-	// key data
-	Key pulumi.StringInput `pulumi:"key"`
-}
-
-func (ConfigurationMachineSecretsCertsK8sAggregatorArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsK8sAggregator)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsCertsK8sAggregatorArgs) ToConfigurationMachineSecretsCertsK8sAggregatorOutput() ConfigurationMachineSecretsCertsK8sAggregatorOutput {
-	return i.ToConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsCertsK8sAggregatorArgs) ToConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsK8sAggregatorOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsCertsK8sAggregatorOutput)
-}
-
-func (i ConfigurationMachineSecretsCertsK8sAggregatorArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsK8sAggregator] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsK8sAggregator]{
-		OutputState: i.ToConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsCertsK8sAggregatorOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsCertsK8sAggregatorOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsK8sAggregator)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsCertsK8sAggregatorOutput) ToConfigurationMachineSecretsCertsK8sAggregatorOutput() ConfigurationMachineSecretsCertsK8sAggregatorOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsK8sAggregatorOutput) ToConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsK8sAggregatorOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsK8sAggregatorOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsK8sAggregator] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsK8sAggregator]{
-		OutputState: o.OutputState,
-	}
-}
-
-// certificate data
-func (o ConfigurationMachineSecretsCertsK8sAggregatorOutput) Cert() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsK8sAggregator) string { return v.Cert }).(pulumi.StringOutput)
-}
-
-// key data
-func (o ConfigurationMachineSecretsCertsK8sAggregatorOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsK8sAggregator) string { return v.Key }).(pulumi.StringOutput)
-}
-
-type ConfigurationMachineSecretsCertsK8sServiceaccount struct {
-	// key data
-	Key string `pulumi:"key"`
-}
-
-// ConfigurationMachineSecretsCertsK8sServiceaccountInput is an input type that accepts ConfigurationMachineSecretsCertsK8sServiceaccountArgs and ConfigurationMachineSecretsCertsK8sServiceaccountOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsCertsK8sServiceaccountInput` via:
-//
-//	ConfigurationMachineSecretsCertsK8sServiceaccountArgs{...}
-type ConfigurationMachineSecretsCertsK8sServiceaccountInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsCertsK8sServiceaccountOutput() ConfigurationMachineSecretsCertsK8sServiceaccountOutput
-	ToConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(context.Context) ConfigurationMachineSecretsCertsK8sServiceaccountOutput
-}
-
-type ConfigurationMachineSecretsCertsK8sServiceaccountArgs struct {
-	// key data
-	Key pulumi.StringInput `pulumi:"key"`
-}
-
-func (ConfigurationMachineSecretsCertsK8sServiceaccountArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsK8sServiceaccount)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsCertsK8sServiceaccountArgs) ToConfigurationMachineSecretsCertsK8sServiceaccountOutput() ConfigurationMachineSecretsCertsK8sServiceaccountOutput {
-	return i.ToConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsCertsK8sServiceaccountArgs) ToConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsK8sServiceaccountOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsCertsK8sServiceaccountOutput)
-}
-
-func (i ConfigurationMachineSecretsCertsK8sServiceaccountArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsK8sServiceaccount] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsK8sServiceaccount]{
-		OutputState: i.ToConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsCertsK8sServiceaccountOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsCertsK8sServiceaccountOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsK8sServiceaccount)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToConfigurationMachineSecretsCertsK8sServiceaccountOutput() ConfigurationMachineSecretsCertsK8sServiceaccountOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsK8sServiceaccountOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsK8sServiceaccount] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsK8sServiceaccount]{
-		OutputState: o.OutputState,
-	}
-}
-
-// key data
-func (o ConfigurationMachineSecretsCertsK8sServiceaccountOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsK8sServiceaccount) string { return v.Key }).(pulumi.StringOutput)
-}
-
-type ConfigurationMachineSecretsCertsOs struct {
-	// certificate data
-	Cert string `pulumi:"cert"`
-	// key data
-	Key string `pulumi:"key"`
-}
-
-// ConfigurationMachineSecretsCertsOsInput is an input type that accepts ConfigurationMachineSecretsCertsOsArgs and ConfigurationMachineSecretsCertsOsOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsCertsOsInput` via:
-//
-//	ConfigurationMachineSecretsCertsOsArgs{...}
-type ConfigurationMachineSecretsCertsOsInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsCertsOsOutput() ConfigurationMachineSecretsCertsOsOutput
-	ToConfigurationMachineSecretsCertsOsOutputWithContext(context.Context) ConfigurationMachineSecretsCertsOsOutput
-}
-
-type ConfigurationMachineSecretsCertsOsArgs struct {
-	// certificate data
-	Cert pulumi.StringInput `pulumi:"cert"`
-	// key data
-	Key pulumi.StringInput `pulumi:"key"`
-}
-
-func (ConfigurationMachineSecretsCertsOsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsOs)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsCertsOsArgs) ToConfigurationMachineSecretsCertsOsOutput() ConfigurationMachineSecretsCertsOsOutput {
-	return i.ToConfigurationMachineSecretsCertsOsOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsCertsOsArgs) ToConfigurationMachineSecretsCertsOsOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsOsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsCertsOsOutput)
-}
-
-func (i ConfigurationMachineSecretsCertsOsArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsOs] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsOs]{
-		OutputState: i.ToConfigurationMachineSecretsCertsOsOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsCertsOsOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsCertsOsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCertsOs)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsCertsOsOutput) ToConfigurationMachineSecretsCertsOsOutput() ConfigurationMachineSecretsCertsOsOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsOsOutput) ToConfigurationMachineSecretsCertsOsOutputWithContext(ctx context.Context) ConfigurationMachineSecretsCertsOsOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsCertsOsOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCertsOs] {
-	return pulumix.Output[ConfigurationMachineSecretsCertsOs]{
-		OutputState: o.OutputState,
-	}
-}
-
-// certificate data
-func (o ConfigurationMachineSecretsCertsOsOutput) Cert() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsOs) string { return v.Cert }).(pulumi.StringOutput)
-}
-
-// key data
-func (o ConfigurationMachineSecretsCertsOsOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCertsOs) string { return v.Key }).(pulumi.StringOutput)
-}
-
-type ConfigurationMachineSecretsCluster struct {
-	// The cluster id
-	Id string `pulumi:"id"`
-	// The cluster secret
-	Secret string `pulumi:"secret"`
-}
-
-// ConfigurationMachineSecretsClusterInput is an input type that accepts ConfigurationMachineSecretsClusterArgs and ConfigurationMachineSecretsClusterOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsClusterInput` via:
-//
-//	ConfigurationMachineSecretsClusterArgs{...}
-type ConfigurationMachineSecretsClusterInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsClusterOutput() ConfigurationMachineSecretsClusterOutput
-	ToConfigurationMachineSecretsClusterOutputWithContext(context.Context) ConfigurationMachineSecretsClusterOutput
-}
-
-type ConfigurationMachineSecretsClusterArgs struct {
-	// The cluster id
-	Id pulumi.StringInput `pulumi:"id"`
-	// The cluster secret
-	Secret pulumi.StringInput `pulumi:"secret"`
-}
-
-func (ConfigurationMachineSecretsClusterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCluster)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsClusterArgs) ToConfigurationMachineSecretsClusterOutput() ConfigurationMachineSecretsClusterOutput {
-	return i.ToConfigurationMachineSecretsClusterOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsClusterArgs) ToConfigurationMachineSecretsClusterOutputWithContext(ctx context.Context) ConfigurationMachineSecretsClusterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsClusterOutput)
-}
-
-func (i ConfigurationMachineSecretsClusterArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCluster] {
-	return pulumix.Output[ConfigurationMachineSecretsCluster]{
-		OutputState: i.ToConfigurationMachineSecretsClusterOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsClusterOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsClusterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsCluster)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsClusterOutput) ToConfigurationMachineSecretsClusterOutput() ConfigurationMachineSecretsClusterOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsClusterOutput) ToConfigurationMachineSecretsClusterOutputWithContext(ctx context.Context) ConfigurationMachineSecretsClusterOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsClusterOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsCluster] {
-	return pulumix.Output[ConfigurationMachineSecretsCluster]{
-		OutputState: o.OutputState,
-	}
-}
-
-// The cluster id
-func (o ConfigurationMachineSecretsClusterOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCluster) string { return v.Id }).(pulumi.StringOutput)
-}
-
-// The cluster secret
-func (o ConfigurationMachineSecretsClusterOutput) Secret() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsCluster) string { return v.Secret }).(pulumi.StringOutput)
-}
-
-type ConfigurationMachineSecretsSecrets struct {
-	// The aescbc encryption secret for the talos kubernetes cluster
-	AescbcEncryptionSecret *string `pulumi:"aescbcEncryptionSecret"`
-	// The bootstrap token for the talos kubernetes cluster
-	BootstrapToken string `pulumi:"bootstrapToken"`
-	// The secretbox encryption secret for the talos kubernetes cluster
-	SecretboxEncryptionSecret string `pulumi:"secretboxEncryptionSecret"`
-}
-
-// ConfigurationMachineSecretsSecretsInput is an input type that accepts ConfigurationMachineSecretsSecretsArgs and ConfigurationMachineSecretsSecretsOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsSecretsInput` via:
-//
-//	ConfigurationMachineSecretsSecretsArgs{...}
-type ConfigurationMachineSecretsSecretsInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsSecretsOutput() ConfigurationMachineSecretsSecretsOutput
-	ToConfigurationMachineSecretsSecretsOutputWithContext(context.Context) ConfigurationMachineSecretsSecretsOutput
-}
-
-type ConfigurationMachineSecretsSecretsArgs struct {
-	// The aescbc encryption secret for the talos kubernetes cluster
-	AescbcEncryptionSecret pulumi.StringPtrInput `pulumi:"aescbcEncryptionSecret"`
-	// The bootstrap token for the talos kubernetes cluster
-	BootstrapToken pulumi.StringInput `pulumi:"bootstrapToken"`
-	// The secretbox encryption secret for the talos kubernetes cluster
-	SecretboxEncryptionSecret pulumi.StringInput `pulumi:"secretboxEncryptionSecret"`
-}
-
-func (ConfigurationMachineSecretsSecretsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsSecrets)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsSecretsArgs) ToConfigurationMachineSecretsSecretsOutput() ConfigurationMachineSecretsSecretsOutput {
-	return i.ToConfigurationMachineSecretsSecretsOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsSecretsArgs) ToConfigurationMachineSecretsSecretsOutputWithContext(ctx context.Context) ConfigurationMachineSecretsSecretsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsSecretsOutput)
-}
-
-func (i ConfigurationMachineSecretsSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsSecrets] {
-	return pulumix.Output[ConfigurationMachineSecretsSecrets]{
-		OutputState: i.ToConfigurationMachineSecretsSecretsOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsSecretsOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsSecretsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsSecrets)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsSecretsOutput) ToConfigurationMachineSecretsSecretsOutput() ConfigurationMachineSecretsSecretsOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsSecretsOutput) ToConfigurationMachineSecretsSecretsOutputWithContext(ctx context.Context) ConfigurationMachineSecretsSecretsOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsSecrets] {
-	return pulumix.Output[ConfigurationMachineSecretsSecrets]{
-		OutputState: o.OutputState,
-	}
-}
-
-// The aescbc encryption secret for the talos kubernetes cluster
-func (o ConfigurationMachineSecretsSecretsOutput) AescbcEncryptionSecret() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsSecrets) *string { return v.AescbcEncryptionSecret }).(pulumi.StringPtrOutput)
-}
-
-// The bootstrap token for the talos kubernetes cluster
-func (o ConfigurationMachineSecretsSecretsOutput) BootstrapToken() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsSecrets) string { return v.BootstrapToken }).(pulumi.StringOutput)
-}
-
-// The secretbox encryption secret for the talos kubernetes cluster
-func (o ConfigurationMachineSecretsSecretsOutput) SecretboxEncryptionSecret() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsSecrets) string { return v.SecretboxEncryptionSecret }).(pulumi.StringOutput)
-}
-
-type ConfigurationMachineSecretsTrustdinfo struct {
-	// The trustd token for the talos kubernetes cluster
-	Token string `pulumi:"token"`
-}
-
-// ConfigurationMachineSecretsTrustdinfoInput is an input type that accepts ConfigurationMachineSecretsTrustdinfoArgs and ConfigurationMachineSecretsTrustdinfoOutput values.
-// You can construct a concrete instance of `ConfigurationMachineSecretsTrustdinfoInput` via:
-//
-//	ConfigurationMachineSecretsTrustdinfoArgs{...}
-type ConfigurationMachineSecretsTrustdinfoInput interface {
-	pulumi.Input
-
-	ToConfigurationMachineSecretsTrustdinfoOutput() ConfigurationMachineSecretsTrustdinfoOutput
-	ToConfigurationMachineSecretsTrustdinfoOutputWithContext(context.Context) ConfigurationMachineSecretsTrustdinfoOutput
-}
-
-type ConfigurationMachineSecretsTrustdinfoArgs struct {
-	// The trustd token for the talos kubernetes cluster
-	Token pulumi.StringInput `pulumi:"token"`
-}
-
-func (ConfigurationMachineSecretsTrustdinfoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsTrustdinfo)(nil)).Elem()
-}
-
-func (i ConfigurationMachineSecretsTrustdinfoArgs) ToConfigurationMachineSecretsTrustdinfoOutput() ConfigurationMachineSecretsTrustdinfoOutput {
-	return i.ToConfigurationMachineSecretsTrustdinfoOutputWithContext(context.Background())
-}
-
-func (i ConfigurationMachineSecretsTrustdinfoArgs) ToConfigurationMachineSecretsTrustdinfoOutputWithContext(ctx context.Context) ConfigurationMachineSecretsTrustdinfoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationMachineSecretsTrustdinfoOutput)
-}
-
-func (i ConfigurationMachineSecretsTrustdinfoArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsTrustdinfo] {
-	return pulumix.Output[ConfigurationMachineSecretsTrustdinfo]{
-		OutputState: i.ToConfigurationMachineSecretsTrustdinfoOutputWithContext(ctx).OutputState,
-	}
-}
-
-type ConfigurationMachineSecretsTrustdinfoOutput struct{ *pulumi.OutputState }
-
-func (ConfigurationMachineSecretsTrustdinfoOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationMachineSecretsTrustdinfo)(nil)).Elem()
-}
-
-func (o ConfigurationMachineSecretsTrustdinfoOutput) ToConfigurationMachineSecretsTrustdinfoOutput() ConfigurationMachineSecretsTrustdinfoOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsTrustdinfoOutput) ToConfigurationMachineSecretsTrustdinfoOutputWithContext(ctx context.Context) ConfigurationMachineSecretsTrustdinfoOutput {
-	return o
-}
-
-func (o ConfigurationMachineSecretsTrustdinfoOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationMachineSecretsTrustdinfo] {
-	return pulumix.Output[ConfigurationMachineSecretsTrustdinfo]{
-		OutputState: o.OutputState,
-	}
-}
-
-// The trustd token for the talos kubernetes cluster
-func (o ConfigurationMachineSecretsTrustdinfoOutput) Token() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationMachineSecretsTrustdinfo) string { return v.Token }).(pulumi.StringOutput)
-}
-
 type DisksClientConfiguration struct {
 	// The client CA certificate
 	CaCertificate string `pulumi:"caCertificate"`
@@ -2337,53 +1570,6 @@ func (i SecretsMachineSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[
 	}
 }
 
-func (i SecretsMachineSecretsArgs) ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput {
-	return i.ToSecretsMachineSecretsPtrOutputWithContext(context.Background())
-}
-
-func (i SecretsMachineSecretsArgs) ToSecretsMachineSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsOutput).ToSecretsMachineSecretsPtrOutputWithContext(ctx)
-}
-
-// SecretsMachineSecretsPtrInput is an input type that accepts SecretsMachineSecretsArgs, SecretsMachineSecretsPtr and SecretsMachineSecretsPtrOutput values.
-// You can construct a concrete instance of `SecretsMachineSecretsPtrInput` via:
-//
-//	        SecretsMachineSecretsArgs{...}
-//
-//	or:
-//
-//	        nil
-type SecretsMachineSecretsPtrInput interface {
-	pulumi.Input
-
-	ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput
-	ToSecretsMachineSecretsPtrOutputWithContext(context.Context) SecretsMachineSecretsPtrOutput
-}
-
-type secretsMachineSecretsPtrType SecretsMachineSecretsArgs
-
-func SecretsMachineSecretsPtr(v *SecretsMachineSecretsArgs) SecretsMachineSecretsPtrInput {
-	return (*secretsMachineSecretsPtrType)(v)
-}
-
-func (*secretsMachineSecretsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecretsMachineSecrets)(nil)).Elem()
-}
-
-func (i *secretsMachineSecretsPtrType) ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput {
-	return i.ToSecretsMachineSecretsPtrOutputWithContext(context.Background())
-}
-
-func (i *secretsMachineSecretsPtrType) ToSecretsMachineSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsPtrOutput)
-}
-
-func (i *secretsMachineSecretsPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecrets] {
-	return pulumix.Output[*SecretsMachineSecrets]{
-		OutputState: i.ToSecretsMachineSecretsPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsOutput) ElementType() reflect.Type {
@@ -2396,16 +1582,6 @@ func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsOutput() SecretsMach
 
 func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsOutputWithContext(ctx context.Context) SecretsMachineSecretsOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput {
-	return o.ToSecretsMachineSecretsPtrOutputWithContext(context.Background())
-}
-
-func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecretsMachineSecrets) *SecretsMachineSecrets {
-		return &v
-	}).(SecretsMachineSecretsPtrOutput)
 }
 
 func (o SecretsMachineSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecrets] {
@@ -2431,75 +1607,6 @@ func (o SecretsMachineSecretsOutput) Secrets() SecretsMachineSecretsSecretsPtrOu
 // trustd secrets
 func (o SecretsMachineSecretsOutput) Trustdinfo() SecretsMachineSecretsTrustdinfoPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecrets) *SecretsMachineSecretsTrustdinfo { return v.Trustdinfo }).(SecretsMachineSecretsTrustdinfoPtrOutput)
-}
-
-type SecretsMachineSecretsPtrOutput struct{ *pulumi.OutputState }
-
-func (SecretsMachineSecretsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecretsMachineSecrets)(nil)).Elem()
-}
-
-func (o SecretsMachineSecretsPtrOutput) ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput {
-	return o
-}
-
-func (o SecretsMachineSecretsPtrOutput) ToSecretsMachineSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsPtrOutput {
-	return o
-}
-
-func (o SecretsMachineSecretsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecrets] {
-	return pulumix.Output[*SecretsMachineSecrets]{
-		OutputState: o.OutputState,
-	}
-}
-
-func (o SecretsMachineSecretsPtrOutput) Elem() SecretsMachineSecretsOutput {
-	return o.ApplyT(func(v *SecretsMachineSecrets) SecretsMachineSecrets {
-		if v != nil {
-			return *v
-		}
-		var ret SecretsMachineSecrets
-		return ret
-	}).(SecretsMachineSecretsOutput)
-}
-
-func (o SecretsMachineSecretsPtrOutput) Certs() SecretsMachineSecretsCertsPtrOutput {
-	return o.ApplyT(func(v *SecretsMachineSecrets) *SecretsMachineSecretsCerts {
-		if v == nil {
-			return nil
-		}
-		return v.Certs
-	}).(SecretsMachineSecretsCertsPtrOutput)
-}
-
-// The cluster secrets
-func (o SecretsMachineSecretsPtrOutput) Cluster() SecretsMachineSecretsClusterPtrOutput {
-	return o.ApplyT(func(v *SecretsMachineSecrets) *SecretsMachineSecretsCluster {
-		if v == nil {
-			return nil
-		}
-		return v.Cluster
-	}).(SecretsMachineSecretsClusterPtrOutput)
-}
-
-// kubernetes cluster secrets
-func (o SecretsMachineSecretsPtrOutput) Secrets() SecretsMachineSecretsSecretsPtrOutput {
-	return o.ApplyT(func(v *SecretsMachineSecrets) *SecretsMachineSecretsSecrets {
-		if v == nil {
-			return nil
-		}
-		return v.Secrets
-	}).(SecretsMachineSecretsSecretsPtrOutput)
-}
-
-// trustd secrets
-func (o SecretsMachineSecretsPtrOutput) Trustdinfo() SecretsMachineSecretsTrustdinfoPtrOutput {
-	return o.ApplyT(func(v *SecretsMachineSecrets) *SecretsMachineSecretsTrustdinfo {
-		if v == nil {
-			return nil
-		}
-		return v.Trustdinfo
-	}).(SecretsMachineSecretsTrustdinfoPtrOutput)
 }
 
 type SecretsMachineSecretsCerts struct {
@@ -4342,6 +3449,2075 @@ func (o TimeoutPtrOutput) Update() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// A Machine Secrets Certificate
+type Certificate struct {
+	// Certificate
+	Cert string `pulumi:"cert"`
+	// Private Key
+	Key string `pulumi:"key"`
+}
+
+// CertificateInput is an input type that accepts CertificateArgs and CertificateOutput values.
+// You can construct a concrete instance of `CertificateInput` via:
+//
+//	CertificateArgs{...}
+type CertificateInput interface {
+	pulumi.Input
+
+	ToCertificateOutput() CertificateOutput
+	ToCertificateOutputWithContext(context.Context) CertificateOutput
+}
+
+// A Machine Secrets Certificate
+type CertificateArgs struct {
+	// Certificate
+	Cert pulumi.StringInput `pulumi:"cert"`
+	// Private Key
+	Key pulumi.StringInput `pulumi:"key"`
+}
+
+func (CertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*Certificate)(nil)).Elem()
+}
+
+func (i CertificateArgs) ToCertificateOutput() CertificateOutput {
+	return i.ToCertificateOutputWithContext(context.Background())
+}
+
+func (i CertificateArgs) ToCertificateOutputWithContext(ctx context.Context) CertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateOutput)
+}
+
+func (i CertificateArgs) ToOutput(ctx context.Context) pulumix.Output[Certificate] {
+	return pulumix.Output[Certificate]{
+		OutputState: i.ToCertificateOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i CertificateArgs) ToCertificatePtrOutput() CertificatePtrOutput {
+	return i.ToCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i CertificateArgs) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateOutput).ToCertificatePtrOutputWithContext(ctx)
+}
+
+// CertificatePtrInput is an input type that accepts CertificateArgs, CertificatePtr and CertificatePtrOutput values.
+// You can construct a concrete instance of `CertificatePtrInput` via:
+//
+//	        CertificateArgs{...}
+//
+//	or:
+//
+//	        nil
+type CertificatePtrInput interface {
+	pulumi.Input
+
+	ToCertificatePtrOutput() CertificatePtrOutput
+	ToCertificatePtrOutputWithContext(context.Context) CertificatePtrOutput
+}
+
+type certificatePtrType CertificateArgs
+
+func CertificatePtr(v *CertificateArgs) CertificatePtrInput {
+	return (*certificatePtrType)(v)
+}
+
+func (*certificatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Certificate)(nil)).Elem()
+}
+
+func (i *certificatePtrType) ToCertificatePtrOutput() CertificatePtrOutput {
+	return i.ToCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i *certificatePtrType) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificatePtrOutput)
+}
+
+func (i *certificatePtrType) ToOutput(ctx context.Context) pulumix.Output[*Certificate] {
+	return pulumix.Output[*Certificate]{
+		OutputState: i.ToCertificatePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+// A Machine Secrets Certificate
+type CertificateOutput struct{ *pulumi.OutputState }
+
+func (CertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*Certificate)(nil)).Elem()
+}
+
+func (o CertificateOutput) ToCertificateOutput() CertificateOutput {
+	return o
+}
+
+func (o CertificateOutput) ToCertificateOutputWithContext(ctx context.Context) CertificateOutput {
+	return o
+}
+
+func (o CertificateOutput) ToCertificatePtrOutput() CertificatePtrOutput {
+	return o.ToCertificatePtrOutputWithContext(context.Background())
+}
+
+func (o CertificateOutput) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Certificate) *Certificate {
+		return &v
+	}).(CertificatePtrOutput)
+}
+
+func (o CertificateOutput) ToOutput(ctx context.Context) pulumix.Output[Certificate] {
+	return pulumix.Output[Certificate]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Certificate
+func (o CertificateOutput) Cert() pulumi.StringOutput {
+	return o.ApplyT(func(v Certificate) string { return v.Cert }).(pulumi.StringOutput)
+}
+
+// Private Key
+func (o CertificateOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v Certificate) string { return v.Key }).(pulumi.StringOutput)
+}
+
+type CertificatePtrOutput struct{ *pulumi.OutputState }
+
+func (CertificatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Certificate)(nil)).Elem()
+}
+
+func (o CertificatePtrOutput) ToCertificatePtrOutput() CertificatePtrOutput {
+	return o
+}
+
+func (o CertificatePtrOutput) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
+	return o
+}
+
+func (o CertificatePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Certificate] {
+	return pulumix.Output[*Certificate]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o CertificatePtrOutput) Elem() CertificateOutput {
+	return o.ApplyT(func(v *Certificate) Certificate {
+		if v != nil {
+			return *v
+		}
+		var ret Certificate
+		return ret
+	}).(CertificateOutput)
+}
+
+// Certificate
+func (o CertificatePtrOutput) Cert() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Certificate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Cert
+	}).(pulumi.StringPtrOutput)
+}
+
+// Private Key
+func (o CertificatePtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Certificate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// A complete Machine Secrets Certificates configuration
+type Certificates struct {
+	Etcd               Certificate `pulumi:"etcd"`
+	K8s                Certificate `pulumi:"k8s"`
+	K8s_aggregator     Certificate `pulumi:"k8s_aggregator"`
+	K8s_serviceaccount Key         `pulumi:"k8s_serviceaccount"`
+	Os                 Certificate `pulumi:"os"`
+}
+
+// CertificatesInput is an input type that accepts CertificatesArgs and CertificatesOutput values.
+// You can construct a concrete instance of `CertificatesInput` via:
+//
+//	CertificatesArgs{...}
+type CertificatesInput interface {
+	pulumi.Input
+
+	ToCertificatesOutput() CertificatesOutput
+	ToCertificatesOutputWithContext(context.Context) CertificatesOutput
+}
+
+// A complete Machine Secrets Certificates configuration
+type CertificatesArgs struct {
+	Etcd               CertificateInput `pulumi:"etcd"`
+	K8s                CertificateInput `pulumi:"k8s"`
+	K8s_aggregator     CertificateInput `pulumi:"k8s_aggregator"`
+	K8s_serviceaccount KeyInput         `pulumi:"k8s_serviceaccount"`
+	Os                 CertificateInput `pulumi:"os"`
+}
+
+func (CertificatesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*Certificates)(nil)).Elem()
+}
+
+func (i CertificatesArgs) ToCertificatesOutput() CertificatesOutput {
+	return i.ToCertificatesOutputWithContext(context.Background())
+}
+
+func (i CertificatesArgs) ToCertificatesOutputWithContext(ctx context.Context) CertificatesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificatesOutput)
+}
+
+func (i CertificatesArgs) ToOutput(ctx context.Context) pulumix.Output[Certificates] {
+	return pulumix.Output[Certificates]{
+		OutputState: i.ToCertificatesOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i CertificatesArgs) ToCertificatesPtrOutput() CertificatesPtrOutput {
+	return i.ToCertificatesPtrOutputWithContext(context.Background())
+}
+
+func (i CertificatesArgs) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificatesOutput).ToCertificatesPtrOutputWithContext(ctx)
+}
+
+// CertificatesPtrInput is an input type that accepts CertificatesArgs, CertificatesPtr and CertificatesPtrOutput values.
+// You can construct a concrete instance of `CertificatesPtrInput` via:
+//
+//	        CertificatesArgs{...}
+//
+//	or:
+//
+//	        nil
+type CertificatesPtrInput interface {
+	pulumi.Input
+
+	ToCertificatesPtrOutput() CertificatesPtrOutput
+	ToCertificatesPtrOutputWithContext(context.Context) CertificatesPtrOutput
+}
+
+type certificatesPtrType CertificatesArgs
+
+func CertificatesPtr(v *CertificatesArgs) CertificatesPtrInput {
+	return (*certificatesPtrType)(v)
+}
+
+func (*certificatesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Certificates)(nil)).Elem()
+}
+
+func (i *certificatesPtrType) ToCertificatesPtrOutput() CertificatesPtrOutput {
+	return i.ToCertificatesPtrOutputWithContext(context.Background())
+}
+
+func (i *certificatesPtrType) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificatesPtrOutput)
+}
+
+func (i *certificatesPtrType) ToOutput(ctx context.Context) pulumix.Output[*Certificates] {
+	return pulumix.Output[*Certificates]{
+		OutputState: i.ToCertificatesPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+// A complete Machine Secrets Certificates configuration
+type CertificatesOutput struct{ *pulumi.OutputState }
+
+func (CertificatesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*Certificates)(nil)).Elem()
+}
+
+func (o CertificatesOutput) ToCertificatesOutput() CertificatesOutput {
+	return o
+}
+
+func (o CertificatesOutput) ToCertificatesOutputWithContext(ctx context.Context) CertificatesOutput {
+	return o
+}
+
+func (o CertificatesOutput) ToCertificatesPtrOutput() CertificatesPtrOutput {
+	return o.ToCertificatesPtrOutputWithContext(context.Background())
+}
+
+func (o CertificatesOutput) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Certificates) *Certificates {
+		return &v
+	}).(CertificatesPtrOutput)
+}
+
+func (o CertificatesOutput) ToOutput(ctx context.Context) pulumix.Output[Certificates] {
+	return pulumix.Output[Certificates]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o CertificatesOutput) Etcd() CertificateOutput {
+	return o.ApplyT(func(v Certificates) Certificate { return v.Etcd }).(CertificateOutput)
+}
+
+func (o CertificatesOutput) K8s() CertificateOutput {
+	return o.ApplyT(func(v Certificates) Certificate { return v.K8s }).(CertificateOutput)
+}
+
+func (o CertificatesOutput) K8s_aggregator() CertificateOutput {
+	return o.ApplyT(func(v Certificates) Certificate { return v.K8s_aggregator }).(CertificateOutput)
+}
+
+func (o CertificatesOutput) K8s_serviceaccount() KeyOutput {
+	return o.ApplyT(func(v Certificates) Key { return v.K8s_serviceaccount }).(KeyOutput)
+}
+
+func (o CertificatesOutput) Os() CertificateOutput {
+	return o.ApplyT(func(v Certificates) Certificate { return v.Os }).(CertificateOutput)
+}
+
+type CertificatesPtrOutput struct{ *pulumi.OutputState }
+
+func (CertificatesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Certificates)(nil)).Elem()
+}
+
+func (o CertificatesPtrOutput) ToCertificatesPtrOutput() CertificatesPtrOutput {
+	return o
+}
+
+func (o CertificatesPtrOutput) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
+	return o
+}
+
+func (o CertificatesPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Certificates] {
+	return pulumix.Output[*Certificates]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o CertificatesPtrOutput) Elem() CertificatesOutput {
+	return o.ApplyT(func(v *Certificates) Certificates {
+		if v != nil {
+			return *v
+		}
+		var ret Certificates
+		return ret
+	}).(CertificatesOutput)
+}
+
+func (o CertificatesPtrOutput) Etcd() CertificatePtrOutput {
+	return o.ApplyT(func(v *Certificates) *Certificate {
+		if v == nil {
+			return nil
+		}
+		return &v.Etcd
+	}).(CertificatePtrOutput)
+}
+
+func (o CertificatesPtrOutput) K8s() CertificatePtrOutput {
+	return o.ApplyT(func(v *Certificates) *Certificate {
+		if v == nil {
+			return nil
+		}
+		return &v.K8s
+	}).(CertificatePtrOutput)
+}
+
+func (o CertificatesPtrOutput) K8s_aggregator() CertificatePtrOutput {
+	return o.ApplyT(func(v *Certificates) *Certificate {
+		if v == nil {
+			return nil
+		}
+		return &v.K8s_aggregator
+	}).(CertificatePtrOutput)
+}
+
+func (o CertificatesPtrOutput) K8s_serviceaccount() KeyPtrOutput {
+	return o.ApplyT(func(v *Certificates) *Key {
+		if v == nil {
+			return nil
+		}
+		return &v.K8s_serviceaccount
+	}).(KeyPtrOutput)
+}
+
+func (o CertificatesPtrOutput) Os() CertificatePtrOutput {
+	return o.ApplyT(func(v *Certificates) *Certificate {
+		if v == nil {
+			return nil
+		}
+		return &v.Os
+	}).(CertificatePtrOutput)
+}
+
+// A Machine Secrets Cluster Info
+type Cluster struct {
+	// Certificate
+	Id string `pulumi:"id"`
+	// Private Key
+	Secret string `pulumi:"secret"`
+}
+
+// ClusterInput is an input type that accepts ClusterArgs and ClusterOutput values.
+// You can construct a concrete instance of `ClusterInput` via:
+//
+//	ClusterArgs{...}
+type ClusterInput interface {
+	pulumi.Input
+
+	ToClusterOutput() ClusterOutput
+	ToClusterOutputWithContext(context.Context) ClusterOutput
+}
+
+// A Machine Secrets Cluster Info
+type ClusterArgs struct {
+	// Certificate
+	Id pulumi.StringInput `pulumi:"id"`
+	// Private Key
+	Secret pulumi.StringInput `pulumi:"secret"`
+}
+
+func (ClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*Cluster)(nil)).Elem()
+}
+
+func (i ClusterArgs) ToClusterOutput() ClusterOutput {
+	return i.ToClusterOutputWithContext(context.Background())
+}
+
+func (i ClusterArgs) ToClusterOutputWithContext(ctx context.Context) ClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterOutput)
+}
+
+func (i ClusterArgs) ToOutput(ctx context.Context) pulumix.Output[Cluster] {
+	return pulumix.Output[Cluster]{
+		OutputState: i.ToClusterOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i ClusterArgs) ToClusterPtrOutput() ClusterPtrOutput {
+	return i.ToClusterPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterArgs) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterOutput).ToClusterPtrOutputWithContext(ctx)
+}
+
+// ClusterPtrInput is an input type that accepts ClusterArgs, ClusterPtr and ClusterPtrOutput values.
+// You can construct a concrete instance of `ClusterPtrInput` via:
+//
+//	        ClusterArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterPtrInput interface {
+	pulumi.Input
+
+	ToClusterPtrOutput() ClusterPtrOutput
+	ToClusterPtrOutputWithContext(context.Context) ClusterPtrOutput
+}
+
+type clusterPtrType ClusterArgs
+
+func ClusterPtr(v *ClusterArgs) ClusterPtrInput {
+	return (*clusterPtrType)(v)
+}
+
+func (*clusterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Cluster)(nil)).Elem()
+}
+
+func (i *clusterPtrType) ToClusterPtrOutput() ClusterPtrOutput {
+	return i.ToClusterPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterPtrType) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterPtrOutput)
+}
+
+func (i *clusterPtrType) ToOutput(ctx context.Context) pulumix.Output[*Cluster] {
+	return pulumix.Output[*Cluster]{
+		OutputState: i.ToClusterPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+// A Machine Secrets Cluster Info
+type ClusterOutput struct{ *pulumi.OutputState }
+
+func (ClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*Cluster)(nil)).Elem()
+}
+
+func (o ClusterOutput) ToClusterOutput() ClusterOutput {
+	return o
+}
+
+func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOutput {
+	return o
+}
+
+func (o ClusterOutput) ToClusterPtrOutput() ClusterPtrOutput {
+	return o.ToClusterPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterOutput) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Cluster) *Cluster {
+		return &v
+	}).(ClusterPtrOutput)
+}
+
+func (o ClusterOutput) ToOutput(ctx context.Context) pulumix.Output[Cluster] {
+	return pulumix.Output[Cluster]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Certificate
+func (o ClusterOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v Cluster) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Private Key
+func (o ClusterOutput) Secret() pulumi.StringOutput {
+	return o.ApplyT(func(v Cluster) string { return v.Secret }).(pulumi.StringOutput)
+}
+
+type ClusterPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Cluster)(nil)).Elem()
+}
+
+func (o ClusterPtrOutput) ToClusterPtrOutput() ClusterPtrOutput {
+	return o
+}
+
+func (o ClusterPtrOutput) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
+	return o
+}
+
+func (o ClusterPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Cluster] {
+	return pulumix.Output[*Cluster]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o ClusterPtrOutput) Elem() ClusterOutput {
+	return o.ApplyT(func(v *Cluster) Cluster {
+		if v != nil {
+			return *v
+		}
+		var ret Cluster
+		return ret
+	}).(ClusterOutput)
+}
+
+// Certificate
+func (o ClusterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// Private Key
+func (o ClusterPtrOutput) Secret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Secret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A Machine Secrets Private Key
+type Key struct {
+	// Private Key
+	Key string `pulumi:"key"`
+}
+
+// KeyInput is an input type that accepts KeyArgs and KeyOutput values.
+// You can construct a concrete instance of `KeyInput` via:
+//
+//	KeyArgs{...}
+type KeyInput interface {
+	pulumi.Input
+
+	ToKeyOutput() KeyOutput
+	ToKeyOutputWithContext(context.Context) KeyOutput
+}
+
+// A Machine Secrets Private Key
+type KeyArgs struct {
+	// Private Key
+	Key pulumi.StringInput `pulumi:"key"`
+}
+
+func (KeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*Key)(nil)).Elem()
+}
+
+func (i KeyArgs) ToKeyOutput() KeyOutput {
+	return i.ToKeyOutputWithContext(context.Background())
+}
+
+func (i KeyArgs) ToKeyOutputWithContext(ctx context.Context) KeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KeyOutput)
+}
+
+func (i KeyArgs) ToOutput(ctx context.Context) pulumix.Output[Key] {
+	return pulumix.Output[Key]{
+		OutputState: i.ToKeyOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i KeyArgs) ToKeyPtrOutput() KeyPtrOutput {
+	return i.ToKeyPtrOutputWithContext(context.Background())
+}
+
+func (i KeyArgs) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KeyOutput).ToKeyPtrOutputWithContext(ctx)
+}
+
+// KeyPtrInput is an input type that accepts KeyArgs, KeyPtr and KeyPtrOutput values.
+// You can construct a concrete instance of `KeyPtrInput` via:
+//
+//	        KeyArgs{...}
+//
+//	or:
+//
+//	        nil
+type KeyPtrInput interface {
+	pulumi.Input
+
+	ToKeyPtrOutput() KeyPtrOutput
+	ToKeyPtrOutputWithContext(context.Context) KeyPtrOutput
+}
+
+type keyPtrType KeyArgs
+
+func KeyPtr(v *KeyArgs) KeyPtrInput {
+	return (*keyPtrType)(v)
+}
+
+func (*keyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Key)(nil)).Elem()
+}
+
+func (i *keyPtrType) ToKeyPtrOutput() KeyPtrOutput {
+	return i.ToKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *keyPtrType) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KeyPtrOutput)
+}
+
+func (i *keyPtrType) ToOutput(ctx context.Context) pulumix.Output[*Key] {
+	return pulumix.Output[*Key]{
+		OutputState: i.ToKeyPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+// A Machine Secrets Private Key
+type KeyOutput struct{ *pulumi.OutputState }
+
+func (KeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*Key)(nil)).Elem()
+}
+
+func (o KeyOutput) ToKeyOutput() KeyOutput {
+	return o
+}
+
+func (o KeyOutput) ToKeyOutputWithContext(ctx context.Context) KeyOutput {
+	return o
+}
+
+func (o KeyOutput) ToKeyPtrOutput() KeyPtrOutput {
+	return o.ToKeyPtrOutputWithContext(context.Background())
+}
+
+func (o KeyOutput) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Key) *Key {
+		return &v
+	}).(KeyPtrOutput)
+}
+
+func (o KeyOutput) ToOutput(ctx context.Context) pulumix.Output[Key] {
+	return pulumix.Output[Key]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Private Key
+func (o KeyOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v Key) string { return v.Key }).(pulumi.StringOutput)
+}
+
+type KeyPtrOutput struct{ *pulumi.OutputState }
+
+func (KeyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Key)(nil)).Elem()
+}
+
+func (o KeyPtrOutput) ToKeyPtrOutput() KeyPtrOutput {
+	return o
+}
+
+func (o KeyPtrOutput) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
+	return o
+}
+
+func (o KeyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Key] {
+	return pulumix.Output[*Key]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o KeyPtrOutput) Elem() KeyOutput {
+	return o.ApplyT(func(v *Key) Key {
+		if v != nil {
+			return *v
+		}
+		var ret Key
+		return ret
+	}).(KeyOutput)
+}
+
+// Private Key
+func (o KeyPtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Key) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// A complete Machine Secrets configuration
+type MachineSecrets struct {
+	Certs      Certificates `pulumi:"certs"`
+	Cluster    Cluster      `pulumi:"cluster"`
+	Secrets    SecretsType  `pulumi:"secrets"`
+	Trustdinfo TrustdInfo   `pulumi:"trustdinfo"`
+}
+
+// MachineSecretsInput is an input type that accepts MachineSecretsArgs and MachineSecretsOutput values.
+// You can construct a concrete instance of `MachineSecretsInput` via:
+//
+//	MachineSecretsArgs{...}
+type MachineSecretsInput interface {
+	pulumi.Input
+
+	ToMachineSecretsOutput() MachineSecretsOutput
+	ToMachineSecretsOutputWithContext(context.Context) MachineSecretsOutput
+}
+
+// A complete Machine Secrets configuration
+type MachineSecretsArgs struct {
+	Certs      CertificatesInput `pulumi:"certs"`
+	Cluster    ClusterInput      `pulumi:"cluster"`
+	Secrets    SecretsTypeInput  `pulumi:"secrets"`
+	Trustdinfo TrustdInfoInput   `pulumi:"trustdinfo"`
+}
+
+func (MachineSecretsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MachineSecrets)(nil)).Elem()
+}
+
+func (i MachineSecretsArgs) ToMachineSecretsOutput() MachineSecretsOutput {
+	return i.ToMachineSecretsOutputWithContext(context.Background())
+}
+
+func (i MachineSecretsArgs) ToMachineSecretsOutputWithContext(ctx context.Context) MachineSecretsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MachineSecretsOutput)
+}
+
+func (i MachineSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[MachineSecrets] {
+	return pulumix.Output[MachineSecrets]{
+		OutputState: i.ToMachineSecretsOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i MachineSecretsArgs) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
+	return i.ToMachineSecretsPtrOutputWithContext(context.Background())
+}
+
+func (i MachineSecretsArgs) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MachineSecretsOutput).ToMachineSecretsPtrOutputWithContext(ctx)
+}
+
+// MachineSecretsPtrInput is an input type that accepts MachineSecretsArgs, MachineSecretsPtr and MachineSecretsPtrOutput values.
+// You can construct a concrete instance of `MachineSecretsPtrInput` via:
+//
+//	        MachineSecretsArgs{...}
+//
+//	or:
+//
+//	        nil
+type MachineSecretsPtrInput interface {
+	pulumi.Input
+
+	ToMachineSecretsPtrOutput() MachineSecretsPtrOutput
+	ToMachineSecretsPtrOutputWithContext(context.Context) MachineSecretsPtrOutput
+}
+
+type machineSecretsPtrType MachineSecretsArgs
+
+func MachineSecretsPtr(v *MachineSecretsArgs) MachineSecretsPtrInput {
+	return (*machineSecretsPtrType)(v)
+}
+
+func (*machineSecretsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MachineSecrets)(nil)).Elem()
+}
+
+func (i *machineSecretsPtrType) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
+	return i.ToMachineSecretsPtrOutputWithContext(context.Background())
+}
+
+func (i *machineSecretsPtrType) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MachineSecretsPtrOutput)
+}
+
+func (i *machineSecretsPtrType) ToOutput(ctx context.Context) pulumix.Output[*MachineSecrets] {
+	return pulumix.Output[*MachineSecrets]{
+		OutputState: i.ToMachineSecretsPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+// A complete Machine Secrets configuration
+type MachineSecretsOutput struct{ *pulumi.OutputState }
+
+func (MachineSecretsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MachineSecrets)(nil)).Elem()
+}
+
+func (o MachineSecretsOutput) ToMachineSecretsOutput() MachineSecretsOutput {
+	return o
+}
+
+func (o MachineSecretsOutput) ToMachineSecretsOutputWithContext(ctx context.Context) MachineSecretsOutput {
+	return o
+}
+
+func (o MachineSecretsOutput) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
+	return o.ToMachineSecretsPtrOutputWithContext(context.Background())
+}
+
+func (o MachineSecretsOutput) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MachineSecrets) *MachineSecrets {
+		return &v
+	}).(MachineSecretsPtrOutput)
+}
+
+func (o MachineSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[MachineSecrets] {
+	return pulumix.Output[MachineSecrets]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o MachineSecretsOutput) Certs() CertificatesOutput {
+	return o.ApplyT(func(v MachineSecrets) Certificates { return v.Certs }).(CertificatesOutput)
+}
+
+func (o MachineSecretsOutput) Cluster() ClusterOutput {
+	return o.ApplyT(func(v MachineSecrets) Cluster { return v.Cluster }).(ClusterOutput)
+}
+
+func (o MachineSecretsOutput) Secrets() SecretsTypeOutput {
+	return o.ApplyT(func(v MachineSecrets) SecretsType { return v.Secrets }).(SecretsTypeOutput)
+}
+
+func (o MachineSecretsOutput) Trustdinfo() TrustdInfoOutput {
+	return o.ApplyT(func(v MachineSecrets) TrustdInfo { return v.Trustdinfo }).(TrustdInfoOutput)
+}
+
+type MachineSecretsPtrOutput struct{ *pulumi.OutputState }
+
+func (MachineSecretsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MachineSecrets)(nil)).Elem()
+}
+
+func (o MachineSecretsPtrOutput) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
+	return o
+}
+
+func (o MachineSecretsPtrOutput) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
+	return o
+}
+
+func (o MachineSecretsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*MachineSecrets] {
+	return pulumix.Output[*MachineSecrets]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o MachineSecretsPtrOutput) Elem() MachineSecretsOutput {
+	return o.ApplyT(func(v *MachineSecrets) MachineSecrets {
+		if v != nil {
+			return *v
+		}
+		var ret MachineSecrets
+		return ret
+	}).(MachineSecretsOutput)
+}
+
+func (o MachineSecretsPtrOutput) Certs() CertificatesPtrOutput {
+	return o.ApplyT(func(v *MachineSecrets) *Certificates {
+		if v == nil {
+			return nil
+		}
+		return &v.Certs
+	}).(CertificatesPtrOutput)
+}
+
+func (o MachineSecretsPtrOutput) Cluster() ClusterPtrOutput {
+	return o.ApplyT(func(v *MachineSecrets) *Cluster {
+		if v == nil {
+			return nil
+		}
+		return &v.Cluster
+	}).(ClusterPtrOutput)
+}
+
+func (o MachineSecretsPtrOutput) Secrets() SecretsTypePtrOutput {
+	return o.ApplyT(func(v *MachineSecrets) *SecretsType {
+		if v == nil {
+			return nil
+		}
+		return &v.Secrets
+	}).(SecretsTypePtrOutput)
+}
+
+func (o MachineSecretsPtrOutput) Trustdinfo() TrustdInfoPtrOutput {
+	return o.ApplyT(func(v *MachineSecrets) *TrustdInfo {
+		if v == nil {
+			return nil
+		}
+		return &v.Trustdinfo
+	}).(TrustdInfoPtrOutput)
+}
+
+// A Machine Secrets Bootstrap data
+type SecretsType struct {
+	// The bootstrap token for the talos kubernetes cluster
+	Bootstrap_token string `pulumi:"bootstrap_token"`
+	// The secretbox encryption secret for the talos kubernetes cluster
+	Secretbox_encryption_secret string `pulumi:"secretbox_encryption_secret"`
+}
+
+// SecretsTypeInput is an input type that accepts SecretsTypeArgs and SecretsTypeOutput values.
+// You can construct a concrete instance of `SecretsTypeInput` via:
+//
+//	SecretsTypeArgs{...}
+type SecretsTypeInput interface {
+	pulumi.Input
+
+	ToSecretsTypeOutput() SecretsTypeOutput
+	ToSecretsTypeOutputWithContext(context.Context) SecretsTypeOutput
+}
+
+// A Machine Secrets Bootstrap data
+type SecretsTypeArgs struct {
+	// The bootstrap token for the talos kubernetes cluster
+	Bootstrap_token pulumi.StringInput `pulumi:"bootstrap_token"`
+	// The secretbox encryption secret for the talos kubernetes cluster
+	Secretbox_encryption_secret pulumi.StringInput `pulumi:"secretbox_encryption_secret"`
+}
+
+func (SecretsTypeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecretsType)(nil)).Elem()
+}
+
+func (i SecretsTypeArgs) ToSecretsTypeOutput() SecretsTypeOutput {
+	return i.ToSecretsTypeOutputWithContext(context.Background())
+}
+
+func (i SecretsTypeArgs) ToSecretsTypeOutputWithContext(ctx context.Context) SecretsTypeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeOutput)
+}
+
+func (i SecretsTypeArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsType] {
+	return pulumix.Output[SecretsType]{
+		OutputState: i.ToSecretsTypeOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i SecretsTypeArgs) ToSecretsTypePtrOutput() SecretsTypePtrOutput {
+	return i.ToSecretsTypePtrOutputWithContext(context.Background())
+}
+
+func (i SecretsTypeArgs) ToSecretsTypePtrOutputWithContext(ctx context.Context) SecretsTypePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeOutput).ToSecretsTypePtrOutputWithContext(ctx)
+}
+
+// SecretsTypePtrInput is an input type that accepts SecretsTypeArgs, SecretsTypePtr and SecretsTypePtrOutput values.
+// You can construct a concrete instance of `SecretsTypePtrInput` via:
+//
+//	        SecretsTypeArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecretsTypePtrInput interface {
+	pulumi.Input
+
+	ToSecretsTypePtrOutput() SecretsTypePtrOutput
+	ToSecretsTypePtrOutputWithContext(context.Context) SecretsTypePtrOutput
+}
+
+type secretsTypePtrType SecretsTypeArgs
+
+func SecretsTypePtr(v *SecretsTypeArgs) SecretsTypePtrInput {
+	return (*secretsTypePtrType)(v)
+}
+
+func (*secretsTypePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecretsType)(nil)).Elem()
+}
+
+func (i *secretsTypePtrType) ToSecretsTypePtrOutput() SecretsTypePtrOutput {
+	return i.ToSecretsTypePtrOutputWithContext(context.Background())
+}
+
+func (i *secretsTypePtrType) ToSecretsTypePtrOutputWithContext(ctx context.Context) SecretsTypePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypePtrOutput)
+}
+
+func (i *secretsTypePtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsType] {
+	return pulumix.Output[*SecretsType]{
+		OutputState: i.ToSecretsTypePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+// A Machine Secrets Bootstrap data
+type SecretsTypeOutput struct{ *pulumi.OutputState }
+
+func (SecretsTypeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecretsType)(nil)).Elem()
+}
+
+func (o SecretsTypeOutput) ToSecretsTypeOutput() SecretsTypeOutput {
+	return o
+}
+
+func (o SecretsTypeOutput) ToSecretsTypeOutputWithContext(ctx context.Context) SecretsTypeOutput {
+	return o
+}
+
+func (o SecretsTypeOutput) ToSecretsTypePtrOutput() SecretsTypePtrOutput {
+	return o.ToSecretsTypePtrOutputWithContext(context.Background())
+}
+
+func (o SecretsTypeOutput) ToSecretsTypePtrOutputWithContext(ctx context.Context) SecretsTypePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecretsType) *SecretsType {
+		return &v
+	}).(SecretsTypePtrOutput)
+}
+
+func (o SecretsTypeOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsType] {
+	return pulumix.Output[SecretsType]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The bootstrap token for the talos kubernetes cluster
+func (o SecretsTypeOutput) Bootstrap_token() pulumi.StringOutput {
+	return o.ApplyT(func(v SecretsType) string { return v.Bootstrap_token }).(pulumi.StringOutput)
+}
+
+// The secretbox encryption secret for the talos kubernetes cluster
+func (o SecretsTypeOutput) Secretbox_encryption_secret() pulumi.StringOutput {
+	return o.ApplyT(func(v SecretsType) string { return v.Secretbox_encryption_secret }).(pulumi.StringOutput)
+}
+
+type SecretsTypePtrOutput struct{ *pulumi.OutputState }
+
+func (SecretsTypePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecretsType)(nil)).Elem()
+}
+
+func (o SecretsTypePtrOutput) ToSecretsTypePtrOutput() SecretsTypePtrOutput {
+	return o
+}
+
+func (o SecretsTypePtrOutput) ToSecretsTypePtrOutputWithContext(ctx context.Context) SecretsTypePtrOutput {
+	return o
+}
+
+func (o SecretsTypePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsType] {
+	return pulumix.Output[*SecretsType]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o SecretsTypePtrOutput) Elem() SecretsTypeOutput {
+	return o.ApplyT(func(v *SecretsType) SecretsType {
+		if v != nil {
+			return *v
+		}
+		var ret SecretsType
+		return ret
+	}).(SecretsTypeOutput)
+}
+
+// The bootstrap token for the talos kubernetes cluster
+func (o SecretsTypePtrOutput) Bootstrap_token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecretsType) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Bootstrap_token
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secretbox encryption secret for the talos kubernetes cluster
+func (o SecretsTypePtrOutput) Secretbox_encryption_secret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecretsType) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Secretbox_encryption_secret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A Machine Secrets Trust daemon info
+type TrustdInfo struct {
+	// The trustd token for the talos kubernetes cluster
+	Token string `pulumi:"token"`
+}
+
+// TrustdInfoInput is an input type that accepts TrustdInfoArgs and TrustdInfoOutput values.
+// You can construct a concrete instance of `TrustdInfoInput` via:
+//
+//	TrustdInfoArgs{...}
+type TrustdInfoInput interface {
+	pulumi.Input
+
+	ToTrustdInfoOutput() TrustdInfoOutput
+	ToTrustdInfoOutputWithContext(context.Context) TrustdInfoOutput
+}
+
+// A Machine Secrets Trust daemon info
+type TrustdInfoArgs struct {
+	// The trustd token for the talos kubernetes cluster
+	Token pulumi.StringInput `pulumi:"token"`
+}
+
+func (TrustdInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TrustdInfo)(nil)).Elem()
+}
+
+func (i TrustdInfoArgs) ToTrustdInfoOutput() TrustdInfoOutput {
+	return i.ToTrustdInfoOutputWithContext(context.Background())
+}
+
+func (i TrustdInfoArgs) ToTrustdInfoOutputWithContext(ctx context.Context) TrustdInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoOutput)
+}
+
+func (i TrustdInfoArgs) ToOutput(ctx context.Context) pulumix.Output[TrustdInfo] {
+	return pulumix.Output[TrustdInfo]{
+		OutputState: i.ToTrustdInfoOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i TrustdInfoArgs) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
+	return i.ToTrustdInfoPtrOutputWithContext(context.Background())
+}
+
+func (i TrustdInfoArgs) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoOutput).ToTrustdInfoPtrOutputWithContext(ctx)
+}
+
+// TrustdInfoPtrInput is an input type that accepts TrustdInfoArgs, TrustdInfoPtr and TrustdInfoPtrOutput values.
+// You can construct a concrete instance of `TrustdInfoPtrInput` via:
+//
+//	        TrustdInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type TrustdInfoPtrInput interface {
+	pulumi.Input
+
+	ToTrustdInfoPtrOutput() TrustdInfoPtrOutput
+	ToTrustdInfoPtrOutputWithContext(context.Context) TrustdInfoPtrOutput
+}
+
+type trustdInfoPtrType TrustdInfoArgs
+
+func TrustdInfoPtr(v *TrustdInfoArgs) TrustdInfoPtrInput {
+	return (*trustdInfoPtrType)(v)
+}
+
+func (*trustdInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TrustdInfo)(nil)).Elem()
+}
+
+func (i *trustdInfoPtrType) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
+	return i.ToTrustdInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *trustdInfoPtrType) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoPtrOutput)
+}
+
+func (i *trustdInfoPtrType) ToOutput(ctx context.Context) pulumix.Output[*TrustdInfo] {
+	return pulumix.Output[*TrustdInfo]{
+		OutputState: i.ToTrustdInfoPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+// A Machine Secrets Trust daemon info
+type TrustdInfoOutput struct{ *pulumi.OutputState }
+
+func (TrustdInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TrustdInfo)(nil)).Elem()
+}
+
+func (o TrustdInfoOutput) ToTrustdInfoOutput() TrustdInfoOutput {
+	return o
+}
+
+func (o TrustdInfoOutput) ToTrustdInfoOutputWithContext(ctx context.Context) TrustdInfoOutput {
+	return o
+}
+
+func (o TrustdInfoOutput) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
+	return o.ToTrustdInfoPtrOutputWithContext(context.Background())
+}
+
+func (o TrustdInfoOutput) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TrustdInfo) *TrustdInfo {
+		return &v
+	}).(TrustdInfoPtrOutput)
+}
+
+func (o TrustdInfoOutput) ToOutput(ctx context.Context) pulumix.Output[TrustdInfo] {
+	return pulumix.Output[TrustdInfo]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The trustd token for the talos kubernetes cluster
+func (o TrustdInfoOutput) Token() pulumi.StringOutput {
+	return o.ApplyT(func(v TrustdInfo) string { return v.Token }).(pulumi.StringOutput)
+}
+
+type TrustdInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (TrustdInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TrustdInfo)(nil)).Elem()
+}
+
+func (o TrustdInfoPtrOutput) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
+	return o
+}
+
+func (o TrustdInfoPtrOutput) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
+	return o
+}
+
+func (o TrustdInfoPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*TrustdInfo] {
+	return pulumix.Output[*TrustdInfo]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o TrustdInfoPtrOutput) Elem() TrustdInfoOutput {
+	return o.ApplyT(func(v *TrustdInfo) TrustdInfo {
+		if v != nil {
+			return *v
+		}
+		var ret TrustdInfo
+		return ret
+	}).(TrustdInfoOutput)
+}
+
+// The trustd token for the talos kubernetes cluster
+func (o TrustdInfoPtrOutput) Token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TrustdInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Token
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetConfigurationMachineSecrets struct {
+	// The certs for the talos kubernetes cluster
+	Certs GetConfigurationMachineSecretsCerts `pulumi:"certs"`
+	// The cluster secrets
+	Cluster GetConfigurationMachineSecretsCluster `pulumi:"cluster"`
+	// The secrets for the talos kubernetes cluster
+	Secrets GetConfigurationMachineSecretsSecrets `pulumi:"secrets"`
+	// The trustd info for the talos kubernetes cluster
+	Trustdinfo GetConfigurationMachineSecretsTrustdinfo `pulumi:"trustdinfo"`
+}
+
+// GetConfigurationMachineSecretsInput is an input type that accepts GetConfigurationMachineSecretsArgs and GetConfigurationMachineSecretsOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsInput` via:
+//
+//	GetConfigurationMachineSecretsArgs{...}
+type GetConfigurationMachineSecretsInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsOutput() GetConfigurationMachineSecretsOutput
+	ToGetConfigurationMachineSecretsOutputWithContext(context.Context) GetConfigurationMachineSecretsOutput
+}
+
+type GetConfigurationMachineSecretsArgs struct {
+	// The certs for the talos kubernetes cluster
+	Certs GetConfigurationMachineSecretsCertsInput `pulumi:"certs"`
+	// The cluster secrets
+	Cluster GetConfigurationMachineSecretsClusterInput `pulumi:"cluster"`
+	// The secrets for the talos kubernetes cluster
+	Secrets GetConfigurationMachineSecretsSecretsInput `pulumi:"secrets"`
+	// The trustd info for the talos kubernetes cluster
+	Trustdinfo GetConfigurationMachineSecretsTrustdinfoInput `pulumi:"trustdinfo"`
+}
+
+func (GetConfigurationMachineSecretsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecrets)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsArgs) ToGetConfigurationMachineSecretsOutput() GetConfigurationMachineSecretsOutput {
+	return i.ToGetConfigurationMachineSecretsOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsArgs) ToGetConfigurationMachineSecretsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsOutput)
+}
+
+func (i GetConfigurationMachineSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecrets] {
+	return pulumix.Output[GetConfigurationMachineSecrets]{
+		OutputState: i.ToGetConfigurationMachineSecretsOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecrets)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsOutput) ToGetConfigurationMachineSecretsOutput() GetConfigurationMachineSecretsOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsOutput) ToGetConfigurationMachineSecretsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecrets] {
+	return pulumix.Output[GetConfigurationMachineSecrets]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The certs for the talos kubernetes cluster
+func (o GetConfigurationMachineSecretsOutput) Certs() GetConfigurationMachineSecretsCertsOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecrets) GetConfigurationMachineSecretsCerts { return v.Certs }).(GetConfigurationMachineSecretsCertsOutput)
+}
+
+// The cluster secrets
+func (o GetConfigurationMachineSecretsOutput) Cluster() GetConfigurationMachineSecretsClusterOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecrets) GetConfigurationMachineSecretsCluster { return v.Cluster }).(GetConfigurationMachineSecretsClusterOutput)
+}
+
+// The secrets for the talos kubernetes cluster
+func (o GetConfigurationMachineSecretsOutput) Secrets() GetConfigurationMachineSecretsSecretsOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecrets) GetConfigurationMachineSecretsSecrets { return v.Secrets }).(GetConfigurationMachineSecretsSecretsOutput)
+}
+
+// The trustd info for the talos kubernetes cluster
+func (o GetConfigurationMachineSecretsOutput) Trustdinfo() GetConfigurationMachineSecretsTrustdinfoOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecrets) GetConfigurationMachineSecretsTrustdinfo { return v.Trustdinfo }).(GetConfigurationMachineSecretsTrustdinfoOutput)
+}
+
+type GetConfigurationMachineSecretsCerts struct {
+	// The certificate and key pair
+	Etcd GetConfigurationMachineSecretsCertsEtcd `pulumi:"etcd"`
+	// The certificate and key pair
+	K8s GetConfigurationMachineSecretsCertsK8s `pulumi:"k8s"`
+	// The certificate and key pair
+	K8sAggregator     GetConfigurationMachineSecretsCertsK8sAggregator     `pulumi:"k8sAggregator"`
+	K8sServiceaccount GetConfigurationMachineSecretsCertsK8sServiceaccount `pulumi:"k8sServiceaccount"`
+	// The certificate and key pair
+	Os GetConfigurationMachineSecretsCertsOs `pulumi:"os"`
+}
+
+// GetConfigurationMachineSecretsCertsInput is an input type that accepts GetConfigurationMachineSecretsCertsArgs and GetConfigurationMachineSecretsCertsOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsCertsInput` via:
+//
+//	GetConfigurationMachineSecretsCertsArgs{...}
+type GetConfigurationMachineSecretsCertsInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsCertsOutput() GetConfigurationMachineSecretsCertsOutput
+	ToGetConfigurationMachineSecretsCertsOutputWithContext(context.Context) GetConfigurationMachineSecretsCertsOutput
+}
+
+type GetConfigurationMachineSecretsCertsArgs struct {
+	// The certificate and key pair
+	Etcd GetConfigurationMachineSecretsCertsEtcdInput `pulumi:"etcd"`
+	// The certificate and key pair
+	K8s GetConfigurationMachineSecretsCertsK8sInput `pulumi:"k8s"`
+	// The certificate and key pair
+	K8sAggregator     GetConfigurationMachineSecretsCertsK8sAggregatorInput     `pulumi:"k8sAggregator"`
+	K8sServiceaccount GetConfigurationMachineSecretsCertsK8sServiceaccountInput `pulumi:"k8sServiceaccount"`
+	// The certificate and key pair
+	Os GetConfigurationMachineSecretsCertsOsInput `pulumi:"os"`
+}
+
+func (GetConfigurationMachineSecretsCertsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCerts)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsCertsArgs) ToGetConfigurationMachineSecretsCertsOutput() GetConfigurationMachineSecretsCertsOutput {
+	return i.ToGetConfigurationMachineSecretsCertsOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsCertsArgs) ToGetConfigurationMachineSecretsCertsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsOutput)
+}
+
+func (i GetConfigurationMachineSecretsCertsArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCerts] {
+	return pulumix.Output[GetConfigurationMachineSecretsCerts]{
+		OutputState: i.ToGetConfigurationMachineSecretsCertsOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsCertsOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsCertsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCerts)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsCertsOutput) ToGetConfigurationMachineSecretsCertsOutput() GetConfigurationMachineSecretsCertsOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsOutput) ToGetConfigurationMachineSecretsCertsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCerts] {
+	return pulumix.Output[GetConfigurationMachineSecretsCerts]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The certificate and key pair
+func (o GetConfigurationMachineSecretsCertsOutput) Etcd() GetConfigurationMachineSecretsCertsEtcdOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCerts) GetConfigurationMachineSecretsCertsEtcd { return v.Etcd }).(GetConfigurationMachineSecretsCertsEtcdOutput)
+}
+
+// The certificate and key pair
+func (o GetConfigurationMachineSecretsCertsOutput) K8s() GetConfigurationMachineSecretsCertsK8sOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCerts) GetConfigurationMachineSecretsCertsK8s { return v.K8s }).(GetConfigurationMachineSecretsCertsK8sOutput)
+}
+
+// The certificate and key pair
+func (o GetConfigurationMachineSecretsCertsOutput) K8sAggregator() GetConfigurationMachineSecretsCertsK8sAggregatorOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCerts) GetConfigurationMachineSecretsCertsK8sAggregator {
+		return v.K8sAggregator
+	}).(GetConfigurationMachineSecretsCertsK8sAggregatorOutput)
+}
+
+func (o GetConfigurationMachineSecretsCertsOutput) K8sServiceaccount() GetConfigurationMachineSecretsCertsK8sServiceaccountOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCerts) GetConfigurationMachineSecretsCertsK8sServiceaccount {
+		return v.K8sServiceaccount
+	}).(GetConfigurationMachineSecretsCertsK8sServiceaccountOutput)
+}
+
+// The certificate and key pair
+func (o GetConfigurationMachineSecretsCertsOutput) Os() GetConfigurationMachineSecretsCertsOsOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCerts) GetConfigurationMachineSecretsCertsOs { return v.Os }).(GetConfigurationMachineSecretsCertsOsOutput)
+}
+
+type GetConfigurationMachineSecretsCertsEtcd struct {
+	// certificate data
+	Cert string `pulumi:"cert"`
+	// key data
+	Key string `pulumi:"key"`
+}
+
+// GetConfigurationMachineSecretsCertsEtcdInput is an input type that accepts GetConfigurationMachineSecretsCertsEtcdArgs and GetConfigurationMachineSecretsCertsEtcdOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsCertsEtcdInput` via:
+//
+//	GetConfigurationMachineSecretsCertsEtcdArgs{...}
+type GetConfigurationMachineSecretsCertsEtcdInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsCertsEtcdOutput() GetConfigurationMachineSecretsCertsEtcdOutput
+	ToGetConfigurationMachineSecretsCertsEtcdOutputWithContext(context.Context) GetConfigurationMachineSecretsCertsEtcdOutput
+}
+
+type GetConfigurationMachineSecretsCertsEtcdArgs struct {
+	// certificate data
+	Cert pulumi.StringInput `pulumi:"cert"`
+	// key data
+	Key pulumi.StringInput `pulumi:"key"`
+}
+
+func (GetConfigurationMachineSecretsCertsEtcdArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsEtcd)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsCertsEtcdArgs) ToGetConfigurationMachineSecretsCertsEtcdOutput() GetConfigurationMachineSecretsCertsEtcdOutput {
+	return i.ToGetConfigurationMachineSecretsCertsEtcdOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsCertsEtcdArgs) ToGetConfigurationMachineSecretsCertsEtcdOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsEtcdOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsEtcdOutput)
+}
+
+func (i GetConfigurationMachineSecretsCertsEtcdArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsEtcd] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsEtcd]{
+		OutputState: i.ToGetConfigurationMachineSecretsCertsEtcdOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsCertsEtcdOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsCertsEtcdOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsEtcd)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsCertsEtcdOutput) ToGetConfigurationMachineSecretsCertsEtcdOutput() GetConfigurationMachineSecretsCertsEtcdOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsEtcdOutput) ToGetConfigurationMachineSecretsCertsEtcdOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsEtcdOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsEtcdOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsEtcd] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsEtcd]{
+		OutputState: o.OutputState,
+	}
+}
+
+// certificate data
+func (o GetConfigurationMachineSecretsCertsEtcdOutput) Cert() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsEtcd) string { return v.Cert }).(pulumi.StringOutput)
+}
+
+// key data
+func (o GetConfigurationMachineSecretsCertsEtcdOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsEtcd) string { return v.Key }).(pulumi.StringOutput)
+}
+
+type GetConfigurationMachineSecretsCertsK8s struct {
+	// certificate data
+	Cert string `pulumi:"cert"`
+	// key data
+	Key string `pulumi:"key"`
+}
+
+// GetConfigurationMachineSecretsCertsK8sInput is an input type that accepts GetConfigurationMachineSecretsCertsK8sArgs and GetConfigurationMachineSecretsCertsK8sOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsCertsK8sInput` via:
+//
+//	GetConfigurationMachineSecretsCertsK8sArgs{...}
+type GetConfigurationMachineSecretsCertsK8sInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsCertsK8sOutput() GetConfigurationMachineSecretsCertsK8sOutput
+	ToGetConfigurationMachineSecretsCertsK8sOutputWithContext(context.Context) GetConfigurationMachineSecretsCertsK8sOutput
+}
+
+type GetConfigurationMachineSecretsCertsK8sArgs struct {
+	// certificate data
+	Cert pulumi.StringInput `pulumi:"cert"`
+	// key data
+	Key pulumi.StringInput `pulumi:"key"`
+}
+
+func (GetConfigurationMachineSecretsCertsK8sArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8s)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sArgs) ToGetConfigurationMachineSecretsCertsK8sOutput() GetConfigurationMachineSecretsCertsK8sOutput {
+	return i.ToGetConfigurationMachineSecretsCertsK8sOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sArgs) ToGetConfigurationMachineSecretsCertsK8sOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsK8sOutput)
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8s] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsK8s]{
+		OutputState: i.ToGetConfigurationMachineSecretsCertsK8sOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsCertsK8sOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsCertsK8sOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8s)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sOutput) ToGetConfigurationMachineSecretsCertsK8sOutput() GetConfigurationMachineSecretsCertsK8sOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sOutput) ToGetConfigurationMachineSecretsCertsK8sOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8s] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsK8s]{
+		OutputState: o.OutputState,
+	}
+}
+
+// certificate data
+func (o GetConfigurationMachineSecretsCertsK8sOutput) Cert() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsK8s) string { return v.Cert }).(pulumi.StringOutput)
+}
+
+// key data
+func (o GetConfigurationMachineSecretsCertsK8sOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsK8s) string { return v.Key }).(pulumi.StringOutput)
+}
+
+type GetConfigurationMachineSecretsCertsK8sAggregator struct {
+	// certificate data
+	Cert string `pulumi:"cert"`
+	// key data
+	Key string `pulumi:"key"`
+}
+
+// GetConfigurationMachineSecretsCertsK8sAggregatorInput is an input type that accepts GetConfigurationMachineSecretsCertsK8sAggregatorArgs and GetConfigurationMachineSecretsCertsK8sAggregatorOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsCertsK8sAggregatorInput` via:
+//
+//	GetConfigurationMachineSecretsCertsK8sAggregatorArgs{...}
+type GetConfigurationMachineSecretsCertsK8sAggregatorInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsCertsK8sAggregatorOutput() GetConfigurationMachineSecretsCertsK8sAggregatorOutput
+	ToGetConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(context.Context) GetConfigurationMachineSecretsCertsK8sAggregatorOutput
+}
+
+type GetConfigurationMachineSecretsCertsK8sAggregatorArgs struct {
+	// certificate data
+	Cert pulumi.StringInput `pulumi:"cert"`
+	// key data
+	Key pulumi.StringInput `pulumi:"key"`
+}
+
+func (GetConfigurationMachineSecretsCertsK8sAggregatorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8sAggregator)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sAggregatorArgs) ToGetConfigurationMachineSecretsCertsK8sAggregatorOutput() GetConfigurationMachineSecretsCertsK8sAggregatorOutput {
+	return i.ToGetConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sAggregatorArgs) ToGetConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sAggregatorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsK8sAggregatorOutput)
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sAggregatorArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8sAggregator] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsK8sAggregator]{
+		OutputState: i.ToGetConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsCertsK8sAggregatorOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsCertsK8sAggregatorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8sAggregator)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) ToGetConfigurationMachineSecretsCertsK8sAggregatorOutput() GetConfigurationMachineSecretsCertsK8sAggregatorOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) ToGetConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sAggregatorOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8sAggregator] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsK8sAggregator]{
+		OutputState: o.OutputState,
+	}
+}
+
+// certificate data
+func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) Cert() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsK8sAggregator) string { return v.Cert }).(pulumi.StringOutput)
+}
+
+// key data
+func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsK8sAggregator) string { return v.Key }).(pulumi.StringOutput)
+}
+
+type GetConfigurationMachineSecretsCertsK8sServiceaccount struct {
+	// key data
+	Key string `pulumi:"key"`
+}
+
+// GetConfigurationMachineSecretsCertsK8sServiceaccountInput is an input type that accepts GetConfigurationMachineSecretsCertsK8sServiceaccountArgs and GetConfigurationMachineSecretsCertsK8sServiceaccountOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsCertsK8sServiceaccountInput` via:
+//
+//	GetConfigurationMachineSecretsCertsK8sServiceaccountArgs{...}
+type GetConfigurationMachineSecretsCertsK8sServiceaccountInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutput() GetConfigurationMachineSecretsCertsK8sServiceaccountOutput
+	ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(context.Context) GetConfigurationMachineSecretsCertsK8sServiceaccountOutput
+}
+
+type GetConfigurationMachineSecretsCertsK8sServiceaccountArgs struct {
+	// key data
+	Key pulumi.StringInput `pulumi:"key"`
+}
+
+func (GetConfigurationMachineSecretsCertsK8sServiceaccountArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8sServiceaccount)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sServiceaccountArgs) ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutput() GetConfigurationMachineSecretsCertsK8sServiceaccountOutput {
+	return i.ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sServiceaccountArgs) ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sServiceaccountOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsK8sServiceaccountOutput)
+}
+
+func (i GetConfigurationMachineSecretsCertsK8sServiceaccountArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8sServiceaccount] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsK8sServiceaccount]{
+		OutputState: i.ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsCertsK8sServiceaccountOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8sServiceaccount)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutput() GetConfigurationMachineSecretsCertsK8sServiceaccountOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sServiceaccountOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8sServiceaccount] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsK8sServiceaccount]{
+		OutputState: o.OutputState,
+	}
+}
+
+// key data
+func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsK8sServiceaccount) string { return v.Key }).(pulumi.StringOutput)
+}
+
+type GetConfigurationMachineSecretsCertsOs struct {
+	// certificate data
+	Cert string `pulumi:"cert"`
+	// key data
+	Key string `pulumi:"key"`
+}
+
+// GetConfigurationMachineSecretsCertsOsInput is an input type that accepts GetConfigurationMachineSecretsCertsOsArgs and GetConfigurationMachineSecretsCertsOsOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsCertsOsInput` via:
+//
+//	GetConfigurationMachineSecretsCertsOsArgs{...}
+type GetConfigurationMachineSecretsCertsOsInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsCertsOsOutput() GetConfigurationMachineSecretsCertsOsOutput
+	ToGetConfigurationMachineSecretsCertsOsOutputWithContext(context.Context) GetConfigurationMachineSecretsCertsOsOutput
+}
+
+type GetConfigurationMachineSecretsCertsOsArgs struct {
+	// certificate data
+	Cert pulumi.StringInput `pulumi:"cert"`
+	// key data
+	Key pulumi.StringInput `pulumi:"key"`
+}
+
+func (GetConfigurationMachineSecretsCertsOsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsOs)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsCertsOsArgs) ToGetConfigurationMachineSecretsCertsOsOutput() GetConfigurationMachineSecretsCertsOsOutput {
+	return i.ToGetConfigurationMachineSecretsCertsOsOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsCertsOsArgs) ToGetConfigurationMachineSecretsCertsOsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsOsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsOsOutput)
+}
+
+func (i GetConfigurationMachineSecretsCertsOsArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsOs] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsOs]{
+		OutputState: i.ToGetConfigurationMachineSecretsCertsOsOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsCertsOsOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsCertsOsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCertsOs)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsCertsOsOutput) ToGetConfigurationMachineSecretsCertsOsOutput() GetConfigurationMachineSecretsCertsOsOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsOsOutput) ToGetConfigurationMachineSecretsCertsOsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsOsOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsCertsOsOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsOs] {
+	return pulumix.Output[GetConfigurationMachineSecretsCertsOs]{
+		OutputState: o.OutputState,
+	}
+}
+
+// certificate data
+func (o GetConfigurationMachineSecretsCertsOsOutput) Cert() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsOs) string { return v.Cert }).(pulumi.StringOutput)
+}
+
+// key data
+func (o GetConfigurationMachineSecretsCertsOsOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsOs) string { return v.Key }).(pulumi.StringOutput)
+}
+
+type GetConfigurationMachineSecretsCluster struct {
+	// The cluster id
+	Id string `pulumi:"id"`
+	// The cluster secret
+	Secret string `pulumi:"secret"`
+}
+
+// GetConfigurationMachineSecretsClusterInput is an input type that accepts GetConfigurationMachineSecretsClusterArgs and GetConfigurationMachineSecretsClusterOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsClusterInput` via:
+//
+//	GetConfigurationMachineSecretsClusterArgs{...}
+type GetConfigurationMachineSecretsClusterInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsClusterOutput() GetConfigurationMachineSecretsClusterOutput
+	ToGetConfigurationMachineSecretsClusterOutputWithContext(context.Context) GetConfigurationMachineSecretsClusterOutput
+}
+
+type GetConfigurationMachineSecretsClusterArgs struct {
+	// The cluster id
+	Id pulumi.StringInput `pulumi:"id"`
+	// The cluster secret
+	Secret pulumi.StringInput `pulumi:"secret"`
+}
+
+func (GetConfigurationMachineSecretsClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCluster)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsClusterArgs) ToGetConfigurationMachineSecretsClusterOutput() GetConfigurationMachineSecretsClusterOutput {
+	return i.ToGetConfigurationMachineSecretsClusterOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsClusterArgs) ToGetConfigurationMachineSecretsClusterOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsClusterOutput)
+}
+
+func (i GetConfigurationMachineSecretsClusterArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCluster] {
+	return pulumix.Output[GetConfigurationMachineSecretsCluster]{
+		OutputState: i.ToGetConfigurationMachineSecretsClusterOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsClusterOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsCluster)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsClusterOutput) ToGetConfigurationMachineSecretsClusterOutput() GetConfigurationMachineSecretsClusterOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsClusterOutput) ToGetConfigurationMachineSecretsClusterOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsClusterOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsClusterOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCluster] {
+	return pulumix.Output[GetConfigurationMachineSecretsCluster]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The cluster id
+func (o GetConfigurationMachineSecretsClusterOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCluster) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The cluster secret
+func (o GetConfigurationMachineSecretsClusterOutput) Secret() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsCluster) string { return v.Secret }).(pulumi.StringOutput)
+}
+
+type GetConfigurationMachineSecretsSecrets struct {
+	// The aescbc encryption secret for the talos kubernetes cluster
+	AescbcEncryptionSecret *string `pulumi:"aescbcEncryptionSecret"`
+	// The bootstrap token for the talos kubernetes cluster
+	BootstrapToken string `pulumi:"bootstrapToken"`
+	// The secretbox encryption secret for the talos kubernetes cluster
+	SecretboxEncryptionSecret string `pulumi:"secretboxEncryptionSecret"`
+}
+
+// GetConfigurationMachineSecretsSecretsInput is an input type that accepts GetConfigurationMachineSecretsSecretsArgs and GetConfigurationMachineSecretsSecretsOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsSecretsInput` via:
+//
+//	GetConfigurationMachineSecretsSecretsArgs{...}
+type GetConfigurationMachineSecretsSecretsInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsSecretsOutput() GetConfigurationMachineSecretsSecretsOutput
+	ToGetConfigurationMachineSecretsSecretsOutputWithContext(context.Context) GetConfigurationMachineSecretsSecretsOutput
+}
+
+type GetConfigurationMachineSecretsSecretsArgs struct {
+	// The aescbc encryption secret for the talos kubernetes cluster
+	AescbcEncryptionSecret pulumi.StringPtrInput `pulumi:"aescbcEncryptionSecret"`
+	// The bootstrap token for the talos kubernetes cluster
+	BootstrapToken pulumi.StringInput `pulumi:"bootstrapToken"`
+	// The secretbox encryption secret for the talos kubernetes cluster
+	SecretboxEncryptionSecret pulumi.StringInput `pulumi:"secretboxEncryptionSecret"`
+}
+
+func (GetConfigurationMachineSecretsSecretsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsSecrets)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsSecretsArgs) ToGetConfigurationMachineSecretsSecretsOutput() GetConfigurationMachineSecretsSecretsOutput {
+	return i.ToGetConfigurationMachineSecretsSecretsOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsSecretsArgs) ToGetConfigurationMachineSecretsSecretsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsSecretsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsSecretsOutput)
+}
+
+func (i GetConfigurationMachineSecretsSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsSecrets] {
+	return pulumix.Output[GetConfigurationMachineSecretsSecrets]{
+		OutputState: i.ToGetConfigurationMachineSecretsSecretsOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsSecretsOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsSecretsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsSecrets)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsSecretsOutput) ToGetConfigurationMachineSecretsSecretsOutput() GetConfigurationMachineSecretsSecretsOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsSecretsOutput) ToGetConfigurationMachineSecretsSecretsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsSecretsOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsSecrets] {
+	return pulumix.Output[GetConfigurationMachineSecretsSecrets]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The aescbc encryption secret for the talos kubernetes cluster
+func (o GetConfigurationMachineSecretsSecretsOutput) AescbcEncryptionSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsSecrets) *string { return v.AescbcEncryptionSecret }).(pulumi.StringPtrOutput)
+}
+
+// The bootstrap token for the talos kubernetes cluster
+func (o GetConfigurationMachineSecretsSecretsOutput) BootstrapToken() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsSecrets) string { return v.BootstrapToken }).(pulumi.StringOutput)
+}
+
+// The secretbox encryption secret for the talos kubernetes cluster
+func (o GetConfigurationMachineSecretsSecretsOutput) SecretboxEncryptionSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsSecrets) string { return v.SecretboxEncryptionSecret }).(pulumi.StringOutput)
+}
+
+type GetConfigurationMachineSecretsTrustdinfo struct {
+	// The trustd token for the talos kubernetes cluster
+	Token string `pulumi:"token"`
+}
+
+// GetConfigurationMachineSecretsTrustdinfoInput is an input type that accepts GetConfigurationMachineSecretsTrustdinfoArgs and GetConfigurationMachineSecretsTrustdinfoOutput values.
+// You can construct a concrete instance of `GetConfigurationMachineSecretsTrustdinfoInput` via:
+//
+//	GetConfigurationMachineSecretsTrustdinfoArgs{...}
+type GetConfigurationMachineSecretsTrustdinfoInput interface {
+	pulumi.Input
+
+	ToGetConfigurationMachineSecretsTrustdinfoOutput() GetConfigurationMachineSecretsTrustdinfoOutput
+	ToGetConfigurationMachineSecretsTrustdinfoOutputWithContext(context.Context) GetConfigurationMachineSecretsTrustdinfoOutput
+}
+
+type GetConfigurationMachineSecretsTrustdinfoArgs struct {
+	// The trustd token for the talos kubernetes cluster
+	Token pulumi.StringInput `pulumi:"token"`
+}
+
+func (GetConfigurationMachineSecretsTrustdinfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsTrustdinfo)(nil)).Elem()
+}
+
+func (i GetConfigurationMachineSecretsTrustdinfoArgs) ToGetConfigurationMachineSecretsTrustdinfoOutput() GetConfigurationMachineSecretsTrustdinfoOutput {
+	return i.ToGetConfigurationMachineSecretsTrustdinfoOutputWithContext(context.Background())
+}
+
+func (i GetConfigurationMachineSecretsTrustdinfoArgs) ToGetConfigurationMachineSecretsTrustdinfoOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsTrustdinfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsTrustdinfoOutput)
+}
+
+func (i GetConfigurationMachineSecretsTrustdinfoArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsTrustdinfo] {
+	return pulumix.Output[GetConfigurationMachineSecretsTrustdinfo]{
+		OutputState: i.ToGetConfigurationMachineSecretsTrustdinfoOutputWithContext(ctx).OutputState,
+	}
+}
+
+type GetConfigurationMachineSecretsTrustdinfoOutput struct{ *pulumi.OutputState }
+
+func (GetConfigurationMachineSecretsTrustdinfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationMachineSecretsTrustdinfo)(nil)).Elem()
+}
+
+func (o GetConfigurationMachineSecretsTrustdinfoOutput) ToGetConfigurationMachineSecretsTrustdinfoOutput() GetConfigurationMachineSecretsTrustdinfoOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsTrustdinfoOutput) ToGetConfigurationMachineSecretsTrustdinfoOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsTrustdinfoOutput {
+	return o
+}
+
+func (o GetConfigurationMachineSecretsTrustdinfoOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsTrustdinfo] {
+	return pulumix.Output[GetConfigurationMachineSecretsTrustdinfo]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The trustd token for the talos kubernetes cluster
+func (o GetConfigurationMachineSecretsTrustdinfoOutput) Token() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationMachineSecretsTrustdinfo) string { return v.Token }).(pulumi.StringOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationInput)(nil)).Elem(), BootstrapClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationPtrInput)(nil)).Elem(), BootstrapClientConfigurationArgs{})
@@ -4349,16 +5525,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapTimeoutsPtrInput)(nil)).Elem(), BootstrapTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationInput)(nil)).Elem(), ConfigurationApplyClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationPtrInput)(nil)).Elem(), ConfigurationApplyClientConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsInput)(nil)).Elem(), ConfigurationMachineSecretsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsCertsInput)(nil)).Elem(), ConfigurationMachineSecretsCertsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsCertsEtcdInput)(nil)).Elem(), ConfigurationMachineSecretsCertsEtcdArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsCertsK8sInput)(nil)).Elem(), ConfigurationMachineSecretsCertsK8sArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsCertsK8sAggregatorInput)(nil)).Elem(), ConfigurationMachineSecretsCertsK8sAggregatorArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsCertsK8sServiceaccountInput)(nil)).Elem(), ConfigurationMachineSecretsCertsK8sServiceaccountArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsCertsOsInput)(nil)).Elem(), ConfigurationMachineSecretsCertsOsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsClusterInput)(nil)).Elem(), ConfigurationMachineSecretsClusterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsSecretsInput)(nil)).Elem(), ConfigurationMachineSecretsSecretsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationMachineSecretsTrustdinfoInput)(nil)).Elem(), ConfigurationMachineSecretsTrustdinfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DisksClientConfigurationInput)(nil)).Elem(), DisksClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DisksDiskInput)(nil)).Elem(), DisksDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DisksDiskArrayInput)(nil)).Elem(), DisksDiskArray{})
@@ -4369,7 +5535,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsClientConfigurationInput)(nil)).Elem(), SecretsClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsClientConfigurationPtrInput)(nil)).Elem(), SecretsClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsInput)(nil)).Elem(), SecretsMachineSecretsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsPtrInput)(nil)).Elem(), SecretsMachineSecretsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsCertsInput)(nil)).Elem(), SecretsMachineSecretsCertsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsCertsPtrInput)(nil)).Elem(), SecretsMachineSecretsCertsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsCertsEtcdInput)(nil)).Elem(), SecretsMachineSecretsCertsEtcdArgs{})
@@ -4390,22 +5555,36 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsTrustdinfoPtrInput)(nil)).Elem(), SecretsMachineSecretsTrustdinfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TimeoutInput)(nil)).Elem(), TimeoutArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TimeoutPtrInput)(nil)).Elem(), TimeoutArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateInput)(nil)).Elem(), CertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificatePtrInput)(nil)).Elem(), CertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificatesInput)(nil)).Elem(), CertificatesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificatesPtrInput)(nil)).Elem(), CertificatesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterInput)(nil)).Elem(), ClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPtrInput)(nil)).Elem(), ClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KeyInput)(nil)).Elem(), KeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KeyPtrInput)(nil)).Elem(), KeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MachineSecretsInput)(nil)).Elem(), MachineSecretsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MachineSecretsPtrInput)(nil)).Elem(), MachineSecretsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsTypeInput)(nil)).Elem(), SecretsTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsTypePtrInput)(nil)).Elem(), SecretsTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TrustdInfoInput)(nil)).Elem(), TrustdInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TrustdInfoPtrInput)(nil)).Elem(), TrustdInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsInput)(nil)).Elem(), GetConfigurationMachineSecretsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsCertsInput)(nil)).Elem(), GetConfigurationMachineSecretsCertsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsCertsEtcdInput)(nil)).Elem(), GetConfigurationMachineSecretsCertsEtcdArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8sInput)(nil)).Elem(), GetConfigurationMachineSecretsCertsK8sArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8sAggregatorInput)(nil)).Elem(), GetConfigurationMachineSecretsCertsK8sAggregatorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsCertsK8sServiceaccountInput)(nil)).Elem(), GetConfigurationMachineSecretsCertsK8sServiceaccountArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsCertsOsInput)(nil)).Elem(), GetConfigurationMachineSecretsCertsOsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsClusterInput)(nil)).Elem(), GetConfigurationMachineSecretsClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsSecretsInput)(nil)).Elem(), GetConfigurationMachineSecretsSecretsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsTrustdinfoInput)(nil)).Elem(), GetConfigurationMachineSecretsTrustdinfoArgs{})
 	pulumi.RegisterOutputType(BootstrapClientConfigurationOutput{})
 	pulumi.RegisterOutputType(BootstrapClientConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationPtrOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsCertsOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsCertsEtcdOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsCertsK8sOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsCertsK8sAggregatorOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsCertsK8sServiceaccountOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsCertsOsOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsClusterOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsSecretsOutput{})
-	pulumi.RegisterOutputType(ConfigurationMachineSecretsTrustdinfoOutput{})
 	pulumi.RegisterOutputType(DisksClientConfigurationOutput{})
 	pulumi.RegisterOutputType(DisksDiskOutput{})
 	pulumi.RegisterOutputType(DisksDiskArrayOutput{})
@@ -4416,7 +5595,6 @@ func init() {
 	pulumi.RegisterOutputType(SecretsClientConfigurationOutput{})
 	pulumi.RegisterOutputType(SecretsClientConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsOutput{})
-	pulumi.RegisterOutputType(SecretsMachineSecretsPtrOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsCertsOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsCertsPtrOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsCertsEtcdOutput{})
@@ -4437,4 +5615,28 @@ func init() {
 	pulumi.RegisterOutputType(SecretsMachineSecretsTrustdinfoPtrOutput{})
 	pulumi.RegisterOutputType(TimeoutOutput{})
 	pulumi.RegisterOutputType(TimeoutPtrOutput{})
+	pulumi.RegisterOutputType(CertificateOutput{})
+	pulumi.RegisterOutputType(CertificatePtrOutput{})
+	pulumi.RegisterOutputType(CertificatesOutput{})
+	pulumi.RegisterOutputType(CertificatesPtrOutput{})
+	pulumi.RegisterOutputType(ClusterOutput{})
+	pulumi.RegisterOutputType(ClusterPtrOutput{})
+	pulumi.RegisterOutputType(KeyOutput{})
+	pulumi.RegisterOutputType(KeyPtrOutput{})
+	pulumi.RegisterOutputType(MachineSecretsOutput{})
+	pulumi.RegisterOutputType(MachineSecretsPtrOutput{})
+	pulumi.RegisterOutputType(SecretsTypeOutput{})
+	pulumi.RegisterOutputType(SecretsTypePtrOutput{})
+	pulumi.RegisterOutputType(TrustdInfoOutput{})
+	pulumi.RegisterOutputType(TrustdInfoPtrOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsCertsOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsCertsEtcdOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsCertsK8sOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsCertsK8sAggregatorOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsCertsK8sServiceaccountOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsCertsOsOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsClusterOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsSecretsOutput{})
+	pulumi.RegisterOutputType(GetConfigurationMachineSecretsTrustdinfoOutput{})
 }
