@@ -70,8 +70,19 @@ linters-settings:
     check-shadowing: true
     enable-all: true
   depguard:
-    list-type: blacklist
-    include-go-root: false
+    rules:
+      main:
+        files:
+          - '$all'
+        allow:
+          - 'github.com/siderolabs/terraform-provider-talos/shim'
+          - 'github.com/pulumiverse/pulumi-talos/provider/pkg/version'
+          - 'github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge'
+          - 'github.com/pulumiverse/pulumi-talos/provider'
+          - 'github.com/pulumi/pulumi-terraform-bridge/pf/tfgen'
+          - 'github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge'
+          - 'github.com/pulumiverse/pulumi-talos/provider'
+          - '$gostd'
   lll:
     line-length: 200
     tab-width: 4
