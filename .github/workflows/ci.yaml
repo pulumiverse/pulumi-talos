@@ -20,7 +20,7 @@ jobs:
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version-file: 'provider/go.mod'
           cache-dependency-path: 'provider/go.sum'
