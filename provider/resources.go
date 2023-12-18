@@ -239,9 +239,9 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"talos_client_configuration": {Tok: tfbridge.MakeDataSource(talosPkg, clientMod, "Configuration")},
-			"talos_cluster_health":       {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "Health")},
-			"talos_cluster_kubeconfig":   {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "Kubeconfig")},
+			"talos_client_configuration": {Tok: tfbridge.MakeDataSource(talosPkg, clientMod, "getConfiguration")},
+			"talos_cluster_health":       {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "getHealth")},
+			"talos_cluster_kubeconfig":   {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "getKubeconfig")},
 			"talos_machine_configuration": {
 				Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "getConfiguration"),
 				Fields: map[string]*tfbridge.SchemaInfo{
@@ -252,7 +252,7 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
-			"talos_machine_disks": {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "Disks")},
+			"talos_machine_disks": {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "getDisks")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/talos",

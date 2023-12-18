@@ -13,7 +13,7 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
-type ConfigurationClientConfiguration struct {
+type GetConfigurationClientConfiguration struct {
 	// The client CA certificate
 	CaCertificate string `pulumi:"caCertificate"`
 	// The client certificate
@@ -22,18 +22,18 @@ type ConfigurationClientConfiguration struct {
 	ClientKey string `pulumi:"clientKey"`
 }
 
-// ConfigurationClientConfigurationInput is an input type that accepts ConfigurationClientConfigurationArgs and ConfigurationClientConfigurationOutput values.
-// You can construct a concrete instance of `ConfigurationClientConfigurationInput` via:
+// GetConfigurationClientConfigurationInput is an input type that accepts GetConfigurationClientConfigurationArgs and GetConfigurationClientConfigurationOutput values.
+// You can construct a concrete instance of `GetConfigurationClientConfigurationInput` via:
 //
-//	ConfigurationClientConfigurationArgs{...}
-type ConfigurationClientConfigurationInput interface {
+//	GetConfigurationClientConfigurationArgs{...}
+type GetConfigurationClientConfigurationInput interface {
 	pulumi.Input
 
-	ToConfigurationClientConfigurationOutput() ConfigurationClientConfigurationOutput
-	ToConfigurationClientConfigurationOutputWithContext(context.Context) ConfigurationClientConfigurationOutput
+	ToGetConfigurationClientConfigurationOutput() GetConfigurationClientConfigurationOutput
+	ToGetConfigurationClientConfigurationOutputWithContext(context.Context) GetConfigurationClientConfigurationOutput
 }
 
-type ConfigurationClientConfigurationArgs struct {
+type GetConfigurationClientConfigurationArgs struct {
 	// The client CA certificate
 	CaCertificate pulumi.StringInput `pulumi:"caCertificate"`
 	// The client certificate
@@ -42,48 +42,48 @@ type ConfigurationClientConfigurationArgs struct {
 	ClientKey pulumi.StringInput `pulumi:"clientKey"`
 }
 
-func (ConfigurationClientConfigurationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationClientConfiguration)(nil)).Elem()
+func (GetConfigurationClientConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationClientConfiguration)(nil)).Elem()
 }
 
-func (i ConfigurationClientConfigurationArgs) ToConfigurationClientConfigurationOutput() ConfigurationClientConfigurationOutput {
-	return i.ToConfigurationClientConfigurationOutputWithContext(context.Background())
+func (i GetConfigurationClientConfigurationArgs) ToGetConfigurationClientConfigurationOutput() GetConfigurationClientConfigurationOutput {
+	return i.ToGetConfigurationClientConfigurationOutputWithContext(context.Background())
 }
 
-func (i ConfigurationClientConfigurationArgs) ToConfigurationClientConfigurationOutputWithContext(ctx context.Context) ConfigurationClientConfigurationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationClientConfigurationOutput)
+func (i GetConfigurationClientConfigurationArgs) ToGetConfigurationClientConfigurationOutputWithContext(ctx context.Context) GetConfigurationClientConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationClientConfigurationOutput)
 }
 
-type ConfigurationClientConfigurationOutput struct{ *pulumi.OutputState }
+type GetConfigurationClientConfigurationOutput struct{ *pulumi.OutputState }
 
-func (ConfigurationClientConfigurationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConfigurationClientConfiguration)(nil)).Elem()
+func (GetConfigurationClientConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationClientConfiguration)(nil)).Elem()
 }
 
-func (o ConfigurationClientConfigurationOutput) ToConfigurationClientConfigurationOutput() ConfigurationClientConfigurationOutput {
+func (o GetConfigurationClientConfigurationOutput) ToGetConfigurationClientConfigurationOutput() GetConfigurationClientConfigurationOutput {
 	return o
 }
 
-func (o ConfigurationClientConfigurationOutput) ToConfigurationClientConfigurationOutputWithContext(ctx context.Context) ConfigurationClientConfigurationOutput {
+func (o GetConfigurationClientConfigurationOutput) ToGetConfigurationClientConfigurationOutputWithContext(ctx context.Context) GetConfigurationClientConfigurationOutput {
 	return o
 }
 
 // The client CA certificate
-func (o ConfigurationClientConfigurationOutput) CaCertificate() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationClientConfiguration) string { return v.CaCertificate }).(pulumi.StringOutput)
+func (o GetConfigurationClientConfigurationOutput) CaCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationClientConfiguration) string { return v.CaCertificate }).(pulumi.StringOutput)
 }
 
 // The client certificate
-func (o ConfigurationClientConfigurationOutput) ClientCertificate() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationClientConfiguration) string { return v.ClientCertificate }).(pulumi.StringOutput)
+func (o GetConfigurationClientConfigurationOutput) ClientCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationClientConfiguration) string { return v.ClientCertificate }).(pulumi.StringOutput)
 }
 
 // The client key
-func (o ConfigurationClientConfigurationOutput) ClientKey() pulumi.StringOutput {
-	return o.ApplyT(func(v ConfigurationClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
+func (o GetConfigurationClientConfigurationOutput) ClientKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationClientConfigurationInput)(nil)).Elem(), ConfigurationClientConfigurationArgs{})
-	pulumi.RegisterOutputType(ConfigurationClientConfigurationOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationClientConfigurationInput)(nil)).Elem(), GetConfigurationClientConfigurationArgs{})
+	pulumi.RegisterOutputType(GetConfigurationClientConfigurationOutput{})
 }

@@ -6,7 +6,7 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export namespace client {
-    export interface ConfigurationClientConfiguration {
+    export interface GetConfigurationClientConfiguration {
         /**
          * The client CA certificate
          */
@@ -21,7 +21,7 @@ export namespace client {
         clientKey: string;
     }
 
-    export interface ConfigurationClientConfigurationArgs {
+    export interface GetConfigurationClientConfigurationArgs {
         /**
          * The client CA certificate
          */
@@ -38,7 +38,7 @@ export namespace client {
 }
 
 export namespace cluster {
-    export interface HealthClientConfiguration {
+    export interface GetHealthClientConfiguration {
         /**
          * The client CA certificate
          */
@@ -53,7 +53,7 @@ export namespace cluster {
         clientKey: string;
     }
 
-    export interface HealthClientConfigurationArgs {
+    export interface GetHealthClientConfigurationArgs {
         /**
          * The client CA certificate
          */
@@ -68,21 +68,21 @@ export namespace cluster {
         clientKey: pulumi.Input<string>;
     }
 
-    export interface HealthTimeouts {
+    export interface GetHealthTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
         read?: string;
     }
 
-    export interface HealthTimeoutsArgs {
+    export interface GetHealthTimeoutsArgs {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
         read?: pulumi.Input<string>;
     }
 
-    export interface KubeconfigClientConfiguration {
+    export interface GetKubeconfigClientConfiguration {
         /**
          * The client CA certificate
          */
@@ -97,7 +97,7 @@ export namespace cluster {
         clientKey: string;
     }
 
-    export interface KubeconfigClientConfigurationArgs {
+    export interface GetKubeconfigClientConfigurationArgs {
         /**
          * The client CA certificate
          */
@@ -112,14 +112,14 @@ export namespace cluster {
         clientKey: pulumi.Input<string>;
     }
 
-    export interface KubeconfigTimeouts {
+    export interface GetKubeconfigTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
         read?: string;
     }
 
-    export interface KubeconfigTimeoutsArgs {
+    export interface GetKubeconfigTimeoutsArgs {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
@@ -243,7 +243,7 @@ export namespace machine {
         clientKey: pulumi.Input<string>;
     }
 
-    export interface DisksClientConfiguration {
+    export interface GetDisksClientConfiguration {
         /**
          * The client CA certificate
          */
@@ -258,7 +258,7 @@ export namespace machine {
         clientKey: string;
     }
 
-    export interface DisksClientConfigurationArgs {
+    export interface GetDisksClientConfigurationArgs {
         /**
          * The client CA certificate
          */
@@ -273,7 +273,7 @@ export namespace machine {
         clientKey: pulumi.Input<string>;
     }
 
-    export interface DisksFilters {
+    export interface GetDisksFilters {
         /**
          * Filter disks by bus path
          */
@@ -312,7 +312,7 @@ export namespace machine {
         wwid?: string;
     }
 
-    export interface DisksFiltersArgs {
+    export interface GetDisksFiltersArgs {
         /**
          * Filter disks by bus path
          */
@@ -351,14 +351,14 @@ export namespace machine {
         wwid?: pulumi.Input<string>;
     }
 
-    export interface DisksTimeouts {
+    export interface GetDisksTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
         read?: string;
     }
 
-    export interface DisksTimeoutsArgs {
+    export interface GetDisksTimeoutsArgs {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */

@@ -10,15 +10,15 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'HealthClientConfigurationResult',
-    'HealthTimeoutsResult',
-    'KubeconfigClientConfigurationResult',
-    'KubeconfigKubernetesClientConfigurationResult',
-    'KubeconfigTimeoutsResult',
+    'GetHealthClientConfigurationResult',
+    'GetHealthTimeoutsResult',
+    'GetKubeconfigClientConfigurationResult',
+    'GetKubeconfigKubernetesClientConfigurationResult',
+    'GetKubeconfigTimeoutsResult',
 ]
 
 @pulumi.output_type
-class HealthClientConfigurationResult(dict):
+class GetHealthClientConfigurationResult(dict):
     def __init__(__self__, *,
                  ca_certificate: str,
                  client_certificate: str,
@@ -58,7 +58,7 @@ class HealthClientConfigurationResult(dict):
 
 
 @pulumi.output_type
-class HealthTimeoutsResult(dict):
+class GetHealthTimeoutsResult(dict):
     def __init__(__self__, *,
                  read: Optional[str] = None):
         """
@@ -77,7 +77,7 @@ class HealthTimeoutsResult(dict):
 
 
 @pulumi.output_type
-class KubeconfigClientConfigurationResult(dict):
+class GetKubeconfigClientConfigurationResult(dict):
     def __init__(__self__, *,
                  ca_certificate: str,
                  client_certificate: str,
@@ -117,7 +117,7 @@ class KubeconfigClientConfigurationResult(dict):
 
 
 @pulumi.output_type
-class KubeconfigKubernetesClientConfigurationResult(dict):
+class GetKubeconfigKubernetesClientConfigurationResult(dict):
     def __init__(__self__, *,
                  ca_certificate: str,
                  client_certificate: str,
@@ -168,7 +168,7 @@ class KubeconfigKubernetesClientConfigurationResult(dict):
 
 
 @pulumi.output_type
-class KubeconfigTimeoutsResult(dict):
+class GetKubeconfigTimeoutsResult(dict):
     def __init__(__self__, *,
                  read: Optional[str] = None):
         """

@@ -14,10 +14,6 @@ __all__ = [
     'BootstrapClientConfiguration',
     'BootstrapTimeouts',
     'ConfigurationApplyClientConfiguration',
-    'DisksClientConfigurationResult',
-    'DisksDiskResult',
-    'DisksFiltersResult',
-    'DisksTimeoutsResult',
     'SecretsClientConfiguration',
     'Timeout',
     'CertificateResult',
@@ -27,6 +23,10 @@ __all__ = [
     'MachineSecretsResult',
     'SecretsResult',
     'TrustdInfoResult',
+    'GetDisksClientConfigurationResult',
+    'GetDisksDiskResult',
+    'GetDisksFiltersResult',
+    'GetDisksTimeoutsResult',
 ]
 
 @pulumi.output_type
@@ -168,286 +168,6 @@ class ConfigurationApplyClientConfiguration(dict):
         The client key
         """
         return pulumi.get(self, "client_key")
-
-
-@pulumi.output_type
-class DisksClientConfigurationResult(dict):
-    def __init__(__self__, *,
-                 ca_certificate: str,
-                 client_certificate: str,
-                 client_key: str):
-        """
-        :param str ca_certificate: The client CA certificate
-        :param str client_certificate: The client certificate
-        :param str client_key: The client key
-        """
-        pulumi.set(__self__, "ca_certificate", ca_certificate)
-        pulumi.set(__self__, "client_certificate", client_certificate)
-        pulumi.set(__self__, "client_key", client_key)
-
-    @property
-    @pulumi.getter(name="caCertificate")
-    def ca_certificate(self) -> str:
-        """
-        The client CA certificate
-        """
-        return pulumi.get(self, "ca_certificate")
-
-    @property
-    @pulumi.getter(name="clientCertificate")
-    def client_certificate(self) -> str:
-        """
-        The client certificate
-        """
-        return pulumi.get(self, "client_certificate")
-
-    @property
-    @pulumi.getter(name="clientKey")
-    def client_key(self) -> str:
-        """
-        The client key
-        """
-        return pulumi.get(self, "client_key")
-
-
-@pulumi.output_type
-class DisksDiskResult(dict):
-    def __init__(__self__, *,
-                 bus_path: str,
-                 modalias: str,
-                 model: str,
-                 name: str,
-                 serial: str,
-                 size: str,
-                 type: str,
-                 uuid: str,
-                 wwid: str):
-        """
-        :param str bus_path: The bus path of the disk
-        :param str modalias: The modalias of the disk
-        :param str model: The model of the disk
-        :param str name: The name of the disk
-        :param str serial: The serial number of the disk
-        :param str size: The size of the disk
-        :param str type: The type of the disk
-        :param str uuid: The uuid of the disk
-        :param str wwid: The wwid of the disk
-        """
-        pulumi.set(__self__, "bus_path", bus_path)
-        pulumi.set(__self__, "modalias", modalias)
-        pulumi.set(__self__, "model", model)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "serial", serial)
-        pulumi.set(__self__, "size", size)
-        pulumi.set(__self__, "type", type)
-        pulumi.set(__self__, "uuid", uuid)
-        pulumi.set(__self__, "wwid", wwid)
-
-    @property
-    @pulumi.getter(name="busPath")
-    def bus_path(self) -> str:
-        """
-        The bus path of the disk
-        """
-        return pulumi.get(self, "bus_path")
-
-    @property
-    @pulumi.getter
-    def modalias(self) -> str:
-        """
-        The modalias of the disk
-        """
-        return pulumi.get(self, "modalias")
-
-    @property
-    @pulumi.getter
-    def model(self) -> str:
-        """
-        The model of the disk
-        """
-        return pulumi.get(self, "model")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        """
-        The name of the disk
-        """
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def serial(self) -> str:
-        """
-        The serial number of the disk
-        """
-        return pulumi.get(self, "serial")
-
-    @property
-    @pulumi.getter
-    def size(self) -> str:
-        """
-        The size of the disk
-        """
-        return pulumi.get(self, "size")
-
-    @property
-    @pulumi.getter
-    def type(self) -> str:
-        """
-        The type of the disk
-        """
-        return pulumi.get(self, "type")
-
-    @property
-    @pulumi.getter
-    def uuid(self) -> str:
-        """
-        The uuid of the disk
-        """
-        return pulumi.get(self, "uuid")
-
-    @property
-    @pulumi.getter
-    def wwid(self) -> str:
-        """
-        The wwid of the disk
-        """
-        return pulumi.get(self, "wwid")
-
-
-@pulumi.output_type
-class DisksFiltersResult(dict):
-    def __init__(__self__, *,
-                 bus_path: Optional[str] = None,
-                 modalias: Optional[str] = None,
-                 model: Optional[str] = None,
-                 name: Optional[str] = None,
-                 serial: Optional[str] = None,
-                 size: Optional[str] = None,
-                 type: Optional[str] = None,
-                 uuid: Optional[str] = None,
-                 wwid: Optional[str] = None):
-        """
-        :param str bus_path: Filter disks by bus path
-        :param str modalias: Filter disks by modalias
-        :param str model: Filter disks by model
-        :param str name: Filter disks by name
-        :param str serial: Filter disks by serial number
-        :param str size: Filter disks by size
-        :param str type: Filter disks by type
-        :param str uuid: Filter disks by uuid
-        :param str wwid: Filter disks by wwid
-        """
-        if bus_path is not None:
-            pulumi.set(__self__, "bus_path", bus_path)
-        if modalias is not None:
-            pulumi.set(__self__, "modalias", modalias)
-        if model is not None:
-            pulumi.set(__self__, "model", model)
-        if name is not None:
-            pulumi.set(__self__, "name", name)
-        if serial is not None:
-            pulumi.set(__self__, "serial", serial)
-        if size is not None:
-            pulumi.set(__self__, "size", size)
-        if type is not None:
-            pulumi.set(__self__, "type", type)
-        if uuid is not None:
-            pulumi.set(__self__, "uuid", uuid)
-        if wwid is not None:
-            pulumi.set(__self__, "wwid", wwid)
-
-    @property
-    @pulumi.getter(name="busPath")
-    def bus_path(self) -> Optional[str]:
-        """
-        Filter disks by bus path
-        """
-        return pulumi.get(self, "bus_path")
-
-    @property
-    @pulumi.getter
-    def modalias(self) -> Optional[str]:
-        """
-        Filter disks by modalias
-        """
-        return pulumi.get(self, "modalias")
-
-    @property
-    @pulumi.getter
-    def model(self) -> Optional[str]:
-        """
-        Filter disks by model
-        """
-        return pulumi.get(self, "model")
-
-    @property
-    @pulumi.getter
-    def name(self) -> Optional[str]:
-        """
-        Filter disks by name
-        """
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def serial(self) -> Optional[str]:
-        """
-        Filter disks by serial number
-        """
-        return pulumi.get(self, "serial")
-
-    @property
-    @pulumi.getter
-    def size(self) -> Optional[str]:
-        """
-        Filter disks by size
-        """
-        return pulumi.get(self, "size")
-
-    @property
-    @pulumi.getter
-    def type(self) -> Optional[str]:
-        """
-        Filter disks by type
-        """
-        return pulumi.get(self, "type")
-
-    @property
-    @pulumi.getter
-    def uuid(self) -> Optional[str]:
-        """
-        Filter disks by uuid
-        """
-        return pulumi.get(self, "uuid")
-
-    @property
-    @pulumi.getter
-    def wwid(self) -> Optional[str]:
-        """
-        Filter disks by wwid
-        """
-        return pulumi.get(self, "wwid")
-
-
-@pulumi.output_type
-class DisksTimeoutsResult(dict):
-    def __init__(__self__, *,
-                 read: Optional[str] = None):
-        """
-        :param str read: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-        """
-        if read is not None:
-            pulumi.set(__self__, "read", read)
-
-    @property
-    @pulumi.getter
-    def read(self) -> Optional[str]:
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-        """
-        return pulumi.get(self, "read")
 
 
 @pulumi.output_type
@@ -771,5 +491,285 @@ class TrustdInfoResult(dict):
         The trustd token for the talos kubernetes cluster
         """
         return pulumi.get(self, "token")
+
+
+@pulumi.output_type
+class GetDisksClientConfigurationResult(dict):
+    def __init__(__self__, *,
+                 ca_certificate: str,
+                 client_certificate: str,
+                 client_key: str):
+        """
+        :param str ca_certificate: The client CA certificate
+        :param str client_certificate: The client certificate
+        :param str client_key: The client key
+        """
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> str:
+        """
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> str:
+        """
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> str:
+        """
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
+
+@pulumi.output_type
+class GetDisksDiskResult(dict):
+    def __init__(__self__, *,
+                 bus_path: str,
+                 modalias: str,
+                 model: str,
+                 name: str,
+                 serial: str,
+                 size: str,
+                 type: str,
+                 uuid: str,
+                 wwid: str):
+        """
+        :param str bus_path: The bus path of the disk
+        :param str modalias: The modalias of the disk
+        :param str model: The model of the disk
+        :param str name: The name of the disk
+        :param str serial: The serial number of the disk
+        :param str size: The size of the disk
+        :param str type: The type of the disk
+        :param str uuid: The uuid of the disk
+        :param str wwid: The wwid of the disk
+        """
+        pulumi.set(__self__, "bus_path", bus_path)
+        pulumi.set(__self__, "modalias", modalias)
+        pulumi.set(__self__, "model", model)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "serial", serial)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "uuid", uuid)
+        pulumi.set(__self__, "wwid", wwid)
+
+    @property
+    @pulumi.getter(name="busPath")
+    def bus_path(self) -> str:
+        """
+        The bus path of the disk
+        """
+        return pulumi.get(self, "bus_path")
+
+    @property
+    @pulumi.getter
+    def modalias(self) -> str:
+        """
+        The modalias of the disk
+        """
+        return pulumi.get(self, "modalias")
+
+    @property
+    @pulumi.getter
+    def model(self) -> str:
+        """
+        The model of the disk
+        """
+        return pulumi.get(self, "model")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The name of the disk
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def serial(self) -> str:
+        """
+        The serial number of the disk
+        """
+        return pulumi.get(self, "serial")
+
+    @property
+    @pulumi.getter
+    def size(self) -> str:
+        """
+        The size of the disk
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type of the disk
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def uuid(self) -> str:
+        """
+        The uuid of the disk
+        """
+        return pulumi.get(self, "uuid")
+
+    @property
+    @pulumi.getter
+    def wwid(self) -> str:
+        """
+        The wwid of the disk
+        """
+        return pulumi.get(self, "wwid")
+
+
+@pulumi.output_type
+class GetDisksFiltersResult(dict):
+    def __init__(__self__, *,
+                 bus_path: Optional[str] = None,
+                 modalias: Optional[str] = None,
+                 model: Optional[str] = None,
+                 name: Optional[str] = None,
+                 serial: Optional[str] = None,
+                 size: Optional[str] = None,
+                 type: Optional[str] = None,
+                 uuid: Optional[str] = None,
+                 wwid: Optional[str] = None):
+        """
+        :param str bus_path: Filter disks by bus path
+        :param str modalias: Filter disks by modalias
+        :param str model: Filter disks by model
+        :param str name: Filter disks by name
+        :param str serial: Filter disks by serial number
+        :param str size: Filter disks by size
+        :param str type: Filter disks by type
+        :param str uuid: Filter disks by uuid
+        :param str wwid: Filter disks by wwid
+        """
+        if bus_path is not None:
+            pulumi.set(__self__, "bus_path", bus_path)
+        if modalias is not None:
+            pulumi.set(__self__, "modalias", modalias)
+        if model is not None:
+            pulumi.set(__self__, "model", model)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if serial is not None:
+            pulumi.set(__self__, "serial", serial)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if uuid is not None:
+            pulumi.set(__self__, "uuid", uuid)
+        if wwid is not None:
+            pulumi.set(__self__, "wwid", wwid)
+
+    @property
+    @pulumi.getter(name="busPath")
+    def bus_path(self) -> Optional[str]:
+        """
+        Filter disks by bus path
+        """
+        return pulumi.get(self, "bus_path")
+
+    @property
+    @pulumi.getter
+    def modalias(self) -> Optional[str]:
+        """
+        Filter disks by modalias
+        """
+        return pulumi.get(self, "modalias")
+
+    @property
+    @pulumi.getter
+    def model(self) -> Optional[str]:
+        """
+        Filter disks by model
+        """
+        return pulumi.get(self, "model")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter disks by name
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def serial(self) -> Optional[str]:
+        """
+        Filter disks by serial number
+        """
+        return pulumi.get(self, "serial")
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[str]:
+        """
+        Filter disks by size
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        """
+        Filter disks by type
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def uuid(self) -> Optional[str]:
+        """
+        Filter disks by uuid
+        """
+        return pulumi.get(self, "uuid")
+
+    @property
+    @pulumi.getter
+    def wwid(self) -> Optional[str]:
+        """
+        Filter disks by wwid
+        """
+        return pulumi.get(self, "wwid")
+
+
+@pulumi.output_type
+class GetDisksTimeoutsResult(dict):
+    def __init__(__self__, *,
+                 read: Optional[str] = None):
+        """
+        :param str read: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+        """
+        if read is not None:
+            pulumi.set(__self__, "read", read)
+
+    @property
+    @pulumi.getter
+    def read(self) -> Optional[str]:
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+        """
+        return pulumi.get(self, "read")
 
 

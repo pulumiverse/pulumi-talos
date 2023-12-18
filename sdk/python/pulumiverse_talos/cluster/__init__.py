@@ -5,7 +5,7 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
-from .health import *
-from .kubeconfig import *
+from .get_health import *
+from .get_kubeconfig import *
 from ._inputs import *
 from . import outputs

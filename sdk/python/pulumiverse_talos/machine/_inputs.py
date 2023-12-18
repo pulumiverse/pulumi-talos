@@ -13,9 +13,6 @@ __all__ = [
     'BootstrapClientConfigurationArgs',
     'BootstrapTimeoutsArgs',
     'ConfigurationApplyClientConfigurationArgs',
-    'DisksClientConfigurationArgs',
-    'DisksFiltersArgs',
-    'DisksTimeoutsArgs',
     'SecretsClientConfigurationArgs',
     'TimeoutArgs',
     'CertificateArgs',
@@ -32,6 +29,9 @@ __all__ = [
     'SecretsArgs',
     'TrustdInfoArgs',
     'TrustdInfoArgs',
+    'GetDisksClientConfigurationArgs',
+    'GetDisksFiltersArgs',
+    'GetDisksTimeoutsArgs',
 ]
 
 @pulumi.input_type
@@ -159,232 +159,6 @@ class ConfigurationApplyClientConfigurationArgs:
     @client_key.setter
     def client_key(self, value: pulumi.Input[str]):
         pulumi.set(self, "client_key", value)
-
-
-@pulumi.input_type
-class DisksClientConfigurationArgs:
-    def __init__(__self__, *,
-                 ca_certificate: str,
-                 client_certificate: str,
-                 client_key: str):
-        """
-        :param str ca_certificate: The client CA certificate
-        :param str client_certificate: The client certificate
-        :param str client_key: The client key
-        """
-        pulumi.set(__self__, "ca_certificate", ca_certificate)
-        pulumi.set(__self__, "client_certificate", client_certificate)
-        pulumi.set(__self__, "client_key", client_key)
-
-    @property
-    @pulumi.getter(name="caCertificate")
-    def ca_certificate(self) -> str:
-        """
-        The client CA certificate
-        """
-        return pulumi.get(self, "ca_certificate")
-
-    @ca_certificate.setter
-    def ca_certificate(self, value: str):
-        pulumi.set(self, "ca_certificate", value)
-
-    @property
-    @pulumi.getter(name="clientCertificate")
-    def client_certificate(self) -> str:
-        """
-        The client certificate
-        """
-        return pulumi.get(self, "client_certificate")
-
-    @client_certificate.setter
-    def client_certificate(self, value: str):
-        pulumi.set(self, "client_certificate", value)
-
-    @property
-    @pulumi.getter(name="clientKey")
-    def client_key(self) -> str:
-        """
-        The client key
-        """
-        return pulumi.get(self, "client_key")
-
-    @client_key.setter
-    def client_key(self, value: str):
-        pulumi.set(self, "client_key", value)
-
-
-@pulumi.input_type
-class DisksFiltersArgs:
-    def __init__(__self__, *,
-                 bus_path: Optional[str] = None,
-                 modalias: Optional[str] = None,
-                 model: Optional[str] = None,
-                 name: Optional[str] = None,
-                 serial: Optional[str] = None,
-                 size: Optional[str] = None,
-                 type: Optional[str] = None,
-                 uuid: Optional[str] = None,
-                 wwid: Optional[str] = None):
-        """
-        :param str bus_path: Filter disks by bus path
-        :param str modalias: Filter disks by modalias
-        :param str model: Filter disks by model
-        :param str name: Filter disks by name
-        :param str serial: Filter disks by serial number
-        :param str size: Filter disks by size
-        :param str type: Filter disks by type
-        :param str uuid: Filter disks by uuid
-        :param str wwid: Filter disks by wwid
-        """
-        if bus_path is not None:
-            pulumi.set(__self__, "bus_path", bus_path)
-        if modalias is not None:
-            pulumi.set(__self__, "modalias", modalias)
-        if model is not None:
-            pulumi.set(__self__, "model", model)
-        if name is not None:
-            pulumi.set(__self__, "name", name)
-        if serial is not None:
-            pulumi.set(__self__, "serial", serial)
-        if size is not None:
-            pulumi.set(__self__, "size", size)
-        if type is not None:
-            pulumi.set(__self__, "type", type)
-        if uuid is not None:
-            pulumi.set(__self__, "uuid", uuid)
-        if wwid is not None:
-            pulumi.set(__self__, "wwid", wwid)
-
-    @property
-    @pulumi.getter(name="busPath")
-    def bus_path(self) -> Optional[str]:
-        """
-        Filter disks by bus path
-        """
-        return pulumi.get(self, "bus_path")
-
-    @bus_path.setter
-    def bus_path(self, value: Optional[str]):
-        pulumi.set(self, "bus_path", value)
-
-    @property
-    @pulumi.getter
-    def modalias(self) -> Optional[str]:
-        """
-        Filter disks by modalias
-        """
-        return pulumi.get(self, "modalias")
-
-    @modalias.setter
-    def modalias(self, value: Optional[str]):
-        pulumi.set(self, "modalias", value)
-
-    @property
-    @pulumi.getter
-    def model(self) -> Optional[str]:
-        """
-        Filter disks by model
-        """
-        return pulumi.get(self, "model")
-
-    @model.setter
-    def model(self, value: Optional[str]):
-        pulumi.set(self, "model", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> Optional[str]:
-        """
-        Filter disks by name
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: Optional[str]):
-        pulumi.set(self, "name", value)
-
-    @property
-    @pulumi.getter
-    def serial(self) -> Optional[str]:
-        """
-        Filter disks by serial number
-        """
-        return pulumi.get(self, "serial")
-
-    @serial.setter
-    def serial(self, value: Optional[str]):
-        pulumi.set(self, "serial", value)
-
-    @property
-    @pulumi.getter
-    def size(self) -> Optional[str]:
-        """
-        Filter disks by size
-        """
-        return pulumi.get(self, "size")
-
-    @size.setter
-    def size(self, value: Optional[str]):
-        pulumi.set(self, "size", value)
-
-    @property
-    @pulumi.getter
-    def type(self) -> Optional[str]:
-        """
-        Filter disks by type
-        """
-        return pulumi.get(self, "type")
-
-    @type.setter
-    def type(self, value: Optional[str]):
-        pulumi.set(self, "type", value)
-
-    @property
-    @pulumi.getter
-    def uuid(self) -> Optional[str]:
-        """
-        Filter disks by uuid
-        """
-        return pulumi.get(self, "uuid")
-
-    @uuid.setter
-    def uuid(self, value: Optional[str]):
-        pulumi.set(self, "uuid", value)
-
-    @property
-    @pulumi.getter
-    def wwid(self) -> Optional[str]:
-        """
-        Filter disks by wwid
-        """
-        return pulumi.get(self, "wwid")
-
-    @wwid.setter
-    def wwid(self, value: Optional[str]):
-        pulumi.set(self, "wwid", value)
-
-
-@pulumi.input_type
-class DisksTimeoutsArgs:
-    def __init__(__self__, *,
-                 read: Optional[str] = None):
-        """
-        :param str read: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-        """
-        if read is not None:
-            pulumi.set(__self__, "read", read)
-
-    @property
-    @pulumi.getter
-    def read(self) -> Optional[str]:
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-        """
-        return pulumi.get(self, "read")
-
-    @read.setter
-    def read(self, value: Optional[str]):
-        pulumi.set(self, "read", value)
 
 
 @pulumi.input_type
@@ -1029,5 +803,231 @@ class TrustdInfoArgs:
     @token.setter
     def token(self, value: pulumi.Input[str]):
         pulumi.set(self, "token", value)
+
+
+@pulumi.input_type
+class GetDisksClientConfigurationArgs:
+    def __init__(__self__, *,
+                 ca_certificate: str,
+                 client_certificate: str,
+                 client_key: str):
+        """
+        :param str ca_certificate: The client CA certificate
+        :param str client_certificate: The client certificate
+        :param str client_key: The client key
+        """
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> str:
+        """
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @ca_certificate.setter
+    def ca_certificate(self, value: str):
+        pulumi.set(self, "ca_certificate", value)
+
+    @property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> str:
+        """
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @client_certificate.setter
+    def client_certificate(self, value: str):
+        pulumi.set(self, "client_certificate", value)
+
+    @property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> str:
+        """
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
+    @client_key.setter
+    def client_key(self, value: str):
+        pulumi.set(self, "client_key", value)
+
+
+@pulumi.input_type
+class GetDisksFiltersArgs:
+    def __init__(__self__, *,
+                 bus_path: Optional[str] = None,
+                 modalias: Optional[str] = None,
+                 model: Optional[str] = None,
+                 name: Optional[str] = None,
+                 serial: Optional[str] = None,
+                 size: Optional[str] = None,
+                 type: Optional[str] = None,
+                 uuid: Optional[str] = None,
+                 wwid: Optional[str] = None):
+        """
+        :param str bus_path: Filter disks by bus path
+        :param str modalias: Filter disks by modalias
+        :param str model: Filter disks by model
+        :param str name: Filter disks by name
+        :param str serial: Filter disks by serial number
+        :param str size: Filter disks by size
+        :param str type: Filter disks by type
+        :param str uuid: Filter disks by uuid
+        :param str wwid: Filter disks by wwid
+        """
+        if bus_path is not None:
+            pulumi.set(__self__, "bus_path", bus_path)
+        if modalias is not None:
+            pulumi.set(__self__, "modalias", modalias)
+        if model is not None:
+            pulumi.set(__self__, "model", model)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if serial is not None:
+            pulumi.set(__self__, "serial", serial)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if uuid is not None:
+            pulumi.set(__self__, "uuid", uuid)
+        if wwid is not None:
+            pulumi.set(__self__, "wwid", wwid)
+
+    @property
+    @pulumi.getter(name="busPath")
+    def bus_path(self) -> Optional[str]:
+        """
+        Filter disks by bus path
+        """
+        return pulumi.get(self, "bus_path")
+
+    @bus_path.setter
+    def bus_path(self, value: Optional[str]):
+        pulumi.set(self, "bus_path", value)
+
+    @property
+    @pulumi.getter
+    def modalias(self) -> Optional[str]:
+        """
+        Filter disks by modalias
+        """
+        return pulumi.get(self, "modalias")
+
+    @modalias.setter
+    def modalias(self, value: Optional[str]):
+        pulumi.set(self, "modalias", value)
+
+    @property
+    @pulumi.getter
+    def model(self) -> Optional[str]:
+        """
+        Filter disks by model
+        """
+        return pulumi.get(self, "model")
+
+    @model.setter
+    def model(self, value: Optional[str]):
+        pulumi.set(self, "model", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter disks by name
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def serial(self) -> Optional[str]:
+        """
+        Filter disks by serial number
+        """
+        return pulumi.get(self, "serial")
+
+    @serial.setter
+    def serial(self, value: Optional[str]):
+        pulumi.set(self, "serial", value)
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[str]:
+        """
+        Filter disks by size
+        """
+        return pulumi.get(self, "size")
+
+    @size.setter
+    def size(self, value: Optional[str]):
+        pulumi.set(self, "size", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        """
+        Filter disks by type
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def uuid(self) -> Optional[str]:
+        """
+        Filter disks by uuid
+        """
+        return pulumi.get(self, "uuid")
+
+    @uuid.setter
+    def uuid(self, value: Optional[str]):
+        pulumi.set(self, "uuid", value)
+
+    @property
+    @pulumi.getter
+    def wwid(self) -> Optional[str]:
+        """
+        Filter disks by wwid
+        """
+        return pulumi.get(self, "wwid")
+
+    @wwid.setter
+    def wwid(self, value: Optional[str]):
+        pulumi.set(self, "wwid", value)
+
+
+@pulumi.input_type
+class GetDisksTimeoutsArgs:
+    def __init__(__self__, *,
+                 read: Optional[str] = None):
+        """
+        :param str read: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+        """
+        if read is not None:
+            pulumi.set(__self__, "read", read)
+
+    @property
+    @pulumi.getter
+    def read(self) -> Optional[str]:
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+        """
+        return pulumi.get(self, "read")
+
+    @read.setter
+    def read(self, value: Optional[str]):
+        pulumi.set(self, "read", value)
 
 

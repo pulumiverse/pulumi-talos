@@ -10,14 +10,14 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'HealthClientConfigurationArgs',
-    'HealthTimeoutsArgs',
-    'KubeconfigClientConfigurationArgs',
-    'KubeconfigTimeoutsArgs',
+    'GetHealthClientConfigurationArgs',
+    'GetHealthTimeoutsArgs',
+    'GetKubeconfigClientConfigurationArgs',
+    'GetKubeconfigTimeoutsArgs',
 ]
 
 @pulumi.input_type
-class HealthClientConfigurationArgs:
+class GetHealthClientConfigurationArgs:
     def __init__(__self__, *,
                  ca_certificate: str,
                  client_certificate: str,
@@ -69,7 +69,7 @@ class HealthClientConfigurationArgs:
 
 
 @pulumi.input_type
-class HealthTimeoutsArgs:
+class GetHealthTimeoutsArgs:
     def __init__(__self__, *,
                  read: Optional[str] = None):
         """
@@ -92,7 +92,7 @@ class HealthTimeoutsArgs:
 
 
 @pulumi.input_type
-class KubeconfigClientConfigurationArgs:
+class GetKubeconfigClientConfigurationArgs:
     def __init__(__self__, *,
                  ca_certificate: str,
                  client_certificate: str,
@@ -144,7 +144,7 @@ class KubeconfigClientConfigurationArgs:
 
 
 @pulumi.input_type
-class KubeconfigTimeoutsArgs:
+class GetKubeconfigTimeoutsArgs:
     def __init__(__self__, *,
                  read: Optional[str] = None):
         """

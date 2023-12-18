@@ -4,8 +4,8 @@
 import * as utilities from "../utilities";
 
 // Export members:
-export { ConfigurationArgs, ConfigurationResult, ConfigurationOutputArgs } from "./configuration";
-export const configuration: typeof import("./configuration").configuration = null as any;
-export const configurationOutput: typeof import("./configuration").configurationOutput = null as any;
-utilities.lazyLoad(exports, ["configuration","configurationOutput"], () => require("./configuration"));
+export { GetConfigurationArgs, GetConfigurationResult, GetConfigurationOutputArgs } from "./getConfiguration";
+export const getConfiguration: typeof import("./getConfiguration").getConfiguration = null as any;
+export const getConfigurationOutput: typeof import("./getConfiguration").getConfigurationOutput = null as any;
+utilities.lazyLoad(exports, ["getConfiguration","getConfigurationOutput"], () => require("./getConfiguration"));
 

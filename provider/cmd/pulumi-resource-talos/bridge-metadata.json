@@ -96,47 +96,47 @@
             "talos:machine/secrets:Secrets": "talos_machine_secrets"
         },
         "functions": {
-            "talos:client/configuration:Configuration": "talos_client_configuration",
-            "talos:cluster/health:Health": "talos_cluster_health",
-            "talos:cluster/kubeconfig:Kubeconfig": "talos_cluster_kubeconfig",
-            "talos:machine/disks:Disks": "talos_machine_disks",
-            "talos:machine/getConfiguration:getConfiguration": "talos_machine_configuration"
+            "talos:client/getConfiguration:getConfiguration": "talos_client_configuration",
+            "talos:cluster/getHealth:getHealth": "talos_cluster_health",
+            "talos:cluster/getKubeconfig:getKubeconfig": "talos_cluster_kubeconfig",
+            "talos:machine/getConfiguration:getConfiguration": "talos_machine_configuration",
+            "talos:machine/getDisks:getDisks": "talos_machine_disks"
         },
         "renamedProperties": {
-            "talos:client/ConfigurationClientConfiguration:ConfigurationClientConfiguration": {
-                "caCertificate": "ca_certificate",
-                "clientCertificate": "client_certificate",
-                "clientKey": "client_key"
-            },
-            "talos:client/configuration:Configuration": {
+            "talos:client/getConfiguration:getConfiguration": {
                 "clientConfiguration": "client_configuration",
                 "clusterName": "cluster_name",
                 "talosConfig": "talos_config"
             },
-            "talos:cluster/HealthClientConfiguration:HealthClientConfiguration": {
+            "talos:client/getConfigurationClientConfiguration:getConfigurationClientConfiguration": {
                 "caCertificate": "ca_certificate",
                 "clientCertificate": "client_certificate",
                 "clientKey": "client_key"
             },
-            "talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration": {
-                "caCertificate": "ca_certificate",
-                "clientCertificate": "client_certificate",
-                "clientKey": "client_key"
-            },
-            "talos:cluster/KubeconfigKubernetesClientConfiguration:KubeconfigKubernetesClientConfiguration": {
-                "caCertificate": "ca_certificate",
-                "clientCertificate": "client_certificate",
-                "clientKey": "client_key"
-            },
-            "talos:cluster/health:Health": {
+            "talos:cluster/getHealth:getHealth": {
                 "clientConfiguration": "client_configuration",
                 "controlPlaneNodes": "control_plane_nodes",
                 "workerNodes": "worker_nodes"
             },
-            "talos:cluster/kubeconfig:Kubeconfig": {
+            "talos:cluster/getHealthClientConfiguration:getHealthClientConfiguration": {
+                "caCertificate": "ca_certificate",
+                "clientCertificate": "client_certificate",
+                "clientKey": "client_key"
+            },
+            "talos:cluster/getKubeconfig:getKubeconfig": {
                 "clientConfiguration": "client_configuration",
                 "kubeconfigRaw": "kubeconfig_raw",
                 "kubernetesClientConfiguration": "kubernetes_client_configuration"
+            },
+            "talos:cluster/getKubeconfigClientConfiguration:getKubeconfigClientConfiguration": {
+                "caCertificate": "ca_certificate",
+                "clientCertificate": "client_certificate",
+                "clientKey": "client_key"
+            },
+            "talos:cluster/getKubeconfigKubernetesClientConfiguration:getKubeconfigKubernetesClientConfiguration": {
+                "caCertificate": "ca_certificate",
+                "clientCertificate": "client_certificate",
+                "clientKey": "client_key"
             },
             "talos:machine/BootstrapClientConfiguration:BootstrapClientConfiguration": {
                 "caCertificate": "ca_certificate",
@@ -147,17 +147,6 @@
                 "caCertificate": "ca_certificate",
                 "clientCertificate": "client_certificate",
                 "clientKey": "client_key"
-            },
-            "talos:machine/DisksClientConfiguration:DisksClientConfiguration": {
-                "caCertificate": "ca_certificate",
-                "clientCertificate": "client_certificate",
-                "clientKey": "client_key"
-            },
-            "talos:machine/DisksDisk:DisksDisk": {
-                "busPath": "bus_path"
-            },
-            "talos:machine/DisksFilters:DisksFilters": {
-                "busPath": "bus_path"
             },
             "talos:machine/SecretsClientConfiguration:SecretsClientConfiguration": {
                 "caCertificate": "ca_certificate",
@@ -183,9 +172,6 @@
                 "machineConfiguration": "machine_configuration",
                 "machineConfigurationInput": "machine_configuration_input"
             },
-            "talos:machine/disks:Disks": {
-                "clientConfiguration": "client_configuration"
-            },
             "talos:machine/getConfiguration:getConfiguration": {
                 "clusterEndpoint": "cluster_endpoint",
                 "clusterName": "cluster_name",
@@ -204,6 +190,20 @@
                 "aescbcEncryptionSecret": "aescbc_encryption_secret",
                 "bootstrapToken": "bootstrap_token",
                 "secretboxEncryptionSecret": "secretbox_encryption_secret"
+            },
+            "talos:machine/getDisks:getDisks": {
+                "clientConfiguration": "client_configuration"
+            },
+            "talos:machine/getDisksClientConfiguration:getDisksClientConfiguration": {
+                "caCertificate": "ca_certificate",
+                "clientCertificate": "client_certificate",
+                "clientKey": "client_key"
+            },
+            "talos:machine/getDisksDisk:getDisksDisk": {
+                "busPath": "bus_path"
+            },
+            "talos:machine/getDisksFilters:getDisksFilters": {
+                "busPath": "bus_path"
             },
             "talos:machine/secrets:Secrets": {
                 "clientConfiguration": "client_configuration",

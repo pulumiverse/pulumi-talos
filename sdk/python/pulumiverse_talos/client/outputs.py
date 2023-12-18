@@ -10,11 +10,11 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'ConfigurationClientConfigurationResult',
+    'GetConfigurationClientConfigurationResult',
 ]
 
 @pulumi.output_type
-class ConfigurationClientConfigurationResult(dict):
+class GetConfigurationClientConfigurationResult(dict):
     def __init__(__self__, *,
                  ca_certificate: str,
                  client_certificate: str,

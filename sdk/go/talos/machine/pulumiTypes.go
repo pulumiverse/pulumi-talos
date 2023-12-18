@@ -500,671 +500,6 @@ func (o ConfigurationApplyClientConfigurationPtrOutput) ClientKey() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
-type DisksClientConfiguration struct {
-	// The client CA certificate
-	CaCertificate string `pulumi:"caCertificate"`
-	// The client certificate
-	ClientCertificate string `pulumi:"clientCertificate"`
-	// The client key
-	ClientKey string `pulumi:"clientKey"`
-}
-
-// DisksClientConfigurationInput is an input type that accepts DisksClientConfigurationArgs and DisksClientConfigurationOutput values.
-// You can construct a concrete instance of `DisksClientConfigurationInput` via:
-//
-//	DisksClientConfigurationArgs{...}
-type DisksClientConfigurationInput interface {
-	pulumi.Input
-
-	ToDisksClientConfigurationOutput() DisksClientConfigurationOutput
-	ToDisksClientConfigurationOutputWithContext(context.Context) DisksClientConfigurationOutput
-}
-
-type DisksClientConfigurationArgs struct {
-	// The client CA certificate
-	CaCertificate pulumi.StringInput `pulumi:"caCertificate"`
-	// The client certificate
-	ClientCertificate pulumi.StringInput `pulumi:"clientCertificate"`
-	// The client key
-	ClientKey pulumi.StringInput `pulumi:"clientKey"`
-}
-
-func (DisksClientConfigurationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DisksClientConfiguration)(nil)).Elem()
-}
-
-func (i DisksClientConfigurationArgs) ToDisksClientConfigurationOutput() DisksClientConfigurationOutput {
-	return i.ToDisksClientConfigurationOutputWithContext(context.Background())
-}
-
-func (i DisksClientConfigurationArgs) ToDisksClientConfigurationOutputWithContext(ctx context.Context) DisksClientConfigurationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksClientConfigurationOutput)
-}
-
-type DisksClientConfigurationOutput struct{ *pulumi.OutputState }
-
-func (DisksClientConfigurationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DisksClientConfiguration)(nil)).Elem()
-}
-
-func (o DisksClientConfigurationOutput) ToDisksClientConfigurationOutput() DisksClientConfigurationOutput {
-	return o
-}
-
-func (o DisksClientConfigurationOutput) ToDisksClientConfigurationOutputWithContext(ctx context.Context) DisksClientConfigurationOutput {
-	return o
-}
-
-// The client CA certificate
-func (o DisksClientConfigurationOutput) CaCertificate() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksClientConfiguration) string { return v.CaCertificate }).(pulumi.StringOutput)
-}
-
-// The client certificate
-func (o DisksClientConfigurationOutput) ClientCertificate() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksClientConfiguration) string { return v.ClientCertificate }).(pulumi.StringOutput)
-}
-
-// The client key
-func (o DisksClientConfigurationOutput) ClientKey() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
-}
-
-type DisksDisk struct {
-	// The bus path of the disk
-	BusPath string `pulumi:"busPath"`
-	// The modalias of the disk
-	Modalias string `pulumi:"modalias"`
-	// The model of the disk
-	Model string `pulumi:"model"`
-	// The name of the disk
-	Name string `pulumi:"name"`
-	// The serial number of the disk
-	Serial string `pulumi:"serial"`
-	// The size of the disk
-	Size string `pulumi:"size"`
-	// The type of the disk
-	Type string `pulumi:"type"`
-	// The uuid of the disk
-	Uuid string `pulumi:"uuid"`
-	// The wwid of the disk
-	Wwid string `pulumi:"wwid"`
-}
-
-// DisksDiskInput is an input type that accepts DisksDiskArgs and DisksDiskOutput values.
-// You can construct a concrete instance of `DisksDiskInput` via:
-//
-//	DisksDiskArgs{...}
-type DisksDiskInput interface {
-	pulumi.Input
-
-	ToDisksDiskOutput() DisksDiskOutput
-	ToDisksDiskOutputWithContext(context.Context) DisksDiskOutput
-}
-
-type DisksDiskArgs struct {
-	// The bus path of the disk
-	BusPath pulumi.StringInput `pulumi:"busPath"`
-	// The modalias of the disk
-	Modalias pulumi.StringInput `pulumi:"modalias"`
-	// The model of the disk
-	Model pulumi.StringInput `pulumi:"model"`
-	// The name of the disk
-	Name pulumi.StringInput `pulumi:"name"`
-	// The serial number of the disk
-	Serial pulumi.StringInput `pulumi:"serial"`
-	// The size of the disk
-	Size pulumi.StringInput `pulumi:"size"`
-	// The type of the disk
-	Type pulumi.StringInput `pulumi:"type"`
-	// The uuid of the disk
-	Uuid pulumi.StringInput `pulumi:"uuid"`
-	// The wwid of the disk
-	Wwid pulumi.StringInput `pulumi:"wwid"`
-}
-
-func (DisksDiskArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DisksDisk)(nil)).Elem()
-}
-
-func (i DisksDiskArgs) ToDisksDiskOutput() DisksDiskOutput {
-	return i.ToDisksDiskOutputWithContext(context.Background())
-}
-
-func (i DisksDiskArgs) ToDisksDiskOutputWithContext(ctx context.Context) DisksDiskOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksDiskOutput)
-}
-
-// DisksDiskArrayInput is an input type that accepts DisksDiskArray and DisksDiskArrayOutput values.
-// You can construct a concrete instance of `DisksDiskArrayInput` via:
-//
-//	DisksDiskArray{ DisksDiskArgs{...} }
-type DisksDiskArrayInput interface {
-	pulumi.Input
-
-	ToDisksDiskArrayOutput() DisksDiskArrayOutput
-	ToDisksDiskArrayOutputWithContext(context.Context) DisksDiskArrayOutput
-}
-
-type DisksDiskArray []DisksDiskInput
-
-func (DisksDiskArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DisksDisk)(nil)).Elem()
-}
-
-func (i DisksDiskArray) ToDisksDiskArrayOutput() DisksDiskArrayOutput {
-	return i.ToDisksDiskArrayOutputWithContext(context.Background())
-}
-
-func (i DisksDiskArray) ToDisksDiskArrayOutputWithContext(ctx context.Context) DisksDiskArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksDiskArrayOutput)
-}
-
-type DisksDiskOutput struct{ *pulumi.OutputState }
-
-func (DisksDiskOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DisksDisk)(nil)).Elem()
-}
-
-func (o DisksDiskOutput) ToDisksDiskOutput() DisksDiskOutput {
-	return o
-}
-
-func (o DisksDiskOutput) ToDisksDiskOutputWithContext(ctx context.Context) DisksDiskOutput {
-	return o
-}
-
-// The bus path of the disk
-func (o DisksDiskOutput) BusPath() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.BusPath }).(pulumi.StringOutput)
-}
-
-// The modalias of the disk
-func (o DisksDiskOutput) Modalias() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.Modalias }).(pulumi.StringOutput)
-}
-
-// The model of the disk
-func (o DisksDiskOutput) Model() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.Model }).(pulumi.StringOutput)
-}
-
-// The name of the disk
-func (o DisksDiskOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.Name }).(pulumi.StringOutput)
-}
-
-// The serial number of the disk
-func (o DisksDiskOutput) Serial() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.Serial }).(pulumi.StringOutput)
-}
-
-// The size of the disk
-func (o DisksDiskOutput) Size() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.Size }).(pulumi.StringOutput)
-}
-
-// The type of the disk
-func (o DisksDiskOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.Type }).(pulumi.StringOutput)
-}
-
-// The uuid of the disk
-func (o DisksDiskOutput) Uuid() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.Uuid }).(pulumi.StringOutput)
-}
-
-// The wwid of the disk
-func (o DisksDiskOutput) Wwid() pulumi.StringOutput {
-	return o.ApplyT(func(v DisksDisk) string { return v.Wwid }).(pulumi.StringOutput)
-}
-
-type DisksDiskArrayOutput struct{ *pulumi.OutputState }
-
-func (DisksDiskArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DisksDisk)(nil)).Elem()
-}
-
-func (o DisksDiskArrayOutput) ToDisksDiskArrayOutput() DisksDiskArrayOutput {
-	return o
-}
-
-func (o DisksDiskArrayOutput) ToDisksDiskArrayOutputWithContext(ctx context.Context) DisksDiskArrayOutput {
-	return o
-}
-
-func (o DisksDiskArrayOutput) Index(i pulumi.IntInput) DisksDiskOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DisksDisk {
-		return vs[0].([]DisksDisk)[vs[1].(int)]
-	}).(DisksDiskOutput)
-}
-
-type DisksFilters struct {
-	// Filter disks by bus path
-	BusPath *string `pulumi:"busPath"`
-	// Filter disks by modalias
-	Modalias *string `pulumi:"modalias"`
-	// Filter disks by model
-	Model *string `pulumi:"model"`
-	// Filter disks by name
-	Name *string `pulumi:"name"`
-	// Filter disks by serial number
-	Serial *string `pulumi:"serial"`
-	// Filter disks by size
-	Size *string `pulumi:"size"`
-	// Filter disks by type
-	Type *string `pulumi:"type"`
-	// Filter disks by uuid
-	Uuid *string `pulumi:"uuid"`
-	// Filter disks by wwid
-	Wwid *string `pulumi:"wwid"`
-}
-
-// DisksFiltersInput is an input type that accepts DisksFiltersArgs and DisksFiltersOutput values.
-// You can construct a concrete instance of `DisksFiltersInput` via:
-//
-//	DisksFiltersArgs{...}
-type DisksFiltersInput interface {
-	pulumi.Input
-
-	ToDisksFiltersOutput() DisksFiltersOutput
-	ToDisksFiltersOutputWithContext(context.Context) DisksFiltersOutput
-}
-
-type DisksFiltersArgs struct {
-	// Filter disks by bus path
-	BusPath pulumi.StringPtrInput `pulumi:"busPath"`
-	// Filter disks by modalias
-	Modalias pulumi.StringPtrInput `pulumi:"modalias"`
-	// Filter disks by model
-	Model pulumi.StringPtrInput `pulumi:"model"`
-	// Filter disks by name
-	Name pulumi.StringPtrInput `pulumi:"name"`
-	// Filter disks by serial number
-	Serial pulumi.StringPtrInput `pulumi:"serial"`
-	// Filter disks by size
-	Size pulumi.StringPtrInput `pulumi:"size"`
-	// Filter disks by type
-	Type pulumi.StringPtrInput `pulumi:"type"`
-	// Filter disks by uuid
-	Uuid pulumi.StringPtrInput `pulumi:"uuid"`
-	// Filter disks by wwid
-	Wwid pulumi.StringPtrInput `pulumi:"wwid"`
-}
-
-func (DisksFiltersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DisksFilters)(nil)).Elem()
-}
-
-func (i DisksFiltersArgs) ToDisksFiltersOutput() DisksFiltersOutput {
-	return i.ToDisksFiltersOutputWithContext(context.Background())
-}
-
-func (i DisksFiltersArgs) ToDisksFiltersOutputWithContext(ctx context.Context) DisksFiltersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksFiltersOutput)
-}
-
-func (i DisksFiltersArgs) ToDisksFiltersPtrOutput() DisksFiltersPtrOutput {
-	return i.ToDisksFiltersPtrOutputWithContext(context.Background())
-}
-
-func (i DisksFiltersArgs) ToDisksFiltersPtrOutputWithContext(ctx context.Context) DisksFiltersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksFiltersOutput).ToDisksFiltersPtrOutputWithContext(ctx)
-}
-
-// DisksFiltersPtrInput is an input type that accepts DisksFiltersArgs, DisksFiltersPtr and DisksFiltersPtrOutput values.
-// You can construct a concrete instance of `DisksFiltersPtrInput` via:
-//
-//	        DisksFiltersArgs{...}
-//
-//	or:
-//
-//	        nil
-type DisksFiltersPtrInput interface {
-	pulumi.Input
-
-	ToDisksFiltersPtrOutput() DisksFiltersPtrOutput
-	ToDisksFiltersPtrOutputWithContext(context.Context) DisksFiltersPtrOutput
-}
-
-type disksFiltersPtrType DisksFiltersArgs
-
-func DisksFiltersPtr(v *DisksFiltersArgs) DisksFiltersPtrInput {
-	return (*disksFiltersPtrType)(v)
-}
-
-func (*disksFiltersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DisksFilters)(nil)).Elem()
-}
-
-func (i *disksFiltersPtrType) ToDisksFiltersPtrOutput() DisksFiltersPtrOutput {
-	return i.ToDisksFiltersPtrOutputWithContext(context.Background())
-}
-
-func (i *disksFiltersPtrType) ToDisksFiltersPtrOutputWithContext(ctx context.Context) DisksFiltersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksFiltersPtrOutput)
-}
-
-type DisksFiltersOutput struct{ *pulumi.OutputState }
-
-func (DisksFiltersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DisksFilters)(nil)).Elem()
-}
-
-func (o DisksFiltersOutput) ToDisksFiltersOutput() DisksFiltersOutput {
-	return o
-}
-
-func (o DisksFiltersOutput) ToDisksFiltersOutputWithContext(ctx context.Context) DisksFiltersOutput {
-	return o
-}
-
-func (o DisksFiltersOutput) ToDisksFiltersPtrOutput() DisksFiltersPtrOutput {
-	return o.ToDisksFiltersPtrOutputWithContext(context.Background())
-}
-
-func (o DisksFiltersOutput) ToDisksFiltersPtrOutputWithContext(ctx context.Context) DisksFiltersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DisksFilters) *DisksFilters {
-		return &v
-	}).(DisksFiltersPtrOutput)
-}
-
-// Filter disks by bus path
-func (o DisksFiltersOutput) BusPath() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.BusPath }).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by modalias
-func (o DisksFiltersOutput) Modalias() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.Modalias }).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by model
-func (o DisksFiltersOutput) Model() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.Model }).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by name
-func (o DisksFiltersOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.Name }).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by serial number
-func (o DisksFiltersOutput) Serial() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.Serial }).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by size
-func (o DisksFiltersOutput) Size() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.Size }).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by type
-func (o DisksFiltersOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.Type }).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by uuid
-func (o DisksFiltersOutput) Uuid() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.Uuid }).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by wwid
-func (o DisksFiltersOutput) Wwid() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksFilters) *string { return v.Wwid }).(pulumi.StringPtrOutput)
-}
-
-type DisksFiltersPtrOutput struct{ *pulumi.OutputState }
-
-func (DisksFiltersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DisksFilters)(nil)).Elem()
-}
-
-func (o DisksFiltersPtrOutput) ToDisksFiltersPtrOutput() DisksFiltersPtrOutput {
-	return o
-}
-
-func (o DisksFiltersPtrOutput) ToDisksFiltersPtrOutputWithContext(ctx context.Context) DisksFiltersPtrOutput {
-	return o
-}
-
-func (o DisksFiltersPtrOutput) Elem() DisksFiltersOutput {
-	return o.ApplyT(func(v *DisksFilters) DisksFilters {
-		if v != nil {
-			return *v
-		}
-		var ret DisksFilters
-		return ret
-	}).(DisksFiltersOutput)
-}
-
-// Filter disks by bus path
-func (o DisksFiltersPtrOutput) BusPath() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.BusPath
-	}).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by modalias
-func (o DisksFiltersPtrOutput) Modalias() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Modalias
-	}).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by model
-func (o DisksFiltersPtrOutput) Model() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Model
-	}).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by name
-func (o DisksFiltersPtrOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Name
-	}).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by serial number
-func (o DisksFiltersPtrOutput) Serial() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Serial
-	}).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by size
-func (o DisksFiltersPtrOutput) Size() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Size
-	}).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by type
-func (o DisksFiltersPtrOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Type
-	}).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by uuid
-func (o DisksFiltersPtrOutput) Uuid() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Uuid
-	}).(pulumi.StringPtrOutput)
-}
-
-// Filter disks by wwid
-func (o DisksFiltersPtrOutput) Wwid() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksFilters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Wwid
-	}).(pulumi.StringPtrOutput)
-}
-
-type DisksTimeouts struct {
-	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-	Read *string `pulumi:"read"`
-}
-
-// DisksTimeoutsInput is an input type that accepts DisksTimeoutsArgs and DisksTimeoutsOutput values.
-// You can construct a concrete instance of `DisksTimeoutsInput` via:
-//
-//	DisksTimeoutsArgs{...}
-type DisksTimeoutsInput interface {
-	pulumi.Input
-
-	ToDisksTimeoutsOutput() DisksTimeoutsOutput
-	ToDisksTimeoutsOutputWithContext(context.Context) DisksTimeoutsOutput
-}
-
-type DisksTimeoutsArgs struct {
-	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-	Read pulumi.StringPtrInput `pulumi:"read"`
-}
-
-func (DisksTimeoutsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DisksTimeouts)(nil)).Elem()
-}
-
-func (i DisksTimeoutsArgs) ToDisksTimeoutsOutput() DisksTimeoutsOutput {
-	return i.ToDisksTimeoutsOutputWithContext(context.Background())
-}
-
-func (i DisksTimeoutsArgs) ToDisksTimeoutsOutputWithContext(ctx context.Context) DisksTimeoutsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksTimeoutsOutput)
-}
-
-func (i DisksTimeoutsArgs) ToDisksTimeoutsPtrOutput() DisksTimeoutsPtrOutput {
-	return i.ToDisksTimeoutsPtrOutputWithContext(context.Background())
-}
-
-func (i DisksTimeoutsArgs) ToDisksTimeoutsPtrOutputWithContext(ctx context.Context) DisksTimeoutsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksTimeoutsOutput).ToDisksTimeoutsPtrOutputWithContext(ctx)
-}
-
-// DisksTimeoutsPtrInput is an input type that accepts DisksTimeoutsArgs, DisksTimeoutsPtr and DisksTimeoutsPtrOutput values.
-// You can construct a concrete instance of `DisksTimeoutsPtrInput` via:
-//
-//	        DisksTimeoutsArgs{...}
-//
-//	or:
-//
-//	        nil
-type DisksTimeoutsPtrInput interface {
-	pulumi.Input
-
-	ToDisksTimeoutsPtrOutput() DisksTimeoutsPtrOutput
-	ToDisksTimeoutsPtrOutputWithContext(context.Context) DisksTimeoutsPtrOutput
-}
-
-type disksTimeoutsPtrType DisksTimeoutsArgs
-
-func DisksTimeoutsPtr(v *DisksTimeoutsArgs) DisksTimeoutsPtrInput {
-	return (*disksTimeoutsPtrType)(v)
-}
-
-func (*disksTimeoutsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DisksTimeouts)(nil)).Elem()
-}
-
-func (i *disksTimeoutsPtrType) ToDisksTimeoutsPtrOutput() DisksTimeoutsPtrOutput {
-	return i.ToDisksTimeoutsPtrOutputWithContext(context.Background())
-}
-
-func (i *disksTimeoutsPtrType) ToDisksTimeoutsPtrOutputWithContext(ctx context.Context) DisksTimeoutsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DisksTimeoutsPtrOutput)
-}
-
-type DisksTimeoutsOutput struct{ *pulumi.OutputState }
-
-func (DisksTimeoutsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DisksTimeouts)(nil)).Elem()
-}
-
-func (o DisksTimeoutsOutput) ToDisksTimeoutsOutput() DisksTimeoutsOutput {
-	return o
-}
-
-func (o DisksTimeoutsOutput) ToDisksTimeoutsOutputWithContext(ctx context.Context) DisksTimeoutsOutput {
-	return o
-}
-
-func (o DisksTimeoutsOutput) ToDisksTimeoutsPtrOutput() DisksTimeoutsPtrOutput {
-	return o.ToDisksTimeoutsPtrOutputWithContext(context.Background())
-}
-
-func (o DisksTimeoutsOutput) ToDisksTimeoutsPtrOutputWithContext(ctx context.Context) DisksTimeoutsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DisksTimeouts) *DisksTimeouts {
-		return &v
-	}).(DisksTimeoutsPtrOutput)
-}
-
-// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-func (o DisksTimeoutsOutput) Read() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DisksTimeouts) *string { return v.Read }).(pulumi.StringPtrOutput)
-}
-
-type DisksTimeoutsPtrOutput struct{ *pulumi.OutputState }
-
-func (DisksTimeoutsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DisksTimeouts)(nil)).Elem()
-}
-
-func (o DisksTimeoutsPtrOutput) ToDisksTimeoutsPtrOutput() DisksTimeoutsPtrOutput {
-	return o
-}
-
-func (o DisksTimeoutsPtrOutput) ToDisksTimeoutsPtrOutputWithContext(ctx context.Context) DisksTimeoutsPtrOutput {
-	return o
-}
-
-func (o DisksTimeoutsPtrOutput) Elem() DisksTimeoutsOutput {
-	return o.ApplyT(func(v *DisksTimeouts) DisksTimeouts {
-		if v != nil {
-			return *v
-		}
-		var ret DisksTimeouts
-		return ret
-	}).(DisksTimeoutsOutput)
-}
-
-// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-func (o DisksTimeoutsPtrOutput) Read() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DisksTimeouts) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Read
-	}).(pulumi.StringPtrOutput)
-}
-
 type SecretsClientConfiguration struct {
 	// The client CA certificate
 	CaCertificate *string `pulumi:"caCertificate"`
@@ -4797,6 +4132,671 @@ func (o GetConfigurationMachineSecretsTrustdinfoOutput) Token() pulumi.StringOut
 	return o.ApplyT(func(v GetConfigurationMachineSecretsTrustdinfo) string { return v.Token }).(pulumi.StringOutput)
 }
 
+type GetDisksClientConfiguration struct {
+	// The client CA certificate
+	CaCertificate string `pulumi:"caCertificate"`
+	// The client certificate
+	ClientCertificate string `pulumi:"clientCertificate"`
+	// The client key
+	ClientKey string `pulumi:"clientKey"`
+}
+
+// GetDisksClientConfigurationInput is an input type that accepts GetDisksClientConfigurationArgs and GetDisksClientConfigurationOutput values.
+// You can construct a concrete instance of `GetDisksClientConfigurationInput` via:
+//
+//	GetDisksClientConfigurationArgs{...}
+type GetDisksClientConfigurationInput interface {
+	pulumi.Input
+
+	ToGetDisksClientConfigurationOutput() GetDisksClientConfigurationOutput
+	ToGetDisksClientConfigurationOutputWithContext(context.Context) GetDisksClientConfigurationOutput
+}
+
+type GetDisksClientConfigurationArgs struct {
+	// The client CA certificate
+	CaCertificate pulumi.StringInput `pulumi:"caCertificate"`
+	// The client certificate
+	ClientCertificate pulumi.StringInput `pulumi:"clientCertificate"`
+	// The client key
+	ClientKey pulumi.StringInput `pulumi:"clientKey"`
+}
+
+func (GetDisksClientConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksClientConfiguration)(nil)).Elem()
+}
+
+func (i GetDisksClientConfigurationArgs) ToGetDisksClientConfigurationOutput() GetDisksClientConfigurationOutput {
+	return i.ToGetDisksClientConfigurationOutputWithContext(context.Background())
+}
+
+func (i GetDisksClientConfigurationArgs) ToGetDisksClientConfigurationOutputWithContext(ctx context.Context) GetDisksClientConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksClientConfigurationOutput)
+}
+
+type GetDisksClientConfigurationOutput struct{ *pulumi.OutputState }
+
+func (GetDisksClientConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksClientConfiguration)(nil)).Elem()
+}
+
+func (o GetDisksClientConfigurationOutput) ToGetDisksClientConfigurationOutput() GetDisksClientConfigurationOutput {
+	return o
+}
+
+func (o GetDisksClientConfigurationOutput) ToGetDisksClientConfigurationOutputWithContext(ctx context.Context) GetDisksClientConfigurationOutput {
+	return o
+}
+
+// The client CA certificate
+func (o GetDisksClientConfigurationOutput) CaCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksClientConfiguration) string { return v.CaCertificate }).(pulumi.StringOutput)
+}
+
+// The client certificate
+func (o GetDisksClientConfigurationOutput) ClientCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksClientConfiguration) string { return v.ClientCertificate }).(pulumi.StringOutput)
+}
+
+// The client key
+func (o GetDisksClientConfigurationOutput) ClientKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
+}
+
+type GetDisksDisk struct {
+	// The bus path of the disk
+	BusPath string `pulumi:"busPath"`
+	// The modalias of the disk
+	Modalias string `pulumi:"modalias"`
+	// The model of the disk
+	Model string `pulumi:"model"`
+	// The name of the disk
+	Name string `pulumi:"name"`
+	// The serial number of the disk
+	Serial string `pulumi:"serial"`
+	// The size of the disk
+	Size string `pulumi:"size"`
+	// The type of the disk
+	Type string `pulumi:"type"`
+	// The uuid of the disk
+	Uuid string `pulumi:"uuid"`
+	// The wwid of the disk
+	Wwid string `pulumi:"wwid"`
+}
+
+// GetDisksDiskInput is an input type that accepts GetDisksDiskArgs and GetDisksDiskOutput values.
+// You can construct a concrete instance of `GetDisksDiskInput` via:
+//
+//	GetDisksDiskArgs{...}
+type GetDisksDiskInput interface {
+	pulumi.Input
+
+	ToGetDisksDiskOutput() GetDisksDiskOutput
+	ToGetDisksDiskOutputWithContext(context.Context) GetDisksDiskOutput
+}
+
+type GetDisksDiskArgs struct {
+	// The bus path of the disk
+	BusPath pulumi.StringInput `pulumi:"busPath"`
+	// The modalias of the disk
+	Modalias pulumi.StringInput `pulumi:"modalias"`
+	// The model of the disk
+	Model pulumi.StringInput `pulumi:"model"`
+	// The name of the disk
+	Name pulumi.StringInput `pulumi:"name"`
+	// The serial number of the disk
+	Serial pulumi.StringInput `pulumi:"serial"`
+	// The size of the disk
+	Size pulumi.StringInput `pulumi:"size"`
+	// The type of the disk
+	Type pulumi.StringInput `pulumi:"type"`
+	// The uuid of the disk
+	Uuid pulumi.StringInput `pulumi:"uuid"`
+	// The wwid of the disk
+	Wwid pulumi.StringInput `pulumi:"wwid"`
+}
+
+func (GetDisksDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksDisk)(nil)).Elem()
+}
+
+func (i GetDisksDiskArgs) ToGetDisksDiskOutput() GetDisksDiskOutput {
+	return i.ToGetDisksDiskOutputWithContext(context.Background())
+}
+
+func (i GetDisksDiskArgs) ToGetDisksDiskOutputWithContext(ctx context.Context) GetDisksDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksDiskOutput)
+}
+
+// GetDisksDiskArrayInput is an input type that accepts GetDisksDiskArray and GetDisksDiskArrayOutput values.
+// You can construct a concrete instance of `GetDisksDiskArrayInput` via:
+//
+//	GetDisksDiskArray{ GetDisksDiskArgs{...} }
+type GetDisksDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetDisksDiskArrayOutput() GetDisksDiskArrayOutput
+	ToGetDisksDiskArrayOutputWithContext(context.Context) GetDisksDiskArrayOutput
+}
+
+type GetDisksDiskArray []GetDisksDiskInput
+
+func (GetDisksDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDisksDisk)(nil)).Elem()
+}
+
+func (i GetDisksDiskArray) ToGetDisksDiskArrayOutput() GetDisksDiskArrayOutput {
+	return i.ToGetDisksDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetDisksDiskArray) ToGetDisksDiskArrayOutputWithContext(ctx context.Context) GetDisksDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksDiskArrayOutput)
+}
+
+type GetDisksDiskOutput struct{ *pulumi.OutputState }
+
+func (GetDisksDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksDisk)(nil)).Elem()
+}
+
+func (o GetDisksDiskOutput) ToGetDisksDiskOutput() GetDisksDiskOutput {
+	return o
+}
+
+func (o GetDisksDiskOutput) ToGetDisksDiskOutputWithContext(ctx context.Context) GetDisksDiskOutput {
+	return o
+}
+
+// The bus path of the disk
+func (o GetDisksDiskOutput) BusPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.BusPath }).(pulumi.StringOutput)
+}
+
+// The modalias of the disk
+func (o GetDisksDiskOutput) Modalias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.Modalias }).(pulumi.StringOutput)
+}
+
+// The model of the disk
+func (o GetDisksDiskOutput) Model() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.Model }).(pulumi.StringOutput)
+}
+
+// The name of the disk
+func (o GetDisksDiskOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The serial number of the disk
+func (o GetDisksDiskOutput) Serial() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.Serial }).(pulumi.StringOutput)
+}
+
+// The size of the disk
+func (o GetDisksDiskOutput) Size() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.Size }).(pulumi.StringOutput)
+}
+
+// The type of the disk
+func (o GetDisksDiskOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The uuid of the disk
+func (o GetDisksDiskOutput) Uuid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.Uuid }).(pulumi.StringOutput)
+}
+
+// The wwid of the disk
+func (o GetDisksDiskOutput) Wwid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDisk) string { return v.Wwid }).(pulumi.StringOutput)
+}
+
+type GetDisksDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDisksDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDisksDisk)(nil)).Elem()
+}
+
+func (o GetDisksDiskArrayOutput) ToGetDisksDiskArrayOutput() GetDisksDiskArrayOutput {
+	return o
+}
+
+func (o GetDisksDiskArrayOutput) ToGetDisksDiskArrayOutputWithContext(ctx context.Context) GetDisksDiskArrayOutput {
+	return o
+}
+
+func (o GetDisksDiskArrayOutput) Index(i pulumi.IntInput) GetDisksDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDisksDisk {
+		return vs[0].([]GetDisksDisk)[vs[1].(int)]
+	}).(GetDisksDiskOutput)
+}
+
+type GetDisksFilters struct {
+	// Filter disks by bus path
+	BusPath *string `pulumi:"busPath"`
+	// Filter disks by modalias
+	Modalias *string `pulumi:"modalias"`
+	// Filter disks by model
+	Model *string `pulumi:"model"`
+	// Filter disks by name
+	Name *string `pulumi:"name"`
+	// Filter disks by serial number
+	Serial *string `pulumi:"serial"`
+	// Filter disks by size
+	Size *string `pulumi:"size"`
+	// Filter disks by type
+	Type *string `pulumi:"type"`
+	// Filter disks by uuid
+	Uuid *string `pulumi:"uuid"`
+	// Filter disks by wwid
+	Wwid *string `pulumi:"wwid"`
+}
+
+// GetDisksFiltersInput is an input type that accepts GetDisksFiltersArgs and GetDisksFiltersOutput values.
+// You can construct a concrete instance of `GetDisksFiltersInput` via:
+//
+//	GetDisksFiltersArgs{...}
+type GetDisksFiltersInput interface {
+	pulumi.Input
+
+	ToGetDisksFiltersOutput() GetDisksFiltersOutput
+	ToGetDisksFiltersOutputWithContext(context.Context) GetDisksFiltersOutput
+}
+
+type GetDisksFiltersArgs struct {
+	// Filter disks by bus path
+	BusPath pulumi.StringPtrInput `pulumi:"busPath"`
+	// Filter disks by modalias
+	Modalias pulumi.StringPtrInput `pulumi:"modalias"`
+	// Filter disks by model
+	Model pulumi.StringPtrInput `pulumi:"model"`
+	// Filter disks by name
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Filter disks by serial number
+	Serial pulumi.StringPtrInput `pulumi:"serial"`
+	// Filter disks by size
+	Size pulumi.StringPtrInput `pulumi:"size"`
+	// Filter disks by type
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Filter disks by uuid
+	Uuid pulumi.StringPtrInput `pulumi:"uuid"`
+	// Filter disks by wwid
+	Wwid pulumi.StringPtrInput `pulumi:"wwid"`
+}
+
+func (GetDisksFiltersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksFilters)(nil)).Elem()
+}
+
+func (i GetDisksFiltersArgs) ToGetDisksFiltersOutput() GetDisksFiltersOutput {
+	return i.ToGetDisksFiltersOutputWithContext(context.Background())
+}
+
+func (i GetDisksFiltersArgs) ToGetDisksFiltersOutputWithContext(ctx context.Context) GetDisksFiltersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksFiltersOutput)
+}
+
+func (i GetDisksFiltersArgs) ToGetDisksFiltersPtrOutput() GetDisksFiltersPtrOutput {
+	return i.ToGetDisksFiltersPtrOutputWithContext(context.Background())
+}
+
+func (i GetDisksFiltersArgs) ToGetDisksFiltersPtrOutputWithContext(ctx context.Context) GetDisksFiltersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksFiltersOutput).ToGetDisksFiltersPtrOutputWithContext(ctx)
+}
+
+// GetDisksFiltersPtrInput is an input type that accepts GetDisksFiltersArgs, GetDisksFiltersPtr and GetDisksFiltersPtrOutput values.
+// You can construct a concrete instance of `GetDisksFiltersPtrInput` via:
+//
+//	        GetDisksFiltersArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetDisksFiltersPtrInput interface {
+	pulumi.Input
+
+	ToGetDisksFiltersPtrOutput() GetDisksFiltersPtrOutput
+	ToGetDisksFiltersPtrOutputWithContext(context.Context) GetDisksFiltersPtrOutput
+}
+
+type getDisksFiltersPtrType GetDisksFiltersArgs
+
+func GetDisksFiltersPtr(v *GetDisksFiltersArgs) GetDisksFiltersPtrInput {
+	return (*getDisksFiltersPtrType)(v)
+}
+
+func (*getDisksFiltersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDisksFilters)(nil)).Elem()
+}
+
+func (i *getDisksFiltersPtrType) ToGetDisksFiltersPtrOutput() GetDisksFiltersPtrOutput {
+	return i.ToGetDisksFiltersPtrOutputWithContext(context.Background())
+}
+
+func (i *getDisksFiltersPtrType) ToGetDisksFiltersPtrOutputWithContext(ctx context.Context) GetDisksFiltersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksFiltersPtrOutput)
+}
+
+type GetDisksFiltersOutput struct{ *pulumi.OutputState }
+
+func (GetDisksFiltersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksFilters)(nil)).Elem()
+}
+
+func (o GetDisksFiltersOutput) ToGetDisksFiltersOutput() GetDisksFiltersOutput {
+	return o
+}
+
+func (o GetDisksFiltersOutput) ToGetDisksFiltersOutputWithContext(ctx context.Context) GetDisksFiltersOutput {
+	return o
+}
+
+func (o GetDisksFiltersOutput) ToGetDisksFiltersPtrOutput() GetDisksFiltersPtrOutput {
+	return o.ToGetDisksFiltersPtrOutputWithContext(context.Background())
+}
+
+func (o GetDisksFiltersOutput) ToGetDisksFiltersPtrOutputWithContext(ctx context.Context) GetDisksFiltersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetDisksFilters) *GetDisksFilters {
+		return &v
+	}).(GetDisksFiltersPtrOutput)
+}
+
+// Filter disks by bus path
+func (o GetDisksFiltersOutput) BusPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.BusPath }).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by modalias
+func (o GetDisksFiltersOutput) Modalias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.Modalias }).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by model
+func (o GetDisksFiltersOutput) Model() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.Model }).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by name
+func (o GetDisksFiltersOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by serial number
+func (o GetDisksFiltersOutput) Serial() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.Serial }).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by size
+func (o GetDisksFiltersOutput) Size() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.Size }).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by type
+func (o GetDisksFiltersOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by uuid
+func (o GetDisksFiltersOutput) Uuid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.Uuid }).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by wwid
+func (o GetDisksFiltersOutput) Wwid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksFilters) *string { return v.Wwid }).(pulumi.StringPtrOutput)
+}
+
+type GetDisksFiltersPtrOutput struct{ *pulumi.OutputState }
+
+func (GetDisksFiltersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDisksFilters)(nil)).Elem()
+}
+
+func (o GetDisksFiltersPtrOutput) ToGetDisksFiltersPtrOutput() GetDisksFiltersPtrOutput {
+	return o
+}
+
+func (o GetDisksFiltersPtrOutput) ToGetDisksFiltersPtrOutputWithContext(ctx context.Context) GetDisksFiltersPtrOutput {
+	return o
+}
+
+func (o GetDisksFiltersPtrOutput) Elem() GetDisksFiltersOutput {
+	return o.ApplyT(func(v *GetDisksFilters) GetDisksFilters {
+		if v != nil {
+			return *v
+		}
+		var ret GetDisksFilters
+		return ret
+	}).(GetDisksFiltersOutput)
+}
+
+// Filter disks by bus path
+func (o GetDisksFiltersPtrOutput) BusPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BusPath
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by modalias
+func (o GetDisksFiltersPtrOutput) Modalias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Modalias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by model
+func (o GetDisksFiltersPtrOutput) Model() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Model
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by name
+func (o GetDisksFiltersPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by serial number
+func (o GetDisksFiltersPtrOutput) Serial() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Serial
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by size
+func (o GetDisksFiltersPtrOutput) Size() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Size
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by type
+func (o GetDisksFiltersPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by uuid
+func (o GetDisksFiltersPtrOutput) Uuid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Uuid
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter disks by wwid
+func (o GetDisksFiltersPtrOutput) Wwid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksFilters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Wwid
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetDisksTimeouts struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `pulumi:"read"`
+}
+
+// GetDisksTimeoutsInput is an input type that accepts GetDisksTimeoutsArgs and GetDisksTimeoutsOutput values.
+// You can construct a concrete instance of `GetDisksTimeoutsInput` via:
+//
+//	GetDisksTimeoutsArgs{...}
+type GetDisksTimeoutsInput interface {
+	pulumi.Input
+
+	ToGetDisksTimeoutsOutput() GetDisksTimeoutsOutput
+	ToGetDisksTimeoutsOutputWithContext(context.Context) GetDisksTimeoutsOutput
+}
+
+type GetDisksTimeoutsArgs struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read pulumi.StringPtrInput `pulumi:"read"`
+}
+
+func (GetDisksTimeoutsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksTimeouts)(nil)).Elem()
+}
+
+func (i GetDisksTimeoutsArgs) ToGetDisksTimeoutsOutput() GetDisksTimeoutsOutput {
+	return i.ToGetDisksTimeoutsOutputWithContext(context.Background())
+}
+
+func (i GetDisksTimeoutsArgs) ToGetDisksTimeoutsOutputWithContext(ctx context.Context) GetDisksTimeoutsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksTimeoutsOutput)
+}
+
+func (i GetDisksTimeoutsArgs) ToGetDisksTimeoutsPtrOutput() GetDisksTimeoutsPtrOutput {
+	return i.ToGetDisksTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i GetDisksTimeoutsArgs) ToGetDisksTimeoutsPtrOutputWithContext(ctx context.Context) GetDisksTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksTimeoutsOutput).ToGetDisksTimeoutsPtrOutputWithContext(ctx)
+}
+
+// GetDisksTimeoutsPtrInput is an input type that accepts GetDisksTimeoutsArgs, GetDisksTimeoutsPtr and GetDisksTimeoutsPtrOutput values.
+// You can construct a concrete instance of `GetDisksTimeoutsPtrInput` via:
+//
+//	        GetDisksTimeoutsArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetDisksTimeoutsPtrInput interface {
+	pulumi.Input
+
+	ToGetDisksTimeoutsPtrOutput() GetDisksTimeoutsPtrOutput
+	ToGetDisksTimeoutsPtrOutputWithContext(context.Context) GetDisksTimeoutsPtrOutput
+}
+
+type getDisksTimeoutsPtrType GetDisksTimeoutsArgs
+
+func GetDisksTimeoutsPtr(v *GetDisksTimeoutsArgs) GetDisksTimeoutsPtrInput {
+	return (*getDisksTimeoutsPtrType)(v)
+}
+
+func (*getDisksTimeoutsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDisksTimeouts)(nil)).Elem()
+}
+
+func (i *getDisksTimeoutsPtrType) ToGetDisksTimeoutsPtrOutput() GetDisksTimeoutsPtrOutput {
+	return i.ToGetDisksTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i *getDisksTimeoutsPtrType) ToGetDisksTimeoutsPtrOutputWithContext(ctx context.Context) GetDisksTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksTimeoutsPtrOutput)
+}
+
+type GetDisksTimeoutsOutput struct{ *pulumi.OutputState }
+
+func (GetDisksTimeoutsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksTimeouts)(nil)).Elem()
+}
+
+func (o GetDisksTimeoutsOutput) ToGetDisksTimeoutsOutput() GetDisksTimeoutsOutput {
+	return o
+}
+
+func (o GetDisksTimeoutsOutput) ToGetDisksTimeoutsOutputWithContext(ctx context.Context) GetDisksTimeoutsOutput {
+	return o
+}
+
+func (o GetDisksTimeoutsOutput) ToGetDisksTimeoutsPtrOutput() GetDisksTimeoutsPtrOutput {
+	return o.ToGetDisksTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (o GetDisksTimeoutsOutput) ToGetDisksTimeoutsPtrOutputWithContext(ctx context.Context) GetDisksTimeoutsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetDisksTimeouts) *GetDisksTimeouts {
+		return &v
+	}).(GetDisksTimeoutsPtrOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+func (o GetDisksTimeoutsOutput) Read() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDisksTimeouts) *string { return v.Read }).(pulumi.StringPtrOutput)
+}
+
+type GetDisksTimeoutsPtrOutput struct{ *pulumi.OutputState }
+
+func (GetDisksTimeoutsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDisksTimeouts)(nil)).Elem()
+}
+
+func (o GetDisksTimeoutsPtrOutput) ToGetDisksTimeoutsPtrOutput() GetDisksTimeoutsPtrOutput {
+	return o
+}
+
+func (o GetDisksTimeoutsPtrOutput) ToGetDisksTimeoutsPtrOutputWithContext(ctx context.Context) GetDisksTimeoutsPtrOutput {
+	return o
+}
+
+func (o GetDisksTimeoutsPtrOutput) Elem() GetDisksTimeoutsOutput {
+	return o.ApplyT(func(v *GetDisksTimeouts) GetDisksTimeouts {
+		if v != nil {
+			return *v
+		}
+		var ret GetDisksTimeouts
+		return ret
+	}).(GetDisksTimeoutsOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+func (o GetDisksTimeoutsPtrOutput) Read() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDisksTimeouts) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Read
+	}).(pulumi.StringPtrOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationInput)(nil)).Elem(), BootstrapClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationPtrInput)(nil)).Elem(), BootstrapClientConfigurationArgs{})
@@ -4804,13 +4804,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapTimeoutsPtrInput)(nil)).Elem(), BootstrapTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationInput)(nil)).Elem(), ConfigurationApplyClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationPtrInput)(nil)).Elem(), ConfigurationApplyClientConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DisksClientConfigurationInput)(nil)).Elem(), DisksClientConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DisksDiskInput)(nil)).Elem(), DisksDiskArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DisksDiskArrayInput)(nil)).Elem(), DisksDiskArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DisksFiltersInput)(nil)).Elem(), DisksFiltersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DisksFiltersPtrInput)(nil)).Elem(), DisksFiltersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DisksTimeoutsInput)(nil)).Elem(), DisksTimeoutsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DisksTimeoutsPtrInput)(nil)).Elem(), DisksTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsClientConfigurationInput)(nil)).Elem(), SecretsClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsClientConfigurationPtrInput)(nil)).Elem(), SecretsClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsInput)(nil)).Elem(), SecretsMachineSecretsArgs{})
@@ -4858,19 +4851,19 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsClusterInput)(nil)).Elem(), GetConfigurationMachineSecretsClusterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsSecretsInput)(nil)).Elem(), GetConfigurationMachineSecretsSecretsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsTrustdinfoInput)(nil)).Elem(), GetConfigurationMachineSecretsTrustdinfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksClientConfigurationInput)(nil)).Elem(), GetDisksClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksDiskInput)(nil)).Elem(), GetDisksDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksDiskArrayInput)(nil)).Elem(), GetDisksDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksFiltersInput)(nil)).Elem(), GetDisksFiltersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksFiltersPtrInput)(nil)).Elem(), GetDisksFiltersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksTimeoutsInput)(nil)).Elem(), GetDisksTimeoutsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksTimeoutsPtrInput)(nil)).Elem(), GetDisksTimeoutsArgs{})
 	pulumi.RegisterOutputType(BootstrapClientConfigurationOutput{})
 	pulumi.RegisterOutputType(BootstrapClientConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationPtrOutput{})
-	pulumi.RegisterOutputType(DisksClientConfigurationOutput{})
-	pulumi.RegisterOutputType(DisksDiskOutput{})
-	pulumi.RegisterOutputType(DisksDiskArrayOutput{})
-	pulumi.RegisterOutputType(DisksFiltersOutput{})
-	pulumi.RegisterOutputType(DisksFiltersPtrOutput{})
-	pulumi.RegisterOutputType(DisksTimeoutsOutput{})
-	pulumi.RegisterOutputType(DisksTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(SecretsClientConfigurationOutput{})
 	pulumi.RegisterOutputType(SecretsClientConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsOutput{})
@@ -4918,4 +4911,11 @@ func init() {
 	pulumi.RegisterOutputType(GetConfigurationMachineSecretsClusterOutput{})
 	pulumi.RegisterOutputType(GetConfigurationMachineSecretsSecretsOutput{})
 	pulumi.RegisterOutputType(GetConfigurationMachineSecretsTrustdinfoOutput{})
+	pulumi.RegisterOutputType(GetDisksClientConfigurationOutput{})
+	pulumi.RegisterOutputType(GetDisksDiskOutput{})
+	pulumi.RegisterOutputType(GetDisksDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetDisksFiltersOutput{})
+	pulumi.RegisterOutputType(GetDisksFiltersPtrOutput{})
+	pulumi.RegisterOutputType(GetDisksTimeoutsOutput{})
+	pulumi.RegisterOutputType(GetDisksTimeoutsPtrOutput{})
 }
