@@ -78,6 +78,38 @@
                 "clientKey"
             ]
         },
+        "talos:cluster/HealthClientConfiguration:HealthClientConfiguration": {
+            "properties": {
+                "caCertificate": {
+                    "type": "string",
+                    "description": "The client CA certificate\n"
+                },
+                "clientCertificate": {
+                    "type": "string",
+                    "description": "The client certificate\n"
+                },
+                "clientKey": {
+                    "type": "string",
+                    "description": "The client key\n",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "caCertificate",
+                "clientCertificate",
+                "clientKey"
+            ]
+        },
+        "talos:cluster/HealthTimeouts:HealthTimeouts": {
+            "properties": {
+                "read": {
+                    "type": "string",
+                    "description": "A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as \"30s\" or \"2h45m\". Valid time units are \"s\" (seconds), \"m\" (minutes), \"h\" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.\n"
+                }
+            },
+            "type": "object"
+        },
         "talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration": {
             "properties": {
                 "caCertificate": {
@@ -1270,6 +1302,92 @@
                 ]
             }
         },
+        "talos:cluster/health:Health": {
+            "description": "Checks the health of a Talos cluster\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking Health.\n",
+                "properties": {
+                    "clientConfiguration": {
+                        "$ref": "#/types/talos:cluster/HealthClientConfiguration:HealthClientConfiguration",
+                        "description": "The client configuration data\n"
+                    },
+                    "controlPlaneNodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of control plane nodes to check for health.\n"
+                    },
+                    "endpoints": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "endpoints to use for the health check client. Use at least one control plane endpoint.\n"
+                    },
+                    "timeouts": {
+                        "$ref": "#/types/talos:cluster/HealthTimeouts:HealthTimeouts"
+                    },
+                    "workerNodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of worker nodes to check for health.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "clientConfiguration",
+                    "controlPlaneNodes",
+                    "endpoints"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by Health.\n",
+                "properties": {
+                    "clientConfiguration": {
+                        "$ref": "#/types/talos:cluster/HealthClientConfiguration:HealthClientConfiguration",
+                        "description": "The client configuration data\n"
+                    },
+                    "controlPlaneNodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of control plane nodes to check for health.\n"
+                    },
+                    "endpoints": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "endpoints to use for the health check client. Use at least one control plane endpoint.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
+                    },
+                    "timeouts": {
+                        "$ref": "#/types/talos:cluster/HealthTimeouts:HealthTimeouts"
+                    },
+                    "workerNodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of worker nodes to check for health.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "clientConfiguration",
+                    "controlPlaneNodes",
+                    "endpoints",
+                    "id"
+                ]
+            }
+        },
         "talos:cluster/kubeconfig:Kubeconfig": {
             "description": "Retrieves the kubeconfig for a Talos cluster\n",
             "inputs": {
@@ -1281,7 +1399,7 @@
                     },
                     "endpoint": {
                         "type": "string",
-                        "description": "endpoint to use for the talosclient. if not set, the node value will be used\n"
+                        "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
                     },
                     "node": {
                         "type": "string",
@@ -1292,7 +1410,8 @@
                     },
                     "wait": {
                         "type": "boolean",
-                        "description": "Wait for the kubernetes api to be available\n"
+                        "description": "Wait for the kubernetes api to be available\n",
+                        "deprecationMessage": "This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead."
                     }
                 },
                 "type": "object",
@@ -1310,7 +1429,7 @@
                     },
                     "endpoint": {
                         "type": "string",
-                        "description": "endpoint to use for the talosclient. if not set, the node value will be used\n"
+                        "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
                     },
                     "id": {
                         "type": "string",
@@ -1334,7 +1453,8 @@
                     },
                     "wait": {
                         "type": "boolean",
-                        "description": "Wait for the kubernetes api to be available\n"
+                        "description": "Wait for the kubernetes api to be available\n",
+                        "deprecationMessage": "This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead."
                     }
                 },
                 "type": "object",
@@ -1359,7 +1479,7 @@
                     },
                     "endpoint": {
                         "type": "string",
-                        "description": "endpoint to use for the talosclient. if not set, the node value will be used\n"
+                        "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
                     },
                     "filters": {
                         "$ref": "#/types/talos:machine/DisksFilters:DisksFilters",
@@ -1395,7 +1515,7 @@
                     },
                     "endpoint": {
                         "type": "string",
-                        "description": "endpoint to use for the talosclient. if not set, the node value will be used\n"
+                        "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
                     },
                     "filters": {
                         "$ref": "#/types/talos:machine/DisksFilters:DisksFilters",

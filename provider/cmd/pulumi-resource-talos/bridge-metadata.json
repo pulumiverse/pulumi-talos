@@ -97,6 +97,7 @@
         },
         "functions": {
             "talos:client/configuration:Configuration": "talos_client_configuration",
+            "talos:cluster/health:Health": "talos_cluster_health",
             "talos:cluster/kubeconfig:Kubeconfig": "talos_cluster_kubeconfig",
             "talos:machine/disks:Disks": "talos_machine_disks",
             "talos:machine/getConfiguration:getConfiguration": "talos_machine_configuration"
@@ -112,6 +113,11 @@
                 "clusterName": "cluster_name",
                 "talosConfig": "talos_config"
             },
+            "talos:cluster/HealthClientConfiguration:HealthClientConfiguration": {
+                "caCertificate": "ca_certificate",
+                "clientCertificate": "client_certificate",
+                "clientKey": "client_key"
+            },
             "talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration": {
                 "caCertificate": "ca_certificate",
                 "clientCertificate": "client_certificate",
@@ -121,6 +127,11 @@
                 "caCertificate": "ca_certificate",
                 "clientCertificate": "client_certificate",
                 "clientKey": "client_key"
+            },
+            "talos:cluster/health:Health": {
+                "clientConfiguration": "client_configuration",
+                "controlPlaneNodes": "control_plane_nodes",
+                "workerNodes": "worker_nodes"
             },
             "talos:cluster/kubeconfig:Kubeconfig": {
                 "clientConfiguration": "client_configuration",
