@@ -8,7 +8,6 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
@@ -66,7 +65,7 @@ func Disks(ctx *pulumi.Context, args *DisksArgs, opts ...pulumi.InvokeOption) (*
 type DisksArgs struct {
 	// The client configuration data
 	ClientConfiguration DisksClientConfiguration `pulumi:"clientConfiguration"`
-	// endpoint to use for the talosclient. if not set, the node value will be used
+	// endpoint to use for the talosclient. If not set, the node value will be used
 	Endpoint *string `pulumi:"endpoint"`
 	// Filters to apply to the disks
 	Filters *DisksFilters `pulumi:"filters"`
@@ -81,7 +80,7 @@ type DisksResult struct {
 	ClientConfiguration DisksClientConfiguration `pulumi:"clientConfiguration"`
 	// The disks that match the filters
 	Disks []DisksDisk `pulumi:"disks"`
-	// endpoint to use for the talosclient. if not set, the node value will be used
+	// endpoint to use for the talosclient. If not set, the node value will be used
 	Endpoint string `pulumi:"endpoint"`
 	// Filters to apply to the disks
 	Filters *DisksFilters `pulumi:"filters"`
@@ -109,7 +108,7 @@ func DisksOutput(ctx *pulumi.Context, args DisksOutputArgs, opts ...pulumi.Invok
 type DisksOutputArgs struct {
 	// The client configuration data
 	ClientConfiguration DisksClientConfigurationInput `pulumi:"clientConfiguration"`
-	// endpoint to use for the talosclient. if not set, the node value will be used
+	// endpoint to use for the talosclient. If not set, the node value will be used
 	Endpoint pulumi.StringPtrInput `pulumi:"endpoint"`
 	// Filters to apply to the disks
 	Filters DisksFiltersPtrInput `pulumi:"filters"`
@@ -137,12 +136,6 @@ func (o DisksResultOutput) ToDisksResultOutputWithContext(ctx context.Context) D
 	return o
 }
 
-func (o DisksResultOutput) ToOutput(ctx context.Context) pulumix.Output[DisksResult] {
-	return pulumix.Output[DisksResult]{
-		OutputState: o.OutputState,
-	}
-}
-
 // The client configuration data
 func (o DisksResultOutput) ClientConfiguration() DisksClientConfigurationOutput {
 	return o.ApplyT(func(v DisksResult) DisksClientConfiguration { return v.ClientConfiguration }).(DisksClientConfigurationOutput)
@@ -153,7 +146,7 @@ func (o DisksResultOutput) Disks() DisksDiskArrayOutput {
 	return o.ApplyT(func(v DisksResult) []DisksDisk { return v.Disks }).(DisksDiskArrayOutput)
 }
 
-// endpoint to use for the talosclient. if not set, the node value will be used
+// endpoint to use for the talosclient. If not set, the node value will be used
 func (o DisksResultOutput) Endpoint() pulumi.StringOutput {
 	return o.ApplyT(func(v DisksResult) string { return v.Endpoint }).(pulumi.StringOutput)
 }

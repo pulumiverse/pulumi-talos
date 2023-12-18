@@ -8,7 +8,6 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
@@ -155,12 +154,6 @@ func (o GetConfigurationResultOutput) ToGetConfigurationResultOutput() GetConfig
 
 func (o GetConfigurationResultOutput) ToGetConfigurationResultOutputWithContext(ctx context.Context) GetConfigurationResultOutput {
 	return o
-}
-
-func (o GetConfigurationResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationResult] {
-	return pulumix.Output[GetConfigurationResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The endpoint of the talos kubernetes cluster

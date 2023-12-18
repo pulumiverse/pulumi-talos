@@ -9,7 +9,6 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
@@ -176,12 +175,6 @@ func (i *ConfigurationApply) ToConfigurationApplyOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyOutput)
 }
 
-func (i *ConfigurationApply) ToOutput(ctx context.Context) pulumix.Output[*ConfigurationApply] {
-	return pulumix.Output[*ConfigurationApply]{
-		OutputState: i.ToConfigurationApplyOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ConfigurationApplyArrayInput is an input type that accepts ConfigurationApplyArray and ConfigurationApplyArrayOutput values.
 // You can construct a concrete instance of `ConfigurationApplyArrayInput` via:
 //
@@ -205,12 +198,6 @@ func (i ConfigurationApplyArray) ToConfigurationApplyArrayOutput() Configuration
 
 func (i ConfigurationApplyArray) ToConfigurationApplyArrayOutputWithContext(ctx context.Context) ConfigurationApplyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyArrayOutput)
-}
-
-func (i ConfigurationApplyArray) ToOutput(ctx context.Context) pulumix.Output[[]*ConfigurationApply] {
-	return pulumix.Output[[]*ConfigurationApply]{
-		OutputState: i.ToConfigurationApplyArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ConfigurationApplyMapInput is an input type that accepts ConfigurationApplyMap and ConfigurationApplyMapOutput values.
@@ -238,12 +225,6 @@ func (i ConfigurationApplyMap) ToConfigurationApplyMapOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyMapOutput)
 }
 
-func (i ConfigurationApplyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConfigurationApply] {
-	return pulumix.Output[map[string]*ConfigurationApply]{
-		OutputState: i.ToConfigurationApplyMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ConfigurationApplyOutput struct{ *pulumi.OutputState }
 
 func (ConfigurationApplyOutput) ElementType() reflect.Type {
@@ -256,12 +237,6 @@ func (o ConfigurationApplyOutput) ToConfigurationApplyOutput() ConfigurationAppl
 
 func (o ConfigurationApplyOutput) ToConfigurationApplyOutputWithContext(ctx context.Context) ConfigurationApplyOutput {
 	return o
-}
-
-func (o ConfigurationApplyOutput) ToOutput(ctx context.Context) pulumix.Output[*ConfigurationApply] {
-	return pulumix.Output[*ConfigurationApply]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The mode of the apply operation
@@ -317,12 +292,6 @@ func (o ConfigurationApplyArrayOutput) ToConfigurationApplyArrayOutputWithContex
 	return o
 }
 
-func (o ConfigurationApplyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ConfigurationApply] {
-	return pulumix.Output[[]*ConfigurationApply]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ConfigurationApplyArrayOutput) Index(i pulumi.IntInput) ConfigurationApplyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ConfigurationApply {
 		return vs[0].([]*ConfigurationApply)[vs[1].(int)]
@@ -341,12 +310,6 @@ func (o ConfigurationApplyMapOutput) ToConfigurationApplyMapOutput() Configurati
 
 func (o ConfigurationApplyMapOutput) ToConfigurationApplyMapOutputWithContext(ctx context.Context) ConfigurationApplyMapOutput {
 	return o
-}
-
-func (o ConfigurationApplyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConfigurationApply] {
-	return pulumix.Output[map[string]*ConfigurationApply]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ConfigurationApplyMapOutput) MapIndex(k pulumi.StringInput) ConfigurationApplyOutput {

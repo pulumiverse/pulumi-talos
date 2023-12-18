@@ -15,6 +15,7 @@
     "files": [
         "client/configuration.ts",
         "client/index.ts",
+        "cluster/health.ts",
         "cluster/index.ts",
         "cluster/kubeconfig.ts",
         "index.ts",

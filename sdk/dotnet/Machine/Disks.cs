@@ -109,7 +109,7 @@ namespace Pulumiverse.Talos.Machine
         public Inputs.DisksClientConfigurationArgs ClientConfiguration { get; set; } = null!;
 
         /// <summary>
-        /// endpoint to use for the talosclient. if not set, the node value will be used
+        /// endpoint to use for the talosclient. If not set, the node value will be used
         /// </summary>
         [Input("endpoint")]
         public string? Endpoint { get; set; }
@@ -144,7 +144,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<Inputs.DisksClientConfigurationInputArgs> ClientConfiguration { get; set; } = null!;
 
         /// <summary>
-        /// endpoint to use for the talosclient. if not set, the node value will be used
+        /// endpoint to use for the talosclient. If not set, the node value will be used
         /// </summary>
         [Input("endpoint")]
         public Input<string>? Endpoint { get; set; }
@@ -183,7 +183,7 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         public readonly ImmutableArray<Outputs.DisksDiskResult> Disks;
         /// <summary>
-        /// endpoint to use for the talosclient. if not set, the node value will be used
+        /// endpoint to use for the talosclient. If not set, the node value will be used
         /// </summary>
         public readonly string Endpoint;
         /// <summary>

@@ -4,6 +4,11 @@
 import * as utilities from "../utilities";
 
 // Export members:
+export { HealthArgs, HealthResult, HealthOutputArgs } from "./health";
+export const health: typeof import("./health").health = null as any;
+export const healthOutput: typeof import("./health").healthOutput = null as any;
+utilities.lazyLoad(exports, ["health","healthOutput"], () => require("./health"));
+
 export { KubeconfigArgs, KubeconfigResult, KubeconfigOutputArgs } from "./kubeconfig";
 export const kubeconfig: typeof import("./kubeconfig").kubeconfig = null as any;
 export const kubeconfigOutput: typeof import("./kubeconfig").kubeconfigOutput = null as any;

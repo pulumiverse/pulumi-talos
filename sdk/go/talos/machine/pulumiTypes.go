@@ -8,7 +8,6 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
@@ -55,12 +54,6 @@ func (i BootstrapClientConfigurationArgs) ToBootstrapClientConfigurationOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapClientConfigurationOutput)
 }
 
-func (i BootstrapClientConfigurationArgs) ToOutput(ctx context.Context) pulumix.Output[BootstrapClientConfiguration] {
-	return pulumix.Output[BootstrapClientConfiguration]{
-		OutputState: i.ToBootstrapClientConfigurationOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i BootstrapClientConfigurationArgs) ToBootstrapClientConfigurationPtrOutput() BootstrapClientConfigurationPtrOutput {
 	return i.ToBootstrapClientConfigurationPtrOutputWithContext(context.Background())
 }
@@ -102,12 +95,6 @@ func (i *bootstrapClientConfigurationPtrType) ToBootstrapClientConfigurationPtrO
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapClientConfigurationPtrOutput)
 }
 
-func (i *bootstrapClientConfigurationPtrType) ToOutput(ctx context.Context) pulumix.Output[*BootstrapClientConfiguration] {
-	return pulumix.Output[*BootstrapClientConfiguration]{
-		OutputState: i.ToBootstrapClientConfigurationPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type BootstrapClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (BootstrapClientConfigurationOutput) ElementType() reflect.Type {
@@ -130,12 +117,6 @@ func (o BootstrapClientConfigurationOutput) ToBootstrapClientConfigurationPtrOut
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v BootstrapClientConfiguration) *BootstrapClientConfiguration {
 		return &v
 	}).(BootstrapClientConfigurationPtrOutput)
-}
-
-func (o BootstrapClientConfigurationOutput) ToOutput(ctx context.Context) pulumix.Output[BootstrapClientConfiguration] {
-	return pulumix.Output[BootstrapClientConfiguration]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The client CA certificate
@@ -165,12 +146,6 @@ func (o BootstrapClientConfigurationPtrOutput) ToBootstrapClientConfigurationPtr
 
 func (o BootstrapClientConfigurationPtrOutput) ToBootstrapClientConfigurationPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationPtrOutput {
 	return o
-}
-
-func (o BootstrapClientConfigurationPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*BootstrapClientConfiguration] {
-	return pulumix.Output[*BootstrapClientConfiguration]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o BootstrapClientConfigurationPtrOutput) Elem() BootstrapClientConfigurationOutput {
@@ -246,12 +221,6 @@ func (i BootstrapTimeoutsArgs) ToBootstrapTimeoutsOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapTimeoutsOutput)
 }
 
-func (i BootstrapTimeoutsArgs) ToOutput(ctx context.Context) pulumix.Output[BootstrapTimeouts] {
-	return pulumix.Output[BootstrapTimeouts]{
-		OutputState: i.ToBootstrapTimeoutsOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i BootstrapTimeoutsArgs) ToBootstrapTimeoutsPtrOutput() BootstrapTimeoutsPtrOutput {
 	return i.ToBootstrapTimeoutsPtrOutputWithContext(context.Background())
 }
@@ -293,12 +262,6 @@ func (i *bootstrapTimeoutsPtrType) ToBootstrapTimeoutsPtrOutputWithContext(ctx c
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapTimeoutsPtrOutput)
 }
 
-func (i *bootstrapTimeoutsPtrType) ToOutput(ctx context.Context) pulumix.Output[*BootstrapTimeouts] {
-	return pulumix.Output[*BootstrapTimeouts]{
-		OutputState: i.ToBootstrapTimeoutsPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type BootstrapTimeoutsOutput struct{ *pulumi.OutputState }
 
 func (BootstrapTimeoutsOutput) ElementType() reflect.Type {
@@ -323,12 +286,6 @@ func (o BootstrapTimeoutsOutput) ToBootstrapTimeoutsPtrOutputWithContext(ctx con
 	}).(BootstrapTimeoutsPtrOutput)
 }
 
-func (o BootstrapTimeoutsOutput) ToOutput(ctx context.Context) pulumix.Output[BootstrapTimeouts] {
-	return pulumix.Output[BootstrapTimeouts]{
-		OutputState: o.OutputState,
-	}
-}
-
 // A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
 func (o BootstrapTimeoutsOutput) Create() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v BootstrapTimeouts) *string { return v.Create }).(pulumi.StringPtrOutput)
@@ -346,12 +303,6 @@ func (o BootstrapTimeoutsPtrOutput) ToBootstrapTimeoutsPtrOutput() BootstrapTime
 
 func (o BootstrapTimeoutsPtrOutput) ToBootstrapTimeoutsPtrOutputWithContext(ctx context.Context) BootstrapTimeoutsPtrOutput {
 	return o
-}
-
-func (o BootstrapTimeoutsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*BootstrapTimeouts] {
-	return pulumix.Output[*BootstrapTimeouts]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o BootstrapTimeoutsPtrOutput) Elem() BootstrapTimeoutsOutput {
@@ -415,12 +366,6 @@ func (i ConfigurationApplyClientConfigurationArgs) ToConfigurationApplyClientCon
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyClientConfigurationOutput)
 }
 
-func (i ConfigurationApplyClientConfigurationArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigurationApplyClientConfiguration] {
-	return pulumix.Output[ConfigurationApplyClientConfiguration]{
-		OutputState: i.ToConfigurationApplyClientConfigurationOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i ConfigurationApplyClientConfigurationArgs) ToConfigurationApplyClientConfigurationPtrOutput() ConfigurationApplyClientConfigurationPtrOutput {
 	return i.ToConfigurationApplyClientConfigurationPtrOutputWithContext(context.Background())
 }
@@ -462,12 +407,6 @@ func (i *configurationApplyClientConfigurationPtrType) ToConfigurationApplyClien
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyClientConfigurationPtrOutput)
 }
 
-func (i *configurationApplyClientConfigurationPtrType) ToOutput(ctx context.Context) pulumix.Output[*ConfigurationApplyClientConfiguration] {
-	return pulumix.Output[*ConfigurationApplyClientConfiguration]{
-		OutputState: i.ToConfigurationApplyClientConfigurationPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ConfigurationApplyClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (ConfigurationApplyClientConfigurationOutput) ElementType() reflect.Type {
@@ -490,12 +429,6 @@ func (o ConfigurationApplyClientConfigurationOutput) ToConfigurationApplyClientC
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConfigurationApplyClientConfiguration) *ConfigurationApplyClientConfiguration {
 		return &v
 	}).(ConfigurationApplyClientConfigurationPtrOutput)
-}
-
-func (o ConfigurationApplyClientConfigurationOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationApplyClientConfiguration] {
-	return pulumix.Output[ConfigurationApplyClientConfiguration]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The client CA certificate
@@ -525,12 +458,6 @@ func (o ConfigurationApplyClientConfigurationPtrOutput) ToConfigurationApplyClie
 
 func (o ConfigurationApplyClientConfigurationPtrOutput) ToConfigurationApplyClientConfigurationPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationPtrOutput {
 	return o
-}
-
-func (o ConfigurationApplyClientConfigurationPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ConfigurationApplyClientConfiguration] {
-	return pulumix.Output[*ConfigurationApplyClientConfiguration]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ConfigurationApplyClientConfigurationPtrOutput) Elem() ConfigurationApplyClientConfigurationOutput {
@@ -614,12 +541,6 @@ func (i DisksClientConfigurationArgs) ToDisksClientConfigurationOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(DisksClientConfigurationOutput)
 }
 
-func (i DisksClientConfigurationArgs) ToOutput(ctx context.Context) pulumix.Output[DisksClientConfiguration] {
-	return pulumix.Output[DisksClientConfiguration]{
-		OutputState: i.ToDisksClientConfigurationOutputWithContext(ctx).OutputState,
-	}
-}
-
 type DisksClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (DisksClientConfigurationOutput) ElementType() reflect.Type {
@@ -632,12 +553,6 @@ func (o DisksClientConfigurationOutput) ToDisksClientConfigurationOutput() Disks
 
 func (o DisksClientConfigurationOutput) ToDisksClientConfigurationOutputWithContext(ctx context.Context) DisksClientConfigurationOutput {
 	return o
-}
-
-func (o DisksClientConfigurationOutput) ToOutput(ctx context.Context) pulumix.Output[DisksClientConfiguration] {
-	return pulumix.Output[DisksClientConfiguration]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The client CA certificate
@@ -720,12 +635,6 @@ func (i DisksDiskArgs) ToDisksDiskOutputWithContext(ctx context.Context) DisksDi
 	return pulumi.ToOutputWithContext(ctx, i).(DisksDiskOutput)
 }
 
-func (i DisksDiskArgs) ToOutput(ctx context.Context) pulumix.Output[DisksDisk] {
-	return pulumix.Output[DisksDisk]{
-		OutputState: i.ToDisksDiskOutputWithContext(ctx).OutputState,
-	}
-}
-
 // DisksDiskArrayInput is an input type that accepts DisksDiskArray and DisksDiskArrayOutput values.
 // You can construct a concrete instance of `DisksDiskArrayInput` via:
 //
@@ -751,12 +660,6 @@ func (i DisksDiskArray) ToDisksDiskArrayOutputWithContext(ctx context.Context) D
 	return pulumi.ToOutputWithContext(ctx, i).(DisksDiskArrayOutput)
 }
 
-func (i DisksDiskArray) ToOutput(ctx context.Context) pulumix.Output[[]DisksDisk] {
-	return pulumix.Output[[]DisksDisk]{
-		OutputState: i.ToDisksDiskArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 type DisksDiskOutput struct{ *pulumi.OutputState }
 
 func (DisksDiskOutput) ElementType() reflect.Type {
@@ -769,12 +672,6 @@ func (o DisksDiskOutput) ToDisksDiskOutput() DisksDiskOutput {
 
 func (o DisksDiskOutput) ToDisksDiskOutputWithContext(ctx context.Context) DisksDiskOutput {
 	return o
-}
-
-func (o DisksDiskOutput) ToOutput(ctx context.Context) pulumix.Output[DisksDisk] {
-	return pulumix.Output[DisksDisk]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The bus path of the disk
@@ -834,12 +731,6 @@ func (o DisksDiskArrayOutput) ToDisksDiskArrayOutput() DisksDiskArrayOutput {
 
 func (o DisksDiskArrayOutput) ToDisksDiskArrayOutputWithContext(ctx context.Context) DisksDiskArrayOutput {
 	return o
-}
-
-func (o DisksDiskArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]DisksDisk] {
-	return pulumix.Output[[]DisksDisk]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o DisksDiskArrayOutput) Index(i pulumi.IntInput) DisksDiskOutput {
@@ -913,12 +804,6 @@ func (i DisksFiltersArgs) ToDisksFiltersOutputWithContext(ctx context.Context) D
 	return pulumi.ToOutputWithContext(ctx, i).(DisksFiltersOutput)
 }
 
-func (i DisksFiltersArgs) ToOutput(ctx context.Context) pulumix.Output[DisksFilters] {
-	return pulumix.Output[DisksFilters]{
-		OutputState: i.ToDisksFiltersOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i DisksFiltersArgs) ToDisksFiltersPtrOutput() DisksFiltersPtrOutput {
 	return i.ToDisksFiltersPtrOutputWithContext(context.Background())
 }
@@ -960,12 +845,6 @@ func (i *disksFiltersPtrType) ToDisksFiltersPtrOutputWithContext(ctx context.Con
 	return pulumi.ToOutputWithContext(ctx, i).(DisksFiltersPtrOutput)
 }
 
-func (i *disksFiltersPtrType) ToOutput(ctx context.Context) pulumix.Output[*DisksFilters] {
-	return pulumix.Output[*DisksFilters]{
-		OutputState: i.ToDisksFiltersPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type DisksFiltersOutput struct{ *pulumi.OutputState }
 
 func (DisksFiltersOutput) ElementType() reflect.Type {
@@ -988,12 +867,6 @@ func (o DisksFiltersOutput) ToDisksFiltersPtrOutputWithContext(ctx context.Conte
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v DisksFilters) *DisksFilters {
 		return &v
 	}).(DisksFiltersPtrOutput)
-}
-
-func (o DisksFiltersOutput) ToOutput(ctx context.Context) pulumix.Output[DisksFilters] {
-	return pulumix.Output[DisksFilters]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Filter disks by bus path
@@ -1053,12 +926,6 @@ func (o DisksFiltersPtrOutput) ToDisksFiltersPtrOutput() DisksFiltersPtrOutput {
 
 func (o DisksFiltersPtrOutput) ToDisksFiltersPtrOutputWithContext(ctx context.Context) DisksFiltersPtrOutput {
 	return o
-}
-
-func (o DisksFiltersPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*DisksFilters] {
-	return pulumix.Output[*DisksFilters]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o DisksFiltersPtrOutput) Elem() DisksFiltersOutput {
@@ -1194,12 +1061,6 @@ func (i DisksTimeoutsArgs) ToDisksTimeoutsOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(DisksTimeoutsOutput)
 }
 
-func (i DisksTimeoutsArgs) ToOutput(ctx context.Context) pulumix.Output[DisksTimeouts] {
-	return pulumix.Output[DisksTimeouts]{
-		OutputState: i.ToDisksTimeoutsOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i DisksTimeoutsArgs) ToDisksTimeoutsPtrOutput() DisksTimeoutsPtrOutput {
 	return i.ToDisksTimeoutsPtrOutputWithContext(context.Background())
 }
@@ -1241,12 +1102,6 @@ func (i *disksTimeoutsPtrType) ToDisksTimeoutsPtrOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(DisksTimeoutsPtrOutput)
 }
 
-func (i *disksTimeoutsPtrType) ToOutput(ctx context.Context) pulumix.Output[*DisksTimeouts] {
-	return pulumix.Output[*DisksTimeouts]{
-		OutputState: i.ToDisksTimeoutsPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type DisksTimeoutsOutput struct{ *pulumi.OutputState }
 
 func (DisksTimeoutsOutput) ElementType() reflect.Type {
@@ -1271,12 +1126,6 @@ func (o DisksTimeoutsOutput) ToDisksTimeoutsPtrOutputWithContext(ctx context.Con
 	}).(DisksTimeoutsPtrOutput)
 }
 
-func (o DisksTimeoutsOutput) ToOutput(ctx context.Context) pulumix.Output[DisksTimeouts] {
-	return pulumix.Output[DisksTimeouts]{
-		OutputState: o.OutputState,
-	}
-}
-
 // A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
 func (o DisksTimeoutsOutput) Read() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DisksTimeouts) *string { return v.Read }).(pulumi.StringPtrOutput)
@@ -1294,12 +1143,6 @@ func (o DisksTimeoutsPtrOutput) ToDisksTimeoutsPtrOutput() DisksTimeoutsPtrOutpu
 
 func (o DisksTimeoutsPtrOutput) ToDisksTimeoutsPtrOutputWithContext(ctx context.Context) DisksTimeoutsPtrOutput {
 	return o
-}
-
-func (o DisksTimeoutsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*DisksTimeouts] {
-	return pulumix.Output[*DisksTimeouts]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o DisksTimeoutsPtrOutput) Elem() DisksTimeoutsOutput {
@@ -1363,12 +1206,6 @@ func (i SecretsClientConfigurationArgs) ToSecretsClientConfigurationOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsClientConfigurationOutput)
 }
 
-func (i SecretsClientConfigurationArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsClientConfiguration] {
-	return pulumix.Output[SecretsClientConfiguration]{
-		OutputState: i.ToSecretsClientConfigurationOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsClientConfigurationArgs) ToSecretsClientConfigurationPtrOutput() SecretsClientConfigurationPtrOutput {
 	return i.ToSecretsClientConfigurationPtrOutputWithContext(context.Background())
 }
@@ -1410,12 +1247,6 @@ func (i *secretsClientConfigurationPtrType) ToSecretsClientConfigurationPtrOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsClientConfigurationPtrOutput)
 }
 
-func (i *secretsClientConfigurationPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsClientConfiguration] {
-	return pulumix.Output[*SecretsClientConfiguration]{
-		OutputState: i.ToSecretsClientConfigurationPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (SecretsClientConfigurationOutput) ElementType() reflect.Type {
@@ -1438,12 +1269,6 @@ func (o SecretsClientConfigurationOutput) ToSecretsClientConfigurationPtrOutputW
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecretsClientConfiguration) *SecretsClientConfiguration {
 		return &v
 	}).(SecretsClientConfigurationPtrOutput)
-}
-
-func (o SecretsClientConfigurationOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsClientConfiguration] {
-	return pulumix.Output[SecretsClientConfiguration]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The client CA certificate
@@ -1473,12 +1298,6 @@ func (o SecretsClientConfigurationPtrOutput) ToSecretsClientConfigurationPtrOutp
 
 func (o SecretsClientConfigurationPtrOutput) ToSecretsClientConfigurationPtrOutputWithContext(ctx context.Context) SecretsClientConfigurationPtrOutput {
 	return o
-}
-
-func (o SecretsClientConfigurationPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsClientConfiguration] {
-	return pulumix.Output[*SecretsClientConfiguration]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsClientConfigurationPtrOutput) Elem() SecretsClientConfigurationOutput {
@@ -1564,12 +1383,6 @@ func (i SecretsMachineSecretsArgs) ToSecretsMachineSecretsOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsOutput)
 }
 
-func (i SecretsMachineSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecrets] {
-	return pulumix.Output[SecretsMachineSecrets]{
-		OutputState: i.ToSecretsMachineSecretsOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsOutput) ElementType() reflect.Type {
@@ -1582,12 +1395,6 @@ func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsOutput() SecretsMach
 
 func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsOutputWithContext(ctx context.Context) SecretsMachineSecretsOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecrets] {
-	return pulumix.Output[SecretsMachineSecrets]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsOutput) Certs() SecretsMachineSecretsCertsPtrOutput {
@@ -1658,12 +1465,6 @@ func (i SecretsMachineSecretsCertsArgs) ToSecretsMachineSecretsCertsOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsOutput)
 }
 
-func (i SecretsMachineSecretsCertsArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCerts] {
-	return pulumix.Output[SecretsMachineSecretsCerts]{
-		OutputState: i.ToSecretsMachineSecretsCertsOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsCertsArgs) ToSecretsMachineSecretsCertsPtrOutput() SecretsMachineSecretsCertsPtrOutput {
 	return i.ToSecretsMachineSecretsCertsPtrOutputWithContext(context.Background())
 }
@@ -1705,12 +1506,6 @@ func (i *secretsMachineSecretsCertsPtrType) ToSecretsMachineSecretsCertsPtrOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsPtrOutput)
 }
 
-func (i *secretsMachineSecretsCertsPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCerts] {
-	return pulumix.Output[*SecretsMachineSecretsCerts]{
-		OutputState: i.ToSecretsMachineSecretsCertsPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsCertsOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsCertsOutput) ElementType() reflect.Type {
@@ -1733,12 +1528,6 @@ func (o SecretsMachineSecretsCertsOutput) ToSecretsMachineSecretsCertsPtrOutputW
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecretsMachineSecretsCerts) *SecretsMachineSecretsCerts {
 		return &v
 	}).(SecretsMachineSecretsCertsPtrOutput)
-}
-
-func (o SecretsMachineSecretsCertsOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCerts] {
-	return pulumix.Output[SecretsMachineSecretsCerts]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The certificate and key pair
@@ -1780,12 +1569,6 @@ func (o SecretsMachineSecretsCertsPtrOutput) ToSecretsMachineSecretsCertsPtrOutp
 
 func (o SecretsMachineSecretsCertsPtrOutput) ToSecretsMachineSecretsCertsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsCertsPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsCertsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCerts] {
-	return pulumix.Output[*SecretsMachineSecretsCerts]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsCertsPtrOutput) Elem() SecretsMachineSecretsCertsOutput {
@@ -1885,12 +1668,6 @@ func (i SecretsMachineSecretsCertsEtcdArgs) ToSecretsMachineSecretsCertsEtcdOutp
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsEtcdOutput)
 }
 
-func (i SecretsMachineSecretsCertsEtcdArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsEtcd] {
-	return pulumix.Output[SecretsMachineSecretsCertsEtcd]{
-		OutputState: i.ToSecretsMachineSecretsCertsEtcdOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsCertsEtcdArgs) ToSecretsMachineSecretsCertsEtcdPtrOutput() SecretsMachineSecretsCertsEtcdPtrOutput {
 	return i.ToSecretsMachineSecretsCertsEtcdPtrOutputWithContext(context.Background())
 }
@@ -1932,12 +1709,6 @@ func (i *secretsMachineSecretsCertsEtcdPtrType) ToSecretsMachineSecretsCertsEtcd
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsEtcdPtrOutput)
 }
 
-func (i *secretsMachineSecretsCertsEtcdPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsEtcd] {
-	return pulumix.Output[*SecretsMachineSecretsCertsEtcd]{
-		OutputState: i.ToSecretsMachineSecretsCertsEtcdPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsCertsEtcdOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsCertsEtcdOutput) ElementType() reflect.Type {
@@ -1962,12 +1733,6 @@ func (o SecretsMachineSecretsCertsEtcdOutput) ToSecretsMachineSecretsCertsEtcdPt
 	}).(SecretsMachineSecretsCertsEtcdPtrOutput)
 }
 
-func (o SecretsMachineSecretsCertsEtcdOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsEtcd] {
-	return pulumix.Output[SecretsMachineSecretsCertsEtcd]{
-		OutputState: o.OutputState,
-	}
-}
-
 // certificate data
 func (o SecretsMachineSecretsCertsEtcdOutput) Cert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecretsCertsEtcd) *string { return v.Cert }).(pulumi.StringPtrOutput)
@@ -1990,12 +1755,6 @@ func (o SecretsMachineSecretsCertsEtcdPtrOutput) ToSecretsMachineSecretsCertsEtc
 
 func (o SecretsMachineSecretsCertsEtcdPtrOutput) ToSecretsMachineSecretsCertsEtcdPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsCertsEtcdPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsCertsEtcdPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsEtcd] {
-	return pulumix.Output[*SecretsMachineSecretsCertsEtcd]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsCertsEtcdPtrOutput) Elem() SecretsMachineSecretsCertsEtcdOutput {
@@ -2065,12 +1824,6 @@ func (i SecretsMachineSecretsCertsK8sArgs) ToSecretsMachineSecretsCertsK8sOutput
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsK8sOutput)
 }
 
-func (i SecretsMachineSecretsCertsK8sArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsK8s] {
-	return pulumix.Output[SecretsMachineSecretsCertsK8s]{
-		OutputState: i.ToSecretsMachineSecretsCertsK8sOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsCertsK8sArgs) ToSecretsMachineSecretsCertsK8sPtrOutput() SecretsMachineSecretsCertsK8sPtrOutput {
 	return i.ToSecretsMachineSecretsCertsK8sPtrOutputWithContext(context.Background())
 }
@@ -2112,12 +1865,6 @@ func (i *secretsMachineSecretsCertsK8sPtrType) ToSecretsMachineSecretsCertsK8sPt
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsK8sPtrOutput)
 }
 
-func (i *secretsMachineSecretsCertsK8sPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsK8s] {
-	return pulumix.Output[*SecretsMachineSecretsCertsK8s]{
-		OutputState: i.ToSecretsMachineSecretsCertsK8sPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsCertsK8sOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsCertsK8sOutput) ElementType() reflect.Type {
@@ -2142,12 +1889,6 @@ func (o SecretsMachineSecretsCertsK8sOutput) ToSecretsMachineSecretsCertsK8sPtrO
 	}).(SecretsMachineSecretsCertsK8sPtrOutput)
 }
 
-func (o SecretsMachineSecretsCertsK8sOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsK8s] {
-	return pulumix.Output[SecretsMachineSecretsCertsK8s]{
-		OutputState: o.OutputState,
-	}
-}
-
 // certificate data
 func (o SecretsMachineSecretsCertsK8sOutput) Cert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecretsCertsK8s) *string { return v.Cert }).(pulumi.StringPtrOutput)
@@ -2170,12 +1911,6 @@ func (o SecretsMachineSecretsCertsK8sPtrOutput) ToSecretsMachineSecretsCertsK8sP
 
 func (o SecretsMachineSecretsCertsK8sPtrOutput) ToSecretsMachineSecretsCertsK8sPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsCertsK8sPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsCertsK8sPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsK8s] {
-	return pulumix.Output[*SecretsMachineSecretsCertsK8s]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsCertsK8sPtrOutput) Elem() SecretsMachineSecretsCertsK8sOutput {
@@ -2245,12 +1980,6 @@ func (i SecretsMachineSecretsCertsK8sAggregatorArgs) ToSecretsMachineSecretsCert
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsK8sAggregatorOutput)
 }
 
-func (i SecretsMachineSecretsCertsK8sAggregatorArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsK8sAggregator] {
-	return pulumix.Output[SecretsMachineSecretsCertsK8sAggregator]{
-		OutputState: i.ToSecretsMachineSecretsCertsK8sAggregatorOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsCertsK8sAggregatorArgs) ToSecretsMachineSecretsCertsK8sAggregatorPtrOutput() SecretsMachineSecretsCertsK8sAggregatorPtrOutput {
 	return i.ToSecretsMachineSecretsCertsK8sAggregatorPtrOutputWithContext(context.Background())
 }
@@ -2292,12 +2021,6 @@ func (i *secretsMachineSecretsCertsK8sAggregatorPtrType) ToSecretsMachineSecrets
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsK8sAggregatorPtrOutput)
 }
 
-func (i *secretsMachineSecretsCertsK8sAggregatorPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsK8sAggregator] {
-	return pulumix.Output[*SecretsMachineSecretsCertsK8sAggregator]{
-		OutputState: i.ToSecretsMachineSecretsCertsK8sAggregatorPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsCertsK8sAggregatorOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsCertsK8sAggregatorOutput) ElementType() reflect.Type {
@@ -2322,12 +2045,6 @@ func (o SecretsMachineSecretsCertsK8sAggregatorOutput) ToSecretsMachineSecretsCe
 	}).(SecretsMachineSecretsCertsK8sAggregatorPtrOutput)
 }
 
-func (o SecretsMachineSecretsCertsK8sAggregatorOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsK8sAggregator] {
-	return pulumix.Output[SecretsMachineSecretsCertsK8sAggregator]{
-		OutputState: o.OutputState,
-	}
-}
-
 // certificate data
 func (o SecretsMachineSecretsCertsK8sAggregatorOutput) Cert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecretsCertsK8sAggregator) *string { return v.Cert }).(pulumi.StringPtrOutput)
@@ -2350,12 +2067,6 @@ func (o SecretsMachineSecretsCertsK8sAggregatorPtrOutput) ToSecretsMachineSecret
 
 func (o SecretsMachineSecretsCertsK8sAggregatorPtrOutput) ToSecretsMachineSecretsCertsK8sAggregatorPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsCertsK8sAggregatorPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsCertsK8sAggregatorPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsK8sAggregator] {
-	return pulumix.Output[*SecretsMachineSecretsCertsK8sAggregator]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsCertsK8sAggregatorPtrOutput) Elem() SecretsMachineSecretsCertsK8sAggregatorOutput {
@@ -2421,12 +2132,6 @@ func (i SecretsMachineSecretsCertsK8sServiceaccountArgs) ToSecretsMachineSecrets
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsK8sServiceaccountOutput)
 }
 
-func (i SecretsMachineSecretsCertsK8sServiceaccountArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsK8sServiceaccount] {
-	return pulumix.Output[SecretsMachineSecretsCertsK8sServiceaccount]{
-		OutputState: i.ToSecretsMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsCertsK8sServiceaccountArgs) ToSecretsMachineSecretsCertsK8sServiceaccountPtrOutput() SecretsMachineSecretsCertsK8sServiceaccountPtrOutput {
 	return i.ToSecretsMachineSecretsCertsK8sServiceaccountPtrOutputWithContext(context.Background())
 }
@@ -2468,12 +2173,6 @@ func (i *secretsMachineSecretsCertsK8sServiceaccountPtrType) ToSecretsMachineSec
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsK8sServiceaccountPtrOutput)
 }
 
-func (i *secretsMachineSecretsCertsK8sServiceaccountPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsK8sServiceaccount] {
-	return pulumix.Output[*SecretsMachineSecretsCertsK8sServiceaccount]{
-		OutputState: i.ToSecretsMachineSecretsCertsK8sServiceaccountPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsCertsK8sServiceaccountOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsCertsK8sServiceaccountOutput) ElementType() reflect.Type {
@@ -2498,12 +2197,6 @@ func (o SecretsMachineSecretsCertsK8sServiceaccountOutput) ToSecretsMachineSecre
 	}).(SecretsMachineSecretsCertsK8sServiceaccountPtrOutput)
 }
 
-func (o SecretsMachineSecretsCertsK8sServiceaccountOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsK8sServiceaccount] {
-	return pulumix.Output[SecretsMachineSecretsCertsK8sServiceaccount]{
-		OutputState: o.OutputState,
-	}
-}
-
 // key data
 func (o SecretsMachineSecretsCertsK8sServiceaccountOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecretsCertsK8sServiceaccount) *string { return v.Key }).(pulumi.StringPtrOutput)
@@ -2521,12 +2214,6 @@ func (o SecretsMachineSecretsCertsK8sServiceaccountPtrOutput) ToSecretsMachineSe
 
 func (o SecretsMachineSecretsCertsK8sServiceaccountPtrOutput) ToSecretsMachineSecretsCertsK8sServiceaccountPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsCertsK8sServiceaccountPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsCertsK8sServiceaccountPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsK8sServiceaccount] {
-	return pulumix.Output[*SecretsMachineSecretsCertsK8sServiceaccount]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsCertsK8sServiceaccountPtrOutput) Elem() SecretsMachineSecretsCertsK8sServiceaccountOutput {
@@ -2586,12 +2273,6 @@ func (i SecretsMachineSecretsCertsOsArgs) ToSecretsMachineSecretsCertsOsOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsOsOutput)
 }
 
-func (i SecretsMachineSecretsCertsOsArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsOs] {
-	return pulumix.Output[SecretsMachineSecretsCertsOs]{
-		OutputState: i.ToSecretsMachineSecretsCertsOsOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsCertsOsArgs) ToSecretsMachineSecretsCertsOsPtrOutput() SecretsMachineSecretsCertsOsPtrOutput {
 	return i.ToSecretsMachineSecretsCertsOsPtrOutputWithContext(context.Background())
 }
@@ -2633,12 +2314,6 @@ func (i *secretsMachineSecretsCertsOsPtrType) ToSecretsMachineSecretsCertsOsPtrO
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsCertsOsPtrOutput)
 }
 
-func (i *secretsMachineSecretsCertsOsPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsOs] {
-	return pulumix.Output[*SecretsMachineSecretsCertsOs]{
-		OutputState: i.ToSecretsMachineSecretsCertsOsPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsCertsOsOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsCertsOsOutput) ElementType() reflect.Type {
@@ -2663,12 +2338,6 @@ func (o SecretsMachineSecretsCertsOsOutput) ToSecretsMachineSecretsCertsOsPtrOut
 	}).(SecretsMachineSecretsCertsOsPtrOutput)
 }
 
-func (o SecretsMachineSecretsCertsOsOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCertsOs] {
-	return pulumix.Output[SecretsMachineSecretsCertsOs]{
-		OutputState: o.OutputState,
-	}
-}
-
 // certificate data
 func (o SecretsMachineSecretsCertsOsOutput) Cert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecretsCertsOs) *string { return v.Cert }).(pulumi.StringPtrOutput)
@@ -2691,12 +2360,6 @@ func (o SecretsMachineSecretsCertsOsPtrOutput) ToSecretsMachineSecretsCertsOsPtr
 
 func (o SecretsMachineSecretsCertsOsPtrOutput) ToSecretsMachineSecretsCertsOsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsCertsOsPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsCertsOsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCertsOs] {
-	return pulumix.Output[*SecretsMachineSecretsCertsOs]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsCertsOsPtrOutput) Elem() SecretsMachineSecretsCertsOsOutput {
@@ -2766,12 +2429,6 @@ func (i SecretsMachineSecretsClusterArgs) ToSecretsMachineSecretsClusterOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsClusterOutput)
 }
 
-func (i SecretsMachineSecretsClusterArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCluster] {
-	return pulumix.Output[SecretsMachineSecretsCluster]{
-		OutputState: i.ToSecretsMachineSecretsClusterOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsClusterArgs) ToSecretsMachineSecretsClusterPtrOutput() SecretsMachineSecretsClusterPtrOutput {
 	return i.ToSecretsMachineSecretsClusterPtrOutputWithContext(context.Background())
 }
@@ -2813,12 +2470,6 @@ func (i *secretsMachineSecretsClusterPtrType) ToSecretsMachineSecretsClusterPtrO
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsClusterPtrOutput)
 }
 
-func (i *secretsMachineSecretsClusterPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCluster] {
-	return pulumix.Output[*SecretsMachineSecretsCluster]{
-		OutputState: i.ToSecretsMachineSecretsClusterPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsClusterOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsClusterOutput) ElementType() reflect.Type {
@@ -2843,12 +2494,6 @@ func (o SecretsMachineSecretsClusterOutput) ToSecretsMachineSecretsClusterPtrOut
 	}).(SecretsMachineSecretsClusterPtrOutput)
 }
 
-func (o SecretsMachineSecretsClusterOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsCluster] {
-	return pulumix.Output[SecretsMachineSecretsCluster]{
-		OutputState: o.OutputState,
-	}
-}
-
 // The cluster ID
 func (o SecretsMachineSecretsClusterOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecretsCluster) *string { return v.Id }).(pulumi.StringPtrOutput)
@@ -2871,12 +2516,6 @@ func (o SecretsMachineSecretsClusterPtrOutput) ToSecretsMachineSecretsClusterPtr
 
 func (o SecretsMachineSecretsClusterPtrOutput) ToSecretsMachineSecretsClusterPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsClusterPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsClusterPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsCluster] {
-	return pulumix.Output[*SecretsMachineSecretsCluster]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsClusterPtrOutput) Elem() SecretsMachineSecretsClusterOutput {
@@ -2950,12 +2589,6 @@ func (i SecretsMachineSecretsSecretsArgs) ToSecretsMachineSecretsSecretsOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsSecretsOutput)
 }
 
-func (i SecretsMachineSecretsSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsSecrets] {
-	return pulumix.Output[SecretsMachineSecretsSecrets]{
-		OutputState: i.ToSecretsMachineSecretsSecretsOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsSecretsArgs) ToSecretsMachineSecretsSecretsPtrOutput() SecretsMachineSecretsSecretsPtrOutput {
 	return i.ToSecretsMachineSecretsSecretsPtrOutputWithContext(context.Background())
 }
@@ -2997,12 +2630,6 @@ func (i *secretsMachineSecretsSecretsPtrType) ToSecretsMachineSecretsSecretsPtrO
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsSecretsPtrOutput)
 }
 
-func (i *secretsMachineSecretsSecretsPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsSecrets] {
-	return pulumix.Output[*SecretsMachineSecretsSecrets]{
-		OutputState: i.ToSecretsMachineSecretsSecretsPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsSecretsOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsSecretsOutput) ElementType() reflect.Type {
@@ -3025,12 +2652,6 @@ func (o SecretsMachineSecretsSecretsOutput) ToSecretsMachineSecretsSecretsPtrOut
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecretsMachineSecretsSecrets) *SecretsMachineSecretsSecrets {
 		return &v
 	}).(SecretsMachineSecretsSecretsPtrOutput)
-}
-
-func (o SecretsMachineSecretsSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsSecrets] {
-	return pulumix.Output[SecretsMachineSecretsSecrets]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The AES-CBC encryption secret
@@ -3060,12 +2681,6 @@ func (o SecretsMachineSecretsSecretsPtrOutput) ToSecretsMachineSecretsSecretsPtr
 
 func (o SecretsMachineSecretsSecretsPtrOutput) ToSecretsMachineSecretsSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsSecretsPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsSecretsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsSecrets] {
-	return pulumix.Output[*SecretsMachineSecretsSecrets]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsSecretsPtrOutput) Elem() SecretsMachineSecretsSecretsOutput {
@@ -3141,12 +2756,6 @@ func (i SecretsMachineSecretsTrustdinfoArgs) ToSecretsMachineSecretsTrustdinfoOu
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsTrustdinfoOutput)
 }
 
-func (i SecretsMachineSecretsTrustdinfoArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsTrustdinfo] {
-	return pulumix.Output[SecretsMachineSecretsTrustdinfo]{
-		OutputState: i.ToSecretsMachineSecretsTrustdinfoOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsMachineSecretsTrustdinfoArgs) ToSecretsMachineSecretsTrustdinfoPtrOutput() SecretsMachineSecretsTrustdinfoPtrOutput {
 	return i.ToSecretsMachineSecretsTrustdinfoPtrOutputWithContext(context.Background())
 }
@@ -3188,12 +2797,6 @@ func (i *secretsMachineSecretsTrustdinfoPtrType) ToSecretsMachineSecretsTrustdin
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsTrustdinfoPtrOutput)
 }
 
-func (i *secretsMachineSecretsTrustdinfoPtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsTrustdinfo] {
-	return pulumix.Output[*SecretsMachineSecretsTrustdinfo]{
-		OutputState: i.ToSecretsMachineSecretsTrustdinfoPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsMachineSecretsTrustdinfoOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsTrustdinfoOutput) ElementType() reflect.Type {
@@ -3218,12 +2821,6 @@ func (o SecretsMachineSecretsTrustdinfoOutput) ToSecretsMachineSecretsTrustdinfo
 	}).(SecretsMachineSecretsTrustdinfoPtrOutput)
 }
 
-func (o SecretsMachineSecretsTrustdinfoOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsMachineSecretsTrustdinfo] {
-	return pulumix.Output[SecretsMachineSecretsTrustdinfo]{
-		OutputState: o.OutputState,
-	}
-}
-
 // The trustd token
 func (o SecretsMachineSecretsTrustdinfoOutput) Token() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecretsTrustdinfo) *string { return v.Token }).(pulumi.StringPtrOutput)
@@ -3241,12 +2838,6 @@ func (o SecretsMachineSecretsTrustdinfoPtrOutput) ToSecretsMachineSecretsTrustdi
 
 func (o SecretsMachineSecretsTrustdinfoPtrOutput) ToSecretsMachineSecretsTrustdinfoPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsTrustdinfoPtrOutput {
 	return o
-}
-
-func (o SecretsMachineSecretsTrustdinfoPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsMachineSecretsTrustdinfo] {
-	return pulumix.Output[*SecretsMachineSecretsTrustdinfo]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsMachineSecretsTrustdinfoPtrOutput) Elem() SecretsMachineSecretsTrustdinfoOutput {
@@ -3306,12 +2897,6 @@ func (i TimeoutArgs) ToTimeoutOutputWithContext(ctx context.Context) TimeoutOutp
 	return pulumi.ToOutputWithContext(ctx, i).(TimeoutOutput)
 }
 
-func (i TimeoutArgs) ToOutput(ctx context.Context) pulumix.Output[Timeout] {
-	return pulumix.Output[Timeout]{
-		OutputState: i.ToTimeoutOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i TimeoutArgs) ToTimeoutPtrOutput() TimeoutPtrOutput {
 	return i.ToTimeoutPtrOutputWithContext(context.Background())
 }
@@ -3353,12 +2938,6 @@ func (i *timeoutPtrType) ToTimeoutPtrOutputWithContext(ctx context.Context) Time
 	return pulumi.ToOutputWithContext(ctx, i).(TimeoutPtrOutput)
 }
 
-func (i *timeoutPtrType) ToOutput(ctx context.Context) pulumix.Output[*Timeout] {
-	return pulumix.Output[*Timeout]{
-		OutputState: i.ToTimeoutPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type TimeoutOutput struct{ *pulumi.OutputState }
 
 func (TimeoutOutput) ElementType() reflect.Type {
@@ -3383,12 +2962,6 @@ func (o TimeoutOutput) ToTimeoutPtrOutputWithContext(ctx context.Context) Timeou
 	}).(TimeoutPtrOutput)
 }
 
-func (o TimeoutOutput) ToOutput(ctx context.Context) pulumix.Output[Timeout] {
-	return pulumix.Output[Timeout]{
-		OutputState: o.OutputState,
-	}
-}
-
 // A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
 func (o TimeoutOutput) Create() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v Timeout) *string { return v.Create }).(pulumi.StringPtrOutput)
@@ -3411,12 +2984,6 @@ func (o TimeoutPtrOutput) ToTimeoutPtrOutput() TimeoutPtrOutput {
 
 func (o TimeoutPtrOutput) ToTimeoutPtrOutputWithContext(ctx context.Context) TimeoutPtrOutput {
 	return o
-}
-
-func (o TimeoutPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Timeout] {
-	return pulumix.Output[*Timeout]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o TimeoutPtrOutput) Elem() TimeoutOutput {
@@ -3488,12 +3055,6 @@ func (i CertificateArgs) ToCertificateOutputWithContext(ctx context.Context) Cer
 	return pulumi.ToOutputWithContext(ctx, i).(CertificateOutput)
 }
 
-func (i CertificateArgs) ToOutput(ctx context.Context) pulumix.Output[Certificate] {
-	return pulumix.Output[Certificate]{
-		OutputState: i.ToCertificateOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i CertificateArgs) ToCertificatePtrOutput() CertificatePtrOutput {
 	return i.ToCertificatePtrOutputWithContext(context.Background())
 }
@@ -3535,12 +3096,6 @@ func (i *certificatePtrType) ToCertificatePtrOutputWithContext(ctx context.Conte
 	return pulumi.ToOutputWithContext(ctx, i).(CertificatePtrOutput)
 }
 
-func (i *certificatePtrType) ToOutput(ctx context.Context) pulumix.Output[*Certificate] {
-	return pulumix.Output[*Certificate]{
-		OutputState: i.ToCertificatePtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 // A Machine Secrets Certificate
 type CertificateOutput struct{ *pulumi.OutputState }
 
@@ -3566,12 +3121,6 @@ func (o CertificateOutput) ToCertificatePtrOutputWithContext(ctx context.Context
 	}).(CertificatePtrOutput)
 }
 
-func (o CertificateOutput) ToOutput(ctx context.Context) pulumix.Output[Certificate] {
-	return pulumix.Output[Certificate]{
-		OutputState: o.OutputState,
-	}
-}
-
 // Certificate
 func (o CertificateOutput) Cert() pulumi.StringOutput {
 	return o.ApplyT(func(v Certificate) string { return v.Cert }).(pulumi.StringOutput)
@@ -3594,12 +3143,6 @@ func (o CertificatePtrOutput) ToCertificatePtrOutput() CertificatePtrOutput {
 
 func (o CertificatePtrOutput) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
 	return o
-}
-
-func (o CertificatePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Certificate] {
-	return pulumix.Output[*Certificate]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o CertificatePtrOutput) Elem() CertificateOutput {
@@ -3673,12 +3216,6 @@ func (i CertificatesArgs) ToCertificatesOutputWithContext(ctx context.Context) C
 	return pulumi.ToOutputWithContext(ctx, i).(CertificatesOutput)
 }
 
-func (i CertificatesArgs) ToOutput(ctx context.Context) pulumix.Output[Certificates] {
-	return pulumix.Output[Certificates]{
-		OutputState: i.ToCertificatesOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i CertificatesArgs) ToCertificatesPtrOutput() CertificatesPtrOutput {
 	return i.ToCertificatesPtrOutputWithContext(context.Background())
 }
@@ -3720,12 +3257,6 @@ func (i *certificatesPtrType) ToCertificatesPtrOutputWithContext(ctx context.Con
 	return pulumi.ToOutputWithContext(ctx, i).(CertificatesPtrOutput)
 }
 
-func (i *certificatesPtrType) ToOutput(ctx context.Context) pulumix.Output[*Certificates] {
-	return pulumix.Output[*Certificates]{
-		OutputState: i.ToCertificatesPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 // A complete Machine Secrets Certificates configuration
 type CertificatesOutput struct{ *pulumi.OutputState }
 
@@ -3749,12 +3280,6 @@ func (o CertificatesOutput) ToCertificatesPtrOutputWithContext(ctx context.Conte
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v Certificates) *Certificates {
 		return &v
 	}).(CertificatesPtrOutput)
-}
-
-func (o CertificatesOutput) ToOutput(ctx context.Context) pulumix.Output[Certificates] {
-	return pulumix.Output[Certificates]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o CertificatesOutput) Etcd() CertificateOutput {
@@ -3789,12 +3314,6 @@ func (o CertificatesPtrOutput) ToCertificatesPtrOutput() CertificatesPtrOutput {
 
 func (o CertificatesPtrOutput) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
 	return o
-}
-
-func (o CertificatesPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Certificates] {
-	return pulumix.Output[*Certificates]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o CertificatesPtrOutput) Elem() CertificatesOutput {
@@ -3891,12 +3410,6 @@ func (i ClusterArgs) ToClusterOutputWithContext(ctx context.Context) ClusterOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ClusterOutput)
 }
 
-func (i ClusterArgs) ToOutput(ctx context.Context) pulumix.Output[Cluster] {
-	return pulumix.Output[Cluster]{
-		OutputState: i.ToClusterOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i ClusterArgs) ToClusterPtrOutput() ClusterPtrOutput {
 	return i.ToClusterPtrOutputWithContext(context.Background())
 }
@@ -3938,12 +3451,6 @@ func (i *clusterPtrType) ToClusterPtrOutputWithContext(ctx context.Context) Clus
 	return pulumi.ToOutputWithContext(ctx, i).(ClusterPtrOutput)
 }
 
-func (i *clusterPtrType) ToOutput(ctx context.Context) pulumix.Output[*Cluster] {
-	return pulumix.Output[*Cluster]{
-		OutputState: i.ToClusterPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 // A Machine Secrets Cluster Info
 type ClusterOutput struct{ *pulumi.OutputState }
 
@@ -3969,12 +3476,6 @@ func (o ClusterOutput) ToClusterPtrOutputWithContext(ctx context.Context) Cluste
 	}).(ClusterPtrOutput)
 }
 
-func (o ClusterOutput) ToOutput(ctx context.Context) pulumix.Output[Cluster] {
-	return pulumix.Output[Cluster]{
-		OutputState: o.OutputState,
-	}
-}
-
 // Certificate
 func (o ClusterOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v Cluster) string { return v.Id }).(pulumi.StringOutput)
@@ -3997,12 +3498,6 @@ func (o ClusterPtrOutput) ToClusterPtrOutput() ClusterPtrOutput {
 
 func (o ClusterPtrOutput) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
 	return o
-}
-
-func (o ClusterPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Cluster] {
-	return pulumix.Output[*Cluster]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ClusterPtrOutput) Elem() ClusterOutput {
@@ -4070,12 +3565,6 @@ func (i KeyArgs) ToKeyOutputWithContext(ctx context.Context) KeyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(KeyOutput)
 }
 
-func (i KeyArgs) ToOutput(ctx context.Context) pulumix.Output[Key] {
-	return pulumix.Output[Key]{
-		OutputState: i.ToKeyOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i KeyArgs) ToKeyPtrOutput() KeyPtrOutput {
 	return i.ToKeyPtrOutputWithContext(context.Background())
 }
@@ -4117,12 +3606,6 @@ func (i *keyPtrType) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput
 	return pulumi.ToOutputWithContext(ctx, i).(KeyPtrOutput)
 }
 
-func (i *keyPtrType) ToOutput(ctx context.Context) pulumix.Output[*Key] {
-	return pulumix.Output[*Key]{
-		OutputState: i.ToKeyPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 // A Machine Secrets Private Key
 type KeyOutput struct{ *pulumi.OutputState }
 
@@ -4148,12 +3631,6 @@ func (o KeyOutput) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
 	}).(KeyPtrOutput)
 }
 
-func (o KeyOutput) ToOutput(ctx context.Context) pulumix.Output[Key] {
-	return pulumix.Output[Key]{
-		OutputState: o.OutputState,
-	}
-}
-
 // Private Key
 func (o KeyOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v Key) string { return v.Key }).(pulumi.StringOutput)
@@ -4171,12 +3648,6 @@ func (o KeyPtrOutput) ToKeyPtrOutput() KeyPtrOutput {
 
 func (o KeyPtrOutput) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
 	return o
-}
-
-func (o KeyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Key] {
-	return pulumix.Output[*Key]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o KeyPtrOutput) Elem() KeyOutput {
@@ -4238,12 +3709,6 @@ func (i MachineSecretsArgs) ToMachineSecretsOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(MachineSecretsOutput)
 }
 
-func (i MachineSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[MachineSecrets] {
-	return pulumix.Output[MachineSecrets]{
-		OutputState: i.ToMachineSecretsOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i MachineSecretsArgs) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
 	return i.ToMachineSecretsPtrOutputWithContext(context.Background())
 }
@@ -4285,12 +3750,6 @@ func (i *machineSecretsPtrType) ToMachineSecretsPtrOutputWithContext(ctx context
 	return pulumi.ToOutputWithContext(ctx, i).(MachineSecretsPtrOutput)
 }
 
-func (i *machineSecretsPtrType) ToOutput(ctx context.Context) pulumix.Output[*MachineSecrets] {
-	return pulumix.Output[*MachineSecrets]{
-		OutputState: i.ToMachineSecretsPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 // A complete Machine Secrets configuration
 type MachineSecretsOutput struct{ *pulumi.OutputState }
 
@@ -4314,12 +3773,6 @@ func (o MachineSecretsOutput) ToMachineSecretsPtrOutputWithContext(ctx context.C
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v MachineSecrets) *MachineSecrets {
 		return &v
 	}).(MachineSecretsPtrOutput)
-}
-
-func (o MachineSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[MachineSecrets] {
-	return pulumix.Output[MachineSecrets]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o MachineSecretsOutput) Certs() CertificatesOutput {
@@ -4350,12 +3803,6 @@ func (o MachineSecretsPtrOutput) ToMachineSecretsPtrOutput() MachineSecretsPtrOu
 
 func (o MachineSecretsPtrOutput) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
 	return o
-}
-
-func (o MachineSecretsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*MachineSecrets] {
-	return pulumix.Output[*MachineSecrets]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o MachineSecretsPtrOutput) Elem() MachineSecretsOutput {
@@ -4443,12 +3890,6 @@ func (i SecretsTypeArgs) ToSecretsTypeOutputWithContext(ctx context.Context) Sec
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeOutput)
 }
 
-func (i SecretsTypeArgs) ToOutput(ctx context.Context) pulumix.Output[SecretsType] {
-	return pulumix.Output[SecretsType]{
-		OutputState: i.ToSecretsTypeOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SecretsTypeArgs) ToSecretsTypePtrOutput() SecretsTypePtrOutput {
 	return i.ToSecretsTypePtrOutputWithContext(context.Background())
 }
@@ -4490,12 +3931,6 @@ func (i *secretsTypePtrType) ToSecretsTypePtrOutputWithContext(ctx context.Conte
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypePtrOutput)
 }
 
-func (i *secretsTypePtrType) ToOutput(ctx context.Context) pulumix.Output[*SecretsType] {
-	return pulumix.Output[*SecretsType]{
-		OutputState: i.ToSecretsTypePtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 // A Machine Secrets Bootstrap data
 type SecretsTypeOutput struct{ *pulumi.OutputState }
 
@@ -4521,12 +3956,6 @@ func (o SecretsTypeOutput) ToSecretsTypePtrOutputWithContext(ctx context.Context
 	}).(SecretsTypePtrOutput)
 }
 
-func (o SecretsTypeOutput) ToOutput(ctx context.Context) pulumix.Output[SecretsType] {
-	return pulumix.Output[SecretsType]{
-		OutputState: o.OutputState,
-	}
-}
-
 // The bootstrap token for the talos kubernetes cluster
 func (o SecretsTypeOutput) Bootstrap_token() pulumi.StringOutput {
 	return o.ApplyT(func(v SecretsType) string { return v.Bootstrap_token }).(pulumi.StringOutput)
@@ -4549,12 +3978,6 @@ func (o SecretsTypePtrOutput) ToSecretsTypePtrOutput() SecretsTypePtrOutput {
 
 func (o SecretsTypePtrOutput) ToSecretsTypePtrOutputWithContext(ctx context.Context) SecretsTypePtrOutput {
 	return o
-}
-
-func (o SecretsTypePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsType] {
-	return pulumix.Output[*SecretsType]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsTypePtrOutput) Elem() SecretsTypeOutput {
@@ -4622,12 +4045,6 @@ func (i TrustdInfoArgs) ToTrustdInfoOutputWithContext(ctx context.Context) Trust
 	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoOutput)
 }
 
-func (i TrustdInfoArgs) ToOutput(ctx context.Context) pulumix.Output[TrustdInfo] {
-	return pulumix.Output[TrustdInfo]{
-		OutputState: i.ToTrustdInfoOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i TrustdInfoArgs) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
 	return i.ToTrustdInfoPtrOutputWithContext(context.Background())
 }
@@ -4669,12 +4086,6 @@ func (i *trustdInfoPtrType) ToTrustdInfoPtrOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoPtrOutput)
 }
 
-func (i *trustdInfoPtrType) ToOutput(ctx context.Context) pulumix.Output[*TrustdInfo] {
-	return pulumix.Output[*TrustdInfo]{
-		OutputState: i.ToTrustdInfoPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 // A Machine Secrets Trust daemon info
 type TrustdInfoOutput struct{ *pulumi.OutputState }
 
@@ -4700,12 +4111,6 @@ func (o TrustdInfoOutput) ToTrustdInfoPtrOutputWithContext(ctx context.Context) 
 	}).(TrustdInfoPtrOutput)
 }
 
-func (o TrustdInfoOutput) ToOutput(ctx context.Context) pulumix.Output[TrustdInfo] {
-	return pulumix.Output[TrustdInfo]{
-		OutputState: o.OutputState,
-	}
-}
-
 // The trustd token for the talos kubernetes cluster
 func (o TrustdInfoOutput) Token() pulumi.StringOutput {
 	return o.ApplyT(func(v TrustdInfo) string { return v.Token }).(pulumi.StringOutput)
@@ -4723,12 +4128,6 @@ func (o TrustdInfoPtrOutput) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
 
 func (o TrustdInfoPtrOutput) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
 	return o
-}
-
-func (o TrustdInfoPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*TrustdInfo] {
-	return pulumix.Output[*TrustdInfo]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o TrustdInfoPtrOutput) Elem() TrustdInfoOutput {
@@ -4796,12 +4195,6 @@ func (i GetConfigurationMachineSecretsArgs) ToGetConfigurationMachineSecretsOutp
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsOutput)
 }
 
-func (i GetConfigurationMachineSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecrets] {
-	return pulumix.Output[GetConfigurationMachineSecrets]{
-		OutputState: i.ToGetConfigurationMachineSecretsOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsOutput) ElementType() reflect.Type {
@@ -4814,12 +4207,6 @@ func (o GetConfigurationMachineSecretsOutput) ToGetConfigurationMachineSecretsOu
 
 func (o GetConfigurationMachineSecretsOutput) ToGetConfigurationMachineSecretsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecrets] {
-	return pulumix.Output[GetConfigurationMachineSecrets]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The certs for the talos kubernetes cluster
@@ -4889,12 +4276,6 @@ func (i GetConfigurationMachineSecretsCertsArgs) ToGetConfigurationMachineSecret
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsOutput)
 }
 
-func (i GetConfigurationMachineSecretsCertsArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCerts] {
-	return pulumix.Output[GetConfigurationMachineSecretsCerts]{
-		OutputState: i.ToGetConfigurationMachineSecretsCertsOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsCertsOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsCertsOutput) ElementType() reflect.Type {
@@ -4907,12 +4288,6 @@ func (o GetConfigurationMachineSecretsCertsOutput) ToGetConfigurationMachineSecr
 
 func (o GetConfigurationMachineSecretsCertsOutput) ToGetConfigurationMachineSecretsCertsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsCertsOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCerts] {
-	return pulumix.Output[GetConfigurationMachineSecretsCerts]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The certificate and key pair
@@ -4980,12 +4355,6 @@ func (i GetConfigurationMachineSecretsCertsEtcdArgs) ToGetConfigurationMachineSe
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsEtcdOutput)
 }
 
-func (i GetConfigurationMachineSecretsCertsEtcdArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsEtcd] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsEtcd]{
-		OutputState: i.ToGetConfigurationMachineSecretsCertsEtcdOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsCertsEtcdOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsCertsEtcdOutput) ElementType() reflect.Type {
@@ -4998,12 +4367,6 @@ func (o GetConfigurationMachineSecretsCertsEtcdOutput) ToGetConfigurationMachine
 
 func (o GetConfigurationMachineSecretsCertsEtcdOutput) ToGetConfigurationMachineSecretsCertsEtcdOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsEtcdOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsCertsEtcdOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsEtcd] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsEtcd]{
-		OutputState: o.OutputState,
-	}
 }
 
 // certificate data
@@ -5053,12 +4416,6 @@ func (i GetConfigurationMachineSecretsCertsK8sArgs) ToGetConfigurationMachineSec
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsK8sOutput)
 }
 
-func (i GetConfigurationMachineSecretsCertsK8sArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8s] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsK8s]{
-		OutputState: i.ToGetConfigurationMachineSecretsCertsK8sOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsCertsK8sOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsCertsK8sOutput) ElementType() reflect.Type {
@@ -5071,12 +4428,6 @@ func (o GetConfigurationMachineSecretsCertsK8sOutput) ToGetConfigurationMachineS
 
 func (o GetConfigurationMachineSecretsCertsK8sOutput) ToGetConfigurationMachineSecretsCertsK8sOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsCertsK8sOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8s] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsK8s]{
-		OutputState: o.OutputState,
-	}
 }
 
 // certificate data
@@ -5126,12 +4477,6 @@ func (i GetConfigurationMachineSecretsCertsK8sAggregatorArgs) ToGetConfiguration
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsK8sAggregatorOutput)
 }
 
-func (i GetConfigurationMachineSecretsCertsK8sAggregatorArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8sAggregator] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsK8sAggregator]{
-		OutputState: i.ToGetConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsCertsK8sAggregatorOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsCertsK8sAggregatorOutput) ElementType() reflect.Type {
@@ -5144,12 +4489,6 @@ func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) ToGetConfigurati
 
 func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) ToGetConfigurationMachineSecretsCertsK8sAggregatorOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sAggregatorOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8sAggregator] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsK8sAggregator]{
-		OutputState: o.OutputState,
-	}
 }
 
 // certificate data
@@ -5195,12 +4534,6 @@ func (i GetConfigurationMachineSecretsCertsK8sServiceaccountArgs) ToGetConfigura
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsK8sServiceaccountOutput)
 }
 
-func (i GetConfigurationMachineSecretsCertsK8sServiceaccountArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8sServiceaccount] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsK8sServiceaccount]{
-		OutputState: i.ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsCertsK8sServiceaccountOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ElementType() reflect.Type {
@@ -5213,12 +4546,6 @@ func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToGetConfigu
 
 func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToGetConfigurationMachineSecretsCertsK8sServiceaccountOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsK8sServiceaccountOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsK8sServiceaccount] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsK8sServiceaccount]{
-		OutputState: o.OutputState,
-	}
 }
 
 // key data
@@ -5263,12 +4590,6 @@ func (i GetConfigurationMachineSecretsCertsOsArgs) ToGetConfigurationMachineSecr
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsCertsOsOutput)
 }
 
-func (i GetConfigurationMachineSecretsCertsOsArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsOs] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsOs]{
-		OutputState: i.ToGetConfigurationMachineSecretsCertsOsOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsCertsOsOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsCertsOsOutput) ElementType() reflect.Type {
@@ -5281,12 +4602,6 @@ func (o GetConfigurationMachineSecretsCertsOsOutput) ToGetConfigurationMachineSe
 
 func (o GetConfigurationMachineSecretsCertsOsOutput) ToGetConfigurationMachineSecretsCertsOsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsCertsOsOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsCertsOsOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCertsOs] {
-	return pulumix.Output[GetConfigurationMachineSecretsCertsOs]{
-		OutputState: o.OutputState,
-	}
 }
 
 // certificate data
@@ -5336,12 +4651,6 @@ func (i GetConfigurationMachineSecretsClusterArgs) ToGetConfigurationMachineSecr
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsClusterOutput)
 }
 
-func (i GetConfigurationMachineSecretsClusterArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCluster] {
-	return pulumix.Output[GetConfigurationMachineSecretsCluster]{
-		OutputState: i.ToGetConfigurationMachineSecretsClusterOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsClusterOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsClusterOutput) ElementType() reflect.Type {
@@ -5354,12 +4663,6 @@ func (o GetConfigurationMachineSecretsClusterOutput) ToGetConfigurationMachineSe
 
 func (o GetConfigurationMachineSecretsClusterOutput) ToGetConfigurationMachineSecretsClusterOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsClusterOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsClusterOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsCluster] {
-	return pulumix.Output[GetConfigurationMachineSecretsCluster]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The cluster id
@@ -5413,12 +4716,6 @@ func (i GetConfigurationMachineSecretsSecretsArgs) ToGetConfigurationMachineSecr
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsSecretsOutput)
 }
 
-func (i GetConfigurationMachineSecretsSecretsArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsSecrets] {
-	return pulumix.Output[GetConfigurationMachineSecretsSecrets]{
-		OutputState: i.ToGetConfigurationMachineSecretsSecretsOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsSecretsOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsSecretsOutput) ElementType() reflect.Type {
@@ -5431,12 +4728,6 @@ func (o GetConfigurationMachineSecretsSecretsOutput) ToGetConfigurationMachineSe
 
 func (o GetConfigurationMachineSecretsSecretsOutput) ToGetConfigurationMachineSecretsSecretsOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsSecretsOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsSecretsOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsSecrets] {
-	return pulumix.Output[GetConfigurationMachineSecretsSecrets]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The aescbc encryption secret for the talos kubernetes cluster
@@ -5487,12 +4778,6 @@ func (i GetConfigurationMachineSecretsTrustdinfoArgs) ToGetConfigurationMachineS
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationMachineSecretsTrustdinfoOutput)
 }
 
-func (i GetConfigurationMachineSecretsTrustdinfoArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsTrustdinfo] {
-	return pulumix.Output[GetConfigurationMachineSecretsTrustdinfo]{
-		OutputState: i.ToGetConfigurationMachineSecretsTrustdinfoOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetConfigurationMachineSecretsTrustdinfoOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationMachineSecretsTrustdinfoOutput) ElementType() reflect.Type {
@@ -5505,12 +4790,6 @@ func (o GetConfigurationMachineSecretsTrustdinfoOutput) ToGetConfigurationMachin
 
 func (o GetConfigurationMachineSecretsTrustdinfoOutput) ToGetConfigurationMachineSecretsTrustdinfoOutputWithContext(ctx context.Context) GetConfigurationMachineSecretsTrustdinfoOutput {
 	return o
-}
-
-func (o GetConfigurationMachineSecretsTrustdinfoOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigurationMachineSecretsTrustdinfo] {
-	return pulumix.Output[GetConfigurationMachineSecretsTrustdinfo]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The trustd token for the talos kubernetes cluster

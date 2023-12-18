@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -21,17 +21,8 @@ class SecretsInitArgs:
         The set of arguments for constructing a Secrets resource.
         :param pulumi.Input[str] talos_version: The version of talos features to use in generated machine configuration
         """
-        SecretsInitArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            talos_version=talos_version,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             talos_version: Optional[pulumi.Input[str]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
         if talos_version is not None:
-            _setter("talos_version", talos_version)
+            pulumi.set(__self__, "talos_version", talos_version)
 
     @property
     @pulumi.getter(name="talosVersion")
@@ -58,25 +49,12 @@ class _SecretsState:
         :param pulumi.Input['MachineSecretsArgs'] machine_secrets: The secrets for the talos cluster
         :param pulumi.Input[str] talos_version: The version of talos features to use in generated machine configuration
         """
-        _SecretsState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            client_configuration=client_configuration,
-            machine_secrets=machine_secrets,
-            talos_version=talos_version,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             client_configuration: Optional[pulumi.Input['SecretsClientConfigurationArgs']] = None,
-             machine_secrets: Optional[pulumi.Input['MachineSecretsArgs']] = None,
-             talos_version: Optional[pulumi.Input[str]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
         if client_configuration is not None:
-            _setter("client_configuration", client_configuration)
+            pulumi.set(__self__, "client_configuration", client_configuration)
         if machine_secrets is not None:
-            _setter("machine_secrets", machine_secrets)
+            pulumi.set(__self__, "machine_secrets", machine_secrets)
         if talos_version is not None:
-            _setter("talos_version", talos_version)
+            pulumi.set(__self__, "talos_version", talos_version)
 
     @property
     @pulumi.getter(name="clientConfiguration")
@@ -182,10 +160,6 @@ class Secrets(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            SecretsInitArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

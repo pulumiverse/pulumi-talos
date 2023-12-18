@@ -51,7 +51,7 @@ export interface DisksArgs {
      */
     clientConfiguration: inputs.machine.DisksClientConfiguration;
     /**
-     * endpoint to use for the talosclient. if not set, the node value will be used
+     * endpoint to use for the talosclient. If not set, the node value will be used
      */
     endpoint?: string;
     /**
@@ -78,7 +78,7 @@ export interface DisksResult {
      */
     readonly disks: outputs.machine.DisksDisk[];
     /**
-     * endpoint to use for the talosclient. if not set, the node value will be used
+     * endpoint to use for the talosclient. If not set, the node value will be used
      */
     readonly endpoint: string;
     /**
@@ -132,7 +132,7 @@ export interface DisksOutputArgs {
      */
     clientConfiguration: pulumi.Input<inputs.machine.DisksClientConfigurationArgs>;
     /**
-     * endpoint to use for the talosclient. if not set, the node value will be used
+     * endpoint to use for the talosclient. If not set, the node value will be used
      */
     endpoint?: pulumi.Input<string>;
     /**

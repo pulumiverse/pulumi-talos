@@ -8,7 +8,6 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
@@ -125,12 +124,6 @@ func (o ConfigurationResultOutput) ToConfigurationResultOutput() ConfigurationRe
 
 func (o ConfigurationResultOutput) ToConfigurationResultOutputWithContext(ctx context.Context) ConfigurationResultOutput {
 	return o
-}
-
-func (o ConfigurationResultOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigurationResult] {
-	return pulumix.Output[ConfigurationResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The client configuration data

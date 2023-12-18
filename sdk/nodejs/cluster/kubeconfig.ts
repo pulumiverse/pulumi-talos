@@ -30,7 +30,7 @@ export interface KubeconfigArgs {
      */
     clientConfiguration: inputs.cluster.KubeconfigClientConfiguration;
     /**
-     * endpoint to use for the talosclient. if not set, the node value will be used
+     * endpoint to use for the talosclient. If not set, the node value will be used
      */
     endpoint?: string;
     /**
@@ -40,6 +40,8 @@ export interface KubeconfigArgs {
     timeouts?: inputs.cluster.KubeconfigTimeouts;
     /**
      * Wait for the kubernetes api to be available
+     *
+     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
      */
     wait?: boolean;
 }
@@ -53,7 +55,7 @@ export interface KubeconfigResult {
      */
     readonly clientConfiguration: outputs.cluster.KubeconfigClientConfiguration;
     /**
-     * endpoint to use for the talosclient. if not set, the node value will be used
+     * endpoint to use for the talosclient. If not set, the node value will be used
      */
     readonly endpoint: string;
     /**
@@ -75,6 +77,8 @@ export interface KubeconfigResult {
     readonly timeouts?: outputs.cluster.KubeconfigTimeouts;
     /**
      * Wait for the kubernetes api to be available
+     *
+     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
      */
     readonly wait?: boolean;
 }
@@ -94,7 +98,7 @@ export interface KubeconfigOutputArgs {
      */
     clientConfiguration: pulumi.Input<inputs.cluster.KubeconfigClientConfigurationArgs>;
     /**
-     * endpoint to use for the talosclient. if not set, the node value will be used
+     * endpoint to use for the talosclient. If not set, the node value will be used
      */
     endpoint?: pulumi.Input<string>;
     /**
@@ -104,6 +108,8 @@ export interface KubeconfigOutputArgs {
     timeouts?: pulumi.Input<inputs.cluster.KubeconfigTimeoutsArgs>;
     /**
      * Wait for the kubernetes api to be available
+     *
+     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
      */
     wait?: pulumi.Input<boolean>;
 }

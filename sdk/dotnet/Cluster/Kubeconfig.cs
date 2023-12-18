@@ -35,7 +35,7 @@ namespace Pulumiverse.Talos.Cluster
         public Inputs.KubeconfigClientConfigurationArgs ClientConfiguration { get; set; } = null!;
 
         /// <summary>
-        /// endpoint to use for the talosclient. if not set, the node value will be used
+        /// endpoint to use for the talosclient. If not set, the node value will be used
         /// </summary>
         [Input("endpoint")]
         public string? Endpoint { get; set; }
@@ -70,7 +70,7 @@ namespace Pulumiverse.Talos.Cluster
         public Input<Inputs.KubeconfigClientConfigurationInputArgs> ClientConfiguration { get; set; } = null!;
 
         /// <summary>
-        /// endpoint to use for the talosclient. if not set, the node value will be used
+        /// endpoint to use for the talosclient. If not set, the node value will be used
         /// </summary>
         [Input("endpoint")]
         public Input<string>? Endpoint { get; set; }
@@ -105,7 +105,7 @@ namespace Pulumiverse.Talos.Cluster
         /// </summary>
         public readonly Outputs.KubeconfigClientConfigurationResult ClientConfiguration;
         /// <summary>
-        /// endpoint to use for the talosclient. if not set, the node value will be used
+        /// endpoint to use for the talosclient. If not set, the node value will be used
         /// </summary>
         public readonly string Endpoint;
         /// <summary>

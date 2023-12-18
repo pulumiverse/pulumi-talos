@@ -38,6 +38,50 @@ export namespace client {
 }
 
 export namespace cluster {
+    export interface HealthClientConfiguration {
+        /**
+         * The client CA certificate
+         */
+        caCertificate: string;
+        /**
+         * The client certificate
+         */
+        clientCertificate: string;
+        /**
+         * The client key
+         */
+        clientKey: string;
+    }
+
+    export interface HealthClientConfigurationArgs {
+        /**
+         * The client CA certificate
+         */
+        caCertificate: pulumi.Input<string>;
+        /**
+         * The client certificate
+         */
+        clientCertificate: pulumi.Input<string>;
+        /**
+         * The client key
+         */
+        clientKey: pulumi.Input<string>;
+    }
+
+    export interface HealthTimeouts {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+         */
+        read?: string;
+    }
+
+    export interface HealthTimeoutsArgs {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+         */
+        read?: pulumi.Input<string>;
+    }
+
     export interface KubeconfigClientConfiguration {
         /**
          * The client CA certificate

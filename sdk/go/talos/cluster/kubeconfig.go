@@ -8,7 +8,6 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
@@ -27,12 +26,14 @@ func Kubeconfig(ctx *pulumi.Context, args *KubeconfigArgs, opts ...pulumi.Invoke
 type KubeconfigArgs struct {
 	// The client configuration data
 	ClientConfiguration KubeconfigClientConfiguration `pulumi:"clientConfiguration"`
-	// endpoint to use for the talosclient. if not set, the node value will be used
+	// endpoint to use for the talosclient. If not set, the node value will be used
 	Endpoint *string `pulumi:"endpoint"`
 	// controlplane node to retrieve the kubeconfig from
 	Node     string              `pulumi:"node"`
 	Timeouts *KubeconfigTimeouts `pulumi:"timeouts"`
 	// Wait for the kubernetes api to be available
+	//
+	// Deprecated: This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
 	Wait *bool `pulumi:"wait"`
 }
 
@@ -40,7 +41,7 @@ type KubeconfigArgs struct {
 type KubeconfigResult struct {
 	// The client configuration data
 	ClientConfiguration KubeconfigClientConfiguration `pulumi:"clientConfiguration"`
-	// endpoint to use for the talosclient. if not set, the node value will be used
+	// endpoint to use for the talosclient. If not set, the node value will be used
 	Endpoint string `pulumi:"endpoint"`
 	// The ID of this resource.
 	Id string `pulumi:"id"`
@@ -52,6 +53,8 @@ type KubeconfigResult struct {
 	Node     string              `pulumi:"node"`
 	Timeouts *KubeconfigTimeouts `pulumi:"timeouts"`
 	// Wait for the kubernetes api to be available
+	//
+	// Deprecated: This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
 	Wait *bool `pulumi:"wait"`
 }
 
@@ -72,12 +75,14 @@ func KubeconfigOutput(ctx *pulumi.Context, args KubeconfigOutputArgs, opts ...pu
 type KubeconfigOutputArgs struct {
 	// The client configuration data
 	ClientConfiguration KubeconfigClientConfigurationInput `pulumi:"clientConfiguration"`
-	// endpoint to use for the talosclient. if not set, the node value will be used
+	// endpoint to use for the talosclient. If not set, the node value will be used
 	Endpoint pulumi.StringPtrInput `pulumi:"endpoint"`
 	// controlplane node to retrieve the kubeconfig from
 	Node     pulumi.StringInput         `pulumi:"node"`
 	Timeouts KubeconfigTimeoutsPtrInput `pulumi:"timeouts"`
 	// Wait for the kubernetes api to be available
+	//
+	// Deprecated: This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
 	Wait pulumi.BoolPtrInput `pulumi:"wait"`
 }
 
@@ -100,18 +105,12 @@ func (o KubeconfigResultOutput) ToKubeconfigResultOutputWithContext(ctx context.
 	return o
 }
 
-func (o KubeconfigResultOutput) ToOutput(ctx context.Context) pulumix.Output[KubeconfigResult] {
-	return pulumix.Output[KubeconfigResult]{
-		OutputState: o.OutputState,
-	}
-}
-
 // The client configuration data
 func (o KubeconfigResultOutput) ClientConfiguration() KubeconfigClientConfigurationOutput {
 	return o.ApplyT(func(v KubeconfigResult) KubeconfigClientConfiguration { return v.ClientConfiguration }).(KubeconfigClientConfigurationOutput)
 }
 
-// endpoint to use for the talosclient. if not set, the node value will be used
+// endpoint to use for the talosclient. If not set, the node value will be used
 func (o KubeconfigResultOutput) Endpoint() pulumi.StringOutput {
 	return o.ApplyT(func(v KubeconfigResult) string { return v.Endpoint }).(pulumi.StringOutput)
 }
@@ -143,6 +142,8 @@ func (o KubeconfigResultOutput) Timeouts() KubeconfigTimeoutsPtrOutput {
 }
 
 // Wait for the kubernetes api to be available
+//
+// Deprecated: This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
 func (o KubeconfigResultOutput) Wait() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v KubeconfigResult) *bool { return v.Wait }).(pulumi.BoolPtrOutput)
 }

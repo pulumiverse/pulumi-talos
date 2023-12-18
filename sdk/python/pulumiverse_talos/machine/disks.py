@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -66,7 +66,7 @@ class DisksResult:
     @pulumi.getter
     def endpoint(self) -> str:
         """
-        endpoint to use for the talosclient. if not set, the node value will be used
+        endpoint to use for the talosclient. If not set, the node value will be used
         """
         return pulumi.get(self, "endpoint")
 
@@ -145,7 +145,7 @@ def disks(client_configuration: Optional[pulumi.InputType['DisksClientConfigurat
 
 
     :param pulumi.InputType['DisksClientConfigurationArgs'] client_configuration: The client configuration data
-    :param str endpoint: endpoint to use for the talosclient. if not set, the node value will be used
+    :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
     :param pulumi.InputType['DisksFiltersArgs'] filters: Filters to apply to the disks
     :param str node: controlplane node to retrieve the kubeconfig from
     """
@@ -199,7 +199,7 @@ def disks_output(client_configuration: Optional[pulumi.Input[pulumi.InputType['D
 
 
     :param pulumi.InputType['DisksClientConfigurationArgs'] client_configuration: The client configuration data
-    :param str endpoint: endpoint to use for the talosclient. if not set, the node value will be used
+    :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
     :param pulumi.InputType['DisksFiltersArgs'] filters: Filters to apply to the disks
     :param str node: controlplane node to retrieve the kubeconfig from
     """
