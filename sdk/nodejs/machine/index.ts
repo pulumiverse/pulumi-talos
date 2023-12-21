@@ -15,15 +15,15 @@ export type ConfigurationApply = import("./configurationApply").ConfigurationApp
 export const ConfigurationApply: typeof import("./configurationApply").ConfigurationApply = null as any;
 utilities.lazyLoad(exports, ["ConfigurationApply"], () => require("./configurationApply"));
 
-export { DisksArgs, DisksResult, DisksOutputArgs } from "./disks";
-export const disks: typeof import("./disks").disks = null as any;
-export const disksOutput: typeof import("./disks").disksOutput = null as any;
-utilities.lazyLoad(exports, ["disks","disksOutput"], () => require("./disks"));
-
 export { GetConfigurationArgs, GetConfigurationResult, GetConfigurationOutputArgs } from "./getConfiguration";
 export const getConfiguration: typeof import("./getConfiguration").getConfiguration = null as any;
 export const getConfigurationOutput: typeof import("./getConfiguration").getConfigurationOutput = null as any;
 utilities.lazyLoad(exports, ["getConfiguration","getConfigurationOutput"], () => require("./getConfiguration"));
+
+export { GetDisksArgs, GetDisksResult, GetDisksOutputArgs } from "./getDisks";
+export const getDisks: typeof import("./getDisks").getDisks = null as any;
+export const getDisksOutput: typeof import("./getDisks").getDisksOutput = null as any;
+utilities.lazyLoad(exports, ["getDisks","getDisksOutput"], () => require("./getDisks"));
 
 export { SecretsArgs, SecretsState } from "./secrets";
 export type Secrets = import("./secrets").Secrets;

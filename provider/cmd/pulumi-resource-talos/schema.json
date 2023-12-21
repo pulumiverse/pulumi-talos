@@ -55,7 +55,7 @@
     },
     "config": {},
     "types": {
-        "talos:client/ConfigurationClientConfiguration:ConfigurationClientConfiguration": {
+        "talos:client/getConfigurationClientConfiguration:getConfigurationClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -78,7 +78,7 @@
                 "clientKey"
             ]
         },
-        "talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration": {
+        "talos:cluster/getHealthClientConfiguration:getHealthClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -101,7 +101,39 @@
                 "clientKey"
             ]
         },
-        "talos:cluster/KubeconfigKubernetesClientConfiguration:KubeconfigKubernetesClientConfiguration": {
+        "talos:cluster/getHealthTimeouts:getHealthTimeouts": {
+            "properties": {
+                "read": {
+                    "type": "string",
+                    "description": "A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as \"30s\" or \"2h45m\". Valid time units are \"s\" (seconds), \"m\" (minutes), \"h\" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.\n"
+                }
+            },
+            "type": "object"
+        },
+        "talos:cluster/getKubeconfigClientConfiguration:getKubeconfigClientConfiguration": {
+            "properties": {
+                "caCertificate": {
+                    "type": "string",
+                    "description": "The client CA certificate\n"
+                },
+                "clientCertificate": {
+                    "type": "string",
+                    "description": "The client certificate\n"
+                },
+                "clientKey": {
+                    "type": "string",
+                    "description": "The client key\n",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "caCertificate",
+                "clientCertificate",
+                "clientKey"
+            ]
+        },
+        "talos:cluster/getKubeconfigKubernetesClientConfiguration:getKubeconfigKubernetesClientConfiguration": {
             "properties": {
                 "caCertificate": {
                     "type": "string",
@@ -134,7 +166,7 @@
                 }
             }
         },
-        "talos:cluster/KubeconfigTimeouts:KubeconfigTimeouts": {
+        "talos:cluster/getKubeconfigTimeouts:getKubeconfigTimeouts": {
             "properties": {
                 "read": {
                     "type": "string",
@@ -197,136 +229,6 @@
                 "clientCertificate",
                 "clientKey"
             ]
-        },
-        "talos:machine/DisksClientConfiguration:DisksClientConfiguration": {
-            "properties": {
-                "caCertificate": {
-                    "type": "string",
-                    "description": "The client CA certificate\n"
-                },
-                "clientCertificate": {
-                    "type": "string",
-                    "description": "The client certificate\n"
-                },
-                "clientKey": {
-                    "type": "string",
-                    "description": "The client key\n",
-                    "secret": true
-                }
-            },
-            "type": "object",
-            "required": [
-                "caCertificate",
-                "clientCertificate",
-                "clientKey"
-            ]
-        },
-        "talos:machine/DisksDisk:DisksDisk": {
-            "properties": {
-                "busPath": {
-                    "type": "string",
-                    "description": "The bus path of the disk\n"
-                },
-                "modalias": {
-                    "type": "string",
-                    "description": "The modalias of the disk\n"
-                },
-                "model": {
-                    "type": "string",
-                    "description": "The model of the disk\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The name of the disk\n"
-                },
-                "serial": {
-                    "type": "string",
-                    "description": "The serial number of the disk\n"
-                },
-                "size": {
-                    "type": "string",
-                    "description": "The size of the disk\n"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "The type of the disk\n"
-                },
-                "uuid": {
-                    "type": "string",
-                    "description": "The uuid of the disk\n"
-                },
-                "wwid": {
-                    "type": "string",
-                    "description": "The wwid of the disk\n"
-                }
-            },
-            "type": "object",
-            "required": [
-                "busPath",
-                "modalias",
-                "model",
-                "name",
-                "serial",
-                "size",
-                "type",
-                "uuid",
-                "wwid"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredInputs": []
-                }
-            }
-        },
-        "talos:machine/DisksFilters:DisksFilters": {
-            "properties": {
-                "busPath": {
-                    "type": "string",
-                    "description": "Filter disks by bus path\n"
-                },
-                "modalias": {
-                    "type": "string",
-                    "description": "Filter disks by modalias\n"
-                },
-                "model": {
-                    "type": "string",
-                    "description": "Filter disks by model\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Filter disks by name\n"
-                },
-                "serial": {
-                    "type": "string",
-                    "description": "Filter disks by serial number\n"
-                },
-                "size": {
-                    "type": "string",
-                    "description": "Filter disks by size\n"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "Filter disks by type\n"
-                },
-                "uuid": {
-                    "type": "string",
-                    "description": "Filter disks by uuid\n"
-                },
-                "wwid": {
-                    "type": "string",
-                    "description": "Filter disks by wwid\n"
-                }
-            },
-            "type": "object"
-        },
-        "talos:machine/DisksTimeouts:DisksTimeouts": {
-            "properties": {
-                "read": {
-                    "type": "string",
-                    "description": "A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as \"30s\" or \"2h45m\". Valid time units are \"s\" (seconds), \"m\" (minutes), \"h\" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.\n"
-                }
-            },
-            "type": "object"
         },
         "talos:machine/SecretsClientConfiguration:SecretsClientConfiguration": {
             "properties": {
@@ -942,6 +844,136 @@
             "required": [
                 "token"
             ]
+        },
+        "talos:machine/getDisksClientConfiguration:getDisksClientConfiguration": {
+            "properties": {
+                "caCertificate": {
+                    "type": "string",
+                    "description": "The client CA certificate\n"
+                },
+                "clientCertificate": {
+                    "type": "string",
+                    "description": "The client certificate\n"
+                },
+                "clientKey": {
+                    "type": "string",
+                    "description": "The client key\n",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "caCertificate",
+                "clientCertificate",
+                "clientKey"
+            ]
+        },
+        "talos:machine/getDisksDisk:getDisksDisk": {
+            "properties": {
+                "busPath": {
+                    "type": "string",
+                    "description": "The bus path of the disk\n"
+                },
+                "modalias": {
+                    "type": "string",
+                    "description": "The modalias of the disk\n"
+                },
+                "model": {
+                    "type": "string",
+                    "description": "The model of the disk\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the disk\n"
+                },
+                "serial": {
+                    "type": "string",
+                    "description": "The serial number of the disk\n"
+                },
+                "size": {
+                    "type": "string",
+                    "description": "The size of the disk\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the disk\n"
+                },
+                "uuid": {
+                    "type": "string",
+                    "description": "The uuid of the disk\n"
+                },
+                "wwid": {
+                    "type": "string",
+                    "description": "The wwid of the disk\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "busPath",
+                "modalias",
+                "model",
+                "name",
+                "serial",
+                "size",
+                "type",
+                "uuid",
+                "wwid"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "talos:machine/getDisksFilters:getDisksFilters": {
+            "properties": {
+                "busPath": {
+                    "type": "string",
+                    "description": "Filter disks by bus path\n"
+                },
+                "modalias": {
+                    "type": "string",
+                    "description": "Filter disks by modalias\n"
+                },
+                "model": {
+                    "type": "string",
+                    "description": "Filter disks by model\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Filter disks by name\n"
+                },
+                "serial": {
+                    "type": "string",
+                    "description": "Filter disks by serial number\n"
+                },
+                "size": {
+                    "type": "string",
+                    "description": "Filter disks by size\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Filter disks by type\n"
+                },
+                "uuid": {
+                    "type": "string",
+                    "description": "Filter disks by uuid\n"
+                },
+                "wwid": {
+                    "type": "string",
+                    "description": "Filter disks by wwid\n"
+                }
+            },
+            "type": "object"
+        },
+        "talos:machine/getDisksTimeouts:getDisksTimeouts": {
+            "properties": {
+                "read": {
+                    "type": "string",
+                    "description": "A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as \"30s\" or \"2h45m\". Valid time units are \"s\" (seconds), \"m\" (minutes), \"h\" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.\n"
+                }
+            },
+            "type": "object"
         }
     },
     "provider": {
@@ -1192,13 +1224,13 @@
         }
     },
     "functions": {
-        "talos:client/configuration:Configuration": {
-            "description": "Generate client configuration for a Talos cluster\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst thisSecrets = new talos.machine.Secrets(\"thisSecrets\", {});\nconst thisConfiguration = talos.client.ConfigurationOutput({\n    clusterName: \"example-cluster\",\n    clientConfiguration: thisSecrets.clientConfiguration,\n    nodes: [\"10.5.0.2\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\nimport pulumiverse_talos as talos\n\nthis_secrets = talos.machine.Secrets(\"thisSecrets\")\nthis_configuration = talos.client.configuration_output(cluster_name=\"example-cluster\",\n    client_configuration=this_secrets.client_configuration,\n    nodes=[\"10.5.0.2\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisSecrets = new Talos.Machine.Secrets(\"thisSecrets\");\n\n    var thisConfiguration = Talos.Client.Configuration.Invoke(new()\n    {\n        ClusterName = \"example-cluster\",\n        ClientConfiguration = thisSecrets.ClientConfiguration,\n        Nodes = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/client\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tthisSecrets, err := machine.NewSecrets(ctx, \"thisSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_ = client.ConfigurationOutput(ctx, client.ConfigurationOutputArgs{\n\t\t\tClusterName:         pulumi.String(\"example-cluster\"),\n\t\t\tClientConfiguration: thisSecrets.ClientConfiguration,\n\t\t\tNodes: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t}, nil)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport com.pulumi.talos.client.ClientFunctions;\nimport com.pulumi.talos.client.inputs.ConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisSecrets = new Secrets(\"thisSecrets\");\n\n        final var thisConfiguration = ClientFunctions.Configuration(ConfigurationArgs.builder()\n            .clusterName(\"example-cluster\")\n            .clientConfiguration(thisSecrets.clientConfiguration())\n            .nodes(\"10.5.0.2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  thisSecrets:\n    type: talos:machine:Secrets\nvariables:\n  thisConfiguration:\n    fn::invoke:\n      Function: talos:client:Configuration\n      Arguments:\n        clusterName: example-cluster\n        clientConfiguration: ${thisSecrets.clientConfiguration}\n        nodes:\n          - 10.5.0.2\n```\n{{% /example %}}\n{{% /examples %}}",
+        "talos:client/getConfiguration:getConfiguration": {
+            "description": "Generate client configuration for a Talos cluster\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst thisSecrets = new talos.machine.Secrets(\"thisSecrets\", {});\nconst thisConfiguration = talos.client.getConfigurationOutput({\n    clusterName: \"example-cluster\",\n    clientConfiguration: thisSecrets.clientConfiguration,\n    nodes: [\"10.5.0.2\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\nimport pulumiverse_talos as talos\n\nthis_secrets = talos.machine.Secrets(\"thisSecrets\")\nthis_configuration = talos.client.get_configuration_output(cluster_name=\"example-cluster\",\n    client_configuration=this_secrets.client_configuration,\n    nodes=[\"10.5.0.2\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisSecrets = new Talos.Machine.Secrets(\"thisSecrets\");\n\n    var thisConfiguration = Talos.Client.GetConfiguration.Invoke(new()\n    {\n        ClusterName = \"example-cluster\",\n        ClientConfiguration = thisSecrets.ClientConfiguration,\n        Nodes = new[]\n        {\n            \"10.5.0.2\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/client\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tthisSecrets, err := machine.NewSecrets(ctx, \"thisSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_ = client.GetConfigurationOutput(ctx, client.GetConfigurationOutputArgs{\n\t\t\tClusterName:         pulumi.String(\"example-cluster\"),\n\t\t\tClientConfiguration: thisSecrets.ClientConfiguration,\n\t\t\tNodes: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"10.5.0.2\"),\n\t\t\t},\n\t\t}, nil)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport com.pulumi.talos.client.ClientFunctions;\nimport com.pulumi.talos.client.inputs.GetConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisSecrets = new Secrets(\"thisSecrets\");\n\n        final var thisConfiguration = ClientFunctions.getConfiguration(GetConfigurationArgs.builder()\n            .clusterName(\"example-cluster\")\n            .clientConfiguration(thisSecrets.clientConfiguration())\n            .nodes(\"10.5.0.2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  thisSecrets:\n    type: talos:machine:Secrets\nvariables:\n  thisConfiguration:\n    fn::invoke:\n      Function: talos:client:getConfiguration\n      Arguments:\n        clusterName: example-cluster\n        clientConfiguration: ${thisSecrets.clientConfiguration}\n        nodes:\n          - 10.5.0.2\n```\n{{% /example %}}\n{{% /examples %}}",
             "inputs": {
-                "description": "A collection of arguments for invoking Configuration.\n",
+                "description": "A collection of arguments for invoking getConfiguration.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:client/ConfigurationClientConfiguration:ConfigurationClientConfiguration",
+                        "$ref": "#/types/talos:client/getConfigurationClientConfiguration:getConfigurationClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "clusterName": {
@@ -1227,10 +1259,10 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by Configuration.\n",
+                "description": "A collection of values returned by getConfiguration.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:client/ConfigurationClientConfiguration:ConfigurationClientConfiguration",
+                        "$ref": "#/types/talos:client/getConfigurationClientConfiguration:getConfigurationClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "clusterName": {
@@ -1270,29 +1302,116 @@
                 ]
             }
         },
-        "talos:cluster/kubeconfig:Kubeconfig": {
-            "description": "Retrieves the kubeconfig for a Talos cluster\n",
+        "talos:cluster/getHealth:getHealth": {
+            "description": "Checks the health of a Talos cluster\n",
             "inputs": {
-                "description": "A collection of arguments for invoking Kubeconfig.\n",
+                "description": "A collection of arguments for invoking getHealth.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration",
+                        "$ref": "#/types/talos:cluster/getHealthClientConfiguration:getHealthClientConfiguration",
+                        "description": "The client configuration data\n"
+                    },
+                    "controlPlaneNodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of control plane nodes to check for health.\n"
+                    },
+                    "endpoints": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "endpoints to use for the health check client. Use at least one control plane endpoint.\n"
+                    },
+                    "timeouts": {
+                        "$ref": "#/types/talos:cluster/getHealthTimeouts:getHealthTimeouts"
+                    },
+                    "workerNodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of worker nodes to check for health.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "clientConfiguration",
+                    "controlPlaneNodes",
+                    "endpoints"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getHealth.\n",
+                "properties": {
+                    "clientConfiguration": {
+                        "$ref": "#/types/talos:cluster/getHealthClientConfiguration:getHealthClientConfiguration",
+                        "description": "The client configuration data\n"
+                    },
+                    "controlPlaneNodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of control plane nodes to check for health.\n"
+                    },
+                    "endpoints": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "endpoints to use for the health check client. Use at least one control plane endpoint.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
+                    },
+                    "timeouts": {
+                        "$ref": "#/types/talos:cluster/getHealthTimeouts:getHealthTimeouts"
+                    },
+                    "workerNodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of worker nodes to check for health.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "clientConfiguration",
+                    "controlPlaneNodes",
+                    "endpoints",
+                    "id"
+                ]
+            }
+        },
+        "talos:cluster/getKubeconfig:getKubeconfig": {
+            "description": "Retrieves the kubeconfig for a Talos cluster\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getKubeconfig.\n",
+                "properties": {
+                    "clientConfiguration": {
+                        "$ref": "#/types/talos:cluster/getKubeconfigClientConfiguration:getKubeconfigClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "endpoint": {
                         "type": "string",
-                        "description": "endpoint to use for the talosclient. if not set, the node value will be used\n"
+                        "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
                     },
                     "node": {
                         "type": "string",
                         "description": "controlplane node to retrieve the kubeconfig from\n"
                     },
                     "timeouts": {
-                        "$ref": "#/types/talos:cluster/KubeconfigTimeouts:KubeconfigTimeouts"
+                        "$ref": "#/types/talos:cluster/getKubeconfigTimeouts:getKubeconfigTimeouts"
                     },
                     "wait": {
                         "type": "boolean",
-                        "description": "Wait for the kubernetes api to be available\n"
+                        "description": "Wait for the kubernetes api to be available\n",
+                        "deprecationMessage": "This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead."
                     }
                 },
                 "type": "object",
@@ -1302,15 +1421,15 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by Kubeconfig.\n",
+                "description": "A collection of values returned by getKubeconfig.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration",
+                        "$ref": "#/types/talos:cluster/getKubeconfigClientConfiguration:getKubeconfigClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "endpoint": {
                         "type": "string",
-                        "description": "endpoint to use for the talosclient. if not set, the node value will be used\n"
+                        "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
                     },
                     "id": {
                         "type": "string",
@@ -1322,7 +1441,7 @@
                         "secret": true
                     },
                     "kubernetesClientConfiguration": {
-                        "$ref": "#/types/talos:cluster/KubeconfigKubernetesClientConfiguration:KubeconfigKubernetesClientConfiguration",
+                        "$ref": "#/types/talos:cluster/getKubeconfigKubernetesClientConfiguration:getKubeconfigKubernetesClientConfiguration",
                         "description": "The kubernetes client configuration\n"
                     },
                     "node": {
@@ -1330,11 +1449,12 @@
                         "description": "controlplane node to retrieve the kubeconfig from\n"
                     },
                     "timeouts": {
-                        "$ref": "#/types/talos:cluster/KubeconfigTimeouts:KubeconfigTimeouts"
+                        "$ref": "#/types/talos:cluster/getKubeconfigTimeouts:getKubeconfigTimeouts"
                     },
                     "wait": {
                         "type": "boolean",
-                        "description": "Wait for the kubernetes api to be available\n"
+                        "description": "Wait for the kubernetes api to be available\n",
+                        "deprecationMessage": "This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead."
                     }
                 },
                 "type": "object",
@@ -1344,81 +1464,6 @@
                     "id",
                     "kubeconfigRaw",
                     "kubernetesClientConfiguration",
-                    "node"
-                ]
-            }
-        },
-        "talos:machine/disks:Disks": {
-            "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.Disks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst thisSecrets = new talos.machine.Secrets(\"thisSecrets\", {});\nconst thisDisks = talos.machine.DisksOutput({\n    clientConfiguration: thisSecrets.clientConfiguration,\n    node: \"10.5.0.2\",\n    filters: {\n        size: \"\u003e 100GB\",\n        type: \"nvme\",\n    },\n});\nexport const nvmeDisks = thisDisks.apply(thisDisks =\u003e thisDisks.disks.map(__item =\u003e __item.name));\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\nimport pulumiverse_talos as talos\n\nthis_secrets = talos.machine.Secrets(\"thisSecrets\")\nthis_disks = talos.machine.disks_output(client_configuration=this_secrets.client_configuration,\n    node=\"10.5.0.2\",\n    filters=talos.machine.DisksFiltersArgs(\n        size=\"\u003e 100GB\",\n        type=\"nvme\",\n    ))\npulumi.export(\"nvmeDisks\", this_disks.apply(lambda this_disks: [__item.name for __item in this_disks.disks]))\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisSecrets = new Talos.Machine.Secrets(\"thisSecrets\");\n\n    var thisDisks = Talos.Machine.Disks.Invoke(new()\n    {\n        ClientConfiguration = thisSecrets.ClientConfiguration,\n        Node = \"10.5.0.2\",\n        Filters = new Talos.Machine.Inputs.DisksFiltersInputArgs\n        {\n            Size = \"\u003e 100GB\",\n            Type = \"nvme\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"nvmeDisks\"] = thisDisks.Apply(disksResult =\u003e disksResult.Disks).Select(__item =\u003e __item.Name).ToList(),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\nfunc main() {\npulumi.Run(func(ctx *pulumi.Context) error {\nthisSecrets, err := machine.NewSecrets(ctx, \"thisSecrets\", nil)\nif err != nil {\nreturn err\n}\nthisDisks := machine.DisksOutput(ctx, machine.DisksOutputArgs{\nClientConfiguration: thisSecrets.ClientConfiguration,\nNode: pulumi.String(\"10.5.0.2\"),\nFilters: \u0026machine.DisksFiltersArgs{\nSize: pulumi.String(\"\u003e 100GB\"),\nType: pulumi.String(\"nvme\"),\n},\n}, nil);\nctx.Export(\"nvmeDisks\", thisDisks.ApplyT(func(thisDisks machine.DisksResult) ([]*string, error) {\nvar splat0 []*string\nfor _, val0 := range thisDisks.Disks {\nsplat0 = append(splat0, val0.Name)\n}\nreturn splat0, nil\n}).(pulumi.[]*stringOutput))\nreturn nil\n})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport com.pulumi.talos.machine.MachineFunctions;\nimport com.pulumi.talos.machine.inputs.DisksArgs;\nimport com.pulumi.talos.machine.inputs.DisksFiltersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisSecrets = new Secrets(\"thisSecrets\");\n\n        final var thisDisks = MachineFunctions.Disks(DisksArgs.builder()\n            .clientConfiguration(thisSecrets.clientConfiguration())\n            .node(\"10.5.0.2\")\n            .filters(DisksFiltersArgs.builder()\n                .size(\"\u003e 100GB\")\n                .type(\"nvme\")\n                .build())\n            .build());\n\n        ctx.export(\"nvmeDisks\", thisDisks.applyValue(disksResult -\u003e disksResult).applyValue(thisDisks -\u003e thisDisks.applyValue(disksResult -\u003e disksResult.disks()).stream().map(element -\u003e element.name()).collect(toList())));\n    }\n}\n```\n{{% /example %}}\n{{% /examples %}}",
-            "inputs": {
-                "description": "A collection of arguments for invoking Disks.\n",
-                "properties": {
-                    "clientConfiguration": {
-                        "$ref": "#/types/talos:machine/DisksClientConfiguration:DisksClientConfiguration",
-                        "description": "The client configuration data\n"
-                    },
-                    "endpoint": {
-                        "type": "string",
-                        "description": "endpoint to use for the talosclient. if not set, the node value will be used\n"
-                    },
-                    "filters": {
-                        "$ref": "#/types/talos:machine/DisksFilters:DisksFilters",
-                        "description": "Filters to apply to the disks\n"
-                    },
-                    "node": {
-                        "type": "string",
-                        "description": "controlplane node to retrieve the kubeconfig from\n"
-                    },
-                    "timeouts": {
-                        "$ref": "#/types/talos:machine/DisksTimeouts:DisksTimeouts"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "clientConfiguration",
-                    "node"
-                ]
-            },
-            "outputs": {
-                "description": "A collection of values returned by Disks.\n",
-                "properties": {
-                    "clientConfiguration": {
-                        "$ref": "#/types/talos:machine/DisksClientConfiguration:DisksClientConfiguration",
-                        "description": "The client configuration data\n"
-                    },
-                    "disks": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/types/talos:machine/DisksDisk:DisksDisk"
-                        },
-                        "description": "The disks that match the filters\n"
-                    },
-                    "endpoint": {
-                        "type": "string",
-                        "description": "endpoint to use for the talosclient. if not set, the node value will be used\n"
-                    },
-                    "filters": {
-                        "$ref": "#/types/talos:machine/DisksFilters:DisksFilters",
-                        "description": "Filters to apply to the disks\n"
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "The generated ID of this resource\n"
-                    },
-                    "node": {
-                        "type": "string",
-                        "description": "controlplane node to retrieve the kubeconfig from\n"
-                    },
-                    "timeouts": {
-                        "$ref": "#/types/talos:machine/DisksTimeouts:DisksTimeouts"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "clientConfiguration",
-                    "disks",
-                    "endpoint",
-                    "id",
                     "node"
                 ]
             }
@@ -1536,6 +1581,81 @@
                     "machineConfiguration",
                     "machineSecrets",
                     "machineType"
+                ]
+            }
+        },
+        "talos:machine/getDisks:getDisks": {
+            "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst thisSecrets = new talos.machine.Secrets(\"thisSecrets\", {});\nconst thisDisks = talos.machine.getDisksOutput({\n    clientConfiguration: thisSecrets.clientConfiguration,\n    node: \"10.5.0.2\",\n    filters: {\n        size: \"\u003e 100GB\",\n        type: \"nvme\",\n    },\n});\nexport const nvmeDisks = thisDisks.apply(thisDisks =\u003e thisDisks.disks.map(__item =\u003e __item.name));\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\nimport pulumiverse_talos as talos\n\nthis_secrets = talos.machine.Secrets(\"thisSecrets\")\nthis_disks = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,\n    node=\"10.5.0.2\",\n    filters=talos.machine.GetDisksFiltersArgs(\n        size=\"\u003e 100GB\",\n        type=\"nvme\",\n    ))\npulumi.export(\"nvmeDisks\", this_disks.apply(lambda this_disks: [__item.name for __item in this_disks.disks]))\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisSecrets = new Talos.Machine.Secrets(\"thisSecrets\");\n\n    var thisDisks = Talos.Machine.GetDisks.Invoke(new()\n    {\n        ClientConfiguration = thisSecrets.ClientConfiguration,\n        Node = \"10.5.0.2\",\n        Filters = new Talos.Machine.Inputs.GetDisksFiltersInputArgs\n        {\n            Size = \"\u003e 100GB\",\n            Type = \"nvme\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"nvmeDisks\"] = thisDisks.Apply(getDisksResult =\u003e getDisksResult.Disks).Select(__item =\u003e __item.Name).ToList(),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\nfunc main() {\npulumi.Run(func(ctx *pulumi.Context) error {\nthisSecrets, err := machine.NewSecrets(ctx, \"thisSecrets\", nil)\nif err != nil {\nreturn err\n}\nthisDisks := machine.GetDisksOutput(ctx, machine.GetDisksOutputArgs{\nClientConfiguration: thisSecrets.ClientConfiguration,\nNode: pulumi.String(\"10.5.0.2\"),\nFilters: \u0026machine.GetDisksFiltersArgs{\nSize: pulumi.String(\"\u003e 100GB\"),\nType: pulumi.String(\"nvme\"),\n},\n}, nil);\nctx.Export(\"nvmeDisks\", thisDisks.ApplyT(func(thisDisks machine.GetDisksResult) ([]*string, error) {\nvar splat0 []*string\nfor _, val0 := range thisDisks.Disks {\nsplat0 = append(splat0, val0.Name)\n}\nreturn splat0, nil\n}).(pulumi.[]*stringOutput))\nreturn nil\n})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport com.pulumi.talos.machine.MachineFunctions;\nimport com.pulumi.talos.machine.inputs.GetDisksArgs;\nimport com.pulumi.talos.machine.inputs.GetDisksFiltersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisSecrets = new Secrets(\"thisSecrets\");\n\n        final var thisDisks = MachineFunctions.getDisks(GetDisksArgs.builder()\n            .clientConfiguration(thisSecrets.clientConfiguration())\n            .node(\"10.5.0.2\")\n            .filters(GetDisksFiltersArgs.builder()\n                .size(\"\u003e 100GB\")\n                .type(\"nvme\")\n                .build())\n            .build());\n\n        ctx.export(\"nvmeDisks\", thisDisks.applyValue(getDisksResult -\u003e getDisksResult).applyValue(thisDisks -\u003e thisDisks.applyValue(getDisksResult -\u003e getDisksResult.disks()).stream().map(element -\u003e element.name()).collect(toList())));\n    }\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getDisks.\n",
+                "properties": {
+                    "clientConfiguration": {
+                        "$ref": "#/types/talos:machine/getDisksClientConfiguration:getDisksClientConfiguration",
+                        "description": "The client configuration data\n"
+                    },
+                    "endpoint": {
+                        "type": "string",
+                        "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
+                    },
+                    "filters": {
+                        "$ref": "#/types/talos:machine/getDisksFilters:getDisksFilters",
+                        "description": "Filters to apply to the disks\n"
+                    },
+                    "node": {
+                        "type": "string",
+                        "description": "controlplane node to retrieve the kubeconfig from\n"
+                    },
+                    "timeouts": {
+                        "$ref": "#/types/talos:machine/getDisksTimeouts:getDisksTimeouts"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "clientConfiguration",
+                    "node"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDisks.\n",
+                "properties": {
+                    "clientConfiguration": {
+                        "$ref": "#/types/talos:machine/getDisksClientConfiguration:getDisksClientConfiguration",
+                        "description": "The client configuration data\n"
+                    },
+                    "disks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/talos:machine/getDisksDisk:getDisksDisk"
+                        },
+                        "description": "The disks that match the filters\n"
+                    },
+                    "endpoint": {
+                        "type": "string",
+                        "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
+                    },
+                    "filters": {
+                        "$ref": "#/types/talos:machine/getDisksFilters:getDisksFilters",
+                        "description": "Filters to apply to the disks\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The generated ID of this resource\n"
+                    },
+                    "node": {
+                        "type": "string",
+                        "description": "controlplane node to retrieve the kubeconfig from\n"
+                    },
+                    "timeouts": {
+                        "$ref": "#/types/talos:machine/getDisksTimeouts:getDisksTimeouts"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "clientConfiguration",
+                    "disks",
+                    "endpoint",
+                    "id",
+                    "node"
                 ]
             }
         }

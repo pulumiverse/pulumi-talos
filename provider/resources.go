@@ -14,7 +14,7 @@ import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 	"github.com/pulumiverse/pulumi-talos/provider/pkg/version"
-	"github.com/siderolabs/terraform-provider-talos/shim"
+	"github.com/siderolabs/terraform-provider-talos/pkg/talos"
 )
 
 // all of the talos token components used below.
@@ -32,7 +32,7 @@ var metadata []byte
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
-		P:                 pf.ShimProvider(shim.NewProvider()),
+		P:                 pf.ShimProvider(talos.New()),
 		Name:              talosPkg,
 		Description:       "A Pulumi package for creating and managing Talos Linux machines and clusters.",
 		Keywords:          []string{"pulumi", "talos", "category/infrastructure"},
@@ -239,8 +239,9 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"talos_client_configuration": {Tok: tfbridge.MakeDataSource(talosPkg, clientMod, "Configuration")},
-			"talos_cluster_kubeconfig":   {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "Kubeconfig")},
+			"talos_client_configuration": {Tok: tfbridge.MakeDataSource(talosPkg, clientMod, "getConfiguration")},
+			"talos_cluster_health":       {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "getHealth")},
+			"talos_cluster_kubeconfig":   {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "getKubeconfig")},
 			"talos_machine_configuration": {
 				Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "getConfiguration"),
 				Fields: map[string]*tfbridge.SchemaInfo{
@@ -251,7 +252,7 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
-			"talos_machine_disks": {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "Disks")},
+			"talos_machine_disks": {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "getDisks")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/talos",

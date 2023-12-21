@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -32,38 +32,17 @@ class ConfigurationApplyArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         """
-        ConfigurationApplyArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            client_configuration=client_configuration,
-            machine_configuration_input=machine_configuration_input,
-            node=node,
-            apply_mode=apply_mode,
-            config_patches=config_patches,
-            endpoint=endpoint,
-            timeouts=timeouts,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             client_configuration: pulumi.Input['ConfigurationApplyClientConfigurationArgs'],
-             machine_configuration_input: pulumi.Input[str],
-             node: pulumi.Input[str],
-             apply_mode: Optional[pulumi.Input[str]] = None,
-             config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             endpoint: Optional[pulumi.Input[str]] = None,
-             timeouts: Optional[pulumi.Input['TimeoutArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
-        _setter("client_configuration", client_configuration)
-        _setter("machine_configuration_input", machine_configuration_input)
-        _setter("node", node)
+        pulumi.set(__self__, "client_configuration", client_configuration)
+        pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
+        pulumi.set(__self__, "node", node)
         if apply_mode is not None:
-            _setter("apply_mode", apply_mode)
+            pulumi.set(__self__, "apply_mode", apply_mode)
         if config_patches is not None:
-            _setter("config_patches", config_patches)
+            pulumi.set(__self__, "config_patches", config_patches)
         if endpoint is not None:
-            _setter("endpoint", endpoint)
+            pulumi.set(__self__, "endpoint", endpoint)
         if timeouts is not None:
-            _setter("timeouts", timeouts)
+            pulumi.set(__self__, "timeouts", timeouts)
 
     @property
     @pulumi.getter(name="clientConfiguration")
@@ -168,45 +147,22 @@ class _ConfigurationApplyState:
         :param pulumi.Input[str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[str] node: The name of the node to bootstrap
         """
-        _ConfigurationApplyState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            apply_mode=apply_mode,
-            client_configuration=client_configuration,
-            config_patches=config_patches,
-            endpoint=endpoint,
-            machine_configuration=machine_configuration,
-            machine_configuration_input=machine_configuration_input,
-            node=node,
-            timeouts=timeouts,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             apply_mode: Optional[pulumi.Input[str]] = None,
-             client_configuration: Optional[pulumi.Input['ConfigurationApplyClientConfigurationArgs']] = None,
-             config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             endpoint: Optional[pulumi.Input[str]] = None,
-             machine_configuration: Optional[pulumi.Input[str]] = None,
-             machine_configuration_input: Optional[pulumi.Input[str]] = None,
-             node: Optional[pulumi.Input[str]] = None,
-             timeouts: Optional[pulumi.Input['TimeoutArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
         if apply_mode is not None:
-            _setter("apply_mode", apply_mode)
+            pulumi.set(__self__, "apply_mode", apply_mode)
         if client_configuration is not None:
-            _setter("client_configuration", client_configuration)
+            pulumi.set(__self__, "client_configuration", client_configuration)
         if config_patches is not None:
-            _setter("config_patches", config_patches)
+            pulumi.set(__self__, "config_patches", config_patches)
         if endpoint is not None:
-            _setter("endpoint", endpoint)
+            pulumi.set(__self__, "endpoint", endpoint)
         if machine_configuration is not None:
-            _setter("machine_configuration", machine_configuration)
+            pulumi.set(__self__, "machine_configuration", machine_configuration)
         if machine_configuration_input is not None:
-            _setter("machine_configuration_input", machine_configuration_input)
+            pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
         if node is not None:
-            _setter("node", node)
+            pulumi.set(__self__, "node", node)
         if timeouts is not None:
-            _setter("timeouts", timeouts)
+            pulumi.set(__self__, "timeouts", timeouts)
 
     @property
     @pulumi.getter(name="applyMode")
@@ -346,10 +302,6 @@ class ConfigurationApply(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            ConfigurationApplyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -372,11 +324,6 @@ class ConfigurationApply(pulumi.CustomResource):
             __props__ = ConfigurationApplyArgs.__new__(ConfigurationApplyArgs)
 
             __props__.__dict__["apply_mode"] = apply_mode
-            if client_configuration is not None and not isinstance(client_configuration, ConfigurationApplyClientConfigurationArgs):
-                client_configuration = client_configuration or {}
-                def _setter(key, value):
-                    client_configuration[key] = value
-                ConfigurationApplyClientConfigurationArgs._configure(_setter, **client_configuration)
             if client_configuration is None and not opts.urn:
                 raise TypeError("Missing required property 'client_configuration'")
             __props__.__dict__["client_configuration"] = client_configuration
@@ -388,11 +335,6 @@ class ConfigurationApply(pulumi.CustomResource):
             if node is None and not opts.urn:
                 raise TypeError("Missing required property 'node'")
             __props__.__dict__["node"] = node
-            if timeouts is not None and not isinstance(timeouts, TimeoutArgs):
-                timeouts = timeouts or {}
-                def _setter(key, value):
-                    timeouts[key] = value
-                TimeoutArgs._configure(_setter, **timeouts)
             __props__.__dict__["timeouts"] = timeouts
             __props__.__dict__["machine_configuration"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["machineConfiguration", "machineConfigurationInput"])

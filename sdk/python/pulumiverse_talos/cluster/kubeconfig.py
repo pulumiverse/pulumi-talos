@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -61,7 +61,7 @@ class KubeconfigResult:
     @pulumi.getter
     def endpoint(self) -> str:
         """
-        endpoint to use for the talosclient. if not set, the node value will be used
+        endpoint to use for the talosclient. If not set, the node value will be used
         """
         return pulumi.get(self, "endpoint")
 
@@ -108,6 +108,9 @@ class KubeconfigResult:
         """
         Wait for the kubernetes api to be available
         """
+        warnings.warn("""This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.""", DeprecationWarning)
+        pulumi.log.warn("""wait is deprecated: This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.""")
+
         return pulumi.get(self, "wait")
 
 
@@ -138,7 +141,7 @@ def kubeconfig(client_configuration: Optional[pulumi.InputType['KubeconfigClient
 
 
     :param pulumi.InputType['KubeconfigClientConfigurationArgs'] client_configuration: The client configuration data
-    :param str endpoint: endpoint to use for the talosclient. if not set, the node value will be used
+    :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
     :param str node: controlplane node to retrieve the kubeconfig from
     :param bool wait: Wait for the kubernetes api to be available
     """
@@ -174,7 +177,7 @@ def kubeconfig_output(client_configuration: Optional[pulumi.Input[pulumi.InputTy
 
 
     :param pulumi.InputType['KubeconfigClientConfigurationArgs'] client_configuration: The client configuration data
-    :param str endpoint: endpoint to use for the talosclient. if not set, the node value will be used
+    :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
     :param str node: controlplane node to retrieve the kubeconfig from
     :param bool wait: Wait for the kubernetes api to be available
     """

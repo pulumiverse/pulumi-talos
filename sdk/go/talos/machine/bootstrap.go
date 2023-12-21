@@ -9,7 +9,6 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
@@ -139,12 +138,6 @@ func (i *Bootstrap) ToBootstrapOutputWithContext(ctx context.Context) BootstrapO
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapOutput)
 }
 
-func (i *Bootstrap) ToOutput(ctx context.Context) pulumix.Output[*Bootstrap] {
-	return pulumix.Output[*Bootstrap]{
-		OutputState: i.ToBootstrapOutputWithContext(ctx).OutputState,
-	}
-}
-
 // BootstrapArrayInput is an input type that accepts BootstrapArray and BootstrapArrayOutput values.
 // You can construct a concrete instance of `BootstrapArrayInput` via:
 //
@@ -168,12 +161,6 @@ func (i BootstrapArray) ToBootstrapArrayOutput() BootstrapArrayOutput {
 
 func (i BootstrapArray) ToBootstrapArrayOutputWithContext(ctx context.Context) BootstrapArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapArrayOutput)
-}
-
-func (i BootstrapArray) ToOutput(ctx context.Context) pulumix.Output[[]*Bootstrap] {
-	return pulumix.Output[[]*Bootstrap]{
-		OutputState: i.ToBootstrapArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // BootstrapMapInput is an input type that accepts BootstrapMap and BootstrapMapOutput values.
@@ -201,12 +188,6 @@ func (i BootstrapMap) ToBootstrapMapOutputWithContext(ctx context.Context) Boots
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapMapOutput)
 }
 
-func (i BootstrapMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Bootstrap] {
-	return pulumix.Output[map[string]*Bootstrap]{
-		OutputState: i.ToBootstrapMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type BootstrapOutput struct{ *pulumi.OutputState }
 
 func (BootstrapOutput) ElementType() reflect.Type {
@@ -219,12 +200,6 @@ func (o BootstrapOutput) ToBootstrapOutput() BootstrapOutput {
 
 func (o BootstrapOutput) ToBootstrapOutputWithContext(ctx context.Context) BootstrapOutput {
 	return o
-}
-
-func (o BootstrapOutput) ToOutput(ctx context.Context) pulumix.Output[*Bootstrap] {
-	return pulumix.Output[*Bootstrap]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The client configuration data
@@ -260,12 +235,6 @@ func (o BootstrapArrayOutput) ToBootstrapArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
-func (o BootstrapArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Bootstrap] {
-	return pulumix.Output[[]*Bootstrap]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o BootstrapArrayOutput) Index(i pulumi.IntInput) BootstrapOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Bootstrap {
 		return vs[0].([]*Bootstrap)[vs[1].(int)]
@@ -284,12 +253,6 @@ func (o BootstrapMapOutput) ToBootstrapMapOutput() BootstrapMapOutput {
 
 func (o BootstrapMapOutput) ToBootstrapMapOutputWithContext(ctx context.Context) BootstrapMapOutput {
 	return o
-}
-
-func (o BootstrapMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Bootstrap] {
-	return pulumix.Output[map[string]*Bootstrap]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o BootstrapMapOutput) MapIndex(k pulumi.StringInput) BootstrapOutput {

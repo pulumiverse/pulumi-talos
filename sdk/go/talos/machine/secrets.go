@@ -8,7 +8,6 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
@@ -143,12 +142,6 @@ func (i *SecretsType) ToSecretsTypeOutputWithContext(ctx context.Context) Secret
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeOutput)
 }
 
-func (i *SecretsType) ToOutput(ctx context.Context) pulumix.Output[*SecretsType] {
-	return pulumix.Output[*SecretsType]{
-		OutputState: i.ToSecretsTypeOutputWithContext(ctx).OutputState,
-	}
-}
-
 // SecretsTypeArrayInput is an input type that accepts SecretsTypeArray and SecretsTypeArrayOutput values.
 // You can construct a concrete instance of `SecretsTypeArrayInput` via:
 //
@@ -172,12 +165,6 @@ func (i SecretsTypeArray) ToSecretsTypeArrayOutput() SecretsTypeArrayOutput {
 
 func (i SecretsTypeArray) ToSecretsTypeArrayOutputWithContext(ctx context.Context) SecretsTypeArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeArrayOutput)
-}
-
-func (i SecretsTypeArray) ToOutput(ctx context.Context) pulumix.Output[[]*SecretsType] {
-	return pulumix.Output[[]*SecretsType]{
-		OutputState: i.ToSecretsTypeArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // SecretsTypeMapInput is an input type that accepts SecretsTypeMap and SecretsTypeMapOutput values.
@@ -205,12 +192,6 @@ func (i SecretsTypeMap) ToSecretsTypeMapOutputWithContext(ctx context.Context) S
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeMapOutput)
 }
 
-func (i SecretsTypeMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SecretsType] {
-	return pulumix.Output[map[string]*SecretsType]{
-		OutputState: i.ToSecretsTypeMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SecretsTypeOutput struct{ *pulumi.OutputState }
 
 func (SecretsTypeOutput) ElementType() reflect.Type {
@@ -223,12 +204,6 @@ func (o SecretsTypeOutput) ToSecretsTypeOutput() SecretsTypeOutput {
 
 func (o SecretsTypeOutput) ToSecretsTypeOutputWithContext(ctx context.Context) SecretsTypeOutput {
 	return o
-}
-
-func (o SecretsTypeOutput) ToOutput(ctx context.Context) pulumix.Output[*SecretsType] {
-	return pulumix.Output[*SecretsType]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The generated client configuration data
@@ -260,12 +235,6 @@ func (o SecretsTypeArrayOutput) ToSecretsTypeArrayOutputWithContext(ctx context.
 	return o
 }
 
-func (o SecretsTypeArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SecretsType] {
-	return pulumix.Output[[]*SecretsType]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o SecretsTypeArrayOutput) Index(i pulumi.IntInput) SecretsTypeOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *SecretsType {
 		return vs[0].([]*SecretsType)[vs[1].(int)]
@@ -284,12 +253,6 @@ func (o SecretsTypeMapOutput) ToSecretsTypeMapOutput() SecretsTypeMapOutput {
 
 func (o SecretsTypeMapOutput) ToSecretsTypeMapOutputWithContext(ctx context.Context) SecretsTypeMapOutput {
 	return o
-}
-
-func (o SecretsTypeMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SecretsType] {
-	return pulumix.Output[map[string]*SecretsType]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SecretsTypeMapOutput) MapIndex(k pulumi.StringInput) SecretsTypeOutput {

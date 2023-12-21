@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -26,27 +26,12 @@ class BootstrapArgs:
         :param pulumi.Input[str] node: The name of the node to bootstrap
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         """
-        BootstrapArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            client_configuration=client_configuration,
-            node=node,
-            endpoint=endpoint,
-            timeouts=timeouts,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             client_configuration: pulumi.Input['BootstrapClientConfigurationArgs'],
-             node: pulumi.Input[str],
-             endpoint: Optional[pulumi.Input[str]] = None,
-             timeouts: Optional[pulumi.Input['BootstrapTimeoutsArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
-        _setter("client_configuration", client_configuration)
-        _setter("node", node)
+        pulumi.set(__self__, "client_configuration", client_configuration)
+        pulumi.set(__self__, "node", node)
         if endpoint is not None:
-            _setter("endpoint", endpoint)
+            pulumi.set(__self__, "endpoint", endpoint)
         if timeouts is not None:
-            _setter("timeouts", timeouts)
+            pulumi.set(__self__, "timeouts", timeouts)
 
     @property
     @pulumi.getter(name="clientConfiguration")
@@ -107,29 +92,14 @@ class _BootstrapState:
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] node: The name of the node to bootstrap
         """
-        _BootstrapState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            client_configuration=client_configuration,
-            endpoint=endpoint,
-            node=node,
-            timeouts=timeouts,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             client_configuration: Optional[pulumi.Input['BootstrapClientConfigurationArgs']] = None,
-             endpoint: Optional[pulumi.Input[str]] = None,
-             node: Optional[pulumi.Input[str]] = None,
-             timeouts: Optional[pulumi.Input['BootstrapTimeoutsArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
         if client_configuration is not None:
-            _setter("client_configuration", client_configuration)
+            pulumi.set(__self__, "client_configuration", client_configuration)
         if endpoint is not None:
-            _setter("endpoint", endpoint)
+            pulumi.set(__self__, "endpoint", endpoint)
         if node is not None:
-            _setter("node", node)
+            pulumi.set(__self__, "node", node)
         if timeouts is not None:
-            _setter("timeouts", timeouts)
+            pulumi.set(__self__, "timeouts", timeouts)
 
     @property
     @pulumi.getter(name="clientConfiguration")
@@ -231,10 +201,6 @@ class Bootstrap(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            BootstrapArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -253,11 +219,6 @@ class Bootstrap(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = BootstrapArgs.__new__(BootstrapArgs)
 
-            if client_configuration is not None and not isinstance(client_configuration, BootstrapClientConfigurationArgs):
-                client_configuration = client_configuration or {}
-                def _setter(key, value):
-                    client_configuration[key] = value
-                BootstrapClientConfigurationArgs._configure(_setter, **client_configuration)
             if client_configuration is None and not opts.urn:
                 raise TypeError("Missing required property 'client_configuration'")
             __props__.__dict__["client_configuration"] = client_configuration
@@ -265,11 +226,6 @@ class Bootstrap(pulumi.CustomResource):
             if node is None and not opts.urn:
                 raise TypeError("Missing required property 'node'")
             __props__.__dict__["node"] = node
-            if timeouts is not None and not isinstance(timeouts, BootstrapTimeoutsArgs):
-                timeouts = timeouts or {}
-                def _setter(key, value):
-                    timeouts[key] = value
-                BootstrapTimeoutsArgs._configure(_setter, **timeouts)
             __props__.__dict__["timeouts"] = timeouts
         super(Bootstrap, __self__).__init__(
             'talos:machine/bootstrap:Bootstrap',

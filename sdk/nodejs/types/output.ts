@@ -6,7 +6,7 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export namespace client {
-    export interface ConfigurationClientConfiguration {
+    export interface GetConfigurationClientConfiguration {
         /**
          * The client CA certificate
          */
@@ -24,7 +24,7 @@ export namespace client {
 }
 
 export namespace cluster {
-    export interface KubeconfigClientConfiguration {
+    export interface GetHealthClientConfiguration {
         /**
          * The client CA certificate
          */
@@ -39,7 +39,29 @@ export namespace cluster {
         clientKey: string;
     }
 
-    export interface KubeconfigKubernetesClientConfiguration {
+    export interface GetHealthTimeouts {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+         */
+        read?: string;
+    }
+
+    export interface GetKubeconfigClientConfiguration {
+        /**
+         * The client CA certificate
+         */
+        caCertificate: string;
+        /**
+         * The client certificate
+         */
+        clientCertificate: string;
+        /**
+         * The client key
+         */
+        clientKey: string;
+    }
+
+    export interface GetKubeconfigKubernetesClientConfiguration {
         /**
          * The kubernetes CA certificate
          */
@@ -58,7 +80,7 @@ export namespace cluster {
         host: string;
     }
 
-    export interface KubeconfigTimeouts {
+    export interface GetKubeconfigTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
@@ -144,7 +166,7 @@ export namespace machine {
         clientKey: string;
     }
 
-    export interface DisksClientConfiguration {
+    export interface GetDisksClientConfiguration {
         /**
          * The client CA certificate
          */
@@ -159,7 +181,7 @@ export namespace machine {
         clientKey: string;
     }
 
-    export interface DisksDisk {
+    export interface GetDisksDisk {
         /**
          * The bus path of the disk
          */
@@ -198,7 +220,7 @@ export namespace machine {
         wwid: string;
     }
 
-    export interface DisksFilters {
+    export interface GetDisksFilters {
         /**
          * Filter disks by bus path
          */
@@ -237,7 +259,7 @@ export namespace machine {
         wwid?: string;
     }
 
-    export interface DisksTimeouts {
+    export interface GetDisksTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
