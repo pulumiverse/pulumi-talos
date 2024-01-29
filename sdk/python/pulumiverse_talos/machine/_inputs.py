@@ -329,7 +329,7 @@ class CertificatesArgs:
         pulumi.set(self, "k8s", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sAggregator")
     def k8s_aggregator(self) -> 'CertificateArgs':
         return pulumi.get(self, "k8s_aggregator")
 
@@ -338,7 +338,7 @@ class CertificatesArgs:
         pulumi.set(self, "k8s_aggregator", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sServiceaccount")
     def k8s_serviceaccount(self) -> 'KeyArgs':
         return pulumi.get(self, "k8s_serviceaccount")
 
@@ -392,7 +392,7 @@ class CertificatesArgs:
         pulumi.set(self, "k8s", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sAggregator")
     def k8s_aggregator(self) -> pulumi.Input['CertificateArgs']:
         return pulumi.get(self, "k8s_aggregator")
 
@@ -401,7 +401,7 @@ class CertificatesArgs:
         pulumi.set(self, "k8s_aggregator", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sServiceaccount")
     def k8s_serviceaccount(self) -> pulumi.Input['KeyArgs']:
         return pulumi.get(self, "k8s_serviceaccount")
 
@@ -697,7 +697,7 @@ class SecretsArgs:
         pulumi.set(__self__, "secretbox_encryption_secret", secretbox_encryption_secret)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="bootstrapToken")
     def bootstrap_token(self) -> str:
         """
         The bootstrap token for the talos kubernetes cluster
@@ -709,7 +709,7 @@ class SecretsArgs:
         pulumi.set(self, "bootstrap_token", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="secretboxEncryptionSecret")
     def secretbox_encryption_secret(self) -> str:
         """
         The secretbox encryption secret for the talos kubernetes cluster
@@ -735,7 +735,7 @@ class SecretsArgs:
         pulumi.set(__self__, "secretbox_encryption_secret", secretbox_encryption_secret)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="bootstrapToken")
     def bootstrap_token(self) -> pulumi.Input[str]:
         """
         The bootstrap token for the talos kubernetes cluster
@@ -747,7 +747,7 @@ class SecretsArgs:
         pulumi.set(self, "bootstrap_token", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="secretboxEncryptionSecret")
     def secretbox_encryption_secret(self) -> pulumi.Input[str]:
         """
         The secretbox encryption secret for the talos kubernetes cluster

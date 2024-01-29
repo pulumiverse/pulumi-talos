@@ -19,8 +19,8 @@ namespace Pulumiverse.Talos.Machine.Outputs
     {
         public readonly Outputs.CertificateResult Etcd;
         public readonly Outputs.CertificateResult K8s;
-        public readonly Outputs.CertificateResult K8s_aggregator;
-        public readonly Outputs.KeyResult K8s_serviceaccount;
+        public readonly Outputs.CertificateResult K8sAggregator;
+        public readonly Outputs.KeyResult K8sServiceaccount;
         public readonly Outputs.CertificateResult Os;
 
         [OutputConstructor]
@@ -29,16 +29,16 @@ namespace Pulumiverse.Talos.Machine.Outputs
 
             Outputs.CertificateResult k8s,
 
-            Outputs.CertificateResult k8s_aggregator,
+            Outputs.CertificateResult k8sAggregator,
 
-            Outputs.KeyResult k8s_serviceaccount,
+            Outputs.KeyResult k8sServiceaccount,
 
             Outputs.CertificateResult os)
         {
             Etcd = etcd;
             K8s = k8s;
-            K8s_aggregator = k8s_aggregator;
-            K8s_serviceaccount = k8s_serviceaccount;
+            K8sAggregator = k8sAggregator;
+            K8sServiceaccount = k8sServiceaccount;
             Os = os;
         }
     }

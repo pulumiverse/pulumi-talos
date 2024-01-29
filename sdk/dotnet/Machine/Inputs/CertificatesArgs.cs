@@ -22,11 +22,11 @@ namespace Pulumiverse.Talos.Machine.Inputs
         [Input("k8s", required: true)]
         public Input<Inputs.CertificateInputArgs> K8s { get; set; } = null!;
 
-        [Input("k8s_aggregator", required: true)]
-        public Input<Inputs.CertificateInputArgs> K8s_aggregator { get; set; } = null!;
+        [Input("k8sAggregator", required: true)]
+        public Input<Inputs.CertificateInputArgs> K8sAggregator { get; set; } = null!;
 
-        [Input("k8s_serviceaccount", required: true)]
-        public Input<Inputs.KeyInputArgs> K8s_serviceaccount { get; set; } = null!;
+        [Input("k8sServiceaccount", required: true)]
+        public Input<Inputs.KeyInputArgs> K8sServiceaccount { get; set; } = null!;
 
         [Input("os", required: true)]
         public Input<Inputs.CertificateInputArgs> Os { get; set; } = null!;

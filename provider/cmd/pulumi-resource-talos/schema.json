@@ -537,10 +537,10 @@
                 "k8s": {
                     "$ref": "#types/talos:machine/generated:Certificate"
                 },
-                "k8s_aggregator": {
+                "k8sAggregator": {
                     "$ref": "#types/talos:machine/generated:Certificate"
                 },
-                "k8s_serviceaccount": {
+                "k8sServiceaccount": {
                     "$ref": "#types/talos:machine/generated:Key"
                 },
                 "os": {
@@ -551,8 +551,8 @@
             "required": [
                 "etcd",
                 "k8s",
-                "k8s_aggregator",
-                "k8s_serviceaccount",
+                "k8sAggregator",
+                "k8sServiceaccount",
                 "os"
             ]
         },
@@ -616,12 +616,12 @@
         "talos:machine/generated:Secrets": {
             "description": "A Machine Secrets Bootstrap data",
             "properties": {
-                "bootstrap_token": {
+                "bootstrapToken": {
                     "type": "string",
                     "description": "The bootstrap token for the talos kubernetes cluster",
                     "secret": true
                 },
-                "secretbox_encryption_secret": {
+                "secretboxEncryptionSecret": {
                     "type": "string",
                     "description": "The secretbox encryption secret for the talos kubernetes cluster",
                     "secret": true
@@ -629,8 +629,8 @@
             },
             "type": "object",
             "required": [
-                "bootstrap_token",
-                "secretbox_encryption_secret"
+                "bootstrapToken",
+                "secretboxEncryptionSecret"
             ]
         },
         "talos:machine/generated:TrustdInfo": {

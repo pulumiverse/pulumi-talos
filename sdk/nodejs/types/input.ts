@@ -184,8 +184,8 @@ export namespace machine {
     export interface Certificates {
         etcd: inputs.machine.Certificate;
         k8s: inputs.machine.Certificate;
-        k8s_aggregator: inputs.machine.Certificate;
-        k8s_serviceaccount: inputs.machine.Key;
+        k8sAggregator: inputs.machine.Certificate;
+        k8sServiceaccount: inputs.machine.Key;
         os: inputs.machine.Certificate;
     }
 
@@ -195,8 +195,8 @@ export namespace machine {
     export interface CertificatesArgs {
         etcd: pulumi.Input<inputs.machine.CertificateArgs>;
         k8s: pulumi.Input<inputs.machine.CertificateArgs>;
-        k8s_aggregator: pulumi.Input<inputs.machine.CertificateArgs>;
-        k8s_serviceaccount: pulumi.Input<inputs.machine.KeyArgs>;
+        k8sAggregator: pulumi.Input<inputs.machine.CertificateArgs>;
+        k8sServiceaccount: pulumi.Input<inputs.machine.KeyArgs>;
         os: pulumi.Input<inputs.machine.CertificateArgs>;
     }
 
@@ -412,11 +412,11 @@ export namespace machine {
         /**
          * The bootstrap token for the talos kubernetes cluster
          */
-        bootstrap_token: string;
+        bootstrapToken: string;
         /**
          * The secretbox encryption secret for the talos kubernetes cluster
          */
-        secretbox_encryption_secret: string;
+        secretboxEncryptionSecret: string;
     }
 
     /**
@@ -426,11 +426,11 @@ export namespace machine {
         /**
          * The bootstrap token for the talos kubernetes cluster
          */
-        bootstrap_token: pulumi.Input<string>;
+        bootstrapToken: pulumi.Input<string>;
         /**
          * The secretbox encryption secret for the talos kubernetes cluster
          */
-        secretbox_encryption_secret: pulumi.Input<string>;
+        secretboxEncryptionSecret: pulumi.Input<string>;
     }
 
     export interface SecretsClientConfiguration {

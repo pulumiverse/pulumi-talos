@@ -20,20 +20,20 @@ namespace Pulumiverse.Talos.Machine.Outputs
         /// <summary>
         /// The bootstrap token for the talos kubernetes cluster
         /// </summary>
-        public readonly string Bootstrap_token;
+        public readonly string BootstrapToken;
         /// <summary>
         /// The secretbox encryption secret for the talos kubernetes cluster
         /// </summary>
-        public readonly string Secretbox_encryption_secret;
+        public readonly string SecretboxEncryptionSecret;
 
         [OutputConstructor]
         private SecretsResult(
-            string bootstrap_token,
+            string bootstrapToken,
 
-            string secretbox_encryption_secret)
+            string secretboxEncryptionSecret)
         {
-            Bootstrap_token = bootstrap_token;
-            Secretbox_encryption_secret = secretbox_encryption_secret;
+            BootstrapToken = bootstrapToken;
+            SecretboxEncryptionSecret = secretboxEncryptionSecret;
         }
     }
 }

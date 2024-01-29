@@ -109,20 +109,20 @@ func Provider() tfbridge.ProviderInfo {
 					Type:        "object",
 					Description: "A Machine Secrets Bootstrap data",
 					Properties: map[string]schema.PropertySpec{
-						"bootstrap_token": {
+						"bootstrapToken": {
 							TypeSpec:    schema.TypeSpec{Type: "string"},
 							Description: "The bootstrap token for the talos kubernetes cluster",
 							Secret:      true,
 						},
-						"secretbox_encryption_secret": {
+						"secretboxEncryptionSecret": {
 							TypeSpec:    schema.TypeSpec{Type: "string"},
 							Description: "The secretbox encryption secret for the talos kubernetes cluster",
 							Secret:      true,
 						},
 					},
 					Required: []string{
-						"bootstrap_token",
-						"secretbox_encryption_secret",
+						"bootstrapToken",
+						"secretboxEncryptionSecret",
 					},
 				},
 			},
@@ -157,12 +157,12 @@ func Provider() tfbridge.ProviderInfo {
 								Ref: "#types/talos:machine/generated:Certificate",
 							},
 						},
-						"k8s_aggregator": {
+						"k8sAggregator": {
 							TypeSpec: schema.TypeSpec{
 								Ref: "#types/talos:machine/generated:Certificate",
 							},
 						},
-						"k8s_serviceaccount": {
+						"k8sServiceaccount": {
 							TypeSpec: schema.TypeSpec{
 								Ref: "#types/talos:machine/generated:Key",
 							},
@@ -176,8 +176,8 @@ func Provider() tfbridge.ProviderInfo {
 					Required: []string{
 						"etcd",
 						"k8s",
-						"k8s_aggregator",
-						"k8s_serviceaccount",
+						"k8sAggregator",
+						"k8sServiceaccount",
 						"os",
 					},
 				},
