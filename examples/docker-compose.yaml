@@ -27,7 +27,7 @@ x-controlplane: &controlplane
     - label=disable
 
 services:
-  talos-controlplane-1:
+  controlplane:
     <<: *controlplane
     networks:
       default:
