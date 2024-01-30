@@ -1,31 +1,32 @@
-// Copyright 2016-2017, Pulumi Corporation.  All rights reserved.
-//go:build nodejs || all
-// +build nodejs all
-
 package examples
 
 import (
-	//"path"
+	"path/filepath"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
+	"github.com/stretchr/testify/require"
 )
 
-// func TestAccWebserverNode(t *testing.T) {
-// 	test := getJSBaseOptions(t).
-// 		With(integration.ProgramTestOptions{
-// 			Dir: path.Join(getCwd(t), "ts/server"),
-// 		})
+func TestSimpleTs(t *testing.T) {
+	require.NoError(t, startNodes(t), "failed to start docker nodes")
 
-// 	integration.ProgramTest(t, &test)
-// }
+	test := getJSBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: filepath.Join(getCwd(t), "typescript"),
+		Config: map[string]string{
+			"name":     "exampleCluster",
+			"endpoint": "https://cluster.local:6443",
+			"node0":    "10.6.0.2",
+		},
+	})
+	integration.ProgramTest(t, &test)
+}
 
 func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions(t)
 	baseJS := base.With(integration.ProgramTestOptions{
-		ExpectRefreshChanges: true,
 		Dependencies: []string{
-			"@pulumiverse/scaleway",
+			"@pulumiverse/talos",
 		},
 	})
 

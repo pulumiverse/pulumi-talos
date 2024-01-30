@@ -1,11 +1,10 @@
 {
-	"name": "talos",
+	"name": "typescript",
 	"devDependencies": {
-		"@types/node": "^14"
+		"@types/node": "^20"
 	},
 	"dependencies": {
-		"typescript": "^4.0.0",
-		"@pulumi/pulumi": "^3.0.0",
-		"@pulumiverse/talos": "0.1.8"
+		"typescript": "^5.0.0",
+		"@pulumi/pulumi": "^3.0.0"
 	}
 }
