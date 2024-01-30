@@ -34,5 +34,5 @@ const health = talos.cluster.getHealthOutput({
     controlPlaneNodes: [bootstrap.node],
     endpoints: [bootstrap.endpoint],
     clientConfiguration: secrets.clientConfiguration,
-    timeouts: { read: "60s" },
+    timeouts: { read: "4m" },
 });
