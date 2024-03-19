@@ -16,7 +16,7 @@ __all__ = ['ConfigurationApplyArgs', 'ConfigurationApply']
 @pulumi.input_type
 class ConfigurationApplyArgs:
     def __init__(__self__, *,
-                 client_configuration: pulumi.Input['ConfigurationApplyClientConfigurationArgs'],
+                 client_configuration: pulumi.Input['ClientConfigurationArgs'],
                  machine_configuration_input: pulumi.Input[str],
                  node: pulumi.Input[str],
                  apply_mode: Optional[pulumi.Input[str]] = None,
@@ -25,7 +25,7 @@ class ConfigurationApplyArgs:
                  timeouts: Optional[pulumi.Input['TimeoutArgs']] = None):
         """
         The set of arguments for constructing a ConfigurationApply resource.
-        :param pulumi.Input['ConfigurationApplyClientConfigurationArgs'] client_configuration: The client configuration data
+        :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[str] node: The name of the node to bootstrap
         :param pulumi.Input[str] apply_mode: The mode of the apply operation
@@ -46,14 +46,14 @@ class ConfigurationApplyArgs:
 
     @property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> pulumi.Input['ConfigurationApplyClientConfigurationArgs']:
+    def client_configuration(self) -> pulumi.Input['ClientConfigurationArgs']:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
 
     @client_configuration.setter
-    def client_configuration(self, value: pulumi.Input['ConfigurationApplyClientConfigurationArgs']):
+    def client_configuration(self, value: pulumi.Input['ClientConfigurationArgs']):
         pulumi.set(self, "client_configuration", value)
 
     @property
@@ -130,7 +130,7 @@ class ConfigurationApplyArgs:
 class _ConfigurationApplyState:
     def __init__(__self__, *,
                  apply_mode: Optional[pulumi.Input[str]] = None,
-                 client_configuration: Optional[pulumi.Input['ConfigurationApplyClientConfigurationArgs']] = None,
+                 client_configuration: Optional[pulumi.Input['ClientConfigurationArgs']] = None,
                  config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  machine_configuration: Optional[pulumi.Input[str]] = None,
@@ -140,7 +140,7 @@ class _ConfigurationApplyState:
         """
         Input properties used for looking up and filtering ConfigurationApply resources.
         :param pulumi.Input[str] apply_mode: The mode of the apply operation
-        :param pulumi.Input['ConfigurationApplyClientConfigurationArgs'] client_configuration: The client configuration data
+        :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[Sequence[pulumi.Input[str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] machine_configuration: The generated machine configuration after applying patches
@@ -178,14 +178,14 @@ class _ConfigurationApplyState:
 
     @property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> Optional[pulumi.Input['ConfigurationApplyClientConfigurationArgs']]:
+    def client_configuration(self) -> Optional[pulumi.Input['ClientConfigurationArgs']]:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
 
     @client_configuration.setter
-    def client_configuration(self, value: Optional[pulumi.Input['ConfigurationApplyClientConfigurationArgs']]):
+    def client_configuration(self, value: Optional[pulumi.Input['ClientConfigurationArgs']]):
         pulumi.set(self, "client_configuration", value)
 
     @property
@@ -264,7 +264,7 @@ class ConfigurationApply(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  apply_mode: Optional[pulumi.Input[str]] = None,
-                 client_configuration: Optional[pulumi.Input[pulumi.InputType['ConfigurationApplyClientConfigurationArgs']]] = None,
+                 client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
                  config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  machine_configuration_input: Optional[pulumi.Input[str]] = None,
@@ -277,7 +277,7 @@ class ConfigurationApply(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] apply_mode: The mode of the apply operation
-        :param pulumi.Input[pulumi.InputType['ConfigurationApplyClientConfigurationArgs']] client_configuration: The client configuration data
+        :param pulumi.Input[pulumi.InputType['ClientConfigurationArgs']] client_configuration: The client configuration data
         :param pulumi.Input[Sequence[pulumi.Input[str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] machine_configuration_input: The machine configuration to apply
@@ -308,7 +308,7 @@ class ConfigurationApply(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  apply_mode: Optional[pulumi.Input[str]] = None,
-                 client_configuration: Optional[pulumi.Input[pulumi.InputType['ConfigurationApplyClientConfigurationArgs']]] = None,
+                 client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
                  config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  machine_configuration_input: Optional[pulumi.Input[str]] = None,
@@ -350,7 +350,7 @@ class ConfigurationApply(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             apply_mode: Optional[pulumi.Input[str]] = None,
-            client_configuration: Optional[pulumi.Input[pulumi.InputType['ConfigurationApplyClientConfigurationArgs']]] = None,
+            client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
             config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             endpoint: Optional[pulumi.Input[str]] = None,
             machine_configuration: Optional[pulumi.Input[str]] = None,
@@ -365,7 +365,7 @@ class ConfigurationApply(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] apply_mode: The mode of the apply operation
-        :param pulumi.Input[pulumi.InputType['ConfigurationApplyClientConfigurationArgs']] client_configuration: The client configuration data
+        :param pulumi.Input[pulumi.InputType['ClientConfigurationArgs']] client_configuration: The client configuration data
         :param pulumi.Input[Sequence[pulumi.Input[str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] machine_configuration: The generated machine configuration after applying patches
@@ -396,7 +396,7 @@ class ConfigurationApply(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> pulumi.Output['outputs.ConfigurationApplyClientConfiguration']:
+    def client_configuration(self) -> pulumi.Output['outputs.ClientConfiguration']:
         """
         The client configuration data
         """

@@ -104,7 +104,7 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
-			"talos:machine/generated:Secrets": {
+			"talos:machine/generated:KubernetesSecrets": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
 					Type:        "object",
 					Description: "A Machine Secrets Bootstrap data",
@@ -182,6 +182,32 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
+			"talos:machine/generated:ClientConfiguration": {
+				ObjectTypeSpec: schema.ObjectTypeSpec{
+					Type:        "object",
+					Description: "A Client Configuration",
+					Properties: map[string]schema.PropertySpec{
+						"ca_certificate": {
+							TypeSpec:    schema.TypeSpec{Type: "string"},
+							Description: "The client CA certificate",
+						},
+						"client_certificate": {
+							TypeSpec:    schema.TypeSpec{Type: "string"},
+							Description: "The client certificate",
+						},
+						"client_key": {
+							TypeSpec:    schema.TypeSpec{Type: "string"},
+							Description: "The client private key",
+							Secret:      true,
+						},
+					},
+					Required: []string{
+						"ca_certificate",
+						"client_certificate",
+						"client_key",
+					},
+				},
+			},
 			"talos:machine/generated:MachineSecrets": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
 					Type:        "object",
@@ -199,7 +225,7 @@ func Provider() tfbridge.ProviderInfo {
 						},
 						"secrets": {
 							TypeSpec: schema.TypeSpec{
-								Ref: "#types/talos:machine/generated:Secrets",
+								Ref: "#types/talos:machine/generated:KubernetesSecrets",
 							},
 						},
 						"trustdinfo": {
@@ -218,18 +244,39 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"talos_machine_bootstrap": {Tok: tfbridge.MakeResource(talosPkg, machineMod, "Bootstrap")},
+			"talos_machine_bootstrap": {
+				Tok: tfbridge.MakeResource(talosPkg, machineMod, "Bootstrap"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"client_configuration": {
+						Elem: &tfbridge.SchemaInfo{
+							Type: "talos:machine/generated:ClientConfiguration",
+						},
+					},
+				},
+			},
 			"talos_machine_configuration_apply": {
 				Tok: tfbridge.MakeResource(talosPkg, machineMod, "ConfigurationApply"),
 				Fields: map[string]*tfbridge.SchemaInfo{
-					"timeouts": {Elem: &tfbridge.SchemaInfo{
-						NestedType: "Timeout",
-					}},
+					"timeouts": {
+						Elem: &tfbridge.SchemaInfo{
+							NestedType: "Timeout",
+						},
+					},
+					"client_configuration": {
+						Elem: &tfbridge.SchemaInfo{
+							Type: "talos:machine/generated:ClientConfiguration",
+						},
+					},
 				},
 			},
 			"talos_machine_secrets": {
 				Tok: tfbridge.MakeResource(talosPkg, machineMod, "Secrets"),
 				Fields: map[string]*tfbridge.SchemaInfo{
+					"client_configuration": {
+						Elem: &tfbridge.SchemaInfo{
+							Type: "talos:machine/generated:ClientConfiguration",
+						},
+					},
 					"machine_secrets": {
 						Elem: &tfbridge.SchemaInfo{
 							Type: "talos:machine/generated:MachineSecrets",

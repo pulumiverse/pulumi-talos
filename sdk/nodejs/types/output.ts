@@ -90,21 +90,6 @@ export namespace cluster {
 }
 
 export namespace machine {
-    export interface BootstrapClientConfiguration {
-        /**
-         * The client CA certificate
-         */
-        caCertificate: string;
-        /**
-         * The client certificate
-         */
-        clientCertificate: string;
-        /**
-         * The client key
-         */
-        clientKey: string;
-    }
-
     export interface BootstrapTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
@@ -138,6 +123,24 @@ export namespace machine {
     }
 
     /**
+     * A Client Configuration
+     */
+    export interface ClientConfiguration {
+        /**
+         * The client CA certificate
+         */
+        ca_certificate: string;
+        /**
+         * The client certificate
+         */
+        client_certificate: string;
+        /**
+         * The client private key
+         */
+        client_key: string;
+    }
+
+    /**
      * A Machine Secrets Cluster Info
      */
     export interface Cluster {
@@ -149,21 +152,6 @@ export namespace machine {
          * Private Key
          */
         secret: string;
-    }
-
-    export interface ConfigurationApplyClientConfiguration {
-        /**
-         * The client CA certificate
-         */
-        caCertificate: string;
-        /**
-         * The client certificate
-         */
-        clientCertificate: string;
-        /**
-         * The client key
-         */
-        clientKey: string;
     }
 
     export interface GetDisksClientConfiguration {
@@ -277,19 +265,9 @@ export namespace machine {
     }
 
     /**
-     * A complete Machine Secrets configuration
-     */
-    export interface MachineSecrets {
-        certs: outputs.machine.Certificates;
-        cluster: outputs.machine.Cluster;
-        secrets: outputs.machine.Secrets;
-        trustdinfo: outputs.machine.TrustdInfo;
-    }
-
-    /**
      * A Machine Secrets Bootstrap data
      */
-    export interface Secrets {
+    export interface KubernetesSecrets {
         /**
          * The bootstrap token for the talos kubernetes cluster
          */
@@ -300,19 +278,14 @@ export namespace machine {
         secretbox_encryption_secret: string;
     }
 
-    export interface SecretsClientConfiguration {
-        /**
-         * The client CA certificate
-         */
-        caCertificate: string;
-        /**
-         * The client certificate
-         */
-        clientCertificate: string;
-        /**
-         * The client key
-         */
-        clientKey: string;
+    /**
+     * A complete Machine Secrets configuration
+     */
+    export interface MachineSecrets {
+        certs: outputs.machine.Certificates;
+        cluster: outputs.machine.Cluster;
+        secrets: outputs.machine.KubernetesSecrets;
+        trustdinfo: outputs.machine.TrustdInfo;
     }
 
     export interface Timeout {

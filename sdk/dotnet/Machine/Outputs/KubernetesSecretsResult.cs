@@ -15,7 +15,7 @@ namespace Pulumiverse.Talos.Machine.Outputs
     /// A Machine Secrets Bootstrap data
     /// </summary>
     [OutputType]
-    public sealed class SecretsResult
+    public sealed class KubernetesSecretsResult
     {
         /// <summary>
         /// The bootstrap token for the talos kubernetes cluster
@@ -27,7 +27,7 @@ namespace Pulumiverse.Talos.Machine.Outputs
         public readonly string Secretbox_encryption_secret;
 
         [OutputConstructor]
-        private SecretsResult(
+        private KubernetesSecretsResult(
             string bootstrap_token,
 
             string secretbox_encryption_secret)

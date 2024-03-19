@@ -128,21 +128,6 @@ export namespace cluster {
 }
 
 export namespace machine {
-    export interface BootstrapClientConfiguration {
-        /**
-         * The client CA certificate
-         */
-        caCertificate: pulumi.Input<string>;
-        /**
-         * The client certificate
-         */
-        clientCertificate: pulumi.Input<string>;
-        /**
-         * The client key
-         */
-        clientKey: pulumi.Input<string>;
-    }
-
     export interface BootstrapTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
@@ -201,6 +186,24 @@ export namespace machine {
     }
 
     /**
+     * A Client Configuration
+     */
+    export interface ClientConfiguration {
+        /**
+         * The client CA certificate
+         */
+        ca_certificate: pulumi.Input<string>;
+        /**
+         * The client certificate
+         */
+        client_certificate: pulumi.Input<string>;
+        /**
+         * The client private key
+         */
+        client_key: pulumi.Input<string>;
+    }
+
+    /**
      * A Machine Secrets Cluster Info
      */
     export interface Cluster {
@@ -226,21 +229,6 @@ export namespace machine {
          * Private Key
          */
         secret: pulumi.Input<string>;
-    }
-
-    export interface ConfigurationApplyClientConfiguration {
-        /**
-         * The client CA certificate
-         */
-        caCertificate: pulumi.Input<string>;
-        /**
-         * The client certificate
-         */
-        clientCertificate: pulumi.Input<string>;
-        /**
-         * The client key
-         */
-        clientKey: pulumi.Input<string>;
     }
 
     export interface GetDisksClientConfiguration {
@@ -386,29 +374,9 @@ export namespace machine {
     }
 
     /**
-     * A complete Machine Secrets configuration
-     */
-    export interface MachineSecrets {
-        certs: inputs.machine.Certificates;
-        cluster: inputs.machine.Cluster;
-        secrets: inputs.machine.Secrets;
-        trustdinfo: inputs.machine.TrustdInfo;
-    }
-
-    /**
-     * A complete Machine Secrets configuration
-     */
-    export interface MachineSecretsArgs {
-        certs: pulumi.Input<inputs.machine.CertificatesArgs>;
-        cluster: pulumi.Input<inputs.machine.ClusterArgs>;
-        secrets: pulumi.Input<inputs.machine.SecretsArgs>;
-        trustdinfo: pulumi.Input<inputs.machine.TrustdInfoArgs>;
-    }
-
-    /**
      * A Machine Secrets Bootstrap data
      */
-    export interface Secrets {
+    export interface KubernetesSecrets {
         /**
          * The bootstrap token for the talos kubernetes cluster
          */
@@ -422,7 +390,7 @@ export namespace machine {
     /**
      * A Machine Secrets Bootstrap data
      */
-    export interface SecretsArgs {
+    export interface KubernetesSecretsArgs {
         /**
          * The bootstrap token for the talos kubernetes cluster
          */
@@ -433,19 +401,24 @@ export namespace machine {
         secretbox_encryption_secret: pulumi.Input<string>;
     }
 
-    export interface SecretsClientConfiguration {
-        /**
-         * The client CA certificate
-         */
-        caCertificate?: pulumi.Input<string>;
-        /**
-         * The client certificate
-         */
-        clientCertificate?: pulumi.Input<string>;
-        /**
-         * The client key
-         */
-        clientKey?: pulumi.Input<string>;
+    /**
+     * A complete Machine Secrets configuration
+     */
+    export interface MachineSecrets {
+        certs: inputs.machine.Certificates;
+        cluster: inputs.machine.Cluster;
+        secrets: inputs.machine.KubernetesSecrets;
+        trustdinfo: inputs.machine.TrustdInfo;
+    }
+
+    /**
+     * A complete Machine Secrets configuration
+     */
+    export interface MachineSecretsArgs {
+        certs: pulumi.Input<inputs.machine.CertificatesArgs>;
+        cluster: pulumi.Input<inputs.machine.ClusterArgs>;
+        secrets: pulumi.Input<inputs.machine.KubernetesSecretsArgs>;
+        trustdinfo: pulumi.Input<inputs.machine.TrustdInfoArgs>;
     }
 
     export interface Timeout {

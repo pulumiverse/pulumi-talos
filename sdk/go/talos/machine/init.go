@@ -26,7 +26,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	case "talos:machine/configurationApply:ConfigurationApply":
 		r = &ConfigurationApply{}
 	case "talos:machine/secrets:Secrets":
-		r = &SecretsType{}
+		r = &Secrets{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}

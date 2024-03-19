@@ -14,7 +14,7 @@ namespace Pulumiverse.Talos.Machine.Inputs
     /// <summary>
     /// A Machine Secrets Bootstrap data
     /// </summary>
-    public sealed class SecretsInputArgs : global::Pulumi.ResourceArgs
+    public sealed class KubernetesSecretsGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("bootstrap_token", required: true)]
         private Input<string>? _bootstrap_token;
@@ -48,9 +48,9 @@ namespace Pulumiverse.Talos.Machine.Inputs
             }
         }
 
-        public SecretsInputArgs()
+        public KubernetesSecretsGetArgs()
         {
         }
-        public static new SecretsInputArgs Empty => new SecretsInputArgs();
+        public static new KubernetesSecretsGetArgs Empty => new KubernetesSecretsGetArgs();
     }
 }

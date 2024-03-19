@@ -19,7 +19,7 @@ namespace Pulumiverse.Talos.Machine.Outputs
     {
         public readonly Outputs.CertificatesResult Certs;
         public readonly Outputs.ClusterResult Cluster;
-        public readonly Outputs.SecretsResult Secrets;
+        public readonly Outputs.KubernetesSecretsResult Secrets;
         public readonly Outputs.TrustdInfoResult Trustdinfo;
 
         [OutputConstructor]
@@ -28,7 +28,7 @@ namespace Pulumiverse.Talos.Machine.Outputs
 
             Outputs.ClusterResult cluster,
 
-            Outputs.SecretsResult secrets,
+            Outputs.KubernetesSecretsResult secrets,
 
             Outputs.TrustdInfoResult trustdinfo)
         {

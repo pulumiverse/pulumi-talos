@@ -34,7 +34,7 @@ func main() {
 		json0 := string(tmpJSON0)
 		configurationApply, err := machine.NewConfigurationApply(ctx, "configurationApply", &machine.ConfigurationApplyArgs{
 			ClientConfiguration:       secrets.ClientConfiguration,
-			MachineConfigurationInput: *pulumi.String(configuration),
+			MachineConfigurationInput: configuration.MachineConfiguration(),
 			Node:                      pulumi.String("10.5.0.2"),
 			ConfigPatches: pulumi.StringArray{
 				pulumi.String(json0),

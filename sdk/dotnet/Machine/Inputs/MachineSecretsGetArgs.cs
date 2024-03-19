@@ -23,7 +23,7 @@ namespace Pulumiverse.Talos.Machine.Inputs
         public Input<Inputs.ClusterGetArgs> Cluster { get; set; } = null!;
 
         [Input("secrets", required: true)]
-        public Input<Inputs.SecretsGetArgs> Secrets { get; set; } = null!;
+        public Input<Inputs.KubernetesSecretsGetArgs> Secrets { get; set; } = null!;
 
         [Input("trustdinfo", required: true)]
         public Input<Inputs.TrustdInfoGetArgs> Trustdinfo { get; set; } = null!;

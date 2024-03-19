@@ -19,7 +19,7 @@ type ConfigurationApply struct {
 	// The mode of the apply operation
 	ApplyMode pulumi.StringOutput `pulumi:"applyMode"`
 	// The client configuration data
-	ClientConfiguration ConfigurationApplyClientConfigurationOutput `pulumi:"clientConfiguration"`
+	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayOutput `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
@@ -83,7 +83,7 @@ type configurationApplyState struct {
 	// The mode of the apply operation
 	ApplyMode *string `pulumi:"applyMode"`
 	// The client configuration data
-	ClientConfiguration *ConfigurationApplyClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
 	// The list of config patches to apply
 	ConfigPatches []string `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
@@ -101,7 +101,7 @@ type ConfigurationApplyState struct {
 	// The mode of the apply operation
 	ApplyMode pulumi.StringPtrInput
 	// The client configuration data
-	ClientConfiguration ConfigurationApplyClientConfigurationPtrInput
+	ClientConfiguration ClientConfigurationPtrInput
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayInput
 	// The endpoint of the machine to bootstrap
@@ -123,7 +123,7 @@ type configurationApplyArgs struct {
 	// The mode of the apply operation
 	ApplyMode *string `pulumi:"applyMode"`
 	// The client configuration data
-	ClientConfiguration ConfigurationApplyClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration ClientConfiguration `pulumi:"clientConfiguration"`
 	// The list of config patches to apply
 	ConfigPatches []string `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
@@ -140,7 +140,7 @@ type ConfigurationApplyArgs struct {
 	// The mode of the apply operation
 	ApplyMode pulumi.StringPtrInput
 	// The client configuration data
-	ClientConfiguration ConfigurationApplyClientConfigurationInput
+	ClientConfiguration ClientConfigurationInput
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayInput
 	// The endpoint of the machine to bootstrap
@@ -245,8 +245,8 @@ func (o ConfigurationApplyOutput) ApplyMode() pulumi.StringOutput {
 }
 
 // The client configuration data
-func (o ConfigurationApplyOutput) ClientConfiguration() ConfigurationApplyClientConfigurationOutput {
-	return o.ApplyT(func(v *ConfigurationApply) ConfigurationApplyClientConfigurationOutput { return v.ClientConfiguration }).(ConfigurationApplyClientConfigurationOutput)
+func (o ConfigurationApplyOutput) ClientConfiguration() ClientConfigurationOutput {
+	return o.ApplyT(func(v *ConfigurationApply) ClientConfigurationOutput { return v.ClientConfiguration }).(ClientConfigurationOutput)
 }
 
 // The list of config patches to apply

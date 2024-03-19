@@ -14,43 +14,35 @@ namespace Pulumiverse.Talos.Machine.Inputs
     /// <summary>
     /// A Machine Secrets Bootstrap data
     /// </summary>
-    public sealed class SecretsGetArgs : global::Pulumi.ResourceArgs
+    public sealed class KubernetesSecretsArgs : global::Pulumi.InvokeArgs
     {
         [Input("bootstrap_token", required: true)]
-        private Input<string>? _bootstrap_token;
+        private string? _bootstrap_token;
 
         /// <summary>
         /// The bootstrap token for the talos kubernetes cluster
         /// </summary>
-        public Input<string>? Bootstrap_token
+        public string? Bootstrap_token
         {
             get => _bootstrap_token;
-            set
-            {
-                var emptySecret = Output.CreateSecret(0);
-                _bootstrap_token = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
-            }
+            set => _bootstrap_token = value;
         }
 
         [Input("secretbox_encryption_secret", required: true)]
-        private Input<string>? _secretbox_encryption_secret;
+        private string? _secretbox_encryption_secret;
 
         /// <summary>
         /// The secretbox encryption secret for the talos kubernetes cluster
         /// </summary>
-        public Input<string>? Secretbox_encryption_secret
+        public string? Secretbox_encryption_secret
         {
             get => _secretbox_encryption_secret;
-            set
-            {
-                var emptySecret = Output.CreateSecret(0);
-                _secretbox_encryption_secret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
-            }
+            set => _secretbox_encryption_secret = value;
         }
 
-        public SecretsGetArgs()
+        public KubernetesSecretsArgs()
         {
         }
-        public static new SecretsGetArgs Empty => new SecretsGetArgs();
+        public static new KubernetesSecretsArgs Empty => new KubernetesSecretsArgs();
     }
 }
