@@ -22,9 +22,17 @@ const configurationApply = new talos.machine.ConfigurationApply("configurationAp
         },
     })],
 });
+
 const bootstrap = new talos.machine.Bootstrap("bootstrap", {
     node: "10.5.0.2",
     clientConfiguration: secrets.clientConfiguration,
 }, {
     dependsOn: [configurationApply],
+});
+
+const health = talos.cluster.getHealthOutput({
+    controlPlaneNodes: [bootstrap.node],
+    endpoints: [bootstrap.endpoint],
+    clientConfiguration: secrets.clientConfiguration,
+    timeouts: { read: "4m" },
 });
