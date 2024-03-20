@@ -162,10 +162,12 @@ class Bootstrap(pulumi.CustomResource):
 
         ## Import
 
-        terraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
+        terraform
+
+        machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
 
         ```sh
-         $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
+        $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -185,10 +187,12 @@ class Bootstrap(pulumi.CustomResource):
 
         ## Import
 
-        terraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
+        terraform
+
+        machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
 
         ```sh
-         $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
+        $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
         ```
 
         :param str resource_name: The name of the resource.

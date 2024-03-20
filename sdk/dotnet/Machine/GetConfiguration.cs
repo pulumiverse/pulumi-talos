@@ -17,10 +17,9 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
@@ -42,8 +41,7 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetConfigurationResult> InvokeAsync(GetConfigurationArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigurationResult>("talos:machine/getConfiguration:getConfiguration", args ?? new GetConfigurationArgs(), options.WithDefaults());
@@ -53,10 +51,9 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
@@ -78,8 +75,7 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetConfigurationResult> Invoke(GetConfigurationInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationResult>("talos:machine/getConfiguration:getConfiguration", args ?? new GetConfigurationInvokeArgs(), options.WithDefaults());

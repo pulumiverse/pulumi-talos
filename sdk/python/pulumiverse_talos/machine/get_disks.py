@@ -128,6 +128,7 @@ def get_disks(client_configuration: Optional[pulumi.InputType['GetDisksClientCon
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_talos as talos
@@ -142,6 +143,7 @@ def get_disks(client_configuration: Optional[pulumi.InputType['GetDisksClientCon
         ))
     pulumi.export("nvmeDisks", this_disks.apply(lambda this_disks: [__item.name for __item in this_disks.disks]))
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param pulumi.InputType['GetDisksClientConfigurationArgs'] client_configuration: The client configuration data
@@ -182,6 +184,7 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[pulumi.InputTyp
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_talos as talos
@@ -196,6 +199,7 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[pulumi.InputTyp
         ))
     pulumi.export("nvmeDisks", this_disks.apply(lambda this_disks: [__item.name for __item in this_disks.disks]))
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param pulumi.InputType['GetDisksClientConfigurationArgs'] client_configuration: The client configuration data
