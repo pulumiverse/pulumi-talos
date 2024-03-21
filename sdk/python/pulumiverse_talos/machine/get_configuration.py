@@ -183,6 +183,7 @@ def get_configuration(cluster_endpoint: Optional[str] = None,
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_talos as talos
@@ -194,6 +195,7 @@ def get_configuration(cluster_endpoint: Optional[str] = None,
         cluster_endpoint="https://cluster.local:6443",
         machine_secrets=this_secrets.machine_secrets)
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param str cluster_endpoint: The endpoint of the talos kubernetes cluster
@@ -251,6 +253,7 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_talos as talos
@@ -262,6 +265,7 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
         cluster_endpoint="https://cluster.local:6443",
         machine_secrets=this_secrets.machine_secrets)
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param str cluster_endpoint: The endpoint of the talos kubernetes cluster
