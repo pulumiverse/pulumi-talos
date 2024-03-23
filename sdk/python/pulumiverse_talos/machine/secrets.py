@@ -105,19 +105,23 @@ class Secrets(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumiverse_talos as talos
 
         machine_secrets = talos.machine.Secrets("machineSecrets")
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
-        terraform machine secrets can be imported from an existing secrets file
+        terraform
+
+        machine secrets can be imported from an existing secrets file
 
         ```sh
-         $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
+        $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
         ```
 
         :param str resource_name: The name of the resource.
@@ -135,19 +139,23 @@ class Secrets(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumiverse_talos as talos
 
         machine_secrets = talos.machine.Secrets("machineSecrets")
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
-        terraform machine secrets can be imported from an existing secrets file
+        terraform
+
+        machine secrets can be imported from an existing secrets file
 
         ```sh
-         $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
+        $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
         ```
 
         :param str resource_name: The name of the resource.

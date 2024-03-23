@@ -116,6 +116,7 @@ def get_configuration(client_configuration: Optional[pulumi.InputType['GetConfig
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_talos as talos
@@ -126,6 +127,7 @@ def get_configuration(client_configuration: Optional[pulumi.InputType['GetConfig
         client_configuration=this_secrets.client_configuration,
         nodes=["10.5.0.2"])
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param pulumi.InputType['GetConfigurationClientConfigurationArgs'] client_configuration: The client configuration data
@@ -161,6 +163,7 @@ def get_configuration_output(client_configuration: Optional[pulumi.Input[pulumi.
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_talos as talos
@@ -171,6 +174,7 @@ def get_configuration_output(client_configuration: Optional[pulumi.Input[pulumi.
         client_configuration=this_secrets.client_configuration,
         nodes=["10.5.0.2"])
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param pulumi.InputType['GetConfigurationClientConfigurationArgs'] client_configuration: The client configuration data

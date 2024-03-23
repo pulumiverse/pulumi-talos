@@ -13,6 +13,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumi/talos";
@@ -29,6 +30,7 @@ import * as utilities from "../utilities";
  * });
  * export const nvmeDisks = thisDisks.apply(thisDisks => thisDisks.disks.map(__item => __item.name));
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDisks(args: GetDisksArgs, opts?: pulumi.InvokeOptions): Promise<GetDisksResult> {
 
@@ -102,6 +104,7 @@ export interface GetDisksResult {
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumi/talos";
@@ -118,6 +121,7 @@ export interface GetDisksResult {
  * });
  * export const nvmeDisks = thisDisks.apply(thisDisks => thisDisks.disks.map(__item => __item.name));
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDisksOutput(args: GetDisksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDisksResult> {
     return pulumi.output(args).apply((a: any) => getDisks(a, opts))
