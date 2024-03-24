@@ -378,6 +378,10 @@ export namespace machine {
      */
     export interface KubernetesSecrets {
         /**
+         * The aescbc encryption secret for the talos kubernetes cluster
+         */
+        aescbc_encryption_secret?: string;
+        /**
          * The bootstrap token for the talos kubernetes cluster
          */
         bootstrap_token: string;
@@ -391,6 +395,10 @@ export namespace machine {
      * A Machine Secrets Bootstrap data
      */
     export interface KubernetesSecretsArgs {
+        /**
+         * The aescbc encryption secret for the talos kubernetes cluster
+         */
+        aescbc_encryption_secret?: pulumi.Input<string>;
         /**
          * The bootstrap token for the talos kubernetes cluster
          */

@@ -18,6 +18,10 @@ namespace Pulumiverse.Talos.Machine.Outputs
     public sealed class KubernetesSecretsResult
     {
         /// <summary>
+        /// The aescbc encryption secret for the talos kubernetes cluster
+        /// </summary>
+        public readonly string? Aescbc_encryption_secret;
+        /// <summary>
         /// The bootstrap token for the talos kubernetes cluster
         /// </summary>
         public readonly string Bootstrap_token;
@@ -28,10 +32,13 @@ namespace Pulumiverse.Talos.Machine.Outputs
 
         [OutputConstructor]
         private KubernetesSecretsResult(
+            string? aescbc_encryption_secret,
+
             string bootstrap_token,
 
             string secretbox_encryption_secret)
         {
+            Aescbc_encryption_secret = aescbc_encryption_secret;
             Bootstrap_token = bootstrap_token;
             Secretbox_encryption_secret = secretbox_encryption_secret;
         }

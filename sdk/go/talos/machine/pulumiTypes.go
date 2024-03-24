@@ -2870,6 +2870,8 @@ func (o KeyPtrOutput) Key() pulumi.StringPtrOutput {
 
 // A Machine Secrets Bootstrap data
 type KubernetesSecrets struct {
+	// The aescbc encryption secret for the talos kubernetes cluster
+	Aescbc_encryption_secret *string `pulumi:"aescbc_encryption_secret"`
 	// The bootstrap token for the talos kubernetes cluster
 	Bootstrap_token string `pulumi:"bootstrap_token"`
 	// The secretbox encryption secret for the talos kubernetes cluster
@@ -2889,6 +2891,8 @@ type KubernetesSecretsInput interface {
 
 // A Machine Secrets Bootstrap data
 type KubernetesSecretsArgs struct {
+	// The aescbc encryption secret for the talos kubernetes cluster
+	Aescbc_encryption_secret pulumi.StringPtrInput `pulumi:"aescbc_encryption_secret"`
 	// The bootstrap token for the talos kubernetes cluster
 	Bootstrap_token pulumi.StringInput `pulumi:"bootstrap_token"`
 	// The secretbox encryption secret for the talos kubernetes cluster
@@ -2973,6 +2977,11 @@ func (o KubernetesSecretsOutput) ToKubernetesSecretsPtrOutputWithContext(ctx con
 	}).(KubernetesSecretsPtrOutput)
 }
 
+// The aescbc encryption secret for the talos kubernetes cluster
+func (o KubernetesSecretsOutput) Aescbc_encryption_secret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubernetesSecrets) *string { return v.Aescbc_encryption_secret }).(pulumi.StringPtrOutput)
+}
+
 // The bootstrap token for the talos kubernetes cluster
 func (o KubernetesSecretsOutput) Bootstrap_token() pulumi.StringOutput {
 	return o.ApplyT(func(v KubernetesSecrets) string { return v.Bootstrap_token }).(pulumi.StringOutput)
@@ -3005,6 +3014,16 @@ func (o KubernetesSecretsPtrOutput) Elem() KubernetesSecretsOutput {
 		var ret KubernetesSecrets
 		return ret
 	}).(KubernetesSecretsOutput)
+}
+
+// The aescbc encryption secret for the talos kubernetes cluster
+func (o KubernetesSecretsPtrOutput) Aescbc_encryption_secret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubernetesSecrets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Aescbc_encryption_secret
+	}).(pulumi.StringPtrOutput)
 }
 
 // The bootstrap token for the talos kubernetes cluster

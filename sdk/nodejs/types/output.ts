@@ -269,6 +269,10 @@ export namespace machine {
      */
     export interface KubernetesSecrets {
         /**
+         * The aescbc encryption secret for the talos kubernetes cluster
+         */
+        aescbc_encryption_secret?: string;
+        /**
          * The bootstrap token for the talos kubernetes cluster
          */
         bootstrap_token: string;

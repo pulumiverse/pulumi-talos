@@ -475,14 +475,18 @@ class KeyArgs:
 class KubernetesSecretsArgs:
     def __init__(__self__, *,
                  bootstrap_token: str,
-                 secretbox_encryption_secret: str):
+                 secretbox_encryption_secret: str,
+                 aescbc_encryption_secret: Optional[str] = None):
         """
         A Machine Secrets Bootstrap data
         :param str bootstrap_token: The bootstrap token for the talos kubernetes cluster
         :param str secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
+        :param str aescbc_encryption_secret: The aescbc encryption secret for the talos kubernetes cluster
         """
         pulumi.set(__self__, "bootstrap_token", bootstrap_token)
         pulumi.set(__self__, "secretbox_encryption_secret", secretbox_encryption_secret)
+        if aescbc_encryption_secret is not None:
+            pulumi.set(__self__, "aescbc_encryption_secret", aescbc_encryption_secret)
 
     @property
     @pulumi.getter
@@ -508,19 +512,35 @@ class KubernetesSecretsArgs:
     def secretbox_encryption_secret(self, value: str):
         pulumi.set(self, "secretbox_encryption_secret", value)
 
+    @property
+    @pulumi.getter
+    def aescbc_encryption_secret(self) -> Optional[str]:
+        """
+        The aescbc encryption secret for the talos kubernetes cluster
+        """
+        return pulumi.get(self, "aescbc_encryption_secret")
+
+    @aescbc_encryption_secret.setter
+    def aescbc_encryption_secret(self, value: Optional[str]):
+        pulumi.set(self, "aescbc_encryption_secret", value)
+
 
 @pulumi.input_type
 class KubernetesSecretsArgs:
     def __init__(__self__, *,
                  bootstrap_token: pulumi.Input[str],
-                 secretbox_encryption_secret: pulumi.Input[str]):
+                 secretbox_encryption_secret: pulumi.Input[str],
+                 aescbc_encryption_secret: Optional[pulumi.Input[str]] = None):
         """
         A Machine Secrets Bootstrap data
         :param pulumi.Input[str] bootstrap_token: The bootstrap token for the talos kubernetes cluster
         :param pulumi.Input[str] secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
+        :param pulumi.Input[str] aescbc_encryption_secret: The aescbc encryption secret for the talos kubernetes cluster
         """
         pulumi.set(__self__, "bootstrap_token", bootstrap_token)
         pulumi.set(__self__, "secretbox_encryption_secret", secretbox_encryption_secret)
+        if aescbc_encryption_secret is not None:
+            pulumi.set(__self__, "aescbc_encryption_secret", aescbc_encryption_secret)
 
     @property
     @pulumi.getter
@@ -545,6 +565,18 @@ class KubernetesSecretsArgs:
     @secretbox_encryption_secret.setter
     def secretbox_encryption_secret(self, value: pulumi.Input[str]):
         pulumi.set(self, "secretbox_encryption_secret", value)
+
+    @property
+    @pulumi.getter
+    def aescbc_encryption_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The aescbc encryption secret for the talos kubernetes cluster
+        """
+        return pulumi.get(self, "aescbc_encryption_secret")
+
+    @aescbc_encryption_secret.setter
+    def aescbc_encryption_secret(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "aescbc_encryption_secret", value)
 
 
 @pulumi.input_type

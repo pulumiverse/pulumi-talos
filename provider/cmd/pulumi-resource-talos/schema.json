@@ -616,6 +616,11 @@
         "talos:machine/generated:KubernetesSecrets": {
             "description": "A Machine Secrets Bootstrap data",
             "properties": {
+                "aescbc_encryption_secret": {
+                    "type": "string",
+                    "description": "The aescbc encryption secret for the talos kubernetes cluster",
+                    "secret": true
+                },
                 "bootstrap_token": {
                     "type": "string",
                     "description": "The bootstrap token for the talos kubernetes cluster",

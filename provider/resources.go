@@ -119,6 +119,11 @@ func Provider() tfbridge.ProviderInfo {
 							Description: "The secretbox encryption secret for the talos kubernetes cluster",
 							Secret:      true,
 						},
+						"aescbc_encryption_secret": {
+							TypeSpec:    schema.TypeSpec{Type: "string"},
+							Description: "The aescbc encryption secret for the talos kubernetes cluster",
+							Secret:      true,
+						},
 					},
 					Required: []string{
 						"bootstrap_token",
