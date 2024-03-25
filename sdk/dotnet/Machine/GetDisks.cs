@@ -17,10 +17,9 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// &gt; **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
@@ -49,8 +48,7 @@ namespace Pulumiverse.Talos.Machine
         ///     };
         /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDisksResult> InvokeAsync(GetDisksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDisksResult>("talos:machine/getDisks:getDisks", args ?? new GetDisksArgs(), options.WithDefaults());
@@ -60,10 +58,9 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// &gt; **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
@@ -92,8 +89,7 @@ namespace Pulumiverse.Talos.Machine
         ///     };
         /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDisksResult> Invoke(GetDisksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDisksResult>("talos:machine/getDisks:getDisks", args ?? new GetDisksInvokeArgs(), options.WithDefaults());
