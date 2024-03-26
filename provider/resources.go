@@ -109,25 +109,25 @@ func Provider() tfbridge.ProviderInfo {
 					Type:        "object",
 					Description: "A Machine Secrets Bootstrap data",
 					Properties: map[string]schema.PropertySpec{
-						"bootstrap_token": {
+						"bootstrapToken": {
 							TypeSpec:    schema.TypeSpec{Type: "string"},
 							Description: "The bootstrap token for the talos kubernetes cluster",
 							Secret:      true,
 						},
-						"secretbox_encryption_secret": {
+						"secretboxEncryptionSecret": {
 							TypeSpec:    schema.TypeSpec{Type: "string"},
 							Description: "The secretbox encryption secret for the talos kubernetes cluster",
 							Secret:      true,
 						},
-						"aescbc_encryption_secret": {
+						"aescbcEncryptionSecret": {
 							TypeSpec:    schema.TypeSpec{Type: "string"},
 							Description: "The aescbc encryption secret for the talos kubernetes cluster",
 							Secret:      true,
 						},
 					},
 					Required: []string{
-						"bootstrap_token",
-						"secretbox_encryption_secret",
+						"bootstrapToken",
+						"secretboxEncryptionSecret",
 					},
 				},
 			},
@@ -162,12 +162,12 @@ func Provider() tfbridge.ProviderInfo {
 								Ref: "#types/talos:machine/generated:Certificate",
 							},
 						},
-						"k8s_aggregator": {
+						"k8sAggregator": {
 							TypeSpec: schema.TypeSpec{
 								Ref: "#types/talos:machine/generated:Certificate",
 							},
 						},
-						"k8s_serviceaccount": {
+						"k8sServiceaccount": {
 							TypeSpec: schema.TypeSpec{
 								Ref: "#types/talos:machine/generated:Key",
 							},
@@ -181,8 +181,8 @@ func Provider() tfbridge.ProviderInfo {
 					Required: []string{
 						"etcd",
 						"k8s",
-						"k8s_aggregator",
-						"k8s_serviceaccount",
+						"k8sAggregator",
+						"k8sServiceaccount",
 						"os",
 					},
 				},
@@ -192,24 +192,24 @@ func Provider() tfbridge.ProviderInfo {
 					Type:        "object",
 					Description: "A Client Configuration",
 					Properties: map[string]schema.PropertySpec{
-						"ca_certificate": {
+						"caCertificate": {
 							TypeSpec:    schema.TypeSpec{Type: "string"},
 							Description: "The client CA certificate",
 						},
-						"client_certificate": {
+						"clientCertificate": {
 							TypeSpec:    schema.TypeSpec{Type: "string"},
 							Description: "The client certificate",
 						},
-						"client_key": {
+						"clientKey": {
 							TypeSpec:    schema.TypeSpec{Type: "string"},
 							Description: "The client private key",
 							Secret:      true,
 						},
 					},
 					Required: []string{
-						"ca_certificate",
-						"client_certificate",
-						"client_key",
+						"caCertificate",
+						"clientCertificate",
+						"clientKey",
 					},
 				},
 			},

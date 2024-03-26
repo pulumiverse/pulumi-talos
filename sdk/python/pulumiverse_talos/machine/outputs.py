@@ -115,6 +115,25 @@ class CertificatesResult(dict):
     """
     A complete Machine Secrets Certificates configuration
     """
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "k8sAggregator":
+            suggest = "k8s_aggregator"
+        elif key == "k8sServiceaccount":
+            suggest = "k8s_serviceaccount"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CertificatesResult. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CertificatesResult.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CertificatesResult.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  etcd: 'outputs.CertificateResult',
                  k8s: 'outputs.CertificateResult',
@@ -141,12 +160,12 @@ class CertificatesResult(dict):
         return pulumi.get(self, "k8s")
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sAggregator")
     def k8s_aggregator(self) -> 'outputs.CertificateResult':
         return pulumi.get(self, "k8s_aggregator")
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sServiceaccount")
     def k8s_serviceaccount(self) -> 'outputs.KeyResult':
         return pulumi.get(self, "k8s_serviceaccount")
 
@@ -161,6 +180,27 @@ class ClientConfiguration(dict):
     """
     A Client Configuration
     """
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "caCertificate":
+            suggest = "ca_certificate"
+        elif key == "clientCertificate":
+            suggest = "client_certificate"
+        elif key == "clientKey":
+            suggest = "client_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ClientConfiguration. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ClientConfiguration.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ClientConfiguration.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  ca_certificate: str,
                  client_certificate: str,
@@ -176,7 +216,7 @@ class ClientConfiguration(dict):
         pulumi.set(__self__, "client_key", client_key)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="caCertificate")
     def ca_certificate(self) -> str:
         """
         The client CA certificate
@@ -184,7 +224,7 @@ class ClientConfiguration(dict):
         return pulumi.get(self, "ca_certificate")
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="clientCertificate")
     def client_certificate(self) -> str:
         """
         The client certificate
@@ -192,7 +232,7 @@ class ClientConfiguration(dict):
         return pulumi.get(self, "client_certificate")
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="clientKey")
     def client_key(self) -> str:
         """
         The client private key
@@ -260,6 +300,27 @@ class KubernetesSecretsResult(dict):
     """
     A Machine Secrets Bootstrap data
     """
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "bootstrapToken":
+            suggest = "bootstrap_token"
+        elif key == "secretboxEncryptionSecret":
+            suggest = "secretbox_encryption_secret"
+        elif key == "aescbcEncryptionSecret":
+            suggest = "aescbc_encryption_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in KubernetesSecretsResult. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        KubernetesSecretsResult.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        KubernetesSecretsResult.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  bootstrap_token: str,
                  secretbox_encryption_secret: str,
@@ -276,7 +337,7 @@ class KubernetesSecretsResult(dict):
             pulumi.set(__self__, "aescbc_encryption_secret", aescbc_encryption_secret)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="bootstrapToken")
     def bootstrap_token(self) -> str:
         """
         The bootstrap token for the talos kubernetes cluster
@@ -284,7 +345,7 @@ class KubernetesSecretsResult(dict):
         return pulumi.get(self, "bootstrap_token")
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="secretboxEncryptionSecret")
     def secretbox_encryption_secret(self) -> str:
         """
         The secretbox encryption secret for the talos kubernetes cluster
@@ -292,7 +353,7 @@ class KubernetesSecretsResult(dict):
         return pulumi.get(self, "secretbox_encryption_secret")
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="aescbcEncryptionSecret")
     def aescbc_encryption_secret(self) -> Optional[str]:
         """
         The aescbc encryption secret for the talos kubernetes cluster

@@ -16,51 +16,51 @@ namespace Pulumiverse.Talos.Machine.Inputs
     /// </summary>
     public sealed class KubernetesSecretsGetArgs : global::Pulumi.ResourceArgs
     {
-        [Input("aescbc_encryption_secret")]
-        private Input<string>? _aescbc_encryption_secret;
+        [Input("aescbcEncryptionSecret")]
+        private Input<string>? _aescbcEncryptionSecret;
 
         /// <summary>
         /// The aescbc encryption secret for the talos kubernetes cluster
         /// </summary>
-        public Input<string>? Aescbc_encryption_secret
+        public Input<string>? AescbcEncryptionSecret
         {
-            get => _aescbc_encryption_secret;
+            get => _aescbcEncryptionSecret;
             set
             {
                 var emptySecret = Output.CreateSecret(0);
-                _aescbc_encryption_secret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+                _aescbcEncryptionSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
 
-        [Input("bootstrap_token", required: true)]
-        private Input<string>? _bootstrap_token;
+        [Input("bootstrapToken", required: true)]
+        private Input<string>? _bootstrapToken;
 
         /// <summary>
         /// The bootstrap token for the talos kubernetes cluster
         /// </summary>
-        public Input<string>? Bootstrap_token
+        public Input<string>? BootstrapToken
         {
-            get => _bootstrap_token;
+            get => _bootstrapToken;
             set
             {
                 var emptySecret = Output.CreateSecret(0);
-                _bootstrap_token = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+                _bootstrapToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
 
-        [Input("secretbox_encryption_secret", required: true)]
-        private Input<string>? _secretbox_encryption_secret;
+        [Input("secretboxEncryptionSecret", required: true)]
+        private Input<string>? _secretboxEncryptionSecret;
 
         /// <summary>
         /// The secretbox encryption secret for the talos kubernetes cluster
         /// </summary>
-        public Input<string>? Secretbox_encryption_secret
+        public Input<string>? SecretboxEncryptionSecret
         {
-            get => _secretbox_encryption_secret;
+            get => _secretboxEncryptionSecret;
             set
             {
                 var emptySecret = Output.CreateSecret(0);
-                _secretbox_encryption_secret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+                _secretboxEncryptionSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
 

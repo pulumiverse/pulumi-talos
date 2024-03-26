@@ -117,8 +117,8 @@ export namespace machine {
     export interface Certificates {
         etcd: outputs.machine.Certificate;
         k8s: outputs.machine.Certificate;
-        k8s_aggregator: outputs.machine.Certificate;
-        k8s_serviceaccount: outputs.machine.Key;
+        k8sAggregator: outputs.machine.Certificate;
+        k8sServiceaccount: outputs.machine.Key;
         os: outputs.machine.Certificate;
     }
 
@@ -129,15 +129,15 @@ export namespace machine {
         /**
          * The client CA certificate
          */
-        ca_certificate: string;
+        caCertificate: string;
         /**
          * The client certificate
          */
-        client_certificate: string;
+        clientCertificate: string;
         /**
          * The client private key
          */
-        client_key: string;
+        clientKey: string;
     }
 
     /**
@@ -271,15 +271,15 @@ export namespace machine {
         /**
          * The aescbc encryption secret for the talos kubernetes cluster
          */
-        aescbc_encryption_secret?: string;
+        aescbcEncryptionSecret?: string;
         /**
          * The bootstrap token for the talos kubernetes cluster
          */
-        bootstrap_token: string;
+        bootstrapToken: string;
         /**
          * The secretbox encryption secret for the talos kubernetes cluster
          */
-        secretbox_encryption_secret: string;
+        secretboxEncryptionSecret: string;
     }
 
     /**
