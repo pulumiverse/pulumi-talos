@@ -26,7 +26,7 @@ namespace Pulumiverse.Talos.Machine
         /// The client configuration data
         /// </summary>
         [Output("clientConfiguration")]
-        public Output<Outputs.ConfigurationApplyClientConfiguration> ClientConfiguration { get; private set; } = null!;
+        public Output<Outputs.ClientConfiguration> ClientConfiguration { get; private set; } = null!;
 
         /// <summary>
         /// The list of config patches to apply
@@ -123,7 +123,7 @@ namespace Pulumiverse.Talos.Machine
         /// The client configuration data
         /// </summary>
         [Input("clientConfiguration", required: true)]
-        public Input<Inputs.ConfigurationApplyClientConfigurationArgs> ClientConfiguration { get; set; } = null!;
+        public Input<Inputs.ClientConfigurationArgs> ClientConfiguration { get; set; } = null!;
 
         [Input("configPatches")]
         private InputList<string>? _configPatches;
@@ -186,7 +186,7 @@ namespace Pulumiverse.Talos.Machine
         /// The client configuration data
         /// </summary>
         [Input("clientConfiguration")]
-        public Input<Inputs.ConfigurationApplyClientConfigurationGetArgs>? ClientConfiguration { get; set; }
+        public Input<Inputs.ClientConfigurationGetArgs>? ClientConfiguration { get; set; }
 
         [Input("configPatches")]
         private InputList<string>? _configPatches;

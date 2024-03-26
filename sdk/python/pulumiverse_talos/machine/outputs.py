@@ -11,84 +11,21 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'BootstrapClientConfiguration',
     'BootstrapTimeouts',
-    'ConfigurationApplyClientConfiguration',
-    'SecretsClientConfiguration',
     'Timeout',
     'CertificateResult',
     'CertificatesResult',
+    'ClientConfiguration',
     'ClusterResult',
     'KeyResult',
+    'KubernetesSecretsResult',
     'MachineSecretsResult',
-    'SecretsResult',
     'TrustdInfoResult',
     'GetDisksClientConfigurationResult',
     'GetDisksDiskResult',
     'GetDisksFiltersResult',
     'GetDisksTimeoutsResult',
 ]
-
-@pulumi.output_type
-class BootstrapClientConfiguration(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "caCertificate":
-            suggest = "ca_certificate"
-        elif key == "clientCertificate":
-            suggest = "client_certificate"
-        elif key == "clientKey":
-            suggest = "client_key"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in BootstrapClientConfiguration. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        BootstrapClientConfiguration.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        BootstrapClientConfiguration.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 ca_certificate: str,
-                 client_certificate: str,
-                 client_key: str):
-        """
-        :param str ca_certificate: The client CA certificate
-        :param str client_certificate: The client certificate
-        :param str client_key: The client key
-        """
-        pulumi.set(__self__, "ca_certificate", ca_certificate)
-        pulumi.set(__self__, "client_certificate", client_certificate)
-        pulumi.set(__self__, "client_key", client_key)
-
-    @property
-    @pulumi.getter(name="caCertificate")
-    def ca_certificate(self) -> str:
-        """
-        The client CA certificate
-        """
-        return pulumi.get(self, "ca_certificate")
-
-    @property
-    @pulumi.getter(name="clientCertificate")
-    def client_certificate(self) -> str:
-        """
-        The client certificate
-        """
-        return pulumi.get(self, "client_certificate")
-
-    @property
-    @pulumi.getter(name="clientKey")
-    def client_key(self) -> str:
-        """
-        The client key
-        """
-        return pulumi.get(self, "client_key")
-
 
 @pulumi.output_type
 class BootstrapTimeouts(dict):
@@ -107,131 +44,6 @@ class BootstrapTimeouts(dict):
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         return pulumi.get(self, "create")
-
-
-@pulumi.output_type
-class ConfigurationApplyClientConfiguration(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "caCertificate":
-            suggest = "ca_certificate"
-        elif key == "clientCertificate":
-            suggest = "client_certificate"
-        elif key == "clientKey":
-            suggest = "client_key"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ConfigurationApplyClientConfiguration. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        ConfigurationApplyClientConfiguration.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        ConfigurationApplyClientConfiguration.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 ca_certificate: str,
-                 client_certificate: str,
-                 client_key: str):
-        """
-        :param str ca_certificate: The client CA certificate
-        :param str client_certificate: The client certificate
-        :param str client_key: The client key
-        """
-        pulumi.set(__self__, "ca_certificate", ca_certificate)
-        pulumi.set(__self__, "client_certificate", client_certificate)
-        pulumi.set(__self__, "client_key", client_key)
-
-    @property
-    @pulumi.getter(name="caCertificate")
-    def ca_certificate(self) -> str:
-        """
-        The client CA certificate
-        """
-        return pulumi.get(self, "ca_certificate")
-
-    @property
-    @pulumi.getter(name="clientCertificate")
-    def client_certificate(self) -> str:
-        """
-        The client certificate
-        """
-        return pulumi.get(self, "client_certificate")
-
-    @property
-    @pulumi.getter(name="clientKey")
-    def client_key(self) -> str:
-        """
-        The client key
-        """
-        return pulumi.get(self, "client_key")
-
-
-@pulumi.output_type
-class SecretsClientConfiguration(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "caCertificate":
-            suggest = "ca_certificate"
-        elif key == "clientCertificate":
-            suggest = "client_certificate"
-        elif key == "clientKey":
-            suggest = "client_key"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in SecretsClientConfiguration. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        SecretsClientConfiguration.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        SecretsClientConfiguration.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 ca_certificate: Optional[str] = None,
-                 client_certificate: Optional[str] = None,
-                 client_key: Optional[str] = None):
-        """
-        :param str ca_certificate: The client CA certificate
-        :param str client_certificate: The client certificate
-        :param str client_key: The client key
-        """
-        if ca_certificate is not None:
-            pulumi.set(__self__, "ca_certificate", ca_certificate)
-        if client_certificate is not None:
-            pulumi.set(__self__, "client_certificate", client_certificate)
-        if client_key is not None:
-            pulumi.set(__self__, "client_key", client_key)
-
-    @property
-    @pulumi.getter(name="caCertificate")
-    def ca_certificate(self) -> Optional[str]:
-        """
-        The client CA certificate
-        """
-        return pulumi.get(self, "ca_certificate")
-
-    @property
-    @pulumi.getter(name="clientCertificate")
-    def client_certificate(self) -> Optional[str]:
-        """
-        The client certificate
-        """
-        return pulumi.get(self, "client_certificate")
-
-    @property
-    @pulumi.getter(name="clientKey")
-    def client_key(self) -> Optional[str]:
-        """
-        The client key
-        """
-        return pulumi.get(self, "client_key")
 
 
 @pulumi.output_type
@@ -345,6 +157,50 @@ class CertificatesResult(dict):
 
 
 @pulumi.output_type
+class ClientConfiguration(dict):
+    """
+    A Client Configuration
+    """
+    def __init__(__self__, *,
+                 ca_certificate: str,
+                 client_certificate: str,
+                 client_key: str):
+        """
+        A Client Configuration
+        :param str ca_certificate: The client CA certificate
+        :param str client_certificate: The client certificate
+        :param str client_key: The client private key
+        """
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @property
+    @pulumi.getter
+    def ca_certificate(self) -> str:
+        """
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @property
+    @pulumi.getter
+    def client_certificate(self) -> str:
+        """
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @property
+    @pulumi.getter
+    def client_key(self) -> str:
+        """
+        The client private key
+        """
+        return pulumi.get(self, "client_key")
+
+
+@pulumi.output_type
 class ClusterResult(dict):
     """
     A Machine Secrets Cluster Info
@@ -400,6 +256,51 @@ class KeyResult(dict):
 
 
 @pulumi.output_type
+class KubernetesSecretsResult(dict):
+    """
+    A Machine Secrets Bootstrap data
+    """
+    def __init__(__self__, *,
+                 bootstrap_token: str,
+                 secretbox_encryption_secret: str,
+                 aescbc_encryption_secret: Optional[str] = None):
+        """
+        A Machine Secrets Bootstrap data
+        :param str bootstrap_token: The bootstrap token for the talos kubernetes cluster
+        :param str secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
+        :param str aescbc_encryption_secret: The aescbc encryption secret for the talos kubernetes cluster
+        """
+        pulumi.set(__self__, "bootstrap_token", bootstrap_token)
+        pulumi.set(__self__, "secretbox_encryption_secret", secretbox_encryption_secret)
+        if aescbc_encryption_secret is not None:
+            pulumi.set(__self__, "aescbc_encryption_secret", aescbc_encryption_secret)
+
+    @property
+    @pulumi.getter
+    def bootstrap_token(self) -> str:
+        """
+        The bootstrap token for the talos kubernetes cluster
+        """
+        return pulumi.get(self, "bootstrap_token")
+
+    @property
+    @pulumi.getter
+    def secretbox_encryption_secret(self) -> str:
+        """
+        The secretbox encryption secret for the talos kubernetes cluster
+        """
+        return pulumi.get(self, "secretbox_encryption_secret")
+
+    @property
+    @pulumi.getter
+    def aescbc_encryption_secret(self) -> Optional[str]:
+        """
+        The aescbc encryption secret for the talos kubernetes cluster
+        """
+        return pulumi.get(self, "aescbc_encryption_secret")
+
+
+@pulumi.output_type
 class MachineSecretsResult(dict):
     """
     A complete Machine Secrets configuration
@@ -407,7 +308,7 @@ class MachineSecretsResult(dict):
     def __init__(__self__, *,
                  certs: 'outputs.CertificatesResult',
                  cluster: 'outputs.ClusterResult',
-                 secrets: 'outputs.SecretsResult',
+                 secrets: 'outputs.KubernetesSecretsResult',
                  trustdinfo: 'outputs.TrustdInfoResult'):
         """
         A complete Machine Secrets configuration
@@ -429,46 +330,13 @@ class MachineSecretsResult(dict):
 
     @property
     @pulumi.getter
-    def secrets(self) -> 'outputs.SecretsResult':
+    def secrets(self) -> 'outputs.KubernetesSecretsResult':
         return pulumi.get(self, "secrets")
 
     @property
     @pulumi.getter
     def trustdinfo(self) -> 'outputs.TrustdInfoResult':
         return pulumi.get(self, "trustdinfo")
-
-
-@pulumi.output_type
-class SecretsResult(dict):
-    """
-    A Machine Secrets Bootstrap data
-    """
-    def __init__(__self__, *,
-                 bootstrap_token: str,
-                 secretbox_encryption_secret: str):
-        """
-        A Machine Secrets Bootstrap data
-        :param str bootstrap_token: The bootstrap token for the talos kubernetes cluster
-        :param str secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
-        """
-        pulumi.set(__self__, "bootstrap_token", bootstrap_token)
-        pulumi.set(__self__, "secretbox_encryption_secret", secretbox_encryption_secret)
-
-    @property
-    @pulumi.getter
-    def bootstrap_token(self) -> str:
-        """
-        The bootstrap token for the talos kubernetes cluster
-        """
-        return pulumi.get(self, "bootstrap_token")
-
-    @property
-    @pulumi.getter
-    def secretbox_encryption_secret(self) -> str:
-        """
-        The secretbox encryption secret for the talos kubernetes cluster
-        """
-        return pulumi.get(self, "secretbox_encryption_secret")
 
 
 @pulumi.output_type

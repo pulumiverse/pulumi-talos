@@ -44,7 +44,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
     /**
      * The client configuration data
      */
-    public readonly clientConfiguration!: pulumi.Output<outputs.machine.ConfigurationApplyClientConfiguration>;
+    public readonly clientConfiguration!: pulumi.Output<outputs.machine.ClientConfiguration>;
     /**
      * The list of config patches to apply
      */
@@ -126,7 +126,7 @@ export interface ConfigurationApplyState {
     /**
      * The client configuration data
      */
-    clientConfiguration?: pulumi.Input<inputs.machine.ConfigurationApplyClientConfiguration>;
+    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration>;
     /**
      * The list of config patches to apply
      */
@@ -161,7 +161,7 @@ export interface ConfigurationApplyArgs {
     /**
      * The client configuration data
      */
-    clientConfiguration: pulumi.Input<inputs.machine.ConfigurationApplyClientConfiguration>;
+    clientConfiguration: pulumi.Input<inputs.machine.ClientConfiguration>;
     /**
      * The list of config patches to apply
      */

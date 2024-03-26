@@ -14,8 +14,24 @@ namespace Pulumiverse.Talos.Machine.Inputs
     /// <summary>
     /// A Machine Secrets Bootstrap data
     /// </summary>
-    public sealed class SecretsGetArgs : global::Pulumi.ResourceArgs
+    public sealed class KubernetesSecretsGetArgs : global::Pulumi.ResourceArgs
     {
+        [Input("aescbc_encryption_secret")]
+        private Input<string>? _aescbc_encryption_secret;
+
+        /// <summary>
+        /// The aescbc encryption secret for the talos kubernetes cluster
+        /// </summary>
+        public Input<string>? Aescbc_encryption_secret
+        {
+            get => _aescbc_encryption_secret;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _aescbc_encryption_secret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("bootstrap_token", required: true)]
         private Input<string>? _bootstrap_token;
 
@@ -48,9 +64,9 @@ namespace Pulumiverse.Talos.Machine.Inputs
             }
         }
 
-        public SecretsGetArgs()
+        public KubernetesSecretsGetArgs()
         {
         }
-        public static new SecretsGetArgs Empty => new SecretsGetArgs();
+        public static new KubernetesSecretsGetArgs Empty => new KubernetesSecretsGetArgs();
     }
 }

@@ -43,7 +43,7 @@ namespace Pulumiverse.Talos.Machine
         /// The generated client configuration data
         /// </summary>
         [Output("clientConfiguration")]
-        public Output<Outputs.SecretsClientConfiguration> ClientConfiguration { get; private set; } = null!;
+        public Output<Outputs.ClientConfiguration> ClientConfiguration { get; private set; } = null!;
 
         /// <summary>
         /// The secrets for the talos cluster
@@ -122,7 +122,7 @@ namespace Pulumiverse.Talos.Machine
         /// The generated client configuration data
         /// </summary>
         [Input("clientConfiguration")]
-        public Input<Inputs.SecretsClientConfigurationGetArgs>? ClientConfiguration { get; set; }
+        public Input<Inputs.ClientConfigurationGetArgs>? ClientConfiguration { get; set; }
 
         /// <summary>
         /// The secrets for the talos cluster

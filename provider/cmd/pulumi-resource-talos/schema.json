@@ -556,6 +556,30 @@
                 "os"
             ]
         },
+        "talos:machine/generated:ClientConfiguration": {
+            "description": "A Client Configuration",
+            "properties": {
+                "ca_certificate": {
+                    "type": "string",
+                    "description": "The client CA certificate"
+                },
+                "client_certificate": {
+                    "type": "string",
+                    "description": "The client certificate"
+                },
+                "client_key": {
+                    "type": "string",
+                    "description": "The client private key",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "ca_certificate",
+                "client_certificate",
+                "client_key"
+            ]
+        },
         "talos:machine/generated:Cluster": {
             "description": "A Machine Secrets Cluster Info",
             "properties": {
@@ -589,33 +613,14 @@
                 "key"
             ]
         },
-        "talos:machine/generated:MachineSecrets": {
-            "description": "A complete Machine Secrets configuration",
-            "properties": {
-                "certs": {
-                    "$ref": "#types/talos:machine/generated:Certificates"
-                },
-                "cluster": {
-                    "$ref": "#types/talos:machine/generated:Cluster"
-                },
-                "secrets": {
-                    "$ref": "#types/talos:machine/generated:Secrets"
-                },
-                "trustdinfo": {
-                    "$ref": "#types/talos:machine/generated:TrustdInfo"
-                }
-            },
-            "type": "object",
-            "required": [
-                "certs",
-                "cluster",
-                "secrets",
-                "trustdinfo"
-            ]
-        },
-        "talos:machine/generated:Secrets": {
+        "talos:machine/generated:KubernetesSecrets": {
             "description": "A Machine Secrets Bootstrap data",
             "properties": {
+                "aescbc_encryption_secret": {
+                    "type": "string",
+                    "description": "The aescbc encryption secret for the talos kubernetes cluster",
+                    "secret": true
+                },
                 "bootstrap_token": {
                     "type": "string",
                     "description": "The bootstrap token for the talos kubernetes cluster",
@@ -631,6 +636,30 @@
             "required": [
                 "bootstrap_token",
                 "secretbox_encryption_secret"
+            ]
+        },
+        "talos:machine/generated:MachineSecrets": {
+            "description": "A complete Machine Secrets configuration",
+            "properties": {
+                "certs": {
+                    "$ref": "#types/talos:machine/generated:Certificates"
+                },
+                "cluster": {
+                    "$ref": "#types/talos:machine/generated:Cluster"
+                },
+                "secrets": {
+                    "$ref": "#types/talos:machine/generated:KubernetesSecrets"
+                },
+                "trustdinfo": {
+                    "$ref": "#types/talos:machine/generated:TrustdInfo"
+                }
+            },
+            "type": "object",
+            "required": [
+                "certs",
+                "cluster",
+                "secrets",
+                "trustdinfo"
             ]
         },
         "talos:machine/generated:TrustdInfo": {
@@ -984,7 +1013,7 @@
             "description": "The machine bootstrap resource allows you to bootstrap a Talos node.\n\n\n## Import\n\nterraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped\n\n```sh\n $ pulumi import talos:machine/bootstrap:Bootstrap this \u003cany id\u003e\n```\n\n ",
             "properties": {
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:machine/BootstrapClientConfiguration:BootstrapClientConfiguration",
+                    "$ref": "#/types/talos:machine/generated:ClientConfiguration",
                     "description": "The client configuration data\n"
                 },
                 "endpoint": {
@@ -1006,7 +1035,7 @@
             ],
             "inputProperties": {
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:machine/BootstrapClientConfiguration:BootstrapClientConfiguration",
+                    "$ref": "#/types/talos:machine/generated:ClientConfiguration",
                     "description": "The client configuration data\n"
                 },
                 "endpoint": {
@@ -1029,7 +1058,7 @@
                 "description": "Input properties used for looking up and filtering Bootstrap resources.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:machine/BootstrapClientConfiguration:BootstrapClientConfiguration",
+                        "$ref": "#/types/talos:machine/generated:ClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "endpoint": {
@@ -1055,7 +1084,7 @@
                     "description": "The mode of the apply operation\n"
                 },
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:machine/ConfigurationApplyClientConfiguration:ConfigurationApplyClientConfiguration",
+                    "$ref": "#/types/talos:machine/generated:ClientConfiguration",
                     "description": "The client configuration data\n"
                 },
                 "configPatches": {
@@ -1101,7 +1130,7 @@
                     "description": "The mode of the apply operation\n"
                 },
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:machine/ConfigurationApplyClientConfiguration:ConfigurationApplyClientConfiguration",
+                    "$ref": "#/types/talos:machine/generated:ClientConfiguration",
                     "description": "The client configuration data\n"
                 },
                 "configPatches": {
@@ -1141,7 +1170,7 @@
                         "description": "The mode of the apply operation\n"
                     },
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:machine/ConfigurationApplyClientConfiguration:ConfigurationApplyClientConfiguration",
+                        "$ref": "#/types/talos:machine/generated:ClientConfiguration",
                         "description": "The client configuration data\n"
                     },
                     "configPatches": {
@@ -1180,7 +1209,7 @@
             "description": "Generate machine secrets for Talos cluster.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst machineSecrets = new talos.machine.Secrets(\"machineSecrets\", {});\n```\n```python\nimport pulumi\nimport pulumiverse_talos as talos\n\nmachine_secrets = talos.machine.Secrets(\"machineSecrets\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var machineSecrets = new Talos.Machine.Secrets(\"machineSecrets\");\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := machine.NewSecrets(ctx, \"machineSecrets\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var machineSecrets = new Secrets(\"machineSecrets\");\n\n    }\n}\n```\n```yaml\nresources:\n  machineSecrets:\n    type: talos:machine:Secrets\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform machine secrets can be imported from an existing secrets file\n\n```sh\n $ pulumi import talos:machine/secrets:Secrets this \u003cpath-to-secrets.yaml\u003e\n```\n\n ",
             "properties": {
                 "clientConfiguration": {
-                    "$ref": "#/types/talos:machine/SecretsClientConfiguration:SecretsClientConfiguration",
+                    "$ref": "#/types/talos:machine/generated:ClientConfiguration",
                     "description": "The generated client configuration data\n"
                 },
                 "machineSecrets": {
@@ -1207,7 +1236,7 @@
                 "description": "Input properties used for looking up and filtering Secrets resources.\n",
                 "properties": {
                     "clientConfiguration": {
-                        "$ref": "#/types/talos:machine/SecretsClientConfiguration:SecretsClientConfiguration",
+                        "$ref": "#/types/talos:machine/generated:ClientConfiguration",
                         "description": "The generated client configuration data\n"
                     },
                     "machineSecrets": {

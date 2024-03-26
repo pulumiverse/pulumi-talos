@@ -48,7 +48,7 @@ export class Bootstrap extends pulumi.CustomResource {
     /**
      * The client configuration data
      */
-    public readonly clientConfiguration!: pulumi.Output<outputs.machine.BootstrapClientConfiguration>;
+    public readonly clientConfiguration!: pulumi.Output<outputs.machine.ClientConfiguration>;
     /**
      * The endpoint of the machine to bootstrap
      */
@@ -101,7 +101,7 @@ export interface BootstrapState {
     /**
      * The client configuration data
      */
-    clientConfiguration?: pulumi.Input<inputs.machine.BootstrapClientConfiguration>;
+    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration>;
     /**
      * The endpoint of the machine to bootstrap
      */
@@ -120,7 +120,7 @@ export interface BootstrapArgs {
     /**
      * The client configuration data
      */
-    clientConfiguration: pulumi.Input<inputs.machine.BootstrapClientConfiguration>;
+    clientConfiguration: pulumi.Input<inputs.machine.ClientConfiguration>;
     /**
      * The endpoint of the machine to bootstrap
      */

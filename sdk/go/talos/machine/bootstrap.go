@@ -27,7 +27,7 @@ type Bootstrap struct {
 	pulumi.CustomResourceState
 
 	// The client configuration data
-	ClientConfiguration BootstrapClientConfigurationOutput `pulumi:"clientConfiguration"`
+	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringOutput `pulumi:"endpoint"`
 	// The name of the node to bootstrap
@@ -72,7 +72,7 @@ func GetBootstrap(ctx *pulumi.Context,
 // Input properties used for looking up and filtering Bootstrap resources.
 type bootstrapState struct {
 	// The client configuration data
-	ClientConfiguration *BootstrapClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
 	// The endpoint of the machine to bootstrap
 	Endpoint *string `pulumi:"endpoint"`
 	// The name of the node to bootstrap
@@ -82,7 +82,7 @@ type bootstrapState struct {
 
 type BootstrapState struct {
 	// The client configuration data
-	ClientConfiguration BootstrapClientConfigurationPtrInput
+	ClientConfiguration ClientConfigurationPtrInput
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringPtrInput
 	// The name of the node to bootstrap
@@ -96,7 +96,7 @@ func (BootstrapState) ElementType() reflect.Type {
 
 type bootstrapArgs struct {
 	// The client configuration data
-	ClientConfiguration BootstrapClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration ClientConfiguration `pulumi:"clientConfiguration"`
 	// The endpoint of the machine to bootstrap
 	Endpoint *string `pulumi:"endpoint"`
 	// The name of the node to bootstrap
@@ -107,7 +107,7 @@ type bootstrapArgs struct {
 // The set of arguments for constructing a Bootstrap resource.
 type BootstrapArgs struct {
 	// The client configuration data
-	ClientConfiguration BootstrapClientConfigurationInput
+	ClientConfiguration ClientConfigurationInput
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringPtrInput
 	// The name of the node to bootstrap
@@ -203,8 +203,8 @@ func (o BootstrapOutput) ToBootstrapOutputWithContext(ctx context.Context) Boots
 }
 
 // The client configuration data
-func (o BootstrapOutput) ClientConfiguration() BootstrapClientConfigurationOutput {
-	return o.ApplyT(func(v *Bootstrap) BootstrapClientConfigurationOutput { return v.ClientConfiguration }).(BootstrapClientConfigurationOutput)
+func (o BootstrapOutput) ClientConfiguration() ClientConfigurationOutput {
+	return o.ApplyT(func(v *Bootstrap) ClientConfigurationOutput { return v.ClientConfiguration }).(ClientConfigurationOutput)
 }
 
 // The endpoint of the machine to bootstrap

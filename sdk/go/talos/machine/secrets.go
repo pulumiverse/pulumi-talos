@@ -46,26 +46,26 @@ import (
 //	$ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
 //
 // ```
-type SecretsType struct {
+type Secrets struct {
 	pulumi.CustomResourceState
 
 	// The generated client configuration data
-	ClientConfiguration SecretsClientConfigurationOutput `pulumi:"clientConfiguration"`
+	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
 	// The secrets for the talos cluster
 	MachineSecrets MachineSecretsOutput `pulumi:"machineSecrets"`
 	// The version of talos features to use in generated machine configuration
 	TalosVersion pulumi.StringOutput `pulumi:"talosVersion"`
 }
 
-// NewSecretsType registers a new resource with the given unique name, arguments, and options.
-func NewSecretsType(ctx *pulumi.Context,
-	name string, args *SecretsTypeArgs, opts ...pulumi.ResourceOption) (*SecretsType, error) {
+// NewSecrets registers a new resource with the given unique name, arguments, and options.
+func NewSecrets(ctx *pulumi.Context,
+	name string, args *SecretsArgs, opts ...pulumi.ResourceOption) (*Secrets, error) {
 	if args == nil {
-		args = &SecretsTypeArgs{}
+		args = &SecretsArgs{}
 	}
 
 	opts = internal.PkgResourceDefaultOpts(opts)
-	var resource SecretsType
+	var resource Secrets
 	err := ctx.RegisterResource("talos:machine/secrets:Secrets", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
@@ -73,11 +73,11 @@ func NewSecretsType(ctx *pulumi.Context,
 	return &resource, nil
 }
 
-// GetSecretsType gets an existing SecretsType resource's state with the given name, ID, and optional
+// GetSecrets gets an existing Secrets resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetSecretsType(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *SecretsTypeState, opts ...pulumi.ResourceOption) (*SecretsType, error) {
-	var resource SecretsType
+func GetSecrets(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *SecretsState, opts ...pulumi.ResourceOption) (*Secrets, error) {
+	var resource Secrets
 	err := ctx.ReadResource("talos:machine/secrets:Secrets", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
@@ -85,187 +85,187 @@ func GetSecretsType(ctx *pulumi.Context,
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering SecretsType resources.
-type secretsTypeState struct {
+// Input properties used for looking up and filtering Secrets resources.
+type secretsState struct {
 	// The generated client configuration data
-	ClientConfiguration *SecretsClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
 	// The secrets for the talos cluster
 	MachineSecrets *MachineSecrets `pulumi:"machineSecrets"`
 	// The version of talos features to use in generated machine configuration
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
-type SecretsTypeState struct {
+type SecretsState struct {
 	// The generated client configuration data
-	ClientConfiguration SecretsClientConfigurationPtrInput
+	ClientConfiguration ClientConfigurationPtrInput
 	// The secrets for the talos cluster
 	MachineSecrets MachineSecretsPtrInput
 	// The version of talos features to use in generated machine configuration
 	TalosVersion pulumi.StringPtrInput
 }
 
-func (SecretsTypeState) ElementType() reflect.Type {
-	return reflect.TypeOf((*secretsTypeState)(nil)).Elem()
+func (SecretsState) ElementType() reflect.Type {
+	return reflect.TypeOf((*secretsState)(nil)).Elem()
 }
 
-type secretsTypeArgs struct {
+type secretsArgs struct {
 	// The version of talos features to use in generated machine configuration
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
-// The set of arguments for constructing a SecretsType resource.
-type SecretsTypeArgs struct {
+// The set of arguments for constructing a Secrets resource.
+type SecretsArgs struct {
 	// The version of talos features to use in generated machine configuration
 	TalosVersion pulumi.StringPtrInput
 }
 
-func (SecretsTypeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*secretsTypeArgs)(nil)).Elem()
+func (SecretsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*secretsArgs)(nil)).Elem()
 }
 
-type SecretsTypeInput interface {
+type SecretsInput interface {
 	pulumi.Input
 
-	ToSecretsTypeOutput() SecretsTypeOutput
-	ToSecretsTypeOutputWithContext(ctx context.Context) SecretsTypeOutput
+	ToSecretsOutput() SecretsOutput
+	ToSecretsOutputWithContext(ctx context.Context) SecretsOutput
 }
 
-func (*SecretsType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecretsType)(nil)).Elem()
+func (*Secrets) ElementType() reflect.Type {
+	return reflect.TypeOf((**Secrets)(nil)).Elem()
 }
 
-func (i *SecretsType) ToSecretsTypeOutput() SecretsTypeOutput {
-	return i.ToSecretsTypeOutputWithContext(context.Background())
+func (i *Secrets) ToSecretsOutput() SecretsOutput {
+	return i.ToSecretsOutputWithContext(context.Background())
 }
 
-func (i *SecretsType) ToSecretsTypeOutputWithContext(ctx context.Context) SecretsTypeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeOutput)
+func (i *Secrets) ToSecretsOutputWithContext(ctx context.Context) SecretsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsOutput)
 }
 
-// SecretsTypeArrayInput is an input type that accepts SecretsTypeArray and SecretsTypeArrayOutput values.
-// You can construct a concrete instance of `SecretsTypeArrayInput` via:
+// SecretsArrayInput is an input type that accepts SecretsArray and SecretsArrayOutput values.
+// You can construct a concrete instance of `SecretsArrayInput` via:
 //
-//	SecretsTypeArray{ SecretsTypeArgs{...} }
-type SecretsTypeArrayInput interface {
+//	SecretsArray{ SecretsArgs{...} }
+type SecretsArrayInput interface {
 	pulumi.Input
 
-	ToSecretsTypeArrayOutput() SecretsTypeArrayOutput
-	ToSecretsTypeArrayOutputWithContext(context.Context) SecretsTypeArrayOutput
+	ToSecretsArrayOutput() SecretsArrayOutput
+	ToSecretsArrayOutputWithContext(context.Context) SecretsArrayOutput
 }
 
-type SecretsTypeArray []SecretsTypeInput
+type SecretsArray []SecretsInput
 
-func (SecretsTypeArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*SecretsType)(nil)).Elem()
+func (SecretsArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Secrets)(nil)).Elem()
 }
 
-func (i SecretsTypeArray) ToSecretsTypeArrayOutput() SecretsTypeArrayOutput {
-	return i.ToSecretsTypeArrayOutputWithContext(context.Background())
+func (i SecretsArray) ToSecretsArrayOutput() SecretsArrayOutput {
+	return i.ToSecretsArrayOutputWithContext(context.Background())
 }
 
-func (i SecretsTypeArray) ToSecretsTypeArrayOutputWithContext(ctx context.Context) SecretsTypeArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeArrayOutput)
+func (i SecretsArray) ToSecretsArrayOutputWithContext(ctx context.Context) SecretsArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsArrayOutput)
 }
 
-// SecretsTypeMapInput is an input type that accepts SecretsTypeMap and SecretsTypeMapOutput values.
-// You can construct a concrete instance of `SecretsTypeMapInput` via:
+// SecretsMapInput is an input type that accepts SecretsMap and SecretsMapOutput values.
+// You can construct a concrete instance of `SecretsMapInput` via:
 //
-//	SecretsTypeMap{ "key": SecretsTypeArgs{...} }
-type SecretsTypeMapInput interface {
+//	SecretsMap{ "key": SecretsArgs{...} }
+type SecretsMapInput interface {
 	pulumi.Input
 
-	ToSecretsTypeMapOutput() SecretsTypeMapOutput
-	ToSecretsTypeMapOutputWithContext(context.Context) SecretsTypeMapOutput
+	ToSecretsMapOutput() SecretsMapOutput
+	ToSecretsMapOutputWithContext(context.Context) SecretsMapOutput
 }
 
-type SecretsTypeMap map[string]SecretsTypeInput
+type SecretsMap map[string]SecretsInput
 
-func (SecretsTypeMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*SecretsType)(nil)).Elem()
+func (SecretsMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Secrets)(nil)).Elem()
 }
 
-func (i SecretsTypeMap) ToSecretsTypeMapOutput() SecretsTypeMapOutput {
-	return i.ToSecretsTypeMapOutputWithContext(context.Background())
+func (i SecretsMap) ToSecretsMapOutput() SecretsMapOutput {
+	return i.ToSecretsMapOutputWithContext(context.Background())
 }
 
-func (i SecretsTypeMap) ToSecretsTypeMapOutputWithContext(ctx context.Context) SecretsTypeMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsTypeMapOutput)
+func (i SecretsMap) ToSecretsMapOutputWithContext(ctx context.Context) SecretsMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsMapOutput)
 }
 
-type SecretsTypeOutput struct{ *pulumi.OutputState }
+type SecretsOutput struct{ *pulumi.OutputState }
 
-func (SecretsTypeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecretsType)(nil)).Elem()
+func (SecretsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Secrets)(nil)).Elem()
 }
 
-func (o SecretsTypeOutput) ToSecretsTypeOutput() SecretsTypeOutput {
+func (o SecretsOutput) ToSecretsOutput() SecretsOutput {
 	return o
 }
 
-func (o SecretsTypeOutput) ToSecretsTypeOutputWithContext(ctx context.Context) SecretsTypeOutput {
+func (o SecretsOutput) ToSecretsOutputWithContext(ctx context.Context) SecretsOutput {
 	return o
 }
 
 // The generated client configuration data
-func (o SecretsTypeOutput) ClientConfiguration() SecretsClientConfigurationOutput {
-	return o.ApplyT(func(v *SecretsType) SecretsClientConfigurationOutput { return v.ClientConfiguration }).(SecretsClientConfigurationOutput)
+func (o SecretsOutput) ClientConfiguration() ClientConfigurationOutput {
+	return o.ApplyT(func(v *Secrets) ClientConfigurationOutput { return v.ClientConfiguration }).(ClientConfigurationOutput)
 }
 
 // The secrets for the talos cluster
-func (o SecretsTypeOutput) MachineSecrets() MachineSecretsOutput {
-	return o.ApplyT(func(v *SecretsType) MachineSecretsOutput { return v.MachineSecrets }).(MachineSecretsOutput)
+func (o SecretsOutput) MachineSecrets() MachineSecretsOutput {
+	return o.ApplyT(func(v *Secrets) MachineSecretsOutput { return v.MachineSecrets }).(MachineSecretsOutput)
 }
 
 // The version of talos features to use in generated machine configuration
-func (o SecretsTypeOutput) TalosVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v *SecretsType) pulumi.StringOutput { return v.TalosVersion }).(pulumi.StringOutput)
+func (o SecretsOutput) TalosVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v *Secrets) pulumi.StringOutput { return v.TalosVersion }).(pulumi.StringOutput)
 }
 
-type SecretsTypeArrayOutput struct{ *pulumi.OutputState }
+type SecretsArrayOutput struct{ *pulumi.OutputState }
 
-func (SecretsTypeArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*SecretsType)(nil)).Elem()
+func (SecretsArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Secrets)(nil)).Elem()
 }
 
-func (o SecretsTypeArrayOutput) ToSecretsTypeArrayOutput() SecretsTypeArrayOutput {
+func (o SecretsArrayOutput) ToSecretsArrayOutput() SecretsArrayOutput {
 	return o
 }
 
-func (o SecretsTypeArrayOutput) ToSecretsTypeArrayOutputWithContext(ctx context.Context) SecretsTypeArrayOutput {
+func (o SecretsArrayOutput) ToSecretsArrayOutputWithContext(ctx context.Context) SecretsArrayOutput {
 	return o
 }
 
-func (o SecretsTypeArrayOutput) Index(i pulumi.IntInput) SecretsTypeOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *SecretsType {
-		return vs[0].([]*SecretsType)[vs[1].(int)]
-	}).(SecretsTypeOutput)
+func (o SecretsArrayOutput) Index(i pulumi.IntInput) SecretsOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Secrets {
+		return vs[0].([]*Secrets)[vs[1].(int)]
+	}).(SecretsOutput)
 }
 
-type SecretsTypeMapOutput struct{ *pulumi.OutputState }
+type SecretsMapOutput struct{ *pulumi.OutputState }
 
-func (SecretsTypeMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*SecretsType)(nil)).Elem()
+func (SecretsMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Secrets)(nil)).Elem()
 }
 
-func (o SecretsTypeMapOutput) ToSecretsTypeMapOutput() SecretsTypeMapOutput {
+func (o SecretsMapOutput) ToSecretsMapOutput() SecretsMapOutput {
 	return o
 }
 
-func (o SecretsTypeMapOutput) ToSecretsTypeMapOutputWithContext(ctx context.Context) SecretsTypeMapOutput {
+func (o SecretsMapOutput) ToSecretsMapOutputWithContext(ctx context.Context) SecretsMapOutput {
 	return o
 }
 
-func (o SecretsTypeMapOutput) MapIndex(k pulumi.StringInput) SecretsTypeOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *SecretsType {
-		return vs[0].(map[string]*SecretsType)[vs[1].(string)]
-	}).(SecretsTypeOutput)
+func (o SecretsMapOutput) MapIndex(k pulumi.StringInput) SecretsOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *Secrets {
+		return vs[0].(map[string]*Secrets)[vs[1].(string)]
+	}).(SecretsOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*SecretsTypeInput)(nil)).Elem(), &SecretsType{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecretsTypeArrayInput)(nil)).Elem(), SecretsTypeArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecretsTypeMapInput)(nil)).Elem(), SecretsTypeMap{})
-	pulumi.RegisterOutputType(SecretsTypeOutput{})
-	pulumi.RegisterOutputType(SecretsTypeArrayOutput{})
-	pulumi.RegisterOutputType(SecretsTypeMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsInput)(nil)).Elem(), &Secrets{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsArrayInput)(nil)).Elem(), SecretsArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMapInput)(nil)).Elem(), SecretsMap{})
+	pulumi.RegisterOutputType(SecretsOutput{})
+	pulumi.RegisterOutputType(SecretsArrayOutput{})
+	pulumi.RegisterOutputType(SecretsMapOutput{})
 }

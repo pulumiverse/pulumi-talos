@@ -11,33 +11,36 @@ using Pulumi;
 namespace Pulumiverse.Talos.Machine.Outputs
 {
 
+    /// <summary>
+    /// A Client Configuration
+    /// </summary>
     [OutputType]
-    public sealed class SecretsClientConfiguration
+    public sealed class ClientConfiguration
     {
         /// <summary>
         /// The client CA certificate
         /// </summary>
-        public readonly string? CaCertificate;
+        public readonly string Ca_certificate;
         /// <summary>
         /// The client certificate
         /// </summary>
-        public readonly string? ClientCertificate;
+        public readonly string Client_certificate;
         /// <summary>
-        /// The client key
+        /// The client private key
         /// </summary>
-        public readonly string? ClientKey;
+        public readonly string Client_key;
 
         [OutputConstructor]
-        private SecretsClientConfiguration(
-            string? caCertificate,
+        private ClientConfiguration(
+            string ca_certificate,
 
-            string? clientCertificate,
+            string client_certificate,
 
-            string? clientKey)
+            string client_key)
         {
-            CaCertificate = caCertificate;
-            ClientCertificate = clientCertificate;
-            ClientKey = clientKey;
+            Ca_certificate = ca_certificate;
+            Client_certificate = client_certificate;
+            Client_key = client_key;
         }
     }
 }

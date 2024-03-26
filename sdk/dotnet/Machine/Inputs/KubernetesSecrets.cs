@@ -14,8 +14,20 @@ namespace Pulumiverse.Talos.Machine.Inputs
     /// <summary>
     /// A Machine Secrets Bootstrap data
     /// </summary>
-    public sealed class SecretsArgs : global::Pulumi.InvokeArgs
+    public sealed class KubernetesSecretsArgs : global::Pulumi.InvokeArgs
     {
+        [Input("aescbc_encryption_secret")]
+        private string? _aescbc_encryption_secret;
+
+        /// <summary>
+        /// The aescbc encryption secret for the talos kubernetes cluster
+        /// </summary>
+        public string? Aescbc_encryption_secret
+        {
+            get => _aescbc_encryption_secret;
+            set => _aescbc_encryption_secret = value;
+        }
+
         [Input("bootstrap_token", required: true)]
         private string? _bootstrap_token;
 
@@ -40,9 +52,9 @@ namespace Pulumiverse.Talos.Machine.Inputs
             set => _secretbox_encryption_secret = value;
         }
 
-        public SecretsArgs()
+        public KubernetesSecretsArgs()
         {
         }
-        public static new SecretsArgs Empty => new SecretsArgs();
+        public static new KubernetesSecretsArgs Empty => new KubernetesSecretsArgs();
     }
 }
