@@ -11,19 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumiverse/talos";
  *
  * const machineSecrets = new talos.machine.Secrets("machineSecrets", {});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
- * terraform machine secrets can be imported from an existing secrets file
+ * terraform
+ *
+ * machine secrets can be imported from an existing secrets file
  *
  * ```sh
- *  $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
+ * $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
  * ```
  */
 export class Secrets extends pulumi.CustomResource {

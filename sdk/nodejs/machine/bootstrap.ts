@@ -11,10 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * terraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
+ * terraform
+ *
+ * machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
  *
  * ```sh
- *  $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
+ * $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
  * ```
  */
 export class Bootstrap extends pulumi.CustomResource {
