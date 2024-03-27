@@ -19,7 +19,7 @@ def readme():
 
 
 setup(name='pulumiverse_talos',
-      python_requires='>=3.7',
+      python_requires='>=3.8',
       version=VERSION,
       description="A Pulumi package for creating and managing Talos Linux machines and clusters.",
       long_description=readme(),
@@ -38,7 +38,6 @@ setup(name='pulumiverse_talos',
           ]
       },
       install_requires=[
-          'importlib-metadata>=6.0.0,<7.0.0; python_version < "3.8"',
           'parver>=0.2.1',
           'pulumi>=3.0.0,<4.0.0',
           'semver>=2.8.1'

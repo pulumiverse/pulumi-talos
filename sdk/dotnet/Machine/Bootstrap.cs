@@ -15,10 +15,12 @@ namespace Pulumiverse.Talos.Machine
     /// 
     /// ## Import
     /// 
-    /// terraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
+    /// terraform
+    /// 
+    /// machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
     /// 
     /// ```sh
-    ///  $ pulumi import talos:machine/bootstrap:Bootstrap this &lt;any id&gt;
+    /// $ pulumi import talos:machine/bootstrap:Bootstrap this &lt;any id&gt;
     /// ```
     /// </summary>
     [TalosResourceType("talos:machine/bootstrap:Bootstrap")]
