@@ -20,27 +20,27 @@ namespace Pulumiverse.Talos.Machine.Outputs
         /// <summary>
         /// The client CA certificate
         /// </summary>
-        public readonly string Ca_certificate;
+        public readonly string CaCertificate;
         /// <summary>
         /// The client certificate
         /// </summary>
-        public readonly string Client_certificate;
+        public readonly string ClientCertificate;
         /// <summary>
         /// The client private key
         /// </summary>
-        public readonly string Client_key;
+        public readonly string ClientKey;
 
         [OutputConstructor]
         private ClientConfiguration(
-            string ca_certificate,
+            string caCertificate,
 
-            string client_certificate,
+            string clientCertificate,
 
-            string client_key)
+            string clientKey)
         {
-            Ca_certificate = ca_certificate;
-            Client_certificate = client_certificate;
-            Client_key = client_key;
+            CaCertificate = caCertificate;
+            ClientCertificate = clientCertificate;
+            ClientKey = clientKey;
         }
     }
 }

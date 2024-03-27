@@ -537,10 +537,10 @@
                 "k8s": {
                     "$ref": "#types/talos:machine/generated:Certificate"
                 },
-                "k8s_aggregator": {
+                "k8sAggregator": {
                     "$ref": "#types/talos:machine/generated:Certificate"
                 },
-                "k8s_serviceaccount": {
+                "k8sServiceaccount": {
                     "$ref": "#types/talos:machine/generated:Key"
                 },
                 "os": {
@@ -551,23 +551,23 @@
             "required": [
                 "etcd",
                 "k8s",
-                "k8s_aggregator",
-                "k8s_serviceaccount",
+                "k8sAggregator",
+                "k8sServiceaccount",
                 "os"
             ]
         },
         "talos:machine/generated:ClientConfiguration": {
             "description": "A Client Configuration",
             "properties": {
-                "ca_certificate": {
+                "caCertificate": {
                     "type": "string",
                     "description": "The client CA certificate"
                 },
-                "client_certificate": {
+                "clientCertificate": {
                     "type": "string",
                     "description": "The client certificate"
                 },
-                "client_key": {
+                "clientKey": {
                     "type": "string",
                     "description": "The client private key",
                     "secret": true
@@ -575,9 +575,9 @@
             },
             "type": "object",
             "required": [
-                "ca_certificate",
-                "client_certificate",
-                "client_key"
+                "caCertificate",
+                "clientCertificate",
+                "clientKey"
             ]
         },
         "talos:machine/generated:Cluster": {
@@ -616,17 +616,17 @@
         "talos:machine/generated:KubernetesSecrets": {
             "description": "A Machine Secrets Bootstrap data",
             "properties": {
-                "aescbc_encryption_secret": {
+                "aescbcEncryptionSecret": {
                     "type": "string",
                     "description": "The aescbc encryption secret for the talos kubernetes cluster",
                     "secret": true
                 },
-                "bootstrap_token": {
+                "bootstrapToken": {
                     "type": "string",
                     "description": "The bootstrap token for the talos kubernetes cluster",
                     "secret": true
                 },
-                "secretbox_encryption_secret": {
+                "secretboxEncryptionSecret": {
                     "type": "string",
                     "description": "The secretbox encryption secret for the talos kubernetes cluster",
                     "secret": true
@@ -634,8 +634,8 @@
             },
             "type": "object",
             "required": [
-                "bootstrap_token",
-                "secretbox_encryption_secret"
+                "bootstrapToken",
+                "secretboxEncryptionSecret"
             ]
         },
         "talos:machine/generated:MachineSecrets": {

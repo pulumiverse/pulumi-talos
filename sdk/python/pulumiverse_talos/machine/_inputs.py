@@ -168,7 +168,7 @@ class CertificatesArgs:
         pulumi.set(self, "k8s", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sAggregator")
     def k8s_aggregator(self) -> 'CertificateArgs':
         return pulumi.get(self, "k8s_aggregator")
 
@@ -177,7 +177,7 @@ class CertificatesArgs:
         pulumi.set(self, "k8s_aggregator", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sServiceaccount")
     def k8s_serviceaccount(self) -> 'KeyArgs':
         return pulumi.get(self, "k8s_serviceaccount")
 
@@ -231,7 +231,7 @@ class CertificatesArgs:
         pulumi.set(self, "k8s", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sAggregator")
     def k8s_aggregator(self) -> pulumi.Input['CertificateArgs']:
         return pulumi.get(self, "k8s_aggregator")
 
@@ -240,7 +240,7 @@ class CertificatesArgs:
         pulumi.set(self, "k8s_aggregator", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="k8sServiceaccount")
     def k8s_serviceaccount(self) -> pulumi.Input['KeyArgs']:
         return pulumi.get(self, "k8s_serviceaccount")
 
@@ -313,7 +313,7 @@ class ClientConfigurationArgs:
         pulumi.set(__self__, "client_key", client_key)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="caCertificate")
     def ca_certificate(self) -> pulumi.Input[str]:
         """
         The client CA certificate
@@ -325,7 +325,7 @@ class ClientConfigurationArgs:
         pulumi.set(self, "ca_certificate", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="clientCertificate")
     def client_certificate(self) -> pulumi.Input[str]:
         """
         The client certificate
@@ -337,7 +337,7 @@ class ClientConfigurationArgs:
         pulumi.set(self, "client_certificate", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="clientKey")
     def client_key(self) -> pulumi.Input[str]:
         """
         The client private key
@@ -489,7 +489,7 @@ class KubernetesSecretsArgs:
             pulumi.set(__self__, "aescbc_encryption_secret", aescbc_encryption_secret)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="bootstrapToken")
     def bootstrap_token(self) -> str:
         """
         The bootstrap token for the talos kubernetes cluster
@@ -501,7 +501,7 @@ class KubernetesSecretsArgs:
         pulumi.set(self, "bootstrap_token", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="secretboxEncryptionSecret")
     def secretbox_encryption_secret(self) -> str:
         """
         The secretbox encryption secret for the talos kubernetes cluster
@@ -513,7 +513,7 @@ class KubernetesSecretsArgs:
         pulumi.set(self, "secretbox_encryption_secret", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="aescbcEncryptionSecret")
     def aescbc_encryption_secret(self) -> Optional[str]:
         """
         The aescbc encryption secret for the talos kubernetes cluster
@@ -543,7 +543,7 @@ class KubernetesSecretsArgs:
             pulumi.set(__self__, "aescbc_encryption_secret", aescbc_encryption_secret)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="bootstrapToken")
     def bootstrap_token(self) -> pulumi.Input[str]:
         """
         The bootstrap token for the talos kubernetes cluster
@@ -555,7 +555,7 @@ class KubernetesSecretsArgs:
         pulumi.set(self, "bootstrap_token", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="secretboxEncryptionSecret")
     def secretbox_encryption_secret(self) -> pulumi.Input[str]:
         """
         The secretbox encryption secret for the talos kubernetes cluster
@@ -567,7 +567,7 @@ class KubernetesSecretsArgs:
         pulumi.set(self, "secretbox_encryption_secret", value)
 
     @property
-    @pulumi.getter
+    @pulumi.getter(name="aescbcEncryptionSecret")
     def aescbc_encryption_secret(self) -> Optional[pulumi.Input[str]]:
         """
         The aescbc encryption secret for the talos kubernetes cluster

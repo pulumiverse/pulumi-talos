@@ -2197,11 +2197,11 @@ func (o CertificatePtrOutput) Key() pulumi.StringPtrOutput {
 
 // A complete Machine Secrets Certificates configuration
 type Certificates struct {
-	Etcd               Certificate `pulumi:"etcd"`
-	K8s                Certificate `pulumi:"k8s"`
-	K8s_aggregator     Certificate `pulumi:"k8s_aggregator"`
-	K8s_serviceaccount Key         `pulumi:"k8s_serviceaccount"`
-	Os                 Certificate `pulumi:"os"`
+	Etcd              Certificate `pulumi:"etcd"`
+	K8s               Certificate `pulumi:"k8s"`
+	K8sAggregator     Certificate `pulumi:"k8sAggregator"`
+	K8sServiceaccount Key         `pulumi:"k8sServiceaccount"`
+	Os                Certificate `pulumi:"os"`
 }
 
 // CertificatesInput is an input type that accepts CertificatesArgs and CertificatesOutput values.
@@ -2217,11 +2217,11 @@ type CertificatesInput interface {
 
 // A complete Machine Secrets Certificates configuration
 type CertificatesArgs struct {
-	Etcd               CertificateInput `pulumi:"etcd"`
-	K8s                CertificateInput `pulumi:"k8s"`
-	K8s_aggregator     CertificateInput `pulumi:"k8s_aggregator"`
-	K8s_serviceaccount KeyInput         `pulumi:"k8s_serviceaccount"`
-	Os                 CertificateInput `pulumi:"os"`
+	Etcd              CertificateInput `pulumi:"etcd"`
+	K8s               CertificateInput `pulumi:"k8s"`
+	K8sAggregator     CertificateInput `pulumi:"k8sAggregator"`
+	K8sServiceaccount KeyInput         `pulumi:"k8sServiceaccount"`
+	Os                CertificateInput `pulumi:"os"`
 }
 
 func (CertificatesArgs) ElementType() reflect.Type {
@@ -2310,12 +2310,12 @@ func (o CertificatesOutput) K8s() CertificateOutput {
 	return o.ApplyT(func(v Certificates) Certificate { return v.K8s }).(CertificateOutput)
 }
 
-func (o CertificatesOutput) K8s_aggregator() CertificateOutput {
-	return o.ApplyT(func(v Certificates) Certificate { return v.K8s_aggregator }).(CertificateOutput)
+func (o CertificatesOutput) K8sAggregator() CertificateOutput {
+	return o.ApplyT(func(v Certificates) Certificate { return v.K8sAggregator }).(CertificateOutput)
 }
 
-func (o CertificatesOutput) K8s_serviceaccount() KeyOutput {
-	return o.ApplyT(func(v Certificates) Key { return v.K8s_serviceaccount }).(KeyOutput)
+func (o CertificatesOutput) K8sServiceaccount() KeyOutput {
+	return o.ApplyT(func(v Certificates) Key { return v.K8sServiceaccount }).(KeyOutput)
 }
 
 func (o CertificatesOutput) Os() CertificateOutput {
@@ -2364,21 +2364,21 @@ func (o CertificatesPtrOutput) K8s() CertificatePtrOutput {
 	}).(CertificatePtrOutput)
 }
 
-func (o CertificatesPtrOutput) K8s_aggregator() CertificatePtrOutput {
+func (o CertificatesPtrOutput) K8sAggregator() CertificatePtrOutput {
 	return o.ApplyT(func(v *Certificates) *Certificate {
 		if v == nil {
 			return nil
 		}
-		return &v.K8s_aggregator
+		return &v.K8sAggregator
 	}).(CertificatePtrOutput)
 }
 
-func (o CertificatesPtrOutput) K8s_serviceaccount() KeyPtrOutput {
+func (o CertificatesPtrOutput) K8sServiceaccount() KeyPtrOutput {
 	return o.ApplyT(func(v *Certificates) *Key {
 		if v == nil {
 			return nil
 		}
-		return &v.K8s_serviceaccount
+		return &v.K8sServiceaccount
 	}).(KeyPtrOutput)
 }
 
@@ -2394,11 +2394,11 @@ func (o CertificatesPtrOutput) Os() CertificatePtrOutput {
 // A Client Configuration
 type ClientConfiguration struct {
 	// The client CA certificate
-	Ca_certificate string `pulumi:"ca_certificate"`
+	CaCertificate string `pulumi:"caCertificate"`
 	// The client certificate
-	Client_certificate string `pulumi:"client_certificate"`
+	ClientCertificate string `pulumi:"clientCertificate"`
 	// The client private key
-	Client_key string `pulumi:"client_key"`
+	ClientKey string `pulumi:"clientKey"`
 }
 
 // ClientConfigurationInput is an input type that accepts ClientConfigurationArgs and ClientConfigurationOutput values.
@@ -2415,11 +2415,11 @@ type ClientConfigurationInput interface {
 // A Client Configuration
 type ClientConfigurationArgs struct {
 	// The client CA certificate
-	Ca_certificate pulumi.StringInput `pulumi:"ca_certificate"`
+	CaCertificate pulumi.StringInput `pulumi:"caCertificate"`
 	// The client certificate
-	Client_certificate pulumi.StringInput `pulumi:"client_certificate"`
+	ClientCertificate pulumi.StringInput `pulumi:"clientCertificate"`
 	// The client private key
-	Client_key pulumi.StringInput `pulumi:"client_key"`
+	ClientKey pulumi.StringInput `pulumi:"clientKey"`
 }
 
 func (ClientConfigurationArgs) ElementType() reflect.Type {
@@ -2501,18 +2501,18 @@ func (o ClientConfigurationOutput) ToClientConfigurationPtrOutputWithContext(ctx
 }
 
 // The client CA certificate
-func (o ClientConfigurationOutput) Ca_certificate() pulumi.StringOutput {
-	return o.ApplyT(func(v ClientConfiguration) string { return v.Ca_certificate }).(pulumi.StringOutput)
+func (o ClientConfigurationOutput) CaCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v ClientConfiguration) string { return v.CaCertificate }).(pulumi.StringOutput)
 }
 
 // The client certificate
-func (o ClientConfigurationOutput) Client_certificate() pulumi.StringOutput {
-	return o.ApplyT(func(v ClientConfiguration) string { return v.Client_certificate }).(pulumi.StringOutput)
+func (o ClientConfigurationOutput) ClientCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v ClientConfiguration) string { return v.ClientCertificate }).(pulumi.StringOutput)
 }
 
 // The client private key
-func (o ClientConfigurationOutput) Client_key() pulumi.StringOutput {
-	return o.ApplyT(func(v ClientConfiguration) string { return v.Client_key }).(pulumi.StringOutput)
+func (o ClientConfigurationOutput) ClientKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
 }
 
 type ClientConfigurationPtrOutput struct{ *pulumi.OutputState }
@@ -2540,32 +2540,32 @@ func (o ClientConfigurationPtrOutput) Elem() ClientConfigurationOutput {
 }
 
 // The client CA certificate
-func (o ClientConfigurationPtrOutput) Ca_certificate() pulumi.StringPtrOutput {
+func (o ClientConfigurationPtrOutput) CaCertificate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClientConfiguration) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.Ca_certificate
+		return &v.CaCertificate
 	}).(pulumi.StringPtrOutput)
 }
 
 // The client certificate
-func (o ClientConfigurationPtrOutput) Client_certificate() pulumi.StringPtrOutput {
+func (o ClientConfigurationPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClientConfiguration) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.Client_certificate
+		return &v.ClientCertificate
 	}).(pulumi.StringPtrOutput)
 }
 
 // The client private key
-func (o ClientConfigurationPtrOutput) Client_key() pulumi.StringPtrOutput {
+func (o ClientConfigurationPtrOutput) ClientKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClientConfiguration) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.Client_key
+		return &v.ClientKey
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -2871,11 +2871,11 @@ func (o KeyPtrOutput) Key() pulumi.StringPtrOutput {
 // A Machine Secrets Bootstrap data
 type KubernetesSecrets struct {
 	// The aescbc encryption secret for the talos kubernetes cluster
-	Aescbc_encryption_secret *string `pulumi:"aescbc_encryption_secret"`
+	AescbcEncryptionSecret *string `pulumi:"aescbcEncryptionSecret"`
 	// The bootstrap token for the talos kubernetes cluster
-	Bootstrap_token string `pulumi:"bootstrap_token"`
+	BootstrapToken string `pulumi:"bootstrapToken"`
 	// The secretbox encryption secret for the talos kubernetes cluster
-	Secretbox_encryption_secret string `pulumi:"secretbox_encryption_secret"`
+	SecretboxEncryptionSecret string `pulumi:"secretboxEncryptionSecret"`
 }
 
 // KubernetesSecretsInput is an input type that accepts KubernetesSecretsArgs and KubernetesSecretsOutput values.
@@ -2892,11 +2892,11 @@ type KubernetesSecretsInput interface {
 // A Machine Secrets Bootstrap data
 type KubernetesSecretsArgs struct {
 	// The aescbc encryption secret for the talos kubernetes cluster
-	Aescbc_encryption_secret pulumi.StringPtrInput `pulumi:"aescbc_encryption_secret"`
+	AescbcEncryptionSecret pulumi.StringPtrInput `pulumi:"aescbcEncryptionSecret"`
 	// The bootstrap token for the talos kubernetes cluster
-	Bootstrap_token pulumi.StringInput `pulumi:"bootstrap_token"`
+	BootstrapToken pulumi.StringInput `pulumi:"bootstrapToken"`
 	// The secretbox encryption secret for the talos kubernetes cluster
-	Secretbox_encryption_secret pulumi.StringInput `pulumi:"secretbox_encryption_secret"`
+	SecretboxEncryptionSecret pulumi.StringInput `pulumi:"secretboxEncryptionSecret"`
 }
 
 func (KubernetesSecretsArgs) ElementType() reflect.Type {
@@ -2978,18 +2978,18 @@ func (o KubernetesSecretsOutput) ToKubernetesSecretsPtrOutputWithContext(ctx con
 }
 
 // The aescbc encryption secret for the talos kubernetes cluster
-func (o KubernetesSecretsOutput) Aescbc_encryption_secret() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v KubernetesSecrets) *string { return v.Aescbc_encryption_secret }).(pulumi.StringPtrOutput)
+func (o KubernetesSecretsOutput) AescbcEncryptionSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubernetesSecrets) *string { return v.AescbcEncryptionSecret }).(pulumi.StringPtrOutput)
 }
 
 // The bootstrap token for the talos kubernetes cluster
-func (o KubernetesSecretsOutput) Bootstrap_token() pulumi.StringOutput {
-	return o.ApplyT(func(v KubernetesSecrets) string { return v.Bootstrap_token }).(pulumi.StringOutput)
+func (o KubernetesSecretsOutput) BootstrapToken() pulumi.StringOutput {
+	return o.ApplyT(func(v KubernetesSecrets) string { return v.BootstrapToken }).(pulumi.StringOutput)
 }
 
 // The secretbox encryption secret for the talos kubernetes cluster
-func (o KubernetesSecretsOutput) Secretbox_encryption_secret() pulumi.StringOutput {
-	return o.ApplyT(func(v KubernetesSecrets) string { return v.Secretbox_encryption_secret }).(pulumi.StringOutput)
+func (o KubernetesSecretsOutput) SecretboxEncryptionSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v KubernetesSecrets) string { return v.SecretboxEncryptionSecret }).(pulumi.StringOutput)
 }
 
 type KubernetesSecretsPtrOutput struct{ *pulumi.OutputState }
@@ -3017,32 +3017,32 @@ func (o KubernetesSecretsPtrOutput) Elem() KubernetesSecretsOutput {
 }
 
 // The aescbc encryption secret for the talos kubernetes cluster
-func (o KubernetesSecretsPtrOutput) Aescbc_encryption_secret() pulumi.StringPtrOutput {
+func (o KubernetesSecretsPtrOutput) AescbcEncryptionSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *KubernetesSecrets) *string {
 		if v == nil {
 			return nil
 		}
-		return v.Aescbc_encryption_secret
+		return v.AescbcEncryptionSecret
 	}).(pulumi.StringPtrOutput)
 }
 
 // The bootstrap token for the talos kubernetes cluster
-func (o KubernetesSecretsPtrOutput) Bootstrap_token() pulumi.StringPtrOutput {
+func (o KubernetesSecretsPtrOutput) BootstrapToken() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *KubernetesSecrets) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.Bootstrap_token
+		return &v.BootstrapToken
 	}).(pulumi.StringPtrOutput)
 }
 
 // The secretbox encryption secret for the talos kubernetes cluster
-func (o KubernetesSecretsPtrOutput) Secretbox_encryption_secret() pulumi.StringPtrOutput {
+func (o KubernetesSecretsPtrOutput) SecretboxEncryptionSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *KubernetesSecrets) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.Secretbox_encryption_secret
+		return &v.SecretboxEncryptionSecret
 	}).(pulumi.StringPtrOutput)
 }
 

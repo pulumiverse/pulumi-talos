@@ -19,28 +19,28 @@ namespace Pulumiverse.Talos.Machine.Inputs
         /// <summary>
         /// The client CA certificate
         /// </summary>
-        [Input("ca_certificate", required: true)]
-        public Input<string> Ca_certificate { get; set; } = null!;
+        [Input("caCertificate", required: true)]
+        public Input<string> CaCertificate { get; set; } = null!;
 
         /// <summary>
         /// The client certificate
         /// </summary>
-        [Input("client_certificate", required: true)]
-        public Input<string> Client_certificate { get; set; } = null!;
+        [Input("clientCertificate", required: true)]
+        public Input<string> ClientCertificate { get; set; } = null!;
 
-        [Input("client_key", required: true)]
-        private Input<string>? _client_key;
+        [Input("clientKey", required: true)]
+        private Input<string>? _clientKey;
 
         /// <summary>
         /// The client private key
         /// </summary>
-        public Input<string>? Client_key
+        public Input<string>? ClientKey
         {
-            get => _client_key;
+            get => _clientKey;
             set
             {
                 var emptySecret = Output.CreateSecret(0);
-                _client_key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+                _clientKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
 
