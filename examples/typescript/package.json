@@ -1,7 +1,7 @@
 {
 	"name": "talos",
 	"devDependencies": {
-		"@types/node": "^14"
+		"@types/node": "^20.0.0"
 	},
 	"dependencies": {
 		"typescript": "^4.0.0",
