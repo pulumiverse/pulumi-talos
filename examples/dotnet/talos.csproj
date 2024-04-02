@@ -8,7 +8,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="Pulumi" Version="3.*" />
-		<PackageReference Include="Pulumiverse.Talos" Version="0.1.8" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\sdk\dotnet\Pulumiverse.Talos.csproj" />
 	</ItemGroup>
 
 </Project>
