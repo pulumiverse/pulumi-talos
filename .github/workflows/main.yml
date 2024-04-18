@@ -1,0 +1,256 @@
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+  PROVIDER: talos
+  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+  PULUMI_API: https://api.pulumi.com
+  PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
+  PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  PULUMI_TEST_OWNER: "pulumiverse"
+  PYPI_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+  PYPI_USERNAME: "__token__"
+  TRAVIS_OS_NAME: linux
+jobs:
+  build_sdk:
+    name: build_sdk
+    needs: prerequisites
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+    - name: Checkout Scripts Repo
+      uses: actions/checkout@v3
+      with:
+        path: ci-scripts
+        repository: jaxxstorm/scripts
+        ref: third_party
+    - name: Unshallow clone for tags
+      run: git fetch --prune --unshallow --tags
+    - name: Install Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: ${{matrix.goversion}}
+    - name: Install pulumictl
+      uses: jaxxstorm/action-install-gh-release@v1.9.0
+      with:
+        repo: pulumi/pulumictl
+    - name: Install Pulumi CLI
+      uses: pulumi/action-install-pulumi-cli@v2
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{matrix.nodeversion}}
+        registry-url: https://registry.npmjs.org
+    - name: Setup DotNet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{matrix.dotnetversion}}
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{matrix.pythonversion}}
+    - name: Download provider + tfgen binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ env.PROVIDER }}-provider.tar.gz
+        path: ${{ github.workspace }}/bin
+    - name: Untar provider binaries
+      run: |-
+        tar -zxf ${{ github.workspace }}/bin/provider.tar.gz -C ${{ github.workspace}}/bin
+        find ${{ github.workspace }} -name "pulumi-*-${{ env.PROVIDER }}" -print -exec chmod +x {} \;
+    - name: Install plugins
+      run: make install_plugins
+    - name: Update path
+      run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+    - name: Build SDK
+      run: make build_${{ matrix.language }}
+    - name: Check worktree clean
+      run: ./ci-scripts/ci/check-worktree-is-clean
+    - name: Compress SDK folder
+      run: tar -zcf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }}
+        .
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.language  }}-sdk.tar.gz
+        path: ${{ github.workspace}}/sdk/${{ matrix.language }}.tar.gz
+    strategy:
+      fail-fast: true
+      matrix:
+        dotnetversion:
+        - 3.1.301
+        goversion:
+        - 1.21.x
+        language:
+        - nodejs
+        - python
+        - dotnet
+        - go
+        nodeversion:
+        - 18.x
+        pythonversion:
+        - "3.9"
+  prerequisites:
+    name: prerequisites
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+    - name: Checkout Scripts Repo
+      uses: actions/checkout@v3
+      with:
+        path: ci-scripts
+        repository: jaxxstorm/scripts
+        ref: third_party
+    - name: Unshallow clone for tags
+      run: git fetch --prune --unshallow --tags
+    - name: Install Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: ${{matrix.goversion}}
+    - name: Install pulumictl
+      uses: jaxxstorm/action-install-gh-release@v1.9.0
+      with:
+        repo: pulumi/pulumictl
+    - name: Install Pulumi CLI
+      uses: pulumi/action-install-pulumi-cli@v2
+    - if: github.event_name == 'pull_request'
+      name: Install Schema Tools
+      uses: jaxxstorm/action-install-gh-release@v1.9.0
+      with:
+        repo: mikhailshilkov/schema-tools
+    - name: Build tfgen & provider binaries
+      run: make provider
+    # - if: github.event_name == 'pull_request'
+    #   name: Check Schema is Valid
+    #   run: |-
+    #     echo 'SCHEMA_CHANGES<<EOF' >> $GITHUB_ENV
+    #     schema-tools compare ${{ env.PROVIDER }} master --local-path=provider/cmd/pulumi-resource-${{ env.PROVIDER }}/schema.json >> $GITHUB_ENV
+    #     echo 'EOF' >> $GITHUB_ENV
+    # - if: github.event_name == 'pull_request'
+    #   name: Comment on PR with Details of Schema Check
+    #   uses: thollander/actions-comment-pull-request@1.0.1
+    #   with:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     message: |
+    #       ### Does the PR have any schema changes?
+
+    #       ${{ env.SCHEMA_CHANGES }}
+    - name: Tar provider binaries
+      run: tar -zcf ${{ github.workspace }}/bin/provider.tar.gz -C ${{ github.workspace
+        }}/bin/ pulumi-resource-${{ env.PROVIDER }} pulumi-tfgen-${{ env.PROVIDER
+        }}
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.PROVIDER }}-provider.tar.gz
+        path: ${{ github.workspace }}/bin/provider.tar.gz
+    strategy:
+      fail-fast: true
+      matrix:
+        dotnetversion:
+        - 3.1.301
+        goversion:
+        - 1.21.x
+        nodeversion:
+        - 18.x
+        pythonversion:
+        - "3.9"
+  test:
+    name: test
+    needs: build_sdk
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+    - name: Checkout Scripts Repo
+      uses: actions/checkout@v3
+      with:
+        path: ci-scripts
+        repository: jaxxstorm/scripts
+        ref: third_party
+    - name: Unshallow clone for tags
+      run: git fetch --prune --unshallow --tags
+    - name: Install Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: ${{matrix.goversion}}
+    - name: Install pulumictl
+      uses: jaxxstorm/action-install-gh-release@v1.9.0
+      with:
+        repo: pulumi/pulumictl
+    - name: Install Pulumi CLI
+      uses: pulumi/action-install-pulumi-cli@v2
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{matrix.nodeversion}}
+        registry-url: https://registry.npmjs.org
+    - name: Setup DotNet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{matrix.dotnetversion}}
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{matrix.pythonversion}}
+    - name: Download provider + tfgen binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ env.PROVIDER }}-provider.tar.gz
+        path: ${{ github.workspace }}/bin
+    - name: Untar provider binaries
+      run: |-
+        tar -zxf ${{ github.workspace }}/bin/provider.tar.gz -C ${{ github.workspace}}/bin
+        find ${{ github.workspace }} -name "pulumi-*-${{ env.PROVIDER }}" -print -exec chmod +x {} \;
+    - run: dotnet nuget add source ${{ github.workspace }}/nuget
+    - name: Download SDK
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ matrix.language }}-sdk.tar.gz
+        path: ${{ github.workspace}}/sdk/
+    - name: Uncompress SDK folder
+      run: tar -zxf ${{ github.workspace }}/sdk/${{ matrix.language }}.tar.gz -C ${{
+        github.workspace }}/sdk/${{ matrix.language }}
+    - name: Update path
+      run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+    - name: Install Python deps
+      run: |-
+        pip3 install virtualenv==20.0.23
+        pip3 install pipenv
+    - name: Install dependencies
+      run: make install_${{ matrix.language}}_sdk
+    - name: Run tests
+      run: cd examples && go test -v -count=1 -cover -timeout 2h -tags=${{ matrix.language }} -parallel 4 .
+    strategy:
+      fail-fast: true
+      matrix:
+        dotnetversion:
+        - 3.1.301
+        goversion:
+        - 1.21.x
+        language:
+        - nodejs
+        - python
+        - dotnet
+        - go
+        nodeversion:
+        - 18.x
+        pythonversion:
+        - "3.9"
+permissions:
+  contents: write
+
+name: main
+"on":
+  push:
+    branches:
+    - main
+    paths-ignore:
+    - CHANGELOG.md
+    tags-ignore:
+    - v*
+    - sdk/*
+    - '**'
