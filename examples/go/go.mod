@@ -2,7 +2,7 @@ module github.com/pulumiverse/pulumi-talos/examples/go
 
 go 1.21.5
 
-toolchain go1.22.1
+toolchain go1.22.3
 
 require (
 	github.com/pulumi/pulumi/sdk/v3 v3.104.2
