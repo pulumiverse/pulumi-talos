@@ -11,13 +11,6 @@ permissions:
 
 env:
   PROVIDER: talos
-  DOTNETVERSION: |
-    6.0.x
-    3.1.301
-  GOVERSION: 1.21.x
-  JAVAVERSION: "11"
-  NODEVERSION: 20.x
-  PYTHONVERSION: "3.9"
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -30,6 +23,14 @@ env:
   PUBLISH_PYPI: true
   PUBLISH_NPM: true
   PUBLISH_NUGET: true
+  DOTNETVERSION: |
+      6.0.x
+      3.1.301
+  GOVERSION: 1.22.x
+  GRADLEVERSION: "7.6"
+  JAVAVERSION: "11"
+  NODEVERSION: 20.x
+  PYTHONVERSION: 3.11.8
 
 jobs:
   publish_binary:
