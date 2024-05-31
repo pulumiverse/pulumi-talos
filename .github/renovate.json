@@ -6,18 +6,18 @@
     ],
     "packageRules": [
         {
-            "excludePackagePatterns": [
-                "github.com/pulumi/*"
+            "matchFileNames": [
+                "examples/**"
             ],
             "matchDatasources": [
-                "go",
-                "golang-version"
-            ],
-            "groupName": "Pulumi package updates to be done by the update-bridge workflow"
+                "go"
+            ]
         },
         {
-          "matchFileNames": ["sdk/**"],
-          "enabled": false
+            "matchFileNames": [
+                "sdk/**"
+            ],
+            "enabled": false
         }
     ],
     "dependencyDashboard": true
