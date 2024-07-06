@@ -27,6 +27,30 @@ To use from Python, install using `pip`:
 ```bash
 pip install pulumiverse_talos
 ```
+If you see an error as such.
+```
+import pulumiverse_talos
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/venv/lib/python3.12/site-packages/pulumiverse_talos/__init__.py", line 5, in <module>
+    from . import _utilities
+  File "/venv/lib/python3.12/site-packages/pulumiverse_talos/_utilities.py", line 11, in <module>
+    import pkg_resources
+ModuleNotFoundError: No module named 'pkg_resources'
+```
+Try installing
+```
+pip install setuptools
+```
+Or better yet if you're using a Python Virtual Env
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install setuptools
+pip install pulumiverse_talos
+# Test if the import works
+python -c "import pulumiverse_talos"
+```
 
 ### Go
 
