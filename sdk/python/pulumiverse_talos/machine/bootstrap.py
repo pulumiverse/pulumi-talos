@@ -16,13 +16,13 @@ __all__ = ['BootstrapArgs', 'Bootstrap']
 @pulumi.input_type
 class BootstrapArgs:
     def __init__(__self__, *,
-                 client_configuration: pulumi.Input['ClientConfigurationArgs'],
+                 client_configuration: pulumi.Input['BootstrapClientConfigurationArgs'],
                  node: pulumi.Input[str],
                  endpoint: Optional[pulumi.Input[str]] = None,
                  timeouts: Optional[pulumi.Input['BootstrapTimeoutsArgs']] = None):
         """
         The set of arguments for constructing a Bootstrap resource.
-        :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
+        :param pulumi.Input['BootstrapClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[str] node: The name of the node to bootstrap
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         """
@@ -35,14 +35,14 @@ class BootstrapArgs:
 
     @property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> pulumi.Input['ClientConfigurationArgs']:
+    def client_configuration(self) -> pulumi.Input['BootstrapClientConfigurationArgs']:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
 
     @client_configuration.setter
-    def client_configuration(self, value: pulumi.Input['ClientConfigurationArgs']):
+    def client_configuration(self, value: pulumi.Input['BootstrapClientConfigurationArgs']):
         pulumi.set(self, "client_configuration", value)
 
     @property
@@ -82,13 +82,13 @@ class BootstrapArgs:
 @pulumi.input_type
 class _BootstrapState:
     def __init__(__self__, *,
-                 client_configuration: Optional[pulumi.Input['ClientConfigurationArgs']] = None,
+                 client_configuration: Optional[pulumi.Input['BootstrapClientConfigurationArgs']] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
                  timeouts: Optional[pulumi.Input['BootstrapTimeoutsArgs']] = None):
         """
         Input properties used for looking up and filtering Bootstrap resources.
-        :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
+        :param pulumi.Input['BootstrapClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] node: The name of the node to bootstrap
         """
@@ -103,14 +103,14 @@ class _BootstrapState:
 
     @property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> Optional[pulumi.Input['ClientConfigurationArgs']]:
+    def client_configuration(self) -> Optional[pulumi.Input['BootstrapClientConfigurationArgs']]:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
 
     @client_configuration.setter
-    def client_configuration(self, value: Optional[pulumi.Input['ClientConfigurationArgs']]):
+    def client_configuration(self, value: Optional[pulumi.Input['BootstrapClientConfigurationArgs']]):
         pulumi.set(self, "client_configuration", value)
 
     @property
@@ -152,7 +152,7 @@ class Bootstrap(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
+                 client_configuration: Optional[pulumi.Input[pulumi.InputType['BootstrapClientConfigurationArgs']]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
                  timeouts: Optional[pulumi.Input[pulumi.InputType['BootstrapTimeoutsArgs']]] = None,
@@ -170,7 +170,7 @@ class Bootstrap(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['ClientConfigurationArgs']] client_configuration: The client configuration data
+        :param pulumi.Input[pulumi.InputType['BootstrapClientConfigurationArgs']] client_configuration: The client configuration data
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] node: The name of the node to bootstrap
         """
@@ -206,7 +206,7 @@ class Bootstrap(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
+                 client_configuration: Optional[pulumi.Input[pulumi.InputType['BootstrapClientConfigurationArgs']]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
                  timeouts: Optional[pulumi.Input[pulumi.InputType['BootstrapTimeoutsArgs']]] = None,
@@ -237,7 +237,7 @@ class Bootstrap(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
+            client_configuration: Optional[pulumi.Input[pulumi.InputType['BootstrapClientConfigurationArgs']]] = None,
             endpoint: Optional[pulumi.Input[str]] = None,
             node: Optional[pulumi.Input[str]] = None,
             timeouts: Optional[pulumi.Input[pulumi.InputType['BootstrapTimeoutsArgs']]] = None) -> 'Bootstrap':
@@ -248,7 +248,7 @@ class Bootstrap(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['ClientConfigurationArgs']] client_configuration: The client configuration data
+        :param pulumi.Input[pulumi.InputType['BootstrapClientConfigurationArgs']] client_configuration: The client configuration data
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] node: The name of the node to bootstrap
         """
@@ -264,7 +264,7 @@ class Bootstrap(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> pulumi.Output['outputs.ClientConfiguration']:
+    def client_configuration(self) -> pulumi.Output['outputs.BootstrapClientConfiguration']:
         """
         The client configuration data
         """

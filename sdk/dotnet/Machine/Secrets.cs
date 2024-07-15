@@ -43,13 +43,13 @@ namespace Pulumiverse.Talos.Machine
         /// The generated client configuration data
         /// </summary>
         [Output("clientConfiguration")]
-        public Output<Outputs.ClientConfiguration> ClientConfiguration { get; private set; } = null!;
+        public Output<Outputs.SecretsClientConfiguration> ClientConfiguration { get; private set; } = null!;
 
         /// <summary>
         /// The secrets for the talos cluster
         /// </summary>
         [Output("machineSecrets")]
-        public Output<Outputs.MachineSecretsResult> MachineSecrets { get; private set; } = null!;
+        public Output<Outputs.SecretsMachineSecrets> MachineSecrets { get; private set; } = null!;
 
         /// <summary>
         /// The version of talos features to use in generated machine configuration
@@ -122,13 +122,13 @@ namespace Pulumiverse.Talos.Machine
         /// The generated client configuration data
         /// </summary>
         [Input("clientConfiguration")]
-        public Input<Inputs.ClientConfigurationGetArgs>? ClientConfiguration { get; set; }
+        public Input<Inputs.SecretsClientConfigurationGetArgs>? ClientConfiguration { get; set; }
 
         /// <summary>
         /// The secrets for the talos cluster
         /// </summary>
         [Input("machineSecrets")]
-        public Input<Inputs.MachineSecretsGetArgs>? MachineSecrets { get; set; }
+        public Input<Inputs.SecretsMachineSecretsGetArgs>? MachineSecrets { get; set; }
 
         /// <summary>
         /// The version of talos features to use in generated machine configuration

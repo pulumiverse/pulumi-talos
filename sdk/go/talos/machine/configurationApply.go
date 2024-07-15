@@ -19,7 +19,7 @@ type ConfigurationApply struct {
 	// The mode of the apply operation
 	ApplyMode pulumi.StringOutput `pulumi:"applyMode"`
 	// The client configuration data
-	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
+	ClientConfiguration ConfigurationApplyClientConfigurationOutput `pulumi:"clientConfiguration"`
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayOutput `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
@@ -29,8 +29,8 @@ type ConfigurationApply struct {
 	// The machine configuration to apply
 	MachineConfigurationInput pulumi.StringOutput `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
-	Node     pulumi.StringOutput `pulumi:"node"`
-	Timeouts TimeoutPtrOutput    `pulumi:"timeouts"`
+	Node     pulumi.StringOutput                 `pulumi:"node"`
+	Timeouts ConfigurationApplyTimeoutsPtrOutput `pulumi:"timeouts"`
 }
 
 // NewConfigurationApply registers a new resource with the given unique name, arguments, and options.
@@ -83,7 +83,7 @@ type configurationApplyState struct {
 	// The mode of the apply operation
 	ApplyMode *string `pulumi:"applyMode"`
 	// The client configuration data
-	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration *ConfigurationApplyClientConfiguration `pulumi:"clientConfiguration"`
 	// The list of config patches to apply
 	ConfigPatches []string `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
@@ -93,15 +93,15 @@ type configurationApplyState struct {
 	// The machine configuration to apply
 	MachineConfigurationInput *string `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
-	Node     *string  `pulumi:"node"`
-	Timeouts *Timeout `pulumi:"timeouts"`
+	Node     *string                     `pulumi:"node"`
+	Timeouts *ConfigurationApplyTimeouts `pulumi:"timeouts"`
 }
 
 type ConfigurationApplyState struct {
 	// The mode of the apply operation
 	ApplyMode pulumi.StringPtrInput
 	// The client configuration data
-	ClientConfiguration ClientConfigurationPtrInput
+	ClientConfiguration ConfigurationApplyClientConfigurationPtrInput
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayInput
 	// The endpoint of the machine to bootstrap
@@ -112,7 +112,7 @@ type ConfigurationApplyState struct {
 	MachineConfigurationInput pulumi.StringPtrInput
 	// The name of the node to bootstrap
 	Node     pulumi.StringPtrInput
-	Timeouts TimeoutPtrInput
+	Timeouts ConfigurationApplyTimeoutsPtrInput
 }
 
 func (ConfigurationApplyState) ElementType() reflect.Type {
@@ -123,7 +123,7 @@ type configurationApplyArgs struct {
 	// The mode of the apply operation
 	ApplyMode *string `pulumi:"applyMode"`
 	// The client configuration data
-	ClientConfiguration ClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration ConfigurationApplyClientConfiguration `pulumi:"clientConfiguration"`
 	// The list of config patches to apply
 	ConfigPatches []string `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
@@ -131,8 +131,8 @@ type configurationApplyArgs struct {
 	// The machine configuration to apply
 	MachineConfigurationInput string `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
-	Node     string   `pulumi:"node"`
-	Timeouts *Timeout `pulumi:"timeouts"`
+	Node     string                      `pulumi:"node"`
+	Timeouts *ConfigurationApplyTimeouts `pulumi:"timeouts"`
 }
 
 // The set of arguments for constructing a ConfigurationApply resource.
@@ -140,7 +140,7 @@ type ConfigurationApplyArgs struct {
 	// The mode of the apply operation
 	ApplyMode pulumi.StringPtrInput
 	// The client configuration data
-	ClientConfiguration ClientConfigurationInput
+	ClientConfiguration ConfigurationApplyClientConfigurationInput
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayInput
 	// The endpoint of the machine to bootstrap
@@ -149,7 +149,7 @@ type ConfigurationApplyArgs struct {
 	MachineConfigurationInput pulumi.StringInput
 	// The name of the node to bootstrap
 	Node     pulumi.StringInput
-	Timeouts TimeoutPtrInput
+	Timeouts ConfigurationApplyTimeoutsPtrInput
 }
 
 func (ConfigurationApplyArgs) ElementType() reflect.Type {
@@ -245,8 +245,8 @@ func (o ConfigurationApplyOutput) ApplyMode() pulumi.StringOutput {
 }
 
 // The client configuration data
-func (o ConfigurationApplyOutput) ClientConfiguration() ClientConfigurationOutput {
-	return o.ApplyT(func(v *ConfigurationApply) ClientConfigurationOutput { return v.ClientConfiguration }).(ClientConfigurationOutput)
+func (o ConfigurationApplyOutput) ClientConfiguration() ConfigurationApplyClientConfigurationOutput {
+	return o.ApplyT(func(v *ConfigurationApply) ConfigurationApplyClientConfigurationOutput { return v.ClientConfiguration }).(ConfigurationApplyClientConfigurationOutput)
 }
 
 // The list of config patches to apply
@@ -274,8 +274,8 @@ func (o ConfigurationApplyOutput) Node() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.Node }).(pulumi.StringOutput)
 }
 
-func (o ConfigurationApplyOutput) Timeouts() TimeoutPtrOutput {
-	return o.ApplyT(func(v *ConfigurationApply) TimeoutPtrOutput { return v.Timeouts }).(TimeoutPtrOutput)
+func (o ConfigurationApplyOutput) Timeouts() ConfigurationApplyTimeoutsPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApply) ConfigurationApplyTimeoutsPtrOutput { return v.Timeouts }).(ConfigurationApplyTimeoutsPtrOutput)
 }
 
 type ConfigurationApplyArrayOutput struct{ *pulumi.OutputState }

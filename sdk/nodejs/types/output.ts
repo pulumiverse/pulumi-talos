@@ -90,42 +90,7 @@ export namespace cluster {
 }
 
 export namespace machine {
-    export interface BootstrapTimeouts {
-        /**
-         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-         */
-        create?: string;
-    }
-
-    /**
-     * A Machine Secrets Certificate
-     */
-    export interface Certificate {
-        /**
-         * Certificate
-         */
-        cert: string;
-        /**
-         * Private Key
-         */
-        key: string;
-    }
-
-    /**
-     * A complete Machine Secrets Certificates configuration
-     */
-    export interface Certificates {
-        etcd: outputs.machine.Certificate;
-        k8s: outputs.machine.Certificate;
-        k8sAggregator: outputs.machine.Certificate;
-        k8sServiceaccount: outputs.machine.Key;
-        os: outputs.machine.Certificate;
-    }
-
-    /**
-     * A Client Configuration
-     */
-    export interface ClientConfiguration {
+    export interface BootstrapClientConfiguration {
         /**
          * The client CA certificate
          */
@@ -135,23 +100,165 @@ export namespace machine {
          */
         clientCertificate: string;
         /**
-         * The client private key
+         * The client key
          */
         clientKey: string;
     }
 
-    /**
-     * A Machine Secrets Cluster Info
-     */
-    export interface Cluster {
+    export interface BootstrapTimeouts {
         /**
-         * Certificate
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+         */
+        create?: string;
+    }
+
+    export interface ConfigurationApplyClientConfiguration {
+        /**
+         * The client CA certificate
+         */
+        caCertificate: string;
+        /**
+         * The client certificate
+         */
+        clientCertificate: string;
+        /**
+         * The client key
+         */
+        clientKey: string;
+    }
+
+    export interface ConfigurationApplyTimeouts {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+         */
+        create?: string;
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+         */
+        update?: string;
+    }
+
+    export interface GetConfigurationMachineSecrets {
+        /**
+         * The certs for the talos kubernetes cluster
+         */
+        certs: outputs.machine.GetConfigurationMachineSecretsCerts;
+        /**
+         * The cluster secrets
+         */
+        cluster: outputs.machine.GetConfigurationMachineSecretsCluster;
+        /**
+         * The secrets for the talos kubernetes cluster
+         */
+        secrets: outputs.machine.GetConfigurationMachineSecretsSecrets;
+        /**
+         * The trustd info for the talos kubernetes cluster
+         */
+        trustdinfo: outputs.machine.GetConfigurationMachineSecretsTrustdinfo;
+    }
+
+    export interface GetConfigurationMachineSecretsCerts {
+        /**
+         * The certificate and key pair
+         */
+        etcd: outputs.machine.GetConfigurationMachineSecretsCertsEtcd;
+        /**
+         * The certificate and key pair
+         */
+        k8s: outputs.machine.GetConfigurationMachineSecretsCertsK8s;
+        /**
+         * The certificate and key pair
+         */
+        k8sAggregator: outputs.machine.GetConfigurationMachineSecretsCertsK8sAggregator;
+        k8sServiceaccount: outputs.machine.GetConfigurationMachineSecretsCertsK8sServiceaccount;
+        /**
+         * The certificate and key pair
+         */
+        os: outputs.machine.GetConfigurationMachineSecretsCertsOs;
+    }
+
+    export interface GetConfigurationMachineSecretsCertsEtcd {
+        /**
+         * certificate data
+         */
+        cert: string;
+        /**
+         * key data
+         */
+        key: string;
+    }
+
+    export interface GetConfigurationMachineSecretsCertsK8s {
+        /**
+         * certificate data
+         */
+        cert: string;
+        /**
+         * key data
+         */
+        key: string;
+    }
+
+    export interface GetConfigurationMachineSecretsCertsK8sAggregator {
+        /**
+         * certificate data
+         */
+        cert: string;
+        /**
+         * key data
+         */
+        key: string;
+    }
+
+    export interface GetConfigurationMachineSecretsCertsK8sServiceaccount {
+        /**
+         * key data
+         */
+        key: string;
+    }
+
+    export interface GetConfigurationMachineSecretsCertsOs {
+        /**
+         * certificate data
+         */
+        cert: string;
+        /**
+         * key data
+         */
+        key: string;
+    }
+
+    export interface GetConfigurationMachineSecretsCluster {
+        /**
+         * The cluster id
          */
         id: string;
         /**
-         * Private Key
+         * The cluster secret
          */
         secret: string;
+    }
+
+    export interface GetConfigurationMachineSecretsSecrets {
+        /**
+         * The aescbc encryption secret for the talos kubernetes cluster
+         */
+        aescbcEncryptionSecret?: string;
+        /**
+         * The bootstrap token for the talos kubernetes cluster
+         */
+        bootstrapToken: string;
+        /**
+         * The secretbox encryption secret for the talos kubernetes cluster
+         */
+        secretboxEncryptionSecret: string;
+    }
+
+    export interface GetConfigurationMachineSecretsTrustdinfo {
+        /**
+         * The trustd token for the talos kubernetes cluster
+         */
+        token: string;
     }
 
     export interface GetDisksClientConfiguration {
@@ -254,61 +361,140 @@ export namespace machine {
         read?: string;
     }
 
-    /**
-     * A Machine Secrets Private Key
-     */
-    export interface Key {
+    export interface SecretsClientConfiguration {
         /**
-         * Private Key
+         * The client CA certificate
+         */
+        caCertificate: string;
+        /**
+         * The client certificate
+         */
+        clientCertificate: string;
+        /**
+         * The client key
+         */
+        clientKey: string;
+    }
+
+    export interface SecretsMachineSecrets {
+        certs: outputs.machine.SecretsMachineSecretsCerts;
+        /**
+         * The cluster secrets
+         */
+        cluster: outputs.machine.SecretsMachineSecretsCluster;
+        /**
+         * kubernetes cluster secrets
+         */
+        secrets: outputs.machine.SecretsMachineSecretsSecrets;
+        /**
+         * trustd secrets
+         */
+        trustdinfo: outputs.machine.SecretsMachineSecretsTrustdinfo;
+    }
+
+    export interface SecretsMachineSecretsCerts {
+        /**
+         * The certificate and key pair
+         */
+        etcd: outputs.machine.SecretsMachineSecretsCertsEtcd;
+        /**
+         * The certificate and key pair
+         */
+        k8s: outputs.machine.SecretsMachineSecretsCertsK8s;
+        /**
+         * The certificate and key pair
+         */
+        k8sAggregator: outputs.machine.SecretsMachineSecretsCertsK8sAggregator;
+        /**
+         * The service account secrets
+         */
+        k8sServiceaccount: outputs.machine.SecretsMachineSecretsCertsK8sServiceaccount;
+        /**
+         * The certificate and key pair
+         */
+        os: outputs.machine.SecretsMachineSecretsCertsOs;
+    }
+
+    export interface SecretsMachineSecretsCertsEtcd {
+        /**
+         * certificate data
+         */
+        cert: string;
+        /**
+         * key data
          */
         key: string;
     }
 
-    /**
-     * A Machine Secrets Bootstrap data
-     */
-    export interface KubernetesSecrets {
+    export interface SecretsMachineSecretsCertsK8s {
         /**
-         * The aescbc encryption secret for the talos kubernetes cluster
+         * certificate data
          */
-        aescbcEncryptionSecret?: string;
+        cert: string;
         /**
-         * The bootstrap token for the talos kubernetes cluster
+         * key data
+         */
+        key: string;
+    }
+
+    export interface SecretsMachineSecretsCertsK8sAggregator {
+        /**
+         * certificate data
+         */
+        cert: string;
+        /**
+         * key data
+         */
+        key: string;
+    }
+
+    export interface SecretsMachineSecretsCertsK8sServiceaccount {
+        /**
+         * key data
+         */
+        key: string;
+    }
+
+    export interface SecretsMachineSecretsCertsOs {
+        /**
+         * certificate data
+         */
+        cert: string;
+        /**
+         * key data
+         */
+        key: string;
+    }
+
+    export interface SecretsMachineSecretsCluster {
+        /**
+         * The cluster ID
+         */
+        id: string;
+        /**
+         * The cluster secret
+         */
+        secret: string;
+    }
+
+    export interface SecretsMachineSecretsSecrets {
+        /**
+         * The AES-CBC encryption secret
+         */
+        aescbcEncryptionSecret: string;
+        /**
+         * The bootstrap token
          */
         bootstrapToken: string;
         /**
-         * The secretbox encryption secret for the talos kubernetes cluster
+         * The secretbox encryption secret
          */
         secretboxEncryptionSecret: string;
     }
 
-    /**
-     * A complete Machine Secrets configuration
-     */
-    export interface MachineSecrets {
-        certs: outputs.machine.Certificates;
-        cluster: outputs.machine.Cluster;
-        secrets: outputs.machine.KubernetesSecrets;
-        trustdinfo: outputs.machine.TrustdInfo;
-    }
-
-    export interface Timeout {
+    export interface SecretsMachineSecretsTrustdinfo {
         /**
-         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-         */
-        create?: string;
-        /**
-         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-         */
-        update?: string;
-    }
-
-    /**
-     * A Machine Secrets Trust daemon info
-     */
-    export interface TrustdInfo {
-        /**
-         * The trustd token for the talos kubernetes cluster
+         * The trustd token
          */
         token: string;
     }

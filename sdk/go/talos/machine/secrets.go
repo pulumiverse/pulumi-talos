@@ -50,9 +50,9 @@ type Secrets struct {
 	pulumi.CustomResourceState
 
 	// The generated client configuration data
-	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
+	ClientConfiguration SecretsClientConfigurationOutput `pulumi:"clientConfiguration"`
 	// The secrets for the talos cluster
-	MachineSecrets MachineSecretsOutput `pulumi:"machineSecrets"`
+	MachineSecrets SecretsMachineSecretsOutput `pulumi:"machineSecrets"`
 	// The version of talos features to use in generated machine configuration
 	TalosVersion pulumi.StringOutput `pulumi:"talosVersion"`
 }
@@ -88,18 +88,18 @@ func GetSecrets(ctx *pulumi.Context,
 // Input properties used for looking up and filtering Secrets resources.
 type secretsState struct {
 	// The generated client configuration data
-	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration *SecretsClientConfiguration `pulumi:"clientConfiguration"`
 	// The secrets for the talos cluster
-	MachineSecrets *MachineSecrets `pulumi:"machineSecrets"`
+	MachineSecrets *SecretsMachineSecrets `pulumi:"machineSecrets"`
 	// The version of talos features to use in generated machine configuration
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
 type SecretsState struct {
 	// The generated client configuration data
-	ClientConfiguration ClientConfigurationPtrInput
+	ClientConfiguration SecretsClientConfigurationPtrInput
 	// The secrets for the talos cluster
-	MachineSecrets MachineSecretsPtrInput
+	MachineSecrets SecretsMachineSecretsPtrInput
 	// The version of talos features to use in generated machine configuration
 	TalosVersion pulumi.StringPtrInput
 }
@@ -207,13 +207,13 @@ func (o SecretsOutput) ToSecretsOutputWithContext(ctx context.Context) SecretsOu
 }
 
 // The generated client configuration data
-func (o SecretsOutput) ClientConfiguration() ClientConfigurationOutput {
-	return o.ApplyT(func(v *Secrets) ClientConfigurationOutput { return v.ClientConfiguration }).(ClientConfigurationOutput)
+func (o SecretsOutput) ClientConfiguration() SecretsClientConfigurationOutput {
+	return o.ApplyT(func(v *Secrets) SecretsClientConfigurationOutput { return v.ClientConfiguration }).(SecretsClientConfigurationOutput)
 }
 
 // The secrets for the talos cluster
-func (o SecretsOutput) MachineSecrets() MachineSecretsOutput {
-	return o.ApplyT(func(v *Secrets) MachineSecretsOutput { return v.MachineSecrets }).(MachineSecretsOutput)
+func (o SecretsOutput) MachineSecrets() SecretsMachineSecretsOutput {
+	return o.ApplyT(func(v *Secrets) SecretsMachineSecretsOutput { return v.MachineSecrets }).(SecretsMachineSecretsOutput)
 }
 
 // The version of talos features to use in generated machine configuration

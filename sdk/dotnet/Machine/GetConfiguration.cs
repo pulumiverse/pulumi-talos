@@ -134,7 +134,7 @@ namespace Pulumiverse.Talos.Machine
         /// The secrets for the talos cluster
         /// </summary>
         [Input("machineSecrets", required: true)]
-        public Inputs.MachineSecretsArgs MachineSecrets { get; set; } = null!;
+        public Inputs.GetConfigurationMachineSecretsArgs MachineSecrets { get; set; } = null!;
 
         /// <summary>
         /// The type of machine to generate the configuration for
@@ -202,7 +202,7 @@ namespace Pulumiverse.Talos.Machine
         /// The secrets for the talos cluster
         /// </summary>
         [Input("machineSecrets", required: true)]
-        public Input<Inputs.MachineSecretsInputArgs> MachineSecrets { get; set; } = null!;
+        public Input<Inputs.GetConfigurationMachineSecretsInputArgs> MachineSecrets { get; set; } = null!;
 
         /// <summary>
         /// The type of machine to generate the configuration for
@@ -261,7 +261,7 @@ namespace Pulumiverse.Talos.Machine
         /// <summary>
         /// The secrets for the talos cluster
         /// </summary>
-        public readonly Outputs.MachineSecretsResult MachineSecrets;
+        public readonly Outputs.GetConfigurationMachineSecretsResult MachineSecrets;
         /// <summary>
         /// The type of machine to generate the configuration for
         /// </summary>
@@ -289,7 +289,7 @@ namespace Pulumiverse.Talos.Machine
 
             string machineConfiguration,
 
-            Outputs.MachineSecretsResult machineSecrets,
+            Outputs.GetConfigurationMachineSecretsResult machineSecrets,
 
             string machineType,
 

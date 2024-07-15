@@ -10,27 +10,87 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'BootstrapClientConfigurationArgs',
     'BootstrapTimeoutsArgs',
-    'TimeoutArgs',
-    'CertificateArgs',
-    'CertificatesArgs',
-    'CertificatesArgs',
-    'CertificateArgs',
-    'ClientConfigurationArgs',
-    'ClusterArgs',
-    'ClusterArgs',
-    'KeyArgs',
-    'KeyArgs',
-    'KubernetesSecretsArgs',
-    'KubernetesSecretsArgs',
-    'MachineSecretsArgs',
-    'MachineSecretsArgs',
-    'TrustdInfoArgs',
-    'TrustdInfoArgs',
+    'ConfigurationApplyClientConfigurationArgs',
+    'ConfigurationApplyTimeoutsArgs',
+    'SecretsClientConfigurationArgs',
+    'SecretsMachineSecretsArgs',
+    'SecretsMachineSecretsCertsArgs',
+    'SecretsMachineSecretsCertsEtcdArgs',
+    'SecretsMachineSecretsCertsK8sArgs',
+    'SecretsMachineSecretsCertsK8sAggregatorArgs',
+    'SecretsMachineSecretsCertsK8sServiceaccountArgs',
+    'SecretsMachineSecretsCertsOsArgs',
+    'SecretsMachineSecretsClusterArgs',
+    'SecretsMachineSecretsSecretsArgs',
+    'SecretsMachineSecretsTrustdinfoArgs',
+    'GetConfigurationMachineSecretsArgs',
+    'GetConfigurationMachineSecretsCertsArgs',
+    'GetConfigurationMachineSecretsCertsEtcdArgs',
+    'GetConfigurationMachineSecretsCertsK8sArgs',
+    'GetConfigurationMachineSecretsCertsK8sAggregatorArgs',
+    'GetConfigurationMachineSecretsCertsK8sServiceaccountArgs',
+    'GetConfigurationMachineSecretsCertsOsArgs',
+    'GetConfigurationMachineSecretsClusterArgs',
+    'GetConfigurationMachineSecretsSecretsArgs',
+    'GetConfigurationMachineSecretsTrustdinfoArgs',
     'GetDisksClientConfigurationArgs',
     'GetDisksFiltersArgs',
     'GetDisksTimeoutsArgs',
 ]
+
+@pulumi.input_type
+class BootstrapClientConfigurationArgs:
+    def __init__(__self__, *,
+                 ca_certificate: pulumi.Input[str],
+                 client_certificate: pulumi.Input[str],
+                 client_key: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] ca_certificate: The client CA certificate
+        :param pulumi.Input[str] client_certificate: The client certificate
+        :param pulumi.Input[str] client_key: The client key
+        """
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> pulumi.Input[str]:
+        """
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @ca_certificate.setter
+    def ca_certificate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ca_certificate", value)
+
+    @property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> pulumi.Input[str]:
+        """
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @client_certificate.setter
+    def client_certificate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "client_certificate", value)
+
+    @property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> pulumi.Input[str]:
+        """
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
+    @client_key.setter
+    def client_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "client_key", value)
+
 
 @pulumi.input_type
 class BootstrapTimeoutsArgs:
@@ -56,7 +116,59 @@ class BootstrapTimeoutsArgs:
 
 
 @pulumi.input_type
-class TimeoutArgs:
+class ConfigurationApplyClientConfigurationArgs:
+    def __init__(__self__, *,
+                 ca_certificate: pulumi.Input[str],
+                 client_certificate: pulumi.Input[str],
+                 client_key: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] ca_certificate: The client CA certificate
+        :param pulumi.Input[str] client_certificate: The client certificate
+        :param pulumi.Input[str] client_key: The client key
+        """
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> pulumi.Input[str]:
+        """
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @ca_certificate.setter
+    def ca_certificate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ca_certificate", value)
+
+    @property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> pulumi.Input[str]:
+        """
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @client_certificate.setter
+    def client_certificate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "client_certificate", value)
+
+    @property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> pulumi.Input[str]:
+        """
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
+    @client_key.setter
+    def client_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "client_key", value)
+
+
+@pulumi.input_type
+class ConfigurationApplyTimeoutsArgs:
     def __init__(__self__, *,
                  create: Optional[pulumi.Input[str]] = None,
                  update: Optional[pulumi.Input[str]] = None):
@@ -95,14 +207,663 @@ class TimeoutArgs:
 
 
 @pulumi.input_type
-class CertificateArgs:
+class SecretsClientConfigurationArgs:
+    def __init__(__self__, *,
+                 ca_certificate: Optional[pulumi.Input[str]] = None,
+                 client_certificate: Optional[pulumi.Input[str]] = None,
+                 client_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] ca_certificate: The client CA certificate
+        :param pulumi.Input[str] client_certificate: The client certificate
+        :param pulumi.Input[str] client_key: The client key
+        """
+        if ca_certificate is not None:
+            pulumi.set(__self__, "ca_certificate", ca_certificate)
+        if client_certificate is not None:
+            pulumi.set(__self__, "client_certificate", client_certificate)
+        if client_key is not None:
+            pulumi.set(__self__, "client_key", client_key)
+
+    @property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @ca_certificate.setter
+    def ca_certificate(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ca_certificate", value)
+
+    @property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @client_certificate.setter
+    def client_certificate(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "client_certificate", value)
+
+    @property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
+    @client_key.setter
+    def client_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "client_key", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsArgs:
+    def __init__(__self__, *,
+                 certs: Optional[pulumi.Input['SecretsMachineSecretsCertsArgs']] = None,
+                 cluster: Optional[pulumi.Input['SecretsMachineSecretsClusterArgs']] = None,
+                 secrets: Optional[pulumi.Input['SecretsMachineSecretsSecretsArgs']] = None,
+                 trustdinfo: Optional[pulumi.Input['SecretsMachineSecretsTrustdinfoArgs']] = None):
+        """
+        :param pulumi.Input['SecretsMachineSecretsClusterArgs'] cluster: The cluster secrets
+        :param pulumi.Input['SecretsMachineSecretsSecretsArgs'] secrets: kubernetes cluster secrets
+        :param pulumi.Input['SecretsMachineSecretsTrustdinfoArgs'] trustdinfo: trustd secrets
+        """
+        if certs is not None:
+            pulumi.set(__self__, "certs", certs)
+        if cluster is not None:
+            pulumi.set(__self__, "cluster", cluster)
+        if secrets is not None:
+            pulumi.set(__self__, "secrets", secrets)
+        if trustdinfo is not None:
+            pulumi.set(__self__, "trustdinfo", trustdinfo)
+
+    @property
+    @pulumi.getter
+    def certs(self) -> Optional[pulumi.Input['SecretsMachineSecretsCertsArgs']]:
+        return pulumi.get(self, "certs")
+
+    @certs.setter
+    def certs(self, value: Optional[pulumi.Input['SecretsMachineSecretsCertsArgs']]):
+        pulumi.set(self, "certs", value)
+
+    @property
+    @pulumi.getter
+    def cluster(self) -> Optional[pulumi.Input['SecretsMachineSecretsClusterArgs']]:
+        """
+        The cluster secrets
+        """
+        return pulumi.get(self, "cluster")
+
+    @cluster.setter
+    def cluster(self, value: Optional[pulumi.Input['SecretsMachineSecretsClusterArgs']]):
+        pulumi.set(self, "cluster", value)
+
+    @property
+    @pulumi.getter
+    def secrets(self) -> Optional[pulumi.Input['SecretsMachineSecretsSecretsArgs']]:
+        """
+        kubernetes cluster secrets
+        """
+        return pulumi.get(self, "secrets")
+
+    @secrets.setter
+    def secrets(self, value: Optional[pulumi.Input['SecretsMachineSecretsSecretsArgs']]):
+        pulumi.set(self, "secrets", value)
+
+    @property
+    @pulumi.getter
+    def trustdinfo(self) -> Optional[pulumi.Input['SecretsMachineSecretsTrustdinfoArgs']]:
+        """
+        trustd secrets
+        """
+        return pulumi.get(self, "trustdinfo")
+
+    @trustdinfo.setter
+    def trustdinfo(self, value: Optional[pulumi.Input['SecretsMachineSecretsTrustdinfoArgs']]):
+        pulumi.set(self, "trustdinfo", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsCertsArgs:
+    def __init__(__self__, *,
+                 etcd: Optional[pulumi.Input['SecretsMachineSecretsCertsEtcdArgs']] = None,
+                 k8s: Optional[pulumi.Input['SecretsMachineSecretsCertsK8sArgs']] = None,
+                 k8s_aggregator: Optional[pulumi.Input['SecretsMachineSecretsCertsK8sAggregatorArgs']] = None,
+                 k8s_serviceaccount: Optional[pulumi.Input['SecretsMachineSecretsCertsK8sServiceaccountArgs']] = None,
+                 os: Optional[pulumi.Input['SecretsMachineSecretsCertsOsArgs']] = None):
+        """
+        :param pulumi.Input['SecretsMachineSecretsCertsEtcdArgs'] etcd: The certificate and key pair
+        :param pulumi.Input['SecretsMachineSecretsCertsK8sArgs'] k8s: The certificate and key pair
+        :param pulumi.Input['SecretsMachineSecretsCertsK8sAggregatorArgs'] k8s_aggregator: The certificate and key pair
+        :param pulumi.Input['SecretsMachineSecretsCertsK8sServiceaccountArgs'] k8s_serviceaccount: The service account secrets
+        :param pulumi.Input['SecretsMachineSecretsCertsOsArgs'] os: The certificate and key pair
+        """
+        if etcd is not None:
+            pulumi.set(__self__, "etcd", etcd)
+        if k8s is not None:
+            pulumi.set(__self__, "k8s", k8s)
+        if k8s_aggregator is not None:
+            pulumi.set(__self__, "k8s_aggregator", k8s_aggregator)
+        if k8s_serviceaccount is not None:
+            pulumi.set(__self__, "k8s_serviceaccount", k8s_serviceaccount)
+        if os is not None:
+            pulumi.set(__self__, "os", os)
+
+    @property
+    @pulumi.getter
+    def etcd(self) -> Optional[pulumi.Input['SecretsMachineSecretsCertsEtcdArgs']]:
+        """
+        The certificate and key pair
+        """
+        return pulumi.get(self, "etcd")
+
+    @etcd.setter
+    def etcd(self, value: Optional[pulumi.Input['SecretsMachineSecretsCertsEtcdArgs']]):
+        pulumi.set(self, "etcd", value)
+
+    @property
+    @pulumi.getter
+    def k8s(self) -> Optional[pulumi.Input['SecretsMachineSecretsCertsK8sArgs']]:
+        """
+        The certificate and key pair
+        """
+        return pulumi.get(self, "k8s")
+
+    @k8s.setter
+    def k8s(self, value: Optional[pulumi.Input['SecretsMachineSecretsCertsK8sArgs']]):
+        pulumi.set(self, "k8s", value)
+
+    @property
+    @pulumi.getter(name="k8sAggregator")
+    def k8s_aggregator(self) -> Optional[pulumi.Input['SecretsMachineSecretsCertsK8sAggregatorArgs']]:
+        """
+        The certificate and key pair
+        """
+        return pulumi.get(self, "k8s_aggregator")
+
+    @k8s_aggregator.setter
+    def k8s_aggregator(self, value: Optional[pulumi.Input['SecretsMachineSecretsCertsK8sAggregatorArgs']]):
+        pulumi.set(self, "k8s_aggregator", value)
+
+    @property
+    @pulumi.getter(name="k8sServiceaccount")
+    def k8s_serviceaccount(self) -> Optional[pulumi.Input['SecretsMachineSecretsCertsK8sServiceaccountArgs']]:
+        """
+        The service account secrets
+        """
+        return pulumi.get(self, "k8s_serviceaccount")
+
+    @k8s_serviceaccount.setter
+    def k8s_serviceaccount(self, value: Optional[pulumi.Input['SecretsMachineSecretsCertsK8sServiceaccountArgs']]):
+        pulumi.set(self, "k8s_serviceaccount", value)
+
+    @property
+    @pulumi.getter
+    def os(self) -> Optional[pulumi.Input['SecretsMachineSecretsCertsOsArgs']]:
+        """
+        The certificate and key pair
+        """
+        return pulumi.get(self, "os")
+
+    @os.setter
+    def os(self, value: Optional[pulumi.Input['SecretsMachineSecretsCertsOsArgs']]):
+        pulumi.set(self, "os", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsCertsEtcdArgs:
+    def __init__(__self__, *,
+                 cert: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cert: certificate data
+        :param pulumi.Input[str] key: key data
+        """
+        if cert is not None:
+            pulumi.set(__self__, "cert", cert)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+
+    @property
+    @pulumi.getter
+    def cert(self) -> Optional[pulumi.Input[str]]:
+        """
+        certificate data
+        """
+        return pulumi.get(self, "cert")
+
+    @cert.setter
+    def cert(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key data
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsCertsK8sArgs:
+    def __init__(__self__, *,
+                 cert: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cert: certificate data
+        :param pulumi.Input[str] key: key data
+        """
+        if cert is not None:
+            pulumi.set(__self__, "cert", cert)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+
+    @property
+    @pulumi.getter
+    def cert(self) -> Optional[pulumi.Input[str]]:
+        """
+        certificate data
+        """
+        return pulumi.get(self, "cert")
+
+    @cert.setter
+    def cert(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key data
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsCertsK8sAggregatorArgs:
+    def __init__(__self__, *,
+                 cert: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cert: certificate data
+        :param pulumi.Input[str] key: key data
+        """
+        if cert is not None:
+            pulumi.set(__self__, "cert", cert)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+
+    @property
+    @pulumi.getter
+    def cert(self) -> Optional[pulumi.Input[str]]:
+        """
+        certificate data
+        """
+        return pulumi.get(self, "cert")
+
+    @cert.setter
+    def cert(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key data
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsCertsK8sServiceaccountArgs:
+    def __init__(__self__, *,
+                 key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: key data
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key data
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsCertsOsArgs:
+    def __init__(__self__, *,
+                 cert: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cert: certificate data
+        :param pulumi.Input[str] key: key data
+        """
+        if cert is not None:
+            pulumi.set(__self__, "cert", cert)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+
+    @property
+    @pulumi.getter
+    def cert(self) -> Optional[pulumi.Input[str]]:
+        """
+        certificate data
+        """
+        return pulumi.get(self, "cert")
+
+    @cert.setter
+    def cert(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key data
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsClusterArgs:
+    def __init__(__self__, *,
+                 id: Optional[pulumi.Input[str]] = None,
+                 secret: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] id: The cluster ID
+        :param pulumi.Input[str] secret: The cluster secret
+        """
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if secret is not None:
+            pulumi.set(__self__, "secret", secret)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The cluster ID
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter
+    def secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The cluster secret
+        """
+        return pulumi.get(self, "secret")
+
+    @secret.setter
+    def secret(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "secret", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsSecretsArgs:
+    def __init__(__self__, *,
+                 aescbc_encryption_secret: Optional[pulumi.Input[str]] = None,
+                 bootstrap_token: Optional[pulumi.Input[str]] = None,
+                 secretbox_encryption_secret: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] aescbc_encryption_secret: The AES-CBC encryption secret
+        :param pulumi.Input[str] bootstrap_token: The bootstrap token
+        :param pulumi.Input[str] secretbox_encryption_secret: The secretbox encryption secret
+        """
+        if aescbc_encryption_secret is not None:
+            pulumi.set(__self__, "aescbc_encryption_secret", aescbc_encryption_secret)
+        if bootstrap_token is not None:
+            pulumi.set(__self__, "bootstrap_token", bootstrap_token)
+        if secretbox_encryption_secret is not None:
+            pulumi.set(__self__, "secretbox_encryption_secret", secretbox_encryption_secret)
+
+    @property
+    @pulumi.getter(name="aescbcEncryptionSecret")
+    def aescbc_encryption_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The AES-CBC encryption secret
+        """
+        return pulumi.get(self, "aescbc_encryption_secret")
+
+    @aescbc_encryption_secret.setter
+    def aescbc_encryption_secret(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "aescbc_encryption_secret", value)
+
+    @property
+    @pulumi.getter(name="bootstrapToken")
+    def bootstrap_token(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bootstrap token
+        """
+        return pulumi.get(self, "bootstrap_token")
+
+    @bootstrap_token.setter
+    def bootstrap_token(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bootstrap_token", value)
+
+    @property
+    @pulumi.getter(name="secretboxEncryptionSecret")
+    def secretbox_encryption_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The secretbox encryption secret
+        """
+        return pulumi.get(self, "secretbox_encryption_secret")
+
+    @secretbox_encryption_secret.setter
+    def secretbox_encryption_secret(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "secretbox_encryption_secret", value)
+
+
+@pulumi.input_type
+class SecretsMachineSecretsTrustdinfoArgs:
+    def __init__(__self__, *,
+                 token: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] token: The trustd token
+        """
+        if token is not None:
+            pulumi.set(__self__, "token", token)
+
+    @property
+    @pulumi.getter
+    def token(self) -> Optional[pulumi.Input[str]]:
+        """
+        The trustd token
+        """
+        return pulumi.get(self, "token")
+
+    @token.setter
+    def token(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "token", value)
+
+
+@pulumi.input_type
+class GetConfigurationMachineSecretsArgs:
+    def __init__(__self__, *,
+                 certs: 'GetConfigurationMachineSecretsCertsArgs',
+                 cluster: 'GetConfigurationMachineSecretsClusterArgs',
+                 secrets: 'GetConfigurationMachineSecretsSecretsArgs',
+                 trustdinfo: 'GetConfigurationMachineSecretsTrustdinfoArgs'):
+        """
+        :param 'GetConfigurationMachineSecretsCertsArgs' certs: The certs for the talos kubernetes cluster
+        :param 'GetConfigurationMachineSecretsClusterArgs' cluster: The cluster secrets
+        :param 'GetConfigurationMachineSecretsSecretsArgs' secrets: The secrets for the talos kubernetes cluster
+        :param 'GetConfigurationMachineSecretsTrustdinfoArgs' trustdinfo: The trustd info for the talos kubernetes cluster
+        """
+        pulumi.set(__self__, "certs", certs)
+        pulumi.set(__self__, "cluster", cluster)
+        pulumi.set(__self__, "secrets", secrets)
+        pulumi.set(__self__, "trustdinfo", trustdinfo)
+
+    @property
+    @pulumi.getter
+    def certs(self) -> 'GetConfigurationMachineSecretsCertsArgs':
+        """
+        The certs for the talos kubernetes cluster
+        """
+        return pulumi.get(self, "certs")
+
+    @certs.setter
+    def certs(self, value: 'GetConfigurationMachineSecretsCertsArgs'):
+        pulumi.set(self, "certs", value)
+
+    @property
+    @pulumi.getter
+    def cluster(self) -> 'GetConfigurationMachineSecretsClusterArgs':
+        """
+        The cluster secrets
+        """
+        return pulumi.get(self, "cluster")
+
+    @cluster.setter
+    def cluster(self, value: 'GetConfigurationMachineSecretsClusterArgs'):
+        pulumi.set(self, "cluster", value)
+
+    @property
+    @pulumi.getter
+    def secrets(self) -> 'GetConfigurationMachineSecretsSecretsArgs':
+        """
+        The secrets for the talos kubernetes cluster
+        """
+        return pulumi.get(self, "secrets")
+
+    @secrets.setter
+    def secrets(self, value: 'GetConfigurationMachineSecretsSecretsArgs'):
+        pulumi.set(self, "secrets", value)
+
+    @property
+    @pulumi.getter
+    def trustdinfo(self) -> 'GetConfigurationMachineSecretsTrustdinfoArgs':
+        """
+        The trustd info for the talos kubernetes cluster
+        """
+        return pulumi.get(self, "trustdinfo")
+
+    @trustdinfo.setter
+    def trustdinfo(self, value: 'GetConfigurationMachineSecretsTrustdinfoArgs'):
+        pulumi.set(self, "trustdinfo", value)
+
+
+@pulumi.input_type
+class GetConfigurationMachineSecretsCertsArgs:
+    def __init__(__self__, *,
+                 etcd: 'GetConfigurationMachineSecretsCertsEtcdArgs',
+                 k8s: 'GetConfigurationMachineSecretsCertsK8sArgs',
+                 k8s_aggregator: 'GetConfigurationMachineSecretsCertsK8sAggregatorArgs',
+                 k8s_serviceaccount: 'GetConfigurationMachineSecretsCertsK8sServiceaccountArgs',
+                 os: 'GetConfigurationMachineSecretsCertsOsArgs'):
+        """
+        :param 'GetConfigurationMachineSecretsCertsEtcdArgs' etcd: The certificate and key pair
+        :param 'GetConfigurationMachineSecretsCertsK8sArgs' k8s: The certificate and key pair
+        :param 'GetConfigurationMachineSecretsCertsK8sAggregatorArgs' k8s_aggregator: The certificate and key pair
+        :param 'GetConfigurationMachineSecretsCertsOsArgs' os: The certificate and key pair
+        """
+        pulumi.set(__self__, "etcd", etcd)
+        pulumi.set(__self__, "k8s", k8s)
+        pulumi.set(__self__, "k8s_aggregator", k8s_aggregator)
+        pulumi.set(__self__, "k8s_serviceaccount", k8s_serviceaccount)
+        pulumi.set(__self__, "os", os)
+
+    @property
+    @pulumi.getter
+    def etcd(self) -> 'GetConfigurationMachineSecretsCertsEtcdArgs':
+        """
+        The certificate and key pair
+        """
+        return pulumi.get(self, "etcd")
+
+    @etcd.setter
+    def etcd(self, value: 'GetConfigurationMachineSecretsCertsEtcdArgs'):
+        pulumi.set(self, "etcd", value)
+
+    @property
+    @pulumi.getter
+    def k8s(self) -> 'GetConfigurationMachineSecretsCertsK8sArgs':
+        """
+        The certificate and key pair
+        """
+        return pulumi.get(self, "k8s")
+
+    @k8s.setter
+    def k8s(self, value: 'GetConfigurationMachineSecretsCertsK8sArgs'):
+        pulumi.set(self, "k8s", value)
+
+    @property
+    @pulumi.getter(name="k8sAggregator")
+    def k8s_aggregator(self) -> 'GetConfigurationMachineSecretsCertsK8sAggregatorArgs':
+        """
+        The certificate and key pair
+        """
+        return pulumi.get(self, "k8s_aggregator")
+
+    @k8s_aggregator.setter
+    def k8s_aggregator(self, value: 'GetConfigurationMachineSecretsCertsK8sAggregatorArgs'):
+        pulumi.set(self, "k8s_aggregator", value)
+
+    @property
+    @pulumi.getter(name="k8sServiceaccount")
+    def k8s_serviceaccount(self) -> 'GetConfigurationMachineSecretsCertsK8sServiceaccountArgs':
+        return pulumi.get(self, "k8s_serviceaccount")
+
+    @k8s_serviceaccount.setter
+    def k8s_serviceaccount(self, value: 'GetConfigurationMachineSecretsCertsK8sServiceaccountArgs'):
+        pulumi.set(self, "k8s_serviceaccount", value)
+
+    @property
+    @pulumi.getter
+    def os(self) -> 'GetConfigurationMachineSecretsCertsOsArgs':
+        """
+        The certificate and key pair
+        """
+        return pulumi.get(self, "os")
+
+    @os.setter
+    def os(self, value: 'GetConfigurationMachineSecretsCertsOsArgs'):
+        pulumi.set(self, "os", value)
+
+
+@pulumi.input_type
+class GetConfigurationMachineSecretsCertsEtcdArgs:
     def __init__(__self__, *,
                  cert: str,
                  key: str):
         """
-        A Machine Secrets Certificate
-        :param str cert: Certificate
-        :param str key: Private Key
+        :param str cert: certificate data
+        :param str key: key data
         """
         pulumi.set(__self__, "cert", cert)
         pulumi.set(__self__, "key", key)
@@ -111,7 +872,7 @@ class CertificateArgs:
     @pulumi.getter
     def cert(self) -> str:
         """
-        Certificate
+        certificate data
         """
         return pulumi.get(self, "cert")
 
@@ -123,7 +884,7 @@ class CertificateArgs:
     @pulumi.getter
     def key(self) -> str:
         """
-        Private Key
+        key data
         """
         return pulumi.get(self, "key")
 
@@ -133,231 +894,146 @@ class CertificateArgs:
 
 
 @pulumi.input_type
-class CertificatesArgs:
+class GetConfigurationMachineSecretsCertsK8sArgs:
     def __init__(__self__, *,
-                 etcd: 'CertificateArgs',
-                 k8s: 'CertificateArgs',
-                 k8s_aggregator: 'CertificateArgs',
-                 k8s_serviceaccount: 'KeyArgs',
-                 os: 'CertificateArgs'):
+                 cert: str,
+                 key: str):
         """
-        A complete Machine Secrets Certificates configuration
-        """
-        pulumi.set(__self__, "etcd", etcd)
-        pulumi.set(__self__, "k8s", k8s)
-        pulumi.set(__self__, "k8s_aggregator", k8s_aggregator)
-        pulumi.set(__self__, "k8s_serviceaccount", k8s_serviceaccount)
-        pulumi.set(__self__, "os", os)
-
-    @property
-    @pulumi.getter
-    def etcd(self) -> 'CertificateArgs':
-        return pulumi.get(self, "etcd")
-
-    @etcd.setter
-    def etcd(self, value: 'CertificateArgs'):
-        pulumi.set(self, "etcd", value)
-
-    @property
-    @pulumi.getter
-    def k8s(self) -> 'CertificateArgs':
-        return pulumi.get(self, "k8s")
-
-    @k8s.setter
-    def k8s(self, value: 'CertificateArgs'):
-        pulumi.set(self, "k8s", value)
-
-    @property
-    @pulumi.getter(name="k8sAggregator")
-    def k8s_aggregator(self) -> 'CertificateArgs':
-        return pulumi.get(self, "k8s_aggregator")
-
-    @k8s_aggregator.setter
-    def k8s_aggregator(self, value: 'CertificateArgs'):
-        pulumi.set(self, "k8s_aggregator", value)
-
-    @property
-    @pulumi.getter(name="k8sServiceaccount")
-    def k8s_serviceaccount(self) -> 'KeyArgs':
-        return pulumi.get(self, "k8s_serviceaccount")
-
-    @k8s_serviceaccount.setter
-    def k8s_serviceaccount(self, value: 'KeyArgs'):
-        pulumi.set(self, "k8s_serviceaccount", value)
-
-    @property
-    @pulumi.getter
-    def os(self) -> 'CertificateArgs':
-        return pulumi.get(self, "os")
-
-    @os.setter
-    def os(self, value: 'CertificateArgs'):
-        pulumi.set(self, "os", value)
-
-
-@pulumi.input_type
-class CertificatesArgs:
-    def __init__(__self__, *,
-                 etcd: pulumi.Input['CertificateArgs'],
-                 k8s: pulumi.Input['CertificateArgs'],
-                 k8s_aggregator: pulumi.Input['CertificateArgs'],
-                 k8s_serviceaccount: pulumi.Input['KeyArgs'],
-                 os: pulumi.Input['CertificateArgs']):
-        """
-        A complete Machine Secrets Certificates configuration
-        """
-        pulumi.set(__self__, "etcd", etcd)
-        pulumi.set(__self__, "k8s", k8s)
-        pulumi.set(__self__, "k8s_aggregator", k8s_aggregator)
-        pulumi.set(__self__, "k8s_serviceaccount", k8s_serviceaccount)
-        pulumi.set(__self__, "os", os)
-
-    @property
-    @pulumi.getter
-    def etcd(self) -> pulumi.Input['CertificateArgs']:
-        return pulumi.get(self, "etcd")
-
-    @etcd.setter
-    def etcd(self, value: pulumi.Input['CertificateArgs']):
-        pulumi.set(self, "etcd", value)
-
-    @property
-    @pulumi.getter
-    def k8s(self) -> pulumi.Input['CertificateArgs']:
-        return pulumi.get(self, "k8s")
-
-    @k8s.setter
-    def k8s(self, value: pulumi.Input['CertificateArgs']):
-        pulumi.set(self, "k8s", value)
-
-    @property
-    @pulumi.getter(name="k8sAggregator")
-    def k8s_aggregator(self) -> pulumi.Input['CertificateArgs']:
-        return pulumi.get(self, "k8s_aggregator")
-
-    @k8s_aggregator.setter
-    def k8s_aggregator(self, value: pulumi.Input['CertificateArgs']):
-        pulumi.set(self, "k8s_aggregator", value)
-
-    @property
-    @pulumi.getter(name="k8sServiceaccount")
-    def k8s_serviceaccount(self) -> pulumi.Input['KeyArgs']:
-        return pulumi.get(self, "k8s_serviceaccount")
-
-    @k8s_serviceaccount.setter
-    def k8s_serviceaccount(self, value: pulumi.Input['KeyArgs']):
-        pulumi.set(self, "k8s_serviceaccount", value)
-
-    @property
-    @pulumi.getter
-    def os(self) -> pulumi.Input['CertificateArgs']:
-        return pulumi.get(self, "os")
-
-    @os.setter
-    def os(self, value: pulumi.Input['CertificateArgs']):
-        pulumi.set(self, "os", value)
-
-
-@pulumi.input_type
-class CertificateArgs:
-    def __init__(__self__, *,
-                 cert: pulumi.Input[str],
-                 key: pulumi.Input[str]):
-        """
-        A Machine Secrets Certificate
-        :param pulumi.Input[str] cert: Certificate
-        :param pulumi.Input[str] key: Private Key
+        :param str cert: certificate data
+        :param str key: key data
         """
         pulumi.set(__self__, "cert", cert)
         pulumi.set(__self__, "key", key)
 
     @property
     @pulumi.getter
-    def cert(self) -> pulumi.Input[str]:
+    def cert(self) -> str:
         """
-        Certificate
+        certificate data
         """
         return pulumi.get(self, "cert")
 
     @cert.setter
-    def cert(self, value: pulumi.Input[str]):
+    def cert(self, value: str):
         pulumi.set(self, "cert", value)
 
     @property
     @pulumi.getter
-    def key(self) -> pulumi.Input[str]:
+    def key(self) -> str:
         """
-        Private Key
+        key data
         """
         return pulumi.get(self, "key")
 
     @key.setter
-    def key(self, value: pulumi.Input[str]):
+    def key(self, value: str):
         pulumi.set(self, "key", value)
 
 
 @pulumi.input_type
-class ClientConfigurationArgs:
+class GetConfigurationMachineSecretsCertsK8sAggregatorArgs:
     def __init__(__self__, *,
-                 ca_certificate: pulumi.Input[str],
-                 client_certificate: pulumi.Input[str],
-                 client_key: pulumi.Input[str]):
+                 cert: str,
+                 key: str):
         """
-        A Client Configuration
-        :param pulumi.Input[str] ca_certificate: The client CA certificate
-        :param pulumi.Input[str] client_certificate: The client certificate
-        :param pulumi.Input[str] client_key: The client private key
+        :param str cert: certificate data
+        :param str key: key data
         """
-        pulumi.set(__self__, "ca_certificate", ca_certificate)
-        pulumi.set(__self__, "client_certificate", client_certificate)
-        pulumi.set(__self__, "client_key", client_key)
+        pulumi.set(__self__, "cert", cert)
+        pulumi.set(__self__, "key", key)
 
     @property
-    @pulumi.getter(name="caCertificate")
-    def ca_certificate(self) -> pulumi.Input[str]:
+    @pulumi.getter
+    def cert(self) -> str:
         """
-        The client CA certificate
+        certificate data
         """
-        return pulumi.get(self, "ca_certificate")
+        return pulumi.get(self, "cert")
 
-    @ca_certificate.setter
-    def ca_certificate(self, value: pulumi.Input[str]):
-        pulumi.set(self, "ca_certificate", value)
-
-    @property
-    @pulumi.getter(name="clientCertificate")
-    def client_certificate(self) -> pulumi.Input[str]:
-        """
-        The client certificate
-        """
-        return pulumi.get(self, "client_certificate")
-
-    @client_certificate.setter
-    def client_certificate(self, value: pulumi.Input[str]):
-        pulumi.set(self, "client_certificate", value)
+    @cert.setter
+    def cert(self, value: str):
+        pulumi.set(self, "cert", value)
 
     @property
-    @pulumi.getter(name="clientKey")
-    def client_key(self) -> pulumi.Input[str]:
+    @pulumi.getter
+    def key(self) -> str:
         """
-        The client private key
+        key data
         """
-        return pulumi.get(self, "client_key")
+        return pulumi.get(self, "key")
 
-    @client_key.setter
-    def client_key(self, value: pulumi.Input[str]):
-        pulumi.set(self, "client_key", value)
+    @key.setter
+    def key(self, value: str):
+        pulumi.set(self, "key", value)
 
 
 @pulumi.input_type
-class ClusterArgs:
+class GetConfigurationMachineSecretsCertsK8sServiceaccountArgs:
+    def __init__(__self__, *,
+                 key: str):
+        """
+        :param str key: key data
+        """
+        pulumi.set(__self__, "key", key)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        key data
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: str):
+        pulumi.set(self, "key", value)
+
+
+@pulumi.input_type
+class GetConfigurationMachineSecretsCertsOsArgs:
+    def __init__(__self__, *,
+                 cert: str,
+                 key: str):
+        """
+        :param str cert: certificate data
+        :param str key: key data
+        """
+        pulumi.set(__self__, "cert", cert)
+        pulumi.set(__self__, "key", key)
+
+    @property
+    @pulumi.getter
+    def cert(self) -> str:
+        """
+        certificate data
+        """
+        return pulumi.get(self, "cert")
+
+    @cert.setter
+    def cert(self, value: str):
+        pulumi.set(self, "cert", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        key data
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: str):
+        pulumi.set(self, "key", value)
+
+
+@pulumi.input_type
+class GetConfigurationMachineSecretsClusterArgs:
     def __init__(__self__, *,
                  id: str,
                  secret: str):
         """
-        A Machine Secrets Cluster Info
-        :param str id: Certificate
-        :param str secret: Private Key
+        :param str id: The cluster id
+        :param str secret: The cluster secret
         """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "secret", secret)
@@ -366,7 +1042,7 @@ class ClusterArgs:
     @pulumi.getter
     def id(self) -> str:
         """
-        Certificate
+        The cluster id
         """
         return pulumi.get(self, "id")
 
@@ -378,7 +1054,7 @@ class ClusterArgs:
     @pulumi.getter
     def secret(self) -> str:
         """
-        Private Key
+        The cluster secret
         """
         return pulumi.get(self, "secret")
 
@@ -388,97 +1064,12 @@ class ClusterArgs:
 
 
 @pulumi.input_type
-class ClusterArgs:
-    def __init__(__self__, *,
-                 id: pulumi.Input[str],
-                 secret: pulumi.Input[str]):
-        """
-        A Machine Secrets Cluster Info
-        :param pulumi.Input[str] id: Certificate
-        :param pulumi.Input[str] secret: Private Key
-        """
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "secret", secret)
-
-    @property
-    @pulumi.getter
-    def id(self) -> pulumi.Input[str]:
-        """
-        Certificate
-        """
-        return pulumi.get(self, "id")
-
-    @id.setter
-    def id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "id", value)
-
-    @property
-    @pulumi.getter
-    def secret(self) -> pulumi.Input[str]:
-        """
-        Private Key
-        """
-        return pulumi.get(self, "secret")
-
-    @secret.setter
-    def secret(self, value: pulumi.Input[str]):
-        pulumi.set(self, "secret", value)
-
-
-@pulumi.input_type
-class KeyArgs:
-    def __init__(__self__, *,
-                 key: str):
-        """
-        A Machine Secrets Private Key
-        :param str key: Private Key
-        """
-        pulumi.set(__self__, "key", key)
-
-    @property
-    @pulumi.getter
-    def key(self) -> str:
-        """
-        Private Key
-        """
-        return pulumi.get(self, "key")
-
-    @key.setter
-    def key(self, value: str):
-        pulumi.set(self, "key", value)
-
-
-@pulumi.input_type
-class KeyArgs:
-    def __init__(__self__, *,
-                 key: pulumi.Input[str]):
-        """
-        A Machine Secrets Private Key
-        :param pulumi.Input[str] key: Private Key
-        """
-        pulumi.set(__self__, "key", key)
-
-    @property
-    @pulumi.getter
-    def key(self) -> pulumi.Input[str]:
-        """
-        Private Key
-        """
-        return pulumi.get(self, "key")
-
-    @key.setter
-    def key(self, value: pulumi.Input[str]):
-        pulumi.set(self, "key", value)
-
-
-@pulumi.input_type
-class KubernetesSecretsArgs:
+class GetConfigurationMachineSecretsSecretsArgs:
     def __init__(__self__, *,
                  bootstrap_token: str,
                  secretbox_encryption_secret: str,
                  aescbc_encryption_secret: Optional[str] = None):
         """
-        A Machine Secrets Bootstrap data
         :param str bootstrap_token: The bootstrap token for the talos kubernetes cluster
         :param str secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
         :param str aescbc_encryption_secret: The aescbc encryption secret for the talos kubernetes cluster
@@ -526,169 +1117,10 @@ class KubernetesSecretsArgs:
 
 
 @pulumi.input_type
-class KubernetesSecretsArgs:
-    def __init__(__self__, *,
-                 bootstrap_token: pulumi.Input[str],
-                 secretbox_encryption_secret: pulumi.Input[str],
-                 aescbc_encryption_secret: Optional[pulumi.Input[str]] = None):
-        """
-        A Machine Secrets Bootstrap data
-        :param pulumi.Input[str] bootstrap_token: The bootstrap token for the talos kubernetes cluster
-        :param pulumi.Input[str] secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
-        :param pulumi.Input[str] aescbc_encryption_secret: The aescbc encryption secret for the talos kubernetes cluster
-        """
-        pulumi.set(__self__, "bootstrap_token", bootstrap_token)
-        pulumi.set(__self__, "secretbox_encryption_secret", secretbox_encryption_secret)
-        if aescbc_encryption_secret is not None:
-            pulumi.set(__self__, "aescbc_encryption_secret", aescbc_encryption_secret)
-
-    @property
-    @pulumi.getter(name="bootstrapToken")
-    def bootstrap_token(self) -> pulumi.Input[str]:
-        """
-        The bootstrap token for the talos kubernetes cluster
-        """
-        return pulumi.get(self, "bootstrap_token")
-
-    @bootstrap_token.setter
-    def bootstrap_token(self, value: pulumi.Input[str]):
-        pulumi.set(self, "bootstrap_token", value)
-
-    @property
-    @pulumi.getter(name="secretboxEncryptionSecret")
-    def secretbox_encryption_secret(self) -> pulumi.Input[str]:
-        """
-        The secretbox encryption secret for the talos kubernetes cluster
-        """
-        return pulumi.get(self, "secretbox_encryption_secret")
-
-    @secretbox_encryption_secret.setter
-    def secretbox_encryption_secret(self, value: pulumi.Input[str]):
-        pulumi.set(self, "secretbox_encryption_secret", value)
-
-    @property
-    @pulumi.getter(name="aescbcEncryptionSecret")
-    def aescbc_encryption_secret(self) -> Optional[pulumi.Input[str]]:
-        """
-        The aescbc encryption secret for the talos kubernetes cluster
-        """
-        return pulumi.get(self, "aescbc_encryption_secret")
-
-    @aescbc_encryption_secret.setter
-    def aescbc_encryption_secret(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "aescbc_encryption_secret", value)
-
-
-@pulumi.input_type
-class MachineSecretsArgs:
-    def __init__(__self__, *,
-                 certs: 'CertificatesArgs',
-                 cluster: 'ClusterArgs',
-                 secrets: 'KubernetesSecretsArgs',
-                 trustdinfo: 'TrustdInfoArgs'):
-        """
-        A complete Machine Secrets configuration
-        """
-        pulumi.set(__self__, "certs", certs)
-        pulumi.set(__self__, "cluster", cluster)
-        pulumi.set(__self__, "secrets", secrets)
-        pulumi.set(__self__, "trustdinfo", trustdinfo)
-
-    @property
-    @pulumi.getter
-    def certs(self) -> 'CertificatesArgs':
-        return pulumi.get(self, "certs")
-
-    @certs.setter
-    def certs(self, value: 'CertificatesArgs'):
-        pulumi.set(self, "certs", value)
-
-    @property
-    @pulumi.getter
-    def cluster(self) -> 'ClusterArgs':
-        return pulumi.get(self, "cluster")
-
-    @cluster.setter
-    def cluster(self, value: 'ClusterArgs'):
-        pulumi.set(self, "cluster", value)
-
-    @property
-    @pulumi.getter
-    def secrets(self) -> 'KubernetesSecretsArgs':
-        return pulumi.get(self, "secrets")
-
-    @secrets.setter
-    def secrets(self, value: 'KubernetesSecretsArgs'):
-        pulumi.set(self, "secrets", value)
-
-    @property
-    @pulumi.getter
-    def trustdinfo(self) -> 'TrustdInfoArgs':
-        return pulumi.get(self, "trustdinfo")
-
-    @trustdinfo.setter
-    def trustdinfo(self, value: 'TrustdInfoArgs'):
-        pulumi.set(self, "trustdinfo", value)
-
-
-@pulumi.input_type
-class MachineSecretsArgs:
-    def __init__(__self__, *,
-                 certs: pulumi.Input['CertificatesArgs'],
-                 cluster: pulumi.Input['ClusterArgs'],
-                 secrets: pulumi.Input['KubernetesSecretsArgs'],
-                 trustdinfo: pulumi.Input['TrustdInfoArgs']):
-        """
-        A complete Machine Secrets configuration
-        """
-        pulumi.set(__self__, "certs", certs)
-        pulumi.set(__self__, "cluster", cluster)
-        pulumi.set(__self__, "secrets", secrets)
-        pulumi.set(__self__, "trustdinfo", trustdinfo)
-
-    @property
-    @pulumi.getter
-    def certs(self) -> pulumi.Input['CertificatesArgs']:
-        return pulumi.get(self, "certs")
-
-    @certs.setter
-    def certs(self, value: pulumi.Input['CertificatesArgs']):
-        pulumi.set(self, "certs", value)
-
-    @property
-    @pulumi.getter
-    def cluster(self) -> pulumi.Input['ClusterArgs']:
-        return pulumi.get(self, "cluster")
-
-    @cluster.setter
-    def cluster(self, value: pulumi.Input['ClusterArgs']):
-        pulumi.set(self, "cluster", value)
-
-    @property
-    @pulumi.getter
-    def secrets(self) -> pulumi.Input['KubernetesSecretsArgs']:
-        return pulumi.get(self, "secrets")
-
-    @secrets.setter
-    def secrets(self, value: pulumi.Input['KubernetesSecretsArgs']):
-        pulumi.set(self, "secrets", value)
-
-    @property
-    @pulumi.getter
-    def trustdinfo(self) -> pulumi.Input['TrustdInfoArgs']:
-        return pulumi.get(self, "trustdinfo")
-
-    @trustdinfo.setter
-    def trustdinfo(self, value: pulumi.Input['TrustdInfoArgs']):
-        pulumi.set(self, "trustdinfo", value)
-
-
-@pulumi.input_type
-class TrustdInfoArgs:
+class GetConfigurationMachineSecretsTrustdinfoArgs:
     def __init__(__self__, *,
                  token: str):
         """
-        A Machine Secrets Trust daemon info
         :param str token: The trustd token for the talos kubernetes cluster
         """
         pulumi.set(__self__, "token", token)
@@ -703,29 +1135,6 @@ class TrustdInfoArgs:
 
     @token.setter
     def token(self, value: str):
-        pulumi.set(self, "token", value)
-
-
-@pulumi.input_type
-class TrustdInfoArgs:
-    def __init__(__self__, *,
-                 token: pulumi.Input[str]):
-        """
-        A Machine Secrets Trust daemon info
-        :param pulumi.Input[str] token: The trustd token for the talos kubernetes cluster
-        """
-        pulumi.set(__self__, "token", token)
-
-    @property
-    @pulumi.getter
-    def token(self) -> pulumi.Input[str]:
-        """
-        The trustd token for the talos kubernetes cluster
-        """
-        return pulumi.get(self, "token")
-
-    @token.setter
-    def token(self, value: pulumi.Input[str]):
         pulumi.set(self, "token", value)
 
 
