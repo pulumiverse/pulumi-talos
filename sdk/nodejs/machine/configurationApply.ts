@@ -44,7 +44,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
     /**
      * The client configuration data
      */
-    public readonly clientConfiguration!: pulumi.Output<outputs.machine.ClientConfiguration>;
+    public readonly clientConfiguration!: pulumi.Output<outputs.machine.ConfigurationApplyClientConfiguration>;
     /**
      * The list of config patches to apply
      */
@@ -65,7 +65,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
      * The name of the node to bootstrap
      */
     public readonly node!: pulumi.Output<string>;
-    public readonly timeouts!: pulumi.Output<outputs.machine.Timeout | undefined>;
+    public readonly timeouts!: pulumi.Output<outputs.machine.ConfigurationApplyTimeouts | undefined>;
 
     /**
      * Create a ConfigurationApply resource with the given unique name, arguments, and options.
@@ -126,7 +126,7 @@ export interface ConfigurationApplyState {
     /**
      * The client configuration data
      */
-    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration>;
+    clientConfiguration?: pulumi.Input<inputs.machine.ConfigurationApplyClientConfiguration>;
     /**
      * The list of config patches to apply
      */
@@ -147,7 +147,7 @@ export interface ConfigurationApplyState {
      * The name of the node to bootstrap
      */
     node?: pulumi.Input<string>;
-    timeouts?: pulumi.Input<inputs.machine.Timeout>;
+    timeouts?: pulumi.Input<inputs.machine.ConfigurationApplyTimeouts>;
 }
 
 /**
@@ -161,7 +161,7 @@ export interface ConfigurationApplyArgs {
     /**
      * The client configuration data
      */
-    clientConfiguration: pulumi.Input<inputs.machine.ClientConfiguration>;
+    clientConfiguration: pulumi.Input<inputs.machine.ConfigurationApplyClientConfiguration>;
     /**
      * The list of config patches to apply
      */
@@ -178,5 +178,5 @@ export interface ConfigurationApplyArgs {
      * The name of the node to bootstrap
      */
     node: pulumi.Input<string>;
-    timeouts?: pulumi.Input<inputs.machine.Timeout>;
+    timeouts?: pulumi.Input<inputs.machine.ConfigurationApplyTimeouts>;
 }

@@ -57,11 +57,11 @@ export class Secrets extends pulumi.CustomResource {
     /**
      * The generated client configuration data
      */
-    public /*out*/ readonly clientConfiguration!: pulumi.Output<outputs.machine.ClientConfiguration>;
+    public /*out*/ readonly clientConfiguration!: pulumi.Output<outputs.machine.SecretsClientConfiguration>;
     /**
      * The secrets for the talos cluster
      */
-    public /*out*/ readonly machineSecrets!: pulumi.Output<outputs.machine.MachineSecrets>;
+    public /*out*/ readonly machineSecrets!: pulumi.Output<outputs.machine.SecretsMachineSecrets>;
     /**
      * The version of talos features to use in generated machine configuration
      */
@@ -101,11 +101,11 @@ export interface SecretsState {
     /**
      * The generated client configuration data
      */
-    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration>;
+    clientConfiguration?: pulumi.Input<inputs.machine.SecretsClientConfiguration>;
     /**
      * The secrets for the talos cluster
      */
-    machineSecrets?: pulumi.Input<inputs.machine.MachineSecretsArgs>;
+    machineSecrets?: pulumi.Input<inputs.machine.SecretsMachineSecrets>;
     /**
      * The version of talos features to use in generated machine configuration
      */

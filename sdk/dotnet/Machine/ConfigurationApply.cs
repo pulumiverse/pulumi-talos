@@ -26,7 +26,7 @@ namespace Pulumiverse.Talos.Machine
         /// The client configuration data
         /// </summary>
         [Output("clientConfiguration")]
-        public Output<Outputs.ClientConfiguration> ClientConfiguration { get; private set; } = null!;
+        public Output<Outputs.ConfigurationApplyClientConfiguration> ClientConfiguration { get; private set; } = null!;
 
         /// <summary>
         /// The list of config patches to apply
@@ -59,7 +59,7 @@ namespace Pulumiverse.Talos.Machine
         public Output<string> Node { get; private set; } = null!;
 
         [Output("timeouts")]
-        public Output<Outputs.Timeout?> Timeouts { get; private set; } = null!;
+        public Output<Outputs.ConfigurationApplyTimeouts?> Timeouts { get; private set; } = null!;
 
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Pulumiverse.Talos.Machine
         /// The client configuration data
         /// </summary>
         [Input("clientConfiguration", required: true)]
-        public Input<Inputs.ClientConfigurationArgs> ClientConfiguration { get; set; } = null!;
+        public Input<Inputs.ConfigurationApplyClientConfigurationArgs> ClientConfiguration { get; set; } = null!;
 
         [Input("configPatches")]
         private InputList<string>? _configPatches;
@@ -166,7 +166,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<string> Node { get; set; } = null!;
 
         [Input("timeouts")]
-        public Input<Inputs.TimeoutArgs>? Timeouts { get; set; }
+        public Input<Inputs.ConfigurationApplyTimeoutsArgs>? Timeouts { get; set; }
 
         public ConfigurationApplyArgs()
         {
@@ -186,7 +186,7 @@ namespace Pulumiverse.Talos.Machine
         /// The client configuration data
         /// </summary>
         [Input("clientConfiguration")]
-        public Input<Inputs.ClientConfigurationGetArgs>? ClientConfiguration { get; set; }
+        public Input<Inputs.ConfigurationApplyClientConfigurationGetArgs>? ClientConfiguration { get; set; }
 
         [Input("configPatches")]
         private InputList<string>? _configPatches;
@@ -245,7 +245,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<string>? Node { get; set; }
 
         [Input("timeouts")]
-        public Input<Inputs.TimeoutGetArgs>? Timeouts { get; set; }
+        public Input<Inputs.ConfigurationApplyTimeoutsGetArgs>? Timeouts { get; set; }
 
         public ConfigurationApplyState()
         {

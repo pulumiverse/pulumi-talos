@@ -74,7 +74,7 @@ export interface GetConfigurationArgs {
     /**
      * The secrets for the talos cluster
      */
-    machineSecrets: inputs.machine.MachineSecrets;
+    machineSecrets: inputs.machine.GetConfigurationMachineSecrets;
     /**
      * The type of machine to generate the configuration for
      */
@@ -124,7 +124,7 @@ export interface GetConfigurationResult {
     /**
      * The secrets for the talos cluster
      */
-    readonly machineSecrets: outputs.machine.MachineSecrets;
+    readonly machineSecrets: outputs.machine.GetConfigurationMachineSecrets;
     /**
      * The type of machine to generate the configuration for
      */
@@ -190,7 +190,7 @@ export interface GetConfigurationOutputArgs {
     /**
      * The secrets for the talos cluster
      */
-    machineSecrets: pulumi.Input<inputs.machine.MachineSecretsArgs>;
+    machineSecrets: pulumi.Input<inputs.machine.GetConfigurationMachineSecretsArgs>;
     /**
      * The type of machine to generate the configuration for
      */

@@ -69,7 +69,7 @@ type GetConfigurationArgs struct {
 	// The version of kubernetes to use
 	KubernetesVersion *string `pulumi:"kubernetesVersion"`
 	// The secrets for the talos cluster
-	MachineSecrets MachineSecrets `pulumi:"machineSecrets"`
+	MachineSecrets GetConfigurationMachineSecrets `pulumi:"machineSecrets"`
 	// The type of machine to generate the configuration for
 	MachineType string `pulumi:"machineType"`
 	// The version of talos features to use in generated machine configuration
@@ -95,7 +95,7 @@ type GetConfigurationResult struct {
 	// The generated machine configuration
 	MachineConfiguration string `pulumi:"machineConfiguration"`
 	// The secrets for the talos cluster
-	MachineSecrets MachineSecrets `pulumi:"machineSecrets"`
+	MachineSecrets GetConfigurationMachineSecrets `pulumi:"machineSecrets"`
 	// The type of machine to generate the configuration for
 	MachineType string `pulumi:"machineType"`
 	// The version of talos features to use in generated machine configuration
@@ -130,7 +130,7 @@ type GetConfigurationOutputArgs struct {
 	// The version of kubernetes to use
 	KubernetesVersion pulumi.StringPtrInput `pulumi:"kubernetesVersion"`
 	// The secrets for the talos cluster
-	MachineSecrets MachineSecretsInput `pulumi:"machineSecrets"`
+	MachineSecrets GetConfigurationMachineSecretsInput `pulumi:"machineSecrets"`
 	// The type of machine to generate the configuration for
 	MachineType pulumi.StringInput `pulumi:"machineType"`
 	// The version of talos features to use in generated machine configuration
@@ -197,8 +197,8 @@ func (o GetConfigurationResultOutput) MachineConfiguration() pulumi.StringOutput
 }
 
 // The secrets for the talos cluster
-func (o GetConfigurationResultOutput) MachineSecrets() MachineSecretsOutput {
-	return o.ApplyT(func(v GetConfigurationResult) MachineSecrets { return v.MachineSecrets }).(MachineSecretsOutput)
+func (o GetConfigurationResultOutput) MachineSecrets() GetConfigurationMachineSecretsOutput {
+	return o.ApplyT(func(v GetConfigurationResult) GetConfigurationMachineSecrets { return v.MachineSecrets }).(GetConfigurationMachineSecretsOutput)
 }
 
 // The type of machine to generate the configuration for

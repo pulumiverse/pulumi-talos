@@ -54,6 +54,47 @@ func (i BootstrapClientConfigurationArgs) ToBootstrapClientConfigurationOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(BootstrapClientConfigurationOutput)
 }
 
+func (i BootstrapClientConfigurationArgs) ToBootstrapClientConfigurationPtrOutput() BootstrapClientConfigurationPtrOutput {
+	return i.ToBootstrapClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i BootstrapClientConfigurationArgs) ToBootstrapClientConfigurationPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BootstrapClientConfigurationOutput).ToBootstrapClientConfigurationPtrOutputWithContext(ctx)
+}
+
+// BootstrapClientConfigurationPtrInput is an input type that accepts BootstrapClientConfigurationArgs, BootstrapClientConfigurationPtr and BootstrapClientConfigurationPtrOutput values.
+// You can construct a concrete instance of `BootstrapClientConfigurationPtrInput` via:
+//
+//	        BootstrapClientConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type BootstrapClientConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToBootstrapClientConfigurationPtrOutput() BootstrapClientConfigurationPtrOutput
+	ToBootstrapClientConfigurationPtrOutputWithContext(context.Context) BootstrapClientConfigurationPtrOutput
+}
+
+type bootstrapClientConfigurationPtrType BootstrapClientConfigurationArgs
+
+func BootstrapClientConfigurationPtr(v *BootstrapClientConfigurationArgs) BootstrapClientConfigurationPtrInput {
+	return (*bootstrapClientConfigurationPtrType)(v)
+}
+
+func (*bootstrapClientConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BootstrapClientConfiguration)(nil)).Elem()
+}
+
+func (i *bootstrapClientConfigurationPtrType) ToBootstrapClientConfigurationPtrOutput() BootstrapClientConfigurationPtrOutput {
+	return i.ToBootstrapClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *bootstrapClientConfigurationPtrType) ToBootstrapClientConfigurationPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BootstrapClientConfigurationPtrOutput)
+}
+
 type BootstrapClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (BootstrapClientConfigurationOutput) ElementType() reflect.Type {
@@ -66,6 +107,16 @@ func (o BootstrapClientConfigurationOutput) ToBootstrapClientConfigurationOutput
 
 func (o BootstrapClientConfigurationOutput) ToBootstrapClientConfigurationOutputWithContext(ctx context.Context) BootstrapClientConfigurationOutput {
 	return o
+}
+
+func (o BootstrapClientConfigurationOutput) ToBootstrapClientConfigurationPtrOutput() BootstrapClientConfigurationPtrOutput {
+	return o.ToBootstrapClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o BootstrapClientConfigurationOutput) ToBootstrapClientConfigurationPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BootstrapClientConfiguration) *BootstrapClientConfiguration {
+		return &v
+	}).(BootstrapClientConfigurationPtrOutput)
 }
 
 // The client CA certificate
@@ -81,6 +132,60 @@ func (o BootstrapClientConfigurationOutput) ClientCertificate() pulumi.StringOut
 // The client key
 func (o BootstrapClientConfigurationOutput) ClientKey() pulumi.StringOutput {
 	return o.ApplyT(func(v BootstrapClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
+}
+
+type BootstrapClientConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (BootstrapClientConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BootstrapClientConfiguration)(nil)).Elem()
+}
+
+func (o BootstrapClientConfigurationPtrOutput) ToBootstrapClientConfigurationPtrOutput() BootstrapClientConfigurationPtrOutput {
+	return o
+}
+
+func (o BootstrapClientConfigurationPtrOutput) ToBootstrapClientConfigurationPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationPtrOutput {
+	return o
+}
+
+func (o BootstrapClientConfigurationPtrOutput) Elem() BootstrapClientConfigurationOutput {
+	return o.ApplyT(func(v *BootstrapClientConfiguration) BootstrapClientConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret BootstrapClientConfiguration
+		return ret
+	}).(BootstrapClientConfigurationOutput)
+}
+
+// The client CA certificate
+func (o BootstrapClientConfigurationPtrOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BootstrapClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CaCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client certificate
+func (o BootstrapClientConfigurationPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BootstrapClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client key
+func (o BootstrapClientConfigurationPtrOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BootstrapClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientKey
+	}).(pulumi.StringPtrOutput)
 }
 
 type BootstrapTimeouts struct {
@@ -261,6 +366,47 @@ func (i ConfigurationApplyClientConfigurationArgs) ToConfigurationApplyClientCon
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyClientConfigurationOutput)
 }
 
+func (i ConfigurationApplyClientConfigurationArgs) ToConfigurationApplyClientConfigurationPtrOutput() ConfigurationApplyClientConfigurationPtrOutput {
+	return i.ToConfigurationApplyClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i ConfigurationApplyClientConfigurationArgs) ToConfigurationApplyClientConfigurationPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyClientConfigurationOutput).ToConfigurationApplyClientConfigurationPtrOutputWithContext(ctx)
+}
+
+// ConfigurationApplyClientConfigurationPtrInput is an input type that accepts ConfigurationApplyClientConfigurationArgs, ConfigurationApplyClientConfigurationPtr and ConfigurationApplyClientConfigurationPtrOutput values.
+// You can construct a concrete instance of `ConfigurationApplyClientConfigurationPtrInput` via:
+//
+//	        ConfigurationApplyClientConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConfigurationApplyClientConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToConfigurationApplyClientConfigurationPtrOutput() ConfigurationApplyClientConfigurationPtrOutput
+	ToConfigurationApplyClientConfigurationPtrOutputWithContext(context.Context) ConfigurationApplyClientConfigurationPtrOutput
+}
+
+type configurationApplyClientConfigurationPtrType ConfigurationApplyClientConfigurationArgs
+
+func ConfigurationApplyClientConfigurationPtr(v *ConfigurationApplyClientConfigurationArgs) ConfigurationApplyClientConfigurationPtrInput {
+	return (*configurationApplyClientConfigurationPtrType)(v)
+}
+
+func (*configurationApplyClientConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigurationApplyClientConfiguration)(nil)).Elem()
+}
+
+func (i *configurationApplyClientConfigurationPtrType) ToConfigurationApplyClientConfigurationPtrOutput() ConfigurationApplyClientConfigurationPtrOutput {
+	return i.ToConfigurationApplyClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *configurationApplyClientConfigurationPtrType) ToConfigurationApplyClientConfigurationPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyClientConfigurationPtrOutput)
+}
+
 type ConfigurationApplyClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (ConfigurationApplyClientConfigurationOutput) ElementType() reflect.Type {
@@ -273,6 +419,16 @@ func (o ConfigurationApplyClientConfigurationOutput) ToConfigurationApplyClientC
 
 func (o ConfigurationApplyClientConfigurationOutput) ToConfigurationApplyClientConfigurationOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationOutput {
 	return o
+}
+
+func (o ConfigurationApplyClientConfigurationOutput) ToConfigurationApplyClientConfigurationPtrOutput() ConfigurationApplyClientConfigurationPtrOutput {
+	return o.ToConfigurationApplyClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o ConfigurationApplyClientConfigurationOutput) ToConfigurationApplyClientConfigurationPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConfigurationApplyClientConfiguration) *ConfigurationApplyClientConfiguration {
+		return &v
+	}).(ConfigurationApplyClientConfigurationPtrOutput)
 }
 
 // The client CA certificate
@@ -288,6 +444,216 @@ func (o ConfigurationApplyClientConfigurationOutput) ClientCertificate() pulumi.
 // The client key
 func (o ConfigurationApplyClientConfigurationOutput) ClientKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigurationApplyClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
+}
+
+type ConfigurationApplyClientConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (ConfigurationApplyClientConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigurationApplyClientConfiguration)(nil)).Elem()
+}
+
+func (o ConfigurationApplyClientConfigurationPtrOutput) ToConfigurationApplyClientConfigurationPtrOutput() ConfigurationApplyClientConfigurationPtrOutput {
+	return o
+}
+
+func (o ConfigurationApplyClientConfigurationPtrOutput) ToConfigurationApplyClientConfigurationPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationPtrOutput {
+	return o
+}
+
+func (o ConfigurationApplyClientConfigurationPtrOutput) Elem() ConfigurationApplyClientConfigurationOutput {
+	return o.ApplyT(func(v *ConfigurationApplyClientConfiguration) ConfigurationApplyClientConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret ConfigurationApplyClientConfiguration
+		return ret
+	}).(ConfigurationApplyClientConfigurationOutput)
+}
+
+// The client CA certificate
+func (o ConfigurationApplyClientConfigurationPtrOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CaCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client certificate
+func (o ConfigurationApplyClientConfigurationPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client key
+func (o ConfigurationApplyClientConfigurationPtrOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientKey
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConfigurationApplyTimeouts struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `pulumi:"create"`
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `pulumi:"update"`
+}
+
+// ConfigurationApplyTimeoutsInput is an input type that accepts ConfigurationApplyTimeoutsArgs and ConfigurationApplyTimeoutsOutput values.
+// You can construct a concrete instance of `ConfigurationApplyTimeoutsInput` via:
+//
+//	ConfigurationApplyTimeoutsArgs{...}
+type ConfigurationApplyTimeoutsInput interface {
+	pulumi.Input
+
+	ToConfigurationApplyTimeoutsOutput() ConfigurationApplyTimeoutsOutput
+	ToConfigurationApplyTimeoutsOutputWithContext(context.Context) ConfigurationApplyTimeoutsOutput
+}
+
+type ConfigurationApplyTimeoutsArgs struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create pulumi.StringPtrInput `pulumi:"create"`
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update pulumi.StringPtrInput `pulumi:"update"`
+}
+
+func (ConfigurationApplyTimeoutsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigurationApplyTimeouts)(nil)).Elem()
+}
+
+func (i ConfigurationApplyTimeoutsArgs) ToConfigurationApplyTimeoutsOutput() ConfigurationApplyTimeoutsOutput {
+	return i.ToConfigurationApplyTimeoutsOutputWithContext(context.Background())
+}
+
+func (i ConfigurationApplyTimeoutsArgs) ToConfigurationApplyTimeoutsOutputWithContext(ctx context.Context) ConfigurationApplyTimeoutsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyTimeoutsOutput)
+}
+
+func (i ConfigurationApplyTimeoutsArgs) ToConfigurationApplyTimeoutsPtrOutput() ConfigurationApplyTimeoutsPtrOutput {
+	return i.ToConfigurationApplyTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i ConfigurationApplyTimeoutsArgs) ToConfigurationApplyTimeoutsPtrOutputWithContext(ctx context.Context) ConfigurationApplyTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyTimeoutsOutput).ToConfigurationApplyTimeoutsPtrOutputWithContext(ctx)
+}
+
+// ConfigurationApplyTimeoutsPtrInput is an input type that accepts ConfigurationApplyTimeoutsArgs, ConfigurationApplyTimeoutsPtr and ConfigurationApplyTimeoutsPtrOutput values.
+// You can construct a concrete instance of `ConfigurationApplyTimeoutsPtrInput` via:
+//
+//	        ConfigurationApplyTimeoutsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConfigurationApplyTimeoutsPtrInput interface {
+	pulumi.Input
+
+	ToConfigurationApplyTimeoutsPtrOutput() ConfigurationApplyTimeoutsPtrOutput
+	ToConfigurationApplyTimeoutsPtrOutputWithContext(context.Context) ConfigurationApplyTimeoutsPtrOutput
+}
+
+type configurationApplyTimeoutsPtrType ConfigurationApplyTimeoutsArgs
+
+func ConfigurationApplyTimeoutsPtr(v *ConfigurationApplyTimeoutsArgs) ConfigurationApplyTimeoutsPtrInput {
+	return (*configurationApplyTimeoutsPtrType)(v)
+}
+
+func (*configurationApplyTimeoutsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigurationApplyTimeouts)(nil)).Elem()
+}
+
+func (i *configurationApplyTimeoutsPtrType) ToConfigurationApplyTimeoutsPtrOutput() ConfigurationApplyTimeoutsPtrOutput {
+	return i.ToConfigurationApplyTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i *configurationApplyTimeoutsPtrType) ToConfigurationApplyTimeoutsPtrOutputWithContext(ctx context.Context) ConfigurationApplyTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyTimeoutsPtrOutput)
+}
+
+type ConfigurationApplyTimeoutsOutput struct{ *pulumi.OutputState }
+
+func (ConfigurationApplyTimeoutsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigurationApplyTimeouts)(nil)).Elem()
+}
+
+func (o ConfigurationApplyTimeoutsOutput) ToConfigurationApplyTimeoutsOutput() ConfigurationApplyTimeoutsOutput {
+	return o
+}
+
+func (o ConfigurationApplyTimeoutsOutput) ToConfigurationApplyTimeoutsOutputWithContext(ctx context.Context) ConfigurationApplyTimeoutsOutput {
+	return o
+}
+
+func (o ConfigurationApplyTimeoutsOutput) ToConfigurationApplyTimeoutsPtrOutput() ConfigurationApplyTimeoutsPtrOutput {
+	return o.ToConfigurationApplyTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (o ConfigurationApplyTimeoutsOutput) ToConfigurationApplyTimeoutsPtrOutputWithContext(ctx context.Context) ConfigurationApplyTimeoutsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConfigurationApplyTimeouts) *ConfigurationApplyTimeouts {
+		return &v
+	}).(ConfigurationApplyTimeoutsPtrOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o ConfigurationApplyTimeoutsOutput) Create() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConfigurationApplyTimeouts) *string { return v.Create }).(pulumi.StringPtrOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o ConfigurationApplyTimeoutsOutput) Update() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConfigurationApplyTimeouts) *string { return v.Update }).(pulumi.StringPtrOutput)
+}
+
+type ConfigurationApplyTimeoutsPtrOutput struct{ *pulumi.OutputState }
+
+func (ConfigurationApplyTimeoutsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigurationApplyTimeouts)(nil)).Elem()
+}
+
+func (o ConfigurationApplyTimeoutsPtrOutput) ToConfigurationApplyTimeoutsPtrOutput() ConfigurationApplyTimeoutsPtrOutput {
+	return o
+}
+
+func (o ConfigurationApplyTimeoutsPtrOutput) ToConfigurationApplyTimeoutsPtrOutputWithContext(ctx context.Context) ConfigurationApplyTimeoutsPtrOutput {
+	return o
+}
+
+func (o ConfigurationApplyTimeoutsPtrOutput) Elem() ConfigurationApplyTimeoutsOutput {
+	return o.ApplyT(func(v *ConfigurationApplyTimeouts) ConfigurationApplyTimeouts {
+		if v != nil {
+			return *v
+		}
+		var ret ConfigurationApplyTimeouts
+		return ret
+	}).(ConfigurationApplyTimeoutsOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o ConfigurationApplyTimeoutsPtrOutput) Create() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyTimeouts) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Create
+	}).(pulumi.StringPtrOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o ConfigurationApplyTimeoutsPtrOutput) Update() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyTimeouts) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Update
+	}).(pulumi.StringPtrOutput)
 }
 
 type SecretsClientConfiguration struct {
@@ -331,6 +697,47 @@ func (i SecretsClientConfigurationArgs) ToSecretsClientConfigurationOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsClientConfigurationOutput)
 }
 
+func (i SecretsClientConfigurationArgs) ToSecretsClientConfigurationPtrOutput() SecretsClientConfigurationPtrOutput {
+	return i.ToSecretsClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i SecretsClientConfigurationArgs) ToSecretsClientConfigurationPtrOutputWithContext(ctx context.Context) SecretsClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsClientConfigurationOutput).ToSecretsClientConfigurationPtrOutputWithContext(ctx)
+}
+
+// SecretsClientConfigurationPtrInput is an input type that accepts SecretsClientConfigurationArgs, SecretsClientConfigurationPtr and SecretsClientConfigurationPtrOutput values.
+// You can construct a concrete instance of `SecretsClientConfigurationPtrInput` via:
+//
+//	        SecretsClientConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecretsClientConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToSecretsClientConfigurationPtrOutput() SecretsClientConfigurationPtrOutput
+	ToSecretsClientConfigurationPtrOutputWithContext(context.Context) SecretsClientConfigurationPtrOutput
+}
+
+type secretsClientConfigurationPtrType SecretsClientConfigurationArgs
+
+func SecretsClientConfigurationPtr(v *SecretsClientConfigurationArgs) SecretsClientConfigurationPtrInput {
+	return (*secretsClientConfigurationPtrType)(v)
+}
+
+func (*secretsClientConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecretsClientConfiguration)(nil)).Elem()
+}
+
+func (i *secretsClientConfigurationPtrType) ToSecretsClientConfigurationPtrOutput() SecretsClientConfigurationPtrOutput {
+	return i.ToSecretsClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *secretsClientConfigurationPtrType) ToSecretsClientConfigurationPtrOutputWithContext(ctx context.Context) SecretsClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsClientConfigurationPtrOutput)
+}
+
 type SecretsClientConfigurationOutput struct{ *pulumi.OutputState }
 
 func (SecretsClientConfigurationOutput) ElementType() reflect.Type {
@@ -343,6 +750,16 @@ func (o SecretsClientConfigurationOutput) ToSecretsClientConfigurationOutput() S
 
 func (o SecretsClientConfigurationOutput) ToSecretsClientConfigurationOutputWithContext(ctx context.Context) SecretsClientConfigurationOutput {
 	return o
+}
+
+func (o SecretsClientConfigurationOutput) ToSecretsClientConfigurationPtrOutput() SecretsClientConfigurationPtrOutput {
+	return o.ToSecretsClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o SecretsClientConfigurationOutput) ToSecretsClientConfigurationPtrOutputWithContext(ctx context.Context) SecretsClientConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecretsClientConfiguration) *SecretsClientConfiguration {
+		return &v
+	}).(SecretsClientConfigurationPtrOutput)
 }
 
 // The client CA certificate
@@ -358,6 +775,60 @@ func (o SecretsClientConfigurationOutput) ClientCertificate() pulumi.StringPtrOu
 // The client key
 func (o SecretsClientConfigurationOutput) ClientKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsClientConfiguration) *string { return v.ClientKey }).(pulumi.StringPtrOutput)
+}
+
+type SecretsClientConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (SecretsClientConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecretsClientConfiguration)(nil)).Elem()
+}
+
+func (o SecretsClientConfigurationPtrOutput) ToSecretsClientConfigurationPtrOutput() SecretsClientConfigurationPtrOutput {
+	return o
+}
+
+func (o SecretsClientConfigurationPtrOutput) ToSecretsClientConfigurationPtrOutputWithContext(ctx context.Context) SecretsClientConfigurationPtrOutput {
+	return o
+}
+
+func (o SecretsClientConfigurationPtrOutput) Elem() SecretsClientConfigurationOutput {
+	return o.ApplyT(func(v *SecretsClientConfiguration) SecretsClientConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret SecretsClientConfiguration
+		return ret
+	}).(SecretsClientConfigurationOutput)
+}
+
+// The client CA certificate
+func (o SecretsClientConfigurationPtrOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecretsClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CaCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client certificate
+func (o SecretsClientConfigurationPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecretsClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClientCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client key
+func (o SecretsClientConfigurationPtrOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecretsClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClientKey
+	}).(pulumi.StringPtrOutput)
 }
 
 type SecretsMachineSecrets struct {
@@ -403,6 +874,47 @@ func (i SecretsMachineSecretsArgs) ToSecretsMachineSecretsOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsOutput)
 }
 
+func (i SecretsMachineSecretsArgs) ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput {
+	return i.ToSecretsMachineSecretsPtrOutputWithContext(context.Background())
+}
+
+func (i SecretsMachineSecretsArgs) ToSecretsMachineSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsOutput).ToSecretsMachineSecretsPtrOutputWithContext(ctx)
+}
+
+// SecretsMachineSecretsPtrInput is an input type that accepts SecretsMachineSecretsArgs, SecretsMachineSecretsPtr and SecretsMachineSecretsPtrOutput values.
+// You can construct a concrete instance of `SecretsMachineSecretsPtrInput` via:
+//
+//	        SecretsMachineSecretsArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecretsMachineSecretsPtrInput interface {
+	pulumi.Input
+
+	ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput
+	ToSecretsMachineSecretsPtrOutputWithContext(context.Context) SecretsMachineSecretsPtrOutput
+}
+
+type secretsMachineSecretsPtrType SecretsMachineSecretsArgs
+
+func SecretsMachineSecretsPtr(v *SecretsMachineSecretsArgs) SecretsMachineSecretsPtrInput {
+	return (*secretsMachineSecretsPtrType)(v)
+}
+
+func (*secretsMachineSecretsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecretsMachineSecrets)(nil)).Elem()
+}
+
+func (i *secretsMachineSecretsPtrType) ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput {
+	return i.ToSecretsMachineSecretsPtrOutputWithContext(context.Background())
+}
+
+func (i *secretsMachineSecretsPtrType) ToSecretsMachineSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecretsMachineSecretsPtrOutput)
+}
+
 type SecretsMachineSecretsOutput struct{ *pulumi.OutputState }
 
 func (SecretsMachineSecretsOutput) ElementType() reflect.Type {
@@ -415,6 +927,16 @@ func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsOutput() SecretsMach
 
 func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsOutputWithContext(ctx context.Context) SecretsMachineSecretsOutput {
 	return o
+}
+
+func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput {
+	return o.ToSecretsMachineSecretsPtrOutputWithContext(context.Background())
+}
+
+func (o SecretsMachineSecretsOutput) ToSecretsMachineSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecretsMachineSecrets) *SecretsMachineSecrets {
+		return &v
+	}).(SecretsMachineSecretsPtrOutput)
 }
 
 func (o SecretsMachineSecretsOutput) Certs() SecretsMachineSecretsCertsPtrOutput {
@@ -434,6 +956,69 @@ func (o SecretsMachineSecretsOutput) Secrets() SecretsMachineSecretsSecretsPtrOu
 // trustd secrets
 func (o SecretsMachineSecretsOutput) Trustdinfo() SecretsMachineSecretsTrustdinfoPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecrets) *SecretsMachineSecretsTrustdinfo { return v.Trustdinfo }).(SecretsMachineSecretsTrustdinfoPtrOutput)
+}
+
+type SecretsMachineSecretsPtrOutput struct{ *pulumi.OutputState }
+
+func (SecretsMachineSecretsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecretsMachineSecrets)(nil)).Elem()
+}
+
+func (o SecretsMachineSecretsPtrOutput) ToSecretsMachineSecretsPtrOutput() SecretsMachineSecretsPtrOutput {
+	return o
+}
+
+func (o SecretsMachineSecretsPtrOutput) ToSecretsMachineSecretsPtrOutputWithContext(ctx context.Context) SecretsMachineSecretsPtrOutput {
+	return o
+}
+
+func (o SecretsMachineSecretsPtrOutput) Elem() SecretsMachineSecretsOutput {
+	return o.ApplyT(func(v *SecretsMachineSecrets) SecretsMachineSecrets {
+		if v != nil {
+			return *v
+		}
+		var ret SecretsMachineSecrets
+		return ret
+	}).(SecretsMachineSecretsOutput)
+}
+
+func (o SecretsMachineSecretsPtrOutput) Certs() SecretsMachineSecretsCertsPtrOutput {
+	return o.ApplyT(func(v *SecretsMachineSecrets) *SecretsMachineSecretsCerts {
+		if v == nil {
+			return nil
+		}
+		return v.Certs
+	}).(SecretsMachineSecretsCertsPtrOutput)
+}
+
+// The cluster secrets
+func (o SecretsMachineSecretsPtrOutput) Cluster() SecretsMachineSecretsClusterPtrOutput {
+	return o.ApplyT(func(v *SecretsMachineSecrets) *SecretsMachineSecretsCluster {
+		if v == nil {
+			return nil
+		}
+		return v.Cluster
+	}).(SecretsMachineSecretsClusterPtrOutput)
+}
+
+// kubernetes cluster secrets
+func (o SecretsMachineSecretsPtrOutput) Secrets() SecretsMachineSecretsSecretsPtrOutput {
+	return o.ApplyT(func(v *SecretsMachineSecrets) *SecretsMachineSecretsSecrets {
+		if v == nil {
+			return nil
+		}
+		return v.Secrets
+	}).(SecretsMachineSecretsSecretsPtrOutput)
+}
+
+// trustd secrets
+func (o SecretsMachineSecretsPtrOutput) Trustdinfo() SecretsMachineSecretsTrustdinfoPtrOutput {
+	return o.ApplyT(func(v *SecretsMachineSecrets) *SecretsMachineSecretsTrustdinfo {
+		if v == nil {
+			return nil
+		}
+		return v.Trustdinfo
+	}).(SecretsMachineSecretsTrustdinfoPtrOutput)
 }
 
 type SecretsMachineSecretsCerts struct {
@@ -1880,162 +2465,6 @@ func (o SecretsMachineSecretsTrustdinfoPtrOutput) Token() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
-type Timeout struct {
-	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-	Create *string `pulumi:"create"`
-	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-	Update *string `pulumi:"update"`
-}
-
-// TimeoutInput is an input type that accepts TimeoutArgs and TimeoutOutput values.
-// You can construct a concrete instance of `TimeoutInput` via:
-//
-//	TimeoutArgs{...}
-type TimeoutInput interface {
-	pulumi.Input
-
-	ToTimeoutOutput() TimeoutOutput
-	ToTimeoutOutputWithContext(context.Context) TimeoutOutput
-}
-
-type TimeoutArgs struct {
-	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-	Create pulumi.StringPtrInput `pulumi:"create"`
-	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-	Update pulumi.StringPtrInput `pulumi:"update"`
-}
-
-func (TimeoutArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Timeout)(nil)).Elem()
-}
-
-func (i TimeoutArgs) ToTimeoutOutput() TimeoutOutput {
-	return i.ToTimeoutOutputWithContext(context.Background())
-}
-
-func (i TimeoutArgs) ToTimeoutOutputWithContext(ctx context.Context) TimeoutOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TimeoutOutput)
-}
-
-func (i TimeoutArgs) ToTimeoutPtrOutput() TimeoutPtrOutput {
-	return i.ToTimeoutPtrOutputWithContext(context.Background())
-}
-
-func (i TimeoutArgs) ToTimeoutPtrOutputWithContext(ctx context.Context) TimeoutPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TimeoutOutput).ToTimeoutPtrOutputWithContext(ctx)
-}
-
-// TimeoutPtrInput is an input type that accepts TimeoutArgs, TimeoutPtr and TimeoutPtrOutput values.
-// You can construct a concrete instance of `TimeoutPtrInput` via:
-//
-//	        TimeoutArgs{...}
-//
-//	or:
-//
-//	        nil
-type TimeoutPtrInput interface {
-	pulumi.Input
-
-	ToTimeoutPtrOutput() TimeoutPtrOutput
-	ToTimeoutPtrOutputWithContext(context.Context) TimeoutPtrOutput
-}
-
-type timeoutPtrType TimeoutArgs
-
-func TimeoutPtr(v *TimeoutArgs) TimeoutPtrInput {
-	return (*timeoutPtrType)(v)
-}
-
-func (*timeoutPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Timeout)(nil)).Elem()
-}
-
-func (i *timeoutPtrType) ToTimeoutPtrOutput() TimeoutPtrOutput {
-	return i.ToTimeoutPtrOutputWithContext(context.Background())
-}
-
-func (i *timeoutPtrType) ToTimeoutPtrOutputWithContext(ctx context.Context) TimeoutPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TimeoutPtrOutput)
-}
-
-type TimeoutOutput struct{ *pulumi.OutputState }
-
-func (TimeoutOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Timeout)(nil)).Elem()
-}
-
-func (o TimeoutOutput) ToTimeoutOutput() TimeoutOutput {
-	return o
-}
-
-func (o TimeoutOutput) ToTimeoutOutputWithContext(ctx context.Context) TimeoutOutput {
-	return o
-}
-
-func (o TimeoutOutput) ToTimeoutPtrOutput() TimeoutPtrOutput {
-	return o.ToTimeoutPtrOutputWithContext(context.Background())
-}
-
-func (o TimeoutOutput) ToTimeoutPtrOutputWithContext(ctx context.Context) TimeoutPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v Timeout) *Timeout {
-		return &v
-	}).(TimeoutPtrOutput)
-}
-
-// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-func (o TimeoutOutput) Create() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v Timeout) *string { return v.Create }).(pulumi.StringPtrOutput)
-}
-
-// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-func (o TimeoutOutput) Update() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v Timeout) *string { return v.Update }).(pulumi.StringPtrOutput)
-}
-
-type TimeoutPtrOutput struct{ *pulumi.OutputState }
-
-func (TimeoutPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**Timeout)(nil)).Elem()
-}
-
-func (o TimeoutPtrOutput) ToTimeoutPtrOutput() TimeoutPtrOutput {
-	return o
-}
-
-func (o TimeoutPtrOutput) ToTimeoutPtrOutputWithContext(ctx context.Context) TimeoutPtrOutput {
-	return o
-}
-
-func (o TimeoutPtrOutput) Elem() TimeoutOutput {
-	return o.ApplyT(func(v *Timeout) Timeout {
-		if v != nil {
-			return *v
-		}
-		var ret Timeout
-		return ret
-	}).(TimeoutOutput)
-}
-
-// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-func (o TimeoutPtrOutput) Create() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Timeout) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Create
-	}).(pulumi.StringPtrOutput)
-}
-
-// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-func (o TimeoutPtrOutput) Update() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Timeout) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Update
-	}).(pulumi.StringPtrOutput)
-}
-
 // A Machine Secrets Certificate
 type Certificate struct {
 	// Certificate
@@ -2075,47 +2504,6 @@ func (i CertificateArgs) ToCertificateOutputWithContext(ctx context.Context) Cer
 	return pulumi.ToOutputWithContext(ctx, i).(CertificateOutput)
 }
 
-func (i CertificateArgs) ToCertificatePtrOutput() CertificatePtrOutput {
-	return i.ToCertificatePtrOutputWithContext(context.Background())
-}
-
-func (i CertificateArgs) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertificateOutput).ToCertificatePtrOutputWithContext(ctx)
-}
-
-// CertificatePtrInput is an input type that accepts CertificateArgs, CertificatePtr and CertificatePtrOutput values.
-// You can construct a concrete instance of `CertificatePtrInput` via:
-//
-//	        CertificateArgs{...}
-//
-//	or:
-//
-//	        nil
-type CertificatePtrInput interface {
-	pulumi.Input
-
-	ToCertificatePtrOutput() CertificatePtrOutput
-	ToCertificatePtrOutputWithContext(context.Context) CertificatePtrOutput
-}
-
-type certificatePtrType CertificateArgs
-
-func CertificatePtr(v *CertificateArgs) CertificatePtrInput {
-	return (*certificatePtrType)(v)
-}
-
-func (*certificatePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Certificate)(nil)).Elem()
-}
-
-func (i *certificatePtrType) ToCertificatePtrOutput() CertificatePtrOutput {
-	return i.ToCertificatePtrOutputWithContext(context.Background())
-}
-
-func (i *certificatePtrType) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertificatePtrOutput)
-}
-
 // A Machine Secrets Certificate
 type CertificateOutput struct{ *pulumi.OutputState }
 
@@ -2131,16 +2519,6 @@ func (o CertificateOutput) ToCertificateOutputWithContext(ctx context.Context) C
 	return o
 }
 
-func (o CertificateOutput) ToCertificatePtrOutput() CertificatePtrOutput {
-	return o.ToCertificatePtrOutputWithContext(context.Background())
-}
-
-func (o CertificateOutput) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v Certificate) *Certificate {
-		return &v
-	}).(CertificatePtrOutput)
-}
-
 // Certificate
 func (o CertificateOutput) Cert() pulumi.StringOutput {
 	return o.ApplyT(func(v Certificate) string { return v.Cert }).(pulumi.StringOutput)
@@ -2149,50 +2527,6 @@ func (o CertificateOutput) Cert() pulumi.StringOutput {
 // Private Key
 func (o CertificateOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v Certificate) string { return v.Key }).(pulumi.StringOutput)
-}
-
-type CertificatePtrOutput struct{ *pulumi.OutputState }
-
-func (CertificatePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**Certificate)(nil)).Elem()
-}
-
-func (o CertificatePtrOutput) ToCertificatePtrOutput() CertificatePtrOutput {
-	return o
-}
-
-func (o CertificatePtrOutput) ToCertificatePtrOutputWithContext(ctx context.Context) CertificatePtrOutput {
-	return o
-}
-
-func (o CertificatePtrOutput) Elem() CertificateOutput {
-	return o.ApplyT(func(v *Certificate) Certificate {
-		if v != nil {
-			return *v
-		}
-		var ret Certificate
-		return ret
-	}).(CertificateOutput)
-}
-
-// Certificate
-func (o CertificatePtrOutput) Cert() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Certificate) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Cert
-	}).(pulumi.StringPtrOutput)
-}
-
-// Private Key
-func (o CertificatePtrOutput) Key() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Certificate) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Key
-	}).(pulumi.StringPtrOutput)
 }
 
 // A complete Machine Secrets Certificates configuration
@@ -2236,47 +2570,6 @@ func (i CertificatesArgs) ToCertificatesOutputWithContext(ctx context.Context) C
 	return pulumi.ToOutputWithContext(ctx, i).(CertificatesOutput)
 }
 
-func (i CertificatesArgs) ToCertificatesPtrOutput() CertificatesPtrOutput {
-	return i.ToCertificatesPtrOutputWithContext(context.Background())
-}
-
-func (i CertificatesArgs) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertificatesOutput).ToCertificatesPtrOutputWithContext(ctx)
-}
-
-// CertificatesPtrInput is an input type that accepts CertificatesArgs, CertificatesPtr and CertificatesPtrOutput values.
-// You can construct a concrete instance of `CertificatesPtrInput` via:
-//
-//	        CertificatesArgs{...}
-//
-//	or:
-//
-//	        nil
-type CertificatesPtrInput interface {
-	pulumi.Input
-
-	ToCertificatesPtrOutput() CertificatesPtrOutput
-	ToCertificatesPtrOutputWithContext(context.Context) CertificatesPtrOutput
-}
-
-type certificatesPtrType CertificatesArgs
-
-func CertificatesPtr(v *CertificatesArgs) CertificatesPtrInput {
-	return (*certificatesPtrType)(v)
-}
-
-func (*certificatesPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Certificates)(nil)).Elem()
-}
-
-func (i *certificatesPtrType) ToCertificatesPtrOutput() CertificatesPtrOutput {
-	return i.ToCertificatesPtrOutputWithContext(context.Background())
-}
-
-func (i *certificatesPtrType) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertificatesPtrOutput)
-}
-
 // A complete Machine Secrets Certificates configuration
 type CertificatesOutput struct{ *pulumi.OutputState }
 
@@ -2290,16 +2583,6 @@ func (o CertificatesOutput) ToCertificatesOutput() CertificatesOutput {
 
 func (o CertificatesOutput) ToCertificatesOutputWithContext(ctx context.Context) CertificatesOutput {
 	return o
-}
-
-func (o CertificatesOutput) ToCertificatesPtrOutput() CertificatesPtrOutput {
-	return o.ToCertificatesPtrOutputWithContext(context.Background())
-}
-
-func (o CertificatesOutput) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v Certificates) *Certificates {
-		return &v
-	}).(CertificatesPtrOutput)
 }
 
 func (o CertificatesOutput) Etcd() CertificateOutput {
@@ -2320,75 +2603,6 @@ func (o CertificatesOutput) K8sServiceaccount() KeyOutput {
 
 func (o CertificatesOutput) Os() CertificateOutput {
 	return o.ApplyT(func(v Certificates) Certificate { return v.Os }).(CertificateOutput)
-}
-
-type CertificatesPtrOutput struct{ *pulumi.OutputState }
-
-func (CertificatesPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**Certificates)(nil)).Elem()
-}
-
-func (o CertificatesPtrOutput) ToCertificatesPtrOutput() CertificatesPtrOutput {
-	return o
-}
-
-func (o CertificatesPtrOutput) ToCertificatesPtrOutputWithContext(ctx context.Context) CertificatesPtrOutput {
-	return o
-}
-
-func (o CertificatesPtrOutput) Elem() CertificatesOutput {
-	return o.ApplyT(func(v *Certificates) Certificates {
-		if v != nil {
-			return *v
-		}
-		var ret Certificates
-		return ret
-	}).(CertificatesOutput)
-}
-
-func (o CertificatesPtrOutput) Etcd() CertificatePtrOutput {
-	return o.ApplyT(func(v *Certificates) *Certificate {
-		if v == nil {
-			return nil
-		}
-		return &v.Etcd
-	}).(CertificatePtrOutput)
-}
-
-func (o CertificatesPtrOutput) K8s() CertificatePtrOutput {
-	return o.ApplyT(func(v *Certificates) *Certificate {
-		if v == nil {
-			return nil
-		}
-		return &v.K8s
-	}).(CertificatePtrOutput)
-}
-
-func (o CertificatesPtrOutput) K8sAggregator() CertificatePtrOutput {
-	return o.ApplyT(func(v *Certificates) *Certificate {
-		if v == nil {
-			return nil
-		}
-		return &v.K8sAggregator
-	}).(CertificatePtrOutput)
-}
-
-func (o CertificatesPtrOutput) K8sServiceaccount() KeyPtrOutput {
-	return o.ApplyT(func(v *Certificates) *Key {
-		if v == nil {
-			return nil
-		}
-		return &v.K8sServiceaccount
-	}).(KeyPtrOutput)
-}
-
-func (o CertificatesPtrOutput) Os() CertificatePtrOutput {
-	return o.ApplyT(func(v *Certificates) *Certificate {
-		if v == nil {
-			return nil
-		}
-		return &v.Os
-	}).(CertificatePtrOutput)
 }
 
 // A Client Configuration
@@ -2434,47 +2648,6 @@ func (i ClientConfigurationArgs) ToClientConfigurationOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(ClientConfigurationOutput)
 }
 
-func (i ClientConfigurationArgs) ToClientConfigurationPtrOutput() ClientConfigurationPtrOutput {
-	return i.ToClientConfigurationPtrOutputWithContext(context.Background())
-}
-
-func (i ClientConfigurationArgs) ToClientConfigurationPtrOutputWithContext(ctx context.Context) ClientConfigurationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClientConfigurationOutput).ToClientConfigurationPtrOutputWithContext(ctx)
-}
-
-// ClientConfigurationPtrInput is an input type that accepts ClientConfigurationArgs, ClientConfigurationPtr and ClientConfigurationPtrOutput values.
-// You can construct a concrete instance of `ClientConfigurationPtrInput` via:
-//
-//	        ClientConfigurationArgs{...}
-//
-//	or:
-//
-//	        nil
-type ClientConfigurationPtrInput interface {
-	pulumi.Input
-
-	ToClientConfigurationPtrOutput() ClientConfigurationPtrOutput
-	ToClientConfigurationPtrOutputWithContext(context.Context) ClientConfigurationPtrOutput
-}
-
-type clientConfigurationPtrType ClientConfigurationArgs
-
-func ClientConfigurationPtr(v *ClientConfigurationArgs) ClientConfigurationPtrInput {
-	return (*clientConfigurationPtrType)(v)
-}
-
-func (*clientConfigurationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ClientConfiguration)(nil)).Elem()
-}
-
-func (i *clientConfigurationPtrType) ToClientConfigurationPtrOutput() ClientConfigurationPtrOutput {
-	return i.ToClientConfigurationPtrOutputWithContext(context.Background())
-}
-
-func (i *clientConfigurationPtrType) ToClientConfigurationPtrOutputWithContext(ctx context.Context) ClientConfigurationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClientConfigurationPtrOutput)
-}
-
 // A Client Configuration
 type ClientConfigurationOutput struct{ *pulumi.OutputState }
 
@@ -2490,16 +2663,6 @@ func (o ClientConfigurationOutput) ToClientConfigurationOutputWithContext(ctx co
 	return o
 }
 
-func (o ClientConfigurationOutput) ToClientConfigurationPtrOutput() ClientConfigurationPtrOutput {
-	return o.ToClientConfigurationPtrOutputWithContext(context.Background())
-}
-
-func (o ClientConfigurationOutput) ToClientConfigurationPtrOutputWithContext(ctx context.Context) ClientConfigurationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClientConfiguration) *ClientConfiguration {
-		return &v
-	}).(ClientConfigurationPtrOutput)
-}
-
 // The client CA certificate
 func (o ClientConfigurationOutput) CaCertificate() pulumi.StringOutput {
 	return o.ApplyT(func(v ClientConfiguration) string { return v.CaCertificate }).(pulumi.StringOutput)
@@ -2513,60 +2676,6 @@ func (o ClientConfigurationOutput) ClientCertificate() pulumi.StringOutput {
 // The client private key
 func (o ClientConfigurationOutput) ClientKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
-}
-
-type ClientConfigurationPtrOutput struct{ *pulumi.OutputState }
-
-func (ClientConfigurationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ClientConfiguration)(nil)).Elem()
-}
-
-func (o ClientConfigurationPtrOutput) ToClientConfigurationPtrOutput() ClientConfigurationPtrOutput {
-	return o
-}
-
-func (o ClientConfigurationPtrOutput) ToClientConfigurationPtrOutputWithContext(ctx context.Context) ClientConfigurationPtrOutput {
-	return o
-}
-
-func (o ClientConfigurationPtrOutput) Elem() ClientConfigurationOutput {
-	return o.ApplyT(func(v *ClientConfiguration) ClientConfiguration {
-		if v != nil {
-			return *v
-		}
-		var ret ClientConfiguration
-		return ret
-	}).(ClientConfigurationOutput)
-}
-
-// The client CA certificate
-func (o ClientConfigurationPtrOutput) CaCertificate() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ClientConfiguration) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.CaCertificate
-	}).(pulumi.StringPtrOutput)
-}
-
-// The client certificate
-func (o ClientConfigurationPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ClientConfiguration) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ClientCertificate
-	}).(pulumi.StringPtrOutput)
-}
-
-// The client private key
-func (o ClientConfigurationPtrOutput) ClientKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ClientConfiguration) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ClientKey
-	}).(pulumi.StringPtrOutput)
 }
 
 // A Machine Secrets Cluster Info
@@ -2608,47 +2717,6 @@ func (i ClusterArgs) ToClusterOutputWithContext(ctx context.Context) ClusterOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ClusterOutput)
 }
 
-func (i ClusterArgs) ToClusterPtrOutput() ClusterPtrOutput {
-	return i.ToClusterPtrOutputWithContext(context.Background())
-}
-
-func (i ClusterArgs) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterOutput).ToClusterPtrOutputWithContext(ctx)
-}
-
-// ClusterPtrInput is an input type that accepts ClusterArgs, ClusterPtr and ClusterPtrOutput values.
-// You can construct a concrete instance of `ClusterPtrInput` via:
-//
-//	        ClusterArgs{...}
-//
-//	or:
-//
-//	        nil
-type ClusterPtrInput interface {
-	pulumi.Input
-
-	ToClusterPtrOutput() ClusterPtrOutput
-	ToClusterPtrOutputWithContext(context.Context) ClusterPtrOutput
-}
-
-type clusterPtrType ClusterArgs
-
-func ClusterPtr(v *ClusterArgs) ClusterPtrInput {
-	return (*clusterPtrType)(v)
-}
-
-func (*clusterPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Cluster)(nil)).Elem()
-}
-
-func (i *clusterPtrType) ToClusterPtrOutput() ClusterPtrOutput {
-	return i.ToClusterPtrOutputWithContext(context.Background())
-}
-
-func (i *clusterPtrType) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterPtrOutput)
-}
-
 // A Machine Secrets Cluster Info
 type ClusterOutput struct{ *pulumi.OutputState }
 
@@ -2664,16 +2732,6 @@ func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOu
 	return o
 }
 
-func (o ClusterOutput) ToClusterPtrOutput() ClusterPtrOutput {
-	return o.ToClusterPtrOutputWithContext(context.Background())
-}
-
-func (o ClusterOutput) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v Cluster) *Cluster {
-		return &v
-	}).(ClusterPtrOutput)
-}
-
 // Certificate
 func (o ClusterOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v Cluster) string { return v.Id }).(pulumi.StringOutput)
@@ -2682,50 +2740,6 @@ func (o ClusterOutput) Id() pulumi.StringOutput {
 // Private Key
 func (o ClusterOutput) Secret() pulumi.StringOutput {
 	return o.ApplyT(func(v Cluster) string { return v.Secret }).(pulumi.StringOutput)
-}
-
-type ClusterPtrOutput struct{ *pulumi.OutputState }
-
-func (ClusterPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**Cluster)(nil)).Elem()
-}
-
-func (o ClusterPtrOutput) ToClusterPtrOutput() ClusterPtrOutput {
-	return o
-}
-
-func (o ClusterPtrOutput) ToClusterPtrOutputWithContext(ctx context.Context) ClusterPtrOutput {
-	return o
-}
-
-func (o ClusterPtrOutput) Elem() ClusterOutput {
-	return o.ApplyT(func(v *Cluster) Cluster {
-		if v != nil {
-			return *v
-		}
-		var ret Cluster
-		return ret
-	}).(ClusterOutput)
-}
-
-// Certificate
-func (o ClusterPtrOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Cluster) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Id
-	}).(pulumi.StringPtrOutput)
-}
-
-// Private Key
-func (o ClusterPtrOutput) Secret() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Cluster) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Secret
-	}).(pulumi.StringPtrOutput)
 }
 
 // A Machine Secrets Private Key
@@ -2763,47 +2777,6 @@ func (i KeyArgs) ToKeyOutputWithContext(ctx context.Context) KeyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(KeyOutput)
 }
 
-func (i KeyArgs) ToKeyPtrOutput() KeyPtrOutput {
-	return i.ToKeyPtrOutputWithContext(context.Background())
-}
-
-func (i KeyArgs) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(KeyOutput).ToKeyPtrOutputWithContext(ctx)
-}
-
-// KeyPtrInput is an input type that accepts KeyArgs, KeyPtr and KeyPtrOutput values.
-// You can construct a concrete instance of `KeyPtrInput` via:
-//
-//	        KeyArgs{...}
-//
-//	or:
-//
-//	        nil
-type KeyPtrInput interface {
-	pulumi.Input
-
-	ToKeyPtrOutput() KeyPtrOutput
-	ToKeyPtrOutputWithContext(context.Context) KeyPtrOutput
-}
-
-type keyPtrType KeyArgs
-
-func KeyPtr(v *KeyArgs) KeyPtrInput {
-	return (*keyPtrType)(v)
-}
-
-func (*keyPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Key)(nil)).Elem()
-}
-
-func (i *keyPtrType) ToKeyPtrOutput() KeyPtrOutput {
-	return i.ToKeyPtrOutputWithContext(context.Background())
-}
-
-func (i *keyPtrType) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(KeyPtrOutput)
-}
-
 // A Machine Secrets Private Key
 type KeyOutput struct{ *pulumi.OutputState }
 
@@ -2819,53 +2792,9 @@ func (o KeyOutput) ToKeyOutputWithContext(ctx context.Context) KeyOutput {
 	return o
 }
 
-func (o KeyOutput) ToKeyPtrOutput() KeyPtrOutput {
-	return o.ToKeyPtrOutputWithContext(context.Background())
-}
-
-func (o KeyOutput) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v Key) *Key {
-		return &v
-	}).(KeyPtrOutput)
-}
-
 // Private Key
 func (o KeyOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v Key) string { return v.Key }).(pulumi.StringOutput)
-}
-
-type KeyPtrOutput struct{ *pulumi.OutputState }
-
-func (KeyPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**Key)(nil)).Elem()
-}
-
-func (o KeyPtrOutput) ToKeyPtrOutput() KeyPtrOutput {
-	return o
-}
-
-func (o KeyPtrOutput) ToKeyPtrOutputWithContext(ctx context.Context) KeyPtrOutput {
-	return o
-}
-
-func (o KeyPtrOutput) Elem() KeyOutput {
-	return o.ApplyT(func(v *Key) Key {
-		if v != nil {
-			return *v
-		}
-		var ret Key
-		return ret
-	}).(KeyOutput)
-}
-
-// Private Key
-func (o KeyPtrOutput) Key() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Key) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Key
-	}).(pulumi.StringPtrOutput)
 }
 
 // A Machine Secrets Bootstrap data
@@ -2911,47 +2840,6 @@ func (i KubernetesSecretsArgs) ToKubernetesSecretsOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(KubernetesSecretsOutput)
 }
 
-func (i KubernetesSecretsArgs) ToKubernetesSecretsPtrOutput() KubernetesSecretsPtrOutput {
-	return i.ToKubernetesSecretsPtrOutputWithContext(context.Background())
-}
-
-func (i KubernetesSecretsArgs) ToKubernetesSecretsPtrOutputWithContext(ctx context.Context) KubernetesSecretsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(KubernetesSecretsOutput).ToKubernetesSecretsPtrOutputWithContext(ctx)
-}
-
-// KubernetesSecretsPtrInput is an input type that accepts KubernetesSecretsArgs, KubernetesSecretsPtr and KubernetesSecretsPtrOutput values.
-// You can construct a concrete instance of `KubernetesSecretsPtrInput` via:
-//
-//	        KubernetesSecretsArgs{...}
-//
-//	or:
-//
-//	        nil
-type KubernetesSecretsPtrInput interface {
-	pulumi.Input
-
-	ToKubernetesSecretsPtrOutput() KubernetesSecretsPtrOutput
-	ToKubernetesSecretsPtrOutputWithContext(context.Context) KubernetesSecretsPtrOutput
-}
-
-type kubernetesSecretsPtrType KubernetesSecretsArgs
-
-func KubernetesSecretsPtr(v *KubernetesSecretsArgs) KubernetesSecretsPtrInput {
-	return (*kubernetesSecretsPtrType)(v)
-}
-
-func (*kubernetesSecretsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**KubernetesSecrets)(nil)).Elem()
-}
-
-func (i *kubernetesSecretsPtrType) ToKubernetesSecretsPtrOutput() KubernetesSecretsPtrOutput {
-	return i.ToKubernetesSecretsPtrOutputWithContext(context.Background())
-}
-
-func (i *kubernetesSecretsPtrType) ToKubernetesSecretsPtrOutputWithContext(ctx context.Context) KubernetesSecretsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(KubernetesSecretsPtrOutput)
-}
-
 // A Machine Secrets Bootstrap data
 type KubernetesSecretsOutput struct{ *pulumi.OutputState }
 
@@ -2967,16 +2855,6 @@ func (o KubernetesSecretsOutput) ToKubernetesSecretsOutputWithContext(ctx contex
 	return o
 }
 
-func (o KubernetesSecretsOutput) ToKubernetesSecretsPtrOutput() KubernetesSecretsPtrOutput {
-	return o.ToKubernetesSecretsPtrOutputWithContext(context.Background())
-}
-
-func (o KubernetesSecretsOutput) ToKubernetesSecretsPtrOutputWithContext(ctx context.Context) KubernetesSecretsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v KubernetesSecrets) *KubernetesSecrets {
-		return &v
-	}).(KubernetesSecretsPtrOutput)
-}
-
 // The aescbc encryption secret for the talos kubernetes cluster
 func (o KubernetesSecretsOutput) AescbcEncryptionSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v KubernetesSecrets) *string { return v.AescbcEncryptionSecret }).(pulumi.StringPtrOutput)
@@ -2990,60 +2868,6 @@ func (o KubernetesSecretsOutput) BootstrapToken() pulumi.StringOutput {
 // The secretbox encryption secret for the talos kubernetes cluster
 func (o KubernetesSecretsOutput) SecretboxEncryptionSecret() pulumi.StringOutput {
 	return o.ApplyT(func(v KubernetesSecrets) string { return v.SecretboxEncryptionSecret }).(pulumi.StringOutput)
-}
-
-type KubernetesSecretsPtrOutput struct{ *pulumi.OutputState }
-
-func (KubernetesSecretsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**KubernetesSecrets)(nil)).Elem()
-}
-
-func (o KubernetesSecretsPtrOutput) ToKubernetesSecretsPtrOutput() KubernetesSecretsPtrOutput {
-	return o
-}
-
-func (o KubernetesSecretsPtrOutput) ToKubernetesSecretsPtrOutputWithContext(ctx context.Context) KubernetesSecretsPtrOutput {
-	return o
-}
-
-func (o KubernetesSecretsPtrOutput) Elem() KubernetesSecretsOutput {
-	return o.ApplyT(func(v *KubernetesSecrets) KubernetesSecrets {
-		if v != nil {
-			return *v
-		}
-		var ret KubernetesSecrets
-		return ret
-	}).(KubernetesSecretsOutput)
-}
-
-// The aescbc encryption secret for the talos kubernetes cluster
-func (o KubernetesSecretsPtrOutput) AescbcEncryptionSecret() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *KubernetesSecrets) *string {
-		if v == nil {
-			return nil
-		}
-		return v.AescbcEncryptionSecret
-	}).(pulumi.StringPtrOutput)
-}
-
-// The bootstrap token for the talos kubernetes cluster
-func (o KubernetesSecretsPtrOutput) BootstrapToken() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *KubernetesSecrets) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.BootstrapToken
-	}).(pulumi.StringPtrOutput)
-}
-
-// The secretbox encryption secret for the talos kubernetes cluster
-func (o KubernetesSecretsPtrOutput) SecretboxEncryptionSecret() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *KubernetesSecrets) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.SecretboxEncryptionSecret
-	}).(pulumi.StringPtrOutput)
 }
 
 // A complete Machine Secrets configuration
@@ -3085,47 +2909,6 @@ func (i MachineSecretsArgs) ToMachineSecretsOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(MachineSecretsOutput)
 }
 
-func (i MachineSecretsArgs) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
-	return i.ToMachineSecretsPtrOutputWithContext(context.Background())
-}
-
-func (i MachineSecretsArgs) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(MachineSecretsOutput).ToMachineSecretsPtrOutputWithContext(ctx)
-}
-
-// MachineSecretsPtrInput is an input type that accepts MachineSecretsArgs, MachineSecretsPtr and MachineSecretsPtrOutput values.
-// You can construct a concrete instance of `MachineSecretsPtrInput` via:
-//
-//	        MachineSecretsArgs{...}
-//
-//	or:
-//
-//	        nil
-type MachineSecretsPtrInput interface {
-	pulumi.Input
-
-	ToMachineSecretsPtrOutput() MachineSecretsPtrOutput
-	ToMachineSecretsPtrOutputWithContext(context.Context) MachineSecretsPtrOutput
-}
-
-type machineSecretsPtrType MachineSecretsArgs
-
-func MachineSecretsPtr(v *MachineSecretsArgs) MachineSecretsPtrInput {
-	return (*machineSecretsPtrType)(v)
-}
-
-func (*machineSecretsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**MachineSecrets)(nil)).Elem()
-}
-
-func (i *machineSecretsPtrType) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
-	return i.ToMachineSecretsPtrOutputWithContext(context.Background())
-}
-
-func (i *machineSecretsPtrType) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(MachineSecretsPtrOutput)
-}
-
 // A complete Machine Secrets configuration
 type MachineSecretsOutput struct{ *pulumi.OutputState }
 
@@ -3139,16 +2922,6 @@ func (o MachineSecretsOutput) ToMachineSecretsOutput() MachineSecretsOutput {
 
 func (o MachineSecretsOutput) ToMachineSecretsOutputWithContext(ctx context.Context) MachineSecretsOutput {
 	return o
-}
-
-func (o MachineSecretsOutput) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
-	return o.ToMachineSecretsPtrOutputWithContext(context.Background())
-}
-
-func (o MachineSecretsOutput) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v MachineSecrets) *MachineSecrets {
-		return &v
-	}).(MachineSecretsPtrOutput)
 }
 
 func (o MachineSecretsOutput) Certs() CertificatesOutput {
@@ -3165,66 +2938,6 @@ func (o MachineSecretsOutput) Secrets() KubernetesSecretsOutput {
 
 func (o MachineSecretsOutput) Trustdinfo() TrustdInfoOutput {
 	return o.ApplyT(func(v MachineSecrets) TrustdInfo { return v.Trustdinfo }).(TrustdInfoOutput)
-}
-
-type MachineSecretsPtrOutput struct{ *pulumi.OutputState }
-
-func (MachineSecretsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**MachineSecrets)(nil)).Elem()
-}
-
-func (o MachineSecretsPtrOutput) ToMachineSecretsPtrOutput() MachineSecretsPtrOutput {
-	return o
-}
-
-func (o MachineSecretsPtrOutput) ToMachineSecretsPtrOutputWithContext(ctx context.Context) MachineSecretsPtrOutput {
-	return o
-}
-
-func (o MachineSecretsPtrOutput) Elem() MachineSecretsOutput {
-	return o.ApplyT(func(v *MachineSecrets) MachineSecrets {
-		if v != nil {
-			return *v
-		}
-		var ret MachineSecrets
-		return ret
-	}).(MachineSecretsOutput)
-}
-
-func (o MachineSecretsPtrOutput) Certs() CertificatesPtrOutput {
-	return o.ApplyT(func(v *MachineSecrets) *Certificates {
-		if v == nil {
-			return nil
-		}
-		return &v.Certs
-	}).(CertificatesPtrOutput)
-}
-
-func (o MachineSecretsPtrOutput) Cluster() ClusterPtrOutput {
-	return o.ApplyT(func(v *MachineSecrets) *Cluster {
-		if v == nil {
-			return nil
-		}
-		return &v.Cluster
-	}).(ClusterPtrOutput)
-}
-
-func (o MachineSecretsPtrOutput) Secrets() KubernetesSecretsPtrOutput {
-	return o.ApplyT(func(v *MachineSecrets) *KubernetesSecrets {
-		if v == nil {
-			return nil
-		}
-		return &v.Secrets
-	}).(KubernetesSecretsPtrOutput)
-}
-
-func (o MachineSecretsPtrOutput) Trustdinfo() TrustdInfoPtrOutput {
-	return o.ApplyT(func(v *MachineSecrets) *TrustdInfo {
-		if v == nil {
-			return nil
-		}
-		return &v.Trustdinfo
-	}).(TrustdInfoPtrOutput)
 }
 
 // A Machine Secrets Trust daemon info
@@ -3262,47 +2975,6 @@ func (i TrustdInfoArgs) ToTrustdInfoOutputWithContext(ctx context.Context) Trust
 	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoOutput)
 }
 
-func (i TrustdInfoArgs) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
-	return i.ToTrustdInfoPtrOutputWithContext(context.Background())
-}
-
-func (i TrustdInfoArgs) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoOutput).ToTrustdInfoPtrOutputWithContext(ctx)
-}
-
-// TrustdInfoPtrInput is an input type that accepts TrustdInfoArgs, TrustdInfoPtr and TrustdInfoPtrOutput values.
-// You can construct a concrete instance of `TrustdInfoPtrInput` via:
-//
-//	        TrustdInfoArgs{...}
-//
-//	or:
-//
-//	        nil
-type TrustdInfoPtrInput interface {
-	pulumi.Input
-
-	ToTrustdInfoPtrOutput() TrustdInfoPtrOutput
-	ToTrustdInfoPtrOutputWithContext(context.Context) TrustdInfoPtrOutput
-}
-
-type trustdInfoPtrType TrustdInfoArgs
-
-func TrustdInfoPtr(v *TrustdInfoArgs) TrustdInfoPtrInput {
-	return (*trustdInfoPtrType)(v)
-}
-
-func (*trustdInfoPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**TrustdInfo)(nil)).Elem()
-}
-
-func (i *trustdInfoPtrType) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
-	return i.ToTrustdInfoPtrOutputWithContext(context.Background())
-}
-
-func (i *trustdInfoPtrType) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TrustdInfoPtrOutput)
-}
-
 // A Machine Secrets Trust daemon info
 type TrustdInfoOutput struct{ *pulumi.OutputState }
 
@@ -3318,53 +2990,9 @@ func (o TrustdInfoOutput) ToTrustdInfoOutputWithContext(ctx context.Context) Tru
 	return o
 }
 
-func (o TrustdInfoOutput) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
-	return o.ToTrustdInfoPtrOutputWithContext(context.Background())
-}
-
-func (o TrustdInfoOutput) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v TrustdInfo) *TrustdInfo {
-		return &v
-	}).(TrustdInfoPtrOutput)
-}
-
 // The trustd token for the talos kubernetes cluster
 func (o TrustdInfoOutput) Token() pulumi.StringOutput {
 	return o.ApplyT(func(v TrustdInfo) string { return v.Token }).(pulumi.StringOutput)
-}
-
-type TrustdInfoPtrOutput struct{ *pulumi.OutputState }
-
-func (TrustdInfoPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**TrustdInfo)(nil)).Elem()
-}
-
-func (o TrustdInfoPtrOutput) ToTrustdInfoPtrOutput() TrustdInfoPtrOutput {
-	return o
-}
-
-func (o TrustdInfoPtrOutput) ToTrustdInfoPtrOutputWithContext(ctx context.Context) TrustdInfoPtrOutput {
-	return o
-}
-
-func (o TrustdInfoPtrOutput) Elem() TrustdInfoOutput {
-	return o.ApplyT(func(v *TrustdInfo) TrustdInfo {
-		if v != nil {
-			return *v
-		}
-		var ret TrustdInfo
-		return ret
-	}).(TrustdInfoOutput)
-}
-
-// The trustd token for the talos kubernetes cluster
-func (o TrustdInfoPtrOutput) Token() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *TrustdInfo) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Token
-	}).(pulumi.StringPtrOutput)
 }
 
 type GetConfigurationMachineSecrets struct {
@@ -4681,11 +4309,17 @@ func (o GetDisksTimeoutsPtrOutput) Read() pulumi.StringPtrOutput {
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationInput)(nil)).Elem(), BootstrapClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationPtrInput)(nil)).Elem(), BootstrapClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapTimeoutsInput)(nil)).Elem(), BootstrapTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapTimeoutsPtrInput)(nil)).Elem(), BootstrapTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationInput)(nil)).Elem(), ConfigurationApplyClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationPtrInput)(nil)).Elem(), ConfigurationApplyClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyTimeoutsInput)(nil)).Elem(), ConfigurationApplyTimeoutsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyTimeoutsPtrInput)(nil)).Elem(), ConfigurationApplyTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsClientConfigurationInput)(nil)).Elem(), SecretsClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsClientConfigurationPtrInput)(nil)).Elem(), SecretsClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsInput)(nil)).Elem(), SecretsMachineSecretsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsPtrInput)(nil)).Elem(), SecretsMachineSecretsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsCertsInput)(nil)).Elem(), SecretsMachineSecretsCertsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsCertsPtrInput)(nil)).Elem(), SecretsMachineSecretsCertsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsCertsEtcdInput)(nil)).Elem(), SecretsMachineSecretsCertsEtcdArgs{})
@@ -4704,24 +4338,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsSecretsPtrInput)(nil)).Elem(), SecretsMachineSecretsSecretsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsTrustdinfoInput)(nil)).Elem(), SecretsMachineSecretsTrustdinfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsTrustdinfoPtrInput)(nil)).Elem(), SecretsMachineSecretsTrustdinfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TimeoutInput)(nil)).Elem(), TimeoutArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TimeoutPtrInput)(nil)).Elem(), TimeoutArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertificateInput)(nil)).Elem(), CertificateArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CertificatePtrInput)(nil)).Elem(), CertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertificatesInput)(nil)).Elem(), CertificatesArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CertificatesPtrInput)(nil)).Elem(), CertificatesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClientConfigurationInput)(nil)).Elem(), ClientConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClientConfigurationPtrInput)(nil)).Elem(), ClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterInput)(nil)).Elem(), ClusterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPtrInput)(nil)).Elem(), ClusterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KeyInput)(nil)).Elem(), KeyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*KeyPtrInput)(nil)).Elem(), KeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KubernetesSecretsInput)(nil)).Elem(), KubernetesSecretsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*KubernetesSecretsPtrInput)(nil)).Elem(), KubernetesSecretsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineSecretsInput)(nil)).Elem(), MachineSecretsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*MachineSecretsPtrInput)(nil)).Elem(), MachineSecretsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TrustdInfoInput)(nil)).Elem(), TrustdInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TrustdInfoPtrInput)(nil)).Elem(), TrustdInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsInput)(nil)).Elem(), GetConfigurationMachineSecretsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsCertsInput)(nil)).Elem(), GetConfigurationMachineSecretsCertsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationMachineSecretsCertsEtcdInput)(nil)).Elem(), GetConfigurationMachineSecretsCertsEtcdArgs{})
@@ -4740,11 +4364,17 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksTimeoutsInput)(nil)).Elem(), GetDisksTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksTimeoutsPtrInput)(nil)).Elem(), GetDisksTimeoutsArgs{})
 	pulumi.RegisterOutputType(BootstrapClientConfigurationOutput{})
+	pulumi.RegisterOutputType(BootstrapClientConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationOutput{})
+	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(ConfigurationApplyTimeoutsOutput{})
+	pulumi.RegisterOutputType(ConfigurationApplyTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(SecretsClientConfigurationOutput{})
+	pulumi.RegisterOutputType(SecretsClientConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsOutput{})
+	pulumi.RegisterOutputType(SecretsMachineSecretsPtrOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsCertsOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsCertsPtrOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsCertsEtcdOutput{})
@@ -4763,24 +4393,14 @@ func init() {
 	pulumi.RegisterOutputType(SecretsMachineSecretsSecretsPtrOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsTrustdinfoOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsTrustdinfoPtrOutput{})
-	pulumi.RegisterOutputType(TimeoutOutput{})
-	pulumi.RegisterOutputType(TimeoutPtrOutput{})
 	pulumi.RegisterOutputType(CertificateOutput{})
-	pulumi.RegisterOutputType(CertificatePtrOutput{})
 	pulumi.RegisterOutputType(CertificatesOutput{})
-	pulumi.RegisterOutputType(CertificatesPtrOutput{})
 	pulumi.RegisterOutputType(ClientConfigurationOutput{})
-	pulumi.RegisterOutputType(ClientConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(ClusterOutput{})
-	pulumi.RegisterOutputType(ClusterPtrOutput{})
 	pulumi.RegisterOutputType(KeyOutput{})
-	pulumi.RegisterOutputType(KeyPtrOutput{})
 	pulumi.RegisterOutputType(KubernetesSecretsOutput{})
-	pulumi.RegisterOutputType(KubernetesSecretsPtrOutput{})
 	pulumi.RegisterOutputType(MachineSecretsOutput{})
-	pulumi.RegisterOutputType(MachineSecretsPtrOutput{})
 	pulumi.RegisterOutputType(TrustdInfoOutput{})
-	pulumi.RegisterOutputType(TrustdInfoPtrOutput{})
 	pulumi.RegisterOutputType(GetConfigurationMachineSecretsOutput{})
 	pulumi.RegisterOutputType(GetConfigurationMachineSecretsCertsOutput{})
 	pulumi.RegisterOutputType(GetConfigurationMachineSecretsCertsEtcdOutput{})
