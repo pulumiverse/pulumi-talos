@@ -42,7 +42,7 @@ Try installing
 ```
 pip install setuptools
 ```
-Or better yet if you're using a Python Virtual Env
+If you're using a Python Virtual Env
 ```
 python3 -m venv venv
 source venv/bin/activate
