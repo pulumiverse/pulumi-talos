@@ -30,10 +30,12 @@ namespace Pulumiverse.Talos.Machine
     /// 
     /// ## Import
     /// 
-    /// terraform machine secrets can be imported from an existing secrets file
+    /// terraform
+    /// 
+    /// machine secrets can be imported from an existing secrets file
     /// 
     /// ```sh
-    ///  $ pulumi import talos:machine/secrets:Secrets this &lt;path-to-secrets.yaml&gt;
+    /// $ pulumi import talos:machine/secrets:Secrets this &lt;path-to-secrets.yaml&gt;
     /// ```
     /// </summary>
     [TalosResourceType("talos:machine/secrets:Secrets")]

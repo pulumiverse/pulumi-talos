@@ -172,7 +172,7 @@ def get_configuration(cluster_endpoint: Optional[str] = None,
                       docs: Optional[bool] = None,
                       examples: Optional[bool] = None,
                       kubernetes_version: Optional[str] = None,
-                      machine_secrets: Optional[pulumi.InputType['MachineSecretsArgs']] = None,
+                      machine_secrets: Optional[Union['MachineSecretsArgs', 'MachineSecretsArgsDict']] = None,
                       machine_type: Optional[str] = None,
                       talos_version: Optional[str] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConfigurationResult:
@@ -202,7 +202,7 @@ def get_configuration(cluster_endpoint: Optional[str] = None,
     :param bool docs: Whether to generate documentation for the generated configuration
     :param bool examples: Whether to generate examples for the generated configuration
     :param str kubernetes_version: The version of kubernetes to use
-    :param pulumi.InputType['MachineSecretsArgs'] machine_secrets: The secrets for the talos cluster
+    :param Union['MachineSecretsArgs', 'MachineSecretsArgsDict'] machine_secrets: The secrets for the talos cluster
     :param str machine_type: The type of machine to generate the configuration for
     :param str talos_version: The version of talos features to use in generated machine configuration
     """
@@ -240,7 +240,7 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
                              docs: Optional[pulumi.Input[Optional[bool]]] = None,
                              examples: Optional[pulumi.Input[Optional[bool]]] = None,
                              kubernetes_version: Optional[pulumi.Input[Optional[str]]] = None,
-                             machine_secrets: Optional[pulumi.Input[pulumi.InputType['MachineSecretsArgs']]] = None,
+                             machine_secrets: Optional[pulumi.Input[Union['MachineSecretsArgs', 'MachineSecretsArgsDict']]] = None,
                              machine_type: Optional[pulumi.Input[str]] = None,
                              talos_version: Optional[pulumi.Input[Optional[str]]] = None,
                              opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConfigurationResult]:
@@ -270,7 +270,7 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
     :param bool docs: Whether to generate documentation for the generated configuration
     :param bool examples: Whether to generate examples for the generated configuration
     :param str kubernetes_version: The version of kubernetes to use
-    :param pulumi.InputType['MachineSecretsArgs'] machine_secrets: The secrets for the talos cluster
+    :param Union['MachineSecretsArgs', 'MachineSecretsArgsDict'] machine_secrets: The secrets for the talos cluster
     :param str machine_type: The type of machine to generate the configuration for
     :param str talos_version: The version of talos features to use in generated machine configuration
     """

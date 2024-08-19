@@ -1120,7 +1120,7 @@ func (o SecretsMachineSecretsCertsK8sAggregatorPtrOutput) Key() pulumi.StringPtr
 }
 
 type SecretsMachineSecretsCertsK8sServiceaccount struct {
-	// key data
+	// The service account key
 	Key *string `pulumi:"key"`
 }
 
@@ -1136,7 +1136,7 @@ type SecretsMachineSecretsCertsK8sServiceaccountInput interface {
 }
 
 type SecretsMachineSecretsCertsK8sServiceaccountArgs struct {
-	// key data
+	// The service account key
 	Key pulumi.StringPtrInput `pulumi:"key"`
 }
 
@@ -1217,7 +1217,7 @@ func (o SecretsMachineSecretsCertsK8sServiceaccountOutput) ToSecretsMachineSecre
 	}).(SecretsMachineSecretsCertsK8sServiceaccountPtrOutput)
 }
 
-// key data
+// The service account key
 func (o SecretsMachineSecretsCertsK8sServiceaccountOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecretsMachineSecretsCertsK8sServiceaccount) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
@@ -1246,7 +1246,7 @@ func (o SecretsMachineSecretsCertsK8sServiceaccountPtrOutput) Elem() SecretsMach
 	}).(SecretsMachineSecretsCertsK8sServiceaccountOutput)
 }
 
-// key data
+// The service account key
 func (o SecretsMachineSecretsCertsK8sServiceaccountPtrOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecretsMachineSecretsCertsK8sServiceaccount) *string {
 		if v == nil {
@@ -3719,7 +3719,7 @@ func (o GetConfigurationMachineSecretsCertsK8sAggregatorOutput) Key() pulumi.Str
 }
 
 type GetConfigurationMachineSecretsCertsK8sServiceaccount struct {
-	// key data
+	// The key for the k8s service account
 	Key string `pulumi:"key"`
 }
 
@@ -3735,7 +3735,7 @@ type GetConfigurationMachineSecretsCertsK8sServiceaccountInput interface {
 }
 
 type GetConfigurationMachineSecretsCertsK8sServiceaccountArgs struct {
-	// key data
+	// The key for the k8s service account
 	Key pulumi.StringInput `pulumi:"key"`
 }
 
@@ -3765,7 +3765,7 @@ func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) ToGetConfigu
 	return o
 }
 
-// key data
+// The key for the k8s service account
 func (o GetConfigurationMachineSecretsCertsK8sServiceaccountOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConfigurationMachineSecretsCertsK8sServiceaccount) string { return v.Key }).(pulumi.StringOutput)
 }

@@ -41,7 +41,7 @@ export interface GetKubeconfigArgs {
     /**
      * Wait for the kubernetes api to be available
      *
-     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
+     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos.cluster.getHealth instead.
      */
     wait?: boolean;
 }
@@ -78,7 +78,7 @@ export interface GetKubeconfigResult {
     /**
      * Wait for the kubernetes api to be available
      *
-     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
+     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos.cluster.getHealth instead.
      */
     readonly wait?: boolean;
 }
@@ -109,7 +109,7 @@ export interface GetKubeconfigOutputArgs {
     /**
      * Wait for the kubernetes api to be available
      *
-     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.
+     * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos.cluster.getHealth instead.
      */
     wait?: pulumi.Input<boolean>;
 }

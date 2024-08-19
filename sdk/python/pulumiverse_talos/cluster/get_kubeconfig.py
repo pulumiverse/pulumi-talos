@@ -104,13 +104,11 @@ class GetKubeconfigResult:
 
     @property
     @pulumi.getter
+    @_utilities.deprecated("""This attribute is deprecated and no-op. Will be removed in a future version. Use cluster_get_health instead.""")
     def wait(self) -> Optional[bool]:
         """
         Wait for the kubernetes api to be available
         """
-        warnings.warn("""This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.""", DeprecationWarning)
-        pulumi.log.warn("""wait is deprecated: This attribute is deprecated and no-op. Will be removed in a future version. Use talos_cluster_health instead.""")
-
         return pulumi.get(self, "wait")
 
 
@@ -130,17 +128,17 @@ class AwaitableGetKubeconfigResult(GetKubeconfigResult):
             wait=self.wait)
 
 
-def get_kubeconfig(client_configuration: Optional[pulumi.InputType['GetKubeconfigClientConfigurationArgs']] = None,
+def get_kubeconfig(client_configuration: Optional[Union['GetKubeconfigClientConfigurationArgs', 'GetKubeconfigClientConfigurationArgsDict']] = None,
                    endpoint: Optional[str] = None,
                    node: Optional[str] = None,
-                   timeouts: Optional[pulumi.InputType['GetKubeconfigTimeoutsArgs']] = None,
+                   timeouts: Optional[Union['GetKubeconfigTimeoutsArgs', 'GetKubeconfigTimeoutsArgsDict']] = None,
                    wait: Optional[bool] = None,
                    opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetKubeconfigResult:
     """
     Retrieves the kubeconfig for a Talos cluster
 
 
-    :param pulumi.InputType['GetKubeconfigClientConfigurationArgs'] client_configuration: The client configuration data
+    :param Union['GetKubeconfigClientConfigurationArgs', 'GetKubeconfigClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
     :param str node: controlplane node to retrieve the kubeconfig from
     :param bool wait: Wait for the kubernetes api to be available
@@ -166,17 +164,17 @@ def get_kubeconfig(client_configuration: Optional[pulumi.InputType['GetKubeconfi
 
 
 @_utilities.lift_output_func(get_kubeconfig)
-def get_kubeconfig_output(client_configuration: Optional[pulumi.Input[pulumi.InputType['GetKubeconfigClientConfigurationArgs']]] = None,
+def get_kubeconfig_output(client_configuration: Optional[pulumi.Input[Union['GetKubeconfigClientConfigurationArgs', 'GetKubeconfigClientConfigurationArgsDict']]] = None,
                           endpoint: Optional[pulumi.Input[Optional[str]]] = None,
                           node: Optional[pulumi.Input[str]] = None,
-                          timeouts: Optional[pulumi.Input[Optional[pulumi.InputType['GetKubeconfigTimeoutsArgs']]]] = None,
+                          timeouts: Optional[pulumi.Input[Optional[Union['GetKubeconfigTimeoutsArgs', 'GetKubeconfigTimeoutsArgsDict']]]] = None,
                           wait: Optional[pulumi.Input[Optional[bool]]] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetKubeconfigResult]:
     """
     Retrieves the kubeconfig for a Talos cluster
 
 
-    :param pulumi.InputType['GetKubeconfigClientConfigurationArgs'] client_configuration: The client configuration data
+    :param Union['GetKubeconfigClientConfigurationArgs', 'GetKubeconfigClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
     :param str node: controlplane node to retrieve the kubeconfig from
     :param bool wait: Wait for the kubernetes api to be available

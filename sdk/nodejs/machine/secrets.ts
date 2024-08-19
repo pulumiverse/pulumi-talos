@@ -20,10 +20,12 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * terraform machine secrets can be imported from an existing secrets file
+ * terraform
+ *
+ * machine secrets can be imported from an existing secrets file
  *
  * ```sh
- *  $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
+ * $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
  * ```
  */
 export class Secrets extends pulumi.CustomResource {
