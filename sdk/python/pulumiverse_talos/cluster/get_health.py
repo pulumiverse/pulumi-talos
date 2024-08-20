@@ -103,17 +103,17 @@ class AwaitableGetHealthResult(GetHealthResult):
             worker_nodes=self.worker_nodes)
 
 
-def get_health(client_configuration: Optional[pulumi.InputType['GetHealthClientConfigurationArgs']] = None,
+def get_health(client_configuration: Optional[Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict']] = None,
                control_plane_nodes: Optional[Sequence[str]] = None,
                endpoints: Optional[Sequence[str]] = None,
-               timeouts: Optional[pulumi.InputType['GetHealthTimeoutsArgs']] = None,
+               timeouts: Optional[Union['GetHealthTimeoutsArgs', 'GetHealthTimeoutsArgsDict']] = None,
                worker_nodes: Optional[Sequence[str]] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetHealthResult:
     """
     Checks the health of a Talos cluster
 
 
-    :param pulumi.InputType['GetHealthClientConfigurationArgs'] client_configuration: The client configuration data
+    :param Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param Sequence[str] control_plane_nodes: List of control plane nodes to check for health.
     :param Sequence[str] endpoints: endpoints to use for the health check client. Use at least one control plane endpoint.
     :param Sequence[str] worker_nodes: List of worker nodes to check for health.
@@ -137,17 +137,17 @@ def get_health(client_configuration: Optional[pulumi.InputType['GetHealthClientC
 
 
 @_utilities.lift_output_func(get_health)
-def get_health_output(client_configuration: Optional[pulumi.Input[pulumi.InputType['GetHealthClientConfigurationArgs']]] = None,
+def get_health_output(client_configuration: Optional[pulumi.Input[Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict']]] = None,
                       control_plane_nodes: Optional[pulumi.Input[Sequence[str]]] = None,
                       endpoints: Optional[pulumi.Input[Sequence[str]]] = None,
-                      timeouts: Optional[pulumi.Input[Optional[pulumi.InputType['GetHealthTimeoutsArgs']]]] = None,
+                      timeouts: Optional[pulumi.Input[Optional[Union['GetHealthTimeoutsArgs', 'GetHealthTimeoutsArgsDict']]]] = None,
                       worker_nodes: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetHealthResult]:
     """
     Checks the health of a Talos cluster
 
 
-    :param pulumi.InputType['GetHealthClientConfigurationArgs'] client_configuration: The client configuration data
+    :param Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param Sequence[str] control_plane_nodes: List of control plane nodes to check for health.
     :param Sequence[str] endpoints: endpoints to use for the health check client. Use at least one control plane endpoint.
     :param Sequence[str] worker_nodes: List of worker nodes to check for health.

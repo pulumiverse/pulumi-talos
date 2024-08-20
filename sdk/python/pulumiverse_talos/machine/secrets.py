@@ -114,10 +114,12 @@ class Secrets(pulumi.CustomResource):
 
         ## Import
 
-        terraform machine secrets can be imported from an existing secrets file
+        terraform
+
+        machine secrets can be imported from an existing secrets file
 
         ```sh
-         $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
+        $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
         ```
 
         :param str resource_name: The name of the resource.
@@ -144,10 +146,12 @@ class Secrets(pulumi.CustomResource):
 
         ## Import
 
-        terraform machine secrets can be imported from an existing secrets file
+        terraform
+
+        machine secrets can be imported from an existing secrets file
 
         ```sh
-         $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
+        $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
         ```
 
         :param str resource_name: The name of the resource.
@@ -188,8 +192,8 @@ class Secrets(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
-            machine_secrets: Optional[pulumi.Input[pulumi.InputType['MachineSecretsArgs']]] = None,
+            client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
+            machine_secrets: Optional[pulumi.Input[Union['MachineSecretsArgs', 'MachineSecretsArgsDict']]] = None,
             talos_version: Optional[pulumi.Input[str]] = None) -> 'Secrets':
         """
         Get an existing Secrets resource's state with the given name, id, and optional extra
@@ -198,8 +202,8 @@ class Secrets(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['ClientConfigurationArgs']] client_configuration: The generated client configuration data
-        :param pulumi.Input[pulumi.InputType['MachineSecretsArgs']] machine_secrets: The secrets for the talos cluster
+        :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The generated client configuration data
+        :param pulumi.Input[Union['MachineSecretsArgs', 'MachineSecretsArgsDict']] machine_secrets: The secrets for the talos cluster
         :param pulumi.Input[str] talos_version: The version of talos features to use in generated machine configuration
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))

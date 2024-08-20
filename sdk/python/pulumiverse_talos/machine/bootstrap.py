@@ -152,25 +152,27 @@ class Bootstrap(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
+                 client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 timeouts: Optional[pulumi.Input[pulumi.InputType['BootstrapTimeoutsArgs']]] = None,
+                 timeouts: Optional[pulumi.Input[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None,
                  __props__=None):
         """
         The machine bootstrap resource allows you to bootstrap a Talos node.
 
         ## Import
 
-        terraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
+        terraform
+
+        machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
 
         ```sh
-         $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
+        $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['ClientConfigurationArgs']] client_configuration: The client configuration data
+        :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The client configuration data
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] node: The name of the node to bootstrap
         """
@@ -185,10 +187,12 @@ class Bootstrap(pulumi.CustomResource):
 
         ## Import
 
-        terraform machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
+        terraform
+
+        machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
 
         ```sh
-         $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
+        $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -206,10 +210,10 @@ class Bootstrap(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
+                 client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
-                 timeouts: Optional[pulumi.Input[pulumi.InputType['BootstrapTimeoutsArgs']]] = None,
+                 timeouts: Optional[pulumi.Input[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -237,10 +241,10 @@ class Bootstrap(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            client_configuration: Optional[pulumi.Input[pulumi.InputType['ClientConfigurationArgs']]] = None,
+            client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
             endpoint: Optional[pulumi.Input[str]] = None,
             node: Optional[pulumi.Input[str]] = None,
-            timeouts: Optional[pulumi.Input[pulumi.InputType['BootstrapTimeoutsArgs']]] = None) -> 'Bootstrap':
+            timeouts: Optional[pulumi.Input[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None) -> 'Bootstrap':
         """
         Get an existing Bootstrap resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -248,7 +252,7 @@ class Bootstrap(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['ClientConfigurationArgs']] client_configuration: The client configuration data
+        :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The client configuration data
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] node: The name of the node to bootstrap
         """

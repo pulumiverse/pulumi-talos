@@ -106,7 +106,7 @@ class AwaitableGetConfigurationResult(GetConfigurationResult):
             talos_config=self.talos_config)
 
 
-def get_configuration(client_configuration: Optional[pulumi.InputType['GetConfigurationClientConfigurationArgs']] = None,
+def get_configuration(client_configuration: Optional[Union['GetConfigurationClientConfigurationArgs', 'GetConfigurationClientConfigurationArgsDict']] = None,
                       cluster_name: Optional[str] = None,
                       endpoints: Optional[Sequence[str]] = None,
                       nodes: Optional[Sequence[str]] = None,
@@ -128,7 +128,7 @@ def get_configuration(client_configuration: Optional[pulumi.InputType['GetConfig
     ```
 
 
-    :param pulumi.InputType['GetConfigurationClientConfigurationArgs'] client_configuration: The client configuration data
+    :param Union['GetConfigurationClientConfigurationArgs', 'GetConfigurationClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param str cluster_name: The name of the cluster in the generated config
     :param Sequence[str] endpoints: endpoints to set in the generated config
     :param Sequence[str] nodes: nodes to set in the generated config
@@ -151,7 +151,7 @@ def get_configuration(client_configuration: Optional[pulumi.InputType['GetConfig
 
 
 @_utilities.lift_output_func(get_configuration)
-def get_configuration_output(client_configuration: Optional[pulumi.Input[pulumi.InputType['GetConfigurationClientConfigurationArgs']]] = None,
+def get_configuration_output(client_configuration: Optional[pulumi.Input[Union['GetConfigurationClientConfigurationArgs', 'GetConfigurationClientConfigurationArgsDict']]] = None,
                              cluster_name: Optional[pulumi.Input[str]] = None,
                              endpoints: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
                              nodes: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
@@ -173,7 +173,7 @@ def get_configuration_output(client_configuration: Optional[pulumi.Input[pulumi.
     ```
 
 
-    :param pulumi.InputType['GetConfigurationClientConfigurationArgs'] client_configuration: The client configuration data
+    :param Union['GetConfigurationClientConfigurationArgs', 'GetConfigurationClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param str cluster_name: The name of the cluster in the generated config
     :param Sequence[str] endpoints: endpoints to set in the generated config
     :param Sequence[str] nodes: nodes to set in the generated config

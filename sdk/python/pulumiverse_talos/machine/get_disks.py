@@ -115,11 +115,11 @@ class AwaitableGetDisksResult(GetDisksResult):
             timeouts=self.timeouts)
 
 
-def get_disks(client_configuration: Optional[pulumi.InputType['GetDisksClientConfigurationArgs']] = None,
+def get_disks(client_configuration: Optional[Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict']] = None,
               endpoint: Optional[str] = None,
-              filters: Optional[pulumi.InputType['GetDisksFiltersArgs']] = None,
+              filters: Optional[Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict']] = None,
               node: Optional[str] = None,
-              timeouts: Optional[pulumi.InputType['GetDisksTimeoutsArgs']] = None,
+              timeouts: Optional[Union['GetDisksTimeoutsArgs', 'GetDisksTimeoutsArgsDict']] = None,
               opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetDisksResult:
     """
     Generate a machine configuration for a node type
@@ -136,17 +136,17 @@ def get_disks(client_configuration: Optional[pulumi.InputType['GetDisksClientCon
     this_secrets = talos.machine.Secrets("thisSecrets")
     this_disks = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
         node="10.5.0.2",
-        filters=talos.machine.GetDisksFiltersArgs(
-            size="> 100GB",
-            type="nvme",
-        ))
+        filters={
+            "size": "> 100GB",
+            "type": "nvme",
+        })
     pulumi.export("nvmeDisks", this_disks.apply(lambda this_disks: [__item.name for __item in this_disks.disks]))
     ```
 
 
-    :param pulumi.InputType['GetDisksClientConfigurationArgs'] client_configuration: The client configuration data
+    :param Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
-    :param pulumi.InputType['GetDisksFiltersArgs'] filters: Filters to apply to the disks
+    :param Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict'] filters: Filters to apply to the disks
     :param str node: controlplane node to retrieve the kubeconfig from
     """
     __args__ = dict()
@@ -169,11 +169,11 @@ def get_disks(client_configuration: Optional[pulumi.InputType['GetDisksClientCon
 
 
 @_utilities.lift_output_func(get_disks)
-def get_disks_output(client_configuration: Optional[pulumi.Input[pulumi.InputType['GetDisksClientConfigurationArgs']]] = None,
+def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict']]] = None,
                      endpoint: Optional[pulumi.Input[Optional[str]]] = None,
-                     filters: Optional[pulumi.Input[Optional[pulumi.InputType['GetDisksFiltersArgs']]]] = None,
+                     filters: Optional[pulumi.Input[Optional[Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict']]]] = None,
                      node: Optional[pulumi.Input[str]] = None,
-                     timeouts: Optional[pulumi.Input[Optional[pulumi.InputType['GetDisksTimeoutsArgs']]]] = None,
+                     timeouts: Optional[pulumi.Input[Optional[Union['GetDisksTimeoutsArgs', 'GetDisksTimeoutsArgsDict']]]] = None,
                      opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDisksResult]:
     """
     Generate a machine configuration for a node type
@@ -190,17 +190,17 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[pulumi.InputTyp
     this_secrets = talos.machine.Secrets("thisSecrets")
     this_disks = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
         node="10.5.0.2",
-        filters=talos.machine.GetDisksFiltersArgs(
-            size="> 100GB",
-            type="nvme",
-        ))
+        filters={
+            "size": "> 100GB",
+            "type": "nvme",
+        })
     pulumi.export("nvmeDisks", this_disks.apply(lambda this_disks: [__item.name for __item in this_disks.disks]))
     ```
 
 
-    :param pulumi.InputType['GetDisksClientConfigurationArgs'] client_configuration: The client configuration data
+    :param Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
-    :param pulumi.InputType['GetDisksFiltersArgs'] filters: Filters to apply to the disks
+    :param Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict'] filters: Filters to apply to the disks
     :param str node: controlplane node to retrieve the kubeconfig from
     """
     ...
