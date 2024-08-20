@@ -22,3 +22,5 @@ provider/**/schema-embed.json
 **/nuget
 **/dist
 _out
+
+go.work*
