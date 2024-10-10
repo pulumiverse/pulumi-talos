@@ -1,3 +1,3 @@
 module github.com/pulumiverse/pulumi-talos/examples
 
-go 1.20
+go 1.22
