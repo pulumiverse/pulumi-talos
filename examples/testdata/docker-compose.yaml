@@ -1,0 +1,50 @@
+# https://www.talos.dev/v1.8/talos-guides/install/local-platforms/docker/#running-talos-in-docker-manually
+
+name: pulumi-test
+
+x-controlplane: &controlplane
+  image: ghcr.io/siderolabs/talos:v1.8.1
+  environment:
+    PLATFORM: container
+  tmpfs:
+    - /run
+    - /system
+    - /tmp
+  read_only: true
+  privileged: true
+  security_opt:
+    - seccomp:unconfined
+
+services:
+  controlplane:
+    <<: *controlplane
+    networks:
+      default:
+        ipv4_address: '10.6.0.2'
+    volumes:
+      - cni:/etc/cni
+      - k8s:/etc/kubernetes
+      - libexec:/usr/libexec/kubernetes
+      - opt:/opt
+      - udev:/usr/etc/udev
+      - var:/var
+      - state:/system/state
+
+volumes:
+  cni:
+  k8s:
+  libexec:
+  opt:
+  udev:
+  var:
+  state:
+
+networks:
+  default:
+    labels:
+      talos.cluster.name: pulumi-test
+      talos.owned: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.6.0.0/24
