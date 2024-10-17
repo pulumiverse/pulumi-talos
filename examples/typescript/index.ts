@@ -24,6 +24,14 @@ const configurationApply = new talos.machine.ConfigurationApply("configurationAp
             install: {
                 disk: "/dev/sdd",
             },
+
+            // For integration tests
+            features: {
+              hostDNS: {
+                enabled: true,
+                forwardKubeDNSToHost: true,
+              },
+            },
         },
     })],
 });
