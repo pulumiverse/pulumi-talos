@@ -1,28 +1,19 @@
-# Attempt to mimic the output of `talosctl cluster create --provisioner docker ...`
-# The CLI doesn't seem to have a clean way to start a node in maintenence
-# mode, so we'll just stand it up manually for now.
+# https://www.talos.dev/v1.8/talos-guides/install/local-platforms/docker/#running-talos-in-docker-manually
 
 name: pulumi-test
 
 x-controlplane: &controlplane
-  image: ghcr.io/siderolabs/talos:v1.6.7
+  image: ghcr.io/siderolabs/talos:v1.8.1
   environment:
     PLATFORM: container
-    TALOSSKU: 2CPU-2048RAM
-    PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-  labels:
-    org.opencontainers.image.source: https://github.com/siderolabs/talos
-    talos.cluster.name: pulumi-test
-    talos.owned: false
-    talos.type: controlplane
   tmpfs:
     - /run
     - /system
     - /tmp
+  read_only: true
   privileged: true
   security_opt:
     - seccomp:unconfined
-    - label=disable
 
 services:
   controlplane:
@@ -32,8 +23,8 @@ services:
         ipv4_address: '10.6.0.2'
     volumes:
       - cni:/etc/cni
-      - etcK8s:/etc/kubernetes
-      - libexecK8s:/usr/libexec/kubernetes
+      - k8s:/etc/kubernetes
+      - libexec:/usr/libexec/kubernetes
       - opt:/opt
       - udev:/usr/etc/udev
       - var:/var
@@ -41,8 +32,8 @@ services:
 
 volumes:
   cni:
-  etcK8s:
-  libexecK8s:
+  k8s:
+  libexec:
   opt:
   udev:
   var:
