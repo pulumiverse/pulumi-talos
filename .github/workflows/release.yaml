@@ -89,7 +89,7 @@ jobs:
       - name: Install Pulumi CLI
         uses: pulumi/actions@v4
       - name: Setup Node
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4.1.0
         with:
           node-version: ${{ env.NODEVERSION }}
       - name: Setup DotNet
