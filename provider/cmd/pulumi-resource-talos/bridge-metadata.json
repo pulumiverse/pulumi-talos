@@ -1,4 +1,69 @@
 {
+    "auto-aliasing": {
+        "resources": {
+            "talos_machine_bootstrap": {
+                "current": "talos:machine/bootstrap:Bootstrap"
+            },
+            "talos_machine_configuration_apply": {
+                "current": "talos:machine/configurationApply:ConfigurationApply",
+                "fields": {
+                    "config_patches": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "talos_machine_secrets": {
+                "current": "talos:machine/secrets:Secrets"
+            }
+        },
+        "datasources": {
+            "talos_client_configuration": {
+                "current": "talos:client/getConfiguration:getConfiguration",
+                "fields": {
+                    "endpoints": {
+                        "maxItemsOne": false
+                    },
+                    "nodes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "talos_cluster_health": {
+                "current": "talos:cluster/getHealth:getHealth",
+                "fields": {
+                    "control_plane_nodes": {
+                        "maxItemsOne": false
+                    },
+                    "endpoints": {
+                        "maxItemsOne": false
+                    },
+                    "worker_nodes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "talos_cluster_kubeconfig": {
+                "current": "talos:cluster/getKubeconfig:getKubeconfig"
+            },
+            "talos_machine_configuration": {
+                "current": "talos:machine/getConfiguration:getConfiguration",
+                "fields": {
+                    "config_patches": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "talos_machine_disks": {
+                "current": "talos:machine/getDisks:getDisks",
+                "fields": {
+                    "disks": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        }
+    },
+    "auto-settings": {},
     "functions": {
         "talos:client/configuration:Configuration": "talos_client_configuration",
         "talos:cluster/kubeconfig:Kubeconfig": "talos_cluster_kubeconfig",

@@ -16,6 +16,7 @@ import (
 
 	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 
 	"github.com/pulumiverse/pulumi-talos/provider/pkg/version"
@@ -35,7 +36,7 @@ var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
-	info := tfbridge.ProviderInfo{
+	prov := tfbridge.ProviderInfo{
 		P:                 pf.ShimProvider(talos.New()),
 		Name:              talosPkg,
 		Description:       "A Pulumi package for creating and managing Talos Linux machines and clusters.",
@@ -254,7 +255,6 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"talos_machine_bootstrap": {
-				Tok: tfbridge.MakeResource(talosPkg, machineMod, "Bootstrap"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"client_configuration": {
 						Elem: &tfbridge.SchemaInfo{
@@ -264,7 +264,6 @@ func Provider() tfbridge.ProviderInfo {
 				},
 			},
 			"talos_machine_configuration_apply": {
-				Tok: tfbridge.MakeResource(talosPkg, machineMod, "ConfigurationApply"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"timeouts": {
 						Elem: &tfbridge.SchemaInfo{
@@ -279,7 +278,6 @@ func Provider() tfbridge.ProviderInfo {
 				},
 			},
 			"talos_machine_secrets": {
-				Tok: tfbridge.MakeResource(talosPkg, machineMod, "Secrets"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"client_configuration": {
 						Elem: &tfbridge.SchemaInfo{
@@ -295,11 +293,7 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"talos_client_configuration": {Tok: tfbridge.MakeDataSource(talosPkg, clientMod, "getConfiguration")},
-			"talos_cluster_health":       {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "getHealth")},
-			"talos_cluster_kubeconfig":   {Tok: tfbridge.MakeDataSource(talosPkg, clusterMod, "getKubeconfig")},
 			"talos_machine_configuration": {
-				Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "getConfiguration"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"machine_secrets": {
 						Elem: &tfbridge.SchemaInfo{
@@ -308,7 +302,6 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
-			"talos_machine_disks": {Tok: tfbridge.MakeDataSource(talosPkg, machineMod, "getDisks")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/talos",
@@ -350,7 +343,20 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
-	info.SetAutonaming(255, "-")
+	prov.MustComputeTokens(
+		tks.KnownModules(
+			"talos_",
+			"index",
+			[]string{
+				clientMod,
+				clusterMod,
+				machineMod,
+			},
+			tks.MakeStandard(talosPkg),
+		),
+	)
+	prov.SetAutonaming(255, "-")
+	prov.MustApplyAutoAliases()
 
-	return info
+	return prov
 }
