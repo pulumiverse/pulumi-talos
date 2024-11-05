@@ -29,8 +29,10 @@ type ConfigurationApply struct {
 	// The machine configuration to apply
 	MachineConfigurationInput pulumi.StringOutput `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
-	Node     pulumi.StringOutput `pulumi:"node"`
-	Timeouts TimeoutPtrOutput    `pulumi:"timeouts"`
+	Node pulumi.StringOutput `pulumi:"node"`
+	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	OnDestroy ConfigurationApplyOnDestroyPtrOutput `pulumi:"onDestroy"`
+	Timeouts  TimeoutPtrOutput                     `pulumi:"timeouts"`
 }
 
 // NewConfigurationApply registers a new resource with the given unique name, arguments, and options.
@@ -93,8 +95,10 @@ type configurationApplyState struct {
 	// The machine configuration to apply
 	MachineConfigurationInput *string `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
-	Node     *string  `pulumi:"node"`
-	Timeouts *Timeout `pulumi:"timeouts"`
+	Node *string `pulumi:"node"`
+	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	OnDestroy *ConfigurationApplyOnDestroy `pulumi:"onDestroy"`
+	Timeouts  *Timeout                     `pulumi:"timeouts"`
 }
 
 type ConfigurationApplyState struct {
@@ -111,8 +115,10 @@ type ConfigurationApplyState struct {
 	// The machine configuration to apply
 	MachineConfigurationInput pulumi.StringPtrInput
 	// The name of the node to bootstrap
-	Node     pulumi.StringPtrInput
-	Timeouts TimeoutPtrInput
+	Node pulumi.StringPtrInput
+	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	OnDestroy ConfigurationApplyOnDestroyPtrInput
+	Timeouts  TimeoutPtrInput
 }
 
 func (ConfigurationApplyState) ElementType() reflect.Type {
@@ -131,8 +137,10 @@ type configurationApplyArgs struct {
 	// The machine configuration to apply
 	MachineConfigurationInput string `pulumi:"machineConfigurationInput"`
 	// The name of the node to bootstrap
-	Node     string   `pulumi:"node"`
-	Timeouts *Timeout `pulumi:"timeouts"`
+	Node string `pulumi:"node"`
+	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	OnDestroy *ConfigurationApplyOnDestroy `pulumi:"onDestroy"`
+	Timeouts  *Timeout                     `pulumi:"timeouts"`
 }
 
 // The set of arguments for constructing a ConfigurationApply resource.
@@ -148,8 +156,10 @@ type ConfigurationApplyArgs struct {
 	// The machine configuration to apply
 	MachineConfigurationInput pulumi.StringInput
 	// The name of the node to bootstrap
-	Node     pulumi.StringInput
-	Timeouts TimeoutPtrInput
+	Node pulumi.StringInput
+	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	OnDestroy ConfigurationApplyOnDestroyPtrInput
+	Timeouts  TimeoutPtrInput
 }
 
 func (ConfigurationApplyArgs) ElementType() reflect.Type {
@@ -272,6 +282,11 @@ func (o ConfigurationApplyOutput) MachineConfigurationInput() pulumi.StringOutpu
 // The name of the node to bootstrap
 func (o ConfigurationApplyOutput) Node() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.Node }).(pulumi.StringOutput)
+}
+
+// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+func (o ConfigurationApplyOutput) OnDestroy() ConfigurationApplyOnDestroyPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApply) ConfigurationApplyOnDestroyPtrOutput { return v.OnDestroy }).(ConfigurationApplyOnDestroyPtrOutput)
 }
 
 func (o ConfigurationApplyOutput) Timeouts() TimeoutPtrOutput {

@@ -19,6 +19,10 @@ namespace Pulumiverse.Talos.Machine.Outputs
         /// </summary>
         public readonly string? Create;
         /// <summary>
+        /// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+        /// </summary>
+        public readonly string? Delete;
+        /// <summary>
         /// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         /// </summary>
         public readonly string? Update;
@@ -27,9 +31,12 @@ namespace Pulumiverse.Talos.Machine.Outputs
         private Timeout(
             string? create,
 
+            string? delete,
+
             string? update)
         {
             Create = create;
+            Delete = delete;
             Update = update;
         }
     }

@@ -13,6 +13,531 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type KubeconfigClientConfiguration struct {
+	// The client CA certificate
+	CaCertificate string `pulumi:"caCertificate"`
+	// The client certificate
+	ClientCertificate string `pulumi:"clientCertificate"`
+	// The client key
+	ClientKey string `pulumi:"clientKey"`
+}
+
+// KubeconfigClientConfigurationInput is an input type that accepts KubeconfigClientConfigurationArgs and KubeconfigClientConfigurationOutput values.
+// You can construct a concrete instance of `KubeconfigClientConfigurationInput` via:
+//
+//	KubeconfigClientConfigurationArgs{...}
+type KubeconfigClientConfigurationInput interface {
+	pulumi.Input
+
+	ToKubeconfigClientConfigurationOutput() KubeconfigClientConfigurationOutput
+	ToKubeconfigClientConfigurationOutputWithContext(context.Context) KubeconfigClientConfigurationOutput
+}
+
+type KubeconfigClientConfigurationArgs struct {
+	// The client CA certificate
+	CaCertificate pulumi.StringInput `pulumi:"caCertificate"`
+	// The client certificate
+	ClientCertificate pulumi.StringInput `pulumi:"clientCertificate"`
+	// The client key
+	ClientKey pulumi.StringInput `pulumi:"clientKey"`
+}
+
+func (KubeconfigClientConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*KubeconfigClientConfiguration)(nil)).Elem()
+}
+
+func (i KubeconfigClientConfigurationArgs) ToKubeconfigClientConfigurationOutput() KubeconfigClientConfigurationOutput {
+	return i.ToKubeconfigClientConfigurationOutputWithContext(context.Background())
+}
+
+func (i KubeconfigClientConfigurationArgs) ToKubeconfigClientConfigurationOutputWithContext(ctx context.Context) KubeconfigClientConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigClientConfigurationOutput)
+}
+
+func (i KubeconfigClientConfigurationArgs) ToKubeconfigClientConfigurationPtrOutput() KubeconfigClientConfigurationPtrOutput {
+	return i.ToKubeconfigClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i KubeconfigClientConfigurationArgs) ToKubeconfigClientConfigurationPtrOutputWithContext(ctx context.Context) KubeconfigClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigClientConfigurationOutput).ToKubeconfigClientConfigurationPtrOutputWithContext(ctx)
+}
+
+// KubeconfigClientConfigurationPtrInput is an input type that accepts KubeconfigClientConfigurationArgs, KubeconfigClientConfigurationPtr and KubeconfigClientConfigurationPtrOutput values.
+// You can construct a concrete instance of `KubeconfigClientConfigurationPtrInput` via:
+//
+//	        KubeconfigClientConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type KubeconfigClientConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToKubeconfigClientConfigurationPtrOutput() KubeconfigClientConfigurationPtrOutput
+	ToKubeconfigClientConfigurationPtrOutputWithContext(context.Context) KubeconfigClientConfigurationPtrOutput
+}
+
+type kubeconfigClientConfigurationPtrType KubeconfigClientConfigurationArgs
+
+func KubeconfigClientConfigurationPtr(v *KubeconfigClientConfigurationArgs) KubeconfigClientConfigurationPtrInput {
+	return (*kubeconfigClientConfigurationPtrType)(v)
+}
+
+func (*kubeconfigClientConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**KubeconfigClientConfiguration)(nil)).Elem()
+}
+
+func (i *kubeconfigClientConfigurationPtrType) ToKubeconfigClientConfigurationPtrOutput() KubeconfigClientConfigurationPtrOutput {
+	return i.ToKubeconfigClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *kubeconfigClientConfigurationPtrType) ToKubeconfigClientConfigurationPtrOutputWithContext(ctx context.Context) KubeconfigClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigClientConfigurationPtrOutput)
+}
+
+type KubeconfigClientConfigurationOutput struct{ *pulumi.OutputState }
+
+func (KubeconfigClientConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*KubeconfigClientConfiguration)(nil)).Elem()
+}
+
+func (o KubeconfigClientConfigurationOutput) ToKubeconfigClientConfigurationOutput() KubeconfigClientConfigurationOutput {
+	return o
+}
+
+func (o KubeconfigClientConfigurationOutput) ToKubeconfigClientConfigurationOutputWithContext(ctx context.Context) KubeconfigClientConfigurationOutput {
+	return o
+}
+
+func (o KubeconfigClientConfigurationOutput) ToKubeconfigClientConfigurationPtrOutput() KubeconfigClientConfigurationPtrOutput {
+	return o.ToKubeconfigClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o KubeconfigClientConfigurationOutput) ToKubeconfigClientConfigurationPtrOutputWithContext(ctx context.Context) KubeconfigClientConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v KubeconfigClientConfiguration) *KubeconfigClientConfiguration {
+		return &v
+	}).(KubeconfigClientConfigurationPtrOutput)
+}
+
+// The client CA certificate
+func (o KubeconfigClientConfigurationOutput) CaCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v KubeconfigClientConfiguration) string { return v.CaCertificate }).(pulumi.StringOutput)
+}
+
+// The client certificate
+func (o KubeconfigClientConfigurationOutput) ClientCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v KubeconfigClientConfiguration) string { return v.ClientCertificate }).(pulumi.StringOutput)
+}
+
+// The client key
+func (o KubeconfigClientConfigurationOutput) ClientKey() pulumi.StringOutput {
+	return o.ApplyT(func(v KubeconfigClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
+}
+
+type KubeconfigClientConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (KubeconfigClientConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**KubeconfigClientConfiguration)(nil)).Elem()
+}
+
+func (o KubeconfigClientConfigurationPtrOutput) ToKubeconfigClientConfigurationPtrOutput() KubeconfigClientConfigurationPtrOutput {
+	return o
+}
+
+func (o KubeconfigClientConfigurationPtrOutput) ToKubeconfigClientConfigurationPtrOutputWithContext(ctx context.Context) KubeconfigClientConfigurationPtrOutput {
+	return o
+}
+
+func (o KubeconfigClientConfigurationPtrOutput) Elem() KubeconfigClientConfigurationOutput {
+	return o.ApplyT(func(v *KubeconfigClientConfiguration) KubeconfigClientConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret KubeconfigClientConfiguration
+		return ret
+	}).(KubeconfigClientConfigurationOutput)
+}
+
+// The client CA certificate
+func (o KubeconfigClientConfigurationPtrOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CaCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client certificate
+func (o KubeconfigClientConfigurationPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client key
+func (o KubeconfigClientConfigurationPtrOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientKey
+	}).(pulumi.StringPtrOutput)
+}
+
+type KubeconfigKubernetesClientConfiguration struct {
+	// The kubernetes CA certificate
+	CaCertificate *string `pulumi:"caCertificate"`
+	// The kubernetes client certificate
+	ClientCertificate *string `pulumi:"clientCertificate"`
+	// The kubernetes client key
+	ClientKey *string `pulumi:"clientKey"`
+	// The kubernetes host
+	Host *string `pulumi:"host"`
+}
+
+// KubeconfigKubernetesClientConfigurationInput is an input type that accepts KubeconfigKubernetesClientConfigurationArgs and KubeconfigKubernetesClientConfigurationOutput values.
+// You can construct a concrete instance of `KubeconfigKubernetesClientConfigurationInput` via:
+//
+//	KubeconfigKubernetesClientConfigurationArgs{...}
+type KubeconfigKubernetesClientConfigurationInput interface {
+	pulumi.Input
+
+	ToKubeconfigKubernetesClientConfigurationOutput() KubeconfigKubernetesClientConfigurationOutput
+	ToKubeconfigKubernetesClientConfigurationOutputWithContext(context.Context) KubeconfigKubernetesClientConfigurationOutput
+}
+
+type KubeconfigKubernetesClientConfigurationArgs struct {
+	// The kubernetes CA certificate
+	CaCertificate pulumi.StringPtrInput `pulumi:"caCertificate"`
+	// The kubernetes client certificate
+	ClientCertificate pulumi.StringPtrInput `pulumi:"clientCertificate"`
+	// The kubernetes client key
+	ClientKey pulumi.StringPtrInput `pulumi:"clientKey"`
+	// The kubernetes host
+	Host pulumi.StringPtrInput `pulumi:"host"`
+}
+
+func (KubeconfigKubernetesClientConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*KubeconfigKubernetesClientConfiguration)(nil)).Elem()
+}
+
+func (i KubeconfigKubernetesClientConfigurationArgs) ToKubeconfigKubernetesClientConfigurationOutput() KubeconfigKubernetesClientConfigurationOutput {
+	return i.ToKubeconfigKubernetesClientConfigurationOutputWithContext(context.Background())
+}
+
+func (i KubeconfigKubernetesClientConfigurationArgs) ToKubeconfigKubernetesClientConfigurationOutputWithContext(ctx context.Context) KubeconfigKubernetesClientConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigKubernetesClientConfigurationOutput)
+}
+
+func (i KubeconfigKubernetesClientConfigurationArgs) ToKubeconfigKubernetesClientConfigurationPtrOutput() KubeconfigKubernetesClientConfigurationPtrOutput {
+	return i.ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i KubeconfigKubernetesClientConfigurationArgs) ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(ctx context.Context) KubeconfigKubernetesClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigKubernetesClientConfigurationOutput).ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(ctx)
+}
+
+// KubeconfigKubernetesClientConfigurationPtrInput is an input type that accepts KubeconfigKubernetesClientConfigurationArgs, KubeconfigKubernetesClientConfigurationPtr and KubeconfigKubernetesClientConfigurationPtrOutput values.
+// You can construct a concrete instance of `KubeconfigKubernetesClientConfigurationPtrInput` via:
+//
+//	        KubeconfigKubernetesClientConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type KubeconfigKubernetesClientConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToKubeconfigKubernetesClientConfigurationPtrOutput() KubeconfigKubernetesClientConfigurationPtrOutput
+	ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(context.Context) KubeconfigKubernetesClientConfigurationPtrOutput
+}
+
+type kubeconfigKubernetesClientConfigurationPtrType KubeconfigKubernetesClientConfigurationArgs
+
+func KubeconfigKubernetesClientConfigurationPtr(v *KubeconfigKubernetesClientConfigurationArgs) KubeconfigKubernetesClientConfigurationPtrInput {
+	return (*kubeconfigKubernetesClientConfigurationPtrType)(v)
+}
+
+func (*kubeconfigKubernetesClientConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**KubeconfigKubernetesClientConfiguration)(nil)).Elem()
+}
+
+func (i *kubeconfigKubernetesClientConfigurationPtrType) ToKubeconfigKubernetesClientConfigurationPtrOutput() KubeconfigKubernetesClientConfigurationPtrOutput {
+	return i.ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *kubeconfigKubernetesClientConfigurationPtrType) ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(ctx context.Context) KubeconfigKubernetesClientConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigKubernetesClientConfigurationPtrOutput)
+}
+
+type KubeconfigKubernetesClientConfigurationOutput struct{ *pulumi.OutputState }
+
+func (KubeconfigKubernetesClientConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*KubeconfigKubernetesClientConfiguration)(nil)).Elem()
+}
+
+func (o KubeconfigKubernetesClientConfigurationOutput) ToKubeconfigKubernetesClientConfigurationOutput() KubeconfigKubernetesClientConfigurationOutput {
+	return o
+}
+
+func (o KubeconfigKubernetesClientConfigurationOutput) ToKubeconfigKubernetesClientConfigurationOutputWithContext(ctx context.Context) KubeconfigKubernetesClientConfigurationOutput {
+	return o
+}
+
+func (o KubeconfigKubernetesClientConfigurationOutput) ToKubeconfigKubernetesClientConfigurationPtrOutput() KubeconfigKubernetesClientConfigurationPtrOutput {
+	return o.ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o KubeconfigKubernetesClientConfigurationOutput) ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(ctx context.Context) KubeconfigKubernetesClientConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v KubeconfigKubernetesClientConfiguration) *KubeconfigKubernetesClientConfiguration {
+		return &v
+	}).(KubeconfigKubernetesClientConfigurationPtrOutput)
+}
+
+// The kubernetes CA certificate
+func (o KubeconfigKubernetesClientConfigurationOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubeconfigKubernetesClientConfiguration) *string { return v.CaCertificate }).(pulumi.StringPtrOutput)
+}
+
+// The kubernetes client certificate
+func (o KubeconfigKubernetesClientConfigurationOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubeconfigKubernetesClientConfiguration) *string { return v.ClientCertificate }).(pulumi.StringPtrOutput)
+}
+
+// The kubernetes client key
+func (o KubeconfigKubernetesClientConfigurationOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubeconfigKubernetesClientConfiguration) *string { return v.ClientKey }).(pulumi.StringPtrOutput)
+}
+
+// The kubernetes host
+func (o KubeconfigKubernetesClientConfigurationOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubeconfigKubernetesClientConfiguration) *string { return v.Host }).(pulumi.StringPtrOutput)
+}
+
+type KubeconfigKubernetesClientConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (KubeconfigKubernetesClientConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**KubeconfigKubernetesClientConfiguration)(nil)).Elem()
+}
+
+func (o KubeconfigKubernetesClientConfigurationPtrOutput) ToKubeconfigKubernetesClientConfigurationPtrOutput() KubeconfigKubernetesClientConfigurationPtrOutput {
+	return o
+}
+
+func (o KubeconfigKubernetesClientConfigurationPtrOutput) ToKubeconfigKubernetesClientConfigurationPtrOutputWithContext(ctx context.Context) KubeconfigKubernetesClientConfigurationPtrOutput {
+	return o
+}
+
+func (o KubeconfigKubernetesClientConfigurationPtrOutput) Elem() KubeconfigKubernetesClientConfigurationOutput {
+	return o.ApplyT(func(v *KubeconfigKubernetesClientConfiguration) KubeconfigKubernetesClientConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret KubeconfigKubernetesClientConfiguration
+		return ret
+	}).(KubeconfigKubernetesClientConfigurationOutput)
+}
+
+// The kubernetes CA certificate
+func (o KubeconfigKubernetesClientConfigurationPtrOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigKubernetesClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CaCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The kubernetes client certificate
+func (o KubeconfigKubernetesClientConfigurationPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigKubernetesClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClientCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// The kubernetes client key
+func (o KubeconfigKubernetesClientConfigurationPtrOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigKubernetesClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClientKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The kubernetes host
+func (o KubeconfigKubernetesClientConfigurationPtrOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigKubernetesClientConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Host
+	}).(pulumi.StringPtrOutput)
+}
+
+type KubeconfigTimeouts struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `pulumi:"create"`
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `pulumi:"update"`
+}
+
+// KubeconfigTimeoutsInput is an input type that accepts KubeconfigTimeoutsArgs and KubeconfigTimeoutsOutput values.
+// You can construct a concrete instance of `KubeconfigTimeoutsInput` via:
+//
+//	KubeconfigTimeoutsArgs{...}
+type KubeconfigTimeoutsInput interface {
+	pulumi.Input
+
+	ToKubeconfigTimeoutsOutput() KubeconfigTimeoutsOutput
+	ToKubeconfigTimeoutsOutputWithContext(context.Context) KubeconfigTimeoutsOutput
+}
+
+type KubeconfigTimeoutsArgs struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create pulumi.StringPtrInput `pulumi:"create"`
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update pulumi.StringPtrInput `pulumi:"update"`
+}
+
+func (KubeconfigTimeoutsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*KubeconfigTimeouts)(nil)).Elem()
+}
+
+func (i KubeconfigTimeoutsArgs) ToKubeconfigTimeoutsOutput() KubeconfigTimeoutsOutput {
+	return i.ToKubeconfigTimeoutsOutputWithContext(context.Background())
+}
+
+func (i KubeconfigTimeoutsArgs) ToKubeconfigTimeoutsOutputWithContext(ctx context.Context) KubeconfigTimeoutsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigTimeoutsOutput)
+}
+
+func (i KubeconfigTimeoutsArgs) ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput {
+	return i.ToKubeconfigTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i KubeconfigTimeoutsArgs) ToKubeconfigTimeoutsPtrOutputWithContext(ctx context.Context) KubeconfigTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigTimeoutsOutput).ToKubeconfigTimeoutsPtrOutputWithContext(ctx)
+}
+
+// KubeconfigTimeoutsPtrInput is an input type that accepts KubeconfigTimeoutsArgs, KubeconfigTimeoutsPtr and KubeconfigTimeoutsPtrOutput values.
+// You can construct a concrete instance of `KubeconfigTimeoutsPtrInput` via:
+//
+//	        KubeconfigTimeoutsArgs{...}
+//
+//	or:
+//
+//	        nil
+type KubeconfigTimeoutsPtrInput interface {
+	pulumi.Input
+
+	ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput
+	ToKubeconfigTimeoutsPtrOutputWithContext(context.Context) KubeconfigTimeoutsPtrOutput
+}
+
+type kubeconfigTimeoutsPtrType KubeconfigTimeoutsArgs
+
+func KubeconfigTimeoutsPtr(v *KubeconfigTimeoutsArgs) KubeconfigTimeoutsPtrInput {
+	return (*kubeconfigTimeoutsPtrType)(v)
+}
+
+func (*kubeconfigTimeoutsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**KubeconfigTimeouts)(nil)).Elem()
+}
+
+func (i *kubeconfigTimeoutsPtrType) ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput {
+	return i.ToKubeconfigTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i *kubeconfigTimeoutsPtrType) ToKubeconfigTimeoutsPtrOutputWithContext(ctx context.Context) KubeconfigTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KubeconfigTimeoutsPtrOutput)
+}
+
+type KubeconfigTimeoutsOutput struct{ *pulumi.OutputState }
+
+func (KubeconfigTimeoutsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*KubeconfigTimeouts)(nil)).Elem()
+}
+
+func (o KubeconfigTimeoutsOutput) ToKubeconfigTimeoutsOutput() KubeconfigTimeoutsOutput {
+	return o
+}
+
+func (o KubeconfigTimeoutsOutput) ToKubeconfigTimeoutsOutputWithContext(ctx context.Context) KubeconfigTimeoutsOutput {
+	return o
+}
+
+func (o KubeconfigTimeoutsOutput) ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput {
+	return o.ToKubeconfigTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (o KubeconfigTimeoutsOutput) ToKubeconfigTimeoutsPtrOutputWithContext(ctx context.Context) KubeconfigTimeoutsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v KubeconfigTimeouts) *KubeconfigTimeouts {
+		return &v
+	}).(KubeconfigTimeoutsPtrOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o KubeconfigTimeoutsOutput) Create() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubeconfigTimeouts) *string { return v.Create }).(pulumi.StringPtrOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o KubeconfigTimeoutsOutput) Update() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KubeconfigTimeouts) *string { return v.Update }).(pulumi.StringPtrOutput)
+}
+
+type KubeconfigTimeoutsPtrOutput struct{ *pulumi.OutputState }
+
+func (KubeconfigTimeoutsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**KubeconfigTimeouts)(nil)).Elem()
+}
+
+func (o KubeconfigTimeoutsPtrOutput) ToKubeconfigTimeoutsPtrOutput() KubeconfigTimeoutsPtrOutput {
+	return o
+}
+
+func (o KubeconfigTimeoutsPtrOutput) ToKubeconfigTimeoutsPtrOutputWithContext(ctx context.Context) KubeconfigTimeoutsPtrOutput {
+	return o
+}
+
+func (o KubeconfigTimeoutsPtrOutput) Elem() KubeconfigTimeoutsOutput {
+	return o.ApplyT(func(v *KubeconfigTimeouts) KubeconfigTimeouts {
+		if v != nil {
+			return *v
+		}
+		var ret KubeconfigTimeouts
+		return ret
+	}).(KubeconfigTimeoutsOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o KubeconfigTimeoutsPtrOutput) Create() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigTimeouts) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Create
+	}).(pulumi.StringPtrOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o KubeconfigTimeoutsPtrOutput) Update() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KubeconfigTimeouts) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Update
+	}).(pulumi.StringPtrOutput)
+}
+
 type GetHealthClientConfiguration struct {
 	// The client CA certificate
 	CaCertificate string `pulumi:"caCertificate"`
@@ -507,6 +1032,12 @@ func (o GetKubeconfigTimeoutsPtrOutput) Read() pulumi.StringPtrOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigClientConfigurationInput)(nil)).Elem(), KubeconfigClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigClientConfigurationPtrInput)(nil)).Elem(), KubeconfigClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigKubernetesClientConfigurationInput)(nil)).Elem(), KubeconfigKubernetesClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigKubernetesClientConfigurationPtrInput)(nil)).Elem(), KubeconfigKubernetesClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigTimeoutsInput)(nil)).Elem(), KubeconfigTimeoutsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KubeconfigTimeoutsPtrInput)(nil)).Elem(), KubeconfigTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHealthClientConfigurationInput)(nil)).Elem(), GetHealthClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHealthTimeoutsInput)(nil)).Elem(), GetHealthTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHealthTimeoutsPtrInput)(nil)).Elem(), GetHealthTimeoutsArgs{})
@@ -514,6 +1045,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetKubeconfigKubernetesClientConfigurationInput)(nil)).Elem(), GetKubeconfigKubernetesClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetKubeconfigTimeoutsInput)(nil)).Elem(), GetKubeconfigTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetKubeconfigTimeoutsPtrInput)(nil)).Elem(), GetKubeconfigTimeoutsArgs{})
+	pulumi.RegisterOutputType(KubeconfigClientConfigurationOutput{})
+	pulumi.RegisterOutputType(KubeconfigClientConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(KubeconfigKubernetesClientConfigurationOutput{})
+	pulumi.RegisterOutputType(KubeconfigKubernetesClientConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(KubeconfigTimeoutsOutput{})
+	pulumi.RegisterOutputType(KubeconfigTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(GetHealthClientConfigurationOutput{})
 	pulumi.RegisterOutputType(GetHealthTimeoutsOutput{})
 	pulumi.RegisterOutputType(GetHealthTimeoutsPtrOutput{})

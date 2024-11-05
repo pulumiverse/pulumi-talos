@@ -58,6 +58,12 @@ namespace Pulumiverse.Talos.Machine
         [Output("node")]
         public Output<string> Node { get; private set; } = null!;
 
+        /// <summary>
+        /// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        /// </summary>
+        [Output("onDestroy")]
+        public Output<Outputs.ConfigurationApplyOnDestroy?> OnDestroy { get; private set; } = null!;
+
         [Output("timeouts")]
         public Output<Outputs.Timeout?> Timeouts { get; private set; } = null!;
 
@@ -165,6 +171,12 @@ namespace Pulumiverse.Talos.Machine
         [Input("node", required: true)]
         public Input<string> Node { get; set; } = null!;
 
+        /// <summary>
+        /// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        /// </summary>
+        [Input("onDestroy")]
+        public Input<Inputs.ConfigurationApplyOnDestroyArgs>? OnDestroy { get; set; }
+
         [Input("timeouts")]
         public Input<Inputs.TimeoutArgs>? Timeouts { get; set; }
 
@@ -243,6 +255,12 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         [Input("node")]
         public Input<string>? Node { get; set; }
+
+        /// <summary>
+        /// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        /// </summary>
+        [Input("onDestroy")]
+        public Input<Inputs.ConfigurationApplyOnDestroyGetArgs>? OnDestroy { get; set; }
 
         [Input("timeouts")]
         public Input<Inputs.TimeoutGetArgs>? Timeouts { get; set; }

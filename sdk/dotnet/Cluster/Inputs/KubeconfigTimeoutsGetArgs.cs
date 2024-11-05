@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Pulumiverse.Talos.Machine.Inputs
+namespace Pulumiverse.Talos.Cluster.Inputs
 {
 
-    public sealed class TimeoutArgs : global::Pulumi.ResourceArgs
+    public sealed class KubeconfigTimeoutsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
@@ -20,20 +20,14 @@ namespace Pulumiverse.Talos.Machine.Inputs
         public Input<string>? Create { get; set; }
 
         /// <summary>
-        /// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
-        /// </summary>
-        [Input("delete")]
-        public Input<string>? Delete { get; set; }
-
-        /// <summary>
         /// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         /// </summary>
         [Input("update")]
         public Input<string>? Update { get; set; }
 
-        public TimeoutArgs()
+        public KubeconfigTimeoutsGetArgs()
         {
         }
-        public static new TimeoutArgs Empty => new TimeoutArgs();
+        public static new KubeconfigTimeoutsGetArgs Empty => new KubeconfigTimeoutsGetArgs();
     }
 }

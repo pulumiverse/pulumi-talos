@@ -13,13 +13,13 @@ namespace Pulumiverse.Talos.Cluster
     public static class GetHealth
     {
         /// <summary>
-        /// Checks the health of a Talos cluster
+        /// Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
         /// </summary>
         public static Task<GetHealthResult> InvokeAsync(GetHealthArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetHealthResult>("talos:cluster/getHealth:getHealth", args ?? new GetHealthArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Checks the health of a Talos cluster
+        /// Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
         /// </summary>
         public static Output<GetHealthResult> Invoke(GetHealthInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetHealthResult>("talos:cluster/getHealth:getHealth", args ?? new GetHealthInvokeArgs(), options.WithDefaults());
@@ -57,6 +57,12 @@ namespace Pulumiverse.Talos.Cluster
             get => _endpoints ?? (_endpoints = new List<string>());
             set => _endpoints = value;
         }
+
+        /// <summary>
+        /// Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+        /// </summary>
+        [Input("skipKubernetesChecks")]
+        public bool? SkipKubernetesChecks { get; set; }
 
         [Input("timeouts")]
         public Inputs.GetHealthTimeoutsArgs? Timeouts { get; set; }
@@ -111,6 +117,12 @@ namespace Pulumiverse.Talos.Cluster
             set => _endpoints = value;
         }
 
+        /// <summary>
+        /// Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+        /// </summary>
+        [Input("skipKubernetesChecks")]
+        public Input<bool>? SkipKubernetesChecks { get; set; }
+
         [Input("timeouts")]
         public Input<Inputs.GetHealthTimeoutsInputArgs>? Timeouts { get; set; }
 
@@ -152,6 +164,10 @@ namespace Pulumiverse.Talos.Cluster
         /// The ID of this resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+        /// </summary>
+        public readonly bool? SkipKubernetesChecks;
         public readonly Outputs.GetHealthTimeoutsResult? Timeouts;
         /// <summary>
         /// List of worker nodes to check for health.
@@ -168,6 +184,8 @@ namespace Pulumiverse.Talos.Cluster
 
             string id,
 
+            bool? skipKubernetesChecks,
+
             Outputs.GetHealthTimeoutsResult? timeouts,
 
             ImmutableArray<string> workerNodes)
@@ -176,6 +194,7 @@ namespace Pulumiverse.Talos.Cluster
             ControlPlaneNodes = controlPlaneNodes;
             Endpoints = endpoints;
             Id = id;
+            SkipKubernetesChecks = skipKubernetesChecks;
             Timeouts = timeouts;
             WorkerNodes = workerNodes;
         }

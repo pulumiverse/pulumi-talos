@@ -290,6 +290,181 @@ func (o ConfigurationApplyClientConfigurationOutput) ClientKey() pulumi.StringOu
 	return o.ApplyT(func(v ConfigurationApplyClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
 }
 
+type ConfigurationApplyOnDestroy struct {
+	// Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+	Graceful *bool `pulumi:"graceful"`
+	// Reboot indicates whether node should reboot or halt after resetting. Default false
+	Reboot *bool `pulumi:"reboot"`
+	// Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+	Reset *bool `pulumi:"reset"`
+}
+
+// ConfigurationApplyOnDestroyInput is an input type that accepts ConfigurationApplyOnDestroyArgs and ConfigurationApplyOnDestroyOutput values.
+// You can construct a concrete instance of `ConfigurationApplyOnDestroyInput` via:
+//
+//	ConfigurationApplyOnDestroyArgs{...}
+type ConfigurationApplyOnDestroyInput interface {
+	pulumi.Input
+
+	ToConfigurationApplyOnDestroyOutput() ConfigurationApplyOnDestroyOutput
+	ToConfigurationApplyOnDestroyOutputWithContext(context.Context) ConfigurationApplyOnDestroyOutput
+}
+
+type ConfigurationApplyOnDestroyArgs struct {
+	// Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+	Graceful pulumi.BoolPtrInput `pulumi:"graceful"`
+	// Reboot indicates whether node should reboot or halt after resetting. Default false
+	Reboot pulumi.BoolPtrInput `pulumi:"reboot"`
+	// Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+	Reset pulumi.BoolPtrInput `pulumi:"reset"`
+}
+
+func (ConfigurationApplyOnDestroyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigurationApplyOnDestroy)(nil)).Elem()
+}
+
+func (i ConfigurationApplyOnDestroyArgs) ToConfigurationApplyOnDestroyOutput() ConfigurationApplyOnDestroyOutput {
+	return i.ToConfigurationApplyOnDestroyOutputWithContext(context.Background())
+}
+
+func (i ConfigurationApplyOnDestroyArgs) ToConfigurationApplyOnDestroyOutputWithContext(ctx context.Context) ConfigurationApplyOnDestroyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyOnDestroyOutput)
+}
+
+func (i ConfigurationApplyOnDestroyArgs) ToConfigurationApplyOnDestroyPtrOutput() ConfigurationApplyOnDestroyPtrOutput {
+	return i.ToConfigurationApplyOnDestroyPtrOutputWithContext(context.Background())
+}
+
+func (i ConfigurationApplyOnDestroyArgs) ToConfigurationApplyOnDestroyPtrOutputWithContext(ctx context.Context) ConfigurationApplyOnDestroyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyOnDestroyOutput).ToConfigurationApplyOnDestroyPtrOutputWithContext(ctx)
+}
+
+// ConfigurationApplyOnDestroyPtrInput is an input type that accepts ConfigurationApplyOnDestroyArgs, ConfigurationApplyOnDestroyPtr and ConfigurationApplyOnDestroyPtrOutput values.
+// You can construct a concrete instance of `ConfigurationApplyOnDestroyPtrInput` via:
+//
+//	        ConfigurationApplyOnDestroyArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConfigurationApplyOnDestroyPtrInput interface {
+	pulumi.Input
+
+	ToConfigurationApplyOnDestroyPtrOutput() ConfigurationApplyOnDestroyPtrOutput
+	ToConfigurationApplyOnDestroyPtrOutputWithContext(context.Context) ConfigurationApplyOnDestroyPtrOutput
+}
+
+type configurationApplyOnDestroyPtrType ConfigurationApplyOnDestroyArgs
+
+func ConfigurationApplyOnDestroyPtr(v *ConfigurationApplyOnDestroyArgs) ConfigurationApplyOnDestroyPtrInput {
+	return (*configurationApplyOnDestroyPtrType)(v)
+}
+
+func (*configurationApplyOnDestroyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigurationApplyOnDestroy)(nil)).Elem()
+}
+
+func (i *configurationApplyOnDestroyPtrType) ToConfigurationApplyOnDestroyPtrOutput() ConfigurationApplyOnDestroyPtrOutput {
+	return i.ToConfigurationApplyOnDestroyPtrOutputWithContext(context.Background())
+}
+
+func (i *configurationApplyOnDestroyPtrType) ToConfigurationApplyOnDestroyPtrOutputWithContext(ctx context.Context) ConfigurationApplyOnDestroyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyOnDestroyPtrOutput)
+}
+
+type ConfigurationApplyOnDestroyOutput struct{ *pulumi.OutputState }
+
+func (ConfigurationApplyOnDestroyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigurationApplyOnDestroy)(nil)).Elem()
+}
+
+func (o ConfigurationApplyOnDestroyOutput) ToConfigurationApplyOnDestroyOutput() ConfigurationApplyOnDestroyOutput {
+	return o
+}
+
+func (o ConfigurationApplyOnDestroyOutput) ToConfigurationApplyOnDestroyOutputWithContext(ctx context.Context) ConfigurationApplyOnDestroyOutput {
+	return o
+}
+
+func (o ConfigurationApplyOnDestroyOutput) ToConfigurationApplyOnDestroyPtrOutput() ConfigurationApplyOnDestroyPtrOutput {
+	return o.ToConfigurationApplyOnDestroyPtrOutputWithContext(context.Background())
+}
+
+func (o ConfigurationApplyOnDestroyOutput) ToConfigurationApplyOnDestroyPtrOutputWithContext(ctx context.Context) ConfigurationApplyOnDestroyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConfigurationApplyOnDestroy) *ConfigurationApplyOnDestroy {
+		return &v
+	}).(ConfigurationApplyOnDestroyPtrOutput)
+}
+
+// Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+func (o ConfigurationApplyOnDestroyOutput) Graceful() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConfigurationApplyOnDestroy) *bool { return v.Graceful }).(pulumi.BoolPtrOutput)
+}
+
+// Reboot indicates whether node should reboot or halt after resetting. Default false
+func (o ConfigurationApplyOnDestroyOutput) Reboot() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConfigurationApplyOnDestroy) *bool { return v.Reboot }).(pulumi.BoolPtrOutput)
+}
+
+// Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+func (o ConfigurationApplyOnDestroyOutput) Reset() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConfigurationApplyOnDestroy) *bool { return v.Reset }).(pulumi.BoolPtrOutput)
+}
+
+type ConfigurationApplyOnDestroyPtrOutput struct{ *pulumi.OutputState }
+
+func (ConfigurationApplyOnDestroyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigurationApplyOnDestroy)(nil)).Elem()
+}
+
+func (o ConfigurationApplyOnDestroyPtrOutput) ToConfigurationApplyOnDestroyPtrOutput() ConfigurationApplyOnDestroyPtrOutput {
+	return o
+}
+
+func (o ConfigurationApplyOnDestroyPtrOutput) ToConfigurationApplyOnDestroyPtrOutputWithContext(ctx context.Context) ConfigurationApplyOnDestroyPtrOutput {
+	return o
+}
+
+func (o ConfigurationApplyOnDestroyPtrOutput) Elem() ConfigurationApplyOnDestroyOutput {
+	return o.ApplyT(func(v *ConfigurationApplyOnDestroy) ConfigurationApplyOnDestroy {
+		if v != nil {
+			return *v
+		}
+		var ret ConfigurationApplyOnDestroy
+		return ret
+	}).(ConfigurationApplyOnDestroyOutput)
+}
+
+// Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+func (o ConfigurationApplyOnDestroyPtrOutput) Graceful() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyOnDestroy) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Graceful
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Reboot indicates whether node should reboot or halt after resetting. Default false
+func (o ConfigurationApplyOnDestroyPtrOutput) Reboot() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyOnDestroy) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Reboot
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+func (o ConfigurationApplyOnDestroyPtrOutput) Reset() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyOnDestroy) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Reset
+	}).(pulumi.BoolPtrOutput)
+}
+
 type SecretsClientConfiguration struct {
 	// The client CA certificate
 	CaCertificate *string `pulumi:"caCertificate"`
@@ -1883,6 +2058,8 @@ func (o SecretsMachineSecretsTrustdinfoPtrOutput) Token() pulumi.StringPtrOutput
 type Timeout struct {
 	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
 	Create *string `pulumi:"create"`
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `pulumi:"delete"`
 	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
 	Update *string `pulumi:"update"`
 }
@@ -1901,6 +2078,8 @@ type TimeoutInput interface {
 type TimeoutArgs struct {
 	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
 	Create pulumi.StringPtrInput `pulumi:"create"`
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete pulumi.StringPtrInput `pulumi:"delete"`
 	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
 	Update pulumi.StringPtrInput `pulumi:"update"`
 }
@@ -1987,6 +2166,11 @@ func (o TimeoutOutput) Create() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v Timeout) *string { return v.Create }).(pulumi.StringPtrOutput)
 }
 
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+func (o TimeoutOutput) Delete() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v Timeout) *string { return v.Delete }).(pulumi.StringPtrOutput)
+}
+
 // A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
 func (o TimeoutOutput) Update() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v Timeout) *string { return v.Update }).(pulumi.StringPtrOutput)
@@ -2023,6 +2207,16 @@ func (o TimeoutPtrOutput) Create() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.Create
+	}).(pulumi.StringPtrOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+func (o TimeoutPtrOutput) Delete() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Timeout) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Delete
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -4684,6 +4878,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapTimeoutsInput)(nil)).Elem(), BootstrapTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapTimeoutsPtrInput)(nil)).Elem(), BootstrapTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationInput)(nil)).Elem(), ConfigurationApplyClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyOnDestroyInput)(nil)).Elem(), ConfigurationApplyOnDestroyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyOnDestroyPtrInput)(nil)).Elem(), ConfigurationApplyOnDestroyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsClientConfigurationInput)(nil)).Elem(), SecretsClientConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsInput)(nil)).Elem(), SecretsMachineSecretsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsMachineSecretsCertsInput)(nil)).Elem(), SecretsMachineSecretsCertsArgs{})
@@ -4743,6 +4939,8 @@ func init() {
 	pulumi.RegisterOutputType(BootstrapTimeoutsOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationOutput{})
+	pulumi.RegisterOutputType(ConfigurationApplyOnDestroyOutput{})
+	pulumi.RegisterOutputType(ConfigurationApplyOnDestroyPtrOutput{})
 	pulumi.RegisterOutputType(SecretsClientConfigurationOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsOutput{})
 	pulumi.RegisterOutputType(SecretsMachineSecretsCertsOutput{})
