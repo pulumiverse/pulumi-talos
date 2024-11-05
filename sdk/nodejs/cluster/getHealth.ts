@@ -10,7 +10,6 @@ import * as utilities from "../utilities";
  * Checks the health of a Talos cluster
  */
 export function getHealth(args: GetHealthArgs, opts?: pulumi.InvokeOptions): Promise<GetHealthResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("talos:cluster/getHealth:getHealth", {
         "clientConfiguration": args.clientConfiguration,
@@ -74,7 +73,14 @@ export interface GetHealthResult {
  * Checks the health of a Talos cluster
  */
 export function getHealthOutput(args: GetHealthOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetHealthResult> {
-    return pulumi.output(args).apply((a: any) => getHealth(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("talos:cluster/getHealth:getHealth", {
+        "clientConfiguration": args.clientConfiguration,
+        "controlPlaneNodes": args.controlPlaneNodes,
+        "endpoints": args.endpoints,
+        "timeouts": args.timeouts,
+        "workerNodes": args.workerNodes,
+    }, opts);
 }
 
 /**

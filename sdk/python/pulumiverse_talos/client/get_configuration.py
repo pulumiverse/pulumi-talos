@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -148,9 +153,6 @@ def get_configuration(client_configuration: Optional[Union['GetConfigurationClie
         id=pulumi.get(__ret__, 'id'),
         nodes=pulumi.get(__ret__, 'nodes'),
         talos_config=pulumi.get(__ret__, 'talos_config'))
-
-
-@_utilities.lift_output_func(get_configuration)
 def get_configuration_output(client_configuration: Optional[pulumi.Input[Union['GetConfigurationClientConfigurationArgs', 'GetConfigurationClientConfigurationArgsDict']]] = None,
                              cluster_name: Optional[pulumi.Input[str]] = None,
                              endpoints: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
@@ -178,4 +180,17 @@ def get_configuration_output(client_configuration: Optional[pulumi.Input[Union['
     :param Sequence[str] endpoints: endpoints to set in the generated config
     :param Sequence[str] nodes: nodes to set in the generated config
     """
-    ...
+    __args__ = dict()
+    __args__['clientConfiguration'] = client_configuration
+    __args__['clusterName'] = cluster_name
+    __args__['endpoints'] = endpoints
+    __args__['nodes'] = nodes
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('talos:client/getConfiguration:getConfiguration', __args__, opts=opts, typ=GetConfigurationResult)
+    return __ret__.apply(lambda __response__: GetConfigurationResult(
+        client_configuration=pulumi.get(__response__, 'client_configuration'),
+        cluster_name=pulumi.get(__response__, 'cluster_name'),
+        endpoints=pulumi.get(__response__, 'endpoints'),
+        id=pulumi.get(__response__, 'id'),
+        nodes=pulumi.get(__response__, 'nodes'),
+        talos_config=pulumi.get(__response__, 'talos_config')))

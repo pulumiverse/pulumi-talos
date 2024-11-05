@@ -4,17 +4,45 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 
 __all__ = [
     'GetHealthClientConfigurationArgs',
+    'GetHealthClientConfigurationArgsDict',
     'GetHealthTimeoutsArgs',
+    'GetHealthTimeoutsArgsDict',
     'GetKubeconfigClientConfigurationArgs',
+    'GetKubeconfigClientConfigurationArgsDict',
     'GetKubeconfigTimeoutsArgs',
+    'GetKubeconfigTimeoutsArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class GetHealthClientConfigurationArgsDict(TypedDict):
+        ca_certificate: str
+        """
+        The client CA certificate
+        """
+        client_certificate: str
+        """
+        The client certificate
+        """
+        client_key: str
+        """
+        The client key
+        """
+elif False:
+    GetHealthClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class GetHealthClientConfigurationArgs:
@@ -68,6 +96,15 @@ class GetHealthClientConfigurationArgs:
         pulumi.set(self, "client_key", value)
 
 
+if not MYPY:
+    class GetHealthTimeoutsArgsDict(TypedDict):
+        read: NotRequired[str]
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+        """
+elif False:
+    GetHealthTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class GetHealthTimeoutsArgs:
     def __init__(__self__, *,
@@ -90,6 +127,23 @@ class GetHealthTimeoutsArgs:
     def read(self, value: Optional[str]):
         pulumi.set(self, "read", value)
 
+
+if not MYPY:
+    class GetKubeconfigClientConfigurationArgsDict(TypedDict):
+        ca_certificate: str
+        """
+        The client CA certificate
+        """
+        client_certificate: str
+        """
+        The client certificate
+        """
+        client_key: str
+        """
+        The client key
+        """
+elif False:
+    GetKubeconfigClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class GetKubeconfigClientConfigurationArgs:
@@ -142,6 +196,15 @@ class GetKubeconfigClientConfigurationArgs:
     def client_key(self, value: str):
         pulumi.set(self, "client_key", value)
 
+
+if not MYPY:
+    class GetKubeconfigTimeoutsArgsDict(TypedDict):
+        read: NotRequired[str]
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+        """
+elif False:
+    GetKubeconfigTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class GetKubeconfigTimeoutsArgs:

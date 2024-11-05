@@ -4,33 +4,69 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 
 __all__ = [
     'BootstrapTimeoutsArgs',
+    'BootstrapTimeoutsArgsDict',
     'TimeoutArgs',
+    'TimeoutArgsDict',
     'CertificateArgs',
+    'CertificateArgsDict',
     'CertificatesArgs',
+    'CertificatesArgsDict',
     'CertificatesArgs',
+    'CertificatesArgsDict',
     'CertificateArgs',
+    'CertificateArgsDict',
     'ClientConfigurationArgs',
+    'ClientConfigurationArgsDict',
     'ClusterArgs',
+    'ClusterArgsDict',
     'ClusterArgs',
+    'ClusterArgsDict',
     'KeyArgs',
+    'KeyArgsDict',
     'KeyArgs',
+    'KeyArgsDict',
     'KubernetesSecretsArgs',
+    'KubernetesSecretsArgsDict',
     'KubernetesSecretsArgs',
+    'KubernetesSecretsArgsDict',
     'MachineSecretsArgs',
+    'MachineSecretsArgsDict',
     'MachineSecretsArgs',
+    'MachineSecretsArgsDict',
     'TrustdInfoArgs',
+    'TrustdInfoArgsDict',
     'TrustdInfoArgs',
+    'TrustdInfoArgsDict',
     'GetDisksClientConfigurationArgs',
+    'GetDisksClientConfigurationArgsDict',
     'GetDisksFiltersArgs',
+    'GetDisksFiltersArgsDict',
     'GetDisksTimeoutsArgs',
+    'GetDisksTimeoutsArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class BootstrapTimeoutsArgsDict(TypedDict):
+        create: NotRequired[pulumi.Input[str]]
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+elif False:
+    BootstrapTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class BootstrapTimeoutsArgs:
@@ -54,6 +90,19 @@ class BootstrapTimeoutsArgs:
     def create(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "create", value)
 
+
+if not MYPY:
+    class TimeoutArgsDict(TypedDict):
+        create: NotRequired[pulumi.Input[str]]
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+        update: NotRequired[pulumi.Input[str]]
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+elif False:
+    TimeoutArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class TimeoutArgs:
@@ -94,6 +143,22 @@ class TimeoutArgs:
         pulumi.set(self, "update", value)
 
 
+if not MYPY:
+    class CertificateArgsDict(TypedDict):
+        """
+        A Machine Secrets Certificate
+        """
+        cert: str
+        """
+        Certificate
+        """
+        key: str
+        """
+        Private Key
+        """
+elif False:
+    CertificateArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class CertificateArgs:
     def __init__(__self__, *,
@@ -131,6 +196,19 @@ class CertificateArgs:
     def key(self, value: str):
         pulumi.set(self, "key", value)
 
+
+if not MYPY:
+    class CertificatesArgsDict(TypedDict):
+        """
+        A complete Machine Secrets Certificates configuration
+        """
+        etcd: 'CertificateArgsDict'
+        k8s: 'CertificateArgsDict'
+        k8s_aggregator: 'CertificateArgsDict'
+        k8s_serviceaccount: 'KeyArgsDict'
+        os: 'CertificateArgsDict'
+elif False:
+    CertificatesArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class CertificatesArgs:
@@ -195,6 +273,19 @@ class CertificatesArgs:
         pulumi.set(self, "os", value)
 
 
+if not MYPY:
+    class CertificatesArgsDict(TypedDict):
+        """
+        A complete Machine Secrets Certificates configuration
+        """
+        etcd: pulumi.Input['CertificateArgsDict']
+        k8s: pulumi.Input['CertificateArgsDict']
+        k8s_aggregator: pulumi.Input['CertificateArgsDict']
+        k8s_serviceaccount: pulumi.Input['KeyArgsDict']
+        os: pulumi.Input['CertificateArgsDict']
+elif False:
+    CertificatesArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class CertificatesArgs:
     def __init__(__self__, *,
@@ -258,6 +349,22 @@ class CertificatesArgs:
         pulumi.set(self, "os", value)
 
 
+if not MYPY:
+    class CertificateArgsDict(TypedDict):
+        """
+        A Machine Secrets Certificate
+        """
+        cert: pulumi.Input[str]
+        """
+        Certificate
+        """
+        key: pulumi.Input[str]
+        """
+        Private Key
+        """
+elif False:
+    CertificateArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class CertificateArgs:
     def __init__(__self__, *,
@@ -295,6 +402,26 @@ class CertificateArgs:
     def key(self, value: pulumi.Input[str]):
         pulumi.set(self, "key", value)
 
+
+if not MYPY:
+    class ClientConfigurationArgsDict(TypedDict):
+        """
+        A Client Configuration
+        """
+        ca_certificate: pulumi.Input[str]
+        """
+        The client CA certificate
+        """
+        client_certificate: pulumi.Input[str]
+        """
+        The client certificate
+        """
+        client_key: pulumi.Input[str]
+        """
+        The client private key
+        """
+elif False:
+    ClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ClientConfigurationArgs:
@@ -349,6 +476,22 @@ class ClientConfigurationArgs:
         pulumi.set(self, "client_key", value)
 
 
+if not MYPY:
+    class ClusterArgsDict(TypedDict):
+        """
+        A Machine Secrets Cluster Info
+        """
+        id: str
+        """
+        Certificate
+        """
+        secret: str
+        """
+        Private Key
+        """
+elif False:
+    ClusterArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ClusterArgs:
     def __init__(__self__, *,
@@ -386,6 +529,22 @@ class ClusterArgs:
     def secret(self, value: str):
         pulumi.set(self, "secret", value)
 
+
+if not MYPY:
+    class ClusterArgsDict(TypedDict):
+        """
+        A Machine Secrets Cluster Info
+        """
+        id: pulumi.Input[str]
+        """
+        Certificate
+        """
+        secret: pulumi.Input[str]
+        """
+        Private Key
+        """
+elif False:
+    ClusterArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ClusterArgs:
@@ -425,6 +584,18 @@ class ClusterArgs:
         pulumi.set(self, "secret", value)
 
 
+if not MYPY:
+    class KeyArgsDict(TypedDict):
+        """
+        A Machine Secrets Private Key
+        """
+        key: str
+        """
+        Private Key
+        """
+elif False:
+    KeyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class KeyArgs:
     def __init__(__self__, *,
@@ -448,6 +619,18 @@ class KeyArgs:
         pulumi.set(self, "key", value)
 
 
+if not MYPY:
+    class KeyArgsDict(TypedDict):
+        """
+        A Machine Secrets Private Key
+        """
+        key: pulumi.Input[str]
+        """
+        Private Key
+        """
+elif False:
+    KeyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class KeyArgs:
     def __init__(__self__, *,
@@ -470,6 +653,26 @@ class KeyArgs:
     def key(self, value: pulumi.Input[str]):
         pulumi.set(self, "key", value)
 
+
+if not MYPY:
+    class KubernetesSecretsArgsDict(TypedDict):
+        """
+        A Machine Secrets Bootstrap data
+        """
+        bootstrap_token: str
+        """
+        The bootstrap token for the talos kubernetes cluster
+        """
+        secretbox_encryption_secret: str
+        """
+        The secretbox encryption secret for the talos kubernetes cluster
+        """
+        aescbc_encryption_secret: NotRequired[str]
+        """
+        The aescbc encryption secret for the talos kubernetes cluster
+        """
+elif False:
+    KubernetesSecretsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class KubernetesSecretsArgs:
@@ -525,6 +728,26 @@ class KubernetesSecretsArgs:
         pulumi.set(self, "aescbc_encryption_secret", value)
 
 
+if not MYPY:
+    class KubernetesSecretsArgsDict(TypedDict):
+        """
+        A Machine Secrets Bootstrap data
+        """
+        bootstrap_token: pulumi.Input[str]
+        """
+        The bootstrap token for the talos kubernetes cluster
+        """
+        secretbox_encryption_secret: pulumi.Input[str]
+        """
+        The secretbox encryption secret for the talos kubernetes cluster
+        """
+        aescbc_encryption_secret: NotRequired[pulumi.Input[str]]
+        """
+        The aescbc encryption secret for the talos kubernetes cluster
+        """
+elif False:
+    KubernetesSecretsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class KubernetesSecretsArgs:
     def __init__(__self__, *,
@@ -579,6 +802,18 @@ class KubernetesSecretsArgs:
         pulumi.set(self, "aescbc_encryption_secret", value)
 
 
+if not MYPY:
+    class MachineSecretsArgsDict(TypedDict):
+        """
+        A complete Machine Secrets configuration
+        """
+        certs: 'CertificatesArgsDict'
+        cluster: 'ClusterArgsDict'
+        secrets: 'KubernetesSecretsArgsDict'
+        trustdinfo: 'TrustdInfoArgsDict'
+elif False:
+    MachineSecretsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class MachineSecretsArgs:
     def __init__(__self__, *,
@@ -630,6 +865,18 @@ class MachineSecretsArgs:
     def trustdinfo(self, value: 'TrustdInfoArgs'):
         pulumi.set(self, "trustdinfo", value)
 
+
+if not MYPY:
+    class MachineSecretsArgsDict(TypedDict):
+        """
+        A complete Machine Secrets configuration
+        """
+        certs: pulumi.Input['CertificatesArgsDict']
+        cluster: pulumi.Input['ClusterArgsDict']
+        secrets: pulumi.Input['KubernetesSecretsArgsDict']
+        trustdinfo: pulumi.Input['TrustdInfoArgsDict']
+elif False:
+    MachineSecretsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class MachineSecretsArgs:
@@ -683,6 +930,18 @@ class MachineSecretsArgs:
         pulumi.set(self, "trustdinfo", value)
 
 
+if not MYPY:
+    class TrustdInfoArgsDict(TypedDict):
+        """
+        A Machine Secrets Trust daemon info
+        """
+        token: str
+        """
+        The trustd token for the talos kubernetes cluster
+        """
+elif False:
+    TrustdInfoArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class TrustdInfoArgs:
     def __init__(__self__, *,
@@ -706,6 +965,18 @@ class TrustdInfoArgs:
         pulumi.set(self, "token", value)
 
 
+if not MYPY:
+    class TrustdInfoArgsDict(TypedDict):
+        """
+        A Machine Secrets Trust daemon info
+        """
+        token: pulumi.Input[str]
+        """
+        The trustd token for the talos kubernetes cluster
+        """
+elif False:
+    TrustdInfoArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class TrustdInfoArgs:
     def __init__(__self__, *,
@@ -728,6 +999,23 @@ class TrustdInfoArgs:
     def token(self, value: pulumi.Input[str]):
         pulumi.set(self, "token", value)
 
+
+if not MYPY:
+    class GetDisksClientConfigurationArgsDict(TypedDict):
+        ca_certificate: str
+        """
+        The client CA certificate
+        """
+        client_certificate: str
+        """
+        The client certificate
+        """
+        client_key: str
+        """
+        The client key
+        """
+elif False:
+    GetDisksClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class GetDisksClientConfigurationArgs:
@@ -780,6 +1068,47 @@ class GetDisksClientConfigurationArgs:
     def client_key(self, value: str):
         pulumi.set(self, "client_key", value)
 
+
+if not MYPY:
+    class GetDisksFiltersArgsDict(TypedDict):
+        bus_path: NotRequired[str]
+        """
+        Filter disks by bus path
+        """
+        modalias: NotRequired[str]
+        """
+        Filter disks by modalias
+        """
+        model: NotRequired[str]
+        """
+        Filter disks by model
+        """
+        name: NotRequired[str]
+        """
+        Filter disks by name
+        """
+        serial: NotRequired[str]
+        """
+        Filter disks by serial number
+        """
+        size: NotRequired[str]
+        """
+        Filter disks by size
+        """
+        type: NotRequired[str]
+        """
+        Filter disks by type
+        """
+        uuid: NotRequired[str]
+        """
+        Filter disks by uuid
+        """
+        wwid: NotRequired[str]
+        """
+        Filter disks by wwid
+        """
+elif False:
+    GetDisksFiltersArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class GetDisksFiltersArgs:
@@ -931,6 +1260,15 @@ class GetDisksFiltersArgs:
     def wwid(self, value: Optional[str]):
         pulumi.set(self, "wwid", value)
 
+
+if not MYPY:
+    class GetDisksTimeoutsArgsDict(TypedDict):
+        read: NotRequired[str]
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+        """
+elif False:
+    GetDisksTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class GetDisksTimeoutsArgs:

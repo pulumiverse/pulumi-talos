@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -161,9 +166,6 @@ def get_kubeconfig(client_configuration: Optional[Union['GetKubeconfigClientConf
         node=pulumi.get(__ret__, 'node'),
         timeouts=pulumi.get(__ret__, 'timeouts'),
         wait=pulumi.get(__ret__, 'wait'))
-
-
-@_utilities.lift_output_func(get_kubeconfig)
 def get_kubeconfig_output(client_configuration: Optional[pulumi.Input[Union['GetKubeconfigClientConfigurationArgs', 'GetKubeconfigClientConfigurationArgsDict']]] = None,
                           endpoint: Optional[pulumi.Input[Optional[str]]] = None,
                           node: Optional[pulumi.Input[str]] = None,
@@ -179,4 +181,20 @@ def get_kubeconfig_output(client_configuration: Optional[pulumi.Input[Union['Get
     :param str node: controlplane node to retrieve the kubeconfig from
     :param bool wait: Wait for the kubernetes api to be available
     """
-    ...
+    __args__ = dict()
+    __args__['clientConfiguration'] = client_configuration
+    __args__['endpoint'] = endpoint
+    __args__['node'] = node
+    __args__['timeouts'] = timeouts
+    __args__['wait'] = wait
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('talos:cluster/getKubeconfig:getKubeconfig', __args__, opts=opts, typ=GetKubeconfigResult)
+    return __ret__.apply(lambda __response__: GetKubeconfigResult(
+        client_configuration=pulumi.get(__response__, 'client_configuration'),
+        endpoint=pulumi.get(__response__, 'endpoint'),
+        id=pulumi.get(__response__, 'id'),
+        kubeconfig_raw=pulumi.get(__response__, 'kubeconfig_raw'),
+        kubernetes_client_configuration=pulumi.get(__response__, 'kubernetes_client_configuration'),
+        node=pulumi.get(__response__, 'node'),
+        timeouts=pulumi.get(__response__, 'timeouts'),
+        wait=pulumi.get(__response__, 'wait')))
