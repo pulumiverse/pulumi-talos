@@ -5,7 +5,7 @@
   keywords = ["pulumi", "talos", "category/infrastructure"]
   readme = "README.md"
   requires-python = ">=3.8"
-  version = "0.0.0"
+  version = "0.0.0a0+dev"
   [project.license]
     text = "MPL-2.0"
   [project.urls]

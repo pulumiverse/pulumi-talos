@@ -9,6 +9,7 @@
     <PackageProjectUrl>https://talos.dev</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pulumiverse/pulumi-talos</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
+    <Version>0.0.0-alpha.0+dev</Version>
 
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
