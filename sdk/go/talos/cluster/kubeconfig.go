@@ -16,6 +16,8 @@ import (
 type Kubeconfig struct {
 	pulumi.CustomResourceState
 
+	// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+	CertificateRenewalDuration pulumi.StringOutput `pulumi:"certificateRenewalDuration"`
 	// The client configuration data
 	ClientConfiguration KubeconfigClientConfigurationOutput `pulumi:"clientConfiguration"`
 	// endpoint to use for the talosclient. If not set, the node value will be used
@@ -69,6 +71,8 @@ func GetKubeconfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Kubeconfig resources.
 type kubeconfigState struct {
+	// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+	CertificateRenewalDuration *string `pulumi:"certificateRenewalDuration"`
 	// The client configuration data
 	ClientConfiguration *KubeconfigClientConfiguration `pulumi:"clientConfiguration"`
 	// endpoint to use for the talosclient. If not set, the node value will be used
@@ -83,6 +87,8 @@ type kubeconfigState struct {
 }
 
 type KubeconfigState struct {
+	// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+	CertificateRenewalDuration pulumi.StringPtrInput
 	// The client configuration data
 	ClientConfiguration KubeconfigClientConfigurationPtrInput
 	// endpoint to use for the talosclient. If not set, the node value will be used
@@ -101,6 +107,8 @@ func (KubeconfigState) ElementType() reflect.Type {
 }
 
 type kubeconfigArgs struct {
+	// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+	CertificateRenewalDuration *string `pulumi:"certificateRenewalDuration"`
 	// The client configuration data
 	ClientConfiguration KubeconfigClientConfiguration `pulumi:"clientConfiguration"`
 	// endpoint to use for the talosclient. If not set, the node value will be used
@@ -112,6 +120,8 @@ type kubeconfigArgs struct {
 
 // The set of arguments for constructing a Kubeconfig resource.
 type KubeconfigArgs struct {
+	// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+	CertificateRenewalDuration pulumi.StringPtrInput
 	// The client configuration data
 	ClientConfiguration KubeconfigClientConfigurationInput
 	// endpoint to use for the talosclient. If not set, the node value will be used
@@ -206,6 +216,11 @@ func (o KubeconfigOutput) ToKubeconfigOutput() KubeconfigOutput {
 
 func (o KubeconfigOutput) ToKubeconfigOutputWithContext(ctx context.Context) KubeconfigOutput {
 	return o
+}
+
+// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+func (o KubeconfigOutput) CertificateRenewalDuration() pulumi.StringOutput {
+	return o.ApplyT(func(v *Kubeconfig) pulumi.StringOutput { return v.CertificateRenewalDuration }).(pulumi.StringOutput)
 }
 
 // The client configuration data

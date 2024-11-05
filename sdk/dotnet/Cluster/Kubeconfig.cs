@@ -17,6 +17,12 @@ namespace Pulumiverse.Talos.Cluster
     public partial class Kubeconfig : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+        /// </summary>
+        [Output("certificateRenewalDuration")]
+        public Output<string> CertificateRenewalDuration { get; private set; } = null!;
+
+        /// <summary>
         /// The client configuration data
         /// </summary>
         [Output("clientConfiguration")]
@@ -101,6 +107,12 @@ namespace Pulumiverse.Talos.Cluster
     public sealed class KubeconfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+        /// </summary>
+        [Input("certificateRenewalDuration")]
+        public Input<string>? CertificateRenewalDuration { get; set; }
+
+        /// <summary>
         /// The client configuration data
         /// </summary>
         [Input("clientConfiguration", required: true)]
@@ -129,6 +141,12 @@ namespace Pulumiverse.Talos.Cluster
 
     public sealed class KubeconfigState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+        /// </summary>
+        [Input("certificateRenewalDuration")]
+        public Input<string>? CertificateRenewalDuration { get; set; }
+
         /// <summary>
         /// The client configuration data
         /// </summary>
