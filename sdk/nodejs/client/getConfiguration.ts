@@ -16,8 +16,8 @@ import * as utilities from "../utilities";
  * import * as talos from "@pulumi/talos";
  * import * as talos from "@pulumiverse/talos";
  *
- * const thisSecrets = new talos.machine.Secrets("thisSecrets", {});
- * const thisConfiguration = talos.client.getConfigurationOutput({
+ * const thisSecrets = new talos.machine.Secrets("this", {});
+ * const this = talos.client.getConfigurationOutput({
  *     clusterName: "example-cluster",
  *     clientConfiguration: thisSecrets.clientConfiguration,
  *     nodes: ["10.5.0.2"],
@@ -96,8 +96,8 @@ export interface GetConfigurationResult {
  * import * as talos from "@pulumi/talos";
  * import * as talos from "@pulumiverse/talos";
  *
- * const thisSecrets = new talos.machine.Secrets("thisSecrets", {});
- * const thisConfiguration = talos.client.getConfigurationOutput({
+ * const thisSecrets = new talos.machine.Secrets("this", {});
+ * const this = talos.client.getConfigurationOutput({
  *     clusterName: "example-cluster",
  *     clientConfiguration: thisSecrets.clientConfiguration,
  *     nodes: ["10.5.0.2"],

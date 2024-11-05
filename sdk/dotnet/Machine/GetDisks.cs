@@ -28,9 +28,9 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("thisSecrets");
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
         /// 
-        ///     var thisDisks = Talos.Machine.GetDisks.Invoke(new()
+        ///     var @this = Talos.Machine.GetDisks.Invoke(new()
         ///     {
         ///         ClientConfiguration = thisSecrets.ClientConfiguration,
         ///         Node = "10.5.0.2",
@@ -43,7 +43,7 @@ namespace Pulumiverse.Talos.Machine
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["nvmeDisks"] = thisDisks.Apply(getDisksResult =&gt; getDisksResult.Disks).Select(__item =&gt; __item.Name).ToList(),
+        ///         ["nvmeDisks"] = @this.Apply(@this =&gt; @this.Apply(getDisksResult =&gt; getDisksResult.Disks).Select(__item =&gt; __item.Name).ToList()),
         ///     };
         /// });
         /// ```
@@ -67,9 +67,9 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("thisSecrets");
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
         /// 
-        ///     var thisDisks = Talos.Machine.GetDisks.Invoke(new()
+        ///     var @this = Talos.Machine.GetDisks.Invoke(new()
         ///     {
         ///         ClientConfiguration = thisSecrets.ClientConfiguration,
         ///         Node = "10.5.0.2",
@@ -82,7 +82,7 @@ namespace Pulumiverse.Talos.Machine
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["nvmeDisks"] = thisDisks.Apply(getDisksResult =&gt; getDisksResult.Disks).Select(__item =&gt; __item.Name).ToList(),
+        ///         ["nvmeDisks"] = @this.Apply(@this =&gt; @this.Apply(getDisksResult =&gt; getDisksResult.Disks).Select(__item =&gt; __item.Name).ToList()),
         ///     };
         /// });
         /// ```

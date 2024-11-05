@@ -23,7 +23,7 @@ namespace Pulumiverse.Talos.Machine
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var machineSecrets = new Talos.Machine.Secrets("machineSecrets");
+    ///     var machineSecrets = new Talos.Machine.Secrets("machine_secrets");
     /// 
     /// });
     /// ```

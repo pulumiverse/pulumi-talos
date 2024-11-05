@@ -28,9 +28,9 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("thisSecrets");
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
         /// 
-        ///     var thisConfiguration = Talos.Machine.GetConfiguration.Invoke(new()
+        ///     var @this = Talos.Machine.GetConfiguration.Invoke(new()
         ///     {
         ///         ClusterName = "example-cluster",
         ///         MachineType = "controlplane",
@@ -60,9 +60,9 @@ namespace Pulumiverse.Talos.Machine
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("thisSecrets");
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
         /// 
-        ///     var thisConfiguration = Talos.Machine.GetConfiguration.Invoke(new()
+        ///     var @this = Talos.Machine.GetConfiguration.Invoke(new()
         ///     {
         ///         ClusterName = "example-cluster",
         ///         MachineType = "controlplane",

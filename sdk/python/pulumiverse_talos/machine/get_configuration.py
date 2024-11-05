@@ -188,8 +188,8 @@ def get_configuration(cluster_endpoint: Optional[str] = None,
     import pulumi_talos as talos
     import pulumiverse_talos as talos
 
-    this_secrets = talos.machine.Secrets("thisSecrets")
-    this_configuration = talos.machine.get_configuration_output(cluster_name="example-cluster",
+    this_secrets = talos.machine.Secrets("this")
+    this = talos.machine.get_configuration_output(cluster_name="example-cluster",
         machine_type="controlplane",
         cluster_endpoint="https://cluster.local:6443",
         machine_secrets=this_secrets.machine_secrets)
@@ -256,8 +256,8 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
     import pulumi_talos as talos
     import pulumiverse_talos as talos
 
-    this_secrets = talos.machine.Secrets("thisSecrets")
-    this_configuration = talos.machine.get_configuration_output(cluster_name="example-cluster",
+    this_secrets = talos.machine.Secrets("this")
+    this = talos.machine.get_configuration_output(cluster_name="example-cluster",
         machine_type="controlplane",
         cluster_endpoint="https://cluster.local:6443",
         machine_secrets=this_secrets.machine_secrets)

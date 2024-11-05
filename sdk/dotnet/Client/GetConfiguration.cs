@@ -26,9 +26,9 @@ namespace Pulumiverse.Talos.Client
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("thisSecrets");
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
         /// 
-        ///     var thisConfiguration = Talos.Client.GetConfiguration.Invoke(new()
+        ///     var @this = Talos.Client.GetConfiguration.Invoke(new()
         ///     {
         ///         ClusterName = "example-cluster",
         ///         ClientConfiguration = thisSecrets.ClientConfiguration,
@@ -58,9 +58,9 @@ namespace Pulumiverse.Talos.Client
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("thisSecrets");
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
         /// 
-        ///     var thisConfiguration = Talos.Client.GetConfiguration.Invoke(new()
+        ///     var @this = Talos.Client.GetConfiguration.Invoke(new()
         ///     {
         ///         ClusterName = "example-cluster",
         ///         ClientConfiguration = thisSecrets.ClientConfiguration,

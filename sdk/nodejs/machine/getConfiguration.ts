@@ -18,8 +18,8 @@ import * as utilities from "../utilities";
  * import * as talos from "@pulumi/talos";
  * import * as talos from "@pulumiverse/talos";
  *
- * const thisSecrets = new talos.machine.Secrets("thisSecrets", {});
- * const thisConfiguration = talos.machine.getConfigurationOutput({
+ * const thisSecrets = new talos.machine.Secrets("this", {});
+ * const this = talos.machine.getConfigurationOutput({
  *     clusterName: "example-cluster",
  *     machineType: "controlplane",
  *     clusterEndpoint: "https://cluster.local:6443",
@@ -146,8 +146,8 @@ export interface GetConfigurationResult {
  * import * as talos from "@pulumi/talos";
  * import * as talos from "@pulumiverse/talos";
  *
- * const thisSecrets = new talos.machine.Secrets("thisSecrets", {});
- * const thisConfiguration = talos.machine.getConfigurationOutput({
+ * const thisSecrets = new talos.machine.Secrets("this", {});
+ * const this = talos.machine.getConfigurationOutput({
  *     clusterName: "example-cluster",
  *     machineType: "controlplane",
  *     clusterEndpoint: "https://cluster.local:6443",

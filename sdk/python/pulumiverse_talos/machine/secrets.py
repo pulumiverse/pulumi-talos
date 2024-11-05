@@ -109,7 +109,7 @@ class Secrets(pulumi.CustomResource):
         import pulumi
         import pulumiverse_talos as talos
 
-        machine_secrets = talos.machine.Secrets("machineSecrets")
+        machine_secrets = talos.machine.Secrets("machine_secrets")
         ```
 
         ## Import
@@ -141,7 +141,7 @@ class Secrets(pulumi.CustomResource):
         import pulumi
         import pulumiverse_talos as talos
 
-        machine_secrets = talos.machine.Secrets("machineSecrets")
+        machine_secrets = talos.machine.Secrets("machine_secrets")
         ```
 
         ## Import

@@ -133,14 +133,14 @@ def get_disks(client_configuration: Optional[Union['GetDisksClientConfigurationA
     import pulumi_talos as talos
     import pulumiverse_talos as talos
 
-    this_secrets = talos.machine.Secrets("thisSecrets")
-    this_disks = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
+    this_secrets = talos.machine.Secrets("this")
+    this = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
         node="10.5.0.2",
         filters={
             "size": "> 100GB",
             "type": "nvme",
         })
-    pulumi.export("nvmeDisks", this_disks.apply(lambda this_disks: [__item.name for __item in this_disks.disks]))
+    pulumi.export("nvmeDisks", this.apply(lambda this: [__item.name for __item in this.disks]))
     ```
 
 
@@ -187,14 +187,14 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisks
     import pulumi_talos as talos
     import pulumiverse_talos as talos
 
-    this_secrets = talos.machine.Secrets("thisSecrets")
-    this_disks = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
+    this_secrets = talos.machine.Secrets("this")
+    this = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
         node="10.5.0.2",
         filters={
             "size": "> 100GB",
             "type": "nvme",
         })
-    pulumi.export("nvmeDisks", this_disks.apply(lambda this_disks: [__item.name for __item in this_disks.disks]))
+    pulumi.export("nvmeDisks", this.apply(lambda this: [__item.name for __item in this.disks]))
     ```
 
 

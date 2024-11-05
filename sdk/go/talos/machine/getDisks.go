@@ -28,11 +28,11 @@ import (
 // )
 // func main() {
 // pulumi.Run(func(ctx *pulumi.Context) error {
-// thisSecrets, err := machine.NewSecrets(ctx, "thisSecrets", nil)
+// thisSecrets, err := machine.NewSecrets(ctx, "this", nil)
 // if err != nil {
 // return err
 // }
-// thisDisks := machine.GetDisksOutput(ctx, machine.GetDisksOutputArgs{
+// this := machine.GetDisksOutput(ctx, machine.GetDisksOutputArgs{
 // ClientConfiguration: thisSecrets.ClientConfiguration,
 // Node: pulumi.String("10.5.0.2"),
 // Filters: &machine.GetDisksFiltersArgs{
@@ -40,9 +40,9 @@ import (
 // Type: pulumi.String("nvme"),
 // },
 // }, nil);
-// ctx.Export("nvmeDisks", thisDisks.ApplyT(func(thisDisks machine.GetDisksResult) ([]*string, error) {
+// ctx.Export("nvmeDisks", this.ApplyT(func(this machine.GetDisksResult) ([]*string, error) {
 // var splat0 []*string
-// for _, val0 := range thisDisks.Disks {
+// for _, val0 := range this.Disks {
 // splat0 = append(splat0, val0.Name)
 // }
 // return splat0, nil

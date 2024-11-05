@@ -18,8 +18,8 @@ import * as utilities from "../utilities";
  * import * as talos from "@pulumi/talos";
  * import * as talos from "@pulumiverse/talos";
  *
- * const thisSecrets = new talos.machine.Secrets("thisSecrets", {});
- * const thisDisks = talos.machine.getDisksOutput({
+ * const thisSecrets = new talos.machine.Secrets("this", {});
+ * const this = talos.machine.getDisksOutput({
  *     clientConfiguration: thisSecrets.clientConfiguration,
  *     node: "10.5.0.2",
  *     filters: {
@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *         type: "nvme",
  *     },
  * });
- * export const nvmeDisks = thisDisks.apply(thisDisks => thisDisks.disks.map(__item => __item.name));
+ * export const nvmeDisks = _this.apply(_this => _this.disks.map(__item => __item.name));
  * ```
  */
 export function getDisks(args: GetDisksArgs, opts?: pulumi.InvokeOptions): Promise<GetDisksResult> {
@@ -107,8 +107,8 @@ export interface GetDisksResult {
  * import * as talos from "@pulumi/talos";
  * import * as talos from "@pulumiverse/talos";
  *
- * const thisSecrets = new talos.machine.Secrets("thisSecrets", {});
- * const thisDisks = talos.machine.getDisksOutput({
+ * const thisSecrets = new talos.machine.Secrets("this", {});
+ * const this = talos.machine.getDisksOutput({
  *     clientConfiguration: thisSecrets.clientConfiguration,
  *     node: "10.5.0.2",
  *     filters: {
@@ -116,7 +116,7 @@ export interface GetDisksResult {
  *         type: "nvme",
  *     },
  * });
- * export const nvmeDisks = thisDisks.apply(thisDisks => thisDisks.disks.map(__item => __item.name));
+ * export const nvmeDisks = _this.apply(_this => _this.disks.map(__item => __item.name));
  * ```
  */
 export function getDisksOutput(args: GetDisksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDisksResult> {

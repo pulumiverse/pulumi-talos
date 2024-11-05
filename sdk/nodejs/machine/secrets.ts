@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumiverse/talos";
  *
- * const machineSecrets = new talos.machine.Secrets("machineSecrets", {});
+ * const machineSecrets = new talos.machine.Secrets("machine_secrets", {});
  * ```
  *
  * ## Import

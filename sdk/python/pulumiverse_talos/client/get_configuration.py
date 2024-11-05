@@ -121,8 +121,8 @@ def get_configuration(client_configuration: Optional[Union['GetConfigurationClie
     import pulumi_talos as talos
     import pulumiverse_talos as talos
 
-    this_secrets = talos.machine.Secrets("thisSecrets")
-    this_configuration = talos.client.get_configuration_output(cluster_name="example-cluster",
+    this_secrets = talos.machine.Secrets("this")
+    this = talos.client.get_configuration_output(cluster_name="example-cluster",
         client_configuration=this_secrets.client_configuration,
         nodes=["10.5.0.2"])
     ```
@@ -166,8 +166,8 @@ def get_configuration_output(client_configuration: Optional[pulumi.Input[Union['
     import pulumi_talos as talos
     import pulumiverse_talos as talos
 
-    this_secrets = talos.machine.Secrets("thisSecrets")
-    this_configuration = talos.client.get_configuration_output(cluster_name="example-cluster",
+    this_secrets = talos.machine.Secrets("this")
+    this = talos.client.get_configuration_output(cluster_name="example-cluster",
         client_configuration=this_secrets.client_configuration,
         nodes=["10.5.0.2"])
     ```

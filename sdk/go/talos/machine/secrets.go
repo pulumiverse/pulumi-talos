@@ -27,7 +27,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := machine.NewSecrets(ctx, "machineSecrets", nil)
+//			_, err := machine.NewSecrets(ctx, "machine_secrets", nil)
 //			if err != nil {
 //				return err
 //			}
