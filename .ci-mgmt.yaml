@@ -26,10 +26,10 @@ languages:
 publish:
   sdk: "all,!java"
   cdn: false
-#license:
-#  ignore:
-    # Don't check for the license of the local shim package
-    #- github.com/scaleway/terraform-provider-scaleway/v2/shim
+license:
+ ignore:
+    # The following is Apache 2.0 licensed but the license file is not detected correctly
+    - github.com/cyberphone/json-canonicalization/go/src/webpki.org/jsoncanonicalizer
 toolVersions:
   go: "1.22.x"
 pulumiConvert: 1
