@@ -23,16 +23,20 @@ class KubeconfigArgs:
     def __init__(__self__, *,
                  client_configuration: pulumi.Input['KubeconfigClientConfigurationArgs'],
                  node: pulumi.Input[str],
+                 certificate_renewal_duration: Optional[pulumi.Input[str]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  timeouts: Optional[pulumi.Input['KubeconfigTimeoutsArgs']] = None):
         """
         The set of arguments for constructing a Kubeconfig resource.
         :param pulumi.Input['KubeconfigClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[str] node: controlplane node to retrieve the kubeconfig from
+        :param pulumi.Input[str] certificate_renewal_duration: The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
         :param pulumi.Input[str] endpoint: endpoint to use for the talosclient. If not set, the node value will be used
         """
         pulumi.set(__self__, "client_configuration", client_configuration)
         pulumi.set(__self__, "node", node)
+        if certificate_renewal_duration is not None:
+            pulumi.set(__self__, "certificate_renewal_duration", certificate_renewal_duration)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
         if timeouts is not None:
@@ -63,6 +67,18 @@ class KubeconfigArgs:
         pulumi.set(self, "node", value)
 
     @property
+    @pulumi.getter(name="certificateRenewalDuration")
+    def certificate_renewal_duration(self) -> Optional[pulumi.Input[str]]:
+        """
+        The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+        """
+        return pulumi.get(self, "certificate_renewal_duration")
+
+    @certificate_renewal_duration.setter
+    def certificate_renewal_duration(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "certificate_renewal_duration", value)
+
+    @property
     @pulumi.getter
     def endpoint(self) -> Optional[pulumi.Input[str]]:
         """
@@ -87,6 +103,7 @@ class KubeconfigArgs:
 @pulumi.input_type
 class _KubeconfigState:
     def __init__(__self__, *,
+                 certificate_renewal_duration: Optional[pulumi.Input[str]] = None,
                  client_configuration: Optional[pulumi.Input['KubeconfigClientConfigurationArgs']] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  kubeconfig_raw: Optional[pulumi.Input[str]] = None,
@@ -95,12 +112,15 @@ class _KubeconfigState:
                  timeouts: Optional[pulumi.Input['KubeconfigTimeoutsArgs']] = None):
         """
         Input properties used for looking up and filtering Kubeconfig resources.
+        :param pulumi.Input[str] certificate_renewal_duration: The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
         :param pulumi.Input['KubeconfigClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[str] endpoint: endpoint to use for the talosclient. If not set, the node value will be used
         :param pulumi.Input[str] kubeconfig_raw: The raw kubeconfig
         :param pulumi.Input['KubeconfigKubernetesClientConfigurationArgs'] kubernetes_client_configuration: The kubernetes client configuration
         :param pulumi.Input[str] node: controlplane node to retrieve the kubeconfig from
         """
+        if certificate_renewal_duration is not None:
+            pulumi.set(__self__, "certificate_renewal_duration", certificate_renewal_duration)
         if client_configuration is not None:
             pulumi.set(__self__, "client_configuration", client_configuration)
         if endpoint is not None:
@@ -113,6 +133,18 @@ class _KubeconfigState:
             pulumi.set(__self__, "node", node)
         if timeouts is not None:
             pulumi.set(__self__, "timeouts", timeouts)
+
+    @property
+    @pulumi.getter(name="certificateRenewalDuration")
+    def certificate_renewal_duration(self) -> Optional[pulumi.Input[str]]:
+        """
+        The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+        """
+        return pulumi.get(self, "certificate_renewal_duration")
+
+    @certificate_renewal_duration.setter
+    def certificate_renewal_duration(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "certificate_renewal_duration", value)
 
     @property
     @pulumi.getter(name="clientConfiguration")
@@ -189,6 +221,7 @@ class Kubeconfig(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 certificate_renewal_duration: Optional[pulumi.Input[str]] = None,
                  client_configuration: Optional[pulumi.Input[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
@@ -199,6 +232,7 @@ class Kubeconfig(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] certificate_renewal_duration: The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
         :param pulumi.Input[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']] client_configuration: The client configuration data
         :param pulumi.Input[str] endpoint: endpoint to use for the talosclient. If not set, the node value will be used
         :param pulumi.Input[str] node: controlplane node to retrieve the kubeconfig from
@@ -227,6 +261,7 @@ class Kubeconfig(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 certificate_renewal_duration: Optional[pulumi.Input[str]] = None,
                  client_configuration: Optional[pulumi.Input[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
@@ -240,6 +275,7 @@ class Kubeconfig(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = KubeconfigArgs.__new__(KubeconfigArgs)
 
+            __props__.__dict__["certificate_renewal_duration"] = certificate_renewal_duration
             if client_configuration is None and not opts.urn:
                 raise TypeError("Missing required property 'client_configuration'")
             __props__.__dict__["client_configuration"] = client_configuration
@@ -262,6 +298,7 @@ class Kubeconfig(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            certificate_renewal_duration: Optional[pulumi.Input[str]] = None,
             client_configuration: Optional[pulumi.Input[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
             endpoint: Optional[pulumi.Input[str]] = None,
             kubeconfig_raw: Optional[pulumi.Input[str]] = None,
@@ -275,6 +312,7 @@ class Kubeconfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] certificate_renewal_duration: The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
         :param pulumi.Input[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']] client_configuration: The client configuration data
         :param pulumi.Input[str] endpoint: endpoint to use for the talosclient. If not set, the node value will be used
         :param pulumi.Input[str] kubeconfig_raw: The raw kubeconfig
@@ -285,6 +323,7 @@ class Kubeconfig(pulumi.CustomResource):
 
         __props__ = _KubeconfigState.__new__(_KubeconfigState)
 
+        __props__.__dict__["certificate_renewal_duration"] = certificate_renewal_duration
         __props__.__dict__["client_configuration"] = client_configuration
         __props__.__dict__["endpoint"] = endpoint
         __props__.__dict__["kubeconfig_raw"] = kubeconfig_raw
@@ -292,6 +331,14 @@ class Kubeconfig(pulumi.CustomResource):
         __props__.__dict__["node"] = node
         __props__.__dict__["timeouts"] = timeouts
         return Kubeconfig(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="certificateRenewalDuration")
+    def certificate_renewal_duration(self) -> pulumi.Output[str]:
+        """
+        The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+        """
+        return pulumi.get(self, "certificate_renewal_duration")
 
     @property
     @pulumi.getter(name="clientConfiguration")

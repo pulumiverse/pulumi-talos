@@ -38,6 +38,10 @@ export class Kubeconfig extends pulumi.CustomResource {
     }
 
     /**
+     * The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+     */
+    public readonly certificateRenewalDuration!: pulumi.Output<string>;
+    /**
      * The client configuration data
      */
     public readonly clientConfiguration!: pulumi.Output<outputs.cluster.KubeconfigClientConfiguration>;
@@ -72,6 +76,7 @@ export class Kubeconfig extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as KubeconfigState | undefined;
+            resourceInputs["certificateRenewalDuration"] = state ? state.certificateRenewalDuration : undefined;
             resourceInputs["clientConfiguration"] = state ? state.clientConfiguration : undefined;
             resourceInputs["endpoint"] = state ? state.endpoint : undefined;
             resourceInputs["kubeconfigRaw"] = state ? state.kubeconfigRaw : undefined;
@@ -86,6 +91,7 @@ export class Kubeconfig extends pulumi.CustomResource {
             if ((!args || args.node === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'node'");
             }
+            resourceInputs["certificateRenewalDuration"] = args ? args.certificateRenewalDuration : undefined;
             resourceInputs["clientConfiguration"] = args ? args.clientConfiguration : undefined;
             resourceInputs["endpoint"] = args ? args.endpoint : undefined;
             resourceInputs["node"] = args ? args.node : undefined;
@@ -104,6 +110,10 @@ export class Kubeconfig extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Kubeconfig resources.
  */
 export interface KubeconfigState {
+    /**
+     * The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+     */
+    certificateRenewalDuration?: pulumi.Input<string>;
     /**
      * The client configuration data
      */
@@ -131,6 +141,10 @@ export interface KubeconfigState {
  * The set of arguments for constructing a Kubeconfig resource.
  */
 export interface KubeconfigArgs {
+    /**
+     * The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
+     */
+    certificateRenewalDuration?: pulumi.Input<string>;
     /**
      * The client configuration data
      */

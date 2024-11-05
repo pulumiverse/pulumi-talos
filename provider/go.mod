@@ -1,8 +1,6 @@
 module github.com/pulumiverse/pulumi-talos/provider
 
-go 1.23.1
-
-toolchain go1.23.2
+go 1.23.2
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240520223432-0c0bf0d65f10
 
@@ -10,7 +8,7 @@ require (
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.47.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.94.0
 	github.com/pulumi/pulumi/pkg/v3 v3.137.0
-	github.com/siderolabs/terraform-provider-talos v0.6.0
+	github.com/siderolabs/terraform-provider-talos v0.6.1
 )
 
 require (
@@ -148,7 +146,7 @@ require (
 	github.com/jsimonetti/rtnetlink/v2 v2.0.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kevinburke/ssh_config v1.2.0 // indirect
-	github.com/klauspost/compress v1.17.9 // indirect
+	github.com/klauspost/compress v1.17.10 // indirect
 	github.com/letsencrypt/boulder v0.0.0-20240620165639-de9c06129bec // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
@@ -217,11 +215,11 @@ require (
 	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
 	github.com/shibumi/go-pathspec v1.3.0 // indirect
 	github.com/shopspring/decimal v1.3.1 // indirect
-	github.com/siderolabs/crypto v0.4.4 // indirect
+	github.com/siderolabs/crypto v0.5.0 // indirect
 	github.com/siderolabs/gen v0.5.0 // indirect
 	github.com/siderolabs/go-api-signature v0.3.6 // indirect
-	github.com/siderolabs/go-blockdevice v0.4.7 // indirect
-	github.com/siderolabs/go-blockdevice/v2 v2.0.2 // indirect
+	github.com/siderolabs/go-blockdevice v0.4.8 // indirect
+	github.com/siderolabs/go-blockdevice/v2 v2.0.3 // indirect
 	github.com/siderolabs/go-circular v0.2.0 // indirect
 	github.com/siderolabs/go-kubernetes v0.2.12 // indirect
 	github.com/siderolabs/go-pointer v1.0.0 // indirect
@@ -230,8 +228,8 @@ require (
 	github.com/siderolabs/image-factory v0.5.0 // indirect
 	github.com/siderolabs/net v0.4.0 // indirect
 	github.com/siderolabs/protoenc v0.2.1 // indirect
-	github.com/siderolabs/talos v1.8.0 // indirect
-	github.com/siderolabs/talos/pkg/machinery v1.8.0 // indirect
+	github.com/siderolabs/talos v1.8.1 // indirect
+	github.com/siderolabs/talos/pkg/machinery v1.8.1 // indirect
 	github.com/sigstore/cosign/v2 v2.4.0 // indirect
 	github.com/sigstore/protobuf-specs v0.3.2 // indirect
 	github.com/sigstore/rekor v1.3.6 // indirect
@@ -265,11 +263,11 @@ require (
 	github.com/zclconf/go-cty v1.15.0 // indirect
 	go.mongodb.org/mongo-driver v1.14.0 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.53.0 // indirect
-	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.53.0 // indirect
-	go.opentelemetry.io/otel v1.28.0 // indirect
-	go.opentelemetry.io/otel/metric v1.28.0 // indirect
-	go.opentelemetry.io/otel/trace v1.28.0 // indirect
+	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.55.0 // indirect
+	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.55.0 // indirect
+	go.opentelemetry.io/otel v1.30.0 // indirect
+	go.opentelemetry.io/otel/metric v1.30.0 // indirect
+	go.opentelemetry.io/otel/trace v1.30.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
