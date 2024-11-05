@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -134,9 +139,6 @@ def get_health(client_configuration: Optional[Union['GetHealthClientConfiguratio
         id=pulumi.get(__ret__, 'id'),
         timeouts=pulumi.get(__ret__, 'timeouts'),
         worker_nodes=pulumi.get(__ret__, 'worker_nodes'))
-
-
-@_utilities.lift_output_func(get_health)
 def get_health_output(client_configuration: Optional[pulumi.Input[Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict']]] = None,
                       control_plane_nodes: Optional[pulumi.Input[Sequence[str]]] = None,
                       endpoints: Optional[pulumi.Input[Sequence[str]]] = None,
@@ -152,4 +154,18 @@ def get_health_output(client_configuration: Optional[pulumi.Input[Union['GetHeal
     :param Sequence[str] endpoints: endpoints to use for the health check client. Use at least one control plane endpoint.
     :param Sequence[str] worker_nodes: List of worker nodes to check for health.
     """
-    ...
+    __args__ = dict()
+    __args__['clientConfiguration'] = client_configuration
+    __args__['controlPlaneNodes'] = control_plane_nodes
+    __args__['endpoints'] = endpoints
+    __args__['timeouts'] = timeouts
+    __args__['workerNodes'] = worker_nodes
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('talos:cluster/getHealth:getHealth', __args__, opts=opts, typ=GetHealthResult)
+    return __ret__.apply(lambda __response__: GetHealthResult(
+        client_configuration=pulumi.get(__response__, 'client_configuration'),
+        control_plane_nodes=pulumi.get(__response__, 'control_plane_nodes'),
+        endpoints=pulumi.get(__response__, 'endpoints'),
+        id=pulumi.get(__response__, 'id'),
+        timeouts=pulumi.get(__response__, 'timeouts'),
+        worker_nodes=pulumi.get(__response__, 'worker_nodes')))

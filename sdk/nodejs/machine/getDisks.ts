@@ -31,7 +31,6 @@ import * as utilities from "../utilities";
  * ```
  */
 export function getDisks(args: GetDisksArgs, opts?: pulumi.InvokeOptions): Promise<GetDisksResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("talos:machine/getDisks:getDisks", {
         "clientConfiguration": args.clientConfiguration,
@@ -120,7 +119,14 @@ export interface GetDisksResult {
  * ```
  */
 export function getDisksOutput(args: GetDisksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDisksResult> {
-    return pulumi.output(args).apply((a: any) => getDisks(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("talos:machine/getDisks:getDisks", {
+        "clientConfiguration": args.clientConfiguration,
+        "endpoint": args.endpoint,
+        "filters": args.filters,
+        "node": args.node,
+        "timeouts": args.timeouts,
+    }, opts);
 }
 
 /**

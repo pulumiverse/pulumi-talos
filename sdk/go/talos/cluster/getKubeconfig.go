@@ -60,14 +60,20 @@ type GetKubeconfigResult struct {
 
 func GetKubeconfigOutput(ctx *pulumi.Context, args GetKubeconfigOutputArgs, opts ...pulumi.InvokeOption) GetKubeconfigResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetKubeconfigResult, error) {
+		ApplyT(func(v interface{}) (GetKubeconfigResultOutput, error) {
 			args := v.(GetKubeconfigArgs)
-			r, err := GetKubeconfig(ctx, &args, opts...)
-			var s GetKubeconfigResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetKubeconfigResult
+			secret, err := ctx.InvokePackageRaw("talos:cluster/getKubeconfig:getKubeconfig", args, &rv, "", opts...)
+			if err != nil {
+				return GetKubeconfigResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetKubeconfigResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetKubeconfigResultOutput), nil
+			}
+			return output, nil
 		}).(GetKubeconfigResultOutput)
 }
 

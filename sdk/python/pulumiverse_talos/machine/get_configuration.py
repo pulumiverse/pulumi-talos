@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -231,9 +236,6 @@ def get_configuration(cluster_endpoint: Optional[str] = None,
         machine_secrets=pulumi.get(__ret__, 'machine_secrets'),
         machine_type=pulumi.get(__ret__, 'machine_type'),
         talos_version=pulumi.get(__ret__, 'talos_version'))
-
-
-@_utilities.lift_output_func(get_configuration)
 def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = None,
                              cluster_name: Optional[pulumi.Input[str]] = None,
                              config_patches: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
@@ -274,4 +276,27 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
     :param str machine_type: The type of machine to generate the configuration for
     :param str talos_version: The version of talos features to use in generated machine configuration
     """
-    ...
+    __args__ = dict()
+    __args__['clusterEndpoint'] = cluster_endpoint
+    __args__['clusterName'] = cluster_name
+    __args__['configPatches'] = config_patches
+    __args__['docs'] = docs
+    __args__['examples'] = examples
+    __args__['kubernetesVersion'] = kubernetes_version
+    __args__['machineSecrets'] = machine_secrets
+    __args__['machineType'] = machine_type
+    __args__['talosVersion'] = talos_version
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('talos:machine/getConfiguration:getConfiguration', __args__, opts=opts, typ=GetConfigurationResult)
+    return __ret__.apply(lambda __response__: GetConfigurationResult(
+        cluster_endpoint=pulumi.get(__response__, 'cluster_endpoint'),
+        cluster_name=pulumi.get(__response__, 'cluster_name'),
+        config_patches=pulumi.get(__response__, 'config_patches'),
+        docs=pulumi.get(__response__, 'docs'),
+        examples=pulumi.get(__response__, 'examples'),
+        id=pulumi.get(__response__, 'id'),
+        kubernetes_version=pulumi.get(__response__, 'kubernetes_version'),
+        machine_configuration=pulumi.get(__response__, 'machine_configuration'),
+        machine_secrets=pulumi.get(__response__, 'machine_secrets'),
+        machine_type=pulumi.get(__response__, 'machine_type'),
+        talos_version=pulumi.get(__response__, 'talos_version')))

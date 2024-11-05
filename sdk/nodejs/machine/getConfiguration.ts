@@ -28,7 +28,6 @@ import * as utilities from "../utilities";
  * ```
  */
 export function getConfiguration(args: GetConfigurationArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigurationResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("talos:machine/getConfiguration:getConfiguration", {
         "clusterEndpoint": args.clusterEndpoint,
@@ -156,7 +155,18 @@ export interface GetConfigurationResult {
  * ```
  */
 export function getConfigurationOutput(args: GetConfigurationOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigurationResult> {
-    return pulumi.output(args).apply((a: any) => getConfiguration(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("talos:machine/getConfiguration:getConfiguration", {
+        "clusterEndpoint": args.clusterEndpoint,
+        "clusterName": args.clusterName,
+        "configPatches": args.configPatches,
+        "docs": args.docs,
+        "examples": args.examples,
+        "kubernetesVersion": args.kubernetesVersion,
+        "machineSecrets": args.machineSecrets,
+        "machineType": args.machineType,
+        "talosVersion": args.talosVersion,
+    }, opts);
 }
 
 /**

@@ -10,7 +10,6 @@ import * as utilities from "../utilities";
  * Retrieves the kubeconfig for a Talos cluster
  */
 export function getKubeconfig(args: GetKubeconfigArgs, opts?: pulumi.InvokeOptions): Promise<GetKubeconfigResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("talos:cluster/getKubeconfig:getKubeconfig", {
         "clientConfiguration": args.clientConfiguration,
@@ -86,7 +85,14 @@ export interface GetKubeconfigResult {
  * Retrieves the kubeconfig for a Talos cluster
  */
 export function getKubeconfigOutput(args: GetKubeconfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetKubeconfigResult> {
-    return pulumi.output(args).apply((a: any) => getKubeconfig(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("talos:cluster/getKubeconfig:getKubeconfig", {
+        "clientConfiguration": args.clientConfiguration,
+        "endpoint": args.endpoint,
+        "node": args.node,
+        "timeouts": args.timeouts,
+        "wait": args.wait,
+    }, opts);
 }
 
 /**

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 from . import outputs
 from ._inputs import *
@@ -166,9 +171,6 @@ def get_disks(client_configuration: Optional[Union['GetDisksClientConfigurationA
         id=pulumi.get(__ret__, 'id'),
         node=pulumi.get(__ret__, 'node'),
         timeouts=pulumi.get(__ret__, 'timeouts'))
-
-
-@_utilities.lift_output_func(get_disks)
 def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict']]] = None,
                      endpoint: Optional[pulumi.Input[Optional[str]]] = None,
                      filters: Optional[pulumi.Input[Optional[Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict']]]] = None,
@@ -203,4 +205,19 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisks
     :param Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict'] filters: Filters to apply to the disks
     :param str node: controlplane node to retrieve the kubeconfig from
     """
-    ...
+    __args__ = dict()
+    __args__['clientConfiguration'] = client_configuration
+    __args__['endpoint'] = endpoint
+    __args__['filters'] = filters
+    __args__['node'] = node
+    __args__['timeouts'] = timeouts
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('talos:machine/getDisks:getDisks', __args__, opts=opts, typ=GetDisksResult)
+    return __ret__.apply(lambda __response__: GetDisksResult(
+        client_configuration=pulumi.get(__response__, 'client_configuration'),
+        disks=pulumi.get(__response__, 'disks'),
+        endpoint=pulumi.get(__response__, 'endpoint'),
+        filters=pulumi.get(__response__, 'filters'),
+        id=pulumi.get(__response__, 'id'),
+        node=pulumi.get(__response__, 'node'),
+        timeouts=pulumi.get(__response__, 'timeouts')))
