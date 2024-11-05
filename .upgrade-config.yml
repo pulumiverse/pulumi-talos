@@ -1,4 +1,0 @@
-upstream-provider-name: terraform-provider-talos
-upstream-provider-org: siderolabs
-remove-plugins: true
-pr-reviewers: ringods
