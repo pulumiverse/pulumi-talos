@@ -5,7 +5,14 @@
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .get_image_factory_extensions_versions import *
+from .get_image_factory_overlays_versions import *
+from .get_image_factory_urls import *
+from .get_image_factory_versions import *
+from .image_factory_schematic import *
 from .provider import *
+from ._inputs import *
+from . import outputs
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
@@ -13,16 +20,35 @@ if typing.TYPE_CHECKING:
     client = __client
     import pulumiverse_talos.cluster as __cluster
     cluster = __cluster
+    import pulumiverse_talos.config as __config
+    config = __config
     import pulumiverse_talos.machine as __machine
     machine = __machine
 else:
     client = _utilities.lazy_import('pulumiverse_talos.client')
     cluster = _utilities.lazy_import('pulumiverse_talos.cluster')
+    config = _utilities.lazy_import('pulumiverse_talos.config')
     machine = _utilities.lazy_import('pulumiverse_talos.machine')
 
 _utilities.register(
     resource_modules="""
 [
+ {
+  "pkg": "talos",
+  "mod": "cluster/kubeconfig",
+  "fqn": "pulumiverse_talos.cluster",
+  "classes": {
+   "talos:cluster/kubeconfig:Kubeconfig": "Kubeconfig"
+  }
+ },
+ {
+  "pkg": "talos",
+  "mod": "index/imageFactorySchematic",
+  "fqn": "pulumiverse_talos",
+  "classes": {
+   "talos:index/imageFactorySchematic:ImageFactorySchematic": "ImageFactorySchematic"
+  }
+ },
  {
   "pkg": "talos",
   "mod": "machine/bootstrap",

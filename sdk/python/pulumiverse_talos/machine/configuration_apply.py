@@ -27,6 +27,7 @@ class ConfigurationApplyArgs:
                  apply_mode: Optional[pulumi.Input[str]] = None,
                  config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
+                 on_destroy: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']] = None,
                  timeouts: Optional[pulumi.Input['TimeoutArgs']] = None):
         """
         The set of arguments for constructing a ConfigurationApply resource.
@@ -36,6 +37,7 @@ class ConfigurationApplyArgs:
         :param pulumi.Input[str] apply_mode: The mode of the apply operation
         :param pulumi.Input[Sequence[pulumi.Input[str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
+        :param pulumi.Input['ConfigurationApplyOnDestroyArgs'] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
         """
         pulumi.set(__self__, "client_configuration", client_configuration)
         pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
@@ -46,6 +48,8 @@ class ConfigurationApplyArgs:
             pulumi.set(__self__, "config_patches", config_patches)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
+        if on_destroy is not None:
+            pulumi.set(__self__, "on_destroy", on_destroy)
         if timeouts is not None:
             pulumi.set(__self__, "timeouts", timeouts)
 
@@ -122,6 +126,18 @@ class ConfigurationApplyArgs:
         pulumi.set(self, "endpoint", value)
 
     @property
+    @pulumi.getter(name="onDestroy")
+    def on_destroy(self) -> Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']]:
+        """
+        Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        """
+        return pulumi.get(self, "on_destroy")
+
+    @on_destroy.setter
+    def on_destroy(self, value: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']]):
+        pulumi.set(self, "on_destroy", value)
+
+    @property
     @pulumi.getter
     def timeouts(self) -> Optional[pulumi.Input['TimeoutArgs']]:
         return pulumi.get(self, "timeouts")
@@ -141,6 +157,7 @@ class _ConfigurationApplyState:
                  machine_configuration: Optional[pulumi.Input[str]] = None,
                  machine_configuration_input: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
+                 on_destroy: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']] = None,
                  timeouts: Optional[pulumi.Input['TimeoutArgs']] = None):
         """
         Input properties used for looking up and filtering ConfigurationApply resources.
@@ -151,6 +168,7 @@ class _ConfigurationApplyState:
         :param pulumi.Input[str] machine_configuration: The generated machine configuration after applying patches
         :param pulumi.Input[str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[str] node: The name of the node to bootstrap
+        :param pulumi.Input['ConfigurationApplyOnDestroyArgs'] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
         """
         if apply_mode is not None:
             pulumi.set(__self__, "apply_mode", apply_mode)
@@ -166,6 +184,8 @@ class _ConfigurationApplyState:
             pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
         if node is not None:
             pulumi.set(__self__, "node", node)
+        if on_destroy is not None:
+            pulumi.set(__self__, "on_destroy", on_destroy)
         if timeouts is not None:
             pulumi.set(__self__, "timeouts", timeouts)
 
@@ -254,6 +274,18 @@ class _ConfigurationApplyState:
         pulumi.set(self, "node", value)
 
     @property
+    @pulumi.getter(name="onDestroy")
+    def on_destroy(self) -> Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']]:
+        """
+        Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        """
+        return pulumi.get(self, "on_destroy")
+
+    @on_destroy.setter
+    def on_destroy(self, value: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']]):
+        pulumi.set(self, "on_destroy", value)
+
+    @property
     @pulumi.getter
     def timeouts(self) -> Optional[pulumi.Input['TimeoutArgs']]:
         return pulumi.get(self, "timeouts")
@@ -274,6 +306,7 @@ class ConfigurationApply(pulumi.CustomResource):
                  endpoint: Optional[pulumi.Input[str]] = None,
                  machine_configuration_input: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
+                 on_destroy: Optional[pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
                  timeouts: Optional[pulumi.Input[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None,
                  __props__=None):
         """
@@ -287,6 +320,7 @@ class ConfigurationApply(pulumi.CustomResource):
         :param pulumi.Input[str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[str] node: The name of the node to bootstrap
+        :param pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
         """
         ...
     @overload
@@ -318,6 +352,7 @@ class ConfigurationApply(pulumi.CustomResource):
                  endpoint: Optional[pulumi.Input[str]] = None,
                  machine_configuration_input: Optional[pulumi.Input[str]] = None,
                  node: Optional[pulumi.Input[str]] = None,
+                 on_destroy: Optional[pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
                  timeouts: Optional[pulumi.Input[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -340,6 +375,7 @@ class ConfigurationApply(pulumi.CustomResource):
             if node is None and not opts.urn:
                 raise TypeError("Missing required property 'node'")
             __props__.__dict__["node"] = node
+            __props__.__dict__["on_destroy"] = on_destroy
             __props__.__dict__["timeouts"] = timeouts
             __props__.__dict__["machine_configuration"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["machineConfiguration", "machineConfigurationInput"])
@@ -361,6 +397,7 @@ class ConfigurationApply(pulumi.CustomResource):
             machine_configuration: Optional[pulumi.Input[str]] = None,
             machine_configuration_input: Optional[pulumi.Input[str]] = None,
             node: Optional[pulumi.Input[str]] = None,
+            on_destroy: Optional[pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
             timeouts: Optional[pulumi.Input[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None) -> 'ConfigurationApply':
         """
         Get an existing ConfigurationApply resource's state with the given name, id, and optional extra
@@ -376,6 +413,7 @@ class ConfigurationApply(pulumi.CustomResource):
         :param pulumi.Input[str] machine_configuration: The generated machine configuration after applying patches
         :param pulumi.Input[str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[str] node: The name of the node to bootstrap
+        :param pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -388,6 +426,7 @@ class ConfigurationApply(pulumi.CustomResource):
         __props__.__dict__["machine_configuration"] = machine_configuration
         __props__.__dict__["machine_configuration_input"] = machine_configuration_input
         __props__.__dict__["node"] = node
+        __props__.__dict__["on_destroy"] = on_destroy
         __props__.__dict__["timeouts"] = timeouts
         return ConfigurationApply(resource_name, opts=opts, __props__=__props__)
 
@@ -446,6 +485,14 @@ class ConfigurationApply(pulumi.CustomResource):
         The name of the node to bootstrap
         """
         return pulumi.get(self, "node")
+
+    @property
+    @pulumi.getter(name="onDestroy")
+    def on_destroy(self) -> pulumi.Output[Optional['outputs.ConfigurationApplyOnDestroy']]:
+        """
+        Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        """
+        return pulumi.get(self, "on_destroy")
 
     @property
     @pulumi.getter

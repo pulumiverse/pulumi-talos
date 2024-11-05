@@ -17,6 +17,7 @@ from . import outputs
 
 __all__ = [
     'BootstrapTimeouts',
+    'ConfigurationApplyOnDestroy',
     'Timeout',
     'CertificateResult',
     'CertificatesResult',
@@ -52,16 +53,63 @@ class BootstrapTimeouts(dict):
 
 
 @pulumi.output_type
+class ConfigurationApplyOnDestroy(dict):
+    def __init__(__self__, *,
+                 graceful: Optional[bool] = None,
+                 reboot: Optional[bool] = None,
+                 reset: Optional[bool] = None):
+        """
+        :param bool graceful: Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+        :param bool reboot: Reboot indicates whether node should reboot or halt after resetting. Default false
+        :param bool reset: Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+        """
+        if graceful is not None:
+            pulumi.set(__self__, "graceful", graceful)
+        if reboot is not None:
+            pulumi.set(__self__, "reboot", reboot)
+        if reset is not None:
+            pulumi.set(__self__, "reset", reset)
+
+    @property
+    @pulumi.getter
+    def graceful(self) -> Optional[bool]:
+        """
+        Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+        """
+        return pulumi.get(self, "graceful")
+
+    @property
+    @pulumi.getter
+    def reboot(self) -> Optional[bool]:
+        """
+        Reboot indicates whether node should reboot or halt after resetting. Default false
+        """
+        return pulumi.get(self, "reboot")
+
+    @property
+    @pulumi.getter
+    def reset(self) -> Optional[bool]:
+        """
+        Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+        """
+        return pulumi.get(self, "reset")
+
+
+@pulumi.output_type
 class Timeout(dict):
     def __init__(__self__, *,
                  create: Optional[str] = None,
+                 delete: Optional[str] = None,
                  update: Optional[str] = None):
         """
         :param str create: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        :param str delete: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
         :param str update: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         if create is not None:
             pulumi.set(__self__, "create", create)
+        if delete is not None:
+            pulumi.set(__self__, "delete", delete)
         if update is not None:
             pulumi.set(__self__, "update", update)
 
@@ -72,6 +120,14 @@ class Timeout(dict):
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         return pulumi.get(self, "create")
+
+    @property
+    @pulumi.getter
+    def delete(self) -> Optional[str]:
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+        """
+        return pulumi.get(self, "delete")
 
     @property
     @pulumi.getter

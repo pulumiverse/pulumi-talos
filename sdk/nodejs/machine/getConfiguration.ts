@@ -59,11 +59,11 @@ export interface GetConfigurationArgs {
      */
     configPatches?: string[];
     /**
-     * Whether to generate documentation for the generated configuration
+     * Whether to generate documentation for the generated configuration. Defaults to false
      */
     docs?: boolean;
     /**
-     * Whether to generate examples for the generated configuration
+     * Whether to generate examples for the generated configuration. Defaults to false
      */
     examples?: boolean;
     /**
@@ -101,11 +101,11 @@ export interface GetConfigurationResult {
      */
     readonly configPatches?: string[];
     /**
-     * Whether to generate documentation for the generated configuration
+     * Whether to generate documentation for the generated configuration. Defaults to false
      */
     readonly docs?: boolean;
     /**
-     * Whether to generate examples for the generated configuration
+     * Whether to generate examples for the generated configuration. Defaults to false
      */
     readonly examples?: boolean;
     /**
@@ -186,11 +186,11 @@ export interface GetConfigurationOutputArgs {
      */
     configPatches?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Whether to generate documentation for the generated configuration
+     * Whether to generate documentation for the generated configuration. Defaults to false
      */
     docs?: pulumi.Input<boolean>;
     /**
-     * Whether to generate examples for the generated configuration
+     * Whether to generate examples for the generated configuration. Defaults to false
      */
     examples?: pulumi.Input<boolean>;
     /**
