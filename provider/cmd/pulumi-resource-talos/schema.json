@@ -1292,6 +1292,10 @@
         "talos:cluster/kubeconfig:Kubeconfig": {
             "description": "Retrieves the kubeconfig for a Talos cluster\n\n",
             "properties": {
+                "certificateRenewalDuration": {
+                    "type": "string",
+                    "description": "The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string\n"
+                },
                 "clientConfiguration": {
                     "$ref": "#/types/talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration",
                     "description": "The client configuration data\n"
@@ -1318,6 +1322,7 @@
                 }
             },
             "required": [
+                "certificateRenewalDuration",
                 "clientConfiguration",
                 "endpoint",
                 "kubeconfigRaw",
@@ -1325,6 +1330,10 @@
                 "node"
             ],
             "inputProperties": {
+                "certificateRenewalDuration": {
+                    "type": "string",
+                    "description": "The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string\n"
+                },
                 "clientConfiguration": {
                     "$ref": "#/types/talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration",
                     "description": "The client configuration data\n"
@@ -1348,6 +1357,10 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Kubeconfig resources.\n",
                 "properties": {
+                    "certificateRenewalDuration": {
+                        "type": "string",
+                        "description": "The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string\n"
+                    },
                     "clientConfiguration": {
                         "$ref": "#/types/talos:cluster/KubeconfigClientConfiguration:KubeconfigClientConfiguration",
                         "description": "The client configuration data\n"
