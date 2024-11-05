@@ -1,6 +1,12 @@
 {
     "auto-aliasing": {
         "resources": {
+            "talos_cluster_kubeconfig": {
+                "current": "talos:cluster/kubeconfig:Kubeconfig"
+            },
+            "talos_image_factory_schematic": {
+                "current": "talos:imageFactory/schematic:Schematic"
+            },
             "talos_machine_bootstrap": {
                 "current": "talos:machine/bootstrap:Bootstrap"
             },
@@ -44,6 +50,40 @@
             },
             "talos_cluster_kubeconfig": {
                 "current": "talos:cluster/getKubeconfig:getKubeconfig"
+            },
+            "talos_image_factory_extensions_versions": {
+                "current": "talos:imageFactory/getExtensionsVersions:getExtensionsVersions",
+                "fields": {
+                    "extensions_info": {
+                        "maxItemsOne": false
+                    },
+                    "filters": {
+                        "fields": {
+                            "names": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
+            },
+            "talos_image_factory_overlays_versions": {
+                "current": "talos:imageFactory/getOverlaysVersions:getOverlaysVersions",
+                "fields": {
+                    "overlays_info": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "talos_image_factory_urls": {
+                "current": "talos:imageFactory/getUrls:getUrls"
+            },
+            "talos_image_factory_versions": {
+                "current": "talos:imageFactory/getVersions:getVersions",
+                "fields": {
+                    "talos_versions": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "talos_machine_configuration": {
                 "current": "talos:machine/getConfiguration:getConfiguration",

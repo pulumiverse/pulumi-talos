@@ -13,16 +13,38 @@ if typing.TYPE_CHECKING:
     client = __client
     import pulumiverse_talos.cluster as __cluster
     cluster = __cluster
+    import pulumiverse_talos.config as __config
+    config = __config
+    import pulumiverse_talos.imagefactory as __imagefactory
+    imagefactory = __imagefactory
     import pulumiverse_talos.machine as __machine
     machine = __machine
 else:
     client = _utilities.lazy_import('pulumiverse_talos.client')
     cluster = _utilities.lazy_import('pulumiverse_talos.cluster')
+    config = _utilities.lazy_import('pulumiverse_talos.config')
+    imagefactory = _utilities.lazy_import('pulumiverse_talos.imagefactory')
     machine = _utilities.lazy_import('pulumiverse_talos.machine')
 
 _utilities.register(
     resource_modules="""
 [
+ {
+  "pkg": "talos",
+  "mod": "cluster/kubeconfig",
+  "fqn": "pulumiverse_talos.cluster",
+  "classes": {
+   "talos:cluster/kubeconfig:Kubeconfig": "Kubeconfig"
+  }
+ },
+ {
+  "pkg": "talos",
+  "mod": "imageFactory/schematic",
+  "fqn": "pulumiverse_talos.imagefactory",
+  "classes": {
+   "talos:imageFactory/schematic:Schematic": "Schematic"
+  }
+ },
  {
   "pkg": "talos",
   "mod": "machine/bootstrap",

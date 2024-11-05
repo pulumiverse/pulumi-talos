@@ -87,6 +87,137 @@ export namespace cluster {
         read?: string;
     }
 
+    export interface KubeconfigClientConfiguration {
+        /**
+         * The client CA certificate
+         */
+        caCertificate: string;
+        /**
+         * The client certificate
+         */
+        clientCertificate: string;
+        /**
+         * The client key
+         */
+        clientKey: string;
+    }
+
+    export interface KubeconfigKubernetesClientConfiguration {
+        /**
+         * The kubernetes CA certificate
+         */
+        caCertificate: string;
+        /**
+         * The kubernetes client certificate
+         */
+        clientCertificate: string;
+        /**
+         * The kubernetes client key
+         */
+        clientKey: string;
+        /**
+         * The kubernetes host
+         */
+        host: string;
+    }
+
+    export interface KubeconfigTimeouts {
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+         */
+        create?: string;
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+         */
+        update?: string;
+    }
+
+}
+
+export namespace imageFactory {
+    export interface GetExtensionsVersionsExtensionsInfo {
+        author: string;
+        description: string;
+        digest: string;
+        name: string;
+        ref: string;
+    }
+
+    export interface GetExtensionsVersionsFilters {
+        /**
+         * The name of the extension to filter by.
+         */
+        names?: string[];
+    }
+
+    export interface GetOverlaysVersionsFilters {
+        /**
+         * The name of the overlay to filter by.
+         */
+        name?: string;
+    }
+
+    export interface GetOverlaysVersionsOverlaysInfo {
+        digest: string;
+        image: string;
+        name: string;
+        ref: string;
+    }
+
+    export interface GetUrlsUrls {
+        /**
+         * The URL for the disk image.
+         */
+        diskImage: string;
+        /**
+         * The URL for the disk image with secure boot.
+         */
+        diskImageSecureboot: string;
+        /**
+         * The URL for the initramfs image.
+         */
+        initramfs: string;
+        /**
+         * The URL for the installer image.
+         */
+        installer: string;
+        /**
+         * The URL for the installer image with secure boot.
+         */
+        installerSecureboot: string;
+        /**
+         * The URL for the ISO image.
+         */
+        iso: string;
+        /**
+         * The URL for the ISO image with secure boot.
+         */
+        isoSecureboot: string;
+        /**
+         * The URL for the kernel image.
+         */
+        kernel: string;
+        /**
+         * The URL for the kernel command line.
+         */
+        kernelCommandLine: string;
+        /**
+         * The URL for the PXE image.
+         */
+        pxe: string;
+        /**
+         * The URL for the UKI image.
+         */
+        uki: string;
+    }
+
+    export interface GetVersionsFilters {
+        /**
+         * If set to true, only stable versions will be returned. If set to false, all versions will be returned.
+         */
+        stableVersionsOnly?: boolean;
+    }
+
 }
 
 export namespace machine {
@@ -152,6 +283,21 @@ export namespace machine {
          * Private Key
          */
         secret: string;
+    }
+
+    export interface ConfigurationApplyOnDestroy {
+        /**
+         * Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+         */
+        graceful: boolean;
+        /**
+         * Reboot indicates whether node should reboot or halt after resetting. Default false
+         */
+        reboot: boolean;
+        /**
+         * Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+         */
+        reset: boolean;
     }
 
     export interface GetDisksClientConfiguration {
@@ -297,6 +443,10 @@ export namespace machine {
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
         create?: string;
+        /**
+         * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+         */
+        delete?: string;
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */

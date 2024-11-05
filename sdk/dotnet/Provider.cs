@@ -20,6 +20,13 @@ namespace Pulumiverse.Talos
     public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
+        /// The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+        /// </summary>
+        [Output("imageFactoryUrl")]
+        public Output<string?> ImageFactoryUrl { get; private set; } = null!;
+
+
+        /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
         /// </summary>
         ///
@@ -47,6 +54,12 @@ namespace Pulumiverse.Talos
 
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+        /// </summary>
+        [Input("imageFactoryUrl")]
+        public Input<string>? ImageFactoryUrl { get; set; }
+
         public ProviderArgs()
         {
         }

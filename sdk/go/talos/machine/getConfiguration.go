@@ -62,9 +62,9 @@ type GetConfigurationArgs struct {
 	ClusterName string `pulumi:"clusterName"`
 	// The list of config patches to apply to the generated configuration
 	ConfigPatches []string `pulumi:"configPatches"`
-	// Whether to generate documentation for the generated configuration
+	// Whether to generate documentation for the generated configuration. Defaults to false
 	Docs *bool `pulumi:"docs"`
-	// Whether to generate examples for the generated configuration
+	// Whether to generate examples for the generated configuration. Defaults to false
 	Examples *bool `pulumi:"examples"`
 	// The version of kubernetes to use
 	KubernetesVersion *string `pulumi:"kubernetesVersion"`
@@ -84,9 +84,9 @@ type GetConfigurationResult struct {
 	ClusterName string `pulumi:"clusterName"`
 	// The list of config patches to apply to the generated configuration
 	ConfigPatches []string `pulumi:"configPatches"`
-	// Whether to generate documentation for the generated configuration
+	// Whether to generate documentation for the generated configuration. Defaults to false
 	Docs *bool `pulumi:"docs"`
-	// Whether to generate examples for the generated configuration
+	// Whether to generate examples for the generated configuration. Defaults to false
 	Examples *bool `pulumi:"examples"`
 	// The ID of this resource.
 	Id string `pulumi:"id"`
@@ -129,9 +129,9 @@ type GetConfigurationOutputArgs struct {
 	ClusterName pulumi.StringInput `pulumi:"clusterName"`
 	// The list of config patches to apply to the generated configuration
 	ConfigPatches pulumi.StringArrayInput `pulumi:"configPatches"`
-	// Whether to generate documentation for the generated configuration
+	// Whether to generate documentation for the generated configuration. Defaults to false
 	Docs pulumi.BoolPtrInput `pulumi:"docs"`
-	// Whether to generate examples for the generated configuration
+	// Whether to generate examples for the generated configuration. Defaults to false
 	Examples pulumi.BoolPtrInput `pulumi:"examples"`
 	// The version of kubernetes to use
 	KubernetesVersion pulumi.StringPtrInput `pulumi:"kubernetesVersion"`
@@ -177,12 +177,12 @@ func (o GetConfigurationResultOutput) ConfigPatches() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetConfigurationResult) []string { return v.ConfigPatches }).(pulumi.StringArrayOutput)
 }
 
-// Whether to generate documentation for the generated configuration
+// Whether to generate documentation for the generated configuration. Defaults to false
 func (o GetConfigurationResultOutput) Docs() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v GetConfigurationResult) *bool { return v.Docs }).(pulumi.BoolPtrOutput)
 }
 
-// Whether to generate examples for the generated configuration
+// Whether to generate examples for the generated configuration. Defaults to false
 func (o GetConfigurationResultOutput) Examples() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v GetConfigurationResult) *bool { return v.Examples }).(pulumi.BoolPtrOutput)
 }

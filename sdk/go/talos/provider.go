@@ -17,6 +17,9 @@ import (
 // [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
 type Provider struct {
 	pulumi.ProviderResourceState
+
+	// The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+	ImageFactoryUrl pulumi.StringPtrOutput `pulumi:"imageFactoryUrl"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -36,10 +39,14 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
+	// The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+	ImageFactoryUrl *string `pulumi:"imageFactoryUrl"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
+	// The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+	ImageFactoryUrl pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
@@ -77,6 +84,11 @@ func (o ProviderOutput) ToProviderOutput() ProviderOutput {
 
 func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) ProviderOutput {
 	return o
+}
+
+// The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+func (o ProviderOutput) ImageFactoryUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ImageFactoryUrl }).(pulumi.StringPtrOutput)
 }
 
 func init() {

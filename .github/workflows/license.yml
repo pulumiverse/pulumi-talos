@@ -42,6 +42,7 @@ jobs:
         with:
           module-path: provider
           ignore-modules: >-
+            github.com/cyberphone/json-canonicalization/go/src/webpki.org/jsoncanonicalizer,
             github.com/aead/chacha20,
             github.com/apache/arrow/go/v12,
             github.com/apache/thrift/lib/go/thrift,

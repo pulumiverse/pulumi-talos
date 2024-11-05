@@ -18,11 +18,26 @@ __all__ = ['ProviderArgs', 'Provider']
 
 @pulumi.input_type
 class ProviderArgs:
-    def __init__(__self__):
+    def __init__(__self__, *,
+                 image_factory_url: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
+        :param pulumi.Input[str] image_factory_url: The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
         """
-        pass
+        if image_factory_url is not None:
+            pulumi.set(__self__, "image_factory_url", image_factory_url)
+
+    @property
+    @pulumi.getter(name="imageFactoryUrl")
+    def image_factory_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+        """
+        return pulumi.get(self, "image_factory_url")
+
+    @image_factory_url.setter
+    def image_factory_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "image_factory_url", value)
 
 
 class Provider(pulumi.ProviderResource):
@@ -30,6 +45,7 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 image_factory_url: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         The provider type for the talos package. By default, resources use package-wide configuration
@@ -39,6 +55,7 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] image_factory_url: The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
         """
         ...
     @overload
@@ -67,6 +84,7 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 image_factory_url: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -76,9 +94,18 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            __props__.__dict__["image_factory_url"] = image_factory_url
         super(Provider, __self__).__init__(
             'talos',
             resource_name,
             __props__,
             opts)
+
+    @property
+    @pulumi.getter(name="imageFactoryUrl")
+    def image_factory_url(self) -> pulumi.Output[Optional[str]]:
+        """
+        The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+        """
+        return pulumi.get(self, "image_factory_url")
 

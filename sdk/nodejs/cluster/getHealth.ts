@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Checks the health of a Talos cluster
+ * Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
  */
 export function getHealth(args: GetHealthArgs, opts?: pulumi.InvokeOptions): Promise<GetHealthResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -15,6 +15,7 @@ export function getHealth(args: GetHealthArgs, opts?: pulumi.InvokeOptions): Pro
         "clientConfiguration": args.clientConfiguration,
         "controlPlaneNodes": args.controlPlaneNodes,
         "endpoints": args.endpoints,
+        "skipKubernetesChecks": args.skipKubernetesChecks,
         "timeouts": args.timeouts,
         "workerNodes": args.workerNodes,
     }, opts);
@@ -36,6 +37,10 @@ export interface GetHealthArgs {
      * endpoints to use for the health check client. Use at least one control plane endpoint.
      */
     endpoints: string[];
+    /**
+     * Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+     */
+    skipKubernetesChecks?: boolean;
     timeouts?: inputs.cluster.GetHealthTimeouts;
     /**
      * List of worker nodes to check for health.
@@ -63,6 +68,10 @@ export interface GetHealthResult {
      * The ID of this resource.
      */
     readonly id: string;
+    /**
+     * Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+     */
+    readonly skipKubernetesChecks?: boolean;
     readonly timeouts?: outputs.cluster.GetHealthTimeouts;
     /**
      * List of worker nodes to check for health.
@@ -70,7 +79,7 @@ export interface GetHealthResult {
     readonly workerNodes?: string[];
 }
 /**
- * Checks the health of a Talos cluster
+ * Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
  */
 export function getHealthOutput(args: GetHealthOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetHealthResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +87,7 @@ export function getHealthOutput(args: GetHealthOutputArgs, opts?: pulumi.InvokeO
         "clientConfiguration": args.clientConfiguration,
         "controlPlaneNodes": args.controlPlaneNodes,
         "endpoints": args.endpoints,
+        "skipKubernetesChecks": args.skipKubernetesChecks,
         "timeouts": args.timeouts,
         "workerNodes": args.workerNodes,
     }, opts);
@@ -99,6 +109,10 @@ export interface GetHealthOutputArgs {
      * endpoints to use for the health check client. Use at least one control plane endpoint.
      */
     endpoints: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+     */
+    skipKubernetesChecks?: pulumi.Input<boolean>;
     timeouts?: pulumi.Input<inputs.cluster.GetHealthTimeoutsArgs>;
     /**
      * List of worker nodes to check for health.

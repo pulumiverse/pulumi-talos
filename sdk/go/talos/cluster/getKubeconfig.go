@@ -12,9 +12,9 @@ import (
 )
 
 // Retrieves the kubeconfig for a Talos cluster
-func GetKubeconfig(ctx *pulumi.Context, args *GetKubeconfigArgs, opts ...pulumi.InvokeOption) (*GetKubeconfigResult, error) {
+func LookupKubeconfig(ctx *pulumi.Context, args *LookupKubeconfigArgs, opts ...pulumi.InvokeOption) (*LookupKubeconfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
-	var rv GetKubeconfigResult
+	var rv LookupKubeconfigResult
 	err := ctx.Invoke("talos:cluster/getKubeconfig:getKubeconfig", args, &rv, opts...)
 	if err != nil {
 		return nil, err
@@ -23,7 +23,7 @@ func GetKubeconfig(ctx *pulumi.Context, args *GetKubeconfigArgs, opts ...pulumi.
 }
 
 // A collection of arguments for invoking getKubeconfig.
-type GetKubeconfigArgs struct {
+type LookupKubeconfigArgs struct {
 	// The client configuration data
 	ClientConfiguration GetKubeconfigClientConfiguration `pulumi:"clientConfiguration"`
 	// endpoint to use for the talosclient. If not set, the node value will be used
@@ -38,7 +38,7 @@ type GetKubeconfigArgs struct {
 }
 
 // A collection of values returned by getKubeconfig.
-type GetKubeconfigResult struct {
+type LookupKubeconfigResult struct {
 	// The client configuration data
 	ClientConfiguration GetKubeconfigClientConfiguration `pulumi:"clientConfiguration"`
 	// endpoint to use for the talosclient. If not set, the node value will be used
@@ -58,27 +58,27 @@ type GetKubeconfigResult struct {
 	Wait *bool `pulumi:"wait"`
 }
 
-func GetKubeconfigOutput(ctx *pulumi.Context, args GetKubeconfigOutputArgs, opts ...pulumi.InvokeOption) GetKubeconfigResultOutput {
+func LookupKubeconfigOutput(ctx *pulumi.Context, args LookupKubeconfigOutputArgs, opts ...pulumi.InvokeOption) LookupKubeconfigResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetKubeconfigResultOutput, error) {
-			args := v.(GetKubeconfigArgs)
+		ApplyT(func(v interface{}) (LookupKubeconfigResultOutput, error) {
+			args := v.(LookupKubeconfigArgs)
 			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetKubeconfigResult
+			var rv LookupKubeconfigResult
 			secret, err := ctx.InvokePackageRaw("talos:cluster/getKubeconfig:getKubeconfig", args, &rv, "", opts...)
 			if err != nil {
-				return GetKubeconfigResultOutput{}, err
+				return LookupKubeconfigResultOutput{}, err
 			}
 
-			output := pulumi.ToOutput(rv).(GetKubeconfigResultOutput)
+			output := pulumi.ToOutput(rv).(LookupKubeconfigResultOutput)
 			if secret {
-				return pulumi.ToSecret(output).(GetKubeconfigResultOutput), nil
+				return pulumi.ToSecret(output).(LookupKubeconfigResultOutput), nil
 			}
 			return output, nil
-		}).(GetKubeconfigResultOutput)
+		}).(LookupKubeconfigResultOutput)
 }
 
 // A collection of arguments for invoking getKubeconfig.
-type GetKubeconfigOutputArgs struct {
+type LookupKubeconfigOutputArgs struct {
 	// The client configuration data
 	ClientConfiguration GetKubeconfigClientConfigurationInput `pulumi:"clientConfiguration"`
 	// endpoint to use for the talosclient. If not set, the node value will be used
@@ -92,68 +92,68 @@ type GetKubeconfigOutputArgs struct {
 	Wait pulumi.BoolPtrInput `pulumi:"wait"`
 }
 
-func (GetKubeconfigOutputArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetKubeconfigArgs)(nil)).Elem()
+func (LookupKubeconfigOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupKubeconfigArgs)(nil)).Elem()
 }
 
 // A collection of values returned by getKubeconfig.
-type GetKubeconfigResultOutput struct{ *pulumi.OutputState }
+type LookupKubeconfigResultOutput struct{ *pulumi.OutputState }
 
-func (GetKubeconfigResultOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetKubeconfigResult)(nil)).Elem()
+func (LookupKubeconfigResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupKubeconfigResult)(nil)).Elem()
 }
 
-func (o GetKubeconfigResultOutput) ToGetKubeconfigResultOutput() GetKubeconfigResultOutput {
+func (o LookupKubeconfigResultOutput) ToLookupKubeconfigResultOutput() LookupKubeconfigResultOutput {
 	return o
 }
 
-func (o GetKubeconfigResultOutput) ToGetKubeconfigResultOutputWithContext(ctx context.Context) GetKubeconfigResultOutput {
+func (o LookupKubeconfigResultOutput) ToLookupKubeconfigResultOutputWithContext(ctx context.Context) LookupKubeconfigResultOutput {
 	return o
 }
 
 // The client configuration data
-func (o GetKubeconfigResultOutput) ClientConfiguration() GetKubeconfigClientConfigurationOutput {
-	return o.ApplyT(func(v GetKubeconfigResult) GetKubeconfigClientConfiguration { return v.ClientConfiguration }).(GetKubeconfigClientConfigurationOutput)
+func (o LookupKubeconfigResultOutput) ClientConfiguration() GetKubeconfigClientConfigurationOutput {
+	return o.ApplyT(func(v LookupKubeconfigResult) GetKubeconfigClientConfiguration { return v.ClientConfiguration }).(GetKubeconfigClientConfigurationOutput)
 }
 
 // endpoint to use for the talosclient. If not set, the node value will be used
-func (o GetKubeconfigResultOutput) Endpoint() pulumi.StringOutput {
-	return o.ApplyT(func(v GetKubeconfigResult) string { return v.Endpoint }).(pulumi.StringOutput)
+func (o LookupKubeconfigResultOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupKubeconfigResult) string { return v.Endpoint }).(pulumi.StringOutput)
 }
 
 // The ID of this resource.
-func (o GetKubeconfigResultOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v GetKubeconfigResult) string { return v.Id }).(pulumi.StringOutput)
+func (o LookupKubeconfigResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupKubeconfigResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
 // The raw kubeconfig
-func (o GetKubeconfigResultOutput) KubeconfigRaw() pulumi.StringOutput {
-	return o.ApplyT(func(v GetKubeconfigResult) string { return v.KubeconfigRaw }).(pulumi.StringOutput)
+func (o LookupKubeconfigResultOutput) KubeconfigRaw() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupKubeconfigResult) string { return v.KubeconfigRaw }).(pulumi.StringOutput)
 }
 
 // The kubernetes client configuration
-func (o GetKubeconfigResultOutput) KubernetesClientConfiguration() GetKubeconfigKubernetesClientConfigurationOutput {
-	return o.ApplyT(func(v GetKubeconfigResult) GetKubeconfigKubernetesClientConfiguration {
+func (o LookupKubeconfigResultOutput) KubernetesClientConfiguration() GetKubeconfigKubernetesClientConfigurationOutput {
+	return o.ApplyT(func(v LookupKubeconfigResult) GetKubeconfigKubernetesClientConfiguration {
 		return v.KubernetesClientConfiguration
 	}).(GetKubeconfigKubernetesClientConfigurationOutput)
 }
 
 // controlplane node to retrieve the kubeconfig from
-func (o GetKubeconfigResultOutput) Node() pulumi.StringOutput {
-	return o.ApplyT(func(v GetKubeconfigResult) string { return v.Node }).(pulumi.StringOutput)
+func (o LookupKubeconfigResultOutput) Node() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupKubeconfigResult) string { return v.Node }).(pulumi.StringOutput)
 }
 
-func (o GetKubeconfigResultOutput) Timeouts() GetKubeconfigTimeoutsPtrOutput {
-	return o.ApplyT(func(v GetKubeconfigResult) *GetKubeconfigTimeouts { return v.Timeouts }).(GetKubeconfigTimeoutsPtrOutput)
+func (o LookupKubeconfigResultOutput) Timeouts() GetKubeconfigTimeoutsPtrOutput {
+	return o.ApplyT(func(v LookupKubeconfigResult) *GetKubeconfigTimeouts { return v.Timeouts }).(GetKubeconfigTimeoutsPtrOutput)
 }
 
 // Wait for the kubernetes api to be available
 //
 // Deprecated: This attribute is deprecated and no-op. Will be removed in a future version. Use cluster.getHealth instead.
-func (o GetKubeconfigResultOutput) Wait() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v GetKubeconfigResult) *bool { return v.Wait }).(pulumi.BoolPtrOutput)
+func (o LookupKubeconfigResultOutput) Wait() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LookupKubeconfigResult) *bool { return v.Wait }).(pulumi.BoolPtrOutput)
 }
 
 func init() {
-	pulumi.RegisterOutputType(GetKubeconfigResultOutput{})
+	pulumi.RegisterOutputType(LookupKubeconfigResultOutput{})
 }

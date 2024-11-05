@@ -11,7 +11,7 @@ import (
 	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/internal"
 )
 
-// Checks the health of a Talos cluster
+// Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
 func GetHealth(ctx *pulumi.Context, args *GetHealthArgs, opts ...pulumi.InvokeOption) (*GetHealthResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHealthResult
@@ -29,8 +29,10 @@ type GetHealthArgs struct {
 	// List of control plane nodes to check for health.
 	ControlPlaneNodes []string `pulumi:"controlPlaneNodes"`
 	// endpoints to use for the health check client. Use at least one control plane endpoint.
-	Endpoints []string           `pulumi:"endpoints"`
-	Timeouts  *GetHealthTimeouts `pulumi:"timeouts"`
+	Endpoints []string `pulumi:"endpoints"`
+	// Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+	SkipKubernetesChecks *bool              `pulumi:"skipKubernetesChecks"`
+	Timeouts             *GetHealthTimeouts `pulumi:"timeouts"`
 	// List of worker nodes to check for health.
 	WorkerNodes []string `pulumi:"workerNodes"`
 }
@@ -44,8 +46,10 @@ type GetHealthResult struct {
 	// endpoints to use for the health check client. Use at least one control plane endpoint.
 	Endpoints []string `pulumi:"endpoints"`
 	// The ID of this resource.
-	Id       string             `pulumi:"id"`
-	Timeouts *GetHealthTimeouts `pulumi:"timeouts"`
+	Id string `pulumi:"id"`
+	// Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+	SkipKubernetesChecks *bool              `pulumi:"skipKubernetesChecks"`
+	Timeouts             *GetHealthTimeouts `pulumi:"timeouts"`
 	// List of worker nodes to check for health.
 	WorkerNodes []string `pulumi:"workerNodes"`
 }
@@ -76,8 +80,10 @@ type GetHealthOutputArgs struct {
 	// List of control plane nodes to check for health.
 	ControlPlaneNodes pulumi.StringArrayInput `pulumi:"controlPlaneNodes"`
 	// endpoints to use for the health check client. Use at least one control plane endpoint.
-	Endpoints pulumi.StringArrayInput   `pulumi:"endpoints"`
-	Timeouts  GetHealthTimeoutsPtrInput `pulumi:"timeouts"`
+	Endpoints pulumi.StringArrayInput `pulumi:"endpoints"`
+	// Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+	SkipKubernetesChecks pulumi.BoolPtrInput       `pulumi:"skipKubernetesChecks"`
+	Timeouts             GetHealthTimeoutsPtrInput `pulumi:"timeouts"`
 	// List of worker nodes to check for health.
 	WorkerNodes pulumi.StringArrayInput `pulumi:"workerNodes"`
 }
@@ -119,6 +125,11 @@ func (o GetHealthResultOutput) Endpoints() pulumi.StringArrayOutput {
 // The ID of this resource.
 func (o GetHealthResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetHealthResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+func (o GetHealthResultOutput) SkipKubernetesChecks() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetHealthResult) *bool { return v.SkipKubernetesChecks }).(pulumi.BoolPtrOutput)
 }
 
 func (o GetHealthResultOutput) Timeouts() GetHealthTimeoutsPtrOutput {

@@ -24,11 +24,12 @@ import (
 
 // all of the talos token components used below.
 const (
-	talosPkg   = "talos"
-	talosMod   = "index"
-	clientMod  = "client"  // the client module
-	clusterMod = "cluster" // the talos module
-	machineMod = "machine" // the talos module
+	talosPkg        = "talos"
+	talosMod        = "index"
+	clientMod       = "client"        // the client module
+	clusterMod      = "cluster"       // the cluster module
+	machineMod      = "machine"       // the machine module
+	imageFactoryMod = "image_factory" // the image factory module
 )
 
 //go:embed cmd/pulumi-resource-talos/bridge-metadata.json
@@ -254,6 +255,13 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		Resources: map[string]*tfbridge.ResourceInfo{
+			"talos_image_factory_schematic": {
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"schematic": {
+						CSharpName: "SchematicData",
+					},
+				},
+			},
 			"talos_machine_bootstrap": {
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"client_configuration": {
@@ -351,6 +359,7 @@ func Provider() tfbridge.ProviderInfo {
 				clientMod,
 				clusterMod,
 				machineMod,
+				imageFactoryMod,
 			},
 			tks.MakeStandard(talosPkg),
 		),

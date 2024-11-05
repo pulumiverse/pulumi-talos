@@ -28,7 +28,7 @@ class GetHealthResult:
     """
     A collection of values returned by getHealth.
     """
-    def __init__(__self__, client_configuration=None, control_plane_nodes=None, endpoints=None, id=None, timeouts=None, worker_nodes=None):
+    def __init__(__self__, client_configuration=None, control_plane_nodes=None, endpoints=None, id=None, skip_kubernetes_checks=None, timeouts=None, worker_nodes=None):
         if client_configuration and not isinstance(client_configuration, dict):
             raise TypeError("Expected argument 'client_configuration' to be a dict")
         pulumi.set(__self__, "client_configuration", client_configuration)
@@ -41,6 +41,9 @@ class GetHealthResult:
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
+        if skip_kubernetes_checks and not isinstance(skip_kubernetes_checks, bool):
+            raise TypeError("Expected argument 'skip_kubernetes_checks' to be a bool")
+        pulumi.set(__self__, "skip_kubernetes_checks", skip_kubernetes_checks)
         if timeouts and not isinstance(timeouts, dict):
             raise TypeError("Expected argument 'timeouts' to be a dict")
         pulumi.set(__self__, "timeouts", timeouts)
@@ -81,6 +84,14 @@ class GetHealthResult:
         return pulumi.get(self, "id")
 
     @property
+    @pulumi.getter(name="skipKubernetesChecks")
+    def skip_kubernetes_checks(self) -> Optional[bool]:
+        """
+        Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
+        """
+        return pulumi.get(self, "skip_kubernetes_checks")
+
+    @property
     @pulumi.getter
     def timeouts(self) -> Optional['outputs.GetHealthTimeoutsResult']:
         return pulumi.get(self, "timeouts")
@@ -104,6 +115,7 @@ class AwaitableGetHealthResult(GetHealthResult):
             control_plane_nodes=self.control_plane_nodes,
             endpoints=self.endpoints,
             id=self.id,
+            skip_kubernetes_checks=self.skip_kubernetes_checks,
             timeouts=self.timeouts,
             worker_nodes=self.worker_nodes)
 
@@ -111,22 +123,25 @@ class AwaitableGetHealthResult(GetHealthResult):
 def get_health(client_configuration: Optional[Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict']] = None,
                control_plane_nodes: Optional[Sequence[str]] = None,
                endpoints: Optional[Sequence[str]] = None,
+               skip_kubernetes_checks: Optional[bool] = None,
                timeouts: Optional[Union['GetHealthTimeoutsArgs', 'GetHealthTimeoutsArgsDict']] = None,
                worker_nodes: Optional[Sequence[str]] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetHealthResult:
     """
-    Checks the health of a Talos cluster
+    Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
 
 
     :param Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param Sequence[str] control_plane_nodes: List of control plane nodes to check for health.
     :param Sequence[str] endpoints: endpoints to use for the health check client. Use at least one control plane endpoint.
+    :param bool skip_kubernetes_checks: Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
     :param Sequence[str] worker_nodes: List of worker nodes to check for health.
     """
     __args__ = dict()
     __args__['clientConfiguration'] = client_configuration
     __args__['controlPlaneNodes'] = control_plane_nodes
     __args__['endpoints'] = endpoints
+    __args__['skipKubernetesChecks'] = skip_kubernetes_checks
     __args__['timeouts'] = timeouts
     __args__['workerNodes'] = worker_nodes
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
@@ -137,27 +152,31 @@ def get_health(client_configuration: Optional[Union['GetHealthClientConfiguratio
         control_plane_nodes=pulumi.get(__ret__, 'control_plane_nodes'),
         endpoints=pulumi.get(__ret__, 'endpoints'),
         id=pulumi.get(__ret__, 'id'),
+        skip_kubernetes_checks=pulumi.get(__ret__, 'skip_kubernetes_checks'),
         timeouts=pulumi.get(__ret__, 'timeouts'),
         worker_nodes=pulumi.get(__ret__, 'worker_nodes'))
 def get_health_output(client_configuration: Optional[pulumi.Input[Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict']]] = None,
                       control_plane_nodes: Optional[pulumi.Input[Sequence[str]]] = None,
                       endpoints: Optional[pulumi.Input[Sequence[str]]] = None,
+                      skip_kubernetes_checks: Optional[pulumi.Input[Optional[bool]]] = None,
                       timeouts: Optional[pulumi.Input[Optional[Union['GetHealthTimeoutsArgs', 'GetHealthTimeoutsArgsDict']]]] = None,
                       worker_nodes: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetHealthResult]:
     """
-    Checks the health of a Talos cluster
+    Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
 
 
     :param Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param Sequence[str] control_plane_nodes: List of control plane nodes to check for health.
     :param Sequence[str] endpoints: endpoints to use for the health check client. Use at least one control plane endpoint.
+    :param bool skip_kubernetes_checks: Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
     :param Sequence[str] worker_nodes: List of worker nodes to check for health.
     """
     __args__ = dict()
     __args__['clientConfiguration'] = client_configuration
     __args__['controlPlaneNodes'] = control_plane_nodes
     __args__['endpoints'] = endpoints
+    __args__['skipKubernetesChecks'] = skip_kubernetes_checks
     __args__['timeouts'] = timeouts
     __args__['workerNodes'] = worker_nodes
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
@@ -167,5 +186,6 @@ def get_health_output(client_configuration: Optional[pulumi.Input[Union['GetHeal
         control_plane_nodes=pulumi.get(__response__, 'control_plane_nodes'),
         endpoints=pulumi.get(__response__, 'endpoints'),
         id=pulumi.get(__response__, 'id'),
+        skip_kubernetes_checks=pulumi.get(__response__, 'skip_kubernetes_checks'),
         timeouts=pulumi.get(__response__, 'timeouts'),
         worker_nodes=pulumi.get(__response__, 'worker_nodes')))

@@ -65,6 +65,10 @@ export class ConfigurationApply extends pulumi.CustomResource {
      * The name of the node to bootstrap
      */
     public readonly node!: pulumi.Output<string>;
+    /**
+     * Actions to be taken on destroy, if *reset* is not set this is a no-op.
+     */
+    public readonly onDestroy!: pulumi.Output<outputs.machine.ConfigurationApplyOnDestroy | undefined>;
     public readonly timeouts!: pulumi.Output<outputs.machine.Timeout | undefined>;
 
     /**
@@ -87,6 +91,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
             resourceInputs["machineConfiguration"] = state ? state.machineConfiguration : undefined;
             resourceInputs["machineConfigurationInput"] = state ? state.machineConfigurationInput : undefined;
             resourceInputs["node"] = state ? state.node : undefined;
+            resourceInputs["onDestroy"] = state ? state.onDestroy : undefined;
             resourceInputs["timeouts"] = state ? state.timeouts : undefined;
         } else {
             const args = argsOrState as ConfigurationApplyArgs | undefined;
@@ -105,6 +110,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
             resourceInputs["endpoint"] = args ? args.endpoint : undefined;
             resourceInputs["machineConfigurationInput"] = args?.machineConfigurationInput ? pulumi.secret(args.machineConfigurationInput) : undefined;
             resourceInputs["node"] = args ? args.node : undefined;
+            resourceInputs["onDestroy"] = args ? args.onDestroy : undefined;
             resourceInputs["timeouts"] = args ? args.timeouts : undefined;
             resourceInputs["machineConfiguration"] = undefined /*out*/;
         }
@@ -147,6 +153,10 @@ export interface ConfigurationApplyState {
      * The name of the node to bootstrap
      */
     node?: pulumi.Input<string>;
+    /**
+     * Actions to be taken on destroy, if *reset* is not set this is a no-op.
+     */
+    onDestroy?: pulumi.Input<inputs.machine.ConfigurationApplyOnDestroy>;
     timeouts?: pulumi.Input<inputs.machine.Timeout>;
 }
 
@@ -178,5 +188,9 @@ export interface ConfigurationApplyArgs {
      * The name of the node to bootstrap
      */
     node: pulumi.Input<string>;
+    /**
+     * Actions to be taken on destroy, if *reset* is not set this is a no-op.
+     */
+    onDestroy?: pulumi.Input<inputs.machine.ConfigurationApplyOnDestroy>;
     timeouts?: pulumi.Input<inputs.machine.Timeout>;
 }

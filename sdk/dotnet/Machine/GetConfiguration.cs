@@ -105,13 +105,13 @@ namespace Pulumiverse.Talos.Machine
         }
 
         /// <summary>
-        /// Whether to generate documentation for the generated configuration
+        /// Whether to generate documentation for the generated configuration. Defaults to false
         /// </summary>
         [Input("docs")]
         public bool? Docs { get; set; }
 
         /// <summary>
-        /// Whether to generate examples for the generated configuration
+        /// Whether to generate examples for the generated configuration. Defaults to false
         /// </summary>
         [Input("examples")]
         public bool? Examples { get; set; }
@@ -173,13 +173,13 @@ namespace Pulumiverse.Talos.Machine
         }
 
         /// <summary>
-        /// Whether to generate documentation for the generated configuration
+        /// Whether to generate documentation for the generated configuration. Defaults to false
         /// </summary>
         [Input("docs")]
         public Input<bool>? Docs { get; set; }
 
         /// <summary>
-        /// Whether to generate examples for the generated configuration
+        /// Whether to generate examples for the generated configuration. Defaults to false
         /// </summary>
         [Input("examples")]
         public Input<bool>? Examples { get; set; }
@@ -231,11 +231,11 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         public readonly ImmutableArray<string> ConfigPatches;
         /// <summary>
-        /// Whether to generate documentation for the generated configuration
+        /// Whether to generate documentation for the generated configuration. Defaults to false
         /// </summary>
         public readonly bool? Docs;
         /// <summary>
-        /// Whether to generate examples for the generated configuration
+        /// Whether to generate examples for the generated configuration. Defaults to false
         /// </summary>
         public readonly bool? Examples;
         /// <summary>

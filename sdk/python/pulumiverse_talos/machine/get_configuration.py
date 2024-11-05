@@ -91,7 +91,7 @@ class GetConfigurationResult:
     @pulumi.getter
     def docs(self) -> Optional[bool]:
         """
-        Whether to generate documentation for the generated configuration
+        Whether to generate documentation for the generated configuration. Defaults to false
         """
         return pulumi.get(self, "docs")
 
@@ -99,7 +99,7 @@ class GetConfigurationResult:
     @pulumi.getter
     def examples(self) -> Optional[bool]:
         """
-        Whether to generate examples for the generated configuration
+        Whether to generate examples for the generated configuration. Defaults to false
         """
         return pulumi.get(self, "examples")
 
@@ -204,8 +204,8 @@ def get_configuration(cluster_endpoint: Optional[str] = None,
     :param str cluster_endpoint: The endpoint of the talos kubernetes cluster
     :param str cluster_name: The name of the talos kubernetes cluster
     :param Sequence[str] config_patches: The list of config patches to apply to the generated configuration
-    :param bool docs: Whether to generate documentation for the generated configuration
-    :param bool examples: Whether to generate examples for the generated configuration
+    :param bool docs: Whether to generate documentation for the generated configuration. Defaults to false
+    :param bool examples: Whether to generate examples for the generated configuration. Defaults to false
     :param str kubernetes_version: The version of kubernetes to use
     :param Union['MachineSecretsArgs', 'MachineSecretsArgsDict'] machine_secrets: The secrets for the talos cluster
     :param str machine_type: The type of machine to generate the configuration for
@@ -269,8 +269,8 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
     :param str cluster_endpoint: The endpoint of the talos kubernetes cluster
     :param str cluster_name: The name of the talos kubernetes cluster
     :param Sequence[str] config_patches: The list of config patches to apply to the generated configuration
-    :param bool docs: Whether to generate documentation for the generated configuration
-    :param bool examples: Whether to generate examples for the generated configuration
+    :param bool docs: Whether to generate documentation for the generated configuration. Defaults to false
+    :param bool examples: Whether to generate examples for the generated configuration. Defaults to false
     :param str kubernetes_version: The version of kubernetes to use
     :param Union['MachineSecretsArgs', 'MachineSecretsArgsDict'] machine_secrets: The secrets for the talos cluster
     :param str machine_type: The type of machine to generate the configuration for

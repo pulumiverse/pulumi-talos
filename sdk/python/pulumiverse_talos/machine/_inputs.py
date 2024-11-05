@@ -17,6 +17,8 @@ from .. import _utilities
 __all__ = [
     'BootstrapTimeoutsArgs',
     'BootstrapTimeoutsArgsDict',
+    'ConfigurationApplyOnDestroyArgs',
+    'ConfigurationApplyOnDestroyArgsDict',
     'TimeoutArgs',
     'TimeoutArgsDict',
     'CertificateArgs',
@@ -92,10 +94,86 @@ class BootstrapTimeoutsArgs:
 
 
 if not MYPY:
+    class ConfigurationApplyOnDestroyArgsDict(TypedDict):
+        graceful: NotRequired[pulumi.Input[bool]]
+        """
+        Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+        """
+        reboot: NotRequired[pulumi.Input[bool]]
+        """
+        Reboot indicates whether node should reboot or halt after resetting. Default false
+        """
+        reset: NotRequired[pulumi.Input[bool]]
+        """
+        Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+        """
+elif False:
+    ConfigurationApplyOnDestroyArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ConfigurationApplyOnDestroyArgs:
+    def __init__(__self__, *,
+                 graceful: Optional[pulumi.Input[bool]] = None,
+                 reboot: Optional[pulumi.Input[bool]] = None,
+                 reset: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[bool] graceful: Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+        :param pulumi.Input[bool] reboot: Reboot indicates whether node should reboot or halt after resetting. Default false
+        :param pulumi.Input[bool] reset: Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+        """
+        if graceful is not None:
+            pulumi.set(__self__, "graceful", graceful)
+        if reboot is not None:
+            pulumi.set(__self__, "reboot", reboot)
+        if reset is not None:
+            pulumi.set(__self__, "reset", reset)
+
+    @property
+    @pulumi.getter
+    def graceful(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+        """
+        return pulumi.get(self, "graceful")
+
+    @graceful.setter
+    def graceful(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "graceful", value)
+
+    @property
+    @pulumi.getter
+    def reboot(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Reboot indicates whether node should reboot or halt after resetting. Default false
+        """
+        return pulumi.get(self, "reboot")
+
+    @reboot.setter
+    def reboot(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "reboot", value)
+
+    @property
+    @pulumi.getter
+    def reset(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+        """
+        return pulumi.get(self, "reset")
+
+    @reset.setter
+    def reset(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "reset", value)
+
+
+if not MYPY:
     class TimeoutArgsDict(TypedDict):
         create: NotRequired[pulumi.Input[str]]
         """
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+        delete: NotRequired[pulumi.Input[str]]
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
         """
         update: NotRequired[pulumi.Input[str]]
         """
@@ -108,13 +186,17 @@ elif False:
 class TimeoutArgs:
     def __init__(__self__, *,
                  create: Optional[pulumi.Input[str]] = None,
+                 delete: Optional[pulumi.Input[str]] = None,
                  update: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] create: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        :param pulumi.Input[str] delete: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
         :param pulumi.Input[str] update: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         if create is not None:
             pulumi.set(__self__, "create", create)
+        if delete is not None:
+            pulumi.set(__self__, "delete", delete)
         if update is not None:
             pulumi.set(__self__, "update", update)
 
@@ -129,6 +211,18 @@ class TimeoutArgs:
     @create.setter
     def create(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "create", value)
+
+    @property
+    @pulumi.getter
+    def delete(self) -> Optional[pulumi.Input[str]]:
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+        """
+        return pulumi.get(self, "delete")
+
+    @delete.setter
+    def delete(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "delete", value)
 
     @property
     @pulumi.getter

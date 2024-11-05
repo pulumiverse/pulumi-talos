@@ -15,12 +15,183 @@ else:
 from .. import _utilities
 
 __all__ = [
+    'KubeconfigClientConfiguration',
+    'KubeconfigKubernetesClientConfiguration',
+    'KubeconfigTimeouts',
     'GetHealthClientConfigurationResult',
     'GetHealthTimeoutsResult',
     'GetKubeconfigClientConfigurationResult',
     'GetKubeconfigKubernetesClientConfigurationResult',
     'GetKubeconfigTimeoutsResult',
 ]
+
+@pulumi.output_type
+class KubeconfigClientConfiguration(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "caCertificate":
+            suggest = "ca_certificate"
+        elif key == "clientCertificate":
+            suggest = "client_certificate"
+        elif key == "clientKey":
+            suggest = "client_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in KubeconfigClientConfiguration. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        KubeconfigClientConfiguration.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        KubeconfigClientConfiguration.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ca_certificate: str,
+                 client_certificate: str,
+                 client_key: str):
+        """
+        :param str ca_certificate: The client CA certificate
+        :param str client_certificate: The client certificate
+        :param str client_key: The client key
+        """
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> str:
+        """
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> str:
+        """
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> str:
+        """
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
+
+@pulumi.output_type
+class KubeconfigKubernetesClientConfiguration(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "caCertificate":
+            suggest = "ca_certificate"
+        elif key == "clientCertificate":
+            suggest = "client_certificate"
+        elif key == "clientKey":
+            suggest = "client_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in KubeconfigKubernetesClientConfiguration. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        KubeconfigKubernetesClientConfiguration.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        KubeconfigKubernetesClientConfiguration.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ca_certificate: Optional[str] = None,
+                 client_certificate: Optional[str] = None,
+                 client_key: Optional[str] = None,
+                 host: Optional[str] = None):
+        """
+        :param str ca_certificate: The kubernetes CA certificate
+        :param str client_certificate: The kubernetes client certificate
+        :param str client_key: The kubernetes client key
+        :param str host: The kubernetes host
+        """
+        if ca_certificate is not None:
+            pulumi.set(__self__, "ca_certificate", ca_certificate)
+        if client_certificate is not None:
+            pulumi.set(__self__, "client_certificate", client_certificate)
+        if client_key is not None:
+            pulumi.set(__self__, "client_key", client_key)
+        if host is not None:
+            pulumi.set(__self__, "host", host)
+
+    @property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> Optional[str]:
+        """
+        The kubernetes CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> Optional[str]:
+        """
+        The kubernetes client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> Optional[str]:
+        """
+        The kubernetes client key
+        """
+        return pulumi.get(self, "client_key")
+
+    @property
+    @pulumi.getter
+    def host(self) -> Optional[str]:
+        """
+        The kubernetes host
+        """
+        return pulumi.get(self, "host")
+
+
+@pulumi.output_type
+class KubeconfigTimeouts(dict):
+    def __init__(__self__, *,
+                 create: Optional[str] = None,
+                 update: Optional[str] = None):
+        """
+        :param str create: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        :param str update: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+        if create is not None:
+            pulumi.set(__self__, "create", create)
+        if update is not None:
+            pulumi.set(__self__, "update", update)
+
+    @property
+    @pulumi.getter
+    def create(self) -> Optional[str]:
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+        return pulumi.get(self, "create")
+
+    @property
+    @pulumi.getter
+    def update(self) -> Optional[str]:
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+        return pulumi.get(self, "update")
+
 
 @pulumi.output_type
 class GetHealthClientConfigurationResult(dict):

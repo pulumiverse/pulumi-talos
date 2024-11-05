@@ -25,6 +25,10 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
+    /**
+     * The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+     */
+    public readonly imageFactoryUrl!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -37,6 +41,7 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
+            resourceInputs["imageFactoryUrl"] = args ? args.imageFactoryUrl : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
@@ -47,4 +52,8 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
+    /**
+     * The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
+     */
+    imageFactoryUrl?: pulumi.Input<string>;
 }

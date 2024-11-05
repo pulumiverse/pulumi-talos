@@ -14,12 +14,16 @@ utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 // Export sub-modules:
 import * as client from "./client";
 import * as cluster from "./cluster";
+import * as config from "./config";
+import * as imagefactory from "./imagefactory";
 import * as machine from "./machine";
 import * as types from "./types";
 
 export {
     client,
     cluster,
+    config,
+    imagefactory,
     machine,
     types,
 };
