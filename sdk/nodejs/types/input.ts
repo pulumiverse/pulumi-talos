@@ -5,47 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface GetImageFactoryExtensionsVersionsFilters {
-    /**
-     * The name of the extension to filter by.
-     */
-    names?: string[];
-}
-
-export interface GetImageFactoryExtensionsVersionsFiltersArgs {
-    /**
-     * The name of the extension to filter by.
-     */
-    names?: pulumi.Input<pulumi.Input<string>[]>;
-}
-
-export interface GetImageFactoryOverlaysVersionsFilters {
-    /**
-     * The name of the overlay to filter by.
-     */
-    name?: string;
-}
-
-export interface GetImageFactoryOverlaysVersionsFiltersArgs {
-    /**
-     * The name of the overlay to filter by.
-     */
-    name?: pulumi.Input<string>;
-}
-
-export interface GetImageFactoryVersionsFilters {
-    /**
-     * If set to true, only stable versions will be returned. If set to false, all versions will be returned.
-     */
-    stableVersionsOnly?: boolean;
-}
-
-export interface GetImageFactoryVersionsFiltersArgs {
-    /**
-     * If set to true, only stable versions will be returned. If set to false, all versions will be returned.
-     */
-    stableVersionsOnly?: pulumi.Input<boolean>;
-}
 export namespace client {
     export interface GetConfigurationClientConfiguration {
         /**
@@ -210,6 +169,50 @@ export namespace cluster {
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
         update?: pulumi.Input<string>;
+    }
+}
+
+export namespace imageFactory {
+    export interface GetExtensionsVersionsFilters {
+        /**
+         * The name of the extension to filter by.
+         */
+        names?: string[];
+    }
+
+    export interface GetExtensionsVersionsFiltersArgs {
+        /**
+         * The name of the extension to filter by.
+         */
+        names?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetOverlaysVersionsFilters {
+        /**
+         * The name of the overlay to filter by.
+         */
+        name?: string;
+    }
+
+    export interface GetOverlaysVersionsFiltersArgs {
+        /**
+         * The name of the overlay to filter by.
+         */
+        name?: pulumi.Input<string>;
+    }
+
+    export interface GetVersionsFilters {
+        /**
+         * If set to true, only stable versions will be returned. If set to false, all versions will be returned.
+         */
+        stableVersionsOnly?: boolean;
+    }
+
+    export interface GetVersionsFiltersArgs {
+        /**
+         * If set to true, only stable versions will be returned. If set to false, all versions will be returned.
+         */
+        stableVersionsOnly?: pulumi.Input<boolean>;
     }
 }
 

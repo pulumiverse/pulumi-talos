@@ -5,89 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface GetImageFactoryExtensionsVersionsExtensionsInfo {
-    author: string;
-    description: string;
-    digest: string;
-    name: string;
-    ref: string;
-}
-
-export interface GetImageFactoryExtensionsVersionsFilters {
-    /**
-     * The name of the extension to filter by.
-     */
-    names?: string[];
-}
-
-export interface GetImageFactoryOverlaysVersionsFilters {
-    /**
-     * The name of the overlay to filter by.
-     */
-    name?: string;
-}
-
-export interface GetImageFactoryOverlaysVersionsOverlaysInfo {
-    digest: string;
-    image: string;
-    name: string;
-    ref: string;
-}
-
-export interface GetImageFactoryUrlsUrls {
-    /**
-     * The URL for the disk image.
-     */
-    diskImage: string;
-    /**
-     * The URL for the disk image with secure boot.
-     */
-    diskImageSecureboot: string;
-    /**
-     * The URL for the initramfs image.
-     */
-    initramfs: string;
-    /**
-     * The URL for the installer image.
-     */
-    installer: string;
-    /**
-     * The URL for the installer image with secure boot.
-     */
-    installerSecureboot: string;
-    /**
-     * The URL for the ISO image.
-     */
-    iso: string;
-    /**
-     * The URL for the ISO image with secure boot.
-     */
-    isoSecureboot: string;
-    /**
-     * The URL for the kernel image.
-     */
-    kernel: string;
-    /**
-     * The URL for the kernel command line.
-     */
-    kernelCommandLine: string;
-    /**
-     * The URL for the PXE image.
-     */
-    pxe: string;
-    /**
-     * The URL for the UKI image.
-     */
-    uki: string;
-}
-
-export interface GetImageFactoryVersionsFilters {
-    /**
-     * If set to true, only stable versions will be returned. If set to false, all versions will be returned.
-     */
-    stableVersionsOnly?: boolean;
-}
-
 export namespace client {
     export interface GetConfigurationClientConfiguration {
         /**
@@ -213,6 +130,92 @@ export namespace cluster {
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
         update?: string;
+    }
+
+}
+
+export namespace imageFactory {
+    export interface GetExtensionsVersionsExtensionsInfo {
+        author: string;
+        description: string;
+        digest: string;
+        name: string;
+        ref: string;
+    }
+
+    export interface GetExtensionsVersionsFilters {
+        /**
+         * The name of the extension to filter by.
+         */
+        names?: string[];
+    }
+
+    export interface GetOverlaysVersionsFilters {
+        /**
+         * The name of the overlay to filter by.
+         */
+        name?: string;
+    }
+
+    export interface GetOverlaysVersionsOverlaysInfo {
+        digest: string;
+        image: string;
+        name: string;
+        ref: string;
+    }
+
+    export interface GetUrlsUrls {
+        /**
+         * The URL for the disk image.
+         */
+        diskImage: string;
+        /**
+         * The URL for the disk image with secure boot.
+         */
+        diskImageSecureboot: string;
+        /**
+         * The URL for the initramfs image.
+         */
+        initramfs: string;
+        /**
+         * The URL for the installer image.
+         */
+        installer: string;
+        /**
+         * The URL for the installer image with secure boot.
+         */
+        installerSecureboot: string;
+        /**
+         * The URL for the ISO image.
+         */
+        iso: string;
+        /**
+         * The URL for the ISO image with secure boot.
+         */
+        isoSecureboot: string;
+        /**
+         * The URL for the kernel image.
+         */
+        kernel: string;
+        /**
+         * The URL for the kernel command line.
+         */
+        kernelCommandLine: string;
+        /**
+         * The URL for the PXE image.
+         */
+        pxe: string;
+        /**
+         * The URL for the UKI image.
+         */
+        uki: string;
+    }
+
+    export interface GetVersionsFilters {
+        /**
+         * If set to true, only stable versions will be returned. If set to false, all versions will be returned.
+         */
+        stableVersionsOnly?: boolean;
     }
 
 }

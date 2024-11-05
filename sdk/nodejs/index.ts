@@ -5,31 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export { GetImageFactoryExtensionsVersionsArgs, GetImageFactoryExtensionsVersionsResult, GetImageFactoryExtensionsVersionsOutputArgs } from "./getImageFactoryExtensionsVersions";
-export const getImageFactoryExtensionsVersions: typeof import("./getImageFactoryExtensionsVersions").getImageFactoryExtensionsVersions = null as any;
-export const getImageFactoryExtensionsVersionsOutput: typeof import("./getImageFactoryExtensionsVersions").getImageFactoryExtensionsVersionsOutput = null as any;
-utilities.lazyLoad(exports, ["getImageFactoryExtensionsVersions","getImageFactoryExtensionsVersionsOutput"], () => require("./getImageFactoryExtensionsVersions"));
-
-export { GetImageFactoryOverlaysVersionsArgs, GetImageFactoryOverlaysVersionsResult, GetImageFactoryOverlaysVersionsOutputArgs } from "./getImageFactoryOverlaysVersions";
-export const getImageFactoryOverlaysVersions: typeof import("./getImageFactoryOverlaysVersions").getImageFactoryOverlaysVersions = null as any;
-export const getImageFactoryOverlaysVersionsOutput: typeof import("./getImageFactoryOverlaysVersions").getImageFactoryOverlaysVersionsOutput = null as any;
-utilities.lazyLoad(exports, ["getImageFactoryOverlaysVersions","getImageFactoryOverlaysVersionsOutput"], () => require("./getImageFactoryOverlaysVersions"));
-
-export { GetImageFactoryUrlsArgs, GetImageFactoryUrlsResult, GetImageFactoryUrlsOutputArgs } from "./getImageFactoryUrls";
-export const getImageFactoryUrls: typeof import("./getImageFactoryUrls").getImageFactoryUrls = null as any;
-export const getImageFactoryUrlsOutput: typeof import("./getImageFactoryUrls").getImageFactoryUrlsOutput = null as any;
-utilities.lazyLoad(exports, ["getImageFactoryUrls","getImageFactoryUrlsOutput"], () => require("./getImageFactoryUrls"));
-
-export { GetImageFactoryVersionsArgs, GetImageFactoryVersionsResult, GetImageFactoryVersionsOutputArgs } from "./getImageFactoryVersions";
-export const getImageFactoryVersions: typeof import("./getImageFactoryVersions").getImageFactoryVersions = null as any;
-export const getImageFactoryVersionsOutput: typeof import("./getImageFactoryVersions").getImageFactoryVersionsOutput = null as any;
-utilities.lazyLoad(exports, ["getImageFactoryVersions","getImageFactoryVersionsOutput"], () => require("./getImageFactoryVersions"));
-
-export { ImageFactorySchematicArgs, ImageFactorySchematicState } from "./imageFactorySchematic";
-export type ImageFactorySchematic = import("./imageFactorySchematic").ImageFactorySchematic;
-export const ImageFactorySchematic: typeof import("./imageFactorySchematic").ImageFactorySchematic = null as any;
-utilities.lazyLoad(exports, ["ImageFactorySchematic"], () => require("./imageFactorySchematic"));
-
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
@@ -40,6 +15,7 @@ utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 import * as client from "./client";
 import * as cluster from "./cluster";
 import * as config from "./config";
+import * as imagefactory from "./imagefactory";
 import * as machine from "./machine";
 import * as types from "./types";
 
@@ -47,22 +23,10 @@ export {
     client,
     cluster,
     config,
+    imagefactory,
     machine,
     types,
 };
-
-const _module = {
-    version: utilities.getVersion(),
-    construct: (name: string, type: string, urn: string): pulumi.Resource => {
-        switch (type) {
-            case "talos:index/imageFactorySchematic:ImageFactorySchematic":
-                return new ImageFactorySchematic(name, <any>undefined, { urn })
-            default:
-                throw new Error(`unknown resource type ${type}`);
-        }
-    },
-};
-pulumi.runtime.registerResourceModule("talos", "index/imageFactorySchematic", _module)
 pulumi.runtime.registerResourcePackage("talos", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

@@ -5,7 +5,7 @@
                 "current": "talos:cluster/kubeconfig:Kubeconfig"
             },
             "talos_image_factory_schematic": {
-                "current": "talos:index/imageFactorySchematic:ImageFactorySchematic"
+                "current": "talos:imageFactory/schematic:Schematic"
             },
             "talos_machine_bootstrap": {
                 "current": "talos:machine/bootstrap:Bootstrap"
@@ -52,7 +52,7 @@
                 "current": "talos:cluster/getKubeconfig:getKubeconfig"
             },
             "talos_image_factory_extensions_versions": {
-                "current": "talos:index/getImageFactoryExtensionsVersions:getImageFactoryExtensionsVersions",
+                "current": "talos:imageFactory/getExtensionsVersions:getExtensionsVersions",
                 "fields": {
                     "extensions_info": {
                         "maxItemsOne": false
@@ -67,7 +67,7 @@
                 }
             },
             "talos_image_factory_overlays_versions": {
-                "current": "talos:index/getImageFactoryOverlaysVersions:getImageFactoryOverlaysVersions",
+                "current": "talos:imageFactory/getOverlaysVersions:getOverlaysVersions",
                 "fields": {
                     "overlays_info": {
                         "maxItemsOne": false
@@ -75,10 +75,10 @@
                 }
             },
             "talos_image_factory_urls": {
-                "current": "talos:index/getImageFactoryUrls:getImageFactoryUrls"
+                "current": "talos:imageFactory/getUrls:getUrls"
             },
             "talos_image_factory_versions": {
-                "current": "talos:index/getImageFactoryVersions:getImageFactoryVersions",
+                "current": "talos:imageFactory/getVersions:getVersions",
                 "fields": {
                     "talos_versions": {
                         "maxItemsOne": false

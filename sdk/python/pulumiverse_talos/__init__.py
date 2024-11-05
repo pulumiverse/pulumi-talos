@@ -5,14 +5,7 @@
 from . import _utilities
 import typing
 # Export this package's modules as members:
-from .get_image_factory_extensions_versions import *
-from .get_image_factory_overlays_versions import *
-from .get_image_factory_urls import *
-from .get_image_factory_versions import *
-from .image_factory_schematic import *
 from .provider import *
-from ._inputs import *
-from . import outputs
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
@@ -22,12 +15,15 @@ if typing.TYPE_CHECKING:
     cluster = __cluster
     import pulumiverse_talos.config as __config
     config = __config
+    import pulumiverse_talos.imagefactory as __imagefactory
+    imagefactory = __imagefactory
     import pulumiverse_talos.machine as __machine
     machine = __machine
 else:
     client = _utilities.lazy_import('pulumiverse_talos.client')
     cluster = _utilities.lazy_import('pulumiverse_talos.cluster')
     config = _utilities.lazy_import('pulumiverse_talos.config')
+    imagefactory = _utilities.lazy_import('pulumiverse_talos.imagefactory')
     machine = _utilities.lazy_import('pulumiverse_talos.machine')
 
 _utilities.register(
@@ -43,10 +39,10 @@ _utilities.register(
  },
  {
   "pkg": "talos",
-  "mod": "index/imageFactorySchematic",
-  "fqn": "pulumiverse_talos",
+  "mod": "imageFactory/schematic",
+  "fqn": "pulumiverse_talos.imagefactory",
   "classes": {
-   "talos:index/imageFactorySchematic:ImageFactorySchematic": "ImageFactorySchematic"
+   "talos:imageFactory/schematic:Schematic": "Schematic"
   }
  },
  {

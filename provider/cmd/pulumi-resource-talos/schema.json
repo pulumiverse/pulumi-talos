@@ -256,7 +256,7 @@
             },
             "type": "object"
         },
-        "talos:index/getImageFactoryExtensionsVersionsExtensionsInfo:getImageFactoryExtensionsVersionsExtensionsInfo": {
+        "talos:imageFactory/getExtensionsVersionsExtensionsInfo:getExtensionsVersionsExtensionsInfo": {
             "properties": {
                 "author": {
                     "type": "string"
@@ -288,7 +288,7 @@
                 }
             }
         },
-        "talos:index/getImageFactoryExtensionsVersionsFilters:getImageFactoryExtensionsVersionsFilters": {
+        "talos:imageFactory/getExtensionsVersionsFilters:getExtensionsVersionsFilters": {
             "properties": {
                 "names": {
                     "type": "array",
@@ -300,7 +300,7 @@
             },
             "type": "object"
         },
-        "talos:index/getImageFactoryOverlaysVersionsFilters:getImageFactoryOverlaysVersionsFilters": {
+        "talos:imageFactory/getOverlaysVersionsFilters:getOverlaysVersionsFilters": {
             "properties": {
                 "name": {
                     "type": "string",
@@ -309,7 +309,7 @@
             },
             "type": "object"
         },
-        "talos:index/getImageFactoryOverlaysVersionsOverlaysInfo:getImageFactoryOverlaysVersionsOverlaysInfo": {
+        "talos:imageFactory/getOverlaysVersionsOverlaysInfo:getOverlaysVersionsOverlaysInfo": {
             "properties": {
                 "digest": {
                     "type": "string"
@@ -337,7 +337,7 @@
                 }
             }
         },
-        "talos:index/getImageFactoryUrlsUrls:getImageFactoryUrlsUrls": {
+        "talos:imageFactory/getUrlsUrls:getUrlsUrls": {
             "properties": {
                 "diskImage": {
                     "type": "string",
@@ -404,7 +404,7 @@
                 }
             }
         },
-        "talos:index/getImageFactoryVersionsFilters:getImageFactoryVersionsFilters": {
+        "talos:imageFactory/getVersionsFilters:getVersionsFilters": {
             "properties": {
                 "stableVersionsOnly": {
                     "type": "boolean",
@@ -1376,26 +1376,41 @@
                 "type": "object"
             }
         },
-        "talos:index/imageFactorySchematic:ImageFactorySchematic": {
+        "talos:imageFactory/schematic:Schematic": {
             "description": "The image factory schematic resource allows you to create a schematic for a Talos image.\n\n",
             "properties": {
                 "schematic": {
                     "type": "string",
-                    "description": "The schematic yaml respresentation to generate the image.\n"
+                    "description": "The schematic yaml respresentation to generate the image.\n",
+                    "language": {
+                        "csharp": {
+                            "name": "SchematicData"
+                        }
+                    }
                 }
             },
             "inputProperties": {
                 "schematic": {
                     "type": "string",
-                    "description": "The schematic yaml respresentation to generate the image.\n"
+                    "description": "The schematic yaml respresentation to generate the image.\n",
+                    "language": {
+                        "csharp": {
+                            "name": "SchematicData"
+                        }
+                    }
                 }
             },
             "stateInputs": {
-                "description": "Input properties used for looking up and filtering ImageFactorySchematic resources.\n",
+                "description": "Input properties used for looking up and filtering Schematic resources.\n",
                 "properties": {
                     "schematic": {
                         "type": "string",
-                        "description": "The schematic yaml respresentation to generate the image.\n"
+                        "description": "The schematic yaml respresentation to generate the image.\n",
+                        "language": {
+                            "csharp": {
+                                "name": "SchematicData"
+                            }
+                        }
                     }
                 },
                 "type": "object"
@@ -1909,13 +1924,13 @@
                 "type": "object"
             }
         },
-        "talos:index/getImageFactoryExtensionsVersions:getImageFactoryExtensionsVersions": {
-            "description": "The image factory extensions versions data source provides a list of available extensions for a specific talos version from the image factory.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst this = talos.getImageFactoryExtensionsVersions({\n    talosVersion: \"v1.7.5\",\n    filters: {\n        names: [\n            \"amdgpu\",\n            \"tailscale\",\n        ],\n    },\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nthis = talos.get_image_factory_extensions_versions(talos_version=\"v1.7.5\",\n    filters={\n        \"names\": [\n            \"amdgpu\",\n            \"tailscale\",\n        ],\n    })\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @this = Talos.GetImageFactoryExtensionsVersions.Invoke(new()\n    {\n        TalosVersion = \"v1.7.5\",\n        Filters = new Talos.Inputs.GetImageFactoryExtensionsVersionsFiltersInputArgs\n        {\n            Names = new[]\n            {\n                \"amdgpu\",\n                \"tailscale\",\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := talos.GetImageFactoryExtensionsVersions(ctx, \u0026talos.GetImageFactoryExtensionsVersionsArgs{\n\t\t\tTalosVersion: \"v1.7.5\",\n\t\t\tFilters: talos.GetImageFactoryExtensionsVersionsFilters{\n\t\t\t\tNames: []string{\n\t\t\t\t\t\"amdgpu\",\n\t\t\t\t\t\"tailscale\",\n\t\t\t\t},\n\t\t\t},\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosFunctions;\nimport com.pulumi.talos.inputs.GetImageFactoryExtensionsVersionsArgs;\nimport com.pulumi.talos.inputs.GetImageFactoryExtensionsVersionsFiltersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var this = TalosFunctions.getImageFactoryExtensionsVersions(GetImageFactoryExtensionsVersionsArgs.builder()\n            .talosVersion(\"v1.7.5\")\n            .filters(GetImageFactoryExtensionsVersionsFiltersArgs.builder()\n                .names(                \n                    \"amdgpu\",\n                    \"tailscale\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  this:\n    fn::invoke:\n      Function: talos:getImageFactoryExtensionsVersions\n      Arguments:\n        talosVersion: v1.7.5\n        filters:\n          names:\n            - amdgpu\n            - tailscale\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+        "talos:imageFactory/getExtensionsVersions:getExtensionsVersions": {
+            "description": "The image factory extensions versions data source provides a list of available extensions for a specific talos version from the image factory.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst this = talos.imageFactory.getExtensionsVersions({\n    talosVersion: \"v1.7.5\",\n    filters: {\n        names: [\n            \"amdgpu\",\n            \"tailscale\",\n        ],\n    },\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nthis = talos.imageFactory.get_extensions_versions(talos_version=\"v1.7.5\",\n    filters={\n        \"names\": [\n            \"amdgpu\",\n            \"tailscale\",\n        ],\n    })\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @this = Talos.ImageFactory.GetExtensionsVersions.Invoke(new()\n    {\n        TalosVersion = \"v1.7.5\",\n        Filters = new Talos.ImageFactory.Inputs.GetExtensionsVersionsFiltersInputArgs\n        {\n            Names = new[]\n            {\n                \"amdgpu\",\n                \"tailscale\",\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/imageFactory\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := imageFactory.GetExtensionsVersions(ctx, \u0026imagefactory.GetExtensionsVersionsArgs{\n\t\t\tTalosVersion: \"v1.7.5\",\n\t\t\tFilters: imagefactory.GetExtensionsVersionsFilters{\n\t\t\t\tNames: []string{\n\t\t\t\t\t\"amdgpu\",\n\t\t\t\t\t\"tailscale\",\n\t\t\t\t},\n\t\t\t},\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.imageFactory.ImageFactoryFunctions;\nimport com.pulumi.talos.imageFactory.inputs.GetExtensionsVersionsArgs;\nimport com.pulumi.talos.imageFactory.inputs.GetExtensionsVersionsFiltersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var this = ImageFactoryFunctions.getExtensionsVersions(GetExtensionsVersionsArgs.builder()\n            .talosVersion(\"v1.7.5\")\n            .filters(GetExtensionsVersionsFiltersArgs.builder()\n                .names(                \n                    \"amdgpu\",\n                    \"tailscale\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  this:\n    fn::invoke:\n      Function: talos:imageFactory:getExtensionsVersions\n      Arguments:\n        talosVersion: v1.7.5\n        filters:\n          names:\n            - amdgpu\n            - tailscale\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "inputs": {
-                "description": "A collection of arguments for invoking getImageFactoryExtensionsVersions.\n",
+                "description": "A collection of arguments for invoking getExtensionsVersions.\n",
                 "properties": {
                     "filters": {
-                        "$ref": "#/types/talos:index/getImageFactoryExtensionsVersionsFilters:getImageFactoryExtensionsVersionsFilters",
+                        "$ref": "#/types/talos:imageFactory/getExtensionsVersionsFilters:getExtensionsVersionsFilters",
                         "description": "The filter to apply to the extensions list.\n"
                     },
                     "talosVersion": {
@@ -1929,17 +1944,17 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by getImageFactoryExtensionsVersions.\n",
+                "description": "A collection of values returned by getExtensionsVersions.\n",
                 "properties": {
                     "extensionsInfos": {
                         "description": "The list of available extensions for the specified talos version.\n",
                         "items": {
-                            "$ref": "#/types/talos:index/getImageFactoryExtensionsVersionsExtensionsInfo:getImageFactoryExtensionsVersionsExtensionsInfo"
+                            "$ref": "#/types/talos:imageFactory/getExtensionsVersionsExtensionsInfo:getExtensionsVersionsExtensionsInfo"
                         },
                         "type": "array"
                     },
                     "filters": {
-                        "$ref": "#/types/talos:index/getImageFactoryExtensionsVersionsFilters:getImageFactoryExtensionsVersionsFilters",
+                        "$ref": "#/types/talos:imageFactory/getExtensionsVersionsFilters:getExtensionsVersionsFilters",
                         "description": "The filter to apply to the extensions list.\n"
                     },
                     "id": {
@@ -1959,13 +1974,13 @@
                 "type": "object"
             }
         },
-        "talos:index/getImageFactoryOverlaysVersions:getImageFactoryOverlaysVersions": {
-            "description": "The image factory overlays versions data source provides a list of available overlays for a specific talos version from the image factory.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst this = talos.getImageFactoryOverlaysVersions({\n    talosVersion: \"v1.7.5\",\n    filters: {\n        name: \"rock4cplus\",\n    },\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nthis = talos.get_image_factory_overlays_versions(talos_version=\"v1.7.5\",\n    filters={\n        \"name\": \"rock4cplus\",\n    })\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @this = Talos.GetImageFactoryOverlaysVersions.Invoke(new()\n    {\n        TalosVersion = \"v1.7.5\",\n        Filters = new Talos.Inputs.GetImageFactoryOverlaysVersionsFiltersInputArgs\n        {\n            Name = \"rock4cplus\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := talos.GetImageFactoryOverlaysVersions(ctx, \u0026talos.GetImageFactoryOverlaysVersionsArgs{\n\t\t\tTalosVersion: \"v1.7.5\",\n\t\t\tFilters: talos.GetImageFactoryOverlaysVersionsFilters{\n\t\t\t\tName: pulumi.StringRef(\"rock4cplus\"),\n\t\t\t},\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.TalosFunctions;\nimport com.pulumi.talos.inputs.GetImageFactoryOverlaysVersionsArgs;\nimport com.pulumi.talos.inputs.GetImageFactoryOverlaysVersionsFiltersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var this = TalosFunctions.getImageFactoryOverlaysVersions(GetImageFactoryOverlaysVersionsArgs.builder()\n            .talosVersion(\"v1.7.5\")\n            .filters(GetImageFactoryOverlaysVersionsFiltersArgs.builder()\n                .name(\"rock4cplus\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  this:\n    fn::invoke:\n      Function: talos:getImageFactoryOverlaysVersions\n      Arguments:\n        talosVersion: v1.7.5\n        filters:\n          name: rock4cplus\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+        "talos:imageFactory/getOverlaysVersions:getOverlaysVersions": {
+            "description": "The image factory overlays versions data source provides a list of available overlays for a specific talos version from the image factory.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst this = talos.imageFactory.getOverlaysVersions({\n    talosVersion: \"v1.7.5\",\n    filters: {\n        name: \"rock4cplus\",\n    },\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nthis = talos.imageFactory.get_overlays_versions(talos_version=\"v1.7.5\",\n    filters={\n        \"name\": \"rock4cplus\",\n    })\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @this = Talos.ImageFactory.GetOverlaysVersions.Invoke(new()\n    {\n        TalosVersion = \"v1.7.5\",\n        Filters = new Talos.ImageFactory.Inputs.GetOverlaysVersionsFiltersInputArgs\n        {\n            Name = \"rock4cplus\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/imageFactory\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := imageFactory.GetOverlaysVersions(ctx, \u0026imagefactory.GetOverlaysVersionsArgs{\n\t\t\tTalosVersion: \"v1.7.5\",\n\t\t\tFilters: imagefactory.GetOverlaysVersionsFilters{\n\t\t\t\tName: pulumi.StringRef(\"rock4cplus\"),\n\t\t\t},\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.imageFactory.ImageFactoryFunctions;\nimport com.pulumi.talos.imageFactory.inputs.GetOverlaysVersionsArgs;\nimport com.pulumi.talos.imageFactory.inputs.GetOverlaysVersionsFiltersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var this = ImageFactoryFunctions.getOverlaysVersions(GetOverlaysVersionsArgs.builder()\n            .talosVersion(\"v1.7.5\")\n            .filters(GetOverlaysVersionsFiltersArgs.builder()\n                .name(\"rock4cplus\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  this:\n    fn::invoke:\n      Function: talos:imageFactory:getOverlaysVersions\n      Arguments:\n        talosVersion: v1.7.5\n        filters:\n          name: rock4cplus\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "inputs": {
-                "description": "A collection of arguments for invoking getImageFactoryOverlaysVersions.\n",
+                "description": "A collection of arguments for invoking getOverlaysVersions.\n",
                 "properties": {
                     "filters": {
-                        "$ref": "#/types/talos:index/getImageFactoryOverlaysVersionsFilters:getImageFactoryOverlaysVersionsFilters",
+                        "$ref": "#/types/talos:imageFactory/getOverlaysVersionsFilters:getOverlaysVersionsFilters",
                         "description": "The filter to apply to the overlays list.\n"
                     },
                     "talosVersion": {
@@ -1979,10 +1994,10 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by getImageFactoryOverlaysVersions.\n",
+                "description": "A collection of values returned by getOverlaysVersions.\n",
                 "properties": {
                     "filters": {
-                        "$ref": "#/types/talos:index/getImageFactoryOverlaysVersionsFilters:getImageFactoryOverlaysVersionsFilters",
+                        "$ref": "#/types/talos:imageFactory/getOverlaysVersionsFilters:getOverlaysVersionsFilters",
                         "description": "The filter to apply to the overlays list.\n"
                     },
                     "id": {
@@ -1992,7 +2007,7 @@
                     "overlaysInfos": {
                         "description": "The list of available extensions for the specified talos version.\n",
                         "items": {
-                            "$ref": "#/types/talos:index/getImageFactoryOverlaysVersionsOverlaysInfo:getImageFactoryOverlaysVersionsOverlaysInfo"
+                            "$ref": "#/types/talos:imageFactory/getOverlaysVersionsOverlaysInfo:getOverlaysVersionsOverlaysInfo"
                         },
                         "type": "array"
                     },
@@ -2009,10 +2024,10 @@
                 "type": "object"
             }
         },
-        "talos:index/getImageFactoryUrls:getImageFactoryUrls": {
+        "talos:imageFactory/getUrls:getUrls": {
             "description": "Generates URLs for different assets supported by the Talos image factory.\n\n",
             "inputs": {
-                "description": "A collection of arguments for invoking getImageFactoryUrls.\n",
+                "description": "A collection of arguments for invoking getUrls.\n",
                 "properties": {
                     "architecture": {
                         "type": "string"
@@ -2037,7 +2052,7 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by getImageFactoryUrls.\n",
+                "description": "A collection of values returned by getUrls.\n",
                 "properties": {
                     "architecture": {
                         "type": "string"
@@ -2058,7 +2073,7 @@
                         "type": "string"
                     },
                     "urls": {
-                        "$ref": "#/types/talos:index/getImageFactoryUrlsUrls:getImageFactoryUrlsUrls"
+                        "$ref": "#/types/talos:imageFactory/getUrlsUrls:getUrlsUrls"
                     }
                 },
                 "required": [
@@ -2071,23 +2086,23 @@
                 "type": "object"
             }
         },
-        "talos:index/getImageFactoryVersions:getImageFactoryVersions": {
+        "talos:imageFactory/getVersions:getVersions": {
             "description": "The image factory versions data source provides a list of available talos versions from the image factory.\n\n",
             "inputs": {
-                "description": "A collection of arguments for invoking getImageFactoryVersions.\n",
+                "description": "A collection of arguments for invoking getVersions.\n",
                 "properties": {
                     "filters": {
-                        "$ref": "#/types/talos:index/getImageFactoryVersionsFilters:getImageFactoryVersionsFilters",
+                        "$ref": "#/types/talos:imageFactory/getVersionsFilters:getVersionsFilters",
                         "description": "The filter to apply to the overlays list.\n"
                     }
                 },
                 "type": "object"
             },
             "outputs": {
-                "description": "A collection of values returned by getImageFactoryVersions.\n",
+                "description": "A collection of values returned by getVersions.\n",
                 "properties": {
                     "filters": {
-                        "$ref": "#/types/talos:index/getImageFactoryVersionsFilters:getImageFactoryVersionsFilters",
+                        "$ref": "#/types/talos:imageFactory/getVersionsFilters:getVersionsFilters",
                         "description": "The filter to apply to the overlays list.\n"
                     },
                     "id": {
