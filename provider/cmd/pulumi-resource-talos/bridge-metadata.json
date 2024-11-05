@@ -1,6 +1,12 @@
 {
     "auto-aliasing": {
         "resources": {
+            "talos_cluster_kubeconfig": {
+                "current": "talos:cluster/kubeconfig:Kubeconfig"
+            },
+            "talos_image_factory_schematic": {
+                "current": "talos:index/imageFactorySchematic:ImageFactorySchematic"
+            },
             "talos_machine_bootstrap": {
                 "current": "talos:machine/bootstrap:Bootstrap"
             },
@@ -44,6 +50,40 @@
             },
             "talos_cluster_kubeconfig": {
                 "current": "talos:cluster/getKubeconfig:getKubeconfig"
+            },
+            "talos_image_factory_extensions_versions": {
+                "current": "talos:index/getImageFactoryExtensionsVersions:getImageFactoryExtensionsVersions",
+                "fields": {
+                    "extensions_info": {
+                        "maxItemsOne": false
+                    },
+                    "filters": {
+                        "fields": {
+                            "names": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
+            },
+            "talos_image_factory_overlays_versions": {
+                "current": "talos:index/getImageFactoryOverlaysVersions:getImageFactoryOverlaysVersions",
+                "fields": {
+                    "overlays_info": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "talos_image_factory_urls": {
+                "current": "talos:index/getImageFactoryUrls:getImageFactoryUrls"
+            },
+            "talos_image_factory_versions": {
+                "current": "talos:index/getImageFactoryVersions:getImageFactoryVersions",
+                "fields": {
+                    "talos_versions": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "talos_machine_configuration": {
                 "current": "talos:machine/getConfiguration:getConfiguration",
