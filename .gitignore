@@ -24,3 +24,8 @@ provider/**/schema-embed.json
 _out
 
 go.work*
+
+__pycache__
+venv
+sdk/python/build
+sdk/python/*.egg-info

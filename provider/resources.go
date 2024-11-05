@@ -6,15 +6,19 @@
 package talos
 
 import (
-	_ "embed"
 	"fmt"
 	"path/filepath"
+
+	// embed is used to embed the schema files in the provider
+	_ "embed"
+
+	"github.com/siderolabs/terraform-provider-talos/pkg/talos"
 
 	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
+
 	"github.com/pulumiverse/pulumi-talos/provider/pkg/version"
-	"github.com/siderolabs/terraform-provider-talos/pkg/talos"
 )
 
 // all of the talos token components used below.

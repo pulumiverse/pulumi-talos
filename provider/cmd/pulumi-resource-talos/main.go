@@ -9,6 +9,8 @@ package main
 
 import (
 	"context"
+
+	// embed is used to embed the schema files in the provider
 	_ "embed"
 
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
