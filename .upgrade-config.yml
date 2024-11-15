@@ -1,4 +1,5 @@
 upstream-provider-name: terraform-provider-talos
 upstream-provider-org: siderolabs
 remove-plugins: true
+pulumi-infer-version: true
 pr-reviewers: ringods
