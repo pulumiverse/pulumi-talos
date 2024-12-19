@@ -81,7 +81,7 @@ export interface GetHealthResult {
 /**
  * Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
  */
-export function getHealthOutput(args: GetHealthOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetHealthResult> {
+export function getHealthOutput(args: GetHealthOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetHealthResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:cluster/getHealth:getHealth", {
         "clientConfiguration": args.clientConfiguration,

@@ -23,6 +23,12 @@ namespace Pulumiverse.Talos.ImageFactory
         /// </summary>
         public static Output<GetVersionsResult> Invoke(GetVersionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetVersionsResult>("talos:imageFactory/getVersions:getVersions", args ?? new GetVersionsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// The image factory versions data source provides a list of available talos versions from the image factory.
+        /// </summary>
+        public static Output<GetVersionsResult> Invoke(GetVersionsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetVersionsResult>("talos:imageFactory/getVersions:getVersions", args ?? new GetVersionsInvokeArgs(), options.WithDefaults());
     }
 
 

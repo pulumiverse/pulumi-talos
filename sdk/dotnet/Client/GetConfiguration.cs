@@ -75,6 +75,38 @@ namespace Pulumiverse.Talos.Client
         /// </summary>
         public static Output<GetConfigurationResult> Invoke(GetConfigurationInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationResult>("talos:client/getConfiguration:getConfiguration", args ?? new GetConfigurationInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Generate client configuration for a Talos cluster
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// using Talos = Pulumiverse.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
+        /// 
+        ///     var @this = Talos.Client.GetConfiguration.Invoke(new()
+        ///     {
+        ///         ClusterName = "example-cluster",
+        ///         ClientConfiguration = thisSecrets.ClientConfiguration,
+        ///         Nodes = new[]
+        ///         {
+        ///             "10.5.0.2",
+        ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetConfigurationResult> Invoke(GetConfigurationInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationResult>("talos:client/getConfiguration:getConfiguration", args ?? new GetConfigurationInvokeArgs(), options.WithDefaults());
     }
 
 

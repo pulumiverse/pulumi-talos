@@ -59,21 +59,11 @@ type LookupKubeconfigResult struct {
 }
 
 func LookupKubeconfigOutput(ctx *pulumi.Context, args LookupKubeconfigOutputArgs, opts ...pulumi.InvokeOption) LookupKubeconfigResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (LookupKubeconfigResultOutput, error) {
 			args := v.(LookupKubeconfigArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv LookupKubeconfigResult
-			secret, err := ctx.InvokePackageRaw("talos:cluster/getKubeconfig:getKubeconfig", args, &rv, "", opts...)
-			if err != nil {
-				return LookupKubeconfigResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(LookupKubeconfigResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(LookupKubeconfigResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("talos:cluster/getKubeconfig:getKubeconfig", args, LookupKubeconfigResultOutput{}, options).(LookupKubeconfigResultOutput), nil
 		}).(LookupKubeconfigResultOutput)
 }
 

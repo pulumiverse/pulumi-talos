@@ -118,7 +118,7 @@ export interface GetDisksResult {
  * export const nvmeDisks = _this.apply(_this => _this.disks.map(__item => __item.name));
  * ```
  */
-export function getDisksOutput(args: GetDisksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDisksResult> {
+export function getDisksOutput(args: GetDisksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDisksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:machine/getDisks:getDisks", {
         "clientConfiguration": args.clientConfiguration,

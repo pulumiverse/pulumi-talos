@@ -245,7 +245,7 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
                              machine_secrets: Optional[pulumi.Input[Union['MachineSecretsArgs', 'MachineSecretsArgsDict']]] = None,
                              machine_type: Optional[pulumi.Input[str]] = None,
                              talos_version: Optional[pulumi.Input[Optional[str]]] = None,
-                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConfigurationResult]:
+                             opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigurationResult]:
     """
     Generate a machine configuration for a node type
 
@@ -286,7 +286,7 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[str]] = Non
     __args__['machineSecrets'] = machine_secrets
     __args__['machineType'] = machine_type
     __args__['talosVersion'] = talos_version
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:machine/getConfiguration:getConfiguration', __args__, opts=opts, typ=GetConfigurationResult)
     return __ret__.apply(lambda __response__: GetConfigurationResult(
         cluster_endpoint=pulumi.get(__response__, 'cluster_endpoint'),
