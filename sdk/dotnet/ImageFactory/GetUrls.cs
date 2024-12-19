@@ -23,6 +23,12 @@ namespace Pulumiverse.Talos.ImageFactory
         /// </summary>
         public static Output<GetUrlsResult> Invoke(GetUrlsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUrlsResult>("talos:imageFactory/getUrls:getUrls", args ?? new GetUrlsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Generates URLs for different assets supported by the Talos image factory.
+        /// </summary>
+        public static Output<GetUrlsResult> Invoke(GetUrlsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetUrlsResult>("talos:imageFactory/getUrls:getUrls", args ?? new GetUrlsInvokeArgs(), options.WithDefaults());
     }
 
 

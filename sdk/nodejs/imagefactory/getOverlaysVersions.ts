@@ -83,7 +83,7 @@ export interface GetOverlaysVersionsResult {
  * });
  * ```
  */
-export function getOverlaysVersionsOutput(args: GetOverlaysVersionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOverlaysVersionsResult> {
+export function getOverlaysVersionsOutput(args: GetOverlaysVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOverlaysVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:imageFactory/getOverlaysVersions:getOverlaysVersions", {
         "filters": args.filters,

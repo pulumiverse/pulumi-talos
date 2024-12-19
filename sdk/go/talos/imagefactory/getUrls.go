@@ -43,21 +43,11 @@ type GetUrlsResult struct {
 }
 
 func GetUrlsOutput(ctx *pulumi.Context, args GetUrlsOutputArgs, opts ...pulumi.InvokeOption) GetUrlsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetUrlsResultOutput, error) {
 			args := v.(GetUrlsArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetUrlsResult
-			secret, err := ctx.InvokePackageRaw("talos:imageFactory/getUrls:getUrls", args, &rv, "", opts...)
-			if err != nil {
-				return GetUrlsResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetUrlsResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetUrlsResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("talos:imageFactory/getUrls:getUrls", args, GetUrlsResultOutput{}, options).(GetUrlsResultOutput), nil
 		}).(GetUrlsResultOutput)
 }
 

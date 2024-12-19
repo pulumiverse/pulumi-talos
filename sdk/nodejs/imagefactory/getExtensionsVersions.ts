@@ -89,7 +89,7 @@ export interface GetExtensionsVersionsResult {
  * });
  * ```
  */
-export function getExtensionsVersionsOutput(args: GetExtensionsVersionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetExtensionsVersionsResult> {
+export function getExtensionsVersionsOutput(args: GetExtensionsVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetExtensionsVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:imageFactory/getExtensionsVersions:getExtensionsVersions", {
         "filters": args.filters,
