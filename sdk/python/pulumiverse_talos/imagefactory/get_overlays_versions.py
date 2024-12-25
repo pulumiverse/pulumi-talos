@@ -122,7 +122,7 @@ def get_overlays_versions(filters: Optional[Union['GetOverlaysVersionsFiltersArg
         talos_version=pulumi.get(__ret__, 'talos_version'))
 def get_overlays_versions_output(filters: Optional[pulumi.Input[Optional[Union['GetOverlaysVersionsFiltersArgs', 'GetOverlaysVersionsFiltersArgsDict']]]] = None,
                                  talos_version: Optional[pulumi.Input[str]] = None,
-                                 opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOverlaysVersionsResult]:
+                                 opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetOverlaysVersionsResult]:
     """
     The image factory overlays versions data source provides a list of available overlays for a specific talos version from the image factory.
 
@@ -145,7 +145,7 @@ def get_overlays_versions_output(filters: Optional[pulumi.Input[Optional[Union['
     __args__ = dict()
     __args__['filters'] = filters
     __args__['talosVersion'] = talos_version
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:imageFactory/getOverlaysVersions:getOverlaysVersions', __args__, opts=opts, typ=GetOverlaysVersionsResult)
     return __ret__.apply(lambda __response__: GetOverlaysVersionsResult(
         filters=pulumi.get(__response__, 'filters'),

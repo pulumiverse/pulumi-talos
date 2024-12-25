@@ -93,7 +93,7 @@ def get_versions(filters: Optional[Union['GetVersionsFiltersArgs', 'GetVersionsF
         id=pulumi.get(__ret__, 'id'),
         talos_versions=pulumi.get(__ret__, 'talos_versions'))
 def get_versions_output(filters: Optional[pulumi.Input[Optional[Union['GetVersionsFiltersArgs', 'GetVersionsFiltersArgsDict']]]] = None,
-                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetVersionsResult]:
+                        opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetVersionsResult]:
     """
     The image factory versions data source provides a list of available talos versions from the image factory.
 
@@ -102,7 +102,7 @@ def get_versions_output(filters: Optional[pulumi.Input[Optional[Union['GetVersio
     """
     __args__ = dict()
     __args__['filters'] = filters
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:imageFactory/getVersions:getVersions', __args__, opts=opts, typ=GetVersionsResult)
     return __ret__.apply(lambda __response__: GetVersionsResult(
         filters=pulumi.get(__response__, 'filters'),

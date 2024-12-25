@@ -103,21 +103,11 @@ type GetConfigurationResult struct {
 }
 
 func GetConfigurationOutput(ctx *pulumi.Context, args GetConfigurationOutputArgs, opts ...pulumi.InvokeOption) GetConfigurationResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetConfigurationResultOutput, error) {
 			args := v.(GetConfigurationArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetConfigurationResult
-			secret, err := ctx.InvokePackageRaw("talos:machine/getConfiguration:getConfiguration", args, &rv, "", opts...)
-			if err != nil {
-				return GetConfigurationResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetConfigurationResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetConfigurationResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("talos:machine/getConfiguration:getConfiguration", args, GetConfigurationResultOutput{}, options).(GetConfigurationResultOutput), nil
 		}).(GetConfigurationResultOutput)
 }
 

@@ -84,7 +84,7 @@ export interface GetKubeconfigResult {
 /**
  * Retrieves the kubeconfig for a Talos cluster
  */
-export function getKubeconfigOutput(args: GetKubeconfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetKubeconfigResult> {
+export function getKubeconfigOutput(args: GetKubeconfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetKubeconfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:cluster/getKubeconfig:getKubeconfig", {
         "clientConfiguration": args.clientConfiguration,

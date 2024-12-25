@@ -161,7 +161,7 @@ def get_health_output(client_configuration: Optional[pulumi.Input[Union['GetHeal
                       skip_kubernetes_checks: Optional[pulumi.Input[Optional[bool]]] = None,
                       timeouts: Optional[pulumi.Input[Optional[Union['GetHealthTimeoutsArgs', 'GetHealthTimeoutsArgsDict']]]] = None,
                       worker_nodes: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
-                      opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetHealthResult]:
+                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetHealthResult]:
     """
     Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
 
@@ -179,7 +179,7 @@ def get_health_output(client_configuration: Optional[pulumi.Input[Union['GetHeal
     __args__['skipKubernetesChecks'] = skip_kubernetes_checks
     __args__['timeouts'] = timeouts
     __args__['workerNodes'] = worker_nodes
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:cluster/getHealth:getHealth', __args__, opts=opts, typ=GetHealthResult)
     return __ret__.apply(lambda __response__: GetHealthResult(
         client_configuration=pulumi.get(__response__, 'client_configuration'),

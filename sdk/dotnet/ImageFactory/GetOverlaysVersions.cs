@@ -67,6 +67,34 @@ namespace Pulumiverse.Talos.ImageFactory
         /// </summary>
         public static Output<GetOverlaysVersionsResult> Invoke(GetOverlaysVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverlaysVersionsResult>("talos:imageFactory/getOverlaysVersions:getOverlaysVersions", args ?? new GetOverlaysVersionsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// The image factory overlays versions data source provides a list of available overlays for a specific talos version from the image factory.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var @this = Talos.ImageFactory.GetOverlaysVersions.Invoke(new()
+        ///     {
+        ///         TalosVersion = "v1.7.5",
+        ///         Filters = new Talos.ImageFactory.Inputs.GetOverlaysVersionsFiltersInputArgs
+        ///         {
+        ///             Name = "rock4cplus",
+        ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetOverlaysVersionsResult> Invoke(GetOverlaysVersionsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetOverlaysVersionsResult>("talos:imageFactory/getOverlaysVersions:getOverlaysVersions", args ?? new GetOverlaysVersionsInvokeArgs(), options.WithDefaults());
     }
 
 

@@ -4,7 +4,7 @@
   dependencies = ["parver>=0.2.1", "pulumi>=3.0.0,<4.0.0", "semver>=2.8.1", "typing-extensions>=4.11; python_version < \"3.11\""]
   keywords = ["pulumi", "talos", "category/infrastructure"]
   readme = "README.md"
-  requires-python = ">=3.8"
+  requires-python = ">=3.9"
   version = "0.0.0a0+dev"
   [project.license]
     text = "MPL-2.0"

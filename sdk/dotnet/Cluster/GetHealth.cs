@@ -23,6 +23,12 @@ namespace Pulumiverse.Talos.Cluster
         /// </summary>
         public static Output<GetHealthResult> Invoke(GetHealthInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetHealthResult>("talos:cluster/getHealth:getHealth", args ?? new GetHealthInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.
+        /// </summary>
+        public static Output<GetHealthResult> Invoke(GetHealthInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetHealthResult>("talos:cluster/getHealth:getHealth", args ?? new GetHealthInvokeArgs(), options.WithDefaults());
     }
 
 

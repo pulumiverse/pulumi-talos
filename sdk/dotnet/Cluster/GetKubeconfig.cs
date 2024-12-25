@@ -23,6 +23,12 @@ namespace Pulumiverse.Talos.Cluster
         /// </summary>
         public static Output<GetKubeconfigResult> Invoke(GetKubeconfigInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetKubeconfigResult>("talos:cluster/getKubeconfig:getKubeconfig", args ?? new GetKubeconfigInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Retrieves the kubeconfig for a Talos cluster
+        /// </summary>
+        public static Output<GetKubeconfigResult> Invoke(GetKubeconfigInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetKubeconfigResult>("talos:cluster/getKubeconfig:getKubeconfig", args ?? new GetKubeconfigInvokeArgs(), options.WithDefaults());
     }
 
 

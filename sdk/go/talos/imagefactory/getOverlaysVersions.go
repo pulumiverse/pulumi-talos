@@ -72,21 +72,11 @@ type GetOverlaysVersionsResult struct {
 }
 
 func GetOverlaysVersionsOutput(ctx *pulumi.Context, args GetOverlaysVersionsOutputArgs, opts ...pulumi.InvokeOption) GetOverlaysVersionsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetOverlaysVersionsResultOutput, error) {
 			args := v.(GetOverlaysVersionsArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetOverlaysVersionsResult
-			secret, err := ctx.InvokePackageRaw("talos:imageFactory/getOverlaysVersions:getOverlaysVersions", args, &rv, "", opts...)
-			if err != nil {
-				return GetOverlaysVersionsResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetOverlaysVersionsResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetOverlaysVersionsResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("talos:imageFactory/getOverlaysVersions:getOverlaysVersions", args, GetOverlaysVersionsResultOutput{}, options).(GetOverlaysVersionsResultOutput), nil
 		}).(GetOverlaysVersionsResultOutput)
 }
 
