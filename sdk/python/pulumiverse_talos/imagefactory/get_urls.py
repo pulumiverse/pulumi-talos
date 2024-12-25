@@ -132,7 +132,7 @@ def get_urls_output(architecture: Optional[pulumi.Input[Optional[str]]] = None,
                     sbc: Optional[pulumi.Input[Optional[str]]] = None,
                     schematic_id: Optional[pulumi.Input[str]] = None,
                     talos_version: Optional[pulumi.Input[str]] = None,
-                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetUrlsResult]:
+                    opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetUrlsResult]:
     """
     Generates URLs for different assets supported by the Talos image factory.
     """
@@ -142,7 +142,7 @@ def get_urls_output(architecture: Optional[pulumi.Input[Optional[str]]] = None,
     __args__['sbc'] = sbc
     __args__['schematicId'] = schematic_id
     __args__['talosVersion'] = talos_version
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:imageFactory/getUrls:getUrls', __args__, opts=opts, typ=GetUrlsResult)
     return __ret__.apply(lambda __response__: GetUrlsResult(
         architecture=pulumi.get(__response__, 'architecture'),

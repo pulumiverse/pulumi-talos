@@ -157,7 +157,7 @@ def get_configuration_output(client_configuration: Optional[pulumi.Input[Union['
                              cluster_name: Optional[pulumi.Input[str]] = None,
                              endpoints: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
                              nodes: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
-                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConfigurationResult]:
+                             opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigurationResult]:
     """
     Generate client configuration for a Talos cluster
 
@@ -185,7 +185,7 @@ def get_configuration_output(client_configuration: Optional[pulumi.Input[Union['
     __args__['clusterName'] = cluster_name
     __args__['endpoints'] = endpoints
     __args__['nodes'] = nodes
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:client/getConfiguration:getConfiguration', __args__, opts=opts, typ=GetConfigurationResult)
     return __ret__.apply(lambda __response__: GetConfigurationResult(
         client_configuration=pulumi.get(__response__, 'client_configuration'),

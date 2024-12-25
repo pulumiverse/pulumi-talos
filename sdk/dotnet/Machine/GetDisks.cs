@@ -89,6 +89,45 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         public static Output<GetDisksResult> Invoke(GetDisksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDisksResult>("talos:machine/getDisks:getDisks", args ?? new GetDisksInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Generate a machine configuration for a node type
+        /// 
+        /// &gt; **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// using Talos = Pulumiverse.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
+        /// 
+        ///     var @this = Talos.Machine.GetDisks.Invoke(new()
+        ///     {
+        ///         ClientConfiguration = thisSecrets.ClientConfiguration,
+        ///         Node = "10.5.0.2",
+        ///         Filters = new Talos.Machine.Inputs.GetDisksFiltersInputArgs
+        ///         {
+        ///             Size = "&gt; 100GB",
+        ///             Type = "nvme",
+        ///         },
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["nvmeDisks"] = @this.Apply(@this =&gt; @this.Apply(getDisksResult =&gt; getDisksResult.Disks).Select(__item =&gt; __item.Name).ToList()),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetDisksResult> Invoke(GetDisksInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetDisksResult>("talos:machine/getDisks:getDisks", args ?? new GetDisksInvokeArgs(), options.WithDefaults());
     }
 
 

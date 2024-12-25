@@ -55,21 +55,11 @@ type GetHealthResult struct {
 }
 
 func GetHealthOutput(ctx *pulumi.Context, args GetHealthOutputArgs, opts ...pulumi.InvokeOption) GetHealthResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetHealthResultOutput, error) {
 			args := v.(GetHealthArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetHealthResult
-			secret, err := ctx.InvokePackageRaw("talos:cluster/getHealth:getHealth", args, &rv, "", opts...)
-			if err != nil {
-				return GetHealthResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetHealthResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetHealthResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("talos:cluster/getHealth:getHealth", args, GetHealthResultOutput{}, options).(GetHealthResultOutput), nil
 		}).(GetHealthResultOutput)
 }
 

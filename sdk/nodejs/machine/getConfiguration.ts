@@ -154,7 +154,7 @@ export interface GetConfigurationResult {
  * });
  * ```
  */
-export function getConfigurationOutput(args: GetConfigurationOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigurationResult> {
+export function getConfigurationOutput(args: GetConfigurationOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigurationResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:machine/getConfiguration:getConfiguration", {
         "clusterEndpoint": args.clusterEndpoint,

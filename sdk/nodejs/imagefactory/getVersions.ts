@@ -47,7 +47,7 @@ export interface GetVersionsResult {
 /**
  * The image factory versions data source provides a list of available talos versions from the image factory.
  */
-export function getVersionsOutput(args?: GetVersionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVersionsResult> {
+export function getVersionsOutput(args?: GetVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVersionsResult> {
     args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:imageFactory/getVersions:getVersions", {

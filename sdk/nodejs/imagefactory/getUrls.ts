@@ -46,7 +46,7 @@ export interface GetUrlsResult {
 /**
  * Generates URLs for different assets supported by the Talos image factory.
  */
-export function getUrlsOutput(args: GetUrlsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUrlsResult> {
+export function getUrlsOutput(args: GetUrlsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUrlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:imageFactory/getUrls:getUrls", {
         "architecture": args.architecture,

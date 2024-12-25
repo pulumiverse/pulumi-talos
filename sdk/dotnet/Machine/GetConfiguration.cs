@@ -75,6 +75,38 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         public static Output<GetConfigurationResult> Invoke(GetConfigurationInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationResult>("talos:machine/getConfiguration:getConfiguration", args ?? new GetConfigurationInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Generate a machine configuration for a node type
+        /// 
+        /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// using Talos = Pulumiverse.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var thisSecrets = new Talos.Machine.Secrets("this");
+        /// 
+        ///     var @this = Talos.Machine.GetConfiguration.Invoke(new()
+        ///     {
+        ///         ClusterName = "example-cluster",
+        ///         MachineType = "controlplane",
+        ///         ClusterEndpoint = "https://cluster.local:6443",
+        ///         MachineSecrets = thisSecrets.MachineSecrets,
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetConfigurationResult> Invoke(GetConfigurationInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationResult>("talos:machine/getConfiguration:getConfiguration", args ?? new GetConfigurationInvokeArgs(), options.WithDefaults());
     }
 
 

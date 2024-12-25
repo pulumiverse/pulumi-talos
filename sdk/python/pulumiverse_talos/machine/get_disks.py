@@ -176,7 +176,7 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisks
                      filters: Optional[pulumi.Input[Optional[Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict']]]] = None,
                      node: Optional[pulumi.Input[str]] = None,
                      timeouts: Optional[pulumi.Input[Optional[Union['GetDisksTimeoutsArgs', 'GetDisksTimeoutsArgsDict']]]] = None,
-                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDisksResult]:
+                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetDisksResult]:
     """
     Generate a machine configuration for a node type
 
@@ -211,7 +211,7 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisks
     __args__['filters'] = filters
     __args__['node'] = node
     __args__['timeouts'] = timeouts
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:machine/getDisks:getDisks', __args__, opts=opts, typ=GetDisksResult)
     return __ret__.apply(lambda __response__: GetDisksResult(
         client_configuration=pulumi.get(__response__, 'client_configuration'),

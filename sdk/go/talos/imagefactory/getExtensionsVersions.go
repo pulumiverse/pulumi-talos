@@ -75,21 +75,11 @@ type GetExtensionsVersionsResult struct {
 }
 
 func GetExtensionsVersionsOutput(ctx *pulumi.Context, args GetExtensionsVersionsOutputArgs, opts ...pulumi.InvokeOption) GetExtensionsVersionsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetExtensionsVersionsResultOutput, error) {
 			args := v.(GetExtensionsVersionsArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetExtensionsVersionsResult
-			secret, err := ctx.InvokePackageRaw("talos:imageFactory/getExtensionsVersions:getExtensionsVersions", args, &rv, "", opts...)
-			if err != nil {
-				return GetExtensionsVersionsResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetExtensionsVersionsResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetExtensionsVersionsResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("talos:imageFactory/getExtensionsVersions:getExtensionsVersions", args, GetExtensionsVersionsResultOutput{}, options).(GetExtensionsVersionsResultOutput), nil
 		}).(GetExtensionsVersionsResultOutput)
 }
 

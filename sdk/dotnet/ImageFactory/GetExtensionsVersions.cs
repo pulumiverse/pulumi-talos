@@ -75,6 +75,38 @@ namespace Pulumiverse.Talos.ImageFactory
         /// </summary>
         public static Output<GetExtensionsVersionsResult> Invoke(GetExtensionsVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetExtensionsVersionsResult>("talos:imageFactory/getExtensionsVersions:getExtensionsVersions", args ?? new GetExtensionsVersionsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// The image factory extensions versions data source provides a list of available extensions for a specific talos version from the image factory.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var @this = Talos.ImageFactory.GetExtensionsVersions.Invoke(new()
+        ///     {
+        ///         TalosVersion = "v1.7.5",
+        ///         Filters = new Talos.ImageFactory.Inputs.GetExtensionsVersionsFiltersInputArgs
+        ///         {
+        ///             Names = new[]
+        ///             {
+        ///                 "amdgpu",
+        ///                 "tailscale",
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetExtensionsVersionsResult> Invoke(GetExtensionsVersionsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetExtensionsVersionsResult>("talos:imageFactory/getExtensionsVersions:getExtensionsVersions", args ?? new GetExtensionsVersionsInvokeArgs(), options.WithDefaults());
     }
 
 

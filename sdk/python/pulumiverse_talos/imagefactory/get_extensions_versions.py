@@ -125,7 +125,7 @@ def get_extensions_versions(filters: Optional[Union['GetExtensionsVersionsFilter
         talos_version=pulumi.get(__ret__, 'talos_version'))
 def get_extensions_versions_output(filters: Optional[pulumi.Input[Optional[Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict']]]] = None,
                                    talos_version: Optional[pulumi.Input[str]] = None,
-                                   opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetExtensionsVersionsResult]:
+                                   opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetExtensionsVersionsResult]:
     """
     The image factory extensions versions data source provides a list of available extensions for a specific talos version from the image factory.
 
@@ -151,7 +151,7 @@ def get_extensions_versions_output(filters: Optional[pulumi.Input[Optional[Union
     __args__ = dict()
     __args__['filters'] = filters
     __args__['talosVersion'] = talos_version
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:imageFactory/getExtensionsVersions:getExtensionsVersions', __args__, opts=opts, typ=GetExtensionsVersionsResult)
     return __ret__.apply(lambda __response__: GetExtensionsVersionsResult(
         extensions_infos=pulumi.get(__response__, 'extensions_infos'),
