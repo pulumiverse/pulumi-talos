@@ -13,7 +13,7 @@ import (
 	// embed is used to embed the schema files in the provider
 	_ "embed"
 
-	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 
 	talos "github.com/pulumiverse/pulumi-talos/provider"
 )
