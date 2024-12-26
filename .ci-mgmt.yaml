@@ -5,7 +5,6 @@ major-version: 0
 providerDefaultBranch: main
 upstreamProviderOrg: siderolabs
 publishRegistry: false
-enableAutoRelease: false
 plugins:
   - name: terraform
     version: "1.0.19"

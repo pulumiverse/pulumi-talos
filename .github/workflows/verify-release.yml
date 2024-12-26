@@ -16,6 +16,10 @@ on:
         required: false
         type: boolean
         default: false
+      pythonVersion:
+        description: "Optional python SDK version to verify. Defaults to inputs.providerVersion."
+        type: string
+        required: false
   workflow_call:
     inputs:
       providerVersion:
@@ -32,6 +36,10 @@ on:
         required: false
         type: boolean
         default: false
+      pythonVersion:
+        description: "Optional python SDK version to verify. Defaults to inputs.providerVersion."
+        type: string
+        required: false
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -69,7 +77,7 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
       - name: Setup tools
