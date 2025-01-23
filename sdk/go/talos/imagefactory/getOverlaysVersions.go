@@ -21,13 +21,13 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/imageFactory"
+//	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/imagefactory"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := imageFactory.GetOverlaysVersions(ctx, &imagefactory.GetOverlaysVersionsArgs{
+//			_, err := imagefactory.GetOverlaysVersions(ctx, &imagefactory.GetOverlaysVersionsArgs{
 //				TalosVersion: "v1.7.5",
 //				Filters: imagefactory.GetOverlaysVersionsFilters{
 //					Name: pulumi.StringRef("rock4cplus"),
