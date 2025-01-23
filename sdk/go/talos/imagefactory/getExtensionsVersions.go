@@ -21,13 +21,13 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/imageFactory"
+//	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/imagefactory"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := imageFactory.GetExtensionsVersions(ctx, &imagefactory.GetExtensionsVersionsArgs{
+//			_, err := imagefactory.GetExtensionsVersions(ctx, &imagefactory.GetExtensionsVersionsArgs{
 //				TalosVersion: "v1.7.5",
 //				Filters: imagefactory.GetExtensionsVersionsFilters{
 //					Names: []string{
