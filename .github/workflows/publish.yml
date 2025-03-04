@@ -57,6 +57,7 @@ jobs:
       uses: ./.github/actions/setup-tools
       with:
         tools: pulumictl, pulumicli, go, schema-tools
+        cache-go: false
     - name: Create dist directory
       run: mkdir -p dist
     - name: Download provider assets
@@ -189,7 +190,5 @@ jobs:
     secrets: inherit
     with:
       providerVersion: ${{ inputs.version }}
-      # Prelease is run often but we only have 5 concurrent macos runners, so we only test after the stable release.
-      enableMacRunner: ${{ inputs.isPrerelease == false }}
       skipGoSdk: ${{ inputs.skipGoSdk }}
       pythonVersion: ${{ needs.publish_sdk.outputs.python_version }}
