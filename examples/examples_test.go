@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	tc "github.com/testcontainers/testcontainers-go"
+	"github.com/testcontainers/testcontainers-go/log"
 	tcc "github.com/testcontainers/testcontainers-go/modules/compose"
 
 	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
@@ -37,7 +37,7 @@ func startNodes(t *testing.T) error {
 	composePath := filepath.Join(getCwd(t), "testdata", "docker-compose.yaml")
 	compose, err := tcc.NewDockerComposeWith(
 		tcc.WithStackFiles(composePath),
-		tcc.WithLogger(tc.TestLogger(t)),
+		tcc.WithLogger(log.TestLogger(t)),
 	)
 	require.NoError(t, err)
 
