@@ -3,7 +3,7 @@
 name: pulumi-test
 
 x-controlplane: &controlplane
-  image: ghcr.io/siderolabs/talos:v1.8.1
+  image: ghcr.io/siderolabs/talos:v1.9.5
   environment:
     PLATFORM: container
   tmpfs:

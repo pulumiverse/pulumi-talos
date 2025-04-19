@@ -27,10 +27,10 @@ const configurationApply = new talos.machine.ConfigurationApply("configurationAp
 
             // For integration tests
             features: {
-              hostDNS: {
-                enabled: true,
-                forwardKubeDNSToHost: true,
-              },
+                hostDNS: {
+                    enabled: true,
+                    forwardKubeDNSToHost: true,
+                },
             },
         },
     })],
@@ -41,11 +41,4 @@ const bootstrap = new talos.machine.Bootstrap("bootstrap", {
     clientConfiguration: secrets.clientConfiguration,
 }, {
     dependsOn: [configurationApply],
-});
-
-const health = talos.cluster.getHealthOutput({
-    controlPlaneNodes: [bootstrap.node],
-    endpoints: [bootstrap.endpoint],
-    clientConfiguration: secrets.clientConfiguration,
-    timeouts: { read: "4m" },
 });
