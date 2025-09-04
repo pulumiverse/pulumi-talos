@@ -12,6 +12,35 @@ import (
 )
 
 // Generates URLs for different assets supported by the Talos image factory.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/imagefactory"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			this, err := imagefactory.GetUrls(ctx, &imagefactory.GetUrlsArgs{
+//				TalosVersion: "v1.7.5",
+//				SchematicId:  "376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
+//				Platform:     pulumi.StringRef("metal"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("installerImage", this.Urls.Installer)
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetUrls(ctx *pulumi.Context, args *GetUrlsArgs, opts ...pulumi.InvokeOption) (*GetUrlsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUrlsResult

@@ -29,7 +29,6 @@ __all__ = [
     'TrustdInfoResult',
     'GetDisksClientConfigurationResult',
     'GetDisksDiskResult',
-    'GetDisksFiltersResult',
     'GetDisksTimeoutsResult',
 ]
 
@@ -527,220 +526,130 @@ class GetDisksClientConfigurationResult(dict):
 class GetDisksDiskResult(dict):
     def __init__(__self__, *,
                  bus_path: str,
+                 cdrom: bool,
+                 dev_path: str,
+                 io_size: int,
                  modalias: str,
                  model: str,
-                 name: str,
+                 pretty_size: str,
+                 readonly: bool,
+                 rotational: bool,
+                 secondary_disks: Sequence[str],
+                 sector_size: int,
                  serial: str,
-                 size: str,
-                 type: str,
+                 size: int,
+                 sub_system: str,
+                 symlinks: Sequence[str],
+                 transport: str,
                  uuid: str,
                  wwid: str):
-        """
-        :param str bus_path: The bus path of the disk
-        :param str modalias: The modalias of the disk
-        :param str model: The model of the disk
-        :param str name: The name of the disk
-        :param str serial: The serial number of the disk
-        :param str size: The size of the disk
-        :param str type: The type of the disk
-        :param str uuid: The uuid of the disk
-        :param str wwid: The wwid of the disk
-        """
         pulumi.set(__self__, "bus_path", bus_path)
+        pulumi.set(__self__, "cdrom", cdrom)
+        pulumi.set(__self__, "dev_path", dev_path)
+        pulumi.set(__self__, "io_size", io_size)
         pulumi.set(__self__, "modalias", modalias)
         pulumi.set(__self__, "model", model)
-        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "pretty_size", pretty_size)
+        pulumi.set(__self__, "readonly", readonly)
+        pulumi.set(__self__, "rotational", rotational)
+        pulumi.set(__self__, "secondary_disks", secondary_disks)
+        pulumi.set(__self__, "sector_size", sector_size)
         pulumi.set(__self__, "serial", serial)
         pulumi.set(__self__, "size", size)
-        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "sub_system", sub_system)
+        pulumi.set(__self__, "symlinks", symlinks)
+        pulumi.set(__self__, "transport", transport)
         pulumi.set(__self__, "uuid", uuid)
         pulumi.set(__self__, "wwid", wwid)
 
     @property
     @pulumi.getter(name="busPath")
     def bus_path(self) -> str:
-        """
-        The bus path of the disk
-        """
         return pulumi.get(self, "bus_path")
 
     @property
     @pulumi.getter
+    def cdrom(self) -> bool:
+        return pulumi.get(self, "cdrom")
+
+    @property
+    @pulumi.getter(name="devPath")
+    def dev_path(self) -> str:
+        return pulumi.get(self, "dev_path")
+
+    @property
+    @pulumi.getter(name="ioSize")
+    def io_size(self) -> int:
+        return pulumi.get(self, "io_size")
+
+    @property
+    @pulumi.getter
     def modalias(self) -> str:
-        """
-        The modalias of the disk
-        """
         return pulumi.get(self, "modalias")
 
     @property
     @pulumi.getter
     def model(self) -> str:
-        """
-        The model of the disk
-        """
         return pulumi.get(self, "model")
 
     @property
+    @pulumi.getter(name="prettySize")
+    def pretty_size(self) -> str:
+        return pulumi.get(self, "pretty_size")
+
+    @property
     @pulumi.getter
-    def name(self) -> str:
-        """
-        The name of the disk
-        """
-        return pulumi.get(self, "name")
+    def readonly(self) -> bool:
+        return pulumi.get(self, "readonly")
+
+    @property
+    @pulumi.getter
+    def rotational(self) -> bool:
+        return pulumi.get(self, "rotational")
+
+    @property
+    @pulumi.getter(name="secondaryDisks")
+    def secondary_disks(self) -> Sequence[str]:
+        return pulumi.get(self, "secondary_disks")
+
+    @property
+    @pulumi.getter(name="sectorSize")
+    def sector_size(self) -> int:
+        return pulumi.get(self, "sector_size")
 
     @property
     @pulumi.getter
     def serial(self) -> str:
-        """
-        The serial number of the disk
-        """
         return pulumi.get(self, "serial")
 
     @property
     @pulumi.getter
-    def size(self) -> str:
-        """
-        The size of the disk
-        """
+    def size(self) -> int:
         return pulumi.get(self, "size")
 
     @property
+    @pulumi.getter(name="subSystem")
+    def sub_system(self) -> str:
+        return pulumi.get(self, "sub_system")
+
+    @property
     @pulumi.getter
-    def type(self) -> str:
-        """
-        The type of the disk
-        """
-        return pulumi.get(self, "type")
+    def symlinks(self) -> Sequence[str]:
+        return pulumi.get(self, "symlinks")
+
+    @property
+    @pulumi.getter
+    def transport(self) -> str:
+        return pulumi.get(self, "transport")
 
     @property
     @pulumi.getter
     def uuid(self) -> str:
-        """
-        The uuid of the disk
-        """
         return pulumi.get(self, "uuid")
 
     @property
     @pulumi.getter
     def wwid(self) -> str:
-        """
-        The wwid of the disk
-        """
-        return pulumi.get(self, "wwid")
-
-
-@pulumi.output_type
-class GetDisksFiltersResult(dict):
-    def __init__(__self__, *,
-                 bus_path: Optional[str] = None,
-                 modalias: Optional[str] = None,
-                 model: Optional[str] = None,
-                 name: Optional[str] = None,
-                 serial: Optional[str] = None,
-                 size: Optional[str] = None,
-                 type: Optional[str] = None,
-                 uuid: Optional[str] = None,
-                 wwid: Optional[str] = None):
-        """
-        :param str bus_path: Filter disks by bus path
-        :param str modalias: Filter disks by modalias
-        :param str model: Filter disks by model
-        :param str name: Filter disks by name
-        :param str serial: Filter disks by serial number
-        :param str size: Filter disks by size
-        :param str type: Filter disks by type
-        :param str uuid: Filter disks by uuid
-        :param str wwid: Filter disks by wwid
-        """
-        if bus_path is not None:
-            pulumi.set(__self__, "bus_path", bus_path)
-        if modalias is not None:
-            pulumi.set(__self__, "modalias", modalias)
-        if model is not None:
-            pulumi.set(__self__, "model", model)
-        if name is not None:
-            pulumi.set(__self__, "name", name)
-        if serial is not None:
-            pulumi.set(__self__, "serial", serial)
-        if size is not None:
-            pulumi.set(__self__, "size", size)
-        if type is not None:
-            pulumi.set(__self__, "type", type)
-        if uuid is not None:
-            pulumi.set(__self__, "uuid", uuid)
-        if wwid is not None:
-            pulumi.set(__self__, "wwid", wwid)
-
-    @property
-    @pulumi.getter(name="busPath")
-    def bus_path(self) -> Optional[str]:
-        """
-        Filter disks by bus path
-        """
-        return pulumi.get(self, "bus_path")
-
-    @property
-    @pulumi.getter
-    def modalias(self) -> Optional[str]:
-        """
-        Filter disks by modalias
-        """
-        return pulumi.get(self, "modalias")
-
-    @property
-    @pulumi.getter
-    def model(self) -> Optional[str]:
-        """
-        Filter disks by model
-        """
-        return pulumi.get(self, "model")
-
-    @property
-    @pulumi.getter
-    def name(self) -> Optional[str]:
-        """
-        Filter disks by name
-        """
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def serial(self) -> Optional[str]:
-        """
-        Filter disks by serial number
-        """
-        return pulumi.get(self, "serial")
-
-    @property
-    @pulumi.getter
-    def size(self) -> Optional[str]:
-        """
-        Filter disks by size
-        """
-        return pulumi.get(self, "size")
-
-    @property
-    @pulumi.getter
-    def type(self) -> Optional[str]:
-        """
-        Filter disks by type
-        """
-        return pulumi.get(self, "type")
-
-    @property
-    @pulumi.getter
-    def uuid(self) -> Optional[str]:
-        """
-        Filter disks by uuid
-        """
-        return pulumi.get(self, "uuid")
-
-    @property
-    @pulumi.getter
-    def wwid(self) -> Optional[str]:
-        """
-        Filter disks by wwid
-        """
         return pulumi.get(self, "wwid")
 
 
