@@ -3,7 +3,7 @@
 [tools]
 
 # Runtimes
-go = '1.22'
+go = '1.25'
 node = '20'
 python = '3.11.8'
 dotnet = '8.0'

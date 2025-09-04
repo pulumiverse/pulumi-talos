@@ -30,5 +30,5 @@ license:
     # The following is Apache 2.0 licensed but the license file is not detected correctly
     - github.com/cyberphone/json-canonicalization/go/src/webpki.org/jsoncanonicalizer
 toolVersions:
-  go: "1.22.x"
+  go: "1.25.x"
 pulumiConvert: 1
