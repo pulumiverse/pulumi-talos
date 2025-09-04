@@ -1168,51 +1168,84 @@
         "talos:machine/getDisksDisk:getDisksDisk": {
             "properties": {
                 "busPath": {
-                    "type": "string",
-                    "description": "The bus path of the disk\n"
+                    "type": "string"
+                },
+                "cdrom": {
+                    "type": "boolean"
+                },
+                "devPath": {
+                    "type": "string"
+                },
+                "ioSize": {
+                    "type": "integer"
                 },
                 "modalias": {
-                    "type": "string",
-                    "description": "The modalias of the disk\n"
+                    "type": "string"
                 },
                 "model": {
-                    "type": "string",
-                    "description": "The model of the disk\n"
+                    "type": "string"
                 },
-                "name": {
-                    "type": "string",
-                    "description": "The name of the disk\n"
+                "prettySize": {
+                    "type": "string"
+                },
+                "readonly": {
+                    "type": "boolean"
+                },
+                "rotational": {
+                    "type": "boolean"
+                },
+                "secondaryDisks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "sectorSize": {
+                    "type": "integer"
                 },
                 "serial": {
-                    "type": "string",
-                    "description": "The serial number of the disk\n"
+                    "type": "string"
                 },
                 "size": {
-                    "type": "string",
-                    "description": "The size of the disk\n"
+                    "type": "integer"
                 },
-                "type": {
-                    "type": "string",
-                    "description": "The type of the disk\n"
+                "subSystem": {
+                    "type": "string"
+                },
+                "symlinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "transport": {
+                    "type": "string"
                 },
                 "uuid": {
-                    "type": "string",
-                    "description": "The uuid of the disk\n"
+                    "type": "string"
                 },
                 "wwid": {
-                    "type": "string",
-                    "description": "The wwid of the disk\n"
+                    "type": "string"
                 }
             },
             "type": "object",
             "required": [
                 "busPath",
+                "cdrom",
+                "devPath",
+                "ioSize",
                 "modalias",
                 "model",
-                "name",
+                "prettySize",
+                "readonly",
+                "rotational",
+                "secondaryDisks",
+                "sectorSize",
                 "serial",
                 "size",
-                "type",
+                "subSystem",
+                "symlinks",
+                "transport",
                 "uuid",
                 "wwid"
             ],
@@ -1221,47 +1254,6 @@
                     "requiredInputs": []
                 }
             }
-        },
-        "talos:machine/getDisksFilters:getDisksFilters": {
-            "properties": {
-                "busPath": {
-                    "type": "string",
-                    "description": "Filter disks by bus path\n"
-                },
-                "modalias": {
-                    "type": "string",
-                    "description": "Filter disks by modalias\n"
-                },
-                "model": {
-                    "type": "string",
-                    "description": "Filter disks by model\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Filter disks by name\n"
-                },
-                "serial": {
-                    "type": "string",
-                    "description": "Filter disks by serial number\n"
-                },
-                "size": {
-                    "type": "string",
-                    "description": "Filter disks by size\n"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "Filter disks by type\n"
-                },
-                "uuid": {
-                    "type": "string",
-                    "description": "Filter disks by uuid\n"
-                },
-                "wwid": {
-                    "type": "string",
-                    "description": "Filter disks by wwid\n"
-                }
-            },
-            "type": "object"
         },
         "talos:machine/getDisksTimeouts:getDisksTimeouts": {
             "properties": {
@@ -2038,7 +2030,7 @@
             }
         },
         "talos:imageFactory/getUrls:getUrls": {
-            "description": "Generates URLs for different assets supported by the Talos image factory.\n\n",
+            "description": "Generates URLs for different assets supported by the Talos image factory.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\n\nconst this = talos.imageFactory.getUrls({\n    talosVersion: \"v1.7.5\",\n    schematicId: \"376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba\",\n    platform: \"metal\",\n});\nexport const installerImage = _this.then(_this =\u003e _this.urls?.installer);\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\n\nthis = talos.imageFactory.get_urls(talos_version=\"v1.7.5\",\n    schematic_id=\"376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba\",\n    platform=\"metal\")\npulumi.export(\"installerImage\", this.urls.installer)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @this = Talos.ImageFactory.GetUrls.Invoke(new()\n    {\n        TalosVersion = \"v1.7.5\",\n        SchematicId = \"376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba\",\n        Platform = \"metal\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"installerImage\"] = @this.Apply(@this =\u003e @this.Apply(getUrlsResult =\u003e getUrlsResult.Urls?.Installer)),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/imagefactory\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tthis, err := imagefactory.GetUrls(ctx, \u0026imagefactory.GetUrlsArgs{\n\t\t\tTalosVersion: \"v1.7.5\",\n\t\t\tSchematicId:  \"376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba\",\n\t\t\tPlatform:     pulumi.StringRef(\"metal\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"installerImage\", this.Urls.Installer)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.imageFactory.ImageFactoryFunctions;\nimport com.pulumi.talos.imageFactory.inputs.GetUrlsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var this = ImageFactoryFunctions.getUrls(GetUrlsArgs.builder()\n            .talosVersion(\"v1.7.5\")\n            .schematicId(\"376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba\")\n            .platform(\"metal\")\n            .build());\n\n        ctx.export(\"installerImage\", this_.urls().installer());\n    }\n}\n```\n```yaml\nvariables:\n  this:\n    fn::invoke:\n      function: talos:imageFactory:getUrls\n      arguments:\n        talosVersion: v1.7.5\n        schematicId: 376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba\n        platform: metal\noutputs:\n  installerImage: ${this.urls.installer}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getUrls.\n",
                 "properties": {
@@ -2254,7 +2246,7 @@
             }
         },
         "talos:machine/getDisks:getDisks": {
-            "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumi/talos\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst thisSecrets = new talos.machine.Secrets(\"this\", {});\nconst this = talos.machine.getDisksOutput({\n    clientConfiguration: thisSecrets.clientConfiguration,\n    node: \"10.5.0.2\",\n    filters: {\n        size: \"\u003e 100GB\",\n        type: \"nvme\",\n    },\n});\nexport const nvmeDisks = _this.apply(_this =\u003e _this.disks.map(__item =\u003e __item.name));\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\nimport pulumiverse_talos as talos\n\nthis_secrets = talos.machine.Secrets(\"this\")\nthis = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,\n    node=\"10.5.0.2\",\n    filters={\n        \"size\": \"\u003e 100GB\",\n        \"type\": \"nvme\",\n    })\npulumi.export(\"nvmeDisks\", this.apply(lambda this: [__item.name for __item in this.disks]))\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisSecrets = new Talos.Machine.Secrets(\"this\");\n\n    var @this = Talos.Machine.GetDisks.Invoke(new()\n    {\n        ClientConfiguration = thisSecrets.ClientConfiguration,\n        Node = \"10.5.0.2\",\n        Filters = new Talos.Machine.Inputs.GetDisksFiltersInputArgs\n        {\n            Size = \"\u003e 100GB\",\n            Type = \"nvme\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"nvmeDisks\"] = @this.Apply(@this =\u003e @this.Apply(getDisksResult =\u003e getDisksResult.Disks).Select(__item =\u003e __item.Name).ToList()),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\nfunc main() {\npulumi.Run(func(ctx *pulumi.Context) error {\nthisSecrets, err := machine.NewSecrets(ctx, \"this\", nil)\nif err != nil {\nreturn err\n}\nthis := machine.GetDisksOutput(ctx, machine.GetDisksOutputArgs{\nClientConfiguration: thisSecrets.ClientConfiguration,\nNode: pulumi.String(\"10.5.0.2\"),\nFilters: \u0026machine.GetDisksFiltersArgs{\nSize: pulumi.String(\"\u003e 100GB\"),\nType: pulumi.String(\"nvme\"),\n},\n}, nil);\nctx.Export(\"nvmeDisks\", this.ApplyT(func(this machine.GetDisksResult) ([]*string, error) {\nvar splat0 []*string\nfor _, val0 := range this.Disks {\nsplat0 = append(splat0, val0.Name)\n}\nreturn splat0, nil\n}).(pulumi.[]*stringOutput))\nreturn nil\n})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport com.pulumi.talos.machine.MachineFunctions;\nimport com.pulumi.talos.machine.inputs.GetDisksArgs;\nimport com.pulumi.talos.machine.inputs.GetDisksFiltersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisSecrets = new Secrets(\"thisSecrets\");\n\n        final var this = MachineFunctions.getDisks(GetDisksArgs.builder()\n            .clientConfiguration(thisSecrets.clientConfiguration())\n            .node(\"10.5.0.2\")\n            .filters(GetDisksFiltersArgs.builder()\n                .size(\"\u003e 100GB\")\n                .type(\"nvme\")\n                .build())\n            .build());\n\n        ctx.export(\"nvmeDisks\", this_.applyValue(this_ -\u003e this_.disks().stream().map(element -\u003e element.name()).collect(toList())));\n    }\n}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.\n\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getDisks.\n",
                 "properties": {
@@ -2266,13 +2258,13 @@
                         "type": "string",
                         "description": "endpoint to use for the talosclient. If not set, the node value will be used\n"
                     },
-                    "filters": {
-                        "$ref": "#/types/talos:machine/getDisksFilters:getDisksFilters",
-                        "description": "Filters to apply to the disks\n"
-                    },
                     "node": {
                         "type": "string",
                         "description": "controlplane node to retrieve the kubeconfig from\n"
+                    },
+                    "selector": {
+                        "type": "string",
+                        "description": "The CEL expression to filter the disks.\nIf not set, all disks will be returned.\nSee [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).\n"
                     },
                     "timeouts": {
                         "$ref": "#/types/talos:machine/getDisksTimeouts:getDisksTimeouts"
@@ -2302,16 +2294,16 @@
                         "description": "endpoint to use for the talosclient. If not set, the node value will be used\n",
                         "type": "string"
                     },
-                    "filters": {
-                        "$ref": "#/types/talos:machine/getDisksFilters:getDisksFilters",
-                        "description": "Filters to apply to the disks\n"
-                    },
                     "id": {
                         "description": "The generated ID of this resource\n",
                         "type": "string"
                     },
                     "node": {
                         "description": "controlplane node to retrieve the kubeconfig from\n",
+                        "type": "string"
+                    },
+                    "selector": {
+                        "description": "The CEL expression to filter the disks.\nIf not set, all disks will be returned.\nSee [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).\n",
                         "type": "string"
                     },
                     "timeouts": {

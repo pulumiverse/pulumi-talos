@@ -14,18 +14,90 @@ namespace Pulumiverse.Talos.ImageFactory
     {
         /// <summary>
         /// Generates URLs for different assets supported by the Talos image factory.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var @this = Talos.ImageFactory.GetUrls.Invoke(new()
+        ///     {
+        ///         TalosVersion = "v1.7.5",
+        ///         SchematicId = "376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
+        ///         Platform = "metal",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["installerImage"] = @this.Apply(@this =&gt; @this.Apply(getUrlsResult =&gt; getUrlsResult.Urls?.Installer)),
+        ///     };
+        /// });
+        /// ```
         /// </summary>
         public static Task<GetUrlsResult> InvokeAsync(GetUrlsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUrlsResult>("talos:imageFactory/getUrls:getUrls", args ?? new GetUrlsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Generates URLs for different assets supported by the Talos image factory.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var @this = Talos.ImageFactory.GetUrls.Invoke(new()
+        ///     {
+        ///         TalosVersion = "v1.7.5",
+        ///         SchematicId = "376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
+        ///         Platform = "metal",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["installerImage"] = @this.Apply(@this =&gt; @this.Apply(getUrlsResult =&gt; getUrlsResult.Urls?.Installer)),
+        ///     };
+        /// });
+        /// ```
         /// </summary>
         public static Output<GetUrlsResult> Invoke(GetUrlsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUrlsResult>("talos:imageFactory/getUrls:getUrls", args ?? new GetUrlsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Generates URLs for different assets supported by the Talos image factory.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Talos = Pulumi.Talos;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var @this = Talos.ImageFactory.GetUrls.Invoke(new()
+        ///     {
+        ///         TalosVersion = "v1.7.5",
+        ///         SchematicId = "376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
+        ///         Platform = "metal",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["installerImage"] = @this.Apply(@this =&gt; @this.Apply(getUrlsResult =&gt; getUrlsResult.Urls?.Installer)),
+        ///     };
+        /// });
+        /// ```
         /// </summary>
         public static Output<GetUrlsResult> Invoke(GetUrlsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUrlsResult>("talos:imageFactory/getUrls:getUrls", args ?? new GetUrlsInvokeArgs(), options.WithDefaults());

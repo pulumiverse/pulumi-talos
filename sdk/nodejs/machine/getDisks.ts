@@ -10,33 +10,14 @@ import * as utilities from "../utilities";
  * Generate a machine configuration for a node type
  *
  * > **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as talos from "@pulumi/talos";
- * import * as talos from "@pulumiverse/talos";
- *
- * const thisSecrets = new talos.machine.Secrets("this", {});
- * const this = talos.machine.getDisksOutput({
- *     clientConfiguration: thisSecrets.clientConfiguration,
- *     node: "10.5.0.2",
- *     filters: {
- *         size: "> 100GB",
- *         type: "nvme",
- *     },
- * });
- * export const nvmeDisks = _this.apply(_this => _this.disks.map(__item => __item.name));
- * ```
  */
 export function getDisks(args: GetDisksArgs, opts?: pulumi.InvokeOptions): Promise<GetDisksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("talos:machine/getDisks:getDisks", {
         "clientConfiguration": args.clientConfiguration,
         "endpoint": args.endpoint,
-        "filters": args.filters,
         "node": args.node,
+        "selector": args.selector,
         "timeouts": args.timeouts,
     }, opts);
 }
@@ -54,13 +35,15 @@ export interface GetDisksArgs {
      */
     endpoint?: string;
     /**
-     * Filters to apply to the disks
-     */
-    filters?: inputs.machine.GetDisksFilters;
-    /**
      * controlplane node to retrieve the kubeconfig from
      */
     node: string;
+    /**
+     * The CEL expression to filter the disks.
+     * If not set, all disks will be returned.
+     * See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
+     */
+    selector?: string;
     timeouts?: inputs.machine.GetDisksTimeouts;
 }
 
@@ -81,10 +64,6 @@ export interface GetDisksResult {
      */
     readonly endpoint: string;
     /**
-     * Filters to apply to the disks
-     */
-    readonly filters?: outputs.machine.GetDisksFilters;
-    /**
      * The generated ID of this resource
      */
     readonly id: string;
@@ -92,39 +71,26 @@ export interface GetDisksResult {
      * controlplane node to retrieve the kubeconfig from
      */
     readonly node: string;
+    /**
+     * The CEL expression to filter the disks.
+     * If not set, all disks will be returned.
+     * See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
+     */
+    readonly selector?: string;
     readonly timeouts?: outputs.machine.GetDisksTimeouts;
 }
 /**
  * Generate a machine configuration for a node type
  *
  * > **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as talos from "@pulumi/talos";
- * import * as talos from "@pulumiverse/talos";
- *
- * const thisSecrets = new talos.machine.Secrets("this", {});
- * const this = talos.machine.getDisksOutput({
- *     clientConfiguration: thisSecrets.clientConfiguration,
- *     node: "10.5.0.2",
- *     filters: {
- *         size: "> 100GB",
- *         type: "nvme",
- *     },
- * });
- * export const nvmeDisks = _this.apply(_this => _this.disks.map(__item => __item.name));
- * ```
  */
 export function getDisksOutput(args: GetDisksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDisksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:machine/getDisks:getDisks", {
         "clientConfiguration": args.clientConfiguration,
         "endpoint": args.endpoint,
-        "filters": args.filters,
         "node": args.node,
+        "selector": args.selector,
         "timeouts": args.timeouts,
     }, opts);
 }
@@ -142,12 +108,14 @@ export interface GetDisksOutputArgs {
      */
     endpoint?: pulumi.Input<string>;
     /**
-     * Filters to apply to the disks
-     */
-    filters?: pulumi.Input<inputs.machine.GetDisksFiltersArgs>;
-    /**
      * controlplane node to retrieve the kubeconfig from
      */
     node: pulumi.Input<string>;
+    /**
+     * The CEL expression to filter the disks.
+     * If not set, all disks will be returned.
+     * See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
+     */
+    selector?: pulumi.Input<string>;
     timeouts?: pulumi.Input<inputs.machine.GetDisksTimeoutsArgs>;
 }

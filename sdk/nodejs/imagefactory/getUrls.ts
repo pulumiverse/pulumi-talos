@@ -8,6 +8,20 @@ import * as utilities from "../utilities";
 
 /**
  * Generates URLs for different assets supported by the Talos image factory.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as talos from "@pulumi/talos";
+ *
+ * const this = talos.imageFactory.getUrls({
+ *     talosVersion: "v1.7.5",
+ *     schematicId: "376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
+ *     platform: "metal",
+ * });
+ * export const installerImage = _this.then(_this => _this.urls?.installer);
+ * ```
  */
 export function getUrls(args: GetUrlsArgs, opts?: pulumi.InvokeOptions): Promise<GetUrlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -45,6 +59,20 @@ export interface GetUrlsResult {
 }
 /**
  * Generates URLs for different assets supported by the Talos image factory.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as talos from "@pulumi/talos";
+ *
+ * const this = talos.imageFactory.getUrls({
+ *     talosVersion: "v1.7.5",
+ *     schematicId: "376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
+ *     platform: "metal",
+ * });
+ * export const installerImage = _this.then(_this => _this.urls?.installer);
+ * ```
  */
 export function getUrlsOutput(args: GetUrlsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUrlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

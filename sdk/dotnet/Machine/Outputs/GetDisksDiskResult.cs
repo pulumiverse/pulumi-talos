@@ -14,70 +14,79 @@ namespace Pulumiverse.Talos.Machine.Outputs
     [OutputType]
     public sealed class GetDisksDiskResult
     {
-        /// <summary>
-        /// The bus path of the disk
-        /// </summary>
         public readonly string BusPath;
-        /// <summary>
-        /// The modalias of the disk
-        /// </summary>
+        public readonly bool Cdrom;
+        public readonly string DevPath;
+        public readonly int IoSize;
         public readonly string Modalias;
-        /// <summary>
-        /// The model of the disk
-        /// </summary>
         public readonly string Model;
-        /// <summary>
-        /// The name of the disk
-        /// </summary>
-        public readonly string Name;
-        /// <summary>
-        /// The serial number of the disk
-        /// </summary>
+        public readonly string PrettySize;
+        public readonly bool Readonly;
+        public readonly bool Rotational;
+        public readonly ImmutableArray<string> SecondaryDisks;
+        public readonly int SectorSize;
         public readonly string Serial;
-        /// <summary>
-        /// The size of the disk
-        /// </summary>
-        public readonly string Size;
-        /// <summary>
-        /// The type of the disk
-        /// </summary>
-        public readonly string Type;
-        /// <summary>
-        /// The uuid of the disk
-        /// </summary>
+        public readonly int Size;
+        public readonly string SubSystem;
+        public readonly ImmutableArray<string> Symlinks;
+        public readonly string Transport;
         public readonly string Uuid;
-        /// <summary>
-        /// The wwid of the disk
-        /// </summary>
         public readonly string Wwid;
 
         [OutputConstructor]
         private GetDisksDiskResult(
             string busPath,
 
+            bool cdrom,
+
+            string devPath,
+
+            int ioSize,
+
             string modalias,
 
             string model,
 
-            string name,
+            string prettySize,
+
+            bool @readonly,
+
+            bool rotational,
+
+            ImmutableArray<string> secondaryDisks,
+
+            int sectorSize,
 
             string serial,
 
-            string size,
+            int size,
 
-            string type,
+            string subSystem,
+
+            ImmutableArray<string> symlinks,
+
+            string transport,
 
             string uuid,
 
             string wwid)
         {
             BusPath = busPath;
+            Cdrom = cdrom;
+            DevPath = devPath;
+            IoSize = ioSize;
             Modalias = modalias;
             Model = model;
-            Name = name;
+            PrettySize = prettySize;
+            Readonly = @readonly;
+            Rotational = rotational;
+            SecondaryDisks = secondaryDisks;
+            SectorSize = sectorSize;
             Serial = serial;
             Size = size;
-            Type = type;
+            SubSystem = subSystem;
+            Symlinks = symlinks;
+            Transport = transport;
             Uuid = uuid;
             Wwid = wwid;
         }

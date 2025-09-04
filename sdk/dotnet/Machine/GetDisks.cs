@@ -16,37 +16,6 @@ namespace Pulumiverse.Talos.Machine
         /// Generate a machine configuration for a node type
         /// 
         /// &gt; **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
-        /// using Talos = Pulumiverse.Talos;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("this");
-        /// 
-        ///     var @this = Talos.Machine.GetDisks.Invoke(new()
-        ///     {
-        ///         ClientConfiguration = thisSecrets.ClientConfiguration,
-        ///         Node = "10.5.0.2",
-        ///         Filters = new Talos.Machine.Inputs.GetDisksFiltersInputArgs
-        ///         {
-        ///             Size = "&gt; 100GB",
-        ///             Type = "nvme",
-        ///         },
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["nvmeDisks"] = @this.Apply(@this =&gt; @this.Apply(getDisksResult =&gt; getDisksResult.Disks).Select(__item =&gt; __item.Name).ToList()),
-        ///     };
-        /// });
-        /// ```
         /// </summary>
         public static Task<GetDisksResult> InvokeAsync(GetDisksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDisksResult>("talos:machine/getDisks:getDisks", args ?? new GetDisksArgs(), options.WithDefaults());
@@ -55,37 +24,6 @@ namespace Pulumiverse.Talos.Machine
         /// Generate a machine configuration for a node type
         /// 
         /// &gt; **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
-        /// using Talos = Pulumiverse.Talos;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("this");
-        /// 
-        ///     var @this = Talos.Machine.GetDisks.Invoke(new()
-        ///     {
-        ///         ClientConfiguration = thisSecrets.ClientConfiguration,
-        ///         Node = "10.5.0.2",
-        ///         Filters = new Talos.Machine.Inputs.GetDisksFiltersInputArgs
-        ///         {
-        ///             Size = "&gt; 100GB",
-        ///             Type = "nvme",
-        ///         },
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["nvmeDisks"] = @this.Apply(@this =&gt; @this.Apply(getDisksResult =&gt; getDisksResult.Disks).Select(__item =&gt; __item.Name).ToList()),
-        ///     };
-        /// });
-        /// ```
         /// </summary>
         public static Output<GetDisksResult> Invoke(GetDisksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDisksResult>("talos:machine/getDisks:getDisks", args ?? new GetDisksInvokeArgs(), options.WithDefaults());
@@ -94,37 +32,6 @@ namespace Pulumiverse.Talos.Machine
         /// Generate a machine configuration for a node type
         /// 
         /// &gt; **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
-        /// using Talos = Pulumiverse.Talos;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var thisSecrets = new Talos.Machine.Secrets("this");
-        /// 
-        ///     var @this = Talos.Machine.GetDisks.Invoke(new()
-        ///     {
-        ///         ClientConfiguration = thisSecrets.ClientConfiguration,
-        ///         Node = "10.5.0.2",
-        ///         Filters = new Talos.Machine.Inputs.GetDisksFiltersInputArgs
-        ///         {
-        ///             Size = "&gt; 100GB",
-        ///             Type = "nvme",
-        ///         },
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["nvmeDisks"] = @this.Apply(@this =&gt; @this.Apply(getDisksResult =&gt; getDisksResult.Disks).Select(__item =&gt; __item.Name).ToList()),
-        ///     };
-        /// });
-        /// ```
         /// </summary>
         public static Output<GetDisksResult> Invoke(GetDisksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDisksResult>("talos:machine/getDisks:getDisks", args ?? new GetDisksInvokeArgs(), options.WithDefaults());
@@ -146,16 +53,18 @@ namespace Pulumiverse.Talos.Machine
         public string? Endpoint { get; set; }
 
         /// <summary>
-        /// Filters to apply to the disks
-        /// </summary>
-        [Input("filters")]
-        public Inputs.GetDisksFiltersArgs? Filters { get; set; }
-
-        /// <summary>
         /// controlplane node to retrieve the kubeconfig from
         /// </summary>
         [Input("node", required: true)]
         public string Node { get; set; } = null!;
+
+        /// <summary>
+        /// The CEL expression to filter the disks.
+        /// If not set, all disks will be returned.
+        /// See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
+        /// </summary>
+        [Input("selector")]
+        public string? Selector { get; set; }
 
         [Input("timeouts")]
         public Inputs.GetDisksTimeoutsArgs? Timeouts { get; set; }
@@ -181,16 +90,18 @@ namespace Pulumiverse.Talos.Machine
         public Input<string>? Endpoint { get; set; }
 
         /// <summary>
-        /// Filters to apply to the disks
-        /// </summary>
-        [Input("filters")]
-        public Input<Inputs.GetDisksFiltersInputArgs>? Filters { get; set; }
-
-        /// <summary>
         /// controlplane node to retrieve the kubeconfig from
         /// </summary>
         [Input("node", required: true)]
         public Input<string> Node { get; set; } = null!;
+
+        /// <summary>
+        /// The CEL expression to filter the disks.
+        /// If not set, all disks will be returned.
+        /// See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
+        /// </summary>
+        [Input("selector")]
+        public Input<string>? Selector { get; set; }
 
         [Input("timeouts")]
         public Input<Inputs.GetDisksTimeoutsInputArgs>? Timeouts { get; set; }
@@ -218,10 +129,6 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         public readonly string Endpoint;
         /// <summary>
-        /// Filters to apply to the disks
-        /// </summary>
-        public readonly Outputs.GetDisksFiltersResult? Filters;
-        /// <summary>
         /// The generated ID of this resource
         /// </summary>
         public readonly string Id;
@@ -229,6 +136,12 @@ namespace Pulumiverse.Talos.Machine
         /// controlplane node to retrieve the kubeconfig from
         /// </summary>
         public readonly string Node;
+        /// <summary>
+        /// The CEL expression to filter the disks.
+        /// If not set, all disks will be returned.
+        /// See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
+        /// </summary>
+        public readonly string? Selector;
         public readonly Outputs.GetDisksTimeoutsResult? Timeouts;
 
         [OutputConstructor]
@@ -239,20 +152,20 @@ namespace Pulumiverse.Talos.Machine
 
             string endpoint,
 
-            Outputs.GetDisksFiltersResult? filters,
-
             string id,
 
             string node,
+
+            string? selector,
 
             Outputs.GetDisksTimeoutsResult? timeouts)
         {
             ClientConfiguration = clientConfiguration;
             Disks = disks;
             Endpoint = endpoint;
-            Filters = filters;
             Id = id;
             Node = node;
+            Selector = selector;
             Timeouts = timeouts;
         }
     }

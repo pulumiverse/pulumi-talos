@@ -28,7 +28,7 @@ class GetDisksResult:
     """
     A collection of values returned by getDisks.
     """
-    def __init__(__self__, client_configuration=None, disks=None, endpoint=None, filters=None, id=None, node=None, timeouts=None):
+    def __init__(__self__, client_configuration=None, disks=None, endpoint=None, id=None, node=None, selector=None, timeouts=None):
         if client_configuration and not isinstance(client_configuration, dict):
             raise TypeError("Expected argument 'client_configuration' to be a dict")
         pulumi.set(__self__, "client_configuration", client_configuration)
@@ -38,15 +38,15 @@ class GetDisksResult:
         if endpoint and not isinstance(endpoint, str):
             raise TypeError("Expected argument 'endpoint' to be a str")
         pulumi.set(__self__, "endpoint", endpoint)
-        if filters and not isinstance(filters, dict):
-            raise TypeError("Expected argument 'filters' to be a dict")
-        pulumi.set(__self__, "filters", filters)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
         if node and not isinstance(node, str):
             raise TypeError("Expected argument 'node' to be a str")
         pulumi.set(__self__, "node", node)
+        if selector and not isinstance(selector, str):
+            raise TypeError("Expected argument 'selector' to be a str")
+        pulumi.set(__self__, "selector", selector)
         if timeouts and not isinstance(timeouts, dict):
             raise TypeError("Expected argument 'timeouts' to be a dict")
         pulumi.set(__self__, "timeouts", timeouts)
@@ -77,14 +77,6 @@ class GetDisksResult:
 
     @property
     @pulumi.getter
-    def filters(self) -> Optional['outputs.GetDisksFiltersResult']:
-        """
-        Filters to apply to the disks
-        """
-        return pulumi.get(self, "filters")
-
-    @property
-    @pulumi.getter
     def id(self) -> str:
         """
         The generated ID of this resource
@@ -101,6 +93,16 @@ class GetDisksResult:
 
     @property
     @pulumi.getter
+    def selector(self) -> Optional[str]:
+        """
+        The CEL expression to filter the disks.
+        If not set, all disks will be returned.
+        See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
+        """
+        return pulumi.get(self, "selector")
+
+    @property
+    @pulumi.getter
     def timeouts(self) -> Optional['outputs.GetDisksTimeoutsResult']:
         return pulumi.get(self, "timeouts")
 
@@ -114,16 +116,16 @@ class AwaitableGetDisksResult(GetDisksResult):
             client_configuration=self.client_configuration,
             disks=self.disks,
             endpoint=self.endpoint,
-            filters=self.filters,
             id=self.id,
             node=self.node,
+            selector=self.selector,
             timeouts=self.timeouts)
 
 
 def get_disks(client_configuration: Optional[Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict']] = None,
               endpoint: Optional[str] = None,
-              filters: Optional[Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict']] = None,
               node: Optional[str] = None,
+              selector: Optional[str] = None,
               timeouts: Optional[Union['GetDisksTimeoutsArgs', 'GetDisksTimeoutsArgsDict']] = None,
               opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetDisksResult:
     """
@@ -131,34 +133,19 @@ def get_disks(client_configuration: Optional[Union['GetDisksClientConfigurationA
 
     > **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `machine_get_disks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
 
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_talos as talos
-    import pulumiverse_talos as talos
-
-    this_secrets = talos.machine.Secrets("this")
-    this = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
-        node="10.5.0.2",
-        filters={
-            "size": "> 100GB",
-            "type": "nvme",
-        })
-    pulumi.export("nvmeDisks", this.apply(lambda this: [__item.name for __item in this.disks]))
-    ```
-
 
     :param Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
-    :param Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict'] filters: Filters to apply to the disks
     :param str node: controlplane node to retrieve the kubeconfig from
+    :param str selector: The CEL expression to filter the disks.
+           If not set, all disks will be returned.
+           See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
     """
     __args__ = dict()
     __args__['clientConfiguration'] = client_configuration
     __args__['endpoint'] = endpoint
-    __args__['filters'] = filters
     __args__['node'] = node
+    __args__['selector'] = selector
     __args__['timeouts'] = timeouts
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('talos:machine/getDisks:getDisks', __args__, opts=opts, typ=GetDisksResult).value
@@ -167,14 +154,14 @@ def get_disks(client_configuration: Optional[Union['GetDisksClientConfigurationA
         client_configuration=pulumi.get(__ret__, 'client_configuration'),
         disks=pulumi.get(__ret__, 'disks'),
         endpoint=pulumi.get(__ret__, 'endpoint'),
-        filters=pulumi.get(__ret__, 'filters'),
         id=pulumi.get(__ret__, 'id'),
         node=pulumi.get(__ret__, 'node'),
+        selector=pulumi.get(__ret__, 'selector'),
         timeouts=pulumi.get(__ret__, 'timeouts'))
 def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict']]] = None,
                      endpoint: Optional[pulumi.Input[Optional[str]]] = None,
-                     filters: Optional[pulumi.Input[Optional[Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict']]]] = None,
                      node: Optional[pulumi.Input[str]] = None,
+                     selector: Optional[pulumi.Input[Optional[str]]] = None,
                      timeouts: Optional[pulumi.Input[Optional[Union['GetDisksTimeoutsArgs', 'GetDisksTimeoutsArgsDict']]]] = None,
                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetDisksResult]:
     """
@@ -182,34 +169,19 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisks
 
     > **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `machine_get_disks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
 
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_talos as talos
-    import pulumiverse_talos as talos
-
-    this_secrets = talos.machine.Secrets("this")
-    this = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
-        node="10.5.0.2",
-        filters={
-            "size": "> 100GB",
-            "type": "nvme",
-        })
-    pulumi.export("nvmeDisks", this.apply(lambda this: [__item.name for __item in this.disks]))
-    ```
-
 
     :param Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
-    :param Union['GetDisksFiltersArgs', 'GetDisksFiltersArgsDict'] filters: Filters to apply to the disks
     :param str node: controlplane node to retrieve the kubeconfig from
+    :param str selector: The CEL expression to filter the disks.
+           If not set, all disks will be returned.
+           See [CEL documentation](https://www.talos.dev/latest/talos-guides/configuration/disk-management/#disk-selector).
     """
     __args__ = dict()
     __args__['clientConfiguration'] = client_configuration
     __args__['endpoint'] = endpoint
-    __args__['filters'] = filters
     __args__['node'] = node
+    __args__['selector'] = selector
     __args__['timeouts'] = timeouts
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:machine/getDisks:getDisks', __args__, opts=opts, typ=GetDisksResult)
@@ -217,7 +189,7 @@ def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisks
         client_configuration=pulumi.get(__response__, 'client_configuration'),
         disks=pulumi.get(__response__, 'disks'),
         endpoint=pulumi.get(__response__, 'endpoint'),
-        filters=pulumi.get(__response__, 'filters'),
         id=pulumi.get(__response__, 'id'),
         node=pulumi.get(__response__, 'node'),
+        selector=pulumi.get(__response__, 'selector'),
         timeouts=pulumi.get(__response__, 'timeouts')))

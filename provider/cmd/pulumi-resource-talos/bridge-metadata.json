@@ -97,7 +97,17 @@
                 "current": "talos:machine/getDisks:getDisks",
                 "fields": {
                     "disks": {
-                        "maxItemsOne": false
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "secondary_disks": {
+                                    "maxItemsOne": false
+                                },
+                                "symlinks": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
                     }
                 }
             }

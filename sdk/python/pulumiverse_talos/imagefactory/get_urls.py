@@ -109,6 +109,18 @@ def get_urls(architecture: Optional[str] = None,
              opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetUrlsResult:
     """
     Generates URLs for different assets supported by the Talos image factory.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_talos as talos
+
+    this = talos.imageFactory.get_urls(talos_version="v1.7.5",
+        schematic_id="376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
+        platform="metal")
+    pulumi.export("installerImage", this.urls.installer)
+    ```
     """
     __args__ = dict()
     __args__['architecture'] = architecture
@@ -135,6 +147,18 @@ def get_urls_output(architecture: Optional[pulumi.Input[Optional[str]]] = None,
                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetUrlsResult]:
     """
     Generates URLs for different assets supported by the Talos image factory.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_talos as talos
+
+    this = talos.imageFactory.get_urls(talos_version="v1.7.5",
+        schematic_id="376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
+        platform="metal")
+    pulumi.export("installerImage", this.urls.installer)
+    ```
     """
     __args__ = dict()
     __args__['architecture'] = architecture

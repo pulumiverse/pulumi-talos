@@ -316,81 +316,24 @@ export namespace machine {
     }
 
     export interface GetDisksDisk {
-        /**
-         * The bus path of the disk
-         */
         busPath: string;
-        /**
-         * The modalias of the disk
-         */
+        cdrom: boolean;
+        devPath: string;
+        ioSize: number;
         modalias: string;
-        /**
-         * The model of the disk
-         */
         model: string;
-        /**
-         * The name of the disk
-         */
-        name: string;
-        /**
-         * The serial number of the disk
-         */
+        prettySize: string;
+        readonly: boolean;
+        rotational: boolean;
+        secondaryDisks: string[];
+        sectorSize: number;
         serial: string;
-        /**
-         * The size of the disk
-         */
-        size: string;
-        /**
-         * The type of the disk
-         */
-        type: string;
-        /**
-         * The uuid of the disk
-         */
+        size: number;
+        subSystem: string;
+        symlinks: string[];
+        transport: string;
         uuid: string;
-        /**
-         * The wwid of the disk
-         */
         wwid: string;
-    }
-
-    export interface GetDisksFilters {
-        /**
-         * Filter disks by bus path
-         */
-        busPath?: string;
-        /**
-         * Filter disks by modalias
-         */
-        modalias?: string;
-        /**
-         * Filter disks by model
-         */
-        model?: string;
-        /**
-         * Filter disks by name
-         */
-        name?: string;
-        /**
-         * Filter disks by serial number
-         */
-        serial?: string;
-        /**
-         * Filter disks by size
-         */
-        size?: string;
-        /**
-         * Filter disks by type
-         */
-        type?: string;
-        /**
-         * Filter disks by uuid
-         */
-        uuid?: string;
-        /**
-         * Filter disks by wwid
-         */
-        wwid?: string;
     }
 
     export interface GetDisksTimeouts {
