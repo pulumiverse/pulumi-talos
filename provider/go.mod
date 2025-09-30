@@ -1,6 +1,6 @@
 module github.com/pulumiverse/pulumi-talos/provider
 
-go 1.25.0
+go 1.25
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240520223432-0c0bf0d65f10
 
