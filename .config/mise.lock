@@ -30,6 +30,10 @@ backend = "core:java"
 version = "20.19.5"
 backend = "core:node"
 
+[[tools."npm:yarn"]]
+version = "1.22.22"
+backend = "npm:yarn"
+
 [[tools.pulumi]]
 version = "3.145.0"
 backend = "aqua:pulumi/pulumi"
