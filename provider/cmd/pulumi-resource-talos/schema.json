@@ -10,7 +10,7 @@
     "license": "MPL-2.0",
     "attribution": "This Pulumi package is based on the [`talos` Terraform Provider](https://github.com/siderolabs/terraform-provider-talos).",
     "repository": "https://github.com/pulumiverse/pulumi-talos",
-    "logoUrl": "https://www.talos.dev/images/Sidero_stacked_darkbkgd_RGB.png",
+    "logoUrl": "https://raw.githubusercontent.com/pulumiverse/pulumi-talos/refs/heads/main/assets/talos-logo.png",
     "pluginDownloadURL": "github://api.github.com/pulumiverse",
     "publisher": "Pulumiverse",
     "meta": {
