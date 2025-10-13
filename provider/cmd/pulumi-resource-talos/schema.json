@@ -1,5 +1,6 @@
 {
     "name": "talos",
+    "displayName": "Talos",
     "description": "A Pulumi package for creating and managing Talos Linux machines and clusters.",
     "keywords": [
         "pulumi",

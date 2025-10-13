@@ -40,6 +40,7 @@ func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:                 pf.ShimProvider(talos.New()),
 		Name:              talosPkg,
+		DisplayName:       "Talos",
 		Description:       "A Pulumi package for creating and managing Talos Linux machines and clusters.",
 		Keywords:          []string{"pulumi", "talos", "category/infrastructure"},
 		License:           "MPL-2.0",
