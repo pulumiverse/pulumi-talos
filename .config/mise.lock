@@ -46,3 +46,7 @@ url = "https://github.com/pulumi/pulumi/releases/download/v3.145.0/pulumi-v3.145
 [[tools.python]]
 version = "3.11.8"
 backend = "core:python"
+
+[[tools."vfox-pulumi:pulumi/pulumi-converter-terraform"]]
+version = "1.2.4"
+backend = "vfox-pulumi:pulumi/pulumi-converter-terraform"
