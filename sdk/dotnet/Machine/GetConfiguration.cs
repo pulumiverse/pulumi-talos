@@ -15,7 +15,7 @@ namespace Pulumiverse.Talos.Machine
         /// <summary>
         /// Generate a machine configuration for a node type
         /// 
-        /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+        /// &gt; **Note:** It is recommended to set the optional `TalosVersion` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
         /// 
         /// ## Example Usage
         /// 
@@ -47,7 +47,7 @@ namespace Pulumiverse.Talos.Machine
         /// <summary>
         /// Generate a machine configuration for a node type
         /// 
-        /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+        /// &gt; **Note:** It is recommended to set the optional `TalosVersion` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
         /// 
         /// ## Example Usage
         /// 
@@ -79,7 +79,7 @@ namespace Pulumiverse.Talos.Machine
         /// <summary>
         /// Generate a machine configuration for a node type
         /// 
-        /// &gt; **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
+        /// &gt; **Note:** It is recommended to set the optional `TalosVersion` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.
         /// 
         /// ## Example Usage
         /// 
