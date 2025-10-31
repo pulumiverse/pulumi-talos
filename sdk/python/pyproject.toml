@@ -9,7 +9,7 @@
   [project.license]
     text = "MPL-2.0"
   [project.urls]
-    Homepage = "https://talos.dev"
+    Homepage = "https://www.talos.dev"
     Repository = "https://github.com/pulumiverse/pulumi-talos"
 
 [build-system]

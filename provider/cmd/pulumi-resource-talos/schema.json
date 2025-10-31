@@ -7,7 +7,7 @@
         "talos",
         "category/infrastructure"
     ],
-    "homepage": "https://talos.dev",
+    "homepage": "https://www.talos.dev",
     "license": "MPL-2.0",
     "attribution": "This Pulumi package is based on the [`talos` Terraform Provider](https://github.com/siderolabs/terraform-provider-talos).",
     "repository": "https://github.com/pulumiverse/pulumi-talos",

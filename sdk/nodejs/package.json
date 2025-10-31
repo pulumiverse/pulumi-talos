@@ -7,7 +7,7 @@
         "talos",
         "category/infrastructure"
     ],
-    "homepage": "https://talos.dev",
+    "homepage": "https://www.talos.dev",
     "repository": "https://github.com/pulumiverse/pulumi-talos",
     "license": "MPL-2.0",
     "scripts": {

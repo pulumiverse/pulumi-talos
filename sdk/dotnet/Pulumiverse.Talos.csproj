@@ -6,7 +6,7 @@
     <Company>Pulumiverse</Company>
     <Description>A Pulumi package for creating and managing Talos Linux machines and clusters.</Description>
     <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://talos.dev</PackageProjectUrl>
+    <PackageProjectUrl>https://www.talos.dev</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pulumiverse/pulumi-talos</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
     <Version>0.0.0-alpha.0+dev</Version>
