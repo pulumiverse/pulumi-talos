@@ -40,28 +40,28 @@ export class Kubeconfig extends pulumi.CustomResource {
     /**
      * The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
      */
-    public readonly certificateRenewalDuration!: pulumi.Output<string>;
+    declare public readonly certificateRenewalDuration: pulumi.Output<string>;
     /**
      * The client configuration data
      */
-    public readonly clientConfiguration!: pulumi.Output<outputs.cluster.KubeconfigClientConfiguration>;
+    declare public readonly clientConfiguration: pulumi.Output<outputs.cluster.KubeconfigClientConfiguration>;
     /**
      * endpoint to use for the talosclient. If not set, the node value will be used
      */
-    public readonly endpoint!: pulumi.Output<string>;
+    declare public readonly endpoint: pulumi.Output<string>;
     /**
      * The raw kubeconfig
      */
-    public /*out*/ readonly kubeconfigRaw!: pulumi.Output<string>;
+    declare public /*out*/ readonly kubeconfigRaw: pulumi.Output<string>;
     /**
      * The kubernetes client configuration
      */
-    public /*out*/ readonly kubernetesClientConfiguration!: pulumi.Output<outputs.cluster.KubeconfigKubernetesClientConfiguration>;
+    declare public /*out*/ readonly kubernetesClientConfiguration: pulumi.Output<outputs.cluster.KubeconfigKubernetesClientConfiguration>;
     /**
      * controlplane node to retrieve the kubeconfig from
      */
-    public readonly node!: pulumi.Output<string>;
-    public readonly timeouts!: pulumi.Output<outputs.cluster.KubeconfigTimeouts | undefined>;
+    declare public readonly node: pulumi.Output<string>;
+    declare public readonly timeouts: pulumi.Output<outputs.cluster.KubeconfigTimeouts | undefined>;
 
     /**
      * Create a Kubeconfig resource with the given unique name, arguments, and options.
@@ -76,26 +76,26 @@ export class Kubeconfig extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as KubeconfigState | undefined;
-            resourceInputs["certificateRenewalDuration"] = state ? state.certificateRenewalDuration : undefined;
-            resourceInputs["clientConfiguration"] = state ? state.clientConfiguration : undefined;
-            resourceInputs["endpoint"] = state ? state.endpoint : undefined;
-            resourceInputs["kubeconfigRaw"] = state ? state.kubeconfigRaw : undefined;
-            resourceInputs["kubernetesClientConfiguration"] = state ? state.kubernetesClientConfiguration : undefined;
-            resourceInputs["node"] = state ? state.node : undefined;
-            resourceInputs["timeouts"] = state ? state.timeouts : undefined;
+            resourceInputs["certificateRenewalDuration"] = state?.certificateRenewalDuration;
+            resourceInputs["clientConfiguration"] = state?.clientConfiguration;
+            resourceInputs["endpoint"] = state?.endpoint;
+            resourceInputs["kubeconfigRaw"] = state?.kubeconfigRaw;
+            resourceInputs["kubernetesClientConfiguration"] = state?.kubernetesClientConfiguration;
+            resourceInputs["node"] = state?.node;
+            resourceInputs["timeouts"] = state?.timeouts;
         } else {
             const args = argsOrState as KubeconfigArgs | undefined;
-            if ((!args || args.clientConfiguration === undefined) && !opts.urn) {
+            if (args?.clientConfiguration === undefined && !opts.urn) {
                 throw new Error("Missing required property 'clientConfiguration'");
             }
-            if ((!args || args.node === undefined) && !opts.urn) {
+            if (args?.node === undefined && !opts.urn) {
                 throw new Error("Missing required property 'node'");
             }
-            resourceInputs["certificateRenewalDuration"] = args ? args.certificateRenewalDuration : undefined;
-            resourceInputs["clientConfiguration"] = args ? args.clientConfiguration : undefined;
-            resourceInputs["endpoint"] = args ? args.endpoint : undefined;
-            resourceInputs["node"] = args ? args.node : undefined;
-            resourceInputs["timeouts"] = args ? args.timeouts : undefined;
+            resourceInputs["certificateRenewalDuration"] = args?.certificateRenewalDuration;
+            resourceInputs["clientConfiguration"] = args?.clientConfiguration;
+            resourceInputs["endpoint"] = args?.endpoint;
+            resourceInputs["node"] = args?.node;
+            resourceInputs["timeouts"] = args?.timeouts;
             resourceInputs["kubeconfigRaw"] = undefined /*out*/;
             resourceInputs["kubernetesClientConfiguration"] = undefined /*out*/;
         }

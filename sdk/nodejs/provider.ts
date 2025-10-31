@@ -28,7 +28,7 @@ export class Provider extends pulumi.ProviderResource {
     /**
      * The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
      */
-    public readonly imageFactoryUrl!: pulumi.Output<string | undefined>;
+    declare public readonly imageFactoryUrl: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -41,7 +41,7 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["imageFactoryUrl"] = args ? args.imageFactoryUrl : undefined;
+            resourceInputs["imageFactoryUrl"] = args?.imageFactoryUrl;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);

@@ -38,7 +38,7 @@ export class Schematic extends pulumi.CustomResource {
     /**
      * The schematic yaml respresentation to generate the image.
      */
-    public readonly schematic!: pulumi.Output<string | undefined>;
+    declare public readonly schematic: pulumi.Output<string | undefined>;
 
     /**
      * Create a Schematic resource with the given unique name, arguments, and options.
@@ -53,10 +53,10 @@ export class Schematic extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SchematicState | undefined;
-            resourceInputs["schematic"] = state ? state.schematic : undefined;
+            resourceInputs["schematic"] = state?.schematic;
         } else {
             const args = argsOrState as SchematicArgs | undefined;
-            resourceInputs["schematic"] = args ? args.schematic : undefined;
+            resourceInputs["schematic"] = args?.schematic;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Schematic.__pulumiType, name, resourceInputs, opts);

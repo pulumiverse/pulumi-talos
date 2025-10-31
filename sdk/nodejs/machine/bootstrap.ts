@@ -50,16 +50,16 @@ export class Bootstrap extends pulumi.CustomResource {
     /**
      * The client configuration data
      */
-    public readonly clientConfiguration!: pulumi.Output<outputs.machine.ClientConfiguration>;
+    declare public readonly clientConfiguration: pulumi.Output<outputs.machine.ClientConfiguration>;
     /**
      * The endpoint of the machine to bootstrap
      */
-    public readonly endpoint!: pulumi.Output<string>;
+    declare public readonly endpoint: pulumi.Output<string>;
     /**
      * The name of the node to bootstrap
      */
-    public readonly node!: pulumi.Output<string>;
-    public readonly timeouts!: pulumi.Output<outputs.machine.BootstrapTimeouts | undefined>;
+    declare public readonly node: pulumi.Output<string>;
+    declare public readonly timeouts: pulumi.Output<outputs.machine.BootstrapTimeouts | undefined>;
 
     /**
      * Create a Bootstrap resource with the given unique name, arguments, and options.
@@ -74,22 +74,22 @@ export class Bootstrap extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as BootstrapState | undefined;
-            resourceInputs["clientConfiguration"] = state ? state.clientConfiguration : undefined;
-            resourceInputs["endpoint"] = state ? state.endpoint : undefined;
-            resourceInputs["node"] = state ? state.node : undefined;
-            resourceInputs["timeouts"] = state ? state.timeouts : undefined;
+            resourceInputs["clientConfiguration"] = state?.clientConfiguration;
+            resourceInputs["endpoint"] = state?.endpoint;
+            resourceInputs["node"] = state?.node;
+            resourceInputs["timeouts"] = state?.timeouts;
         } else {
             const args = argsOrState as BootstrapArgs | undefined;
-            if ((!args || args.clientConfiguration === undefined) && !opts.urn) {
+            if (args?.clientConfiguration === undefined && !opts.urn) {
                 throw new Error("Missing required property 'clientConfiguration'");
             }
-            if ((!args || args.node === undefined) && !opts.urn) {
+            if (args?.node === undefined && !opts.urn) {
                 throw new Error("Missing required property 'node'");
             }
-            resourceInputs["clientConfiguration"] = args ? args.clientConfiguration : undefined;
-            resourceInputs["endpoint"] = args ? args.endpoint : undefined;
-            resourceInputs["node"] = args ? args.node : undefined;
-            resourceInputs["timeouts"] = args ? args.timeouts : undefined;
+            resourceInputs["clientConfiguration"] = args?.clientConfiguration;
+            resourceInputs["endpoint"] = args?.endpoint;
+            resourceInputs["node"] = args?.node;
+            resourceInputs["timeouts"] = args?.timeouts;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Bootstrap.__pulumiType, name, resourceInputs, opts);

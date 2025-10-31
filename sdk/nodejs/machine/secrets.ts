@@ -59,15 +59,15 @@ export class Secrets extends pulumi.CustomResource {
     /**
      * The generated client configuration data
      */
-    public /*out*/ readonly clientConfiguration!: pulumi.Output<outputs.machine.ClientConfiguration>;
+    declare public /*out*/ readonly clientConfiguration: pulumi.Output<outputs.machine.ClientConfiguration>;
     /**
      * The secrets for the talos cluster
      */
-    public /*out*/ readonly machineSecrets!: pulumi.Output<outputs.machine.MachineSecrets>;
+    declare public /*out*/ readonly machineSecrets: pulumi.Output<outputs.machine.MachineSecrets>;
     /**
      * The version of talos features to use in generated machine configuration
      */
-    public readonly talosVersion!: pulumi.Output<string>;
+    declare public readonly talosVersion: pulumi.Output<string>;
 
     /**
      * Create a Secrets resource with the given unique name, arguments, and options.
@@ -82,12 +82,12 @@ export class Secrets extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SecretsState | undefined;
-            resourceInputs["clientConfiguration"] = state ? state.clientConfiguration : undefined;
-            resourceInputs["machineSecrets"] = state ? state.machineSecrets : undefined;
-            resourceInputs["talosVersion"] = state ? state.talosVersion : undefined;
+            resourceInputs["clientConfiguration"] = state?.clientConfiguration;
+            resourceInputs["machineSecrets"] = state?.machineSecrets;
+            resourceInputs["talosVersion"] = state?.talosVersion;
         } else {
             const args = argsOrState as SecretsArgs | undefined;
-            resourceInputs["talosVersion"] = args ? args.talosVersion : undefined;
+            resourceInputs["talosVersion"] = args?.talosVersion;
             resourceInputs["clientConfiguration"] = undefined /*out*/;
             resourceInputs["machineSecrets"] = undefined /*out*/;
         }
