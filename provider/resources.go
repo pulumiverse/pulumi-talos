@@ -19,6 +19,7 @@ import (
 	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 
+	"github.com/pulumiverse/pulumi-talos/provider/native"
 	"github.com/pulumiverse/pulumi-talos/provider/pkg/version"
 )
 
@@ -52,9 +53,9 @@ func Provider() tfbridge.ProviderInfo {
 		LogoURL:           "https://raw.githubusercontent.com/pulumiverse/pulumi-talos/refs/heads/main/assets/talos-logo.png",
 		PluginDownloadURL: "github://api.github.com/pulumiverse",
 		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
-		//MuxWith: []tfbridge.MuxProvider{
-		//	native.NewProvider(),
-		//},
+		MuxWith: []tfbridge.MuxProvider{
+			native.NewProvider(),
+		},
 		ExtraTypes: map[string]schema.ComplexTypeSpec{
 			"talos:machine/generated:Key": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
