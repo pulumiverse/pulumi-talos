@@ -35,13 +35,8 @@ version = "1.22.22"
 backend = "npm:yarn"
 
 [[tools.pulumi]]
-version = "3.145.0"
+version = "3.175.0"
 backend = "aqua:pulumi/pulumi"
-
-[tools.pulumi.platforms.macos-arm64]
-checksum = "sha512:acadd7d66d3d652eae0100b6dd23ddce17dbb90d264edcd15d9dcb26c886e4b602fde08cc5d94112c9bd038b9d2f3d237fd23fdf3a5648f5fc53c1fb25efe351"
-size = 77378920
-url = "https://github.com/pulumi/pulumi/releases/download/v3.145.0/pulumi-v3.145.0-darwin-arm64.tar.gz"
 
 [[tools.python]]
 version = "3.11.8"

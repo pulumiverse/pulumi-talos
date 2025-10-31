@@ -22,7 +22,7 @@ import (
 	"github.com/pulumiverse/pulumi-talos/provider/pkg/version"
 )
 
-// all of the talos token components used below.
+// all the talos token components used below.
 const (
 	talosPkg        = "talos"
 	talosMod        = "index"
@@ -44,7 +44,7 @@ func Provider() tfbridge.ProviderInfo {
 		Description:       "A Pulumi package for creating and managing Talos Linux machines and clusters.",
 		Keywords:          []string{"pulumi", "talos", "category/infrastructure"},
 		License:           "MPL-2.0",
-		Homepage:          "https://talos.dev",
+		Homepage:          "https://www.talos.dev",
 		GitHubOrg:         "siderolabs",
 		Repository:        "https://github.com/pulumiverse/pulumi-talos",
 		Version:           version.Version,
@@ -52,6 +52,9 @@ func Provider() tfbridge.ProviderInfo {
 		LogoURL:           "https://raw.githubusercontent.com/pulumiverse/pulumi-talos/refs/heads/main/assets/talos-logo.png",
 		PluginDownloadURL: "github://api.github.com/pulumiverse",
 		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
+		//MuxWith: []tfbridge.MuxProvider{
+		//	native.NewProvider(),
+		//},
 		ExtraTypes: map[string]schema.ComplexTypeSpec{
 			"talos:machine/generated:Key": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
