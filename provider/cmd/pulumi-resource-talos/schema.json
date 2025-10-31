@@ -64,7 +64,7 @@
         "variables": {
             "imageFactoryUrl": {
                 "type": "string",
-                "description": "The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.\n"
+                "description": "The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev."
             }
         }
     },
@@ -1271,13 +1271,13 @@
         "properties": {
             "imageFactoryUrl": {
                 "type": "string",
-                "description": "The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.\n"
+                "description": "The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev."
             }
         },
         "inputProperties": {
             "imageFactoryUrl": {
                 "type": "string",
-                "description": "The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.\n"
+                "description": "The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev."
             }
         },
         "methods": {
@@ -1516,7 +1516,7 @@
                 },
                 "machineConfiguration": {
                     "type": "string",
-                    "description": "The generated machine configuration after applying patches\n",
+                    "description": "The generated machine configuration after applying patches",
                     "secret": true
                 },
                 "machineConfigurationInput": {
@@ -1610,7 +1610,7 @@
                     },
                     "machineConfiguration": {
                         "type": "string",
-                        "description": "The generated machine configuration after applying patches\n",
+                        "description": "The generated machine configuration after applying patches",
                         "secret": true
                     },
                     "machineConfigurationInput": {
@@ -1687,7 +1687,7 @@
                 "properties": {
                     "__self__": {
                         "type": "ref",
-                        "$ref": "#/resources/pulumi:providers:talos"
+                        "$ref": "#/provider"
                     }
                 },
                 "type": "pulumi:providers:talos/terraformConfig",
@@ -1905,7 +1905,7 @@
                     "wait": {
                         "type": "boolean",
                         "description": "Wait for the kubernetes api to be available\n",
-                        "deprecationMessage": "This attribute is deprecated and no-op. Will be removed in a future version. Use talos.cluster.getHealth instead."
+                        "deprecationMessage": "This attribute is deprecated and no-op. Will be removed in a future version. Use\u003cspan pulumi-lang-nodejs=\" talos.cluster.getHealth \" pulumi-lang-dotnet=\" talos.cluster.getHealth \" pulumi-lang-go=\" cluster.getHealth \" pulumi-lang-python=\" cluster_get_health \" pulumi-lang-yaml=\" talos.cluster.getHealth \" pulumi-lang-java=\" talos.cluster.getHealth \"\u003e talos.cluster.getHealth \u003c/span\u003einstead."
                     }
                 },
                 "type": "object",
@@ -1946,7 +1946,7 @@
                         "$ref": "#/types/talos:cluster/getKubeconfigTimeouts:getKubeconfigTimeouts"
                     },
                     "wait": {
-                        "deprecationMessage": "This attribute is deprecated and no-op. Will be removed in a future version. Use talos.cluster.getHealth instead.",
+                        "deprecationMessage": "This attribute is deprecated and no-op. Will be removed in a future version. Use\u003cspan pulumi-lang-nodejs=\" talos.cluster.getHealth \" pulumi-lang-dotnet=\" talos.cluster.getHealth \" pulumi-lang-go=\" cluster.getHealth \" pulumi-lang-python=\" cluster_get_health \" pulumi-lang-yaml=\" talos.cluster.getHealth \" pulumi-lang-java=\" talos.cluster.getHealth \"\u003e talos.cluster.getHealth \u003c/span\u003einstead.",
                         "description": "Wait for the kubernetes api to be available\n",
                         "type": "boolean"
                     }
@@ -2163,7 +2163,7 @@
             }
         },
         "talos:machine/getConfiguration:getConfiguration": {
-            "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** It is recommended to set the optional `talos_version` attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst thisSecrets = new talos.machine.Secrets(\"this\", {});\nconst _this = talos.machine.getConfigurationOutput({\n    clusterName: \"example-cluster\",\n    machineType: \"controlplane\",\n    clusterEndpoint: \"https://cluster.local:6443\",\n    machineSecrets: thisSecrets.machineSecrets,\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\nimport pulumiverse_talos as talos\n\nthis_secrets = talos.machine.Secrets(\"this\")\nthis = talos.machine.get_configuration_output(cluster_name=\"example-cluster\",\n    machine_type=\"controlplane\",\n    cluster_endpoint=\"https://cluster.local:6443\",\n    machine_secrets=this_secrets.machine_secrets)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisSecrets = new Talos.Machine.Secrets(\"this\");\n\n    var @this = Talos.Machine.GetConfiguration.Invoke(new()\n    {\n        ClusterName = \"example-cluster\",\n        MachineType = \"controlplane\",\n        ClusterEndpoint = \"https://cluster.local:6443\",\n        MachineSecrets = thisSecrets.MachineSecrets,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tthisSecrets, err := machine.NewSecrets(ctx, \"this\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_ = machine.GetConfigurationOutput(ctx, machine.GetConfigurationOutputArgs{\n\t\t\tClusterName:     pulumi.String(\"example-cluster\"),\n\t\t\tMachineType:     pulumi.String(\"controlplane\"),\n\t\t\tClusterEndpoint: pulumi.String(\"https://cluster.local:6443\"),\n\t\t\tMachineSecrets:  thisSecrets.MachineSecrets,\n\t\t}, nil)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport com.pulumi.talos.machine.MachineFunctions;\nimport com.pulumi.talos.machine.inputs.GetConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisSecrets = new Secrets(\"thisSecrets\");\n\n        final var this = MachineFunctions.getConfiguration(GetConfigurationArgs.builder()\n            .clusterName(\"example-cluster\")\n            .machineType(\"controlplane\")\n            .clusterEndpoint(\"https://cluster.local:6443\")\n            .machineSecrets(thisSecrets.machineSecrets())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  thisSecrets:\n    type: talos:machine:Secrets\n    name: this\nvariables:\n  this:\n    fn::invoke:\n      function: talos:machine:getConfiguration\n      arguments:\n        clusterName: example-cluster\n        machineType: controlplane\n        clusterEndpoint: https://cluster.local:6443\n        machineSecrets: ${thisSecrets.machineSecrets}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** It is recommended to set the optional \u003cspan pulumi-lang-nodejs=\"`talosVersion`\" pulumi-lang-dotnet=\"`TalosVersion`\" pulumi-lang-go=\"`talosVersion`\" pulumi-lang-python=\"`talos_version`\" pulumi-lang-yaml=\"`talosVersion`\" pulumi-lang-java=\"`talosVersion`\"\u003e`talos_version`\u003c/span\u003e attribute. Otherwise when using a new version of the provider with a new major version of the Talos SDK, new machineconfig features will be enabled by default which could cause unexpected behavior.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as talos from \"@pulumiverse/talos\";\n\nconst thisSecrets = new talos.machine.Secrets(\"this\", {});\nconst _this = talos.machine.getConfigurationOutput({\n    clusterName: \"example-cluster\",\n    machineType: \"controlplane\",\n    clusterEndpoint: \"https://cluster.local:6443\",\n    machineSecrets: thisSecrets.machineSecrets,\n});\n```\n```python\nimport pulumi\nimport pulumi_talos as talos\nimport pulumiverse_talos as talos\n\nthis_secrets = talos.machine.Secrets(\"this\")\nthis = talos.machine.get_configuration_output(cluster_name=\"example-cluster\",\n    machine_type=\"controlplane\",\n    cluster_endpoint=\"https://cluster.local:6443\",\n    machine_secrets=this_secrets.machine_secrets)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Talos = Pulumi.Talos;\nusing Talos = Pulumiverse.Talos;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var thisSecrets = new Talos.Machine.Secrets(\"this\");\n\n    var @this = Talos.Machine.GetConfiguration.Invoke(new()\n    {\n        ClusterName = \"example-cluster\",\n        MachineType = \"controlplane\",\n        ClusterEndpoint = \"https://cluster.local:6443\",\n        MachineSecrets = thisSecrets.MachineSecrets,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tthisSecrets, err := machine.NewSecrets(ctx, \"this\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_ = machine.GetConfigurationOutput(ctx, machine.GetConfigurationOutputArgs{\n\t\t\tClusterName:     pulumi.String(\"example-cluster\"),\n\t\t\tMachineType:     pulumi.String(\"controlplane\"),\n\t\t\tClusterEndpoint: pulumi.String(\"https://cluster.local:6443\"),\n\t\t\tMachineSecrets:  thisSecrets.MachineSecrets,\n\t\t}, nil)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.talos.machine.Secrets;\nimport com.pulumi.talos.machine.MachineFunctions;\nimport com.pulumi.talos.machine.inputs.GetConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var thisSecrets = new Secrets(\"thisSecrets\");\n\n        final var this = MachineFunctions.getConfiguration(GetConfigurationArgs.builder()\n            .clusterName(\"example-cluster\")\n            .machineType(\"controlplane\")\n            .clusterEndpoint(\"https://cluster.local:6443\")\n            .machineSecrets(thisSecrets.machineSecrets())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  thisSecrets:\n    type: talos:machine:Secrets\n    name: this\nvariables:\n  this:\n    fn::invoke:\n      function: talos:machine:getConfiguration\n      arguments:\n        clusterName: example-cluster\n        machineType: controlplane\n        clusterEndpoint: https://cluster.local:6443\n        machineSecrets: ${thisSecrets.machineSecrets}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getConfiguration.\n",
                 "properties": {
@@ -2279,7 +2279,7 @@
             }
         },
         "talos:machine/getDisks:getDisks": {
-            "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `talos.machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.\n\n",
+            "description": "Generate a machine configuration for a node type\n\n\u003e **Note:** Since Talos natively supports `.machine.install.diskSelector`, the \u003cspan pulumi-lang-nodejs=\"`talos.machine.getDisks`\" pulumi-lang-dotnet=\"`talos.machine.getDisks`\" pulumi-lang-go=\"`machine.getDisks`\" pulumi-lang-python=\"`machine_get_disks`\" pulumi-lang-yaml=\"`talos.machine.getDisks`\" pulumi-lang-java=\"`talos.machine.getDisks`\"\u003e`talos.machine.getDisks`\u003c/span\u003e data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.\n\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getDisks.\n",
                 "properties": {
