@@ -40,36 +40,36 @@ export class ConfigurationApply extends pulumi.CustomResource {
     /**
      * The mode of the apply operation
      */
-    public readonly applyMode!: pulumi.Output<string>;
+    declare public readonly applyMode: pulumi.Output<string>;
     /**
      * The client configuration data
      */
-    public readonly clientConfiguration!: pulumi.Output<outputs.machine.ClientConfiguration>;
+    declare public readonly clientConfiguration: pulumi.Output<outputs.machine.ClientConfiguration>;
     /**
      * The list of config patches to apply
      */
-    public readonly configPatches!: pulumi.Output<string[] | undefined>;
+    declare public readonly configPatches: pulumi.Output<string[] | undefined>;
     /**
      * The endpoint of the machine to bootstrap
      */
-    public readonly endpoint!: pulumi.Output<string>;
+    declare public readonly endpoint: pulumi.Output<string>;
     /**
      * The generated machine configuration after applying patches
      */
-    public /*out*/ readonly machineConfiguration!: pulumi.Output<string>;
+    declare public /*out*/ readonly machineConfiguration: pulumi.Output<string>;
     /**
      * The machine configuration to apply
      */
-    public readonly machineConfigurationInput!: pulumi.Output<string>;
+    declare public readonly machineConfigurationInput: pulumi.Output<string>;
     /**
      * The name of the node to bootstrap
      */
-    public readonly node!: pulumi.Output<string>;
+    declare public readonly node: pulumi.Output<string>;
     /**
      * Actions to be taken on destroy, if *reset* is not set this is a no-op.
      */
-    public readonly onDestroy!: pulumi.Output<outputs.machine.ConfigurationApplyOnDestroy | undefined>;
-    public readonly timeouts!: pulumi.Output<outputs.machine.Timeout | undefined>;
+    declare public readonly onDestroy: pulumi.Output<outputs.machine.ConfigurationApplyOnDestroy | undefined>;
+    declare public readonly timeouts: pulumi.Output<outputs.machine.Timeout | undefined>;
 
     /**
      * Create a ConfigurationApply resource with the given unique name, arguments, and options.
@@ -84,34 +84,34 @@ export class ConfigurationApply extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConfigurationApplyState | undefined;
-            resourceInputs["applyMode"] = state ? state.applyMode : undefined;
-            resourceInputs["clientConfiguration"] = state ? state.clientConfiguration : undefined;
-            resourceInputs["configPatches"] = state ? state.configPatches : undefined;
-            resourceInputs["endpoint"] = state ? state.endpoint : undefined;
-            resourceInputs["machineConfiguration"] = state ? state.machineConfiguration : undefined;
-            resourceInputs["machineConfigurationInput"] = state ? state.machineConfigurationInput : undefined;
-            resourceInputs["node"] = state ? state.node : undefined;
-            resourceInputs["onDestroy"] = state ? state.onDestroy : undefined;
-            resourceInputs["timeouts"] = state ? state.timeouts : undefined;
+            resourceInputs["applyMode"] = state?.applyMode;
+            resourceInputs["clientConfiguration"] = state?.clientConfiguration;
+            resourceInputs["configPatches"] = state?.configPatches;
+            resourceInputs["endpoint"] = state?.endpoint;
+            resourceInputs["machineConfiguration"] = state?.machineConfiguration;
+            resourceInputs["machineConfigurationInput"] = state?.machineConfigurationInput;
+            resourceInputs["node"] = state?.node;
+            resourceInputs["onDestroy"] = state?.onDestroy;
+            resourceInputs["timeouts"] = state?.timeouts;
         } else {
             const args = argsOrState as ConfigurationApplyArgs | undefined;
-            if ((!args || args.clientConfiguration === undefined) && !opts.urn) {
+            if (args?.clientConfiguration === undefined && !opts.urn) {
                 throw new Error("Missing required property 'clientConfiguration'");
             }
-            if ((!args || args.machineConfigurationInput === undefined) && !opts.urn) {
+            if (args?.machineConfigurationInput === undefined && !opts.urn) {
                 throw new Error("Missing required property 'machineConfigurationInput'");
             }
-            if ((!args || args.node === undefined) && !opts.urn) {
+            if (args?.node === undefined && !opts.urn) {
                 throw new Error("Missing required property 'node'");
             }
-            resourceInputs["applyMode"] = args ? args.applyMode : undefined;
-            resourceInputs["clientConfiguration"] = args ? args.clientConfiguration : undefined;
-            resourceInputs["configPatches"] = args ? args.configPatches : undefined;
-            resourceInputs["endpoint"] = args ? args.endpoint : undefined;
+            resourceInputs["applyMode"] = args?.applyMode;
+            resourceInputs["clientConfiguration"] = args?.clientConfiguration;
+            resourceInputs["configPatches"] = args?.configPatches;
+            resourceInputs["endpoint"] = args?.endpoint;
             resourceInputs["machineConfigurationInput"] = args?.machineConfigurationInput ? pulumi.secret(args.machineConfigurationInput) : undefined;
-            resourceInputs["node"] = args ? args.node : undefined;
-            resourceInputs["onDestroy"] = args ? args.onDestroy : undefined;
-            resourceInputs["timeouts"] = args ? args.timeouts : undefined;
+            resourceInputs["node"] = args?.node;
+            resourceInputs["onDestroy"] = args?.onDestroy;
+            resourceInputs["timeouts"] = args?.timeouts;
             resourceInputs["machineConfiguration"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);

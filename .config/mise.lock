@@ -35,7 +35,7 @@ version = "1.22.22"
 backend = "npm:yarn"
 
 [[tools.pulumi]]
-version = "3.175.0"
+version = "3.190.0"
 backend = "aqua:pulumi/pulumi"
 
 [[tools.python]]
