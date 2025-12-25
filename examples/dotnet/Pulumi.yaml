@@ -1,3 +1,0 @@
-name: talos
-runtime: dotnet
-description: A minimal Talos program in Pulumi YAML
