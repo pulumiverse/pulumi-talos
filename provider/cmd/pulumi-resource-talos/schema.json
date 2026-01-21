@@ -257,6 +257,18 @@
             },
             "type": "object"
         },
+        "talos:imageFactory/getExtensionsVersionsExactFilters:getExtensionsVersionsExactFilters": {
+            "properties": {
+                "names": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The exact name match of the extension to filter by.\n"
+                }
+            },
+            "type": "object"
+        },
         "talos:imageFactory/getExtensionsVersionsExtensionsInfo:getExtensionsVersionsExtensionsInfo": {
             "properties": {
                 "author": {
@@ -1497,7 +1509,7 @@
             "properties": {
                 "applyMode": {
                     "type": "string",
-                    "description": "The mode of the apply operation\n"
+                    "description": "The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise\n"
                 },
                 "clientConfiguration": {
                     "$ref": "#/types/talos:machine/generated:ClientConfiguration",
@@ -1532,6 +1544,10 @@
                     "$ref": "#/types/talos:machine/ConfigurationApplyOnDestroy:ConfigurationApplyOnDestroy",
                     "description": "Actions to be taken on destroy, if *reset* is not set this is a no-op.\n"
                 },
+                "resolvedApplyMode": {
+                    "type": "string",
+                    "description": "The actual apply mode used. When\u003cspan pulumi-lang-nodejs=\" applyMode \" pulumi-lang-dotnet=\" ApplyMode \" pulumi-lang-go=\" applyMode \" pulumi-lang-python=\" apply_mode \" pulumi-lang-yaml=\" applyMode \" pulumi-lang-java=\" applyMode \"\u003e apply_mode \u003c/span\u003eis 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals\u003cspan pulumi-lang-nodejs=\" applyMode \" pulumi-lang-dotnet=\" ApplyMode \" pulumi-lang-go=\" applyMode \" pulumi-lang-python=\" apply_mode \" pulumi-lang-yaml=\" applyMode \" pulumi-lang-java=\" applyMode \"\u003e apply_mode \u003c/span\u003efor other modes."
+                },
                 "timeouts": {
                     "$ref": "#/types/talos:machine/Timeout:Timeout"
                 }
@@ -1542,12 +1558,13 @@
                 "endpoint",
                 "machineConfiguration",
                 "machineConfigurationInput",
-                "node"
+                "node",
+                "resolvedApplyMode"
             ],
             "inputProperties": {
                 "applyMode": {
                     "type": "string",
-                    "description": "The mode of the apply operation\n"
+                    "description": "The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise\n"
                 },
                 "clientConfiguration": {
                     "$ref": "#/types/talos:machine/generated:ClientConfiguration",
@@ -1591,7 +1608,7 @@
                 "properties": {
                     "applyMode": {
                         "type": "string",
-                        "description": "The mode of the apply operation\n"
+                        "description": "The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise\n"
                     },
                     "clientConfiguration": {
                         "$ref": "#/types/talos:machine/generated:ClientConfiguration",
@@ -1625,6 +1642,10 @@
                     "onDestroy": {
                         "$ref": "#/types/talos:machine/ConfigurationApplyOnDestroy:ConfigurationApplyOnDestroy",
                         "description": "Actions to be taken on destroy, if *reset* is not set this is a no-op.\n"
+                    },
+                    "resolvedApplyMode": {
+                        "type": "string",
+                        "description": "The actual apply mode used. When\u003cspan pulumi-lang-nodejs=\" applyMode \" pulumi-lang-dotnet=\" ApplyMode \" pulumi-lang-go=\" applyMode \" pulumi-lang-python=\" apply_mode \" pulumi-lang-yaml=\" applyMode \" pulumi-lang-java=\" applyMode \"\u003e apply_mode \u003c/span\u003eis 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals\u003cspan pulumi-lang-nodejs=\" applyMode \" pulumi-lang-dotnet=\" ApplyMode \" pulumi-lang-go=\" applyMode \" pulumi-lang-python=\" apply_mode \" pulumi-lang-yaml=\" applyMode \" pulumi-lang-java=\" applyMode \"\u003e apply_mode \u003c/span\u003efor other modes."
                     },
                     "timeouts": {
                         "$ref": "#/types/talos:machine/Timeout:Timeout"
@@ -1967,6 +1988,10 @@
             "inputs": {
                 "description": "A collection of arguments for invoking getExtensionsVersions.\n",
                 "properties": {
+                    "exactFilters": {
+                        "$ref": "#/types/talos:imageFactory/getExtensionsVersionsExactFilters:getExtensionsVersionsExactFilters",
+                        "description": "The filter to apply to the extensions list.\n"
+                    },
                     "filters": {
                         "$ref": "#/types/talos:imageFactory/getExtensionsVersionsFilters:getExtensionsVersionsFilters",
                         "description": "The filter to apply to the extensions list.\n"
@@ -1984,6 +2009,10 @@
             "outputs": {
                 "description": "A collection of values returned by getExtensionsVersions.\n",
                 "properties": {
+                    "exactFilters": {
+                        "$ref": "#/types/talos:imageFactory/getExtensionsVersionsExactFilters:getExtensionsVersionsExactFilters",
+                        "description": "The filter to apply to the extensions list.\n"
+                    },
                     "extensionsInfos": {
                         "description": "The list of available extensions for the specified talos version.\n",
                         "items": {
