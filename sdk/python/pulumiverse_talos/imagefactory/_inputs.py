@@ -15,6 +15,8 @@ else:
 from .. import _utilities
 
 __all__ = [
+    'GetExtensionsVersionsExactFiltersArgs',
+    'GetExtensionsVersionsExactFiltersArgsDict',
     'GetExtensionsVersionsFiltersArgs',
     'GetExtensionsVersionsFiltersArgsDict',
     'GetOverlaysVersionsFiltersArgs',
@@ -24,6 +26,38 @@ __all__ = [
 ]
 
 MYPY = False
+
+if not MYPY:
+    class GetExtensionsVersionsExactFiltersArgsDict(TypedDict):
+        names: NotRequired[Sequence[_builtins.str]]
+        """
+        The exact name match of the extension to filter by.
+        """
+elif False:
+    GetExtensionsVersionsExactFiltersArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class GetExtensionsVersionsExactFiltersArgs:
+    def __init__(__self__, *,
+                 names: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param Sequence[_builtins.str] names: The exact name match of the extension to filter by.
+        """
+        if names is not None:
+            pulumi.set(__self__, "names", names)
+
+    @_builtins.property
+    @pulumi.getter
+    def names(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The exact name match of the extension to filter by.
+        """
+        return pulumi.get(self, "names")
+
+    @names.setter
+    def names(self, value: Optional[Sequence[_builtins.str]]):
+        pulumi.set(self, "names", value)
+
 
 if not MYPY:
     class GetExtensionsVersionsFiltersArgsDict(TypedDict):

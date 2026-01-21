@@ -29,6 +29,7 @@ import * as utilities from "../utilities";
 export function getExtensionsVersions(args: GetExtensionsVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetExtensionsVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("talos:imageFactory/getExtensionsVersions:getExtensionsVersions", {
+        "exactFilters": args.exactFilters,
         "filters": args.filters,
         "talosVersion": args.talosVersion,
     }, opts);
@@ -38,6 +39,10 @@ export function getExtensionsVersions(args: GetExtensionsVersionsArgs, opts?: pu
  * A collection of arguments for invoking getExtensionsVersions.
  */
 export interface GetExtensionsVersionsArgs {
+    /**
+     * The filter to apply to the extensions list.
+     */
+    exactFilters?: inputs.imageFactory.GetExtensionsVersionsExactFilters;
     /**
      * The filter to apply to the extensions list.
      */
@@ -52,6 +57,10 @@ export interface GetExtensionsVersionsArgs {
  * A collection of values returned by getExtensionsVersions.
  */
 export interface GetExtensionsVersionsResult {
+    /**
+     * The filter to apply to the extensions list.
+     */
+    readonly exactFilters?: outputs.imageFactory.GetExtensionsVersionsExactFilters;
     /**
      * The list of available extensions for the specified talos version.
      */
@@ -92,6 +101,7 @@ export interface GetExtensionsVersionsResult {
 export function getExtensionsVersionsOutput(args: GetExtensionsVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetExtensionsVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("talos:imageFactory/getExtensionsVersions:getExtensionsVersions", {
+        "exactFilters": args.exactFilters,
         "filters": args.filters,
         "talosVersion": args.talosVersion,
     }, opts);
@@ -101,6 +111,10 @@ export function getExtensionsVersionsOutput(args: GetExtensionsVersionsOutputArg
  * A collection of arguments for invoking getExtensionsVersions.
  */
 export interface GetExtensionsVersionsOutputArgs {
+    /**
+     * The filter to apply to the extensions list.
+     */
+    exactFilters?: pulumi.Input<inputs.imageFactory.GetExtensionsVersionsExactFiltersArgs>;
     /**
      * The filter to apply to the extensions list.
      */

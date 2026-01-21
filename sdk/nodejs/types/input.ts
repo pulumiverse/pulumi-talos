@@ -173,6 +173,20 @@ export namespace cluster {
 }
 
 export namespace imageFactory {
+    export interface GetExtensionsVersionsExactFilters {
+        /**
+         * The exact name match of the extension to filter by.
+         */
+        names?: string[];
+    }
+
+    export interface GetExtensionsVersionsExactFiltersArgs {
+        /**
+         * The exact name match of the extension to filter by.
+         */
+        names?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface GetExtensionsVersionsFilters {
         /**
          * The name of the extension to filter by.

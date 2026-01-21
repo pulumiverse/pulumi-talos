@@ -135,6 +135,13 @@ export namespace cluster {
 }
 
 export namespace imageFactory {
+    export interface GetExtensionsVersionsExactFilters {
+        /**
+         * The exact name match of the extension to filter by.
+         */
+        names?: string[];
+    }
+
     export interface GetExtensionsVersionsExtensionsInfo {
         author: string;
         description: string;

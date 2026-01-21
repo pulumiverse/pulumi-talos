@@ -54,6 +54,13 @@
             "talos_image_factory_extensions_versions": {
                 "current": "talos:imageFactory/getExtensionsVersions:getExtensionsVersions",
                 "fields": {
+                    "exact_filters": {
+                        "fields": {
+                            "names": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
                     "extensions_info": {
                         "maxItemsOne": false
                     },

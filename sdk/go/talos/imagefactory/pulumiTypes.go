@@ -13,6 +13,143 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type GetExtensionsVersionsExactFilters struct {
+	// The exact name match of the extension to filter by.
+	Names []string `pulumi:"names"`
+}
+
+// GetExtensionsVersionsExactFiltersInput is an input type that accepts GetExtensionsVersionsExactFiltersArgs and GetExtensionsVersionsExactFiltersOutput values.
+// You can construct a concrete instance of `GetExtensionsVersionsExactFiltersInput` via:
+//
+//	GetExtensionsVersionsExactFiltersArgs{...}
+type GetExtensionsVersionsExactFiltersInput interface {
+	pulumi.Input
+
+	ToGetExtensionsVersionsExactFiltersOutput() GetExtensionsVersionsExactFiltersOutput
+	ToGetExtensionsVersionsExactFiltersOutputWithContext(context.Context) GetExtensionsVersionsExactFiltersOutput
+}
+
+type GetExtensionsVersionsExactFiltersArgs struct {
+	// The exact name match of the extension to filter by.
+	Names pulumi.StringArrayInput `pulumi:"names"`
+}
+
+func (GetExtensionsVersionsExactFiltersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetExtensionsVersionsExactFilters)(nil)).Elem()
+}
+
+func (i GetExtensionsVersionsExactFiltersArgs) ToGetExtensionsVersionsExactFiltersOutput() GetExtensionsVersionsExactFiltersOutput {
+	return i.ToGetExtensionsVersionsExactFiltersOutputWithContext(context.Background())
+}
+
+func (i GetExtensionsVersionsExactFiltersArgs) ToGetExtensionsVersionsExactFiltersOutputWithContext(ctx context.Context) GetExtensionsVersionsExactFiltersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExtensionsVersionsExactFiltersOutput)
+}
+
+func (i GetExtensionsVersionsExactFiltersArgs) ToGetExtensionsVersionsExactFiltersPtrOutput() GetExtensionsVersionsExactFiltersPtrOutput {
+	return i.ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(context.Background())
+}
+
+func (i GetExtensionsVersionsExactFiltersArgs) ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(ctx context.Context) GetExtensionsVersionsExactFiltersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExtensionsVersionsExactFiltersOutput).ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(ctx)
+}
+
+// GetExtensionsVersionsExactFiltersPtrInput is an input type that accepts GetExtensionsVersionsExactFiltersArgs, GetExtensionsVersionsExactFiltersPtr and GetExtensionsVersionsExactFiltersPtrOutput values.
+// You can construct a concrete instance of `GetExtensionsVersionsExactFiltersPtrInput` via:
+//
+//	        GetExtensionsVersionsExactFiltersArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetExtensionsVersionsExactFiltersPtrInput interface {
+	pulumi.Input
+
+	ToGetExtensionsVersionsExactFiltersPtrOutput() GetExtensionsVersionsExactFiltersPtrOutput
+	ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(context.Context) GetExtensionsVersionsExactFiltersPtrOutput
+}
+
+type getExtensionsVersionsExactFiltersPtrType GetExtensionsVersionsExactFiltersArgs
+
+func GetExtensionsVersionsExactFiltersPtr(v *GetExtensionsVersionsExactFiltersArgs) GetExtensionsVersionsExactFiltersPtrInput {
+	return (*getExtensionsVersionsExactFiltersPtrType)(v)
+}
+
+func (*getExtensionsVersionsExactFiltersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetExtensionsVersionsExactFilters)(nil)).Elem()
+}
+
+func (i *getExtensionsVersionsExactFiltersPtrType) ToGetExtensionsVersionsExactFiltersPtrOutput() GetExtensionsVersionsExactFiltersPtrOutput {
+	return i.ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(context.Background())
+}
+
+func (i *getExtensionsVersionsExactFiltersPtrType) ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(ctx context.Context) GetExtensionsVersionsExactFiltersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExtensionsVersionsExactFiltersPtrOutput)
+}
+
+type GetExtensionsVersionsExactFiltersOutput struct{ *pulumi.OutputState }
+
+func (GetExtensionsVersionsExactFiltersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetExtensionsVersionsExactFilters)(nil)).Elem()
+}
+
+func (o GetExtensionsVersionsExactFiltersOutput) ToGetExtensionsVersionsExactFiltersOutput() GetExtensionsVersionsExactFiltersOutput {
+	return o
+}
+
+func (o GetExtensionsVersionsExactFiltersOutput) ToGetExtensionsVersionsExactFiltersOutputWithContext(ctx context.Context) GetExtensionsVersionsExactFiltersOutput {
+	return o
+}
+
+func (o GetExtensionsVersionsExactFiltersOutput) ToGetExtensionsVersionsExactFiltersPtrOutput() GetExtensionsVersionsExactFiltersPtrOutput {
+	return o.ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(context.Background())
+}
+
+func (o GetExtensionsVersionsExactFiltersOutput) ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(ctx context.Context) GetExtensionsVersionsExactFiltersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetExtensionsVersionsExactFilters) *GetExtensionsVersionsExactFilters {
+		return &v
+	}).(GetExtensionsVersionsExactFiltersPtrOutput)
+}
+
+// The exact name match of the extension to filter by.
+func (o GetExtensionsVersionsExactFiltersOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetExtensionsVersionsExactFilters) []string { return v.Names }).(pulumi.StringArrayOutput)
+}
+
+type GetExtensionsVersionsExactFiltersPtrOutput struct{ *pulumi.OutputState }
+
+func (GetExtensionsVersionsExactFiltersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetExtensionsVersionsExactFilters)(nil)).Elem()
+}
+
+func (o GetExtensionsVersionsExactFiltersPtrOutput) ToGetExtensionsVersionsExactFiltersPtrOutput() GetExtensionsVersionsExactFiltersPtrOutput {
+	return o
+}
+
+func (o GetExtensionsVersionsExactFiltersPtrOutput) ToGetExtensionsVersionsExactFiltersPtrOutputWithContext(ctx context.Context) GetExtensionsVersionsExactFiltersPtrOutput {
+	return o
+}
+
+func (o GetExtensionsVersionsExactFiltersPtrOutput) Elem() GetExtensionsVersionsExactFiltersOutput {
+	return o.ApplyT(func(v *GetExtensionsVersionsExactFilters) GetExtensionsVersionsExactFilters {
+		if v != nil {
+			return *v
+		}
+		var ret GetExtensionsVersionsExactFilters
+		return ret
+	}).(GetExtensionsVersionsExactFiltersOutput)
+}
+
+// The exact name match of the extension to filter by.
+func (o GetExtensionsVersionsExactFiltersPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetExtensionsVersionsExactFilters) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
 type GetExtensionsVersionsExtensionsInfo struct {
 	Author      string `pulumi:"author"`
 	Description string `pulumi:"description"`
@@ -797,6 +934,8 @@ func (o GetVersionsFiltersPtrOutput) StableVersionsOnly() pulumi.BoolPtrOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*GetExtensionsVersionsExactFiltersInput)(nil)).Elem(), GetExtensionsVersionsExactFiltersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetExtensionsVersionsExactFiltersPtrInput)(nil)).Elem(), GetExtensionsVersionsExactFiltersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetExtensionsVersionsExtensionsInfoInput)(nil)).Elem(), GetExtensionsVersionsExtensionsInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetExtensionsVersionsExtensionsInfoArrayInput)(nil)).Elem(), GetExtensionsVersionsExtensionsInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetExtensionsVersionsFiltersInput)(nil)).Elem(), GetExtensionsVersionsFiltersArgs{})
@@ -808,6 +947,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUrlsUrlsInput)(nil)).Elem(), GetUrlsUrlsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVersionsFiltersInput)(nil)).Elem(), GetVersionsFiltersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVersionsFiltersPtrInput)(nil)).Elem(), GetVersionsFiltersArgs{})
+	pulumi.RegisterOutputType(GetExtensionsVersionsExactFiltersOutput{})
+	pulumi.RegisterOutputType(GetExtensionsVersionsExactFiltersPtrOutput{})
 	pulumi.RegisterOutputType(GetExtensionsVersionsExtensionsInfoOutput{})
 	pulumi.RegisterOutputType(GetExtensionsVersionsExtensionsInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetExtensionsVersionsFiltersOutput{})

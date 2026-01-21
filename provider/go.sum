@@ -1474,8 +1474,8 @@ github.com/siderolabs/talos v1.12.0 h1:ESejLcot+q41sHH/oP4Ndd5pUrXQS6z7KTMwzIqsu
 github.com/siderolabs/talos v1.12.0/go.mod h1:3fLGpDYbwgvH/4Z2RJ+soZ1GwobwSKywlfCfTbd8ZA0=
 github.com/siderolabs/talos/pkg/machinery v1.12.0 h1:SDXXCTEuPhaXIA84WuBeG8cxR71DkF8FhXXgb2S1048=
 github.com/siderolabs/talos/pkg/machinery v1.12.0/go.mod h1:dNc4lG9yb2CzCwnJbfSUO9ZmkXE6P3BnVo1UsCITr/U=
-github.com/siderolabs/terraform-provider-talos v0.10.0 h1:qao892svy46mStmudxXv79qjO/8wuiFOYhBxzcH7bfU=
-github.com/siderolabs/terraform-provider-talos v0.10.0/go.mod h1:VXWrZorFZIZdm7sofQcMYqu5iI6Ks3jMJKgviUQ6Rv4=
+github.com/siderolabs/terraform-provider-talos v0.10.1 h1:jtDqrRUtvq3Sx5QijPnYa/RDbxRObHEJ3/5KfV1FGMk=
+github.com/siderolabs/terraform-provider-talos v0.10.1/go.mod h1:VXWrZorFZIZdm7sofQcMYqu5iI6Ks3jMJKgviUQ6Rv4=
 github.com/sirupsen/logrus v1.7.0/go.mod h1:yWOB1SBYBC5VeMP7gHvWumXLIWorT60ONWic61uBYv0=
 github.com/sirupsen/logrus v1.9.4-0.20230606125235-dd1b4c2e81af h1:Sp5TG9f7K39yfB+If0vjp97vuT74F72r8hfRpP8jLU0=
 github.com/sirupsen/logrus v1.9.4-0.20230606125235-dd1b4c2e81af/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=

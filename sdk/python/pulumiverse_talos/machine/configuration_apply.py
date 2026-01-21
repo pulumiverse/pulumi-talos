@@ -34,7 +34,7 @@ class ConfigurationApplyArgs:
         :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[_builtins.str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
-        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation
+        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input['ConfigurationApplyOnDestroyArgs'] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
@@ -93,7 +93,7 @@ class ConfigurationApplyArgs:
     @pulumi.getter(name="applyMode")
     def apply_mode(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        The mode of the apply operation
+        The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         """
         return pulumi.get(self, "apply_mode")
 
@@ -158,10 +158,11 @@ class _ConfigurationApplyState:
                  machine_configuration_input: Optional[pulumi.Input[_builtins.str]] = None,
                  node: Optional[pulumi.Input[_builtins.str]] = None,
                  on_destroy: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']] = None,
+                 resolved_apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
                  timeouts: Optional[pulumi.Input['TimeoutArgs']] = None):
         """
         Input properties used for looking up and filtering ConfigurationApply resources.
-        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation
+        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
@@ -169,6 +170,7 @@ class _ConfigurationApplyState:
         :param pulumi.Input[_builtins.str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
         :param pulumi.Input['ConfigurationApplyOnDestroyArgs'] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        :param pulumi.Input[_builtins.str] resolved_apply_mode: The actual apply mode used. When apply_mode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals apply_mode for other modes.
         """
         if apply_mode is not None:
             pulumi.set(__self__, "apply_mode", apply_mode)
@@ -186,6 +188,8 @@ class _ConfigurationApplyState:
             pulumi.set(__self__, "node", node)
         if on_destroy is not None:
             pulumi.set(__self__, "on_destroy", on_destroy)
+        if resolved_apply_mode is not None:
+            pulumi.set(__self__, "resolved_apply_mode", resolved_apply_mode)
         if timeouts is not None:
             pulumi.set(__self__, "timeouts", timeouts)
 
@@ -193,7 +197,7 @@ class _ConfigurationApplyState:
     @pulumi.getter(name="applyMode")
     def apply_mode(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        The mode of the apply operation
+        The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         """
         return pulumi.get(self, "apply_mode")
 
@@ -286,6 +290,18 @@ class _ConfigurationApplyState:
         pulumi.set(self, "on_destroy", value)
 
     @_builtins.property
+    @pulumi.getter(name="resolvedApplyMode")
+    def resolved_apply_mode(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The actual apply mode used. When apply_mode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals apply_mode for other modes.
+        """
+        return pulumi.get(self, "resolved_apply_mode")
+
+    @resolved_apply_mode.setter
+    def resolved_apply_mode(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "resolved_apply_mode", value)
+
+    @_builtins.property
     @pulumi.getter
     def timeouts(self) -> Optional[pulumi.Input['TimeoutArgs']]:
         return pulumi.get(self, "timeouts")
@@ -315,7 +331,7 @@ class ConfigurationApply(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation
+        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The client configuration data
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
@@ -379,6 +395,7 @@ class ConfigurationApply(pulumi.CustomResource):
             __props__.__dict__["on_destroy"] = on_destroy
             __props__.__dict__["timeouts"] = timeouts
             __props__.__dict__["machine_configuration"] = None
+            __props__.__dict__["resolved_apply_mode"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["machineConfiguration", "machineConfigurationInput"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ConfigurationApply, __self__).__init__(
@@ -399,6 +416,7 @@ class ConfigurationApply(pulumi.CustomResource):
             machine_configuration_input: Optional[pulumi.Input[_builtins.str]] = None,
             node: Optional[pulumi.Input[_builtins.str]] = None,
             on_destroy: Optional[pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
+            resolved_apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
             timeouts: Optional[pulumi.Input[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None) -> 'ConfigurationApply':
         """
         Get an existing ConfigurationApply resource's state with the given name, id, and optional extra
@@ -407,7 +425,7 @@ class ConfigurationApply(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation
+        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The client configuration data
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
@@ -415,6 +433,7 @@ class ConfigurationApply(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] machine_configuration_input: The machine configuration to apply
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
         :param pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        :param pulumi.Input[_builtins.str] resolved_apply_mode: The actual apply mode used. When apply_mode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals apply_mode for other modes.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -428,6 +447,7 @@ class ConfigurationApply(pulumi.CustomResource):
         __props__.__dict__["machine_configuration_input"] = machine_configuration_input
         __props__.__dict__["node"] = node
         __props__.__dict__["on_destroy"] = on_destroy
+        __props__.__dict__["resolved_apply_mode"] = resolved_apply_mode
         __props__.__dict__["timeouts"] = timeouts
         return ConfigurationApply(resource_name, opts=opts, __props__=__props__)
 
@@ -435,7 +455,7 @@ class ConfigurationApply(pulumi.CustomResource):
     @pulumi.getter(name="applyMode")
     def apply_mode(self) -> pulumi.Output[_builtins.str]:
         """
-        The mode of the apply operation
+        The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         """
         return pulumi.get(self, "apply_mode")
 
@@ -494,6 +514,14 @@ class ConfigurationApply(pulumi.CustomResource):
         Actions to be taken on destroy, if *reset* is not set this is a no-op.
         """
         return pulumi.get(self, "on_destroy")
+
+    @_builtins.property
+    @pulumi.getter(name="resolvedApplyMode")
+    def resolved_apply_mode(self) -> pulumi.Output[_builtins.str]:
+        """
+        The actual apply mode used. When apply_mode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals apply_mode for other modes.
+        """
+        return pulumi.get(self, "resolved_apply_mode")
 
     @_builtins.property
     @pulumi.getter
