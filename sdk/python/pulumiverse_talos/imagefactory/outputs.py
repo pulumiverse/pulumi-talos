@@ -15,6 +15,7 @@ else:
 from .. import _utilities
 
 __all__ = [
+    'GetExtensionsVersionsExactFiltersResult',
     'GetExtensionsVersionsExtensionsInfoResult',
     'GetExtensionsVersionsFiltersResult',
     'GetOverlaysVersionsFiltersResult',
@@ -22,6 +23,25 @@ __all__ = [
     'GetUrlsUrlsResult',
     'GetVersionsFiltersResult',
 ]
+
+@pulumi.output_type
+class GetExtensionsVersionsExactFiltersResult(dict):
+    def __init__(__self__, *,
+                 names: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param Sequence[_builtins.str] names: The exact name match of the extension to filter by.
+        """
+        if names is not None:
+            pulumi.set(__self__, "names", names)
+
+    @_builtins.property
+    @pulumi.getter
+    def names(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The exact name match of the extension to filter by.
+        """
+        return pulumi.get(self, "names")
+
 
 @pulumi.output_type
 class GetExtensionsVersionsExtensionsInfoResult(dict):

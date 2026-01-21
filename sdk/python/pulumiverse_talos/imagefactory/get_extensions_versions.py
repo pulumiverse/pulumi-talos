@@ -28,7 +28,10 @@ class GetExtensionsVersionsResult:
     """
     A collection of values returned by getExtensionsVersions.
     """
-    def __init__(__self__, extensions_infos=None, filters=None, id=None, talos_version=None):
+    def __init__(__self__, exact_filters=None, extensions_infos=None, filters=None, id=None, talos_version=None):
+        if exact_filters and not isinstance(exact_filters, dict):
+            raise TypeError("Expected argument 'exact_filters' to be a dict")
+        pulumi.set(__self__, "exact_filters", exact_filters)
         if extensions_infos and not isinstance(extensions_infos, list):
             raise TypeError("Expected argument 'extensions_infos' to be a list")
         pulumi.set(__self__, "extensions_infos", extensions_infos)
@@ -41,6 +44,14 @@ class GetExtensionsVersionsResult:
         if talos_version and not isinstance(talos_version, str):
             raise TypeError("Expected argument 'talos_version' to be a str")
         pulumi.set(__self__, "talos_version", talos_version)
+
+    @_builtins.property
+    @pulumi.getter(name="exactFilters")
+    def exact_filters(self) -> Optional['outputs.GetExtensionsVersionsExactFiltersResult']:
+        """
+        The filter to apply to the extensions list.
+        """
+        return pulumi.get(self, "exact_filters")
 
     @_builtins.property
     @pulumi.getter(name="extensionsInfos")
@@ -81,13 +92,15 @@ class AwaitableGetExtensionsVersionsResult(GetExtensionsVersionsResult):
         if False:
             yield self
         return GetExtensionsVersionsResult(
+            exact_filters=self.exact_filters,
             extensions_infos=self.extensions_infos,
             filters=self.filters,
             id=self.id,
             talos_version=self.talos_version)
 
 
-def get_extensions_versions(filters: Optional[Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict']] = None,
+def get_extensions_versions(exact_filters: Optional[Union['GetExtensionsVersionsExactFiltersArgs', 'GetExtensionsVersionsExactFiltersArgsDict']] = None,
+                            filters: Optional[Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict']] = None,
                             talos_version: Optional[_builtins.str] = None,
                             opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetExtensionsVersionsResult:
     """
@@ -109,21 +122,25 @@ def get_extensions_versions(filters: Optional[Union['GetExtensionsVersionsFilter
     ```
 
 
+    :param Union['GetExtensionsVersionsExactFiltersArgs', 'GetExtensionsVersionsExactFiltersArgsDict'] exact_filters: The filter to apply to the extensions list.
     :param Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict'] filters: The filter to apply to the extensions list.
     :param _builtins.str talos_version: The talos version to get extensions for.
     """
     __args__ = dict()
+    __args__['exactFilters'] = exact_filters
     __args__['filters'] = filters
     __args__['talosVersion'] = talos_version
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('talos:imageFactory/getExtensionsVersions:getExtensionsVersions', __args__, opts=opts, typ=GetExtensionsVersionsResult).value
 
     return AwaitableGetExtensionsVersionsResult(
+        exact_filters=pulumi.get(__ret__, 'exact_filters'),
         extensions_infos=pulumi.get(__ret__, 'extensions_infos'),
         filters=pulumi.get(__ret__, 'filters'),
         id=pulumi.get(__ret__, 'id'),
         talos_version=pulumi.get(__ret__, 'talos_version'))
-def get_extensions_versions_output(filters: Optional[pulumi.Input[Optional[Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict']]]] = None,
+def get_extensions_versions_output(exact_filters: Optional[pulumi.Input[Optional[Union['GetExtensionsVersionsExactFiltersArgs', 'GetExtensionsVersionsExactFiltersArgsDict']]]] = None,
+                                   filters: Optional[pulumi.Input[Optional[Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict']]]] = None,
                                    talos_version: Optional[pulumi.Input[_builtins.str]] = None,
                                    opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetExtensionsVersionsResult]:
     """
@@ -145,15 +162,18 @@ def get_extensions_versions_output(filters: Optional[pulumi.Input[Optional[Union
     ```
 
 
+    :param Union['GetExtensionsVersionsExactFiltersArgs', 'GetExtensionsVersionsExactFiltersArgsDict'] exact_filters: The filter to apply to the extensions list.
     :param Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict'] filters: The filter to apply to the extensions list.
     :param _builtins.str talos_version: The talos version to get extensions for.
     """
     __args__ = dict()
+    __args__['exactFilters'] = exact_filters
     __args__['filters'] = filters
     __args__['talosVersion'] = talos_version
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('talos:imageFactory/getExtensionsVersions:getExtensionsVersions', __args__, opts=opts, typ=GetExtensionsVersionsResult)
     return __ret__.apply(lambda __response__: GetExtensionsVersionsResult(
+        exact_filters=pulumi.get(__response__, 'exact_filters'),
         extensions_infos=pulumi.get(__response__, 'extensions_infos'),
         filters=pulumi.get(__response__, 'filters'),
         id=pulumi.get(__response__, 'id'),

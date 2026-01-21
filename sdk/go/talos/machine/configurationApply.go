@@ -16,7 +16,7 @@ import (
 type ConfigurationApply struct {
 	pulumi.CustomResourceState
 
-	// The mode of the apply operation
+	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode pulumi.StringOutput `pulumi:"applyMode"`
 	// The client configuration data
 	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
@@ -32,7 +32,9 @@ type ConfigurationApply struct {
 	Node pulumi.StringOutput `pulumi:"node"`
 	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
 	OnDestroy ConfigurationApplyOnDestroyPtrOutput `pulumi:"onDestroy"`
-	Timeouts  TimeoutPtrOutput                     `pulumi:"timeouts"`
+	// The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
+	ResolvedApplyMode pulumi.StringOutput `pulumi:"resolvedApplyMode"`
+	Timeouts          TimeoutPtrOutput    `pulumi:"timeouts"`
 }
 
 // NewConfigurationApply registers a new resource with the given unique name, arguments, and options.
@@ -82,7 +84,7 @@ func GetConfigurationApply(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ConfigurationApply resources.
 type configurationApplyState struct {
-	// The mode of the apply operation
+	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode *string `pulumi:"applyMode"`
 	// The client configuration data
 	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
@@ -98,11 +100,13 @@ type configurationApplyState struct {
 	Node *string `pulumi:"node"`
 	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
 	OnDestroy *ConfigurationApplyOnDestroy `pulumi:"onDestroy"`
-	Timeouts  *Timeout                     `pulumi:"timeouts"`
+	// The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
+	ResolvedApplyMode *string  `pulumi:"resolvedApplyMode"`
+	Timeouts          *Timeout `pulumi:"timeouts"`
 }
 
 type ConfigurationApplyState struct {
-	// The mode of the apply operation
+	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode pulumi.StringPtrInput
 	// The client configuration data
 	ClientConfiguration ClientConfigurationPtrInput
@@ -118,7 +122,9 @@ type ConfigurationApplyState struct {
 	Node pulumi.StringPtrInput
 	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
 	OnDestroy ConfigurationApplyOnDestroyPtrInput
-	Timeouts  TimeoutPtrInput
+	// The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
+	ResolvedApplyMode pulumi.StringPtrInput
+	Timeouts          TimeoutPtrInput
 }
 
 func (ConfigurationApplyState) ElementType() reflect.Type {
@@ -126,7 +132,7 @@ func (ConfigurationApplyState) ElementType() reflect.Type {
 }
 
 type configurationApplyArgs struct {
-	// The mode of the apply operation
+	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode *string `pulumi:"applyMode"`
 	// The client configuration data
 	ClientConfiguration ClientConfiguration `pulumi:"clientConfiguration"`
@@ -145,7 +151,7 @@ type configurationApplyArgs struct {
 
 // The set of arguments for constructing a ConfigurationApply resource.
 type ConfigurationApplyArgs struct {
-	// The mode of the apply operation
+	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode pulumi.StringPtrInput
 	// The client configuration data
 	ClientConfiguration ClientConfigurationInput
@@ -249,7 +255,7 @@ func (o ConfigurationApplyOutput) ToConfigurationApplyOutputWithContext(ctx cont
 	return o
 }
 
-// The mode of the apply operation
+// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 func (o ConfigurationApplyOutput) ApplyMode() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.ApplyMode }).(pulumi.StringOutput)
 }
@@ -287,6 +293,11 @@ func (o ConfigurationApplyOutput) Node() pulumi.StringOutput {
 // Actions to be taken on destroy, if *reset* is not set this is a no-op.
 func (o ConfigurationApplyOutput) OnDestroy() ConfigurationApplyOnDestroyPtrOutput {
 	return o.ApplyT(func(v *ConfigurationApply) ConfigurationApplyOnDestroyPtrOutput { return v.OnDestroy }).(ConfigurationApplyOnDestroyPtrOutput)
+}
+
+// The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
+func (o ConfigurationApplyOutput) ResolvedApplyMode() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.ResolvedApplyMode }).(pulumi.StringOutput)
 }
 
 func (o ConfigurationApplyOutput) Timeouts() TimeoutPtrOutput {

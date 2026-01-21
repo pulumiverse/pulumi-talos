@@ -17,7 +17,7 @@ namespace Pulumiverse.Talos.Machine
     public partial class ConfigurationApply : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The mode of the apply operation
+        /// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         /// </summary>
         [Output("applyMode")]
         public Output<string> ApplyMode { get; private set; } = null!;
@@ -63,6 +63,12 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         [Output("onDestroy")]
         public Output<Outputs.ConfigurationApplyOnDestroy?> OnDestroy { get; private set; } = null!;
+
+        /// <summary>
+        /// The actual apply mode used. When ApplyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals ApplyMode for other modes.
+        /// </summary>
+        [Output("resolvedApplyMode")]
+        public Output<string> ResolvedApplyMode { get; private set; } = null!;
 
         [Output("timeouts")]
         public Output<Outputs.Timeout?> Timeouts { get; private set; } = null!;
@@ -120,7 +126,7 @@ namespace Pulumiverse.Talos.Machine
     public sealed class ConfigurationApplyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The mode of the apply operation
+        /// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         /// </summary>
         [Input("applyMode")]
         public Input<string>? ApplyMode { get; set; }
@@ -189,7 +195,7 @@ namespace Pulumiverse.Talos.Machine
     public sealed class ConfigurationApplyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The mode of the apply operation
+        /// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         /// </summary>
         [Input("applyMode")]
         public Input<string>? ApplyMode { get; set; }
@@ -261,6 +267,12 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         [Input("onDestroy")]
         public Input<Inputs.ConfigurationApplyOnDestroyGetArgs>? OnDestroy { get; set; }
+
+        /// <summary>
+        /// The actual apply mode used. When ApplyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals ApplyMode for other modes.
+        /// </summary>
+        [Input("resolvedApplyMode")]
+        public Input<string>? ResolvedApplyMode { get; set; }
 
         [Input("timeouts")]
         public Input<Inputs.TimeoutGetArgs>? Timeouts { get; set; }

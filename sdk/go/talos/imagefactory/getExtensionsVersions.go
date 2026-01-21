@@ -57,6 +57,8 @@ func GetExtensionsVersions(ctx *pulumi.Context, args *GetExtensionsVersionsArgs,
 // A collection of arguments for invoking getExtensionsVersions.
 type GetExtensionsVersionsArgs struct {
 	// The filter to apply to the extensions list.
+	ExactFilters *GetExtensionsVersionsExactFilters `pulumi:"exactFilters"`
+	// The filter to apply to the extensions list.
 	Filters *GetExtensionsVersionsFilters `pulumi:"filters"`
 	// The talos version to get extensions for.
 	TalosVersion string `pulumi:"talosVersion"`
@@ -64,6 +66,8 @@ type GetExtensionsVersionsArgs struct {
 
 // A collection of values returned by getExtensionsVersions.
 type GetExtensionsVersionsResult struct {
+	// The filter to apply to the extensions list.
+	ExactFilters *GetExtensionsVersionsExactFilters `pulumi:"exactFilters"`
 	// The list of available extensions for the specified talos version.
 	ExtensionsInfos []GetExtensionsVersionsExtensionsInfo `pulumi:"extensionsInfos"`
 	// The filter to apply to the extensions list.
@@ -85,6 +89,8 @@ func GetExtensionsVersionsOutput(ctx *pulumi.Context, args GetExtensionsVersions
 
 // A collection of arguments for invoking getExtensionsVersions.
 type GetExtensionsVersionsOutputArgs struct {
+	// The filter to apply to the extensions list.
+	ExactFilters GetExtensionsVersionsExactFiltersPtrInput `pulumi:"exactFilters"`
 	// The filter to apply to the extensions list.
 	Filters GetExtensionsVersionsFiltersPtrInput `pulumi:"filters"`
 	// The talos version to get extensions for.
@@ -108,6 +114,11 @@ func (o GetExtensionsVersionsResultOutput) ToGetExtensionsVersionsResultOutput()
 
 func (o GetExtensionsVersionsResultOutput) ToGetExtensionsVersionsResultOutputWithContext(ctx context.Context) GetExtensionsVersionsResultOutput {
 	return o
+}
+
+// The filter to apply to the extensions list.
+func (o GetExtensionsVersionsResultOutput) ExactFilters() GetExtensionsVersionsExactFiltersPtrOutput {
+	return o.ApplyT(func(v GetExtensionsVersionsResult) *GetExtensionsVersionsExactFilters { return v.ExactFilters }).(GetExtensionsVersionsExactFiltersPtrOutput)
 }
 
 // The list of available extensions for the specified talos version.

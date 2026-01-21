@@ -38,7 +38,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
     }
 
     /**
-     * The mode of the apply operation
+     * The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
      */
     declare public readonly applyMode: pulumi.Output<string>;
     /**
@@ -69,6 +69,10 @@ export class ConfigurationApply extends pulumi.CustomResource {
      * Actions to be taken on destroy, if *reset* is not set this is a no-op.
      */
     declare public readonly onDestroy: pulumi.Output<outputs.machine.ConfigurationApplyOnDestroy | undefined>;
+    /**
+     * The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
+     */
+    declare public /*out*/ readonly resolvedApplyMode: pulumi.Output<string>;
     declare public readonly timeouts: pulumi.Output<outputs.machine.Timeout | undefined>;
 
     /**
@@ -92,6 +96,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
             resourceInputs["machineConfigurationInput"] = state?.machineConfigurationInput;
             resourceInputs["node"] = state?.node;
             resourceInputs["onDestroy"] = state?.onDestroy;
+            resourceInputs["resolvedApplyMode"] = state?.resolvedApplyMode;
             resourceInputs["timeouts"] = state?.timeouts;
         } else {
             const args = argsOrState as ConfigurationApplyArgs | undefined;
@@ -113,6 +118,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
             resourceInputs["onDestroy"] = args?.onDestroy;
             resourceInputs["timeouts"] = args?.timeouts;
             resourceInputs["machineConfiguration"] = undefined /*out*/;
+            resourceInputs["resolvedApplyMode"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["machineConfiguration", "machineConfigurationInput"] };
@@ -126,7 +132,7 @@ export class ConfigurationApply extends pulumi.CustomResource {
  */
 export interface ConfigurationApplyState {
     /**
-     * The mode of the apply operation
+     * The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
      */
     applyMode?: pulumi.Input<string>;
     /**
@@ -157,6 +163,10 @@ export interface ConfigurationApplyState {
      * Actions to be taken on destroy, if *reset* is not set this is a no-op.
      */
     onDestroy?: pulumi.Input<inputs.machine.ConfigurationApplyOnDestroy>;
+    /**
+     * The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
+     */
+    resolvedApplyMode?: pulumi.Input<string>;
     timeouts?: pulumi.Input<inputs.machine.Timeout>;
 }
 
@@ -165,7 +175,7 @@ export interface ConfigurationApplyState {
  */
 export interface ConfigurationApplyArgs {
     /**
-     * The mode of the apply operation
+     * The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
      */
     applyMode?: pulumi.Input<string>;
     /**

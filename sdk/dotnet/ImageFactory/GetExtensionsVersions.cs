@@ -115,6 +115,12 @@ namespace Pulumiverse.Talos.ImageFactory
         /// <summary>
         /// The filter to apply to the extensions list.
         /// </summary>
+        [Input("exactFilters")]
+        public Inputs.GetExtensionsVersionsExactFiltersArgs? ExactFilters { get; set; }
+
+        /// <summary>
+        /// The filter to apply to the extensions list.
+        /// </summary>
         [Input("filters")]
         public Inputs.GetExtensionsVersionsFiltersArgs? Filters { get; set; }
 
@@ -132,6 +138,12 @@ namespace Pulumiverse.Talos.ImageFactory
 
     public sealed class GetExtensionsVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The filter to apply to the extensions list.
+        /// </summary>
+        [Input("exactFilters")]
+        public Input<Inputs.GetExtensionsVersionsExactFiltersInputArgs>? ExactFilters { get; set; }
+
         /// <summary>
         /// The filter to apply to the extensions list.
         /// </summary>
@@ -155,6 +167,10 @@ namespace Pulumiverse.Talos.ImageFactory
     public sealed class GetExtensionsVersionsResult
     {
         /// <summary>
+        /// The filter to apply to the extensions list.
+        /// </summary>
+        public readonly Outputs.GetExtensionsVersionsExactFiltersResult? ExactFilters;
+        /// <summary>
         /// The list of available extensions for the specified talos version.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetExtensionsVersionsExtensionsInfoResult> ExtensionsInfos;
@@ -173,6 +189,8 @@ namespace Pulumiverse.Talos.ImageFactory
 
         [OutputConstructor]
         private GetExtensionsVersionsResult(
+            Outputs.GetExtensionsVersionsExactFiltersResult? exactFilters,
+
             ImmutableArray<Outputs.GetExtensionsVersionsExtensionsInfoResult> extensionsInfos,
 
             Outputs.GetExtensionsVersionsFiltersResult? filters,
@@ -181,6 +199,7 @@ namespace Pulumiverse.Talos.ImageFactory
 
             string talosVersion)
         {
+            ExactFilters = exactFilters;
             ExtensionsInfos = extensionsInfos;
             Filters = filters;
             Id = id;
