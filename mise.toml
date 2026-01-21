@@ -1,3 +1,0 @@
-# Overwrites mise configuration at .config/mise.toml
-[tools]
-golangci-lint = "2.5.0"
