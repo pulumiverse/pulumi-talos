@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumiverse/talos";
  *
- * const _this = talos.imageFactory.getUrls({
+ * const _this = talos.imagefactory.getUrls({
  *     talosVersion: "v1.7.5",
  *     schematicId: "376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
  *     platform: "metal",
@@ -66,7 +66,7 @@ export interface GetUrlsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumiverse/talos";
  *
- * const _this = talos.imageFactory.getUrls({
+ * const _this = talos.imagefactory.getUrls({
  *     talosVersion: "v1.7.5",
  *     schematicId: "376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
  *     platform: "metal",
@@ -89,9 +89,9 @@ export function getUrlsOutput(args: GetUrlsOutputArgs, opts?: pulumi.InvokeOutpu
  * A collection of arguments for invoking getUrls.
  */
 export interface GetUrlsOutputArgs {
-    architecture?: pulumi.Input<string>;
-    platform?: pulumi.Input<string>;
-    sbc?: pulumi.Input<string>;
+    architecture?: pulumi.Input<string | undefined>;
+    platform?: pulumi.Input<string | undefined>;
+    sbc?: pulumi.Input<string | undefined>;
     schematicId: pulumi.Input<string>;
     talosVersion: pulumi.Input<string>;
 }

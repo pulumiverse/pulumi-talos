@@ -70,7 +70,7 @@ export interface SchematicState {
     /**
      * The schematic yaml respresentation to generate the image.
      */
-    schematic?: pulumi.Input<string>;
+    schematic?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -80,5 +80,5 @@ export interface SchematicArgs {
     /**
      * The schematic yaml respresentation to generate the image.
      */
-    schematic?: pulumi.Input<string>;
+    schematic?: pulumi.Input<string | undefined>;
 }

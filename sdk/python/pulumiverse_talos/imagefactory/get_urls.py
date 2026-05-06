@@ -116,7 +116,7 @@ def get_urls(architecture: Optional[_builtins.str] = None,
     import pulumi
     import pulumi_talos as talos
 
-    this = talos.imageFactory.get_urls(talos_version="v1.7.5",
+    this = talos.imagefactory.get_urls(talos_version="v1.7.5",
         schematic_id="376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
         platform="metal")
     pulumi.export("installerImage", this.urls.installer)
@@ -139,11 +139,11 @@ def get_urls(architecture: Optional[_builtins.str] = None,
         schematic_id=pulumi.get(__ret__, 'schematic_id'),
         talos_version=pulumi.get(__ret__, 'talos_version'),
         urls=pulumi.get(__ret__, 'urls'))
-def get_urls_output(architecture: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                    platform: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                    sbc: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                    schematic_id: Optional[pulumi.Input[_builtins.str]] = None,
-                    talos_version: Optional[pulumi.Input[_builtins.str]] = None,
+def get_urls_output(architecture: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                    platform: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                    sbc: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                    schematic_id: pulumi.Input[Optional[_builtins.str]] = None,
+                    talos_version: pulumi.Input[Optional[_builtins.str]] = None,
                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetUrlsResult]:
     """
     Generates URLs for different assets supported by the Talos image factory.
@@ -154,7 +154,7 @@ def get_urls_output(architecture: Optional[pulumi.Input[Optional[_builtins.str]]
     import pulumi
     import pulumi_talos as talos
 
-    this = talos.imageFactory.get_urls(talos_version="v1.7.5",
+    this = talos.imagefactory.get_urls(talos_version="v1.7.5",
         schematic_id="376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba",
         platform="metal")
     pulumi.export("installerImage", this.urls.installer)

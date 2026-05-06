@@ -112,7 +112,7 @@ def get_extensions_versions(exact_filters: Optional[Union['GetExtensionsVersions
     import pulumi
     import pulumi_talos as talos
 
-    this = talos.imageFactory.get_extensions_versions(talos_version="v1.7.5",
+    this = talos.imagefactory.get_extensions_versions(talos_version="v1.7.5",
         filters={
             "names": [
                 "amdgpu",
@@ -139,9 +139,9 @@ def get_extensions_versions(exact_filters: Optional[Union['GetExtensionsVersions
         filters=pulumi.get(__ret__, 'filters'),
         id=pulumi.get(__ret__, 'id'),
         talos_version=pulumi.get(__ret__, 'talos_version'))
-def get_extensions_versions_output(exact_filters: Optional[pulumi.Input[Optional[Union['GetExtensionsVersionsExactFiltersArgs', 'GetExtensionsVersionsExactFiltersArgsDict']]]] = None,
-                                   filters: Optional[pulumi.Input[Optional[Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict']]]] = None,
-                                   talos_version: Optional[pulumi.Input[_builtins.str]] = None,
+def get_extensions_versions_output(exact_filters: pulumi.Input[Optional[Optional[Union['GetExtensionsVersionsExactFiltersArgs', 'GetExtensionsVersionsExactFiltersArgsDict']]]] = None,
+                                   filters: pulumi.Input[Optional[Optional[Union['GetExtensionsVersionsFiltersArgs', 'GetExtensionsVersionsFiltersArgsDict']]]] = None,
+                                   talos_version: pulumi.Input[Optional[_builtins.str]] = None,
                                    opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetExtensionsVersionsResult]:
     """
     The image factory extensions versions data source provides a list of available extensions for a specific talos version from the image factory.
@@ -152,7 +152,7 @@ def get_extensions_versions_output(exact_filters: Optional[pulumi.Input[Optional
     import pulumi
     import pulumi_talos as talos
 
-    this = talos.imageFactory.get_extensions_versions(talos_version="v1.7.5",
+    this = talos.imagefactory.get_extensions_versions(talos_version="v1.7.5",
         filters={
             "names": [
                 "amdgpu",

@@ -166,11 +166,11 @@ def get_kubeconfig(client_configuration: Optional[Union['GetKubeconfigClientConf
         node=pulumi.get(__ret__, 'node'),
         timeouts=pulumi.get(__ret__, 'timeouts'),
         wait=pulumi.get(__ret__, 'wait'))
-def get_kubeconfig_output(client_configuration: Optional[pulumi.Input[Union['GetKubeconfigClientConfigurationArgs', 'GetKubeconfigClientConfigurationArgsDict']]] = None,
-                          endpoint: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                          node: Optional[pulumi.Input[_builtins.str]] = None,
-                          timeouts: Optional[pulumi.Input[Optional[Union['GetKubeconfigTimeoutsArgs', 'GetKubeconfigTimeoutsArgsDict']]]] = None,
-                          wait: Optional[pulumi.Input[Optional[_builtins.bool]]] = None,
+def get_kubeconfig_output(client_configuration: pulumi.Input[Optional[Union['GetKubeconfigClientConfigurationArgs', 'GetKubeconfigClientConfigurationArgsDict']]] = None,
+                          endpoint: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                          node: pulumi.Input[Optional[_builtins.str]] = None,
+                          timeouts: pulumi.Input[Optional[Optional[Union['GetKubeconfigTimeoutsArgs', 'GetKubeconfigTimeoutsArgsDict']]]] = None,
+                          wait: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
                           opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetKubeconfigResult]:
     """
     Retrieves the kubeconfig for a Talos cluster

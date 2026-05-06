@@ -16,21 +16,32 @@ import (
 type ConfigurationApply struct {
 	pulumi.CustomResourceState
 
-	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+	// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode pulumi.StringOutput `pulumi:"applyMode"`
 	// The client configuration data
-	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
+	ClientConfiguration ClientConfigurationPtrOutput `pulumi:"clientConfiguration"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo ConfigurationApplyClientConfigurationWoPtrOutput `pulumi:"clientConfigurationWo"`
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayOutput `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringOutput `pulumi:"endpoint"`
 	// The generated machine configuration after applying patches
 	MachineConfiguration pulumi.StringOutput `pulumi:"machineConfiguration"`
+	// SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to machineConfigurationInputWo — which is write-only and itself invisible to state — still surface as plan diffs.
+	MachineConfigurationHash pulumi.StringOutput `pulumi:"machineConfigurationHash"`
 	// The machine configuration to apply
-	MachineConfigurationInput pulumi.StringOutput `pulumi:"machineConfigurationInput"`
+	MachineConfigurationInput pulumi.StringPtrOutput `pulumi:"machineConfigurationInput"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The machine configuration to apply (write-only). Use this instead of machineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+	MachineConfigurationInputWo pulumi.StringPtrOutput `pulumi:"machineConfigurationInputWo"`
 	// The name of the node to bootstrap
 	Node pulumi.StringOutput `pulumi:"node"`
 	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	//
+	// > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+	// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
 	OnDestroy ConfigurationApplyOnDestroyPtrOutput `pulumi:"onDestroy"`
 	// The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
 	ResolvedApplyMode pulumi.StringOutput `pulumi:"resolvedApplyMode"`
@@ -44,21 +55,23 @@ func NewConfigurationApply(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.ClientConfiguration == nil {
-		return nil, errors.New("invalid value for required argument 'ClientConfiguration'")
-	}
-	if args.MachineConfigurationInput == nil {
-		return nil, errors.New("invalid value for required argument 'MachineConfigurationInput'")
-	}
 	if args.Node == nil {
 		return nil, errors.New("invalid value for required argument 'Node'")
 	}
+	if args.ClientConfigurationWo != nil {
+		args.ClientConfigurationWo = pulumi.ToSecret(args.ClientConfigurationWo).(ConfigurationApplyClientConfigurationWoPtrInput)
+	}
 	if args.MachineConfigurationInput != nil {
-		args.MachineConfigurationInput = pulumi.ToSecret(args.MachineConfigurationInput).(pulumi.StringInput)
+		args.MachineConfigurationInput = pulumi.ToSecret(args.MachineConfigurationInput).(pulumi.StringPtrInput)
+	}
+	if args.MachineConfigurationInputWo != nil {
+		args.MachineConfigurationInputWo = pulumi.ToSecret(args.MachineConfigurationInputWo).(pulumi.StringPtrInput)
 	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientConfigurationWo",
 		"machineConfiguration",
 		"machineConfigurationInput",
+		"machineConfigurationInputWo",
 	})
 	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
@@ -84,21 +97,32 @@ func GetConfigurationApply(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ConfigurationApply resources.
 type configurationApplyState struct {
-	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+	// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode *string `pulumi:"applyMode"`
 	// The client configuration data
 	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo *ConfigurationApplyClientConfigurationWo `pulumi:"clientConfigurationWo"`
 	// The list of config patches to apply
 	ConfigPatches []string `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
 	Endpoint *string `pulumi:"endpoint"`
 	// The generated machine configuration after applying patches
 	MachineConfiguration *string `pulumi:"machineConfiguration"`
+	// SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to machineConfigurationInputWo — which is write-only and itself invisible to state — still surface as plan diffs.
+	MachineConfigurationHash *string `pulumi:"machineConfigurationHash"`
 	// The machine configuration to apply
 	MachineConfigurationInput *string `pulumi:"machineConfigurationInput"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The machine configuration to apply (write-only). Use this instead of machineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+	MachineConfigurationInputWo *string `pulumi:"machineConfigurationInputWo"`
 	// The name of the node to bootstrap
 	Node *string `pulumi:"node"`
 	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	//
+	// > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+	// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
 	OnDestroy *ConfigurationApplyOnDestroy `pulumi:"onDestroy"`
 	// The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
 	ResolvedApplyMode *string  `pulumi:"resolvedApplyMode"`
@@ -106,21 +130,32 @@ type configurationApplyState struct {
 }
 
 type ConfigurationApplyState struct {
-	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+	// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode pulumi.StringPtrInput
 	// The client configuration data
 	ClientConfiguration ClientConfigurationPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo ConfigurationApplyClientConfigurationWoPtrInput
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayInput
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringPtrInput
 	// The generated machine configuration after applying patches
 	MachineConfiguration pulumi.StringPtrInput
+	// SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to machineConfigurationInputWo — which is write-only and itself invisible to state — still surface as plan diffs.
+	MachineConfigurationHash pulumi.StringPtrInput
 	// The machine configuration to apply
 	MachineConfigurationInput pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The machine configuration to apply (write-only). Use this instead of machineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+	MachineConfigurationInputWo pulumi.StringPtrInput
 	// The name of the node to bootstrap
 	Node pulumi.StringPtrInput
 	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	//
+	// > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+	// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
 	OnDestroy ConfigurationApplyOnDestroyPtrInput
 	// The actual apply mode used. When applyMode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals applyMode for other modes.
 	ResolvedApplyMode pulumi.StringPtrInput
@@ -132,38 +167,56 @@ func (ConfigurationApplyState) ElementType() reflect.Type {
 }
 
 type configurationApplyArgs struct {
-	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+	// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode *string `pulumi:"applyMode"`
 	// The client configuration data
-	ClientConfiguration ClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo *ConfigurationApplyClientConfigurationWo `pulumi:"clientConfigurationWo"`
 	// The list of config patches to apply
 	ConfigPatches []string `pulumi:"configPatches"`
 	// The endpoint of the machine to bootstrap
 	Endpoint *string `pulumi:"endpoint"`
 	// The machine configuration to apply
-	MachineConfigurationInput string `pulumi:"machineConfigurationInput"`
+	MachineConfigurationInput *string `pulumi:"machineConfigurationInput"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The machine configuration to apply (write-only). Use this instead of machineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+	MachineConfigurationInputWo *string `pulumi:"machineConfigurationInputWo"`
 	// The name of the node to bootstrap
 	Node string `pulumi:"node"`
 	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	//
+	// > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+	// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
 	OnDestroy *ConfigurationApplyOnDestroy `pulumi:"onDestroy"`
 	Timeouts  *Timeout                     `pulumi:"timeouts"`
 }
 
 // The set of arguments for constructing a ConfigurationApply resource.
 type ConfigurationApplyArgs struct {
-	// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+	// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 	ApplyMode pulumi.StringPtrInput
 	// The client configuration data
-	ClientConfiguration ClientConfigurationInput
+	ClientConfiguration ClientConfigurationPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo ConfigurationApplyClientConfigurationWoPtrInput
 	// The list of config patches to apply
 	ConfigPatches pulumi.StringArrayInput
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringPtrInput
 	// The machine configuration to apply
-	MachineConfigurationInput pulumi.StringInput
+	MachineConfigurationInput pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The machine configuration to apply (write-only). Use this instead of machineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+	MachineConfigurationInputWo pulumi.StringPtrInput
 	// The name of the node to bootstrap
 	Node pulumi.StringInput
 	// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+	//
+	// > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+	// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
 	OnDestroy ConfigurationApplyOnDestroyPtrInput
 	Timeouts  TimeoutPtrInput
 }
@@ -255,14 +308,22 @@ func (o ConfigurationApplyOutput) ToConfigurationApplyOutputWithContext(ctx cont
 	return o
 }
 
-// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
 func (o ConfigurationApplyOutput) ApplyMode() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.ApplyMode }).(pulumi.StringOutput)
 }
 
 // The client configuration data
-func (o ConfigurationApplyOutput) ClientConfiguration() ClientConfigurationOutput {
-	return o.ApplyT(func(v *ConfigurationApply) ClientConfigurationOutput { return v.ClientConfiguration }).(ClientConfigurationOutput)
+func (o ConfigurationApplyOutput) ClientConfiguration() ClientConfigurationPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApply) ClientConfigurationPtrOutput { return v.ClientConfiguration }).(ClientConfigurationPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+func (o ConfigurationApplyOutput) ClientConfigurationWo() ConfigurationApplyClientConfigurationWoPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApply) ConfigurationApplyClientConfigurationWoPtrOutput {
+		return v.ClientConfigurationWo
+	}).(ConfigurationApplyClientConfigurationWoPtrOutput)
 }
 
 // The list of config patches to apply
@@ -280,9 +341,20 @@ func (o ConfigurationApplyOutput) MachineConfiguration() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.MachineConfiguration }).(pulumi.StringOutput)
 }
 
+// SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to machineConfigurationInputWo — which is write-only and itself invisible to state — still surface as plan diffs.
+func (o ConfigurationApplyOutput) MachineConfigurationHash() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.MachineConfigurationHash }).(pulumi.StringOutput)
+}
+
 // The machine configuration to apply
-func (o ConfigurationApplyOutput) MachineConfigurationInput() pulumi.StringOutput {
-	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringOutput { return v.MachineConfigurationInput }).(pulumi.StringOutput)
+func (o ConfigurationApplyOutput) MachineConfigurationInput() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringPtrOutput { return v.MachineConfigurationInput }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The machine configuration to apply (write-only). Use this instead of machineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+func (o ConfigurationApplyOutput) MachineConfigurationInputWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApply) pulumi.StringPtrOutput { return v.MachineConfigurationInputWo }).(pulumi.StringPtrOutput)
 }
 
 // The name of the node to bootstrap
@@ -291,6 +363,9 @@ func (o ConfigurationApplyOutput) Node() pulumi.StringOutput {
 }
 
 // Actions to be taken on destroy, if *reset* is not set this is a no-op.
+//
+// > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
 func (o ConfigurationApplyOutput) OnDestroy() ConfigurationApplyOnDestroyPtrOutput {
 	return o.ApplyT(func(v *ConfigurationApply) ConfigurationApplyOnDestroyPtrOutput { return v.OnDestroy }).(ConfigurationApplyOnDestroyPtrOutput)
 }

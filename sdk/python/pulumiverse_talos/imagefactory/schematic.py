@@ -19,9 +19,10 @@ __all__ = ['SchematicArgs', 'Schematic']
 @pulumi.input_type
 class SchematicArgs:
     def __init__(__self__, *,
-                 schematic: Optional[pulumi.Input[_builtins.str]] = None):
+                 schematic: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a Schematic resource.
+
         :param pulumi.Input[_builtins.str] schematic: The schematic yaml respresentation to generate the image.
         """
         if schematic is not None:
@@ -29,23 +30,24 @@ class SchematicArgs:
 
     @_builtins.property
     @pulumi.getter
-    def schematic(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def schematic(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The schematic yaml respresentation to generate the image.
         """
         return pulumi.get(self, "schematic")
 
     @schematic.setter
-    def schematic(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def schematic(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "schematic", value)
 
 
 @pulumi.input_type
 class _SchematicState:
     def __init__(__self__, *,
-                 schematic: Optional[pulumi.Input[_builtins.str]] = None):
+                 schematic: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Schematic resources.
+
         :param pulumi.Input[_builtins.str] schematic: The schematic yaml respresentation to generate the image.
         """
         if schematic is not None:
@@ -53,14 +55,14 @@ class _SchematicState:
 
     @_builtins.property
     @pulumi.getter
-    def schematic(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def schematic(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The schematic yaml respresentation to generate the image.
         """
         return pulumi.get(self, "schematic")
 
     @schematic.setter
-    def schematic(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def schematic(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "schematic", value)
 
 
@@ -70,10 +72,11 @@ class Schematic(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 schematic: Optional[pulumi.Input[_builtins.str]] = None,
+                 schematic: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         The image factory schematic resource allows you to create a schematic for a Talos image.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -87,6 +90,7 @@ class Schematic(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         The image factory schematic resource allows you to create a schematic for a Talos image.
+
 
         :param str resource_name: The name of the resource.
         :param SchematicArgs args: The arguments to use to populate this resource's properties.
@@ -103,7 +107,7 @@ class Schematic(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 schematic: Optional[pulumi.Input[_builtins.str]] = None,
+                 schematic: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -124,7 +128,7 @@ class Schematic(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            schematic: Optional[pulumi.Input[_builtins.str]] = None) -> 'Schematic':
+            schematic: pulumi.Input[Optional[_builtins.str]] = None) -> 'Schematic':
         """
         Get an existing Schematic resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumiverse/talos";
  *
- * const _this = talos.imageFactory.getExtensionsVersions({
+ * const _this = talos.imagefactory.getExtensionsVersions({
  *     talosVersion: "v1.7.5",
  *     filters: {
  *         names: [
@@ -87,7 +87,7 @@ export interface GetExtensionsVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumiverse/talos";
  *
- * const _this = talos.imageFactory.getExtensionsVersions({
+ * const _this = talos.imagefactory.getExtensionsVersions({
  *     talosVersion: "v1.7.5",
  *     filters: {
  *         names: [
@@ -114,11 +114,11 @@ export interface GetExtensionsVersionsOutputArgs {
     /**
      * The filter to apply to the extensions list.
      */
-    exactFilters?: pulumi.Input<inputs.imageFactory.GetExtensionsVersionsExactFiltersArgs>;
+    exactFilters?: pulumi.Input<inputs.imageFactory.GetExtensionsVersionsExactFiltersArgs | undefined>;
     /**
      * The filter to apply to the extensions list.
      */
-    filters?: pulumi.Input<inputs.imageFactory.GetExtensionsVersionsFiltersArgs>;
+    filters?: pulumi.Input<inputs.imageFactory.GetExtensionsVersionsFiltersArgs | undefined>;
     /**
      * The talos version to get extensions for.
      */

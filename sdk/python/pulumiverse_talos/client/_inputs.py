@@ -19,24 +19,19 @@ __all__ = [
     'GetConfigurationClientConfigurationArgsDict',
 ]
 
-MYPY = False
-
-if not MYPY:
-    class GetConfigurationClientConfigurationArgsDict(TypedDict):
-        ca_certificate: _builtins.str
-        """
-        The client CA certificate
-        """
-        client_certificate: _builtins.str
-        """
-        The client certificate
-        """
-        client_key: _builtins.str
-        """
-        The client key
-        """
-elif False:
-    GetConfigurationClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class GetConfigurationClientConfigurationArgsDict(TypedDict):
+    ca_certificate: _builtins.str
+    """
+    The client CA certificate
+    """
+    client_certificate: _builtins.str
+    """
+    The client certificate
+    """
+    client_key: _builtins.str
+    """
+    The client key
+    """
 
 @pulumi.input_type
 class GetConfigurationClientConfigurationArgs:

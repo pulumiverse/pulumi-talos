@@ -13,21 +13,14 @@ import (
 )
 
 // The machine bootstrap resource allows you to bootstrap a Talos node.
-//
-// ## Import
-//
-// terraform
-//
-// machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
-//
-// ```sh
-// $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
-// ```
 type Bootstrap struct {
 	pulumi.CustomResourceState
 
 	// The client configuration data
-	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
+	ClientConfiguration ClientConfigurationPtrOutput `pulumi:"clientConfiguration"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo BootstrapClientConfigurationWoPtrOutput `pulumi:"clientConfigurationWo"`
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringOutput `pulumi:"endpoint"`
 	// The name of the node to bootstrap
@@ -42,12 +35,16 @@ func NewBootstrap(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.ClientConfiguration == nil {
-		return nil, errors.New("invalid value for required argument 'ClientConfiguration'")
-	}
 	if args.Node == nil {
 		return nil, errors.New("invalid value for required argument 'Node'")
 	}
+	if args.ClientConfigurationWo != nil {
+		args.ClientConfigurationWo = pulumi.ToSecret(args.ClientConfigurationWo).(BootstrapClientConfigurationWoPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientConfigurationWo",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Bootstrap
 	err := ctx.RegisterResource("talos:machine/bootstrap:Bootstrap", name, args, &resource, opts...)
@@ -73,6 +70,9 @@ func GetBootstrap(ctx *pulumi.Context,
 type bootstrapState struct {
 	// The client configuration data
 	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo *BootstrapClientConfigurationWo `pulumi:"clientConfigurationWo"`
 	// The endpoint of the machine to bootstrap
 	Endpoint *string `pulumi:"endpoint"`
 	// The name of the node to bootstrap
@@ -83,6 +83,9 @@ type bootstrapState struct {
 type BootstrapState struct {
 	// The client configuration data
 	ClientConfiguration ClientConfigurationPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo BootstrapClientConfigurationWoPtrInput
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringPtrInput
 	// The name of the node to bootstrap
@@ -96,7 +99,10 @@ func (BootstrapState) ElementType() reflect.Type {
 
 type bootstrapArgs struct {
 	// The client configuration data
-	ClientConfiguration ClientConfiguration `pulumi:"clientConfiguration"`
+	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo *BootstrapClientConfigurationWo `pulumi:"clientConfigurationWo"`
 	// The endpoint of the machine to bootstrap
 	Endpoint *string `pulumi:"endpoint"`
 	// The name of the node to bootstrap
@@ -107,7 +113,10 @@ type bootstrapArgs struct {
 // The set of arguments for constructing a Bootstrap resource.
 type BootstrapArgs struct {
 	// The client configuration data
-	ClientConfiguration ClientConfigurationInput
+	ClientConfiguration ClientConfigurationPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+	ClientConfigurationWo BootstrapClientConfigurationWoPtrInput
 	// The endpoint of the machine to bootstrap
 	Endpoint pulumi.StringPtrInput
 	// The name of the node to bootstrap
@@ -203,8 +212,14 @@ func (o BootstrapOutput) ToBootstrapOutputWithContext(ctx context.Context) Boots
 }
 
 // The client configuration data
-func (o BootstrapOutput) ClientConfiguration() ClientConfigurationOutput {
-	return o.ApplyT(func(v *Bootstrap) ClientConfigurationOutput { return v.ClientConfiguration }).(ClientConfigurationOutput)
+func (o BootstrapOutput) ClientConfiguration() ClientConfigurationPtrOutput {
+	return o.ApplyT(func(v *Bootstrap) ClientConfigurationPtrOutput { return v.ClientConfiguration }).(ClientConfigurationPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+func (o BootstrapOutput) ClientConfigurationWo() BootstrapClientConfigurationWoPtrOutput {
+	return o.ApplyT(func(v *Bootstrap) BootstrapClientConfigurationWoPtrOutput { return v.ClientConfigurationWo }).(BootstrapClientConfigurationWoPtrOutput)
 }
 
 // The endpoint of the machine to bootstrap

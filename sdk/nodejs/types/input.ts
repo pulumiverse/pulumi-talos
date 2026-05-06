@@ -79,7 +79,7 @@ export namespace cluster {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
-        read?: pulumi.Input<string>;
+        read?: pulumi.Input<string | undefined>;
     }
 
     export interface GetKubeconfigClientConfiguration {
@@ -123,7 +123,7 @@ export namespace cluster {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
-        read?: pulumi.Input<string>;
+        read?: pulumi.Input<string | undefined>;
     }
 
     export interface KubeconfigClientConfiguration {
@@ -145,30 +145,30 @@ export namespace cluster {
         /**
          * The kubernetes CA certificate
          */
-        caCertificate?: pulumi.Input<string>;
+        caCertificate?: pulumi.Input<string | undefined>;
         /**
          * The kubernetes client certificate
          */
-        clientCertificate?: pulumi.Input<string>;
+        clientCertificate?: pulumi.Input<string | undefined>;
         /**
          * The kubernetes client key
          */
-        clientKey?: pulumi.Input<string>;
+        clientKey?: pulumi.Input<string | undefined>;
         /**
          * The kubernetes host
          */
-        host?: pulumi.Input<string>;
+        host?: pulumi.Input<string | undefined>;
     }
 
     export interface KubeconfigTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
-        create?: pulumi.Input<string>;
+        create?: pulumi.Input<string | undefined>;
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
-        update?: pulumi.Input<string>;
+        update?: pulumi.Input<string | undefined>;
     }
 }
 
@@ -184,7 +184,7 @@ export namespace imageFactory {
         /**
          * The exact name match of the extension to filter by.
          */
-        names?: pulumi.Input<pulumi.Input<string>[]>;
+        names?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     }
 
     export interface GetExtensionsVersionsFilters {
@@ -198,7 +198,7 @@ export namespace imageFactory {
         /**
          * The name of the extension to filter by.
          */
-        names?: pulumi.Input<pulumi.Input<string>[]>;
+        names?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     }
 
     export interface GetOverlaysVersionsFilters {
@@ -212,7 +212,7 @@ export namespace imageFactory {
         /**
          * The name of the overlay to filter by.
          */
-        name?: pulumi.Input<string>;
+        name?: pulumi.Input<string | undefined>;
     }
 
     export interface GetVersionsFilters {
@@ -226,16 +226,34 @@ export namespace imageFactory {
         /**
          * If set to true, only stable versions will be returned. If set to false, all versions will be returned.
          */
-        stableVersionsOnly?: pulumi.Input<boolean>;
+        stableVersionsOnly?: pulumi.Input<boolean | undefined>;
     }
 }
 
 export namespace machine {
+    export interface BootstrapClientConfigurationWo {
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client CA certificate
+         */
+        caCertificate: pulumi.Input<string>;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client certificate
+         */
+        clientCertificate: pulumi.Input<string>;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client key
+         */
+        clientKey: pulumi.Input<string>;
+    }
+
     export interface BootstrapTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
-        create?: pulumi.Input<string>;
+        create?: pulumi.Input<string | undefined>;
     }
 
     /**
@@ -334,19 +352,37 @@ export namespace machine {
         secret: pulumi.Input<string>;
     }
 
+    export interface ConfigurationApplyClientConfigurationWo {
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client CA certificate
+         */
+        caCertificate: pulumi.Input<string>;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client certificate
+         */
+        clientCertificate: pulumi.Input<string>;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client key
+         */
+        clientKey: pulumi.Input<string>;
+    }
+
     export interface ConfigurationApplyOnDestroy {
         /**
          * Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
          */
-        graceful?: pulumi.Input<boolean>;
+        graceful?: pulumi.Input<boolean | undefined>;
         /**
          * Reboot indicates whether node should reboot or halt after resetting. Default false
          */
-        reboot?: pulumi.Input<boolean>;
+        reboot?: pulumi.Input<boolean | undefined>;
         /**
          * Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
          */
-        reset?: pulumi.Input<boolean>;
+        reset?: pulumi.Input<boolean | undefined>;
     }
 
     export interface GetDisksClientConfiguration {
@@ -390,7 +426,7 @@ export namespace machine {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
          */
-        read?: pulumi.Input<string>;
+        read?: pulumi.Input<string | undefined>;
     }
 
     /**
@@ -438,7 +474,7 @@ export namespace machine {
         /**
          * The aescbc encryption secret for the talos kubernetes cluster
          */
-        aescbcEncryptionSecret?: pulumi.Input<string>;
+        aescbcEncryptionSecret?: pulumi.Input<string | undefined>;
         /**
          * The bootstrap token for the talos kubernetes cluster
          */
@@ -473,15 +509,15 @@ export namespace machine {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
-        create?: pulumi.Input<string>;
+        create?: pulumi.Input<string | undefined>;
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
          */
-        delete?: pulumi.Input<string>;
+        delete?: pulumi.Input<string | undefined>;
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
          */
-        update?: pulumi.Input<string>;
+        update?: pulumi.Input<string | undefined>;
     }
 
     /**

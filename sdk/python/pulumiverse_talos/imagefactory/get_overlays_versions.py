@@ -99,7 +99,7 @@ def get_overlays_versions(filters: Optional[Union['GetOverlaysVersionsFiltersArg
     import pulumi
     import pulumi_talos as talos
 
-    this = talos.imageFactory.get_overlays_versions(talos_version="v1.7.5",
+    this = talos.imagefactory.get_overlays_versions(talos_version="v1.7.5",
         filters={
             "name": "rock4cplus",
         })
@@ -120,8 +120,8 @@ def get_overlays_versions(filters: Optional[Union['GetOverlaysVersionsFiltersArg
         id=pulumi.get(__ret__, 'id'),
         overlays_infos=pulumi.get(__ret__, 'overlays_infos'),
         talos_version=pulumi.get(__ret__, 'talos_version'))
-def get_overlays_versions_output(filters: Optional[pulumi.Input[Optional[Union['GetOverlaysVersionsFiltersArgs', 'GetOverlaysVersionsFiltersArgsDict']]]] = None,
-                                 talos_version: Optional[pulumi.Input[_builtins.str]] = None,
+def get_overlays_versions_output(filters: pulumi.Input[Optional[Optional[Union['GetOverlaysVersionsFiltersArgs', 'GetOverlaysVersionsFiltersArgsDict']]]] = None,
+                                 talos_version: pulumi.Input[Optional[_builtins.str]] = None,
                                  opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetOverlaysVersionsResult]:
     """
     The image factory overlays versions data source provides a list of available overlays for a specific talos version from the image factory.
@@ -132,7 +132,7 @@ def get_overlays_versions_output(filters: Optional[pulumi.Input[Optional[Union['
     import pulumi
     import pulumi_talos as talos
 
-    this = talos.imageFactory.get_overlays_versions(talos_version="v1.7.5",
+    this = talos.imagefactory.get_overlays_versions(talos_version="v1.7.5",
         filters={
             "name": "rock4cplus",
         })

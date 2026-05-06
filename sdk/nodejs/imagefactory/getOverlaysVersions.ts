@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumiverse/talos";
  *
- * const _this = talos.imageFactory.getOverlaysVersions({
+ * const _this = talos.imagefactory.getOverlaysVersions({
  *     talosVersion: "v1.7.5",
  *     filters: {
  *         name: "rock4cplus",
@@ -75,7 +75,7 @@ export interface GetOverlaysVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as talos from "@pulumiverse/talos";
  *
- * const _this = talos.imageFactory.getOverlaysVersions({
+ * const _this = talos.imagefactory.getOverlaysVersions({
  *     talosVersion: "v1.7.5",
  *     filters: {
  *         name: "rock4cplus",
@@ -98,7 +98,7 @@ export interface GetOverlaysVersionsOutputArgs {
     /**
      * The filter to apply to the overlays list.
      */
-    filters?: pulumi.Input<inputs.imageFactory.GetOverlaysVersionsFiltersArgs>;
+    filters?: pulumi.Input<inputs.imageFactory.GetOverlaysVersionsFiltersArgs | undefined>;
     /**
      * The talos version to get overlays for.
      */

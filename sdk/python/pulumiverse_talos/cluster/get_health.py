@@ -155,12 +155,12 @@ def get_health(client_configuration: Optional[Union['GetHealthClientConfiguratio
         skip_kubernetes_checks=pulumi.get(__ret__, 'skip_kubernetes_checks'),
         timeouts=pulumi.get(__ret__, 'timeouts'),
         worker_nodes=pulumi.get(__ret__, 'worker_nodes'))
-def get_health_output(client_configuration: Optional[pulumi.Input[Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict']]] = None,
-                      control_plane_nodes: Optional[pulumi.Input[Sequence[_builtins.str]]] = None,
-                      endpoints: Optional[pulumi.Input[Sequence[_builtins.str]]] = None,
-                      skip_kubernetes_checks: Optional[pulumi.Input[Optional[_builtins.bool]]] = None,
-                      timeouts: Optional[pulumi.Input[Optional[Union['GetHealthTimeoutsArgs', 'GetHealthTimeoutsArgsDict']]]] = None,
-                      worker_nodes: Optional[pulumi.Input[Optional[Sequence[_builtins.str]]]] = None,
+def get_health_output(client_configuration: pulumi.Input[Optional[Union['GetHealthClientConfigurationArgs', 'GetHealthClientConfigurationArgsDict']]] = None,
+                      control_plane_nodes: pulumi.Input[Optional[Sequence[_builtins.str]]] = None,
+                      endpoints: pulumi.Input[Optional[Sequence[_builtins.str]]] = None,
+                      skip_kubernetes_checks: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
+                      timeouts: pulumi.Input[Optional[Optional[Union['GetHealthTimeoutsArgs', 'GetHealthTimeoutsArgsDict']]]] = None,
+                      worker_nodes: pulumi.Input[Optional[Optional[Sequence[_builtins.str]]]] = None,
                       opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetHealthResult]:
     """
     Waits for the Talos cluster to be healthy. Can be used as a dependency before running other operations on the cluster.

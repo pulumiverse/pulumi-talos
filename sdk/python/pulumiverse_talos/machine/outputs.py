@@ -16,7 +16,9 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'BootstrapClientConfigurationWo',
     'BootstrapTimeouts',
+    'ConfigurationApplyClientConfigurationWo',
     'ConfigurationApplyOnDestroy',
     'Timeout',
     'CertificateResult',
@@ -31,6 +33,73 @@ __all__ = [
     'GetDisksDiskResult',
     'GetDisksTimeoutsResult',
 ]
+
+@pulumi.output_type
+class BootstrapClientConfigurationWo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "caCertificate":
+            suggest = "ca_certificate"
+        elif key == "clientCertificate":
+            suggest = "client_certificate"
+        elif key == "clientKey":
+            suggest = "client_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BootstrapClientConfigurationWo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BootstrapClientConfigurationWo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BootstrapClientConfigurationWo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ca_certificate: _builtins.str,
+                 client_certificate: _builtins.str,
+                 client_key: _builtins.str):
+        """
+        :param _builtins.str ca_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client CA certificate
+        :param _builtins.str client_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client certificate
+        :param _builtins.str client_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client key
+        """
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @_builtins.property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @_builtins.property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @_builtins.property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
 
 @pulumi.output_type
 class BootstrapTimeouts(dict):
@@ -49,6 +118,73 @@ class BootstrapTimeouts(dict):
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         return pulumi.get(self, "create")
+
+
+@pulumi.output_type
+class ConfigurationApplyClientConfigurationWo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "caCertificate":
+            suggest = "ca_certificate"
+        elif key == "clientCertificate":
+            suggest = "client_certificate"
+        elif key == "clientKey":
+            suggest = "client_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConfigurationApplyClientConfigurationWo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConfigurationApplyClientConfigurationWo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConfigurationApplyClientConfigurationWo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ca_certificate: _builtins.str,
+                 client_certificate: _builtins.str,
+                 client_key: _builtins.str):
+        """
+        :param _builtins.str ca_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client CA certificate
+        :param _builtins.str client_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client certificate
+        :param _builtins.str client_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client key
+        """
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @_builtins.property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @_builtins.property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @_builtins.property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client key
+        """
+        return pulumi.get(self, "client_key")
 
 
 @pulumi.output_type
@@ -147,6 +283,7 @@ class CertificateResult(dict):
                  key: _builtins.str):
         """
         A Machine Secrets Certificate
+
         :param _builtins.str cert: Certificate
         :param _builtins.str key: Private Key
         """
@@ -267,6 +404,7 @@ class ClientConfiguration(dict):
                  client_key: _builtins.str):
         """
         A Client Configuration
+
         :param _builtins.str ca_certificate: The client CA certificate
         :param _builtins.str client_certificate: The client certificate
         :param _builtins.str client_key: The client private key
@@ -310,6 +448,7 @@ class ClusterResult(dict):
                  secret: _builtins.str):
         """
         A Machine Secrets Cluster Info
+
         :param _builtins.str id: Certificate
         :param _builtins.str secret: Private Key
         """
@@ -342,6 +481,7 @@ class KeyResult(dict):
                  key: _builtins.str):
         """
         A Machine Secrets Private Key
+
         :param _builtins.str key: Private Key
         """
         pulumi.set(__self__, "key", key)
@@ -387,6 +527,7 @@ class KubernetesSecretsResult(dict):
                  aescbc_encryption_secret: Optional[_builtins.str] = None):
         """
         A Machine Secrets Bootstrap data
+
         :param _builtins.str bootstrap_token: The bootstrap token for the talos kubernetes cluster
         :param _builtins.str secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
         :param _builtins.str aescbc_encryption_secret: The aescbc encryption secret for the talos kubernetes cluster
@@ -469,6 +610,7 @@ class TrustdInfoResult(dict):
                  token: _builtins.str):
         """
         A Machine Secrets Trust daemon info
+
         :param _builtins.str token: The trustd token for the talos kubernetes cluster
         """
         pulumi.set(__self__, "token", token)

@@ -27,16 +27,6 @@ namespace Pulumiverse.Talos.Machine
     /// 
     /// });
     /// ```
-    /// 
-    /// ## Import
-    /// 
-    /// terraform
-    /// 
-    /// machine secrets can be imported from an existing secrets file
-    /// 
-    /// ```sh
-    /// $ pulumi import talos:machine/secrets:Secrets this &lt;path-to-secrets.yaml&gt;
-    /// ```
     /// </summary>
     [TalosResourceType("talos:machine/secrets:Secrets")]
     public partial class Secrets : global::Pulumi.CustomResource
@@ -54,7 +44,7 @@ namespace Pulumiverse.Talos.Machine
         public Output<Outputs.MachineSecretsResult> MachineSecrets { get; private set; } = null!;
 
         /// <summary>
-        /// The version of talos features to use in generated machine configuration
+        /// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
         /// </summary>
         [Output("talosVersion")]
         public Output<string> TalosVersion { get; private set; } = null!;
@@ -107,7 +97,7 @@ namespace Pulumiverse.Talos.Machine
     public sealed class SecretsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The version of talos features to use in generated machine configuration
+        /// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
         /// </summary>
         [Input("talosVersion")]
         public Input<string>? TalosVersion { get; set; }
@@ -133,7 +123,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<Inputs.MachineSecretsGetArgs>? MachineSecrets { get; set; }
 
         /// <summary>
-        /// The version of talos features to use in generated machine configuration
+        /// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
         /// </summary>
         [Input("talosVersion")]
         public Input<string>? TalosVersion { get; set; }

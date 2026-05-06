@@ -64,7 +64,7 @@ export interface ProviderArgs {
     /**
      * The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
      */
-    imageFactoryUrl?: pulumi.Input<string>;
+    imageFactoryUrl?: pulumi.Input<string | undefined>;
 }
 
 export namespace Provider {

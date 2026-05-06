@@ -19,9 +19,10 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 image_factory_url: Optional[pulumi.Input[_builtins.str]] = None):
+                 image_factory_url: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a Provider resource.
+
         :param pulumi.Input[_builtins.str] image_factory_url: The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
         """
         if image_factory_url is not None:
@@ -29,14 +30,14 @@ class ProviderArgs:
 
     @_builtins.property
     @pulumi.getter(name="imageFactoryUrl")
-    def image_factory_url(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def image_factory_url(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The URL of Image Factory to generate schematics. If not set defaults to https://factory.talos.dev.
         """
         return pulumi.get(self, "image_factory_url")
 
     @image_factory_url.setter
-    def image_factory_url(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def image_factory_url(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "image_factory_url", value)
 
 
@@ -46,13 +47,14 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 image_factory_url: Optional[pulumi.Input[_builtins.str]] = None,
+                 image_factory_url: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         The provider type for the talos package. By default, resources use package-wide configuration
         settings, however an explicit `Provider` instance may be created and passed during resource
         construction to achieve fine-grained programmatic control over provider settings. See the
         [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -70,6 +72,7 @@ class Provider(pulumi.ProviderResource):
         construction to achieve fine-grained programmatic control over provider settings. See the
         [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
 
+
         :param str resource_name: The name of the resource.
         :param ProviderArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -85,7 +88,7 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 image_factory_url: Optional[pulumi.Input[_builtins.str]] = None,
+                 image_factory_url: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):

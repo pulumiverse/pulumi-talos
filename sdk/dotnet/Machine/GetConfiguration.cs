@@ -23,7 +23,6 @@ namespace Pulumiverse.Talos.Machine
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
         /// using Talos = Pulumiverse.Talos;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -55,7 +54,6 @@ namespace Pulumiverse.Talos.Machine
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
         /// using Talos = Pulumiverse.Talos;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -87,7 +85,6 @@ namespace Pulumiverse.Talos.Machine
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
         /// using Talos = Pulumiverse.Talos;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -167,7 +164,7 @@ namespace Pulumiverse.Talos.Machine
         public string MachineType { get; set; } = null!;
 
         /// <summary>
-        /// The version of talos features to use in generated machine configuration
+        /// The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `ConfigPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
         /// </summary>
         [Input("talosVersion")]
         public string? TalosVersion { get; set; }
@@ -235,7 +232,7 @@ namespace Pulumiverse.Talos.Machine
         public Input<string> MachineType { get; set; } = null!;
 
         /// <summary>
-        /// The version of talos features to use in generated machine configuration
+        /// The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `ConfigPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
         /// </summary>
         [Input("talosVersion")]
         public Input<string>? TalosVersion { get; set; }
@@ -291,7 +288,7 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         public readonly string MachineType;
         /// <summary>
-        /// The version of talos features to use in generated machine configuration
+        /// The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `ConfigPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
         /// </summary>
         public readonly string? TalosVersion;
 

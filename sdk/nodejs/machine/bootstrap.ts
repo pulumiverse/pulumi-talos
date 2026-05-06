@@ -8,16 +8,6 @@ import * as utilities from "../utilities";
 
 /**
  * The machine bootstrap resource allows you to bootstrap a Talos node.
- *
- * ## Import
- *
- * terraform
- *
- * machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
- *
- * ```sh
- * $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
- * ```
  */
 export class Bootstrap extends pulumi.CustomResource {
     /**
@@ -50,7 +40,12 @@ export class Bootstrap extends pulumi.CustomResource {
     /**
      * The client configuration data
      */
-    declare public readonly clientConfiguration: pulumi.Output<outputs.machine.ClientConfiguration>;
+    declare public readonly clientConfiguration: pulumi.Output<outputs.machine.ClientConfiguration | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+     */
+    declare public readonly clientConfigurationWo: pulumi.Output<outputs.machine.BootstrapClientConfigurationWo | undefined>;
     /**
      * The endpoint of the machine to bootstrap
      */
@@ -75,23 +70,24 @@ export class Bootstrap extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as BootstrapState | undefined;
             resourceInputs["clientConfiguration"] = state?.clientConfiguration;
+            resourceInputs["clientConfigurationWo"] = state?.clientConfigurationWo;
             resourceInputs["endpoint"] = state?.endpoint;
             resourceInputs["node"] = state?.node;
             resourceInputs["timeouts"] = state?.timeouts;
         } else {
             const args = argsOrState as BootstrapArgs | undefined;
-            if (args?.clientConfiguration === undefined && !opts.urn) {
-                throw new Error("Missing required property 'clientConfiguration'");
-            }
             if (args?.node === undefined && !opts.urn) {
                 throw new Error("Missing required property 'node'");
             }
             resourceInputs["clientConfiguration"] = args?.clientConfiguration;
+            resourceInputs["clientConfigurationWo"] = args?.clientConfigurationWo ? pulumi.secret(args.clientConfigurationWo) : undefined;
             resourceInputs["endpoint"] = args?.endpoint;
             resourceInputs["node"] = args?.node;
             resourceInputs["timeouts"] = args?.timeouts;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientConfigurationWo"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Bootstrap.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -103,16 +99,21 @@ export interface BootstrapState {
     /**
      * The client configuration data
      */
-    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration>;
+    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+     */
+    clientConfigurationWo?: pulumi.Input<inputs.machine.BootstrapClientConfigurationWo | undefined>;
     /**
      * The endpoint of the machine to bootstrap
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * The name of the node to bootstrap
      */
-    node?: pulumi.Input<string>;
-    timeouts?: pulumi.Input<inputs.machine.BootstrapTimeouts>;
+    node?: pulumi.Input<string | undefined>;
+    timeouts?: pulumi.Input<inputs.machine.BootstrapTimeouts | undefined>;
 }
 
 /**
@@ -122,14 +123,19 @@ export interface BootstrapArgs {
     /**
      * The client configuration data
      */
-    clientConfiguration: pulumi.Input<inputs.machine.ClientConfiguration>;
+    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The client configuration data (write-only). Use this instead of clientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+     */
+    clientConfigurationWo?: pulumi.Input<inputs.machine.BootstrapClientConfigurationWo | undefined>;
     /**
      * The endpoint of the machine to bootstrap
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * The name of the node to bootstrap
      */
     node: pulumi.Input<string>;
-    timeouts?: pulumi.Input<inputs.machine.BootstrapTimeouts>;
+    timeouts?: pulumi.Input<inputs.machine.BootstrapTimeouts | undefined>;
 }

@@ -112,10 +112,10 @@ export interface GetHealthOutputArgs {
     /**
      * Skip Kubernetes component checks, this is useful to check if the nodes has finished booting up and kubelet is running. Default is false.
      */
-    skipKubernetesChecks?: pulumi.Input<boolean>;
-    timeouts?: pulumi.Input<inputs.cluster.GetHealthTimeoutsArgs>;
+    skipKubernetesChecks?: pulumi.Input<boolean | undefined>;
+    timeouts?: pulumi.Input<inputs.cluster.GetHealthTimeoutsArgs | undefined>;
     /**
      * List of worker nodes to check for health.
      */
-    workerNodes?: pulumi.Input<pulumi.Input<string>[]>;
+    workerNodes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

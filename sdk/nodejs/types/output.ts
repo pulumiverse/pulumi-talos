@@ -228,6 +228,24 @@ export namespace imageFactory {
 }
 
 export namespace machine {
+    export interface BootstrapClientConfigurationWo {
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client CA certificate
+         */
+        caCertificate: string;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client certificate
+         */
+        clientCertificate: string;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client key
+         */
+        clientKey: string;
+    }
+
     export interface BootstrapTimeouts {
         /**
          * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
@@ -290,6 +308,24 @@ export namespace machine {
          * Private Key
          */
         secret: string;
+    }
+
+    export interface ConfigurationApplyClientConfigurationWo {
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client CA certificate
+         */
+        caCertificate: string;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client certificate
+         */
+        clientCertificate: string;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * The client key
+         */
+        clientKey: string;
     }
 
     export interface ConfigurationApplyOnDestroy {

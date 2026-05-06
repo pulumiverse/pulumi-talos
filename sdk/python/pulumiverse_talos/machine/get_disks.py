@@ -133,6 +133,20 @@ def get_disks(client_configuration: Optional[Union['GetDisksClientConfigurationA
 
     > **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `machine_get_disks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_talos as talos
+    import pulumiverse_talos as talos
+
+    this_secrets = talos.machine.Secrets("this")
+    this = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
+        node="10.5.0.2",
+        selector="disk.size > 6u * GB")
+    pulumi.export("nvmeDisks", this.apply(lambda this: [__item.name for __item in this.disks]))
+    ```
+
 
     :param Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict'] client_configuration: The client configuration data
     :param _builtins.str endpoint: endpoint to use for the talosclient. If not set, the node value will be used
@@ -158,16 +172,30 @@ def get_disks(client_configuration: Optional[Union['GetDisksClientConfigurationA
         node=pulumi.get(__ret__, 'node'),
         selector=pulumi.get(__ret__, 'selector'),
         timeouts=pulumi.get(__ret__, 'timeouts'))
-def get_disks_output(client_configuration: Optional[pulumi.Input[Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict']]] = None,
-                     endpoint: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                     node: Optional[pulumi.Input[_builtins.str]] = None,
-                     selector: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                     timeouts: Optional[pulumi.Input[Optional[Union['GetDisksTimeoutsArgs', 'GetDisksTimeoutsArgsDict']]]] = None,
+def get_disks_output(client_configuration: pulumi.Input[Optional[Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict']]] = None,
+                     endpoint: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                     node: pulumi.Input[Optional[_builtins.str]] = None,
+                     selector: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                     timeouts: pulumi.Input[Optional[Optional[Union['GetDisksTimeoutsArgs', 'GetDisksTimeoutsArgsDict']]]] = None,
                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetDisksResult]:
     """
     Generate a machine configuration for a node type
 
     > **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `machine_get_disks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_talos as talos
+    import pulumiverse_talos as talos
+
+    this_secrets = talos.machine.Secrets("this")
+    this = talos.machine.get_disks_output(client_configuration=this_secrets.client_configuration,
+        node="10.5.0.2",
+        selector="disk.size > 6u * GB")
+    pulumi.export("nvmeDisks", this.apply(lambda this: [__item.name for __item in this.disks]))
+    ```
 
 
     :param Union['GetDisksClientConfigurationArgs', 'GetDisksClientConfigurationArgsDict'] client_configuration: The client configuration data

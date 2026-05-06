@@ -17,16 +17,6 @@ import * as utilities from "../utilities";
  *
  * const machineSecrets = new talos.machine.Secrets("machine_secrets", {});
  * ```
- *
- * ## Import
- *
- * terraform
- *
- * machine secrets can be imported from an existing secrets file
- *
- * ```sh
- * $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
- * ```
  */
 export class Secrets extends pulumi.CustomResource {
     /**
@@ -65,7 +55,7 @@ export class Secrets extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly machineSecrets: pulumi.Output<outputs.machine.MachineSecrets>;
     /**
-     * The version of talos features to use in generated machine configuration
+     * The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
      */
     declare public readonly talosVersion: pulumi.Output<string>;
 
@@ -103,15 +93,15 @@ export interface SecretsState {
     /**
      * The generated client configuration data
      */
-    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration>;
+    clientConfiguration?: pulumi.Input<inputs.machine.ClientConfiguration | undefined>;
     /**
      * The secrets for the talos cluster
      */
-    machineSecrets?: pulumi.Input<inputs.machine.MachineSecretsArgs>;
+    machineSecrets?: pulumi.Input<inputs.machine.MachineSecretsArgs | undefined>;
     /**
-     * The version of talos features to use in generated machine configuration
+     * The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
      */
-    talosVersion?: pulumi.Input<string>;
+    talosVersion?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -119,7 +109,7 @@ export interface SecretsState {
  */
 export interface SecretsArgs {
     /**
-     * The version of talos features to use in generated machine configuration
+     * The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
      */
-    talosVersion?: pulumi.Input<string>;
+    talosVersion?: pulumi.Input<string | undefined>;
 }

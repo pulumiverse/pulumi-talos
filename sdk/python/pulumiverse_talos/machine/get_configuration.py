@@ -147,7 +147,7 @@ class GetConfigurationResult:
     @pulumi.getter(name="talosVersion")
     def talos_version(self) -> Optional[_builtins.str]:
         """
-        The version of talos features to use in generated machine configuration
+        The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `config_patches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
         """
         return pulumi.get(self, "talos_version")
 
@@ -209,7 +209,7 @@ def get_configuration(cluster_endpoint: Optional[_builtins.str] = None,
     :param _builtins.str kubernetes_version: The version of kubernetes to use
     :param Union['MachineSecretsArgs', 'MachineSecretsArgsDict'] machine_secrets: The secrets for the talos cluster
     :param _builtins.str machine_type: The type of machine to generate the configuration for
-    :param _builtins.str talos_version: The version of talos features to use in generated machine configuration
+    :param _builtins.str talos_version: The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `config_patches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
     """
     __args__ = dict()
     __args__['clusterEndpoint'] = cluster_endpoint
@@ -236,15 +236,15 @@ def get_configuration(cluster_endpoint: Optional[_builtins.str] = None,
         machine_secrets=pulumi.get(__ret__, 'machine_secrets'),
         machine_type=pulumi.get(__ret__, 'machine_type'),
         talos_version=pulumi.get(__ret__, 'talos_version'))
-def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                             cluster_name: Optional[pulumi.Input[_builtins.str]] = None,
-                             config_patches: Optional[pulumi.Input[Optional[Sequence[_builtins.str]]]] = None,
-                             docs: Optional[pulumi.Input[Optional[_builtins.bool]]] = None,
-                             examples: Optional[pulumi.Input[Optional[_builtins.bool]]] = None,
-                             kubernetes_version: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                             machine_secrets: Optional[pulumi.Input[Union['MachineSecretsArgs', 'MachineSecretsArgsDict']]] = None,
-                             machine_type: Optional[pulumi.Input[_builtins.str]] = None,
-                             talos_version: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
+def get_configuration_output(cluster_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                             cluster_name: pulumi.Input[Optional[_builtins.str]] = None,
+                             config_patches: pulumi.Input[Optional[Optional[Sequence[_builtins.str]]]] = None,
+                             docs: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
+                             examples: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
+                             kubernetes_version: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                             machine_secrets: pulumi.Input[Optional[Union['MachineSecretsArgs', 'MachineSecretsArgsDict']]] = None,
+                             machine_type: pulumi.Input[Optional[_builtins.str]] = None,
+                             talos_version: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                              opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigurationResult]:
     """
     Generate a machine configuration for a node type
@@ -274,7 +274,7 @@ def get_configuration_output(cluster_endpoint: Optional[pulumi.Input[_builtins.s
     :param _builtins.str kubernetes_version: The version of kubernetes to use
     :param Union['MachineSecretsArgs', 'MachineSecretsArgsDict'] machine_secrets: The secrets for the talos cluster
     :param _builtins.str machine_type: The type of machine to generate the configuration for
-    :param _builtins.str talos_version: The version of talos features to use in generated machine configuration
+    :param _builtins.str talos_version: The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `config_patches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
     """
     __args__ = dict()
     __args__['clusterEndpoint'] = cluster_endpoint
