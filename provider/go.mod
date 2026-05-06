@@ -5,7 +5,7 @@ go 1.26.2
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20260318212141-5525259d096b
 
 require (
-	github.com/pulumi/pulumi-go-provider v1.1.2
+	github.com/pulumi/pulumi-go-provider v1.3.2
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.129.0
 	github.com/pulumi/pulumi/pkg/v3 v3.233.0
 	github.com/pulumi/pulumi/sdk/v3 v3.233.0
