@@ -21,61 +21,53 @@ __all__ = ['ConfigurationApplyArgs', 'ConfigurationApply']
 @pulumi.input_type
 class ConfigurationApplyArgs:
     def __init__(__self__, *,
-                 client_configuration: pulumi.Input['ClientConfigurationArgs'],
-                 machine_configuration_input: pulumi.Input[_builtins.str],
                  node: pulumi.Input[_builtins.str],
-                 apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
-                 config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 on_destroy: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']] = None,
-                 timeouts: Optional[pulumi.Input['TimeoutArgs']] = None):
+                 apply_mode: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_configuration: pulumi.Input[Optional['ClientConfigurationArgs']] = None,
+                 client_configuration_wo: pulumi.Input[Optional['ConfigurationApplyClientConfigurationWoArgs']] = None,
+                 config_patches: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_input: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_input_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 on_destroy: pulumi.Input[Optional['ConfigurationApplyOnDestroyArgs']] = None,
+                 timeouts: pulumi.Input[Optional['TimeoutArgs']] = None):
         """
         The set of arguments for constructing a ConfigurationApply resource.
-        :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
-        :param pulumi.Input[_builtins.str] machine_configuration_input: The machine configuration to apply
+
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
-        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
+        :param pulumi.Input['ConfigurationApplyClientConfigurationWoArgs'] client_configuration_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
+        :param pulumi.Input[_builtins.str] machine_configuration_input: The machine configuration to apply
+        :param pulumi.Input[_builtins.str] machine_configuration_input_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The machine configuration to apply (write-only). Use this instead of machine_configuration_input when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input['ConfigurationApplyOnDestroyArgs'] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
+               
+               > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+               then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         """
-        pulumi.set(__self__, "client_configuration", client_configuration)
-        pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
         pulumi.set(__self__, "node", node)
         if apply_mode is not None:
             pulumi.set(__self__, "apply_mode", apply_mode)
+        if client_configuration is not None:
+            pulumi.set(__self__, "client_configuration", client_configuration)
+        if client_configuration_wo is not None:
+            pulumi.set(__self__, "client_configuration_wo", client_configuration_wo)
         if config_patches is not None:
             pulumi.set(__self__, "config_patches", config_patches)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
+        if machine_configuration_input is not None:
+            pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
+        if machine_configuration_input_wo is not None:
+            pulumi.set(__self__, "machine_configuration_input_wo", machine_configuration_input_wo)
         if on_destroy is not None:
             pulumi.set(__self__, "on_destroy", on_destroy)
         if timeouts is not None:
             pulumi.set(__self__, "timeouts", timeouts)
-
-    @_builtins.property
-    @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> pulumi.Input['ClientConfigurationArgs']:
-        """
-        The client configuration data
-        """
-        return pulumi.get(self, "client_configuration")
-
-    @client_configuration.setter
-    def client_configuration(self, value: pulumi.Input['ClientConfigurationArgs']):
-        pulumi.set(self, "client_configuration", value)
-
-    @_builtins.property
-    @pulumi.getter(name="machineConfigurationInput")
-    def machine_configuration_input(self) -> pulumi.Input[_builtins.str]:
-        """
-        The machine configuration to apply
-        """
-        return pulumi.get(self, "machine_configuration_input")
-
-    @machine_configuration_input.setter
-    def machine_configuration_input(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "machine_configuration_input", value)
 
     @_builtins.property
     @pulumi.getter
@@ -91,99 +83,170 @@ class ConfigurationApplyArgs:
 
     @_builtins.property
     @pulumi.getter(name="applyMode")
-    def apply_mode(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def apply_mode(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         """
         return pulumi.get(self, "apply_mode")
 
     @apply_mode.setter
-    def apply_mode(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def apply_mode(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "apply_mode", value)
 
     @_builtins.property
+    @pulumi.getter(name="clientConfiguration")
+    def client_configuration(self) -> pulumi.Input[Optional['ClientConfigurationArgs']]:
+        """
+        The client configuration data
+        """
+        return pulumi.get(self, "client_configuration")
+
+    @client_configuration.setter
+    def client_configuration(self, value: pulumi.Input[Optional['ClientConfigurationArgs']]):
+        pulumi.set(self, "client_configuration", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientConfigurationWo")
+    def client_configuration_wo(self) -> pulumi.Input[Optional['ConfigurationApplyClientConfigurationWoArgs']]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "client_configuration_wo")
+
+    @client_configuration_wo.setter
+    def client_configuration_wo(self, value: pulumi.Input[Optional['ConfigurationApplyClientConfigurationWoArgs']]):
+        pulumi.set(self, "client_configuration_wo", value)
+
+    @_builtins.property
     @pulumi.getter(name="configPatches")
-    def config_patches(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def config_patches(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         The list of config patches to apply
         """
         return pulumi.get(self, "config_patches")
 
     @config_patches.setter
-    def config_patches(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def config_patches(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "config_patches", value)
 
     @_builtins.property
     @pulumi.getter
-    def endpoint(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def endpoint(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The endpoint of the machine to bootstrap
         """
         return pulumi.get(self, "endpoint")
 
     @endpoint.setter
-    def endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def endpoint(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "endpoint", value)
 
     @_builtins.property
+    @pulumi.getter(name="machineConfigurationInput")
+    def machine_configuration_input(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The machine configuration to apply
+        """
+        return pulumi.get(self, "machine_configuration_input")
+
+    @machine_configuration_input.setter
+    def machine_configuration_input(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "machine_configuration_input", value)
+
+    @_builtins.property
+    @pulumi.getter(name="machineConfigurationInputWo")
+    def machine_configuration_input_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The machine configuration to apply (write-only). Use this instead of machine_configuration_input when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "machine_configuration_input_wo")
+
+    @machine_configuration_input_wo.setter
+    def machine_configuration_input_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "machine_configuration_input_wo", value)
+
+    @_builtins.property
     @pulumi.getter(name="onDestroy")
-    def on_destroy(self) -> Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']]:
+    def on_destroy(self) -> pulumi.Input[Optional['ConfigurationApplyOnDestroyArgs']]:
         """
         Actions to be taken on destroy, if *reset* is not set this is a no-op.
+
+        > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+        then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         """
         return pulumi.get(self, "on_destroy")
 
     @on_destroy.setter
-    def on_destroy(self, value: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']]):
+    def on_destroy(self, value: pulumi.Input[Optional['ConfigurationApplyOnDestroyArgs']]):
         pulumi.set(self, "on_destroy", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input['TimeoutArgs']]:
+    def timeouts(self) -> pulumi.Input[Optional['TimeoutArgs']]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input['TimeoutArgs']]):
+    def timeouts(self, value: pulumi.Input[Optional['TimeoutArgs']]):
         pulumi.set(self, "timeouts", value)
 
 
 @pulumi.input_type
 class _ConfigurationApplyState:
     def __init__(__self__, *,
-                 apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_configuration: Optional[pulumi.Input['ClientConfigurationArgs']] = None,
-                 config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 machine_configuration: Optional[pulumi.Input[_builtins.str]] = None,
-                 machine_configuration_input: Optional[pulumi.Input[_builtins.str]] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 on_destroy: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']] = None,
-                 resolved_apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input['TimeoutArgs']] = None):
+                 apply_mode: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_configuration: pulumi.Input[Optional['ClientConfigurationArgs']] = None,
+                 client_configuration_wo: pulumi.Input[Optional['ConfigurationApplyClientConfigurationWoArgs']] = None,
+                 config_patches: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_hash: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_input: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_input_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 on_destroy: pulumi.Input[Optional['ConfigurationApplyOnDestroyArgs']] = None,
+                 resolved_apply_mode: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional['TimeoutArgs']] = None):
         """
         Input properties used for looking up and filtering ConfigurationApply resources.
-        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+
+        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
+        :param pulumi.Input['ConfigurationApplyClientConfigurationWoArgs'] client_configuration_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[_builtins.str] machine_configuration: The generated machine configuration after applying patches
+        :param pulumi.Input[_builtins.str] machine_configuration_hash: SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to machine_configuration_input_wo — which is write-only and itself invisible to state — still surface as plan diffs.
         :param pulumi.Input[_builtins.str] machine_configuration_input: The machine configuration to apply
+        :param pulumi.Input[_builtins.str] machine_configuration_input_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The machine configuration to apply (write-only). Use this instead of machine_configuration_input when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
         :param pulumi.Input['ConfigurationApplyOnDestroyArgs'] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
+               
+               > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+               then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         :param pulumi.Input[_builtins.str] resolved_apply_mode: The actual apply mode used. When apply_mode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals apply_mode for other modes.
         """
         if apply_mode is not None:
             pulumi.set(__self__, "apply_mode", apply_mode)
         if client_configuration is not None:
             pulumi.set(__self__, "client_configuration", client_configuration)
+        if client_configuration_wo is not None:
+            pulumi.set(__self__, "client_configuration_wo", client_configuration_wo)
         if config_patches is not None:
             pulumi.set(__self__, "config_patches", config_patches)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
         if machine_configuration is not None:
             pulumi.set(__self__, "machine_configuration", machine_configuration)
+        if machine_configuration_hash is not None:
+            pulumi.set(__self__, "machine_configuration_hash", machine_configuration_hash)
         if machine_configuration_input is not None:
             pulumi.set(__self__, "machine_configuration_input", machine_configuration_input)
+        if machine_configuration_input_wo is not None:
+            pulumi.set(__self__, "machine_configuration_input_wo", machine_configuration_input_wo)
         if node is not None:
             pulumi.set(__self__, "node", node)
         if on_destroy is not None:
@@ -195,119 +258,160 @@ class _ConfigurationApplyState:
 
     @_builtins.property
     @pulumi.getter(name="applyMode")
-    def apply_mode(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def apply_mode(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         """
         return pulumi.get(self, "apply_mode")
 
     @apply_mode.setter
-    def apply_mode(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def apply_mode(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "apply_mode", value)
 
     @_builtins.property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> Optional[pulumi.Input['ClientConfigurationArgs']]:
+    def client_configuration(self) -> pulumi.Input[Optional['ClientConfigurationArgs']]:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
 
     @client_configuration.setter
-    def client_configuration(self, value: Optional[pulumi.Input['ClientConfigurationArgs']]):
+    def client_configuration(self, value: pulumi.Input[Optional['ClientConfigurationArgs']]):
         pulumi.set(self, "client_configuration", value)
 
     @_builtins.property
+    @pulumi.getter(name="clientConfigurationWo")
+    def client_configuration_wo(self) -> pulumi.Input[Optional['ConfigurationApplyClientConfigurationWoArgs']]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "client_configuration_wo")
+
+    @client_configuration_wo.setter
+    def client_configuration_wo(self, value: pulumi.Input[Optional['ConfigurationApplyClientConfigurationWoArgs']]):
+        pulumi.set(self, "client_configuration_wo", value)
+
+    @_builtins.property
     @pulumi.getter(name="configPatches")
-    def config_patches(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def config_patches(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         The list of config patches to apply
         """
         return pulumi.get(self, "config_patches")
 
     @config_patches.setter
-    def config_patches(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def config_patches(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "config_patches", value)
 
     @_builtins.property
     @pulumi.getter
-    def endpoint(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def endpoint(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The endpoint of the machine to bootstrap
         """
         return pulumi.get(self, "endpoint")
 
     @endpoint.setter
-    def endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def endpoint(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "endpoint", value)
 
     @_builtins.property
     @pulumi.getter(name="machineConfiguration")
-    def machine_configuration(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def machine_configuration(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The generated machine configuration after applying patches
         """
         return pulumi.get(self, "machine_configuration")
 
     @machine_configuration.setter
-    def machine_configuration(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def machine_configuration(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "machine_configuration", value)
 
     @_builtins.property
+    @pulumi.getter(name="machineConfigurationHash")
+    def machine_configuration_hash(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to machine_configuration_input_wo — which is write-only and itself invisible to state — still surface as plan diffs.
+        """
+        return pulumi.get(self, "machine_configuration_hash")
+
+    @machine_configuration_hash.setter
+    def machine_configuration_hash(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "machine_configuration_hash", value)
+
+    @_builtins.property
     @pulumi.getter(name="machineConfigurationInput")
-    def machine_configuration_input(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def machine_configuration_input(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The machine configuration to apply
         """
         return pulumi.get(self, "machine_configuration_input")
 
     @machine_configuration_input.setter
-    def machine_configuration_input(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def machine_configuration_input(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "machine_configuration_input", value)
 
     @_builtins.property
+    @pulumi.getter(name="machineConfigurationInputWo")
+    def machine_configuration_input_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The machine configuration to apply (write-only). Use this instead of machine_configuration_input when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "machine_configuration_input_wo")
+
+    @machine_configuration_input_wo.setter
+    def machine_configuration_input_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "machine_configuration_input_wo", value)
+
+    @_builtins.property
     @pulumi.getter
-    def node(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def node(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the node to bootstrap
         """
         return pulumi.get(self, "node")
 
     @node.setter
-    def node(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def node(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "node", value)
 
     @_builtins.property
     @pulumi.getter(name="onDestroy")
-    def on_destroy(self) -> Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']]:
+    def on_destroy(self) -> pulumi.Input[Optional['ConfigurationApplyOnDestroyArgs']]:
         """
         Actions to be taken on destroy, if *reset* is not set this is a no-op.
+
+        > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+        then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         """
         return pulumi.get(self, "on_destroy")
 
     @on_destroy.setter
-    def on_destroy(self, value: Optional[pulumi.Input['ConfigurationApplyOnDestroyArgs']]):
+    def on_destroy(self, value: pulumi.Input[Optional['ConfigurationApplyOnDestroyArgs']]):
         pulumi.set(self, "on_destroy", value)
 
     @_builtins.property
     @pulumi.getter(name="resolvedApplyMode")
-    def resolved_apply_mode(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def resolved_apply_mode(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The actual apply mode used. When apply_mode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals apply_mode for other modes.
         """
         return pulumi.get(self, "resolved_apply_mode")
 
     @resolved_apply_mode.setter
-    def resolved_apply_mode(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def resolved_apply_mode(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "resolved_apply_mode", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input['TimeoutArgs']]:
+    def timeouts(self) -> pulumi.Input[Optional['TimeoutArgs']]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input['TimeoutArgs']]):
+    def timeouts(self, value: pulumi.Input[Optional['TimeoutArgs']]):
         pulumi.set(self, "timeouts", value)
 
 
@@ -317,27 +421,37 @@ class ConfigurationApply(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
-                 config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 machine_configuration_input: Optional[pulumi.Input[_builtins.str]] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 on_destroy: Optional[pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
-                 timeouts: Optional[pulumi.Input[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None,
+                 apply_mode: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_configuration: pulumi.Input[Optional[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
+                 client_configuration_wo: pulumi.Input[Optional[Union['ConfigurationApplyClientConfigurationWoArgs', 'ConfigurationApplyClientConfigurationWoArgsDict']]] = None,
+                 config_patches: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_input: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_input_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 on_destroy: pulumi.Input[Optional[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
+                 timeouts: pulumi.Input[Optional[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None,
                  __props__=None):
         """
         The machine configuration apply resource allows to apply machine configuration to a node
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The client configuration data
+        :param pulumi.Input[Union['ConfigurationApplyClientConfigurationWoArgs', 'ConfigurationApplyClientConfigurationWoArgsDict']] client_configuration_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[_builtins.str] machine_configuration_input: The machine configuration to apply
+        :param pulumi.Input[_builtins.str] machine_configuration_input_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The machine configuration to apply (write-only). Use this instead of machine_configuration_input when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
         :param pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
+               
+               > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+               then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         """
         ...
     @overload
@@ -347,6 +461,7 @@ class ConfigurationApply(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         The machine configuration apply resource allows to apply machine configuration to a node
+
 
         :param str resource_name: The name of the resource.
         :param ConfigurationApplyArgs args: The arguments to use to populate this resource's properties.
@@ -363,14 +478,16 @@ class ConfigurationApply(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
-                 config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 machine_configuration_input: Optional[pulumi.Input[_builtins.str]] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 on_destroy: Optional[pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
-                 timeouts: Optional[pulumi.Input[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None,
+                 apply_mode: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_configuration: pulumi.Input[Optional[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
+                 client_configuration_wo: pulumi.Input[Optional[Union['ConfigurationApplyClientConfigurationWoArgs', 'ConfigurationApplyClientConfigurationWoArgsDict']]] = None,
+                 config_patches: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_input: pulumi.Input[Optional[_builtins.str]] = None,
+                 machine_configuration_input_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 on_destroy: pulumi.Input[Optional[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
+                 timeouts: pulumi.Input[Optional[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -381,22 +498,21 @@ class ConfigurationApply(pulumi.CustomResource):
             __props__ = ConfigurationApplyArgs.__new__(ConfigurationApplyArgs)
 
             __props__.__dict__["apply_mode"] = apply_mode
-            if client_configuration is None and not opts.urn:
-                raise TypeError("Missing required property 'client_configuration'")
             __props__.__dict__["client_configuration"] = client_configuration
+            __props__.__dict__["client_configuration_wo"] = None if client_configuration_wo is None else pulumi.Output.secret(client_configuration_wo)
             __props__.__dict__["config_patches"] = config_patches
             __props__.__dict__["endpoint"] = endpoint
-            if machine_configuration_input is None and not opts.urn:
-                raise TypeError("Missing required property 'machine_configuration_input'")
             __props__.__dict__["machine_configuration_input"] = None if machine_configuration_input is None else pulumi.Output.secret(machine_configuration_input)
+            __props__.__dict__["machine_configuration_input_wo"] = None if machine_configuration_input_wo is None else pulumi.Output.secret(machine_configuration_input_wo)
             if node is None and not opts.urn:
                 raise TypeError("Missing required property 'node'")
             __props__.__dict__["node"] = node
             __props__.__dict__["on_destroy"] = on_destroy
             __props__.__dict__["timeouts"] = timeouts
             __props__.__dict__["machine_configuration"] = None
+            __props__.__dict__["machine_configuration_hash"] = None
             __props__.__dict__["resolved_apply_mode"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["machineConfiguration", "machineConfigurationInput"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientConfigurationWo", "machineConfiguration", "machineConfigurationInput", "machineConfigurationInputWo"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ConfigurationApply, __self__).__init__(
             'talos:machine/configurationApply:ConfigurationApply',
@@ -408,16 +524,19 @@ class ConfigurationApply(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
-            client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
-            config_patches: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-            machine_configuration: Optional[pulumi.Input[_builtins.str]] = None,
-            machine_configuration_input: Optional[pulumi.Input[_builtins.str]] = None,
-            node: Optional[pulumi.Input[_builtins.str]] = None,
-            on_destroy: Optional[pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
-            resolved_apply_mode: Optional[pulumi.Input[_builtins.str]] = None,
-            timeouts: Optional[pulumi.Input[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None) -> 'ConfigurationApply':
+            apply_mode: pulumi.Input[Optional[_builtins.str]] = None,
+            client_configuration: pulumi.Input[Optional[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
+            client_configuration_wo: pulumi.Input[Optional[Union['ConfigurationApplyClientConfigurationWoArgs', 'ConfigurationApplyClientConfigurationWoArgsDict']]] = None,
+            config_patches: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+            machine_configuration: pulumi.Input[Optional[_builtins.str]] = None,
+            machine_configuration_hash: pulumi.Input[Optional[_builtins.str]] = None,
+            machine_configuration_input: pulumi.Input[Optional[_builtins.str]] = None,
+            machine_configuration_input_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            node: pulumi.Input[Optional[_builtins.str]] = None,
+            on_destroy: pulumi.Input[Optional[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']]] = None,
+            resolved_apply_mode: pulumi.Input[Optional[_builtins.str]] = None,
+            timeouts: pulumi.Input[Optional[Union['TimeoutArgs', 'TimeoutArgsDict']]] = None) -> 'ConfigurationApply':
         """
         Get an existing ConfigurationApply resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -425,14 +544,22 @@ class ConfigurationApply(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        :param pulumi.Input[_builtins.str] apply_mode: The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The client configuration data
+        :param pulumi.Input[Union['ConfigurationApplyClientConfigurationWoArgs', 'ConfigurationApplyClientConfigurationWoArgsDict']] client_configuration_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] config_patches: The list of config patches to apply
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[_builtins.str] machine_configuration: The generated machine configuration after applying patches
+        :param pulumi.Input[_builtins.str] machine_configuration_hash: SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to machine_configuration_input_wo — which is write-only and itself invisible to state — still surface as plan diffs.
         :param pulumi.Input[_builtins.str] machine_configuration_input: The machine configuration to apply
+        :param pulumi.Input[_builtins.str] machine_configuration_input_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The machine configuration to apply (write-only). Use this instead of machine_configuration_input when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
         :param pulumi.Input[Union['ConfigurationApplyOnDestroyArgs', 'ConfigurationApplyOnDestroyArgsDict']] on_destroy: Actions to be taken on destroy, if *reset* is not set this is a no-op.
+               
+               > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+               then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         :param pulumi.Input[_builtins.str] resolved_apply_mode: The actual apply mode used. When apply_mode is 'staged_if_needing_reboot', shows the resolved mode ('auto' or 'staged') based on dry-run analysis. Equals apply_mode for other modes.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -441,10 +568,13 @@ class ConfigurationApply(pulumi.CustomResource):
 
         __props__.__dict__["apply_mode"] = apply_mode
         __props__.__dict__["client_configuration"] = client_configuration
+        __props__.__dict__["client_configuration_wo"] = client_configuration_wo
         __props__.__dict__["config_patches"] = config_patches
         __props__.__dict__["endpoint"] = endpoint
         __props__.__dict__["machine_configuration"] = machine_configuration
+        __props__.__dict__["machine_configuration_hash"] = machine_configuration_hash
         __props__.__dict__["machine_configuration_input"] = machine_configuration_input
+        __props__.__dict__["machine_configuration_input_wo"] = machine_configuration_input_wo
         __props__.__dict__["node"] = node
         __props__.__dict__["on_destroy"] = on_destroy
         __props__.__dict__["resolved_apply_mode"] = resolved_apply_mode
@@ -455,17 +585,26 @@ class ConfigurationApply(pulumi.CustomResource):
     @pulumi.getter(name="applyMode")
     def apply_mode(self) -> pulumi.Output[_builtins.str]:
         """
-        The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         """
         return pulumi.get(self, "apply_mode")
 
     @_builtins.property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> pulumi.Output['outputs.ClientConfiguration']:
+    def client_configuration(self) -> pulumi.Output[Optional['outputs.ClientConfiguration']]:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
+
+    @_builtins.property
+    @pulumi.getter(name="clientConfigurationWo")
+    def client_configuration_wo(self) -> pulumi.Output[Optional['outputs.ConfigurationApplyClientConfigurationWo']]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "client_configuration_wo")
 
     @_builtins.property
     @pulumi.getter(name="configPatches")
@@ -492,12 +631,29 @@ class ConfigurationApply(pulumi.CustomResource):
         return pulumi.get(self, "machine_configuration")
 
     @_builtins.property
+    @pulumi.getter(name="machineConfigurationHash")
+    def machine_configuration_hash(self) -> pulumi.Output[_builtins.str]:
+        """
+        SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to machine_configuration_input_wo — which is write-only and itself invisible to state — still surface as plan diffs.
+        """
+        return pulumi.get(self, "machine_configuration_hash")
+
+    @_builtins.property
     @pulumi.getter(name="machineConfigurationInput")
-    def machine_configuration_input(self) -> pulumi.Output[_builtins.str]:
+    def machine_configuration_input(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         The machine configuration to apply
         """
         return pulumi.get(self, "machine_configuration_input")
+
+    @_builtins.property
+    @pulumi.getter(name="machineConfigurationInputWo")
+    def machine_configuration_input_wo(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The machine configuration to apply (write-only). Use this instead of machine_configuration_input when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "machine_configuration_input_wo")
 
     @_builtins.property
     @pulumi.getter
@@ -512,6 +668,9 @@ class ConfigurationApply(pulumi.CustomResource):
     def on_destroy(self) -> pulumi.Output[Optional['outputs.ConfigurationApplyOnDestroy']]:
         """
         Actions to be taken on destroy, if *reset* is not set this is a no-op.
+
+        > Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+        then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         """
         return pulumi.get(self, "on_destroy")
 

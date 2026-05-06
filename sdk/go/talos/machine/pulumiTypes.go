@@ -83,6 +83,193 @@ func (o BootstrapClientConfigurationOutput) ClientKey() pulumi.StringOutput {
 	return o.ApplyT(func(v BootstrapClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
 }
 
+type BootstrapClientConfigurationWo struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client CA certificate
+	CaCertificate string `pulumi:"caCertificate"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client certificate
+	ClientCertificate string `pulumi:"clientCertificate"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client key
+	ClientKey string `pulumi:"clientKey"`
+}
+
+// BootstrapClientConfigurationWoInput is an input type that accepts BootstrapClientConfigurationWoArgs and BootstrapClientConfigurationWoOutput values.
+// You can construct a concrete instance of `BootstrapClientConfigurationWoInput` via:
+//
+//	BootstrapClientConfigurationWoArgs{...}
+type BootstrapClientConfigurationWoInput interface {
+	pulumi.Input
+
+	ToBootstrapClientConfigurationWoOutput() BootstrapClientConfigurationWoOutput
+	ToBootstrapClientConfigurationWoOutputWithContext(context.Context) BootstrapClientConfigurationWoOutput
+}
+
+type BootstrapClientConfigurationWoArgs struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client CA certificate
+	CaCertificate pulumi.StringInput `pulumi:"caCertificate"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client certificate
+	ClientCertificate pulumi.StringInput `pulumi:"clientCertificate"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client key
+	ClientKey pulumi.StringInput `pulumi:"clientKey"`
+}
+
+func (BootstrapClientConfigurationWoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BootstrapClientConfigurationWo)(nil)).Elem()
+}
+
+func (i BootstrapClientConfigurationWoArgs) ToBootstrapClientConfigurationWoOutput() BootstrapClientConfigurationWoOutput {
+	return i.ToBootstrapClientConfigurationWoOutputWithContext(context.Background())
+}
+
+func (i BootstrapClientConfigurationWoArgs) ToBootstrapClientConfigurationWoOutputWithContext(ctx context.Context) BootstrapClientConfigurationWoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BootstrapClientConfigurationWoOutput)
+}
+
+func (i BootstrapClientConfigurationWoArgs) ToBootstrapClientConfigurationWoPtrOutput() BootstrapClientConfigurationWoPtrOutput {
+	return i.ToBootstrapClientConfigurationWoPtrOutputWithContext(context.Background())
+}
+
+func (i BootstrapClientConfigurationWoArgs) ToBootstrapClientConfigurationWoPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationWoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BootstrapClientConfigurationWoOutput).ToBootstrapClientConfigurationWoPtrOutputWithContext(ctx)
+}
+
+// BootstrapClientConfigurationWoPtrInput is an input type that accepts BootstrapClientConfigurationWoArgs, BootstrapClientConfigurationWoPtr and BootstrapClientConfigurationWoPtrOutput values.
+// You can construct a concrete instance of `BootstrapClientConfigurationWoPtrInput` via:
+//
+//	        BootstrapClientConfigurationWoArgs{...}
+//
+//	or:
+//
+//	        nil
+type BootstrapClientConfigurationWoPtrInput interface {
+	pulumi.Input
+
+	ToBootstrapClientConfigurationWoPtrOutput() BootstrapClientConfigurationWoPtrOutput
+	ToBootstrapClientConfigurationWoPtrOutputWithContext(context.Context) BootstrapClientConfigurationWoPtrOutput
+}
+
+type bootstrapClientConfigurationWoPtrType BootstrapClientConfigurationWoArgs
+
+func BootstrapClientConfigurationWoPtr(v *BootstrapClientConfigurationWoArgs) BootstrapClientConfigurationWoPtrInput {
+	return (*bootstrapClientConfigurationWoPtrType)(v)
+}
+
+func (*bootstrapClientConfigurationWoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BootstrapClientConfigurationWo)(nil)).Elem()
+}
+
+func (i *bootstrapClientConfigurationWoPtrType) ToBootstrapClientConfigurationWoPtrOutput() BootstrapClientConfigurationWoPtrOutput {
+	return i.ToBootstrapClientConfigurationWoPtrOutputWithContext(context.Background())
+}
+
+func (i *bootstrapClientConfigurationWoPtrType) ToBootstrapClientConfigurationWoPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationWoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BootstrapClientConfigurationWoPtrOutput)
+}
+
+type BootstrapClientConfigurationWoOutput struct{ *pulumi.OutputState }
+
+func (BootstrapClientConfigurationWoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BootstrapClientConfigurationWo)(nil)).Elem()
+}
+
+func (o BootstrapClientConfigurationWoOutput) ToBootstrapClientConfigurationWoOutput() BootstrapClientConfigurationWoOutput {
+	return o
+}
+
+func (o BootstrapClientConfigurationWoOutput) ToBootstrapClientConfigurationWoOutputWithContext(ctx context.Context) BootstrapClientConfigurationWoOutput {
+	return o
+}
+
+func (o BootstrapClientConfigurationWoOutput) ToBootstrapClientConfigurationWoPtrOutput() BootstrapClientConfigurationWoPtrOutput {
+	return o.ToBootstrapClientConfigurationWoPtrOutputWithContext(context.Background())
+}
+
+func (o BootstrapClientConfigurationWoOutput) ToBootstrapClientConfigurationWoPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationWoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BootstrapClientConfigurationWo) *BootstrapClientConfigurationWo {
+		return &v
+	}).(BootstrapClientConfigurationWoPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client CA certificate
+func (o BootstrapClientConfigurationWoOutput) CaCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v BootstrapClientConfigurationWo) string { return v.CaCertificate }).(pulumi.StringOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client certificate
+func (o BootstrapClientConfigurationWoOutput) ClientCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v BootstrapClientConfigurationWo) string { return v.ClientCertificate }).(pulumi.StringOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client key
+func (o BootstrapClientConfigurationWoOutput) ClientKey() pulumi.StringOutput {
+	return o.ApplyT(func(v BootstrapClientConfigurationWo) string { return v.ClientKey }).(pulumi.StringOutput)
+}
+
+type BootstrapClientConfigurationWoPtrOutput struct{ *pulumi.OutputState }
+
+func (BootstrapClientConfigurationWoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BootstrapClientConfigurationWo)(nil)).Elem()
+}
+
+func (o BootstrapClientConfigurationWoPtrOutput) ToBootstrapClientConfigurationWoPtrOutput() BootstrapClientConfigurationWoPtrOutput {
+	return o
+}
+
+func (o BootstrapClientConfigurationWoPtrOutput) ToBootstrapClientConfigurationWoPtrOutputWithContext(ctx context.Context) BootstrapClientConfigurationWoPtrOutput {
+	return o
+}
+
+func (o BootstrapClientConfigurationWoPtrOutput) Elem() BootstrapClientConfigurationWoOutput {
+	return o.ApplyT(func(v *BootstrapClientConfigurationWo) BootstrapClientConfigurationWo {
+		if v != nil {
+			return *v
+		}
+		var ret BootstrapClientConfigurationWo
+		return ret
+	}).(BootstrapClientConfigurationWoOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client CA certificate
+func (o BootstrapClientConfigurationWoPtrOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BootstrapClientConfigurationWo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CaCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client certificate
+func (o BootstrapClientConfigurationWoPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BootstrapClientConfigurationWo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client key
+func (o BootstrapClientConfigurationWoPtrOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BootstrapClientConfigurationWo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientKey
+	}).(pulumi.StringPtrOutput)
+}
+
 type BootstrapTimeouts struct {
 	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
 	Create *string `pulumi:"create"`
@@ -288,6 +475,193 @@ func (o ConfigurationApplyClientConfigurationOutput) ClientCertificate() pulumi.
 // The client key
 func (o ConfigurationApplyClientConfigurationOutput) ClientKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigurationApplyClientConfiguration) string { return v.ClientKey }).(pulumi.StringOutput)
+}
+
+type ConfigurationApplyClientConfigurationWo struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client CA certificate
+	CaCertificate string `pulumi:"caCertificate"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client certificate
+	ClientCertificate string `pulumi:"clientCertificate"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client key
+	ClientKey string `pulumi:"clientKey"`
+}
+
+// ConfigurationApplyClientConfigurationWoInput is an input type that accepts ConfigurationApplyClientConfigurationWoArgs and ConfigurationApplyClientConfigurationWoOutput values.
+// You can construct a concrete instance of `ConfigurationApplyClientConfigurationWoInput` via:
+//
+//	ConfigurationApplyClientConfigurationWoArgs{...}
+type ConfigurationApplyClientConfigurationWoInput interface {
+	pulumi.Input
+
+	ToConfigurationApplyClientConfigurationWoOutput() ConfigurationApplyClientConfigurationWoOutput
+	ToConfigurationApplyClientConfigurationWoOutputWithContext(context.Context) ConfigurationApplyClientConfigurationWoOutput
+}
+
+type ConfigurationApplyClientConfigurationWoArgs struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client CA certificate
+	CaCertificate pulumi.StringInput `pulumi:"caCertificate"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client certificate
+	ClientCertificate pulumi.StringInput `pulumi:"clientCertificate"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The client key
+	ClientKey pulumi.StringInput `pulumi:"clientKey"`
+}
+
+func (ConfigurationApplyClientConfigurationWoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigurationApplyClientConfigurationWo)(nil)).Elem()
+}
+
+func (i ConfigurationApplyClientConfigurationWoArgs) ToConfigurationApplyClientConfigurationWoOutput() ConfigurationApplyClientConfigurationWoOutput {
+	return i.ToConfigurationApplyClientConfigurationWoOutputWithContext(context.Background())
+}
+
+func (i ConfigurationApplyClientConfigurationWoArgs) ToConfigurationApplyClientConfigurationWoOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationWoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyClientConfigurationWoOutput)
+}
+
+func (i ConfigurationApplyClientConfigurationWoArgs) ToConfigurationApplyClientConfigurationWoPtrOutput() ConfigurationApplyClientConfigurationWoPtrOutput {
+	return i.ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(context.Background())
+}
+
+func (i ConfigurationApplyClientConfigurationWoArgs) ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationWoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyClientConfigurationWoOutput).ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(ctx)
+}
+
+// ConfigurationApplyClientConfigurationWoPtrInput is an input type that accepts ConfigurationApplyClientConfigurationWoArgs, ConfigurationApplyClientConfigurationWoPtr and ConfigurationApplyClientConfigurationWoPtrOutput values.
+// You can construct a concrete instance of `ConfigurationApplyClientConfigurationWoPtrInput` via:
+//
+//	        ConfigurationApplyClientConfigurationWoArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConfigurationApplyClientConfigurationWoPtrInput interface {
+	pulumi.Input
+
+	ToConfigurationApplyClientConfigurationWoPtrOutput() ConfigurationApplyClientConfigurationWoPtrOutput
+	ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(context.Context) ConfigurationApplyClientConfigurationWoPtrOutput
+}
+
+type configurationApplyClientConfigurationWoPtrType ConfigurationApplyClientConfigurationWoArgs
+
+func ConfigurationApplyClientConfigurationWoPtr(v *ConfigurationApplyClientConfigurationWoArgs) ConfigurationApplyClientConfigurationWoPtrInput {
+	return (*configurationApplyClientConfigurationWoPtrType)(v)
+}
+
+func (*configurationApplyClientConfigurationWoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigurationApplyClientConfigurationWo)(nil)).Elem()
+}
+
+func (i *configurationApplyClientConfigurationWoPtrType) ToConfigurationApplyClientConfigurationWoPtrOutput() ConfigurationApplyClientConfigurationWoPtrOutput {
+	return i.ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(context.Background())
+}
+
+func (i *configurationApplyClientConfigurationWoPtrType) ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationWoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigurationApplyClientConfigurationWoPtrOutput)
+}
+
+type ConfigurationApplyClientConfigurationWoOutput struct{ *pulumi.OutputState }
+
+func (ConfigurationApplyClientConfigurationWoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigurationApplyClientConfigurationWo)(nil)).Elem()
+}
+
+func (o ConfigurationApplyClientConfigurationWoOutput) ToConfigurationApplyClientConfigurationWoOutput() ConfigurationApplyClientConfigurationWoOutput {
+	return o
+}
+
+func (o ConfigurationApplyClientConfigurationWoOutput) ToConfigurationApplyClientConfigurationWoOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationWoOutput {
+	return o
+}
+
+func (o ConfigurationApplyClientConfigurationWoOutput) ToConfigurationApplyClientConfigurationWoPtrOutput() ConfigurationApplyClientConfigurationWoPtrOutput {
+	return o.ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(context.Background())
+}
+
+func (o ConfigurationApplyClientConfigurationWoOutput) ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationWoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConfigurationApplyClientConfigurationWo) *ConfigurationApplyClientConfigurationWo {
+		return &v
+	}).(ConfigurationApplyClientConfigurationWoPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client CA certificate
+func (o ConfigurationApplyClientConfigurationWoOutput) CaCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v ConfigurationApplyClientConfigurationWo) string { return v.CaCertificate }).(pulumi.StringOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client certificate
+func (o ConfigurationApplyClientConfigurationWoOutput) ClientCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v ConfigurationApplyClientConfigurationWo) string { return v.ClientCertificate }).(pulumi.StringOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client key
+func (o ConfigurationApplyClientConfigurationWoOutput) ClientKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ConfigurationApplyClientConfigurationWo) string { return v.ClientKey }).(pulumi.StringOutput)
+}
+
+type ConfigurationApplyClientConfigurationWoPtrOutput struct{ *pulumi.OutputState }
+
+func (ConfigurationApplyClientConfigurationWoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConfigurationApplyClientConfigurationWo)(nil)).Elem()
+}
+
+func (o ConfigurationApplyClientConfigurationWoPtrOutput) ToConfigurationApplyClientConfigurationWoPtrOutput() ConfigurationApplyClientConfigurationWoPtrOutput {
+	return o
+}
+
+func (o ConfigurationApplyClientConfigurationWoPtrOutput) ToConfigurationApplyClientConfigurationWoPtrOutputWithContext(ctx context.Context) ConfigurationApplyClientConfigurationWoPtrOutput {
+	return o
+}
+
+func (o ConfigurationApplyClientConfigurationWoPtrOutput) Elem() ConfigurationApplyClientConfigurationWoOutput {
+	return o.ApplyT(func(v *ConfigurationApplyClientConfigurationWo) ConfigurationApplyClientConfigurationWo {
+		if v != nil {
+			return *v
+		}
+		var ret ConfigurationApplyClientConfigurationWo
+		return ret
+	}).(ConfigurationApplyClientConfigurationWoOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client CA certificate
+func (o ConfigurationApplyClientConfigurationWoPtrOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyClientConfigurationWo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CaCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client certificate
+func (o ConfigurationApplyClientConfigurationWoPtrOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyClientConfigurationWo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientCertificate
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The client key
+func (o ConfigurationApplyClientConfigurationWoPtrOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigurationApplyClientConfigurationWo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientKey
+	}).(pulumi.StringPtrOutput)
 }
 
 type ConfigurationApplyOnDestroy struct {
@@ -4613,9 +4987,13 @@ func (o GetDisksTimeoutsPtrOutput) Read() pulumi.StringPtrOutput {
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationInput)(nil)).Elem(), BootstrapClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationWoInput)(nil)).Elem(), BootstrapClientConfigurationWoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapClientConfigurationWoPtrInput)(nil)).Elem(), BootstrapClientConfigurationWoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapTimeoutsInput)(nil)).Elem(), BootstrapTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BootstrapTimeoutsPtrInput)(nil)).Elem(), BootstrapTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationInput)(nil)).Elem(), ConfigurationApplyClientConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationWoInput)(nil)).Elem(), ConfigurationApplyClientConfigurationWoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyClientConfigurationWoPtrInput)(nil)).Elem(), ConfigurationApplyClientConfigurationWoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyOnDestroyInput)(nil)).Elem(), ConfigurationApplyOnDestroyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigurationApplyOnDestroyPtrInput)(nil)).Elem(), ConfigurationApplyOnDestroyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecretsClientConfigurationInput)(nil)).Elem(), SecretsClientConfigurationArgs{})
@@ -4672,9 +5050,13 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksTimeoutsInput)(nil)).Elem(), GetDisksTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksTimeoutsPtrInput)(nil)).Elem(), GetDisksTimeoutsArgs{})
 	pulumi.RegisterOutputType(BootstrapClientConfigurationOutput{})
+	pulumi.RegisterOutputType(BootstrapClientConfigurationWoOutput{})
+	pulumi.RegisterOutputType(BootstrapClientConfigurationWoPtrOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsOutput{})
 	pulumi.RegisterOutputType(BootstrapTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationOutput{})
+	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationWoOutput{})
+	pulumi.RegisterOutputType(ConfigurationApplyClientConfigurationWoPtrOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyOnDestroyOutput{})
 	pulumi.RegisterOutputType(ConfigurationApplyOnDestroyPtrOutput{})
 	pulumi.RegisterOutputType(SecretsClientConfigurationOutput{})

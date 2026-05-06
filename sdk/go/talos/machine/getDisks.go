@@ -14,6 +14,40 @@ import (
 // Generate a machine configuration for a node type
 //
 // > **Note:** Since Talos natively supports `.machine.install.diskSelector`, the `machine.getDisks` data source maybe just used to query disk information that could be used elsewhere. It's recommended to use `machine.install.diskSelector` in Talos machine configuration.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-talos/sdk/go/talos/machine"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// thisSecrets, err := machine.NewSecrets(ctx, "this", nil)
+// if err != nil {
+// return err
+// }
+// this := machine.GetDisksOutput(ctx, machine.GetDisksOutputArgs{
+// ClientConfiguration: thisSecrets.ClientConfiguration,
+// Node: pulumi.String("10.5.0.2"),
+// Selector: pulumi.String("disk.size > 6u * GB"),
+// }, nil);
+// ctx.Export("nvmeDisks", this.ApplyT(func(this machine.GetDisksResult) ([]interface{}, error) {
+// var splat0 []interface{}
+// for _, val0 := range this.Disks {
+// splat0 = append(splat0, val0.Name)
+// }
+// return splat0, nil
+// }).(pulumi._[]interface{}Output))
+// return nil
+// })
+// }
+// ```
 func GetDisks(ctx *pulumi.Context, args *GetDisksArgs, opts ...pulumi.InvokeOption) (*GetDisksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDisksResult

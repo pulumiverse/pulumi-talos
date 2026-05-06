@@ -21,34 +21,29 @@ __all__ = ['BootstrapArgs', 'Bootstrap']
 @pulumi.input_type
 class BootstrapArgs:
     def __init__(__self__, *,
-                 client_configuration: pulumi.Input['ClientConfigurationArgs'],
                  node: pulumi.Input[_builtins.str],
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input['BootstrapTimeoutsArgs']] = None):
+                 client_configuration: pulumi.Input[Optional['ClientConfigurationArgs']] = None,
+                 client_configuration_wo: pulumi.Input[Optional['BootstrapClientConfigurationWoArgs']] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional['BootstrapTimeoutsArgs']] = None):
         """
         The set of arguments for constructing a Bootstrap resource.
-        :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
+
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
+        :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
+        :param pulumi.Input['BootstrapClientConfigurationWoArgs'] client_configuration_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
         """
-        pulumi.set(__self__, "client_configuration", client_configuration)
         pulumi.set(__self__, "node", node)
+        if client_configuration is not None:
+            pulumi.set(__self__, "client_configuration", client_configuration)
+        if client_configuration_wo is not None:
+            pulumi.set(__self__, "client_configuration_wo", client_configuration_wo)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
         if timeouts is not None:
             pulumi.set(__self__, "timeouts", timeouts)
-
-    @_builtins.property
-    @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> pulumi.Input['ClientConfigurationArgs']:
-        """
-        The client configuration data
-        """
-        return pulumi.get(self, "client_configuration")
-
-    @client_configuration.setter
-    def client_configuration(self, value: pulumi.Input['ClientConfigurationArgs']):
-        pulumi.set(self, "client_configuration", value)
 
     @_builtins.property
     @pulumi.getter
@@ -63,42 +58,73 @@ class BootstrapArgs:
         pulumi.set(self, "node", value)
 
     @_builtins.property
+    @pulumi.getter(name="clientConfiguration")
+    def client_configuration(self) -> pulumi.Input[Optional['ClientConfigurationArgs']]:
+        """
+        The client configuration data
+        """
+        return pulumi.get(self, "client_configuration")
+
+    @client_configuration.setter
+    def client_configuration(self, value: pulumi.Input[Optional['ClientConfigurationArgs']]):
+        pulumi.set(self, "client_configuration", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientConfigurationWo")
+    def client_configuration_wo(self) -> pulumi.Input[Optional['BootstrapClientConfigurationWoArgs']]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "client_configuration_wo")
+
+    @client_configuration_wo.setter
+    def client_configuration_wo(self, value: pulumi.Input[Optional['BootstrapClientConfigurationWoArgs']]):
+        pulumi.set(self, "client_configuration_wo", value)
+
+    @_builtins.property
     @pulumi.getter
-    def endpoint(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def endpoint(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The endpoint of the machine to bootstrap
         """
         return pulumi.get(self, "endpoint")
 
     @endpoint.setter
-    def endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def endpoint(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "endpoint", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input['BootstrapTimeoutsArgs']]:
+    def timeouts(self) -> pulumi.Input[Optional['BootstrapTimeoutsArgs']]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input['BootstrapTimeoutsArgs']]):
+    def timeouts(self, value: pulumi.Input[Optional['BootstrapTimeoutsArgs']]):
         pulumi.set(self, "timeouts", value)
 
 
 @pulumi.input_type
 class _BootstrapState:
     def __init__(__self__, *,
-                 client_configuration: Optional[pulumi.Input['ClientConfigurationArgs']] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input['BootstrapTimeoutsArgs']] = None):
+                 client_configuration: pulumi.Input[Optional['ClientConfigurationArgs']] = None,
+                 client_configuration_wo: pulumi.Input[Optional['BootstrapClientConfigurationWoArgs']] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional['BootstrapTimeoutsArgs']] = None):
         """
         Input properties used for looking up and filtering Bootstrap resources.
+
         :param pulumi.Input['ClientConfigurationArgs'] client_configuration: The client configuration data
+        :param pulumi.Input['BootstrapClientConfigurationWoArgs'] client_configuration_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
         """
         if client_configuration is not None:
             pulumi.set(__self__, "client_configuration", client_configuration)
+        if client_configuration_wo is not None:
+            pulumi.set(__self__, "client_configuration_wo", client_configuration_wo)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
         if node is not None:
@@ -108,47 +134,60 @@ class _BootstrapState:
 
     @_builtins.property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> Optional[pulumi.Input['ClientConfigurationArgs']]:
+    def client_configuration(self) -> pulumi.Input[Optional['ClientConfigurationArgs']]:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
 
     @client_configuration.setter
-    def client_configuration(self, value: Optional[pulumi.Input['ClientConfigurationArgs']]):
+    def client_configuration(self, value: pulumi.Input[Optional['ClientConfigurationArgs']]):
         pulumi.set(self, "client_configuration", value)
 
     @_builtins.property
+    @pulumi.getter(name="clientConfigurationWo")
+    def client_configuration_wo(self) -> pulumi.Input[Optional['BootstrapClientConfigurationWoArgs']]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "client_configuration_wo")
+
+    @client_configuration_wo.setter
+    def client_configuration_wo(self, value: pulumi.Input[Optional['BootstrapClientConfigurationWoArgs']]):
+        pulumi.set(self, "client_configuration_wo", value)
+
+    @_builtins.property
     @pulumi.getter
-    def endpoint(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def endpoint(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The endpoint of the machine to bootstrap
         """
         return pulumi.get(self, "endpoint")
 
     @endpoint.setter
-    def endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def endpoint(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "endpoint", value)
 
     @_builtins.property
     @pulumi.getter
-    def node(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def node(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the node to bootstrap
         """
         return pulumi.get(self, "node")
 
     @node.setter
-    def node(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def node(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "node", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input['BootstrapTimeoutsArgs']]:
+    def timeouts(self) -> pulumi.Input[Optional['BootstrapTimeoutsArgs']]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input['BootstrapTimeoutsArgs']]):
+    def timeouts(self, value: pulumi.Input[Optional['BootstrapTimeoutsArgs']]):
         pulumi.set(self, "timeouts", value)
 
 
@@ -158,27 +197,21 @@ class Bootstrap(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None,
+                 client_configuration: pulumi.Input[Optional[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
+                 client_configuration_wo: pulumi.Input[Optional[Union['BootstrapClientConfigurationWoArgs', 'BootstrapClientConfigurationWoArgsDict']]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None,
                  __props__=None):
         """
         The machine bootstrap resource allows you to bootstrap a Talos node.
 
-        ## Import
-
-        terraform
-
-        machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
-
-        ```sh
-        $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
-        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The client configuration data
+        :param pulumi.Input[Union['BootstrapClientConfigurationWoArgs', 'BootstrapClientConfigurationWoArgsDict']] client_configuration_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
         """
@@ -191,15 +224,6 @@ class Bootstrap(pulumi.CustomResource):
         """
         The machine bootstrap resource allows you to bootstrap a Talos node.
 
-        ## Import
-
-        terraform
-
-        machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
-
-        ```sh
-        $ pulumi import talos:machine/bootstrap:Bootstrap this <any id>
-        ```
 
         :param str resource_name: The name of the resource.
         :param BootstrapArgs args: The arguments to use to populate this resource's properties.
@@ -216,10 +240,11 @@ class Bootstrap(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None,
+                 client_configuration: pulumi.Input[Optional[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
+                 client_configuration_wo: pulumi.Input[Optional[Union['BootstrapClientConfigurationWoArgs', 'BootstrapClientConfigurationWoArgsDict']]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -229,14 +254,15 @@ class Bootstrap(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = BootstrapArgs.__new__(BootstrapArgs)
 
-            if client_configuration is None and not opts.urn:
-                raise TypeError("Missing required property 'client_configuration'")
             __props__.__dict__["client_configuration"] = client_configuration
+            __props__.__dict__["client_configuration_wo"] = None if client_configuration_wo is None else pulumi.Output.secret(client_configuration_wo)
             __props__.__dict__["endpoint"] = endpoint
             if node is None and not opts.urn:
                 raise TypeError("Missing required property 'node'")
             __props__.__dict__["node"] = node
             __props__.__dict__["timeouts"] = timeouts
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientConfigurationWo"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Bootstrap, __self__).__init__(
             'talos:machine/bootstrap:Bootstrap',
             resource_name,
@@ -247,10 +273,11 @@ class Bootstrap(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            client_configuration: Optional[pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
-            endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-            node: Optional[pulumi.Input[_builtins.str]] = None,
-            timeouts: Optional[pulumi.Input[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None) -> 'Bootstrap':
+            client_configuration: pulumi.Input[Optional[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']]] = None,
+            client_configuration_wo: pulumi.Input[Optional[Union['BootstrapClientConfigurationWoArgs', 'BootstrapClientConfigurationWoArgsDict']]] = None,
+            endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+            node: pulumi.Input[Optional[_builtins.str]] = None,
+            timeouts: pulumi.Input[Optional[Union['BootstrapTimeoutsArgs', 'BootstrapTimeoutsArgsDict']]] = None) -> 'Bootstrap':
         """
         Get an existing Bootstrap resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -259,6 +286,8 @@ class Bootstrap(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['ClientConfigurationArgs', 'ClientConfigurationArgsDict']] client_configuration: The client configuration data
+        :param pulumi.Input[Union['BootstrapClientConfigurationWoArgs', 'BootstrapClientConfigurationWoArgsDict']] client_configuration_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
         :param pulumi.Input[_builtins.str] endpoint: The endpoint of the machine to bootstrap
         :param pulumi.Input[_builtins.str] node: The name of the node to bootstrap
         """
@@ -267,6 +296,7 @@ class Bootstrap(pulumi.CustomResource):
         __props__ = _BootstrapState.__new__(_BootstrapState)
 
         __props__.__dict__["client_configuration"] = client_configuration
+        __props__.__dict__["client_configuration_wo"] = client_configuration_wo
         __props__.__dict__["endpoint"] = endpoint
         __props__.__dict__["node"] = node
         __props__.__dict__["timeouts"] = timeouts
@@ -274,11 +304,20 @@ class Bootstrap(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> pulumi.Output['outputs.ClientConfiguration']:
+    def client_configuration(self) -> pulumi.Output[Optional['outputs.ClientConfiguration']]:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
+
+    @_builtins.property
+    @pulumi.getter(name="clientConfigurationWo")
+    def client_configuration_wo(self) -> pulumi.Output[Optional['outputs.BootstrapClientConfigurationWo']]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client configuration data (write-only). Use this instead of client_configuration when using ephemeral resources. Requires Terraform 1.11+
+        """
+        return pulumi.get(self, "client_configuration_wo")
 
     @_builtins.property
     @pulumi.getter

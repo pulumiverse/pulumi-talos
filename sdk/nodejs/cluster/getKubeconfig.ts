@@ -106,16 +106,16 @@ export interface GetKubeconfigOutputArgs {
     /**
      * endpoint to use for the talosclient. If not set, the node value will be used
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * controlplane node to retrieve the kubeconfig from
      */
     node: pulumi.Input<string>;
-    timeouts?: pulumi.Input<inputs.cluster.GetKubeconfigTimeoutsArgs>;
+    timeouts?: pulumi.Input<inputs.cluster.GetKubeconfigTimeoutsArgs | undefined>;
     /**
      * Wait for the kubernetes api to be available
      *
      * @deprecated This attribute is deprecated and no-op. Will be removed in a future version. Use talos.cluster.getHealth instead.
      */
-    wait?: pulumi.Input<boolean>;
+    wait?: pulumi.Input<boolean | undefined>;
 }

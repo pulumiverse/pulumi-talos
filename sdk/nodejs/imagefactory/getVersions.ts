@@ -62,5 +62,5 @@ export interface GetVersionsOutputArgs {
     /**
      * The filter to apply to the overlays list.
      */
-    filters?: pulumi.Input<inputs.imageFactory.GetVersionsFiltersArgs>;
+    filters?: pulumi.Input<inputs.imageFactory.GetVersionsFiltersArgs | undefined>;
 }

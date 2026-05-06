@@ -153,10 +153,10 @@ def get_configuration(client_configuration: Optional[Union['GetConfigurationClie
         id=pulumi.get(__ret__, 'id'),
         nodes=pulumi.get(__ret__, 'nodes'),
         talos_config=pulumi.get(__ret__, 'talos_config'))
-def get_configuration_output(client_configuration: Optional[pulumi.Input[Union['GetConfigurationClientConfigurationArgs', 'GetConfigurationClientConfigurationArgsDict']]] = None,
-                             cluster_name: Optional[pulumi.Input[_builtins.str]] = None,
-                             endpoints: Optional[pulumi.Input[Optional[Sequence[_builtins.str]]]] = None,
-                             nodes: Optional[pulumi.Input[Optional[Sequence[_builtins.str]]]] = None,
+def get_configuration_output(client_configuration: pulumi.Input[Optional[Union['GetConfigurationClientConfigurationArgs', 'GetConfigurationClientConfigurationArgsDict']]] = None,
+                             cluster_name: pulumi.Input[Optional[_builtins.str]] = None,
+                             endpoints: pulumi.Input[Optional[Optional[Sequence[_builtins.str]]]] = None,
+                             nodes: pulumi.Input[Optional[Optional[Sequence[_builtins.str]]]] = None,
                              opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigurationResult]:
     """
     Generate client configuration for a Talos cluster

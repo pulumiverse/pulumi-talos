@@ -126,9 +126,9 @@ export interface GetConfigurationOutputArgs {
     /**
      * endpoints to set in the generated config
      */
-    endpoints?: pulumi.Input<pulumi.Input<string>[]>;
+    endpoints?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * nodes to set in the generated config
      */
-    nodes?: pulumi.Input<pulumi.Input<string>[]>;
+    nodes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

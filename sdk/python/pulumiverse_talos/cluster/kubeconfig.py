@@ -23,11 +23,12 @@ class KubeconfigArgs:
     def __init__(__self__, *,
                  client_configuration: pulumi.Input['KubeconfigClientConfigurationArgs'],
                  node: pulumi.Input[_builtins.str],
-                 certificate_renewal_duration: Optional[pulumi.Input[_builtins.str]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input['KubeconfigTimeoutsArgs']] = None):
+                 certificate_renewal_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional['KubeconfigTimeoutsArgs']] = None):
         """
         The set of arguments for constructing a Kubeconfig resource.
+
         :param pulumi.Input['KubeconfigClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[_builtins.str] node: controlplane node to retrieve the kubeconfig from
         :param pulumi.Input[_builtins.str] certificate_renewal_duration: The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
@@ -68,50 +69,51 @@ class KubeconfigArgs:
 
     @_builtins.property
     @pulumi.getter(name="certificateRenewalDuration")
-    def certificate_renewal_duration(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def certificate_renewal_duration(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
         """
         return pulumi.get(self, "certificate_renewal_duration")
 
     @certificate_renewal_duration.setter
-    def certificate_renewal_duration(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def certificate_renewal_duration(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "certificate_renewal_duration", value)
 
     @_builtins.property
     @pulumi.getter
-    def endpoint(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def endpoint(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         endpoint to use for the talosclient. If not set, the node value will be used
         """
         return pulumi.get(self, "endpoint")
 
     @endpoint.setter
-    def endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def endpoint(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "endpoint", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input['KubeconfigTimeoutsArgs']]:
+    def timeouts(self) -> pulumi.Input[Optional['KubeconfigTimeoutsArgs']]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input['KubeconfigTimeoutsArgs']]):
+    def timeouts(self, value: pulumi.Input[Optional['KubeconfigTimeoutsArgs']]):
         pulumi.set(self, "timeouts", value)
 
 
 @pulumi.input_type
 class _KubeconfigState:
     def __init__(__self__, *,
-                 certificate_renewal_duration: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_configuration: Optional[pulumi.Input['KubeconfigClientConfigurationArgs']] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 kubeconfig_raw: Optional[pulumi.Input[_builtins.str]] = None,
-                 kubernetes_client_configuration: Optional[pulumi.Input['KubeconfigKubernetesClientConfigurationArgs']] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input['KubeconfigTimeoutsArgs']] = None):
+                 certificate_renewal_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_configuration: pulumi.Input[Optional['KubeconfigClientConfigurationArgs']] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 kubeconfig_raw: pulumi.Input[Optional[_builtins.str]] = None,
+                 kubernetes_client_configuration: pulumi.Input[Optional['KubeconfigKubernetesClientConfigurationArgs']] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional['KubeconfigTimeoutsArgs']] = None):
         """
         Input properties used for looking up and filtering Kubeconfig resources.
+
         :param pulumi.Input[_builtins.str] certificate_renewal_duration: The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
         :param pulumi.Input['KubeconfigClientConfigurationArgs'] client_configuration: The client configuration data
         :param pulumi.Input[_builtins.str] endpoint: endpoint to use for the talosclient. If not set, the node value will be used
@@ -136,83 +138,83 @@ class _KubeconfigState:
 
     @_builtins.property
     @pulumi.getter(name="certificateRenewalDuration")
-    def certificate_renewal_duration(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def certificate_renewal_duration(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
         """
         return pulumi.get(self, "certificate_renewal_duration")
 
     @certificate_renewal_duration.setter
-    def certificate_renewal_duration(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def certificate_renewal_duration(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "certificate_renewal_duration", value)
 
     @_builtins.property
     @pulumi.getter(name="clientConfiguration")
-    def client_configuration(self) -> Optional[pulumi.Input['KubeconfigClientConfigurationArgs']]:
+    def client_configuration(self) -> pulumi.Input[Optional['KubeconfigClientConfigurationArgs']]:
         """
         The client configuration data
         """
         return pulumi.get(self, "client_configuration")
 
     @client_configuration.setter
-    def client_configuration(self, value: Optional[pulumi.Input['KubeconfigClientConfigurationArgs']]):
+    def client_configuration(self, value: pulumi.Input[Optional['KubeconfigClientConfigurationArgs']]):
         pulumi.set(self, "client_configuration", value)
 
     @_builtins.property
     @pulumi.getter
-    def endpoint(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def endpoint(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         endpoint to use for the talosclient. If not set, the node value will be used
         """
         return pulumi.get(self, "endpoint")
 
     @endpoint.setter
-    def endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def endpoint(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "endpoint", value)
 
     @_builtins.property
     @pulumi.getter(name="kubeconfigRaw")
-    def kubeconfig_raw(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def kubeconfig_raw(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The raw kubeconfig
         """
         return pulumi.get(self, "kubeconfig_raw")
 
     @kubeconfig_raw.setter
-    def kubeconfig_raw(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def kubeconfig_raw(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "kubeconfig_raw", value)
 
     @_builtins.property
     @pulumi.getter(name="kubernetesClientConfiguration")
-    def kubernetes_client_configuration(self) -> Optional[pulumi.Input['KubeconfigKubernetesClientConfigurationArgs']]:
+    def kubernetes_client_configuration(self) -> pulumi.Input[Optional['KubeconfigKubernetesClientConfigurationArgs']]:
         """
         The kubernetes client configuration
         """
         return pulumi.get(self, "kubernetes_client_configuration")
 
     @kubernetes_client_configuration.setter
-    def kubernetes_client_configuration(self, value: Optional[pulumi.Input['KubeconfigKubernetesClientConfigurationArgs']]):
+    def kubernetes_client_configuration(self, value: pulumi.Input[Optional['KubeconfigKubernetesClientConfigurationArgs']]):
         pulumi.set(self, "kubernetes_client_configuration", value)
 
     @_builtins.property
     @pulumi.getter
-    def node(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def node(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         controlplane node to retrieve the kubeconfig from
         """
         return pulumi.get(self, "node")
 
     @node.setter
-    def node(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def node(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "node", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input['KubeconfigTimeoutsArgs']]:
+    def timeouts(self) -> pulumi.Input[Optional['KubeconfigTimeoutsArgs']]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input['KubeconfigTimeoutsArgs']]):
+    def timeouts(self, value: pulumi.Input[Optional['KubeconfigTimeoutsArgs']]):
         pulumi.set(self, "timeouts", value)
 
 
@@ -222,14 +224,15 @@ class Kubeconfig(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 certificate_renewal_duration: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_configuration: Optional[pulumi.Input[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input[Union['KubeconfigTimeoutsArgs', 'KubeconfigTimeoutsArgsDict']]] = None,
+                 certificate_renewal_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_configuration: pulumi.Input[Optional[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional[Union['KubeconfigTimeoutsArgs', 'KubeconfigTimeoutsArgsDict']]] = None,
                  __props__=None):
         """
         Retrieves the kubeconfig for a Talos cluster
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -247,6 +250,7 @@ class Kubeconfig(pulumi.CustomResource):
         """
         Retrieves the kubeconfig for a Talos cluster
 
+
         :param str resource_name: The name of the resource.
         :param KubeconfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -262,11 +266,11 @@ class Kubeconfig(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 certificate_renewal_duration: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_configuration: Optional[pulumi.Input[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
-                 endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-                 node: Optional[pulumi.Input[_builtins.str]] = None,
-                 timeouts: Optional[pulumi.Input[Union['KubeconfigTimeoutsArgs', 'KubeconfigTimeoutsArgsDict']]] = None,
+                 certificate_renewal_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_configuration: pulumi.Input[Optional[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
+                 endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+                 node: pulumi.Input[Optional[_builtins.str]] = None,
+                 timeouts: pulumi.Input[Optional[Union['KubeconfigTimeoutsArgs', 'KubeconfigTimeoutsArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -299,13 +303,13 @@ class Kubeconfig(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            certificate_renewal_duration: Optional[pulumi.Input[_builtins.str]] = None,
-            client_configuration: Optional[pulumi.Input[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
-            endpoint: Optional[pulumi.Input[_builtins.str]] = None,
-            kubeconfig_raw: Optional[pulumi.Input[_builtins.str]] = None,
-            kubernetes_client_configuration: Optional[pulumi.Input[Union['KubeconfigKubernetesClientConfigurationArgs', 'KubeconfigKubernetesClientConfigurationArgsDict']]] = None,
-            node: Optional[pulumi.Input[_builtins.str]] = None,
-            timeouts: Optional[pulumi.Input[Union['KubeconfigTimeoutsArgs', 'KubeconfigTimeoutsArgsDict']]] = None) -> 'Kubeconfig':
+            certificate_renewal_duration: pulumi.Input[Optional[_builtins.str]] = None,
+            client_configuration: pulumi.Input[Optional[Union['KubeconfigClientConfigurationArgs', 'KubeconfigClientConfigurationArgsDict']]] = None,
+            endpoint: pulumi.Input[Optional[_builtins.str]] = None,
+            kubeconfig_raw: pulumi.Input[Optional[_builtins.str]] = None,
+            kubernetes_client_configuration: pulumi.Input[Optional[Union['KubeconfigKubernetesClientConfigurationArgs', 'KubeconfigKubernetesClientConfigurationArgsDict']]] = None,
+            node: pulumi.Input[Optional[_builtins.str]] = None,
+            timeouts: pulumi.Input[Optional[Union['KubeconfigTimeoutsArgs', 'KubeconfigTimeoutsArgsDict']]] = None) -> 'Kubeconfig':
         """
         Get an existing Kubeconfig resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

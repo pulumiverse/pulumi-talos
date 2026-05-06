@@ -36,16 +36,6 @@ import (
 //	}
 //
 // ```
-//
-// ## Import
-//
-// terraform
-//
-// machine secrets can be imported from an existing secrets file
-//
-// ```sh
-// $ pulumi import talos:machine/secrets:Secrets this <path-to-secrets.yaml>
-// ```
 type Secrets struct {
 	pulumi.CustomResourceState
 
@@ -53,7 +43,7 @@ type Secrets struct {
 	ClientConfiguration ClientConfigurationOutput `pulumi:"clientConfiguration"`
 	// The secrets for the talos cluster
 	MachineSecrets MachineSecretsOutput `pulumi:"machineSecrets"`
-	// The version of talos features to use in generated machine configuration
+	// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 	TalosVersion pulumi.StringOutput `pulumi:"talosVersion"`
 }
 
@@ -91,7 +81,7 @@ type secretsState struct {
 	ClientConfiguration *ClientConfiguration `pulumi:"clientConfiguration"`
 	// The secrets for the talos cluster
 	MachineSecrets *MachineSecrets `pulumi:"machineSecrets"`
-	// The version of talos features to use in generated machine configuration
+	// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
@@ -100,7 +90,7 @@ type SecretsState struct {
 	ClientConfiguration ClientConfigurationPtrInput
 	// The secrets for the talos cluster
 	MachineSecrets MachineSecretsPtrInput
-	// The version of talos features to use in generated machine configuration
+	// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 	TalosVersion pulumi.StringPtrInput
 }
 
@@ -109,13 +99,13 @@ func (SecretsState) ElementType() reflect.Type {
 }
 
 type secretsArgs struct {
-	// The version of talos features to use in generated machine configuration
+	// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
 // The set of arguments for constructing a Secrets resource.
 type SecretsArgs struct {
-	// The version of talos features to use in generated machine configuration
+	// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 	TalosVersion pulumi.StringPtrInput
 }
 
@@ -216,7 +206,7 @@ func (o SecretsOutput) MachineSecrets() MachineSecretsOutput {
 	return o.ApplyT(func(v *Secrets) MachineSecretsOutput { return v.MachineSecrets }).(MachineSecretsOutput)
 }
 
-// The version of talos features to use in generated machine configuration
+// The Talos version contract used to generate the secrets. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 func (o SecretsOutput) TalosVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Secrets) pulumi.StringOutput { return v.TalosVersion }).(pulumi.StringOutput)
 }

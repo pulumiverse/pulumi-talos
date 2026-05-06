@@ -17,7 +17,7 @@ namespace Pulumiverse.Talos.Machine
     public partial class ConfigurationApply : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        /// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         /// </summary>
         [Output("applyMode")]
         public Output<string> ApplyMode { get; private set; } = null!;
@@ -26,7 +26,14 @@ namespace Pulumiverse.Talos.Machine
         /// The client configuration data
         /// </summary>
         [Output("clientConfiguration")]
-        public Output<Outputs.ClientConfiguration> ClientConfiguration { get; private set; } = null!;
+        public Output<Outputs.ClientConfiguration?> ClientConfiguration { get; private set; } = null!;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The client configuration data (write-only). Use this instead of ClientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        [Output("clientConfigurationWo")]
+        public Output<Outputs.ConfigurationApplyClientConfigurationWo?> ClientConfigurationWo { get; private set; } = null!;
 
         /// <summary>
         /// The list of config patches to apply
@@ -47,10 +54,23 @@ namespace Pulumiverse.Talos.Machine
         public Output<string> MachineConfiguration { get; private set; } = null!;
 
         /// <summary>
+        /// SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to MachineConfigurationInputWo — which is write-only and itself invisible to state — still surface as plan diffs.
+        /// </summary>
+        [Output("machineConfigurationHash")]
+        public Output<string> MachineConfigurationHash { get; private set; } = null!;
+
+        /// <summary>
         /// The machine configuration to apply
         /// </summary>
         [Output("machineConfigurationInput")]
-        public Output<string> MachineConfigurationInput { get; private set; } = null!;
+        public Output<string?> MachineConfigurationInput { get; private set; } = null!;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The machine configuration to apply (write-only). Use this instead of MachineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        [Output("machineConfigurationInputWo")]
+        public Output<string?> MachineConfigurationInputWo { get; private set; } = null!;
 
         /// <summary>
         /// The name of the node to bootstrap
@@ -60,6 +80,9 @@ namespace Pulumiverse.Talos.Machine
 
         /// <summary>
         /// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        /// 
+        /// &gt; Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+        /// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         /// </summary>
         [Output("onDestroy")]
         public Output<Outputs.ConfigurationApplyOnDestroy?> OnDestroy { get; private set; } = null!;
@@ -99,8 +122,10 @@ namespace Pulumiverse.Talos.Machine
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
                 AdditionalSecretOutputs =
                 {
+                    "clientConfigurationWo",
                     "machineConfiguration",
                     "machineConfigurationInput",
+                    "machineConfigurationInputWo",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -126,7 +151,7 @@ namespace Pulumiverse.Talos.Machine
     public sealed class ConfigurationApplyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        /// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         /// </summary>
         [Input("applyMode")]
         public Input<string>? ApplyMode { get; set; }
@@ -134,8 +159,25 @@ namespace Pulumiverse.Talos.Machine
         /// <summary>
         /// The client configuration data
         /// </summary>
-        [Input("clientConfiguration", required: true)]
-        public Input<Inputs.ClientConfigurationArgs> ClientConfiguration { get; set; } = null!;
+        [Input("clientConfiguration")]
+        public Input<Inputs.ClientConfigurationArgs>? ClientConfiguration { get; set; }
+
+        [Input("clientConfigurationWo")]
+        private Input<Inputs.ConfigurationApplyClientConfigurationWoArgs>? _clientConfigurationWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The client configuration data (write-only). Use this instead of ClientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        public Input<Inputs.ConfigurationApplyClientConfigurationWoArgs>? ClientConfigurationWo
+        {
+            get => _clientConfigurationWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientConfigurationWo = Output.Tuple<Input<Inputs.ConfigurationApplyClientConfigurationWoArgs>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("configPatches")]
         private InputList<string>? _configPatches;
@@ -155,7 +197,7 @@ namespace Pulumiverse.Talos.Machine
         [Input("endpoint")]
         public Input<string>? Endpoint { get; set; }
 
-        [Input("machineConfigurationInput", required: true)]
+        [Input("machineConfigurationInput")]
         private Input<string>? _machineConfigurationInput;
 
         /// <summary>
@@ -171,6 +213,23 @@ namespace Pulumiverse.Talos.Machine
             }
         }
 
+        [Input("machineConfigurationInputWo")]
+        private Input<string>? _machineConfigurationInputWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The machine configuration to apply (write-only). Use this instead of MachineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        public Input<string>? MachineConfigurationInputWo
+        {
+            get => _machineConfigurationInputWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _machineConfigurationInputWo = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         /// <summary>
         /// The name of the node to bootstrap
         /// </summary>
@@ -179,6 +238,9 @@ namespace Pulumiverse.Talos.Machine
 
         /// <summary>
         /// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        /// 
+        /// &gt; Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+        /// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         /// </summary>
         [Input("onDestroy")]
         public Input<Inputs.ConfigurationApplyOnDestroyArgs>? OnDestroy { get; set; }
@@ -195,7 +257,7 @@ namespace Pulumiverse.Talos.Machine
     public sealed class ConfigurationApplyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The mode of the apply operation. Use 'staged*if*needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
+        /// The mode of the apply operation. Use 'staged_if_needing_reboot' for automatic reboot prevention: performs a dry-run and uses 'staged' mode if reboot is needed, 'auto' otherwise
         /// </summary>
         [Input("applyMode")]
         public Input<string>? ApplyMode { get; set; }
@@ -205,6 +267,23 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         [Input("clientConfiguration")]
         public Input<Inputs.ClientConfigurationGetArgs>? ClientConfiguration { get; set; }
+
+        [Input("clientConfigurationWo")]
+        private Input<Inputs.ConfigurationApplyClientConfigurationWoGetArgs>? _clientConfigurationWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The client configuration data (write-only). Use this instead of ClientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        public Input<Inputs.ConfigurationApplyClientConfigurationWoGetArgs>? ClientConfigurationWo
+        {
+            get => _clientConfigurationWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientConfigurationWo = Output.Tuple<Input<Inputs.ConfigurationApplyClientConfigurationWoGetArgs>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("configPatches")]
         private InputList<string>? _configPatches;
@@ -240,6 +319,12 @@ namespace Pulumiverse.Talos.Machine
             }
         }
 
+        /// <summary>
+        /// SHA256 hex digest of the rendered machine configuration (input plus patches). Persisted in state so that changes to MachineConfigurationInputWo — which is write-only and itself invisible to state — still surface as plan diffs.
+        /// </summary>
+        [Input("machineConfigurationHash")]
+        public Input<string>? MachineConfigurationHash { get; set; }
+
         [Input("machineConfigurationInput")]
         private Input<string>? _machineConfigurationInput;
 
@@ -256,6 +341,23 @@ namespace Pulumiverse.Talos.Machine
             }
         }
 
+        [Input("machineConfigurationInputWo")]
+        private Input<string>? _machineConfigurationInputWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The machine configuration to apply (write-only). Use this instead of MachineConfigurationInput when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        public Input<string>? MachineConfigurationInputWo
+        {
+            get => _machineConfigurationInputWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _machineConfigurationInputWo = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         /// <summary>
         /// The name of the node to bootstrap
         /// </summary>
@@ -264,6 +366,9 @@ namespace Pulumiverse.Talos.Machine
 
         /// <summary>
         /// Actions to be taken on destroy, if *reset* is not set this is a no-op.
+        /// 
+        /// &gt; Note: Any changes to *on_destroy* block has to be applied first by running *terraform apply* first,
+        /// then a subsequent *terraform destroy* for the changes to take effect due to limitations in Terraform provider framework.
         /// </summary>
         [Input("onDestroy")]
         public Input<Inputs.ConfigurationApplyOnDestroyGetArgs>? OnDestroy { get; set; }

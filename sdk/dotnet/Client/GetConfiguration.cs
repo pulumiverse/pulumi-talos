@@ -21,7 +21,6 @@ namespace Pulumiverse.Talos.Client
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
         /// using Talos = Pulumiverse.Talos;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -53,7 +52,6 @@ namespace Pulumiverse.Talos.Client
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
         /// using Talos = Pulumiverse.Talos;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -85,7 +83,6 @@ namespace Pulumiverse.Talos.Client
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Talos = Pulumi.Talos;
         /// using Talos = Pulumiverse.Talos;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 

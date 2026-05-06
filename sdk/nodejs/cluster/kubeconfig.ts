@@ -113,28 +113,28 @@ export interface KubeconfigState {
     /**
      * The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
      */
-    certificateRenewalDuration?: pulumi.Input<string>;
+    certificateRenewalDuration?: pulumi.Input<string | undefined>;
     /**
      * The client configuration data
      */
-    clientConfiguration?: pulumi.Input<inputs.cluster.KubeconfigClientConfiguration>;
+    clientConfiguration?: pulumi.Input<inputs.cluster.KubeconfigClientConfiguration | undefined>;
     /**
      * endpoint to use for the talosclient. If not set, the node value will be used
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * The raw kubeconfig
      */
-    kubeconfigRaw?: pulumi.Input<string>;
+    kubeconfigRaw?: pulumi.Input<string | undefined>;
     /**
      * The kubernetes client configuration
      */
-    kubernetesClientConfiguration?: pulumi.Input<inputs.cluster.KubeconfigKubernetesClientConfiguration>;
+    kubernetesClientConfiguration?: pulumi.Input<inputs.cluster.KubeconfigKubernetesClientConfiguration | undefined>;
     /**
      * controlplane node to retrieve the kubeconfig from
      */
-    node?: pulumi.Input<string>;
-    timeouts?: pulumi.Input<inputs.cluster.KubeconfigTimeouts>;
+    node?: pulumi.Input<string | undefined>;
+    timeouts?: pulumi.Input<inputs.cluster.KubeconfigTimeouts | undefined>;
 }
 
 /**
@@ -144,7 +144,7 @@ export interface KubeconfigArgs {
     /**
      * The duration in hours before the certificate is renewed, defaults to 720h. Must be a valid duration string
      */
-    certificateRenewalDuration?: pulumi.Input<string>;
+    certificateRenewalDuration?: pulumi.Input<string | undefined>;
     /**
      * The client configuration data
      */
@@ -152,10 +152,10 @@ export interface KubeconfigArgs {
     /**
      * endpoint to use for the talosclient. If not set, the node value will be used
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * controlplane node to retrieve the kubeconfig from
      */
     node: pulumi.Input<string>;
-    timeouts?: pulumi.Input<inputs.cluster.KubeconfigTimeouts>;
+    timeouts?: pulumi.Input<inputs.cluster.KubeconfigTimeouts | undefined>;
 }

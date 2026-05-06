@@ -1,0 +1,3 @@
+name: talos
+description: A Pulumi resource provider for talos.
+language: dotnet

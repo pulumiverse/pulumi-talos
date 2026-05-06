@@ -25,16 +25,11 @@ __all__ = [
     'GetVersionsFiltersArgsDict',
 ]
 
-MYPY = False
-
-if not MYPY:
-    class GetExtensionsVersionsExactFiltersArgsDict(TypedDict):
-        names: NotRequired[Sequence[_builtins.str]]
-        """
-        The exact name match of the extension to filter by.
-        """
-elif False:
-    GetExtensionsVersionsExactFiltersArgsDict: TypeAlias = Mapping[str, Any]
+class GetExtensionsVersionsExactFiltersArgsDict(TypedDict):
+    names: NotRequired[Sequence[_builtins.str]]
+    """
+    The exact name match of the extension to filter by.
+    """
 
 @pulumi.input_type
 class GetExtensionsVersionsExactFiltersArgs:
@@ -59,14 +54,11 @@ class GetExtensionsVersionsExactFiltersArgs:
         pulumi.set(self, "names", value)
 
 
-if not MYPY:
-    class GetExtensionsVersionsFiltersArgsDict(TypedDict):
-        names: NotRequired[Sequence[_builtins.str]]
-        """
-        The name of the extension to filter by.
-        """
-elif False:
-    GetExtensionsVersionsFiltersArgsDict: TypeAlias = Mapping[str, Any]
+class GetExtensionsVersionsFiltersArgsDict(TypedDict):
+    names: NotRequired[Sequence[_builtins.str]]
+    """
+    The name of the extension to filter by.
+    """
 
 @pulumi.input_type
 class GetExtensionsVersionsFiltersArgs:
@@ -91,14 +83,11 @@ class GetExtensionsVersionsFiltersArgs:
         pulumi.set(self, "names", value)
 
 
-if not MYPY:
-    class GetOverlaysVersionsFiltersArgsDict(TypedDict):
-        name: NotRequired[_builtins.str]
-        """
-        The name of the overlay to filter by.
-        """
-elif False:
-    GetOverlaysVersionsFiltersArgsDict: TypeAlias = Mapping[str, Any]
+class GetOverlaysVersionsFiltersArgsDict(TypedDict):
+    name: NotRequired[_builtins.str]
+    """
+    The name of the overlay to filter by.
+    """
 
 @pulumi.input_type
 class GetOverlaysVersionsFiltersArgs:
@@ -123,14 +112,11 @@ class GetOverlaysVersionsFiltersArgs:
         pulumi.set(self, "name", value)
 
 
-if not MYPY:
-    class GetVersionsFiltersArgsDict(TypedDict):
-        stable_versions_only: NotRequired[_builtins.bool]
-        """
-        If set to true, only stable versions will be returned. If set to false, all versions will be returned.
-        """
-elif False:
-    GetVersionsFiltersArgsDict: TypeAlias = Mapping[str, Any]
+class GetVersionsFiltersArgsDict(TypedDict):
+    stable_versions_only: NotRequired[_builtins.bool]
+    """
+    If set to true, only stable versions will be returned. If set to false, all versions will be returned.
+    """
 
 @pulumi.input_type
 class GetVersionsFiltersArgs:

@@ -15,8 +15,12 @@ else:
 from .. import _utilities
 
 __all__ = [
+    'BootstrapClientConfigurationWoArgs',
+    'BootstrapClientConfigurationWoArgsDict',
     'BootstrapTimeoutsArgs',
     'BootstrapTimeoutsArgsDict',
+    'ConfigurationApplyClientConfigurationWoArgs',
+    'ConfigurationApplyClientConfigurationWoArgsDict',
     'ConfigurationApplyOnDestroyArgs',
     'ConfigurationApplyOnDestroyArgsDict',
     'TimeoutArgs',
@@ -57,21 +61,91 @@ __all__ = [
     'GetDisksTimeoutsArgsDict',
 ]
 
-MYPY = False
+class BootstrapClientConfigurationWoArgsDict(TypedDict):
+    ca_certificate: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The client CA certificate
+    """
+    client_certificate: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The client certificate
+    """
+    client_key: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The client key
+    """
 
-if not MYPY:
-    class BootstrapTimeoutsArgsDict(TypedDict):
-        create: NotRequired[pulumi.Input[_builtins.str]]
+@pulumi.input_type
+class BootstrapClientConfigurationWoArgs:
+    def __init__(__self__, *,
+                 ca_certificate: pulumi.Input[_builtins.str],
+                 client_certificate: pulumi.Input[_builtins.str],
+                 client_key: pulumi.Input[_builtins.str]):
         """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        :param pulumi.Input[_builtins.str] ca_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client CA certificate
+        :param pulumi.Input[_builtins.str] client_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client certificate
+        :param pulumi.Input[_builtins.str] client_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client key
         """
-elif False:
-    BootstrapTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @_builtins.property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client CA certificate
+        """
+        return pulumi.get(self, "ca_certificate")
+
+    @ca_certificate.setter
+    def ca_certificate(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "ca_certificate", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client certificate
+        """
+        return pulumi.get(self, "client_certificate")
+
+    @client_certificate.setter
+    def client_certificate(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "client_certificate", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
+    @client_key.setter
+    def client_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "client_key", value)
+
+
+class BootstrapTimeoutsArgsDict(TypedDict):
+    create: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+    """
 
 @pulumi.input_type
 class BootstrapTimeoutsArgs:
     def __init__(__self__, *,
-                 create: Optional[pulumi.Input[_builtins.str]] = None):
+                 create: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] create: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
@@ -80,40 +154,112 @@ class BootstrapTimeoutsArgs:
 
     @_builtins.property
     @pulumi.getter
-    def create(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def create(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         return pulumi.get(self, "create")
 
     @create.setter
-    def create(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def create(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "create", value)
 
 
-if not MYPY:
-    class ConfigurationApplyOnDestroyArgsDict(TypedDict):
-        graceful: NotRequired[pulumi.Input[_builtins.bool]]
+class ConfigurationApplyClientConfigurationWoArgsDict(TypedDict):
+    ca_certificate: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The client CA certificate
+    """
+    client_certificate: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The client certificate
+    """
+    client_key: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The client key
+    """
+
+@pulumi.input_type
+class ConfigurationApplyClientConfigurationWoArgs:
+    def __init__(__self__, *,
+                 ca_certificate: pulumi.Input[_builtins.str],
+                 client_certificate: pulumi.Input[_builtins.str],
+                 client_key: pulumi.Input[_builtins.str]):
         """
-        Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+        :param pulumi.Input[_builtins.str] ca_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client CA certificate
+        :param pulumi.Input[_builtins.str] client_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client certificate
+        :param pulumi.Input[_builtins.str] client_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The client key
         """
-        reboot: NotRequired[pulumi.Input[_builtins.bool]]
+        pulumi.set(__self__, "ca_certificate", ca_certificate)
+        pulumi.set(__self__, "client_certificate", client_certificate)
+        pulumi.set(__self__, "client_key", client_key)
+
+    @_builtins.property
+    @pulumi.getter(name="caCertificate")
+    def ca_certificate(self) -> pulumi.Input[_builtins.str]:
         """
-        Reboot indicates whether node should reboot or halt after resetting. Default false
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client CA certificate
         """
-        reset: NotRequired[pulumi.Input[_builtins.bool]]
+        return pulumi.get(self, "ca_certificate")
+
+    @ca_certificate.setter
+    def ca_certificate(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "ca_certificate", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientCertificate")
+    def client_certificate(self) -> pulumi.Input[_builtins.str]:
         """
-        Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client certificate
         """
-elif False:
-    ConfigurationApplyOnDestroyArgsDict: TypeAlias = Mapping[str, Any]
+        return pulumi.get(self, "client_certificate")
+
+    @client_certificate.setter
+    def client_certificate(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "client_certificate", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientKey")
+    def client_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The client key
+        """
+        return pulumi.get(self, "client_key")
+
+    @client_key.setter
+    def client_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "client_key", value)
+
+
+class ConfigurationApplyOnDestroyArgsDict(TypedDict):
+    graceful: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
+    """
+    reboot: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Reboot indicates whether node should reboot or halt after resetting. Default false
+    """
+    reset: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
+    """
 
 @pulumi.input_type
 class ConfigurationApplyOnDestroyArgs:
     def __init__(__self__, *,
-                 graceful: Optional[pulumi.Input[_builtins.bool]] = None,
-                 reboot: Optional[pulumi.Input[_builtins.bool]] = None,
-                 reset: Optional[pulumi.Input[_builtins.bool]] = None):
+                 graceful: pulumi.Input[Optional[_builtins.bool]] = None,
+                 reboot: pulumi.Input[Optional[_builtins.bool]] = None,
+                 reset: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         :param pulumi.Input[_builtins.bool] graceful: Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
         :param pulumi.Input[_builtins.bool] reboot: Reboot indicates whether node should reboot or halt after resetting. Default false
@@ -128,64 +274,61 @@ class ConfigurationApplyOnDestroyArgs:
 
     @_builtins.property
     @pulumi.getter
-    def graceful(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def graceful(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Graceful indicates whether node should leave etcd before the upgrade, it also enforces etcd checks before leaving. Default true
         """
         return pulumi.get(self, "graceful")
 
     @graceful.setter
-    def graceful(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def graceful(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "graceful", value)
 
     @_builtins.property
     @pulumi.getter
-    def reboot(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def reboot(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Reboot indicates whether node should reboot or halt after resetting. Default false
         """
         return pulumi.get(self, "reboot")
 
     @reboot.setter
-    def reboot(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def reboot(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "reboot", value)
 
     @_builtins.property
     @pulumi.getter
-    def reset(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def reset(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Reset the machine to the initial state (STATE and EPHEMERAL will be wiped). Default false
         """
         return pulumi.get(self, "reset")
 
     @reset.setter
-    def reset(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def reset(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "reset", value)
 
 
-if not MYPY:
-    class TimeoutArgsDict(TypedDict):
-        create: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-        """
-        delete: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
-        """
-        update: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-        """
-elif False:
-    TimeoutArgsDict: TypeAlias = Mapping[str, Any]
+class TimeoutArgsDict(TypedDict):
+    create: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+    """
+    delete: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+    """
+    update: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+    """
 
 @pulumi.input_type
 class TimeoutArgs:
     def __init__(__self__, *,
-                 create: Optional[pulumi.Input[_builtins.str]] = None,
-                 delete: Optional[pulumi.Input[_builtins.str]] = None,
-                 update: Optional[pulumi.Input[_builtins.str]] = None):
+                 create: pulumi.Input[Optional[_builtins.str]] = None,
+                 delete: pulumi.Input[Optional[_builtins.str]] = None,
+                 update: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] create: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         :param pulumi.Input[_builtins.str] delete: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
@@ -200,56 +343,53 @@ class TimeoutArgs:
 
     @_builtins.property
     @pulumi.getter
-    def create(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def create(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         return pulumi.get(self, "create")
 
     @create.setter
-    def create(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def create(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "create", value)
 
     @_builtins.property
     @pulumi.getter
-    def delete(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def delete(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
         """
         return pulumi.get(self, "delete")
 
     @delete.setter
-    def delete(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def delete(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "delete", value)
 
     @_builtins.property
     @pulumi.getter
-    def update(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def update(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         return pulumi.get(self, "update")
 
     @update.setter
-    def update(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def update(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "update", value)
 
 
-if not MYPY:
-    class CertificateArgsDict(TypedDict):
-        """
-        A Machine Secrets Certificate
-        """
-        cert: _builtins.str
-        """
-        Certificate
-        """
-        key: _builtins.str
-        """
-        Private Key
-        """
-elif False:
-    CertificateArgsDict: TypeAlias = Mapping[str, Any]
+class CertificateArgsDict(TypedDict):
+    """
+    A Machine Secrets Certificate
+    """
+    cert: _builtins.str
+    """
+    Certificate
+    """
+    key: _builtins.str
+    """
+    Private Key
+    """
 
 @pulumi.input_type
 class CertificateArgs:
@@ -258,6 +398,7 @@ class CertificateArgs:
                  key: _builtins.str):
         """
         A Machine Secrets Certificate
+
         :param _builtins.str cert: Certificate
         :param _builtins.str key: Private Key
         """
@@ -289,18 +430,15 @@ class CertificateArgs:
         pulumi.set(self, "key", value)
 
 
-if not MYPY:
-    class CertificatesArgsDict(TypedDict):
-        """
-        A complete Machine Secrets Certificates configuration
-        """
-        etcd: 'CertificateArgsDict'
-        k8s: 'CertificateArgsDict'
-        k8s_aggregator: 'CertificateArgsDict'
-        k8s_serviceaccount: 'KeyArgsDict'
-        os: 'CertificateArgsDict'
-elif False:
-    CertificatesArgsDict: TypeAlias = Mapping[str, Any]
+class CertificatesArgsDict(TypedDict):
+    """
+    A complete Machine Secrets Certificates configuration
+    """
+    etcd: 'CertificateArgsDict'
+    k8s: 'CertificateArgsDict'
+    k8s_aggregator: 'CertificateArgsDict'
+    k8s_serviceaccount: 'KeyArgsDict'
+    os: 'CertificateArgsDict'
 
 @pulumi.input_type
 class CertificatesArgs:
@@ -365,18 +503,15 @@ class CertificatesArgs:
         pulumi.set(self, "os", value)
 
 
-if not MYPY:
-    class CertificatesArgsDict(TypedDict):
-        """
-        A complete Machine Secrets Certificates configuration
-        """
-        etcd: pulumi.Input['CertificateArgsDict']
-        k8s: pulumi.Input['CertificateArgsDict']
-        k8s_aggregator: pulumi.Input['CertificateArgsDict']
-        k8s_serviceaccount: pulumi.Input['KeyArgsDict']
-        os: pulumi.Input['CertificateArgsDict']
-elif False:
-    CertificatesArgsDict: TypeAlias = Mapping[str, Any]
+class CertificatesArgsDict(TypedDict):
+    """
+    A complete Machine Secrets Certificates configuration
+    """
+    etcd: pulumi.Input['CertificateArgsDict']
+    k8s: pulumi.Input['CertificateArgsDict']
+    k8s_aggregator: pulumi.Input['CertificateArgsDict']
+    k8s_serviceaccount: pulumi.Input['KeyArgsDict']
+    os: pulumi.Input['CertificateArgsDict']
 
 @pulumi.input_type
 class CertificatesArgs:
@@ -441,21 +576,18 @@ class CertificatesArgs:
         pulumi.set(self, "os", value)
 
 
-if not MYPY:
-    class CertificateArgsDict(TypedDict):
-        """
-        A Machine Secrets Certificate
-        """
-        cert: pulumi.Input[_builtins.str]
-        """
-        Certificate
-        """
-        key: pulumi.Input[_builtins.str]
-        """
-        Private Key
-        """
-elif False:
-    CertificateArgsDict: TypeAlias = Mapping[str, Any]
+class CertificateArgsDict(TypedDict):
+    """
+    A Machine Secrets Certificate
+    """
+    cert: pulumi.Input[_builtins.str]
+    """
+    Certificate
+    """
+    key: pulumi.Input[_builtins.str]
+    """
+    Private Key
+    """
 
 @pulumi.input_type
 class CertificateArgs:
@@ -464,6 +596,7 @@ class CertificateArgs:
                  key: pulumi.Input[_builtins.str]):
         """
         A Machine Secrets Certificate
+
         :param pulumi.Input[_builtins.str] cert: Certificate
         :param pulumi.Input[_builtins.str] key: Private Key
         """
@@ -495,25 +628,22 @@ class CertificateArgs:
         pulumi.set(self, "key", value)
 
 
-if not MYPY:
-    class ClientConfigurationArgsDict(TypedDict):
-        """
-        A Client Configuration
-        """
-        ca_certificate: pulumi.Input[_builtins.str]
-        """
-        The client CA certificate
-        """
-        client_certificate: pulumi.Input[_builtins.str]
-        """
-        The client certificate
-        """
-        client_key: pulumi.Input[_builtins.str]
-        """
-        The client private key
-        """
-elif False:
-    ClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class ClientConfigurationArgsDict(TypedDict):
+    """
+    A Client Configuration
+    """
+    ca_certificate: pulumi.Input[_builtins.str]
+    """
+    The client CA certificate
+    """
+    client_certificate: pulumi.Input[_builtins.str]
+    """
+    The client certificate
+    """
+    client_key: pulumi.Input[_builtins.str]
+    """
+    The client private key
+    """
 
 @pulumi.input_type
 class ClientConfigurationArgs:
@@ -523,6 +653,7 @@ class ClientConfigurationArgs:
                  client_key: pulumi.Input[_builtins.str]):
         """
         A Client Configuration
+
         :param pulumi.Input[_builtins.str] ca_certificate: The client CA certificate
         :param pulumi.Input[_builtins.str] client_certificate: The client certificate
         :param pulumi.Input[_builtins.str] client_key: The client private key
@@ -568,21 +699,18 @@ class ClientConfigurationArgs:
         pulumi.set(self, "client_key", value)
 
 
-if not MYPY:
-    class ClusterArgsDict(TypedDict):
-        """
-        A Machine Secrets Cluster Info
-        """
-        id: _builtins.str
-        """
-        Certificate
-        """
-        secret: _builtins.str
-        """
-        Private Key
-        """
-elif False:
-    ClusterArgsDict: TypeAlias = Mapping[str, Any]
+class ClusterArgsDict(TypedDict):
+    """
+    A Machine Secrets Cluster Info
+    """
+    id: _builtins.str
+    """
+    Certificate
+    """
+    secret: _builtins.str
+    """
+    Private Key
+    """
 
 @pulumi.input_type
 class ClusterArgs:
@@ -591,6 +719,7 @@ class ClusterArgs:
                  secret: _builtins.str):
         """
         A Machine Secrets Cluster Info
+
         :param _builtins.str id: Certificate
         :param _builtins.str secret: Private Key
         """
@@ -622,21 +751,18 @@ class ClusterArgs:
         pulumi.set(self, "secret", value)
 
 
-if not MYPY:
-    class ClusterArgsDict(TypedDict):
-        """
-        A Machine Secrets Cluster Info
-        """
-        id: pulumi.Input[_builtins.str]
-        """
-        Certificate
-        """
-        secret: pulumi.Input[_builtins.str]
-        """
-        Private Key
-        """
-elif False:
-    ClusterArgsDict: TypeAlias = Mapping[str, Any]
+class ClusterArgsDict(TypedDict):
+    """
+    A Machine Secrets Cluster Info
+    """
+    id: pulumi.Input[_builtins.str]
+    """
+    Certificate
+    """
+    secret: pulumi.Input[_builtins.str]
+    """
+    Private Key
+    """
 
 @pulumi.input_type
 class ClusterArgs:
@@ -645,6 +771,7 @@ class ClusterArgs:
                  secret: pulumi.Input[_builtins.str]):
         """
         A Machine Secrets Cluster Info
+
         :param pulumi.Input[_builtins.str] id: Certificate
         :param pulumi.Input[_builtins.str] secret: Private Key
         """
@@ -676,17 +803,14 @@ class ClusterArgs:
         pulumi.set(self, "secret", value)
 
 
-if not MYPY:
-    class KeyArgsDict(TypedDict):
-        """
-        A Machine Secrets Private Key
-        """
-        key: _builtins.str
-        """
-        Private Key
-        """
-elif False:
-    KeyArgsDict: TypeAlias = Mapping[str, Any]
+class KeyArgsDict(TypedDict):
+    """
+    A Machine Secrets Private Key
+    """
+    key: _builtins.str
+    """
+    Private Key
+    """
 
 @pulumi.input_type
 class KeyArgs:
@@ -694,6 +818,7 @@ class KeyArgs:
                  key: _builtins.str):
         """
         A Machine Secrets Private Key
+
         :param _builtins.str key: Private Key
         """
         pulumi.set(__self__, "key", key)
@@ -711,17 +836,14 @@ class KeyArgs:
         pulumi.set(self, "key", value)
 
 
-if not MYPY:
-    class KeyArgsDict(TypedDict):
-        """
-        A Machine Secrets Private Key
-        """
-        key: pulumi.Input[_builtins.str]
-        """
-        Private Key
-        """
-elif False:
-    KeyArgsDict: TypeAlias = Mapping[str, Any]
+class KeyArgsDict(TypedDict):
+    """
+    A Machine Secrets Private Key
+    """
+    key: pulumi.Input[_builtins.str]
+    """
+    Private Key
+    """
 
 @pulumi.input_type
 class KeyArgs:
@@ -729,6 +851,7 @@ class KeyArgs:
                  key: pulumi.Input[_builtins.str]):
         """
         A Machine Secrets Private Key
+
         :param pulumi.Input[_builtins.str] key: Private Key
         """
         pulumi.set(__self__, "key", key)
@@ -746,25 +869,22 @@ class KeyArgs:
         pulumi.set(self, "key", value)
 
 
-if not MYPY:
-    class KubernetesSecretsArgsDict(TypedDict):
-        """
-        A Machine Secrets Bootstrap data
-        """
-        bootstrap_token: _builtins.str
-        """
-        The bootstrap token for the talos kubernetes cluster
-        """
-        secretbox_encryption_secret: _builtins.str
-        """
-        The secretbox encryption secret for the talos kubernetes cluster
-        """
-        aescbc_encryption_secret: NotRequired[_builtins.str]
-        """
-        The aescbc encryption secret for the talos kubernetes cluster
-        """
-elif False:
-    KubernetesSecretsArgsDict: TypeAlias = Mapping[str, Any]
+class KubernetesSecretsArgsDict(TypedDict):
+    """
+    A Machine Secrets Bootstrap data
+    """
+    bootstrap_token: _builtins.str
+    """
+    The bootstrap token for the talos kubernetes cluster
+    """
+    secretbox_encryption_secret: _builtins.str
+    """
+    The secretbox encryption secret for the talos kubernetes cluster
+    """
+    aescbc_encryption_secret: NotRequired[_builtins.str]
+    """
+    The aescbc encryption secret for the talos kubernetes cluster
+    """
 
 @pulumi.input_type
 class KubernetesSecretsArgs:
@@ -774,6 +894,7 @@ class KubernetesSecretsArgs:
                  aescbc_encryption_secret: Optional[_builtins.str] = None):
         """
         A Machine Secrets Bootstrap data
+
         :param _builtins.str bootstrap_token: The bootstrap token for the talos kubernetes cluster
         :param _builtins.str secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
         :param _builtins.str aescbc_encryption_secret: The aescbc encryption secret for the talos kubernetes cluster
@@ -820,34 +941,32 @@ class KubernetesSecretsArgs:
         pulumi.set(self, "aescbc_encryption_secret", value)
 
 
-if not MYPY:
-    class KubernetesSecretsArgsDict(TypedDict):
-        """
-        A Machine Secrets Bootstrap data
-        """
-        bootstrap_token: pulumi.Input[_builtins.str]
-        """
-        The bootstrap token for the talos kubernetes cluster
-        """
-        secretbox_encryption_secret: pulumi.Input[_builtins.str]
-        """
-        The secretbox encryption secret for the talos kubernetes cluster
-        """
-        aescbc_encryption_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The aescbc encryption secret for the talos kubernetes cluster
-        """
-elif False:
-    KubernetesSecretsArgsDict: TypeAlias = Mapping[str, Any]
+class KubernetesSecretsArgsDict(TypedDict):
+    """
+    A Machine Secrets Bootstrap data
+    """
+    bootstrap_token: pulumi.Input[_builtins.str]
+    """
+    The bootstrap token for the talos kubernetes cluster
+    """
+    secretbox_encryption_secret: pulumi.Input[_builtins.str]
+    """
+    The secretbox encryption secret for the talos kubernetes cluster
+    """
+    aescbc_encryption_secret: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The aescbc encryption secret for the talos kubernetes cluster
+    """
 
 @pulumi.input_type
 class KubernetesSecretsArgs:
     def __init__(__self__, *,
                  bootstrap_token: pulumi.Input[_builtins.str],
                  secretbox_encryption_secret: pulumi.Input[_builtins.str],
-                 aescbc_encryption_secret: Optional[pulumi.Input[_builtins.str]] = None):
+                 aescbc_encryption_secret: pulumi.Input[Optional[_builtins.str]] = None):
         """
         A Machine Secrets Bootstrap data
+
         :param pulumi.Input[_builtins.str] bootstrap_token: The bootstrap token for the talos kubernetes cluster
         :param pulumi.Input[_builtins.str] secretbox_encryption_secret: The secretbox encryption secret for the talos kubernetes cluster
         :param pulumi.Input[_builtins.str] aescbc_encryption_secret: The aescbc encryption secret for the talos kubernetes cluster
@@ -883,28 +1002,25 @@ class KubernetesSecretsArgs:
 
     @_builtins.property
     @pulumi.getter(name="aescbcEncryptionSecret")
-    def aescbc_encryption_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def aescbc_encryption_secret(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The aescbc encryption secret for the talos kubernetes cluster
         """
         return pulumi.get(self, "aescbc_encryption_secret")
 
     @aescbc_encryption_secret.setter
-    def aescbc_encryption_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def aescbc_encryption_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aescbc_encryption_secret", value)
 
 
-if not MYPY:
-    class MachineSecretsArgsDict(TypedDict):
-        """
-        A complete Machine Secrets configuration
-        """
-        certs: 'CertificatesArgsDict'
-        cluster: 'ClusterArgsDict'
-        secrets: 'KubernetesSecretsArgsDict'
-        trustdinfo: 'TrustdInfoArgsDict'
-elif False:
-    MachineSecretsArgsDict: TypeAlias = Mapping[str, Any]
+class MachineSecretsArgsDict(TypedDict):
+    """
+    A complete Machine Secrets configuration
+    """
+    certs: 'CertificatesArgsDict'
+    cluster: 'ClusterArgsDict'
+    secrets: 'KubernetesSecretsArgsDict'
+    trustdinfo: 'TrustdInfoArgsDict'
 
 @pulumi.input_type
 class MachineSecretsArgs:
@@ -958,17 +1074,14 @@ class MachineSecretsArgs:
         pulumi.set(self, "trustdinfo", value)
 
 
-if not MYPY:
-    class MachineSecretsArgsDict(TypedDict):
-        """
-        A complete Machine Secrets configuration
-        """
-        certs: pulumi.Input['CertificatesArgsDict']
-        cluster: pulumi.Input['ClusterArgsDict']
-        secrets: pulumi.Input['KubernetesSecretsArgsDict']
-        trustdinfo: pulumi.Input['TrustdInfoArgsDict']
-elif False:
-    MachineSecretsArgsDict: TypeAlias = Mapping[str, Any]
+class MachineSecretsArgsDict(TypedDict):
+    """
+    A complete Machine Secrets configuration
+    """
+    certs: pulumi.Input['CertificatesArgsDict']
+    cluster: pulumi.Input['ClusterArgsDict']
+    secrets: pulumi.Input['KubernetesSecretsArgsDict']
+    trustdinfo: pulumi.Input['TrustdInfoArgsDict']
 
 @pulumi.input_type
 class MachineSecretsArgs:
@@ -1022,17 +1135,14 @@ class MachineSecretsArgs:
         pulumi.set(self, "trustdinfo", value)
 
 
-if not MYPY:
-    class TrustdInfoArgsDict(TypedDict):
-        """
-        A Machine Secrets Trust daemon info
-        """
-        token: _builtins.str
-        """
-        The trustd token for the talos kubernetes cluster
-        """
-elif False:
-    TrustdInfoArgsDict: TypeAlias = Mapping[str, Any]
+class TrustdInfoArgsDict(TypedDict):
+    """
+    A Machine Secrets Trust daemon info
+    """
+    token: _builtins.str
+    """
+    The trustd token for the talos kubernetes cluster
+    """
 
 @pulumi.input_type
 class TrustdInfoArgs:
@@ -1040,6 +1150,7 @@ class TrustdInfoArgs:
                  token: _builtins.str):
         """
         A Machine Secrets Trust daemon info
+
         :param _builtins.str token: The trustd token for the talos kubernetes cluster
         """
         pulumi.set(__self__, "token", token)
@@ -1057,17 +1168,14 @@ class TrustdInfoArgs:
         pulumi.set(self, "token", value)
 
 
-if not MYPY:
-    class TrustdInfoArgsDict(TypedDict):
-        """
-        A Machine Secrets Trust daemon info
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The trustd token for the talos kubernetes cluster
-        """
-elif False:
-    TrustdInfoArgsDict: TypeAlias = Mapping[str, Any]
+class TrustdInfoArgsDict(TypedDict):
+    """
+    A Machine Secrets Trust daemon info
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The trustd token for the talos kubernetes cluster
+    """
 
 @pulumi.input_type
 class TrustdInfoArgs:
@@ -1075,6 +1183,7 @@ class TrustdInfoArgs:
                  token: pulumi.Input[_builtins.str]):
         """
         A Machine Secrets Trust daemon info
+
         :param pulumi.Input[_builtins.str] token: The trustd token for the talos kubernetes cluster
         """
         pulumi.set(__self__, "token", token)
@@ -1092,22 +1201,19 @@ class TrustdInfoArgs:
         pulumi.set(self, "token", value)
 
 
-if not MYPY:
-    class GetDisksClientConfigurationArgsDict(TypedDict):
-        ca_certificate: _builtins.str
-        """
-        The client CA certificate
-        """
-        client_certificate: _builtins.str
-        """
-        The client certificate
-        """
-        client_key: _builtins.str
-        """
-        The client key
-        """
-elif False:
-    GetDisksClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class GetDisksClientConfigurationArgsDict(TypedDict):
+    ca_certificate: _builtins.str
+    """
+    The client CA certificate
+    """
+    client_certificate: _builtins.str
+    """
+    The client certificate
+    """
+    client_key: _builtins.str
+    """
+    The client key
+    """
 
 @pulumi.input_type
 class GetDisksClientConfigurationArgs:
@@ -1161,14 +1267,11 @@ class GetDisksClientConfigurationArgs:
         pulumi.set(self, "client_key", value)
 
 
-if not MYPY:
-    class GetDisksTimeoutsArgsDict(TypedDict):
-        read: NotRequired[_builtins.str]
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-        """
-elif False:
-    GetDisksTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
+class GetDisksTimeoutsArgsDict(TypedDict):
+    read: NotRequired[_builtins.str]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+    """
 
 @pulumi.input_type
 class GetDisksTimeoutsArgs:

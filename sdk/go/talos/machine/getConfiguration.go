@@ -72,7 +72,7 @@ type GetConfigurationArgs struct {
 	MachineSecrets MachineSecrets `pulumi:"machineSecrets"`
 	// The type of machine to generate the configuration for
 	MachineType string `pulumi:"machineType"`
-	// The version of talos features to use in generated machine configuration
+	// The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `configPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
@@ -98,7 +98,7 @@ type GetConfigurationResult struct {
 	MachineSecrets MachineSecrets `pulumi:"machineSecrets"`
 	// The type of machine to generate the configuration for
 	MachineType string `pulumi:"machineType"`
-	// The version of talos features to use in generated machine configuration
+	// The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `configPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 	TalosVersion *string `pulumi:"talosVersion"`
 }
 
@@ -129,7 +129,7 @@ type GetConfigurationOutputArgs struct {
 	MachineSecrets MachineSecretsInput `pulumi:"machineSecrets"`
 	// The type of machine to generate the configuration for
 	MachineType pulumi.StringInput `pulumi:"machineType"`
-	// The version of talos features to use in generated machine configuration
+	// The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `configPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 	TalosVersion pulumi.StringPtrInput `pulumi:"talosVersion"`
 }
 
@@ -202,7 +202,7 @@ func (o GetConfigurationResultOutput) MachineType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConfigurationResult) string { return v.MachineType }).(pulumi.StringOutput)
 }
 
-// The version of talos features to use in generated machine configuration
+// The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `configPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
 func (o GetConfigurationResultOutput) TalosVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetConfigurationResult) *string { return v.TalosVersion }).(pulumi.StringPtrOutput)
 }

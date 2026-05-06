@@ -31,24 +31,19 @@ __all__ = [
     'GetKubeconfigTimeoutsArgsDict',
 ]
 
-MYPY = False
-
-if not MYPY:
-    class KubeconfigClientConfigurationArgsDict(TypedDict):
-        ca_certificate: pulumi.Input[_builtins.str]
-        """
-        The client CA certificate
-        """
-        client_certificate: pulumi.Input[_builtins.str]
-        """
-        The client certificate
-        """
-        client_key: pulumi.Input[_builtins.str]
-        """
-        The client key
-        """
-elif False:
-    KubeconfigClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class KubeconfigClientConfigurationArgsDict(TypedDict):
+    ca_certificate: pulumi.Input[_builtins.str]
+    """
+    The client CA certificate
+    """
+    client_certificate: pulumi.Input[_builtins.str]
+    """
+    The client certificate
+    """
+    client_key: pulumi.Input[_builtins.str]
+    """
+    The client key
+    """
 
 @pulumi.input_type
 class KubeconfigClientConfigurationArgs:
@@ -102,34 +97,31 @@ class KubeconfigClientConfigurationArgs:
         pulumi.set(self, "client_key", value)
 
 
-if not MYPY:
-    class KubeconfigKubernetesClientConfigurationArgsDict(TypedDict):
-        ca_certificate: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The kubernetes CA certificate
-        """
-        client_certificate: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The kubernetes client certificate
-        """
-        client_key: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The kubernetes client key
-        """
-        host: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The kubernetes host
-        """
-elif False:
-    KubeconfigKubernetesClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class KubeconfigKubernetesClientConfigurationArgsDict(TypedDict):
+    ca_certificate: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The kubernetes CA certificate
+    """
+    client_certificate: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The kubernetes client certificate
+    """
+    client_key: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The kubernetes client key
+    """
+    host: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The kubernetes host
+    """
 
 @pulumi.input_type
 class KubeconfigKubernetesClientConfigurationArgs:
     def __init__(__self__, *,
-                 ca_certificate: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_certificate: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 host: Optional[pulumi.Input[_builtins.str]] = None):
+                 ca_certificate: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_certificate: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 host: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] ca_certificate: The kubernetes CA certificate
         :param pulumi.Input[_builtins.str] client_certificate: The kubernetes client certificate
@@ -147,71 +139,68 @@ class KubeconfigKubernetesClientConfigurationArgs:
 
     @_builtins.property
     @pulumi.getter(name="caCertificate")
-    def ca_certificate(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def ca_certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The kubernetes CA certificate
         """
         return pulumi.get(self, "ca_certificate")
 
     @ca_certificate.setter
-    def ca_certificate(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def ca_certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "ca_certificate", value)
 
     @_builtins.property
     @pulumi.getter(name="clientCertificate")
-    def client_certificate(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The kubernetes client certificate
         """
         return pulumi.get(self, "client_certificate")
 
     @client_certificate.setter
-    def client_certificate(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_certificate", value)
 
     @_builtins.property
     @pulumi.getter(name="clientKey")
-    def client_key(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_key(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The kubernetes client key
         """
         return pulumi.get(self, "client_key")
 
     @client_key.setter
-    def client_key(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_key(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_key", value)
 
     @_builtins.property
     @pulumi.getter
-    def host(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def host(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The kubernetes host
         """
         return pulumi.get(self, "host")
 
     @host.setter
-    def host(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def host(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "host", value)
 
 
-if not MYPY:
-    class KubeconfigTimeoutsArgsDict(TypedDict):
-        create: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-        """
-        update: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-        """
-elif False:
-    KubeconfigTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
+class KubeconfigTimeoutsArgsDict(TypedDict):
+    create: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+    """
+    update: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+    """
 
 @pulumi.input_type
 class KubeconfigTimeoutsArgs:
     def __init__(__self__, *,
-                 create: Optional[pulumi.Input[_builtins.str]] = None,
-                 update: Optional[pulumi.Input[_builtins.str]] = None):
+                 create: pulumi.Input[Optional[_builtins.str]] = None,
+                 update: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] create: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         :param pulumi.Input[_builtins.str] update: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
@@ -223,45 +212,42 @@ class KubeconfigTimeoutsArgs:
 
     @_builtins.property
     @pulumi.getter
-    def create(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def create(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         return pulumi.get(self, "create")
 
     @create.setter
-    def create(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def create(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "create", value)
 
     @_builtins.property
     @pulumi.getter
-    def update(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def update(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
         """
         return pulumi.get(self, "update")
 
     @update.setter
-    def update(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def update(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "update", value)
 
 
-if not MYPY:
-    class GetHealthClientConfigurationArgsDict(TypedDict):
-        ca_certificate: _builtins.str
-        """
-        The client CA certificate
-        """
-        client_certificate: _builtins.str
-        """
-        The client certificate
-        """
-        client_key: _builtins.str
-        """
-        The client key
-        """
-elif False:
-    GetHealthClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class GetHealthClientConfigurationArgsDict(TypedDict):
+    ca_certificate: _builtins.str
+    """
+    The client CA certificate
+    """
+    client_certificate: _builtins.str
+    """
+    The client certificate
+    """
+    client_key: _builtins.str
+    """
+    The client key
+    """
 
 @pulumi.input_type
 class GetHealthClientConfigurationArgs:
@@ -315,14 +301,11 @@ class GetHealthClientConfigurationArgs:
         pulumi.set(self, "client_key", value)
 
 
-if not MYPY:
-    class GetHealthTimeoutsArgsDict(TypedDict):
-        read: NotRequired[_builtins.str]
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-        """
-elif False:
-    GetHealthTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
+class GetHealthTimeoutsArgsDict(TypedDict):
+    read: NotRequired[_builtins.str]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+    """
 
 @pulumi.input_type
 class GetHealthTimeoutsArgs:
@@ -347,22 +330,19 @@ class GetHealthTimeoutsArgs:
         pulumi.set(self, "read", value)
 
 
-if not MYPY:
-    class GetKubeconfigClientConfigurationArgsDict(TypedDict):
-        ca_certificate: _builtins.str
-        """
-        The client CA certificate
-        """
-        client_certificate: _builtins.str
-        """
-        The client certificate
-        """
-        client_key: _builtins.str
-        """
-        The client key
-        """
-elif False:
-    GetKubeconfigClientConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class GetKubeconfigClientConfigurationArgsDict(TypedDict):
+    ca_certificate: _builtins.str
+    """
+    The client CA certificate
+    """
+    client_certificate: _builtins.str
+    """
+    The client certificate
+    """
+    client_key: _builtins.str
+    """
+    The client key
+    """
 
 @pulumi.input_type
 class GetKubeconfigClientConfigurationArgs:
@@ -416,14 +396,11 @@ class GetKubeconfigClientConfigurationArgs:
         pulumi.set(self, "client_key", value)
 
 
-if not MYPY:
-    class GetKubeconfigTimeoutsArgsDict(TypedDict):
-        read: NotRequired[_builtins.str]
-        """
-        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-        """
-elif False:
-    GetKubeconfigTimeoutsArgsDict: TypeAlias = Mapping[str, Any]
+class GetKubeconfigTimeoutsArgsDict(TypedDict):
+    read: NotRequired[_builtins.str]
+    """
+    A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+    """
 
 @pulumi.input_type
 class GetKubeconfigTimeoutsArgs:

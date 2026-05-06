@@ -12,16 +12,6 @@ namespace Pulumiverse.Talos.Machine
 {
     /// <summary>
     /// The machine bootstrap resource allows you to bootstrap a Talos node.
-    /// 
-    /// ## Import
-    /// 
-    /// terraform
-    /// 
-    /// machine bootstrap can be imported to let terraform know that the machine is already bootstrapped
-    /// 
-    /// ```sh
-    /// $ pulumi import talos:machine/bootstrap:Bootstrap this &lt;any id&gt;
-    /// ```
     /// </summary>
     [TalosResourceType("talos:machine/bootstrap:Bootstrap")]
     public partial class Bootstrap : global::Pulumi.CustomResource
@@ -30,7 +20,14 @@ namespace Pulumiverse.Talos.Machine
         /// The client configuration data
         /// </summary>
         [Output("clientConfiguration")]
-        public Output<Outputs.ClientConfiguration> ClientConfiguration { get; private set; } = null!;
+        public Output<Outputs.ClientConfiguration?> ClientConfiguration { get; private set; } = null!;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The client configuration data (write-only). Use this instead of ClientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        [Output("clientConfigurationWo")]
+        public Output<Outputs.BootstrapClientConfigurationWo?> ClientConfigurationWo { get; private set; } = null!;
 
         /// <summary>
         /// The endpoint of the machine to bootstrap
@@ -71,6 +68,10 @@ namespace Pulumiverse.Talos.Machine
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
+                AdditionalSecretOutputs =
+                {
+                    "clientConfigurationWo",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -97,8 +98,25 @@ namespace Pulumiverse.Talos.Machine
         /// <summary>
         /// The client configuration data
         /// </summary>
-        [Input("clientConfiguration", required: true)]
-        public Input<Inputs.ClientConfigurationArgs> ClientConfiguration { get; set; } = null!;
+        [Input("clientConfiguration")]
+        public Input<Inputs.ClientConfigurationArgs>? ClientConfiguration { get; set; }
+
+        [Input("clientConfigurationWo")]
+        private Input<Inputs.BootstrapClientConfigurationWoArgs>? _clientConfigurationWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The client configuration data (write-only). Use this instead of ClientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        public Input<Inputs.BootstrapClientConfigurationWoArgs>? ClientConfigurationWo
+        {
+            get => _clientConfigurationWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientConfigurationWo = Output.Tuple<Input<Inputs.BootstrapClientConfigurationWoArgs>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The endpoint of the machine to bootstrap
@@ -128,6 +146,23 @@ namespace Pulumiverse.Talos.Machine
         /// </summary>
         [Input("clientConfiguration")]
         public Input<Inputs.ClientConfigurationGetArgs>? ClientConfiguration { get; set; }
+
+        [Input("clientConfigurationWo")]
+        private Input<Inputs.BootstrapClientConfigurationWoGetArgs>? _clientConfigurationWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The client configuration data (write-only). Use this instead of ClientConfiguration when using ephemeral resources. Requires Terraform 1.11+
+        /// </summary>
+        public Input<Inputs.BootstrapClientConfigurationWoGetArgs>? ClientConfigurationWo
+        {
+            get => _clientConfigurationWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientConfigurationWo = Output.Tuple<Input<Inputs.BootstrapClientConfigurationWoGetArgs>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The endpoint of the machine to bootstrap

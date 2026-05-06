@@ -78,7 +78,7 @@ export interface GetConfigurationArgs {
      */
     machineType: string;
     /**
-     * The version of talos features to use in generated machine configuration
+     * The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `configPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
      */
     talosVersion?: string;
 }
@@ -128,7 +128,7 @@ export interface GetConfigurationResult {
      */
     readonly machineType: string;
     /**
-     * The version of talos features to use in generated machine configuration
+     * The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `configPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
      */
     readonly talosVersion?: string;
 }
@@ -182,19 +182,19 @@ export interface GetConfigurationOutputArgs {
     /**
      * The list of config patches to apply to the generated configuration
      */
-    configPatches?: pulumi.Input<pulumi.Input<string>[]>;
+    configPatches?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to generate documentation for the generated configuration. Defaults to false
      */
-    docs?: pulumi.Input<boolean>;
+    docs?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to generate examples for the generated configuration. Defaults to false
      */
-    examples?: pulumi.Input<boolean>;
+    examples?: pulumi.Input<boolean | undefined>;
     /**
      * The version of kubernetes to use
      */
-    kubernetesVersion?: pulumi.Input<string>;
+    kubernetesVersion?: pulumi.Input<string | undefined>;
     /**
      * The secrets for the talos cluster
      */
@@ -204,7 +204,7 @@ export interface GetConfigurationOutputArgs {
      */
     machineType: pulumi.Input<string>;
     /**
-     * The version of talos features to use in generated machine configuration
+     * The Talos version contract used to generate the machine configuration. This does not control the installed Talos version. Use `configPatches` to set `machine.install.image` to the desired value. Example values: `v1.12`, `v1.12.1`, `1.12`, `1.12.1`
      */
-    talosVersion?: pulumi.Input<string>;
+    talosVersion?: pulumi.Input<string | undefined>;
 }
