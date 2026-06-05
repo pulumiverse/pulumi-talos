@@ -46,7 +46,7 @@ jobs:
         MISE_ENV: test
         MISE_FETCH_REMOTE_VERSIONS_TIMEOUT: 30s
       with:
-        version: 2026.2.20
+        version: 2026.3.7
         github_token: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
         # also save this cache since we are using a different mise env.
         cache_save: true
