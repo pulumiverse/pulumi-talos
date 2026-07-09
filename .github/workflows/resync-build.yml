@@ -3,8 +3,8 @@ name: "Resync Build Workflows"
 
 on:
   schedule:
-    # Once a month on the 5th
-    - cron: 0 0 5 * *
+    # Every Monday, Wednesday & Friday at 05:00
+    - cron: 0 5 * * 1,3,5
   workflow_dispatch:
 
 permissions:
