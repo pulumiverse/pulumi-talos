@@ -1,3 +1,0 @@
-name: talos
-runtime: go
-description: A minimal Talos program in Pulumi YAML
