@@ -24,7 +24,8 @@ import (
 
 // all the talos token components used below.
 const (
-	talosPkg        = "talos"
+	provider        = "talos"
+	talosPkg        = provider
 	talosMod        = "index"
 	clientMod       = "client"        // the client module
 	clusterMod      = "cluster"       // the cluster module
@@ -37,12 +38,20 @@ var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
+	const objectType = "object"
+	const keyType = "key"
+	const stringType = "string"
+	const certificateType = "#types/talos:machine/generated:Certificate"
+	const clientConfigurationType = "talos:machine/generated:ClientConfiguration"
+	const machineSecretsType = "talos:machine/generated:MachineSecrets" // nolint:gosec
+	const privateKeyDescription = "Private Key"
+	const clientConfigurationProperty = "client_configuration"
 	prov := tfbridge.ProviderInfo{
 		P:                 pf.ShimProvider(talos.New()),
-		Name:              talosPkg,
+		Name:              provider,
 		DisplayName:       "Talos",
 		Description:       "A Pulumi package for creating and managing Talos Linux machines and clusters.",
-		Keywords:          []string{"pulumi", "talos", "category/infrastructure"},
+		Keywords:          []string{"pulumi", provider, "category/infrastructure"},
 		License:           "MPL-2.0",
 		Homepage:          "https://www.talos.dev",
 		GitHubOrg:         "siderolabs",
@@ -58,53 +67,53 @@ func Provider() tfbridge.ProviderInfo {
 		ExtraTypes: map[string]schema.ComplexTypeSpec{
 			"talos:machine/generated:Key": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type:        "object",
+					Type:        objectType,
 					Description: "A Machine Secrets Private Key",
 					Properties: map[string]schema.PropertySpec{
-						"key": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
-							Description: "Private Key",
+						keyType: {
+							TypeSpec:    schema.TypeSpec{Type: stringType},
+							Description: privateKeyDescription,
 							Secret:      true,
 						},
 					},
 					Required: []string{
-						"key",
+						keyType,
 					},
 				},
 			},
 			"talos:machine/generated:Certificate": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type:        "object",
+					Type:        objectType,
 					Description: "A Machine Secrets Certificate",
 					Properties: map[string]schema.PropertySpec{
 						"cert": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "Certificate",
 						},
-						"key": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
-							Description: "Private Key",
+						keyType: {
+							TypeSpec:    schema.TypeSpec{Type: stringType},
+							Description: privateKeyDescription,
 							Secret:      true,
 						},
 					},
 					Required: []string{
 						"cert",
-						"key",
+						keyType,
 					},
 				},
 			},
 			"talos:machine/generated:Cluster": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type:        "object",
+					Type:        objectType,
 					Description: "A Machine Secrets Cluster Info",
 					Properties: map[string]schema.PropertySpec{
 						"id": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "Certificate",
 						},
 						"secret": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
-							Description: "Private Key",
+							TypeSpec:    schema.TypeSpec{Type: stringType},
+							Description: privateKeyDescription,
 							Secret:      true,
 						},
 					},
@@ -116,21 +125,21 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"talos:machine/generated:KubernetesSecrets": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type:        "object",
+					Type:        objectType,
 					Description: "A Machine Secrets Bootstrap data",
 					Properties: map[string]schema.PropertySpec{
 						"bootstrapToken": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "The bootstrap token for the talos kubernetes cluster",
 							Secret:      true,
 						},
 						"secretboxEncryptionSecret": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "The secretbox encryption secret for the talos kubernetes cluster",
 							Secret:      true,
 						},
 						"aescbcEncryptionSecret": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "The aescbc encryption secret for the talos kubernetes cluster",
 							Secret:      true,
 						},
@@ -143,11 +152,11 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"talos:machine/generated:TrustdInfo": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type:        "object",
+					Type:        objectType,
 					Description: "A Machine Secrets Trust daemon info",
 					Properties: map[string]schema.PropertySpec{
 						"token": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "The trustd token for the talos kubernetes cluster",
 							Secret:      true,
 						},
@@ -159,22 +168,22 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"talos:machine/generated:Certificates": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type:        "object",
+					Type:        objectType,
 					Description: "A complete Machine Secrets Certificates configuration",
 					Properties: map[string]schema.PropertySpec{
 						"etcd": {
 							TypeSpec: schema.TypeSpec{
-								Ref: "#types/talos:machine/generated:Certificate",
+								Ref: certificateType,
 							},
 						},
 						"k8s": {
 							TypeSpec: schema.TypeSpec{
-								Ref: "#types/talos:machine/generated:Certificate",
+								Ref: certificateType,
 							},
 						},
 						"k8sAggregator": {
 							TypeSpec: schema.TypeSpec{
-								Ref: "#types/talos:machine/generated:Certificate",
+								Ref: certificateType,
 							},
 						},
 						"k8sServiceaccount": {
@@ -184,7 +193,7 @@ func Provider() tfbridge.ProviderInfo {
 						},
 						"os": {
 							TypeSpec: schema.TypeSpec{
-								Ref: "#types/talos:machine/generated:Certificate",
+								Ref: certificateType,
 							},
 						},
 					},
@@ -197,21 +206,21 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
-			"talos:machine/generated:ClientConfiguration": {
+			clientConfigurationType: {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type:        "object",
+					Type:        objectType,
 					Description: "A Client Configuration",
 					Properties: map[string]schema.PropertySpec{
 						"caCertificate": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "The client CA certificate",
 						},
 						"clientCertificate": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "The client certificate",
 						},
 						"clientKey": {
-							TypeSpec:    schema.TypeSpec{Type: "string"},
+							TypeSpec:    schema.TypeSpec{Type: stringType},
 							Description: "The client private key",
 							Secret:      true,
 						},
@@ -223,9 +232,9 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
-			"talos:machine/generated:MachineSecrets": {
+			machineSecretsType: {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
-					Type:        "object",
+					Type:        objectType,
 					Description: "A complete Machine Secrets configuration",
 					Properties: map[string]schema.PropertySpec{
 						"certs": {
@@ -268,9 +277,9 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"talos_machine_bootstrap": {
 				Fields: map[string]*tfbridge.SchemaInfo{
-					"client_configuration": {
+					clientConfigurationProperty: {
 						Elem: &tfbridge.SchemaInfo{
-							Type: "talos:machine/generated:ClientConfiguration",
+							Type: clientConfigurationType,
 						},
 					},
 				},
@@ -282,23 +291,23 @@ func Provider() tfbridge.ProviderInfo {
 							NestedType: "Timeout",
 						},
 					},
-					"client_configuration": {
+					clientConfigurationProperty: {
 						Elem: &tfbridge.SchemaInfo{
-							Type: "talos:machine/generated:ClientConfiguration",
+							Type: clientConfigurationType,
 						},
 					},
 				},
 			},
 			"talos_machine_secrets": {
 				Fields: map[string]*tfbridge.SchemaInfo{
-					"client_configuration": {
+					clientConfigurationProperty: {
 						Elem: &tfbridge.SchemaInfo{
-							Type: "talos:machine/generated:ClientConfiguration",
+							Type: clientConfigurationType,
 						},
 					},
 					"machine_secrets": {
 						Elem: &tfbridge.SchemaInfo{
-							Type: "talos:machine/generated:MachineSecrets",
+							Type: machineSecretsType,
 						},
 					},
 				},
@@ -309,7 +318,7 @@ func Provider() tfbridge.ProviderInfo {
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"machine_secrets": {
 						Elem: &tfbridge.SchemaInfo{
-							Type: "talos:machine/generated:MachineSecrets",
+							Type: machineSecretsType,
 						},
 					},
 				},
