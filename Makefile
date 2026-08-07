@@ -163,6 +163,7 @@ build_nodejs: .make/build_nodejs
 .make/build_nodejs: .make/generate_nodejs
 	cd sdk/nodejs/ && \
 		yarn install && \
+		npm pkg set publishConfig.access="public" && \
 		yarn run tsc && \
 		cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/
 	@touch $@
